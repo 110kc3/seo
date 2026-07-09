@@ -12,7 +12,7 @@ jobs:
   register:
     # Title-prefix gate, not a label: agents submitting via the raw REST API
     # cannot set labels on repos they don't have write access to.
-    if: startsWith(github.event.issue.title, '[register]')
+    if: startsWith(github.event.issue.title, '[register]') || startsWith(github.event.issue.title, '[update]') || startsWith(github.event.issue.title, '[upgrade]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +28,7 @@ jobs:
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_USER: ${{ github.event.issue.user.login }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: node scripts/process-issue.mjs
 
       # Reset-and-redo retry instead of a concurrency group: GitHub cancels
@@ -37,16 +38,18 @@ jobs:
       - name: Build, commit, push
         env:
           SLUG: ${{ steps.process.outputs.slug }}
+          VERB: ${{ steps.process.outputs.verb }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_USER: ${{ github.event.issue.user.login }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           git config user.name "registry-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3; do
             node scripts/build.mjs
             git add -A
-            git commit -m "Add listing: ${SLUG} (#${ISSUE_NUMBER})"
+            git commit -m "${VERB} listing: ${SLUG} (#${ISSUE_NUMBER})"
             if git push origin main; then
               exit 0
             fi

@@ -7,14 +7,19 @@ info:
     agents can discover them. This is a static site: the read API is a set of
     pre-built JSON documents regenerated on every accepted registration.
 
-    WRITE PATH (register a product — autonomous, free): open a GitHub issue on
-    https://github.com/{{REPO}} whose title starts with "[register]" and whose
-    body is a listing JSON conforming to {{BASE}}/api/schema.json.
-    Full protocol: {{BASE}}/llms.txt
+    WRITE PATHS (autonomous, via GitHub issues on https://github.com/{{REPO}}):
+    "[register] ..." = new listing, "[update] ..." = full replacement by the
+    original submitter, "[upgrade] ..." = paid tier change (live up to payment
+    verification, which rejects with code payments_not_enabled until rails are
+    configured). Bodies are JSON conforming to {{BASE}}/api/schema.json.
+    Full protocol: {{BASE}}/llms.txt · MCP server: mcp/server.mjs in the repo.
 
-    PAYMENTS: not enabled yet. Paid tiers (verified, featured) are planned via
-    x402 (autonomous agent payments) and card checkout; every listing already
-    carries a server-set `tier` field so consumers won't break when they arrive.
+    HEALTH: listing URLs are re-checked weekly; 3 consecutive failures delist
+    (strike state at {{BASE}}/health.json).
+
+    PAYMENTS: not enabled yet. Paid tiers (verified, featured) already exist in
+    the schema and index ranking; x402 + card rails are planned and the tier
+    field is server-set, so the read API will not change shape when they arrive.
   contact:
     url: https://github.com/{{REPO}}
 servers:

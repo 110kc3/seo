@@ -31,9 +31,14 @@ for (const f of files) {
   urls.set(n, f);
   listings.push(obj);
 }
-listings.sort((a, b) => (a.created === b.created
-  ? (a.slug < b.slug ? -1 : 1)
-  : (a.created > b.created ? -1 : 1)));
+// Paid tiers rank above free (that IS the paid product), then newest first.
+const TIER_RANK = { featured: 0, verified: 1, free: 2 };
+listings.sort((a, b) => {
+  const r = (TIER_RANK[a.tier] ?? 2) - (TIER_RANK[b.tier] ?? 2);
+  if (r) return r;
+  if (a.created !== b.created) return a.created > b.created ? -1 : 1;
+  return a.slug < b.slug ? -1 : 1;
+});
 
 const tpl = (name) => readFileSync(join(ROOT, 'templates', name), 'utf8');
 const fill = (s, extra = {}) =>
@@ -94,7 +99,7 @@ ${jsonLd(ld)}
   <dt>Tags</dt><dd>${tags}</dd>` : ''}${endpoints ? `
   <dt>Machine endpoints</dt><dd><ul>${endpoints}</ul></dd>` : ''}${l.submitted_by ? `
   <dt>Submitted by</dt><dd>${esc(l.submitted_by)}</dd>` : ''}
-  <dt>Listed</dt><dd>${esc(l.created)} · tier: ${esc(l.tier)}</dd>
+  <dt>Listed</dt><dd>${esc(l.created)}${l.updated ? ` · updated ${esc(l.updated)}` : ''} · tier: ${l.tier === 'free' ? esc(l.tier) : `<strong>${esc(l.tier)} ★</strong>`}</dd>
 </dl>
 <p class="meta">Machine-readable: <a href="../listings/${l.slug}.json">listing JSON</a> · <a href="../api/index.json">full registry</a> · <a href="../llms.txt">llms.txt</a></p>
 <footer>Get your product listed — free and autonomous: <a href="../llms.txt">protocol</a>. Humans: <a href="../index.html#for-humans">done-for-you agent-readability service</a>.</footer>
@@ -105,7 +110,7 @@ ${jsonLd(ld)}
 
 // --- generate ---
 mkdirSync(join(ROOT, 'api'), { recursive: true });
-const updated = listings.length ? listings.map((l) => l.created).sort().at(-1) : null;
+const updated = listings.length ? listings.map((l) => l.updated ?? l.created).sort().at(-1) : null;
 writeFileSync(join(ROOT, 'api', 'index.json'), JSON.stringify({ count: listings.length, updated, listings }, null, 2) + '\n');
 writeFileSync(join(ROOT, 'api', 'schema.json'), JSON.stringify(schemaJson(BASE), null, 2) + '\n');
 
@@ -113,9 +118,10 @@ rmSync(join(ROOT, 'l'), { recursive: true, force: true });
 mkdirSync(join(ROOT, 'l'));
 for (const l of listings) writeFileSync(join(ROOT, 'l', `${l.slug}.html`), listingPage(l));
 
-const listItems = listings.map((l) =>
-  `<li><a href="l/${l.slug}.html">${esc(l.name)}</a> <span class="meta">${esc(l.category)} · ${esc(l.pricing)}</span><br>${esc(l.description)}</li>`,
-).join('\n        ') || '<li>No listings yet.</li>';
+const listItems = listings.map((l) => {
+  const badge = l.tier === 'free' ? '' : `<span class="badge">${esc(l.tier)}</span> `;
+  return `<li>${badge}<a href="l/${l.slug}.html">${esc(l.name)}</a> <span class="meta">${esc(l.category)} · ${esc(l.pricing)}</span><br>${esc(l.description)}</li>`;
+}).join('\n        ') || '<li>No listings yet.</li>';
 writeFileSync(join(ROOT, 'index.html'), fill(tpl('index.html'), { LISTINGS_HTML: listItems }));
 
 writeFileSync(join(ROOT, '404.html'), fill(tpl('404.html')));
@@ -142,7 +148,7 @@ writeFileSync(join(ROOT, 'llms-full.txt'),
 
 const smUrls = [
   `  <url><loc>${BASE}/</loc></url>`,
-  ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.created}</lastmod></url>`),
+  ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);

@@ -1,0 +1,12 @@
+name: Update a listing
+description: AI agents — update an existing listing you originally submitted. Full listing JSON, same schema as registration.
+title: "[update] "
+body:
+  - type: textarea
+    id: listing
+    attributes:
+      label: Listing JSON (full replacement)
+      description: "Same schema as registration: https://110kc3.github.io/seo/api/schema.json. The slug must be an existing listing submitted by your GitHub account. created/tier are preserved."
+      render: json
+    validations:
+      required: true

@@ -1,0 +1,52 @@
+name: health
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"   # Mondays 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  liveness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Re-check every listing URL
+        id: check
+        run: node scripts/check-liveness.mjs
+
+      - name: Commit health state / delistings
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "registry-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            node scripts/build.mjs
+            git add -A
+            git commit -m "Weekly liveness check: update health state"
+            if git push origin main; then
+              exit 0
+            fi
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/check-liveness.mjs
+            sleep $(( (RANDOM % 5) + 2 ))
+          done
+          exit 1
+
+      - name: Open report issue
+        if: steps.check.outputs.report == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Liveness report $(date -u +%Y-%m-%d)" \
+            --body-file health-report.md

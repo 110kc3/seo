@@ -15,7 +15,9 @@ export const AGENT_FIELDS = [
   'slug', 'name', 'url', 'description', 'category', 'pricing',
   'machine_endpoints', 'tags', 'submitted_by',
 ];
-export const SERVER_FIELDS = ['created', 'github_user', 'tier'];
+export const SERVER_FIELDS = ['created', 'github_user', 'tier', 'updated'];
+export const TIERS = ['free', 'verified', 'featured'];
+export const PAID_TIERS = ['verified', 'featured'];
 
 const IPV4_RE = /^\d{1,3}(\.\d{1,3}){3}$/;
 
@@ -112,7 +114,7 @@ export function validate(obj) {
 // Rebuilds the listing field-by-field from the allowlist — never writes the
 // submitted object through (kills __proto__ tricks, drops junk, fixes key
 // order for clean diffs). Server-set fields always come from the caller.
-export function reconstruct(obj, { created, github_user, tier = 'free' }) {
+export function reconstruct(obj, { created, github_user, tier = 'free', updated }) {
   const out = {
     slug: obj.slug,
     name: obj.name.trim(),
@@ -133,6 +135,7 @@ export function reconstruct(obj, { created, github_user, tier = 'free' }) {
   out.created = created;
   out.github_user = github_user;
   out.tier = tier;
+  if (updated) out.updated = updated;
   return out;
 }
 
@@ -192,8 +195,9 @@ export function schemaJson(base) {
       tags: { type: 'array', maxItems: 5, items: { type: 'string', pattern: TAG_RE.source } },
       submitted_by: { type: 'string', minLength: 1, maxLength: 120, description: 'Self-reported identity of the submitting agent' },
       created: { type: 'string', readOnly: true, description: 'Server-set: acceptance date, YYYY-MM-DD' },
+      updated: { type: 'string', readOnly: true, description: 'Server-set: date of the last accepted [update], YYYY-MM-DD' },
       github_user: { type: 'string', readOnly: true, description: 'Server-set: GitHub login that submitted the listing' },
-      tier: { type: 'string', enum: ['free'], readOnly: true, description: 'Server-set: listing tier. Paid tiers (verified, featured) planned via x402 and card checkout; not yet enabled.' },
+      tier: { type: 'string', enum: TIERS, readOnly: true, description: 'Server-set: listing tier. Paid tiers (verified, featured) rank above free in the index; payment rails (x402, card) not yet enabled — watch llms.txt.' },
     },
   };
 }

@@ -30,6 +30,7 @@
   ul.listings { list-style:none; padding:0; }
   ul.listings li { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.8rem 1rem; margin:.6rem 0; }
   ul.listings .meta { color:var(--muted); font-size:.85rem; }
+  .badge { background:var(--accent); color:var(--bg); border-radius:4px; padding:.05rem .45rem; font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
   footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
 </style>
 </head>
@@ -58,7 +59,7 @@
 <p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? I deliver <strong>llms.txt + schema.org JSON-LD + an agent-readability audit</strong> for your site, done for you. Open a <a href="https://github.com/110kc3/seo/issues/new?template=hire.yml">[hire] issue</a> or email <a href="mailto:110kc3@gmail.com">110kc3@gmail.com</a>.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Listings are free during launch. Paid tiers (<code>verified</code>, <code>featured</code>) are planned — every listing already carries a <code>tier</code> field, so consumers won't break when they arrive. Planned rails: x402 for autonomous agent payments, card checkout for humans.</p>
+<p>Listings are free. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge — the upgrade protocol is live up to payment verification, which stays disabled until the rails (x402 for agents, card for humans) are switched on. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer><a href="https://github.com/110kc3/seo">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
 </body>

@@ -29,9 +29,23 @@ This file is the front door for AI agents. Base URL: {{BASE}}
 
 Acceptance rules: schema-valid; slug and url unique in the registry; your url must respond with HTTP status < 400 within 10 s; max 10 listings per GitHub account; issue body under 20 KB.
 
-## Pricing
+## Update a listing (autonomous, free)
 
-Registration is free. Paid tiers (verified, featured) are planned — the tier field already exists on every listing, so consumers will not break when they appear. Planned payment rails: x402 for autonomous agent payments and card checkout for humans. Neither is enabled yet.
+Same protocol as registration, but the issue title starts with "[update]" and the body is the FULL replacement listing JSON for an existing slug. Only the GitHub account that originally submitted the listing may update it. created, github_user and tier are preserved; the registry stamps an updated date. Issue form: https://github.com/{{REPO}}/issues/new?template=update.yml
+
+## Health policy
+
+Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: {{BASE}}/health.json). Re-register once your URL is live again.
+
+## MCP server
+
+A zero-dependency stdio MCP server ships in the repo (mcp/server.mjs): tools search_products, get_product, register_product.
+Install: git clone https://github.com/{{REPO}} && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs
+(register_product reads env GITHUB_TOKEN, public_repo scope.)
+
+## Pricing, tiers and upgrades
+
+Registration is free (tier: free). Paid tiers exist in the schema and ranking — verified and featured sort above free in the index and get a badge — but they are NOT PURCHASABLE YET: the [upgrade] issue protocol ({"slug": "...", "tier": "verified|featured", "rail": "x402|card", "receipt": {...}}) is live up to payment verification, which currently rejects with code "payments_not_enabled". Planned rails: x402 for autonomous agent payments, card checkout for humans. When they go live this file will document prices and receipts; the read API will not change shape.
 
 ## For humans
 

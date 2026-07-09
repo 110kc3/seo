@@ -1,21 +1,26 @@
 # TODO
 
-## P1 — v2: payments (prepared, not enabled)
-- [ ] x402 rail for autonomous agent payments (Coinbase facilitator, USDC on Base): paid `[register-verified]` / upgrade path where the workflow verifies an x402 payment receipt before setting `tier: verified|featured` in `process-issue.mjs` (server-side flip — never trust submitted `tier`).
-- [ ] Card checkout for humans (Stripe payment link first, API later) for the same tier upgrades.
-- [ ] Surface tiers in build output: badge on `l/<slug>.html`, `featured` sorted first in `index.html` + `api/index.json`, tier enum extended in `schemaJson()`.
-- [ ] Update pricing sections (llms.txt, openapi.yaml, index.html) when rails go live.
+## Blocked on Kamil (everything else is implemented)
 
-## P1 — discoverability (the index is only worth what finds it)
-- [ ] Submit the index to agent-facing directories (agentswelcome.dev-style atlases, awesome-lists, x402 Bazaar once there's a paid API).
-- [ ] Show HN draft: "The first directory where AI agents register themselves" — after a few organic listings exist.
-- [ ] GitHub repo topics + description tuned for agent search (repo search is itself an agent discovery channel).
+- [ ] **Enable payments** — 3 steps, needs your credentials (full checklist in README → Payments): x402 wallet address + complete `verifyPayment()` against the facilitator; Stripe payment link; set prices in `templates/llms.txt`. The `[upgrade]` flow, tier ranking/badges, and `set-tier.mjs` manual flip are all live and tested.
+- [ ] **Post Show HN** — draft ready in `docs/show-hn.md` (titles, body, timing). Wait for 2–3 organic listings first.
+- [ ] **Migration off github.io** — your call on domain/host. Checklist in README → Migration (one config knob + two issue-template URLs).
+- [ ] **Directory submissions needing a human** — see `docs/distribution.md` for the researched channel list; the PR-able ones may already be done (check the table's Status column).
 
-## P2 — migration off github.io (planned by Kamil)
-- [ ] New domain/host: edit `site.config.json` (`base`), update hardcoded URLs in `.github/ISSUE_TEMPLATE/{register,config}.yml`, rebuild, push. Consider Cloudflare Pages (same pattern as kc-it.pl) or custom domain on Pages.
-- [ ] Keep github.io URL redirecting (Pages custom-domain redirect handles this automatically if staying on Pages).
+## Done (v1 + v2 autonomous scope, 2026-07-09)
 
-## P2 — hardening / registry hygiene
-- [ ] Weekly cron workflow: re-run liveness on all listings, open an issue (or auto-delist after N failures) for dead URLs.
-- [ ] MCP server exposing the registry (read + register) — likely the highest-value agent-facing channel after llms.txt.
-- [ ] Per-listing `updated` support: allow `[update]` issues from the original `github_user` to modify their listing.
+- [x] Agent registry live at https://110kc3.github.io/seo/ — llms.txt, JSON API + schema, per-listing JSON-LD pages, sitemap/robots/OpenAPI, custom 404.
+- [x] `[register]` flow — verified live end to end (accept / reject / duplicate, no commits on rejection).
+- [x] `[update]` flow — original submitter replaces their listing; `created`/`tier` preserved, `updated` stamped.
+- [x] `[upgrade]` flow — ownership + shape checks live; payment verification stubbed to `payments_not_enabled` until rails configured.
+- [x] Tier system — `verified`/`featured` in schema, featured-first ranking, badges, `scripts/set-tier.mjs`.
+- [x] Weekly health cron — 3-strike auto-delist, committed `health.json`, report issues.
+- [x] MCP server — `mcp/server.mjs`, zero-dep stdio: search_products / get_product / register_product.
+- [x] Repo topics + description tuned for GitHub search.
+- [x] Show HN draft (`docs/show-hn.md`).
+
+## Later / nice-to-have
+
+- [ ] Automate Stripe reconciliation (webhook → repository_dispatch → set-tier) once there's a first paying customer.
+- [ ] x402 Bazaar listing once the index itself exposes a paid x402 endpoint.
+- [ ] Listing analytics: badge/click-through counters (needs non-static ingest — revisit after migration).

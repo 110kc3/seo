@@ -99,6 +99,11 @@
       "readOnly": true,
       "description": "Server-set: acceptance date, YYYY-MM-DD"
     },
+    "updated": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Server-set: date of the last accepted [update], YYYY-MM-DD"
+    },
     "github_user": {
       "type": "string",
       "readOnly": true,
@@ -107,10 +112,12 @@
     "tier": {
       "type": "string",
       "enum": [
-        "free"
+        "free",
+        "verified",
+        "featured"
       ],
       "readOnly": true,
-      "description": "Server-set: listing tier. Paid tiers (verified, featured) planned via x402 and card checkout; not yet enabled."
+      "description": "Server-set: listing tier. Paid tiers (verified, featured) rank above free in the index; payment rails (x402, card) not yet enabled — watch llms.txt."
     }
   }
 }
