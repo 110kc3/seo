@@ -1,5 +1,5 @@
 {
-  "count": 3,
+  "count": 2,
   "updated": "2026-07-09",
   "listings": [
     {
@@ -41,21 +41,6 @@
       "created": "2026-07-09",
       "github_user": "110kc3",
       "tier": "free"
-    },
-    {
-      "slug": "e2e-flow-test",
-      "name": "E2E Flow Test v2",
-      "url": "https://example.com",
-      "description": "Updated live through the [update] protocol.",
-      "category": "agent",
-      "pricing": "free",
-      "tags": [
-        "updated"
-      ],
-      "created": "2026-07-09",
-      "github_user": "110kc3",
-      "tier": "free",
-      "updated": "2026-07-09"
     }
   ]
 }
