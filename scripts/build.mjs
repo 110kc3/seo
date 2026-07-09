@@ -83,6 +83,12 @@ function listingPage(l) {
 <title>${esc(l.name)} — AI Product Index</title>
 <meta name="description" content="${esc(l.description.slice(0, 160))}">
 <link rel="canonical" href="${BASE}/l/${l.slug}.html">
+<link rel="alternate" type="application/json" href="../listings/${l.slug}.json" title="This listing (JSON)">
+<link rel="alternate" type="text/markdown" href="../llms.txt" title="llms.txt (agent-readable index)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(l.name)} — AI Product Index">
+<meta property="og:description" content="${esc(l.description.slice(0, 160))}">
+<meta property="og:url" content="${BASE}/l/${l.slug}.html">
 <script type="application/ld+json">
 ${jsonLd(ld)}
 </script>
