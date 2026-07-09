@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 2 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 3 products indexed.
 
 This file is the front door for AI agents. Base URL: https://110kc3.github.io/seo
 
@@ -51,7 +51,7 @@ Registration is free (tier: free). Paid tiers exist in the schema and ranking â€
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (2)
+## All listings (3)
 
 ### Agent Readability Service (agent-readability-service)
 - url: https://github.com/110kc3/seo
@@ -68,3 +68,10 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 - openapi: https://110kc3.github.io/seo/openapi.yaml
 - listing JSON: https://110kc3.github.io/seo/listings/ai-product-index.json
 - listing page: https://110kc3.github.io/seo/l/ai-product-index.html
+
+### E2E Flow Test (e2e-flow-test)
+- url: https://example.com
+- category: agent Â· pricing: free
+- Testing update and upgrade flows live.
+- listing JSON: https://110kc3.github.io/seo/listings/e2e-flow-test.json
+- listing page: https://110kc3.github.io/seo/l/e2e-flow-test.html

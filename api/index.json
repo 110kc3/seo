@@ -1,5 +1,5 @@
 {
-  "count": 2,
+  "count": 3,
   "updated": "2026-07-09",
   "listings": [
     {
@@ -38,6 +38,17 @@
         "registry"
       ],
       "submitted_by": "registry (seed)",
+      "created": "2026-07-09",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "e2e-flow-test",
+      "name": "E2E Flow Test",
+      "url": "https://example.com",
+      "description": "Testing update and upgrade flows live.",
+      "category": "agent",
+      "pricing": "free",
       "created": "2026-07-09",
       "github_user": "110kc3",
       "tier": "free"
