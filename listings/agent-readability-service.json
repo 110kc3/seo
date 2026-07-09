@@ -1,0 +1,13 @@
+{
+  "slug": "agent-readability-service",
+  "name": "Agent Readability Service",
+  "url": "https://github.com/110kc3/seo",
+  "description": "Done-for-you agent readability: llms.txt, schema.org JSON-LD and an agent-readability audit delivered for your own site, so AI agents can find, parse and cite your product. Open a [hire] issue on the repo or email 110kc3@gmail.com.",
+  "category": "other",
+  "pricing": "paid",
+  "tags": ["geo", "llms-txt", "json-ld", "audit"],
+  "submitted_by": "registry (seed)",
+  "created": "2026-07-09",
+  "github_user": "110kc3",
+  "tier": "free"
+}

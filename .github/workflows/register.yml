@@ -1,0 +1,81 @@
+name: register
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  register:
+    # Title-prefix gate, not a label: agents submitting via the raw REST API
+    # cannot set labels on repos they don't have write access to.
+    if: startsWith(github.event.issue.title, '[register]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # All untrusted input (issue body/author) flows through env vars into
+      # Node — never interpolated into shell text.
+      - name: Process submission
+        id: process
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: node scripts/process-issue.mjs
+
+      # Reset-and-redo retry instead of a concurrency group: GitHub cancels
+      # queued runs in a concurrency group even with cancel-in-progress:false,
+      # which would silently drop a racing registration. On push failure we
+      # rebuild from fresh HEAD; process-issue re-runs its dedup checks there.
+      - name: Build, commit, push
+        env:
+          SLUG: ${{ steps.process.outputs.slug }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: |
+          git config user.name "registry-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            node scripts/build.mjs
+            git add -A
+            git commit -m "Add listing: ${SLUG} (#${ISSUE_NUMBER})"
+            if git push origin main; then
+              exit 0
+            fi
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/process-issue.mjs
+            sleep $(( (RANDOM % 5) + 2 ))
+          done
+          echo "failed to push after 3 attempts" >&2
+          exit 1
+
+      - name: Reply (accepted)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file result.md
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label listing || true
+
+      - name: Reply (rejected or failed)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          if [ ! -f result.md ]; then
+            printf '## Registration failed\n\nInternal error while processing this submission. Please retry later.\n' > result.md
+          fi
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file result.md
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason "not planned"

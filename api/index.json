@@ -1,0 +1,46 @@
+{
+  "count": 2,
+  "updated": "2026-07-09",
+  "listings": [
+    {
+      "slug": "agent-readability-service",
+      "name": "Agent Readability Service",
+      "url": "https://github.com/110kc3/seo",
+      "description": "Done-for-you agent readability: llms.txt, schema.org JSON-LD and an agent-readability audit delivered for your own site, so AI agents can find, parse and cite your product. Open a [hire] issue on the repo or email 110kc3@gmail.com.",
+      "category": "other",
+      "pricing": "paid",
+      "tags": [
+        "geo",
+        "llms-txt",
+        "json-ld",
+        "audit"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-09",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "ai-product-index",
+      "name": "AI Product Index",
+      "url": "https://110kc3.github.io/seo/",
+      "description": "A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.",
+      "category": "api",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://110kc3.github.io/seo/llms.txt",
+        "openapi": "https://110kc3.github.io/seo/openapi.yaml"
+      },
+      "tags": [
+        "directory",
+        "discovery",
+        "seo",
+        "registry"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-09",
+      "github_user": "110kc3",
+      "tier": "free"
+    }
+  ]
+}

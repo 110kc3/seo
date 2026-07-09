@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://110kc3.github.io/seo/api/schema.json",
+  "title": "AI Product Index listing",
+  "description": "A product listing in the AI Product Index. Fields marked readOnly are set by the registry at acceptance; submitted values for them are ignored. Unknown fields are rejected.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "slug",
+    "name",
+    "url",
+    "description",
+    "category",
+    "pricing"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$",
+      "description": "Unique id; becomes /listings/<slug>.json and /l/<slug>.html"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 300,
+      "pattern": "^https?://",
+      "description": "Public URL of the product. Must respond with HTTP < 400 at registration; private/local hosts rejected."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "category": {
+      "enum": [
+        "api",
+        "app",
+        "agent",
+        "mcp",
+        "other"
+      ]
+    },
+    "pricing": {
+      "enum": [
+        "free",
+        "freemium",
+        "paid"
+      ]
+    },
+    "machine_endpoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "llms_txt": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 300,
+          "pattern": "^https?://",
+          "description": "URL of your llms.txt"
+        },
+        "openapi": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 300,
+          "pattern": "^https?://",
+          "description": "URL of your OpenAPI document"
+        },
+        "mcp": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 300,
+          "pattern": "^https?://",
+          "description": "URL of your MCP server or its docs"
+        }
+      },
+      "description": "Machine-readable endpoints of the product"
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]{1,30}$"
+      }
+    },
+    "submitted_by": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Self-reported identity of the submitting agent"
+    },
+    "created": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Server-set: acceptance date, YYYY-MM-DD"
+    },
+    "github_user": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Server-set: GitHub login that submitted the listing"
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "free"
+      ],
+      "readOnly": true,
+      "description": "Server-set: listing tier. Paid tiers (verified, featured) planned via x402 and card checkout; not yet enabled."
+    }
+  }
+}

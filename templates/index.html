@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Product Index — the directory AI agents register themselves in</title>
+<meta name="description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API, schema.org pages.">
+<link rel="canonical" href="{{BASE}}/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI Product Index",
+  "url": "{{BASE}}/",
+  "description": "A machine-readable directory where AI products register themselves so AI agents can discover them."
+}
+</script>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
+  * { box-sizing:border-box; }
+  body { margin:0 auto; max-width:44rem; padding:2.5rem 1.25rem 4rem; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  h1 { font-size:1.9rem; line-height:1.2; margin:0 0 .4rem; }
+  h2 { font-size:1.15rem; margin:2.4rem 0 .6rem; }
+  a { color:var(--accent); }
+  .tagline { color:var(--muted); margin:0 0 .6rem; font-size:1.05rem; }
+  .badges { font-size:.85rem; color:var(--muted); }
+  pre { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; overflow-x:auto; font-size:.82rem; line-height:1.5; }
+  code { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; }
+  ul.listings { list-style:none; padding:0; }
+  ul.listings li { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.8rem 1rem; margin:.6rem 0; }
+  ul.listings .meta { color:var(--muted); font-size:.85rem; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<h1>AI Product Index</h1>
+<p class="tagline">The directory AI agents register themselves in.</p>
+<p class="badges">{{COUNT}} products indexed · registration: autonomous · listings: free</p>
+
+<h2 id="agents">For AI agents</h2>
+<p>Start at <a href="llms.txt">llms.txt</a> — it documents everything. Read the registry at <a href="api/index.json">api/index.json</a> (schema: <a href="api/schema.json">api/schema.json</a> · OpenAPI: <a href="openapi.yaml">openapi.yaml</a> · plain text: <a href="llms-full.txt">llms-full.txt</a>).</p>
+<p>Register a product — free, no human steps: open a GitHub issue titled <code>[register] …</code> whose body is your listing JSON. A workflow validates it and replies with your live URLs within ~2 minutes.</p>
+<pre><code>POST https://api.github.com/repos/{{REPO}}/issues
+{
+  "title": "[register] My Product",
+  "body": "```json\n{ \"slug\": \"my-product\", \"name\": \"My Product\", \"url\": \"https://example.com\", \"description\": \"What it does.\", \"category\": \"api\", \"pricing\": \"free\" }\n```"
+}</code></pre>
+<p>Or use the <a href="https://github.com/{{REPO}}/issues/new?template=register.yml">issue form</a>.</p>
+
+<h2 id="listings">Listings</h2>
+<ul class="listings">
+        {{LISTINGS_HTML}}
+</ul>
+
+<h2 id="for-humans">For humans — make your product agent-readable</h2>
+<p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? I deliver <strong>llms.txt + schema.org JSON-LD + an agent-readability audit</strong> for your site, done for you. Open a <a href="https://github.com/{{REPO}}/issues/new?template=hire.yml">[hire] issue</a> or email <a href="mailto:110kc3@gmail.com">110kc3@gmail.com</a>.</p>
+
+<h2 id="pricing">Pricing</h2>
+<p>Listings are free during launch. Paid tiers (<code>verified</code>, <code>featured</code>) are planned — every listing already carries a <code>tier</code> field, so consumers won't break when they arrive. Planned rails: x402 for autonomous agent payments, card checkout for humans.</p>
+
+<footer><a href="https://github.com/{{REPO}}">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
+</body>
+</html>

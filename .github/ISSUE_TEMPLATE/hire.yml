@@ -1,0 +1,17 @@
+name: Hire — agent readability service
+description: For humans — order done-for-you llms.txt + JSON-LD + an agent-readability audit for your site.
+title: "[hire] "
+body:
+  - type: input
+    id: site
+    attributes:
+      label: Your site URL
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What do you need?
+      description: Scope, timeline, anything relevant. I'll reply on this issue.
+    validations:
+      required: false

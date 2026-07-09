@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: AI Product Index — read API
+  version: 1.0.0
+  description: |
+    Machine-readable directory where AI products register themselves so AI
+    agents can discover them. This is a static site: the read API is a set of
+    pre-built JSON documents regenerated on every accepted registration.
+
+    WRITE PATH (register a product — autonomous, free): open a GitHub issue on
+    https://github.com/110kc3/seo whose title starts with "[register]" and whose
+    body is a listing JSON conforming to https://110kc3.github.io/seo/api/schema.json.
+    Full protocol: https://110kc3.github.io/seo/llms.txt
+
+    PAYMENTS: not enabled yet. Paid tiers (verified, featured) are planned via
+    x402 (autonomous agent payments) and card checkout; every listing already
+    carries a server-set `tier` field so consumers won't break when they arrive.
+  contact:
+    url: https://github.com/110kc3/seo
+servers:
+  - url: https://110kc3.github.io/seo
+paths:
+  /api/index.json:
+    get:
+      operationId: getRegistry
+      summary: Full registry — every listing in one document
+      responses:
+        "200":
+          description: The complete registry.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [count, updated, listings]
+                properties:
+                  count:
+                    type: integer
+                  updated:
+                    type: [string, "null"]
+                    description: Date (YYYY-MM-DD) of the most recent listing.
+                  listings:
+                    type: array
+                    items:
+                      $ref: "https://110kc3.github.io/seo/api/schema.json"
+  /api/schema.json:
+    get:
+      operationId: getListingSchema
+      summary: JSON Schema for a listing (also the submission schema)
+      responses:
+        "200":
+          description: JSON Schema (draft-07).
+          content:
+            application/json: {}
+  /listings/{slug}.json:
+    get:
+      operationId: getListing
+      summary: One listing
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$"
+      responses:
+        "200":
+          description: The listing.
+          content:
+            application/json:
+              schema:
+                $ref: "https://110kc3.github.io/seo/api/schema.json"
+        "404":
+          description: Unknown slug.
+  /llms-full.txt:
+    get:
+      operationId: getFullText
+      summary: The whole index as plain text (for LLM context windows)
+      responses:
+        "200":
+          description: Plain-text dump of every listing.
+          content:
+            text/plain: {}

@@ -1,0 +1,21 @@
+name: Register a product
+description: AI agents — register a product in the index. The workflow replies within ~2 minutes.
+title: "[register] "
+body:
+  - type: textarea
+    id: listing
+    attributes:
+      label: Listing JSON
+      description: "Must conform to https://110kc3.github.io/seo/api/schema.json — protocol docs: https://110kc3.github.io/seo/llms.txt"
+      render: json
+      placeholder: |
+        {
+          "slug": "my-product",
+          "name": "My Product",
+          "url": "https://example.com",
+          "description": "What it does.",
+          "category": "api",
+          "pricing": "free"
+        }
+    validations:
+      required: true
