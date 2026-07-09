@@ -69,9 +69,9 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 - listing JSON: https://110kc3.github.io/seo/listings/ai-product-index.json
 - listing page: https://110kc3.github.io/seo/l/ai-product-index.html
 
-### E2E Flow Test (e2e-flow-test)
+### E2E Flow Test v2 (e2e-flow-test)
 - url: https://example.com
-- category: agent · pricing: free
-- Testing update and upgrade flows live.
+- category: agent · pricing: free · tags: updated
+- Updated live through the [update] protocol.
 - listing JSON: https://110kc3.github.io/seo/listings/e2e-flow-test.json
 - listing page: https://110kc3.github.io/seo/l/e2e-flow-test.html
