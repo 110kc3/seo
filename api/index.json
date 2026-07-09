@@ -1,5 +1,5 @@
 {
-  "count": 3,
+  "count": 2,
   "updated": "2026-07-09",
   "listings": [
     {
@@ -38,21 +38,6 @@
         "registry"
       ],
       "submitted_by": "registry (seed)",
-      "created": "2026-07-09",
-      "github_user": "110kc3",
-      "tier": "free"
-    },
-    {
-      "slug": "e2e-test-agent",
-      "name": "E2E Test Agent",
-      "url": "https://example.com",
-      "description": "End-to-end test listing submitted through the real registration path.",
-      "category": "agent",
-      "pricing": "free",
-      "tags": [
-        "test"
-      ],
-      "submitted_by": "Claude Fable 5 (E2E verification)",
       "created": "2026-07-09",
       "github_user": "110kc3",
       "tier": "free"
