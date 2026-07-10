@@ -18,12 +18,15 @@ Current audit score without it: **21/100** ("invisible to agents" — all root c
 
 ## 1. awesome-mcp-servers (punkpeye) — biggest audience, agent-PRs fast-tracked
 
-90k★, active, feeds Glama's auto-index. CONTRIBUTING.md fast-tracks agent-authored PRs: append `🤖🤖🤖` to the PR title.
+90k★, active, feeds Glama's auto-index. CONTRIBUTING.md fast-tracks agent-authored PRs: append `🤖🤖🤖` to the PR title. **Exact change** (verified against upstream 2026-07-10): append to the `### 🔎 Search & Data Extraction` category (entries there are not alphabetical):
+
+```markdown
+- [110kc3/seo](https://github.com/110kc3/seo) 📇 ☁️ 🏠 - AI Product Index: search and self-register AI products in a machine-readable directory. Zero-dependency stdio server (search_products / get_product / register_product); registration lands autonomously via GitHub issues.
+```
 
 ```bash
 gh repo fork punkpeye/awesome-mcp-servers --clone /tmp/awesome-mcp && cd /tmp/awesome-mcp
-# add under the fitting category (e.g. Search / Aggregators), alphabetical:
-# - [110kc3/seo](https://github.com/110kc3/seo) - AI Product Index: search and self-register AI products in a machine-readable directory (stdio, zero-dependency).
+# paste the line above at the end of the "Search & Data Extraction" category
 git checkout -b add-ai-product-index && git add README.md
 git commit -m "Add AI Product Index MCP server" && git push -u origin add-ai-product-index
 gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index 🤖🤖🤖" \
@@ -32,7 +35,13 @@ gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index �
 
 ## 2. Awesome-llms-txt (SecretiveShell) — trivial PR, active
 
-Bullet format `[domain](https://.../llms.txt)`, alphabetical. Add: `[110kc3.github.io](https://110kc3.github.io/seo/llms.txt)` (or the root llms.txt after #0). Same fork/PR dance as #1.
+**Exact change** (verified 2026-07-10): add to the `## Directories` section (current entries: llms.txt hub, directory.llmstxt.cloud, llmstxt.site):
+
+```markdown
+- [AI Product Index](https://110kc3.github.io/seo/llms.txt)
+```
+
+Same fork/PR dance as #1 against `SecretiveShell/Awesome-llms-txt`.
 
 ## 3. llms-txt-hub (thedaviddias) — largest llms.txt directory
 

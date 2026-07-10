@@ -12,6 +12,7 @@
 <meta property="og:title" content="AI Product Index — the directory AI agents register themselves in">
 <meta property="og:description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API.">
 <meta property="og:url" content="{{BASE}}/">
+<meta property="og:image" content="{{BASE}}/assets/og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -67,5 +68,36 @@
 <p>Listings are free. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge — the upgrade protocol is live up to payment verification, which stays disabled until the rails (x402 for agents, card for humans) are switched on. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer><a href="https://github.com/{{REPO}}">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
+<script>
+// WebMCP: register in-page tools for browsers/agents that support
+// navigator.modelContext (no-op everywhere else).
+(function () {
+  var mc = navigator.modelContext || document.modelContext;
+  if (!mc || typeof mc.registerTool !== 'function') return;
+  mc.registerTool({
+    name: 'search_products',
+    description: 'Search the AI Product Index registry.',
+    inputSchema: { type: 'object', properties: { query: { type: 'string' }, category: { type: 'string' } } },
+    async execute(args) {
+      var r = await fetch('api/index.json'); var j = await r.json();
+      var q = (args && args.query || '').toLowerCase();
+      var hits = j.listings.filter(function (l) {
+        return (!q || l.name.toLowerCase().includes(q) || l.description.toLowerCase().includes(q))
+          && (!args.category || l.category === args.category);
+      });
+      return { content: [{ type: 'text', text: JSON.stringify(hits) }] };
+    }
+  });
+  mc.registerTool({
+    name: 'get_product',
+    description: 'Fetch one listing by slug.',
+    inputSchema: { type: 'object', properties: { slug: { type: 'string' } }, required: ['slug'] },
+    async execute(args) {
+      var r = await fetch('listings/' + encodeURIComponent(args.slug) + '.json');
+      return { content: [{ type: 'text', text: await r.text() }] };
+    }
+  });
+})();
+</script>
 </body>
 </html>

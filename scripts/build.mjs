@@ -89,6 +89,7 @@ function listingPage(l) {
 <meta property="og:title" content="${esc(l.name)} — AI Product Index">
 <meta property="og:description" content="${esc(l.description.slice(0, 160))}">
 <meta property="og:url" content="${BASE}/l/${l.slug}.html">
+<meta property="og:image" content="${BASE}/assets/og.png">
 <script type="application/ld+json">
 ${jsonLd(ld)}
 </script>
