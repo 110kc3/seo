@@ -14,7 +14,7 @@ gh repo create 110kc3.github.io --public --source=. --remote=origin --push \
 gh api -X POST repos/110kc3/110kc3.github.io/pages -f 'source[branch]=main' -f 'source[path]=/'
 ```
 
-Current audit score without it: **21/100** ("invisible to agents" — all root checks 404). With it + the OG/alternate-link fixes already shipped: estimated **~75** (≥70 = certifiable). Not achievable on GitHub Pages regardless: markdown content-negotiation (9), custom response headers (5), WebMCP endpoint (5).
+**✅ DONE 2026-07-10** — repo published (approved by Kamil), Pages live, all root surfaces 200. Audit went **21 → 81/100, "agent-ready (certifiable)"** after also adding og:image, `interfaces.json_api`/`webmcp` in agents.json, the A2A card at `/.well-known/agent.json`, and in-page WebMCP tools. Only the static-hosting-impossible checks fail (markdown content-negotiation, RFC 9421 web-bot-auth, custom response headers).
 
 ## 1. awesome-mcp-servers (punkpeye) — biggest audience, agent-PRs fast-tracked
 
@@ -49,11 +49,9 @@ llmstxthub.com/submit → GitHub sign-in → automated PR. Note: ~110 open PRs, 
 
 ## 4. agentswelcome.dev — no account, pure API, our exact niche
 
-After #0 is live and the audit clears 70:
+Audit already passes (**81/100, certifiable** as of 2026-07-10) — the directory submit is one command, awaiting your go:
 
 ```bash
-curl -X POST https://agentswelcome.dev/api/audit -H 'content-type: application/json' -d '{"url":"https://110kc3.github.io/seo/"}'
-# if score >= 70:
 curl -X POST https://agentswelcome.dev/api/directory -H 'content-type: application/json' -d '{"url":"https://110kc3.github.io/seo/"}'
 ```
 
