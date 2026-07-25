@@ -12,6 +12,9 @@
 // of their choosing. Every field of the client's `accepted` block is compared
 // against our own requirements before anything is sent onward.
 
+import { resolveX402 } from '../scripts/x402-config.mjs';
+import { facilitatorHeaders } from './cdp-auth.js';
+
 const HDR_REQUIRED = 'PAYMENT-REQUIRED';
 const HDR_SIGNATURE = 'PAYMENT-SIGNATURE';
 const HDR_RESPONSE = 'PAYMENT-RESPONSE';
@@ -48,17 +51,16 @@ function sameAmount(a, b) {
  * payment rails are unconfigured — callers must fail closed, never serve free.
  */
 export function paymentRequirements(cfg, amountAtomic) {
-  const p = cfg.payments ?? {};
-  const x = p.x402 ?? {};
-  if (!p.x402_address || !x.facilitator_url || !x.network || !x.asset || !amountAtomic) return null;
+  const rail = resolveX402(cfg);
+  if (!rail || !amountAtomic) return null;
   return {
     scheme: 'exact',
-    network: x.network,
+    network: rail.network,
     amount: String(amountAtomic),
-    asset: x.asset,
-    payTo: p.x402_address,
-    maxTimeoutSeconds: x.max_timeout_seconds ?? 60,
-    extra: { name: x.asset_name ?? 'USDC', version: x.asset_version ?? '2' },
+    asset: rail.asset,
+    payTo: rail.payTo,
+    maxTimeoutSeconds: rail.max_timeout_seconds,
+    extra: { name: rail.asset_name, version: rail.asset_version },
   };
 }
 
@@ -86,13 +88,13 @@ function fail(code, error, status = 400) {
   });
 }
 
-async function facilitator(url, path, body) {
+async function facilitator(url, path, body, authHeaders = {}) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 15_000);
   try {
     const resp = await fetch(`${url.replace(/\/+$/, '')}${path}`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'user-agent': 'ai-product-index/1.0' },
+      headers: { 'content-type': 'application/json', 'user-agent': 'ai-product-index/1.0', ...authHeaders },
       body: JSON.stringify(body),
       signal: ctl.signal,
     });
@@ -121,7 +123,7 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
       paid: false,
       response: fail(
         'payments_not_enabled',
-        `paid access is not purchasable yet — x402 rails are configured but no receiving address is set; watch ${cfg.base.replace(/\/+$/, '')}/llms.txt`,
+        `paid access is not purchasable yet — the x402 rail is not fully configured; watch ${cfg.base.replace(/\/+$/, '')}/llms.txt`,
         503,
       ),
     };
@@ -203,11 +205,21 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
   await env.PAYMENTS.put(nonceKey, 'reserved', { expirationTtl: 300 });
 
   const body = { x402Version: X402_VERSION, paymentPayload: payload, paymentRequirements: requirements };
-  const url = cfg.payments.x402.facilitator_url;
+  const rail = resolveX402(cfg);
+  const url = rail.facilitator_url;
+
+  // Each JWT is bound to one method+host+path by its `uris` claim, so /verify
+  // and /settle are signed separately — a token for one is not valid for the
+  // other. Rails with auth: "none" get an empty header set from the same call.
+  const verifyAuth = await facilitatorHeaders(rail, env, 'POST', `${url.replace(/\/+$/, '')}/verify`);
+  if (!verifyAuth.ok) {
+    await env.PAYMENTS.delete(nonceKey);
+    return { paid: false, response: fail(verifyAuth.code, verifyAuth.error, 503) };
+  }
 
   let verify;
   try {
-    verify = await facilitator(url, '/verify', body);
+    verify = await facilitator(url, '/verify', body, verifyAuth.headers);
   } catch (e) {
     await env.PAYMENTS.delete(nonceKey);
     return { paid: false, response: fail('facilitator_unreachable', `payment facilitator did not respond: ${e.name}`, 502) };
@@ -223,9 +235,15 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     };
   }
 
+  const settleAuth = await facilitatorHeaders(rail, env, 'POST', `${url.replace(/\/+$/, '')}/settle`);
+  if (!settleAuth.ok) {
+    await env.PAYMENTS.delete(nonceKey);
+    return { paid: false, response: fail(settleAuth.code, settleAuth.error, 503) };
+  }
+
   let settle;
   try {
-    settle = await facilitator(url, '/settle', body);
+    settle = await facilitator(url, '/settle', body, settleAuth.headers);
   } catch (e) {
     await env.PAYMENTS.delete(nonceKey);
     return { paid: false, response: fail('facilitator_unreachable', `payment settlement did not respond: ${e.name}`, 502) };

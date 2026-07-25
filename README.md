@@ -85,15 +85,30 @@ Use `scripts/*.test.mjs`, not `node --test scripts/` — Node 22 resolves a bare
 
 Migration knob: `site.config.json → base` is the single source for every absolute URL; the build regenerates sitemap/canonical/JSON-LD/llms.txt/openapi from it. The three hardcoded URLs in `.github/ISSUE_TEMPLATE/*.yml` must be edited by hand (issue-form text can't be templated).
 
-## Payments (implemented — switching on needs Kamil's wallet address)
+## Payments — rails, and how to switch between them
 
-**The code ships fail-closed on testnet.** `site.config.json → payments.x402` defaults to Base Sepolia with the x402 spec's own example USDC address, and `x402_address` is empty, so every paid path rejects with `payments_not_enabled` rather than serving free or sending funds anywhere. To go live:
+Rails differ only in where they settle and who they answer to, so they live as named profiles under `payments.x402.profiles` with an `active` selector. **Moving from rehearsal to real money is one word, not five edited fields.** `scripts/x402-config.mjs → resolveX402()` is the single resolver; both the Worker and the `[upgrade]` issue flow read it, so the two can never disagree about which chain and asset are being accepted.
 
-1. **Receiving address** — put the wallet in `payments.x402_address`. This is the only genuinely blocking item.
-2. **Mainnet** — set `payments.x402.network` to `eip155:8453` (Base) and `payments.x402.asset` to the **verified** mainnet USDC contract, and `rpc_url` to a Base mainnet RPC. Do not copy the address from memory or from this README — read it off the token's official page and check it against a block explorer before a single payment is accepted.
-3. **Prices** — `audit_price_atomic`, `verified_tier_price_atomic`, `featured_tier_price_atomic` are in atomic units (USDC has 6 decimals, so `10000` = $0.01). Rebuild after changing.
-4. **Card (humans)** — a Stripe payment link in `payments.stripe_payment_link`; `rail: "card"` upgrades answer `manual_reconciliation` and are flipped with `scripts/set-tier.mjs`.
+Currently `active: "testnet"` — Base Sepolia, real protocol, worthless money.
 
-Also worth doing once live: join the [Cloudflare Monetization Gateway](https://blog.cloudflare.com/monetization-gateway/) waitlist — being on Cloudflare is the prerequisite, and it would let the same 402 metering be applied to `/api/index.json` without code.
+| Profile | Facilitator | Auth | Ready? |
+|---|---|---|---|
+| `testnet` | `x402.org/facilitator` | none | **yes — live now** |
+| `mainnet` | `x402.org/facilitator` | none | needs the verified USDC address |
+| `cdp` | Coinbase CDP | Bearer JWT | needs the USDC address + CDP API key |
+
+**The mainnet profiles ship with `asset` deliberately blank.** `resolveX402()` returns `null` — i.e. `payments_not_enabled` — rather than quoting a payment against an empty contract. Read the Base USDC address off the token's official page and check it against a block explorer before filling it in; do not copy it from memory, from this README, or from a model.
+
+To go live on mainnet:
+
+1. **Verify and set the USDC contract** in the chosen profile's `asset`.
+2. **Pick the facilitator.** `mainnet` needs no credentials. `cdp` gives a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
+3. **Flip `active`**, rebuild, deploy.
+
+**Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. `audit_price_atomic` covers `/api/audit`; `verified_tier_price_atomic` and `featured_tier_price_atomic` cover `[upgrade]`. Agents can read the live terms at `/api/x402/info` without provoking a 402.
+
+**Card (humans)** — a Stripe payment link in `payments.stripe_payment_link`; `rail: "card"` upgrades answer `manual_reconciliation` and are flipped with `scripts/set-tier.mjs`. Stripe's own x402 product settles to a Stripe balance in fiat but is private preview behind an access request; adopting it later is a `facilitator_url` change, not a rewrite.
+
+**CDP authentication** (`worker/cdp-auth.js`) is hand-rolled on WebCrypto rather than pulling in `@coinbase/x402`, which would drag `viem`, `zod` and the whole CDP SDK into a Worker for one signature. The contract was read off those published package sources: header `{alg, kid, typ, nonce}` with `alg` of `EdDSA` (Ed25519) or `ES256` (EC), claims `{sub, iss: "cdp", nbf, exp, jti, uris}`. The `uris` claim binds each token to one method+host+path, so a `/verify` token cannot be replayed against `/settle`. A rail declaring `auth: "cdp"` with no credentials fails closed instead of firing unauthenticated and surfacing Coinbase's 401 as if the agent's payment were bad.
 
 The read API will not change shape — `tier` has been server-set on every listing since day one.

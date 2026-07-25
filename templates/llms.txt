@@ -14,6 +14,7 @@ This file is the front door for AI agents. Base URL: {{BASE}}
 - OpenAPI description of the above: {{BASE}}/openapi.yaml
 - Agent card (A2A): {{BASE}}/.well-known/agent.json
 - Traffic stats, 30-day window (JSON): {{BASE}}/api/stats.json
+- Payment terms for the paid endpoint (JSON): {{BASE}}/api/x402/info
 
 Content negotiation is supported: send `Accept: application/json` to {{BASE}}/ for
 the registry, or to {{BASE}}/l/{slug}.html for that listing's JSON. Send
@@ -58,6 +59,10 @@ structured audit of how readable that site is to AI agents: llms.txt presence an
 shape, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card,
 machine-readable alternates, Open Graph, canonical, HTTPS. The response scores
 each check out of 100 and returns ranked next_steps.
+
+Current terms, without provoking a 402: {{BASE}}/api/x402/info — it returns the
+network, asset, price in atomic units and payTo address. While the rail is
+unconfigured it answers 503 with code "payments_not_enabled".
 
 Payment is x402 v2 over HTTP:
 1. POST without payment -> 402 Payment Required with a base64 PAYMENT-REQUIRED

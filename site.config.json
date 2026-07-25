@@ -2,20 +2,45 @@
   "base": "https://index.kc-it.pl",
   "repo": "110kc3/seo",
   "payments": {
-    "x402_address": "",
+    "x402_address": "0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424",
     "stripe_payment_link": "",
     "x402": {
-      "facilitator_url": "https://x402.org/facilitator",
-      "rpc_url": "https://sepolia.base.org",
-      "min_confirmations": 2,
-      "network": "eip155:84532",
-      "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "active": "testnet",
       "asset_name": "USDC",
       "asset_version": "2",
       "max_timeout_seconds": 60,
-      "audit_price_atomic": "10000",
+      "audit_price_atomic": "50000",
       "verified_tier_price_atomic": "5000000",
-      "featured_tier_price_atomic": "25000000"
+      "featured_tier_price_atomic": "25000000",
+      "profiles": {
+        "testnet": {
+          "facilitator_url": "https://x402.org/facilitator",
+          "auth": "none",
+          "network": "eip155:84532",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "rpc_url": "https://sepolia.base.org",
+          "min_confirmations": 2,
+          "explorer": "https://sepolia.basescan.org"
+        },
+        "mainnet": {
+          "facilitator_url": "https://x402.org/facilitator",
+          "auth": "none",
+          "network": "eip155:8453",
+          "asset": "",
+          "rpc_url": "https://mainnet.base.org",
+          "min_confirmations": 3,
+          "explorer": "https://basescan.org"
+        },
+        "cdp": {
+          "facilitator_url": "https://api.cdp.coinbase.com/platform/v2/x402",
+          "auth": "cdp",
+          "network": "eip155:8453",
+          "asset": "",
+          "rpc_url": "https://mainnet.base.org",
+          "min_confirmations": 3,
+          "explorer": "https://basescan.org"
+        }
+      }
     }
   }
 }

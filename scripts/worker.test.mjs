@@ -12,6 +12,8 @@ import { alternatesFor, negotiate } from '../worker/negotiate.js';
 import { paymentRequirements, requirePayment, __testing as x402 } from '../worker/x402.js';
 import { parseAuditRequest, __testing as audit } from '../worker/audit.js';
 import { __testing as stats } from '../worker/stats.js';
+import { resolveX402, needsCdpAuth } from './x402-config.mjs';
+import { createCdpAuthHeader, facilitatorHeaders } from '../worker/cdp-auth.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -96,22 +98,70 @@ const CFG = {
   payments: {
     x402_address: '0x209693Bc6afc0C5328bA36FaF03C514EF312287C',
     x402: {
-      facilitator_url: 'https://x402.org/facilitator',
-      network: 'eip155:84532',
-      asset: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
+      active: 'testnet',
       asset_name: 'USDC',
       asset_version: '2',
       max_timeout_seconds: 60,
       audit_price_atomic: '10000',
+      verified_tier_price_atomic: '5000000',
+      profiles: {
+        testnet: {
+          facilitator_url: 'https://x402.org/facilitator',
+          auth: 'none',
+          network: 'eip155:84532',
+          asset: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
+          rpc_url: 'https://sepolia.base.org',
+          min_confirmations: 2,
+        },
+        // Ships deliberately blank: the mainnet USDC contract must be verified
+        // against a block explorer, never recalled from memory.
+        mainnet: {
+          facilitator_url: 'https://x402.org/facilitator',
+          auth: 'none',
+          network: 'eip155:8453',
+          asset: '',
+        },
+        cdp: {
+          facilitator_url: 'https://api.cdp.coinbase.com/platform/v2/x402',
+          auth: 'cdp',
+          network: 'eip155:8453',
+          asset: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
+        },
+      },
     },
   },
 };
+
+const withRail = (name) => ({ ...CFG, payments: { ...CFG.payments, x402: { ...CFG.payments.x402, active: name } } });
 
 test('paymentRequirements fails closed until a receiving address is set', () => {
   assert.equal(paymentRequirements({ payments: {} }, '10000'), null);
   const noAddress = { payments: { ...CFG.payments, x402_address: '' } };
   assert.equal(paymentRequirements(noAddress, '10000'), null);
   assert.equal(paymentRequirements(CFG, undefined), null);
+});
+
+test('a rail with an unverified asset address stays disabled', () => {
+  // The mainnet profile is intentionally incomplete. Selecting it must disable
+  // payments rather than quote a payment against an empty contract address.
+  assert.equal(paymentRequirements(withRail('mainnet'), '10000'), null);
+  assert.equal(resolveX402(withRail('mainnet')), null);
+});
+
+test('resolveX402 selects the active profile and flattens it', () => {
+  const testnet = resolveX402(CFG);
+  assert.equal(testnet.rail, 'testnet');
+  assert.equal(testnet.network, 'eip155:84532');
+  assert.equal(testnet.auth, 'none');
+  assert.equal(testnet.payTo, CFG.payments.x402_address);
+  assert.equal(testnet.audit_price_atomic, '10000');
+
+  const cdp = resolveX402(withRail('cdp'));
+  assert.equal(cdp.network, 'eip155:8453');
+  assert.ok(needsCdpAuth(cdp));
+  assert.ok(!needsCdpAuth(testnet));
+
+  assert.equal(resolveX402({ payments: { x402: { active: 'nope', profiles: {} } } }), null);
 });
 
 test('paymentRequirements emits a spec-shaped exact-scheme requirement', () => {
@@ -262,6 +312,103 @@ test('malformed payment payloads are 400, not 402', async () => {
 
   const badNonce = await gate(validPayload({ authorization: { nonce: '0x1234' } }));
   assert.equal(badNonce.response.status, 400);
+});
+
+// --- CDP facilitator authentication ----------------------------------------
+
+const decodeJwtPart = (part) =>
+  JSON.parse(Buffer.from(part.replaceAll('-', '+').replaceAll('_', '/'), 'base64').toString('utf8'));
+
+// A CDP Ed25519 secret is base64 of seed(32) || publicKey(32). Generate a real
+// keypair so the signature path is genuinely exercised, not stubbed.
+async function ed25519Secret() {
+  const { subtle } = globalThis.crypto;
+  const pair = await subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify']);
+  const jwk = await subtle.exportKey('jwk', pair.privateKey);
+  const b64urlToBytes = (s) => Buffer.from(s.replaceAll('-', '+').replaceAll('_', '/'), 'base64');
+  return Buffer.concat([b64urlToBytes(jwk.d), b64urlToBytes(jwk.x)]).toString('base64');
+}
+
+test('CDP JWT carries the documented header and claims (EdDSA)', async () => {
+  const apiKeySecret = await ed25519Secret();
+  const header = await createCdpAuthHeader({
+    apiKeyId: 'key-abc',
+    apiKeySecret,
+    method: 'POST',
+    host: 'api.cdp.coinbase.com',
+    path: '/platform/v2/x402/verify',
+    now: 1_800_000_000,
+  });
+
+  assert.match(header, /^Bearer /);
+  const [h, c, sig] = header.slice('Bearer '.length).split('.');
+  assert.ok(sig.length > 0);
+
+  const decodedHeader = decodeJwtPart(h);
+  assert.equal(decodedHeader.alg, 'EdDSA');
+  assert.equal(decodedHeader.kid, 'key-abc');
+  assert.equal(decodedHeader.typ, 'JWT');
+  assert.ok(decodedHeader.nonce);
+
+  const claims = decodeJwtPart(c);
+  assert.equal(claims.sub, 'key-abc');
+  assert.equal(claims.iss, 'cdp');
+  assert.equal(claims.nbf, 1_800_000_000);
+  assert.ok(claims.exp > claims.nbf);
+  assert.ok(claims.jti);
+  // The uris claim binds the token to one route — a /verify token must not be
+  // usable against /settle.
+  assert.deepEqual(claims.uris, ['POST api.cdp.coinbase.com/platform/v2/x402/verify']);
+});
+
+test('CDP JWT signs with ES256 when given a PKCS8 PEM', async () => {
+  const { subtle } = globalThis.crypto;
+  const pair = await subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);
+  const der = Buffer.from(await subtle.exportKey('pkcs8', pair.privateKey)).toString('base64');
+  const pem = `-----BEGIN PRIVATE KEY-----\n${der.match(/.{1,64}/g).join('\n')}\n-----END PRIVATE KEY-----`;
+
+  const header = await createCdpAuthHeader({
+    apiKeyId: 'ec-key', apiKeySecret: pem, method: 'POST', host: 'api.cdp.coinbase.com', path: '/platform/v2/x402/settle',
+  });
+  const decoded = decodeJwtPart(header.slice('Bearer '.length).split('.')[0]);
+  assert.equal(decoded.alg, 'ES256');
+  assert.equal(decoded.kid, 'ec-key');
+});
+
+test('each JWT is unique even for identical requests', async () => {
+  const apiKeySecret = await ed25519Secret();
+  const args = { apiKeyId: 'k', apiKeySecret, method: 'POST', host: 'h', path: '/p', now: 1_800_000_000 };
+  const [a, b] = await Promise.all([createCdpAuthHeader(args), createCdpAuthHeader(args)]);
+  assert.notEqual(a, b, 'nonce and jti must be freshly random per token');
+});
+
+test('an unrecognised key secret is rejected rather than signed with garbage', async () => {
+  await assert.rejects(
+    () => createCdpAuthHeader({ apiKeyId: 'k', apiKeySecret: 'dG9vLXNob3J0', method: 'POST', host: 'h', path: '/p' }),
+    /unrecognised CDP API key secret/,
+  );
+});
+
+test('facilitatorHeaders sends nothing for an unauthenticated rail', async () => {
+  const res = await facilitatorHeaders(resolveX402(CFG), {}, 'POST', 'https://x402.org/facilitator/verify');
+  assert.deepEqual(res, { ok: true, headers: {} });
+});
+
+test('a CDP rail without credentials fails closed instead of firing unauthenticated', async () => {
+  // Otherwise Coinbase's 401 would surface to the agent as if its payment were
+  // bad, when the real fault is a missing deployment secret.
+  const res = await facilitatorHeaders(resolveX402(withRail('cdp')), {}, 'POST', 'https://api.cdp.coinbase.com/platform/v2/x402/verify');
+  assert.equal(res.ok, false);
+  assert.equal(res.code, 'payments_not_enabled');
+});
+
+test('a CDP rail with credentials produces an Authorization header', async () => {
+  const env = { CDP_API_KEY_ID: 'key-abc', CDP_API_KEY_SECRET: await ed25519Secret() };
+  const res = await facilitatorHeaders(resolveX402(withRail('cdp')), env, 'POST', 'https://api.cdp.coinbase.com/platform/v2/x402/settle');
+  assert.equal(res.ok, true);
+  assert.match(res.headers.Authorization, /^Bearer [\w-]+\.[\w-]+\.[\w-]+$/);
+  const claims = decodeJwtPart(res.headers.Authorization.slice('Bearer '.length).split('.')[1]);
+  assert.deepEqual(claims.uris, ['POST api.cdp.coinbase.com/platform/v2/x402/settle']);
 });
 
 // --- audit input boundary --------------------------------------------------

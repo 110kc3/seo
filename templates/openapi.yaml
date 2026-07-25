@@ -104,6 +104,21 @@ paths:
             application/json: {}
         "503":
           description: Stats not published yet (code stats_not_enabled).
+  /api/x402/info:
+    get:
+      operationId: getPaymentTerms
+      summary: Payment terms for the paid endpoint, without provoking a 402
+      description: |
+        Returns the active rail's network, asset, price in atomic units and payTo
+        address. Everything here also appears in the 402 challenge — this just
+        saves a wasted request.
+      responses:
+        "200":
+          description: Active payment terms.
+          content:
+            application/json: {}
+        "503":
+          description: Rail not configured (code payments_not_enabled).
   /api/audit:
     post:
       operationId: auditUrl

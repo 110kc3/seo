@@ -51,6 +51,7 @@
     "json_api": "https://index.kc-it.pl/api/index.json",
     "openapi": "https://index.kc-it.pl/openapi.yaml",
     "schema": "https://index.kc-it.pl/api/schema.json",
-    "stats": "https://index.kc-it.pl/api/stats.json"
+    "stats": "https://index.kc-it.pl/api/stats.json",
+    "payment_terms": "https://index.kc-it.pl/api/x402/info"
   }
 }

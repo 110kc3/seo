@@ -13,8 +13,9 @@ import cfg from '../site.config.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
-import { requirePayment, attachSettlement } from './x402.js';
+import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
+import { resolveX402 } from '../scripts/x402-config.mjs';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const MAX_AUDIT_BODY = 4 * 1024;
@@ -80,7 +81,7 @@ async function handleAudit(request, env, cfgObj) {
   const parsed = parseAuditRequest(body);
   if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
 
-  const price = cfgObj.payments?.x402?.audit_price_atomic;
+  const price = resolveX402(cfgObj)?.audit_price_atomic;
   const gate = await requirePayment(request, env, cfgObj, {
     amountAtomic: price,
     resource: {
@@ -96,6 +97,40 @@ async function handleAudit(request, env, cfgObj) {
   return attachSettlement(json(result, status), gate.settlement);
 }
 
+// --- public payment terms --------------------------------------------------
+
+// Lets an agent read the price without provoking a 402. Everything here is
+// already published in the payment challenge, so nothing new is disclosed —
+// it just saves a wasted request, and gives a Bazaar crawler something to read.
+function handleX402Info(cfgObj) {
+  const rail = resolveX402(cfgObj);
+  if (!rail) {
+    return json({
+      ok: false,
+      code: 'payments_not_enabled',
+      error: 'the x402 rail is not fully configured yet',
+      protocol: 'https://docs.x402.org',
+    }, 503);
+  }
+  return json({
+    ok: true,
+    protocol: 'x402',
+    x402Version: 2,
+    network: rail.network,
+    asset: rail.asset,
+    asset_name: rail.asset_name,
+    payTo: rail.payTo,
+    resources: [{
+      url: `${BASE}/api/audit`,
+      method: 'POST',
+      amount: rail.audit_price_atomic,
+      description: 'Agent-readability audit of one URL.',
+    }],
+    explorer: rail.explorer,
+    docs: `${BASE}/llms.txt`,
+  }, 200, { 'cache-control': 'public, max-age=300' });
+}
+
 // --- router ----------------------------------------------------------------
 
 export default {
@@ -109,6 +144,8 @@ export default {
         response = await handleAudit(request, env, cfg);
       } else if (url.pathname === '/api/stats.json') {
         response = await handleStats(env);
+      } else if (url.pathname === '/api/x402/info') {
+        response = handleX402Info(cfg);
       } else {
         const alternate = negotiate(url.pathname, request.headers.get('accept'));
         const assetRequest = alternate

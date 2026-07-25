@@ -8,6 +8,7 @@ import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate, reconstruct, normalizeUrl, MAX_LISTINGS_PER_USER, SLUG_RE, PAID_TIERS } from './validate.mjs';
 import { verifyReceipt, tierPriceAtomic, TX_RE } from './x402-receipt.mjs';
+import { resolveX402 } from './x402-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
@@ -113,19 +114,19 @@ function loadLedger() {
 
 async function verifyPayment(rail, receipt, tier) {
   const p = cfg.payments ?? {};
-  const x = p.x402 ?? {};
 
-  if (!p.x402_address && !p.stripe_payment_link) {
-    return { ok: false, code: 'payments_not_enabled', error: `tier upgrades are not purchasable yet — payment rails (x402, card) are planned; watch ${BASE}/llms.txt` };
-  }
   if (rail === 'card') {
     return { ok: false, code: 'manual_reconciliation', error: `card payments are reconciled by hand — pay at ${p.stripe_payment_link || 'the published payment link'} and the tier is applied once the payment clears` };
   }
   if (rail !== 'x402') {
     return { ok: false, code: 'invalid', error: 'rail must be "x402" or "card"' };
   }
-  if (!p.x402_address || !x.rpc_url || !x.asset) {
-    return { ok: false, code: 'payments_not_enabled', error: `the x402 rail is not fully configured yet (needs a receiving address and a chain RPC); watch ${BASE}/llms.txt` };
+
+  // Same resolver the Worker uses, so the issue flow and the HTTP flow can
+  // never disagree about which chain and asset are being accepted.
+  const x = resolveX402(cfg);
+  if (!x || !x.rpc_url) {
+    return { ok: false, code: 'payments_not_enabled', error: `the x402 rail is not fully configured yet; watch ${BASE}/llms.txt` };
   }
 
   const price = tierPriceAtomic(x, tier);
@@ -148,9 +149,9 @@ async function verifyPayment(rail, receipt, tier) {
   const res = await verifyReceipt(x.rpc_url, {
     transaction: tx,
     asset: x.asset,
-    payTo: p.x402_address,
+    payTo: x.payTo,
     minAmount: price,
-    minConfirmations: x.min_confirmations ?? 2,
+    minConfirmations: x.min_confirmations,
   });
   if (!res.ok) return res;
   return { ok: true, tx, payer: res.payer, value: res.value };

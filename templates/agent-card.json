@@ -51,6 +51,7 @@
     "json_api": "{{BASE}}/api/index.json",
     "openapi": "{{BASE}}/openapi.yaml",
     "schema": "{{BASE}}/api/schema.json",
-    "stats": "{{BASE}}/api/stats.json"
+    "stats": "{{BASE}}/api/stats.json",
+    "payment_terms": "{{BASE}}/api/x402/info"
   }
 }
