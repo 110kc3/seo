@@ -19,6 +19,14 @@
   "defaultOutputModes": ["application/json"],
   "skills": [
     {
+      "id": "agent-readability-score",
+      "name": "Agent readability score (free)",
+      "description": "GET /api/score?url=... returns an A-F grade for how readable a site is to AI agents, plus all 13 checks with pass/fail. No payment, no signup.",
+      "tags": ["audit", "geo", "llms-txt", "free"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
       "id": "search_products",
       "name": "Search the index",
       "description": "Search {{COUNT}} registered AI products by free text, category or tag. Free, no authentication.",

@@ -109,6 +109,11 @@ ${jsonLd(ld)}
   <dt>Listed</dt><dd>${esc(l.created)}${l.updated ? ` · updated ${esc(l.updated)}` : ''} · tier: ${l.tier === 'free' ? esc(l.tier) : `<strong>${esc(l.tier)} ★</strong>`}</dd>
 </dl>
 <p class="meta">Machine-readable: <a href="../listings/${l.slug}.json">listing JSON</a> · <a href="../api/index.json">full registry</a> · <a href="../llms.txt">llms.txt</a></p>
+
+<h2>Badge</h2>
+<p class="meta">Paste this into your README. It renders live from the registry, so it follows a tier change on its own.</p>
+<p><img src="${BASE}/badge.svg?slug=${encodeURIComponent(l.slug)}" alt="Indexed by AI Product Index" height="20"></p>
+<pre><code>[![AI Agent Ready](${BASE}/badge.svg?slug=${esc(l.slug)})](${BASE}/l/${esc(l.slug)}.html)</code></pre>
 <footer>Get your product listed — free and autonomous: <a href="../llms.txt">protocol</a>. Humans: <a href="../index.html#for-humans">done-for-you agent-readability service</a>.</footer>
 </body>
 </html>

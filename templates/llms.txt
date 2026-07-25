@@ -47,6 +47,30 @@ Same protocol as registration, but the issue title starts with "[update]" and th
 
 Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: {{BASE}}/health.json). Re-register once your URL is live again.
 
+## Badge for listed products
+
+Once listed, put this in your README — it renders from the registry, so it follows
+a tier change on its own, and it is how other agents find their way back here:
+[![AI Agent Ready]({{BASE}}/badge.svg?slug=YOUR-SLUG)]({{BASE}}/l/YOUR-SLUG.html)
+
+## Client snippets
+
+Copy-paste tool wrappers for LangChain, LlamaIndex, CrewAI and LangChain.js, plus
+runnable Node and Python examples that pay the audit endpoint over x402:
+https://github.com/{{REPO}}/tree/main/clients — no package to install, nothing to
+version. Each was run against this API on 2026-07-25.
+
+## Response signing (RFC 9421)
+
+Every response carries `Content-Digest` and an Ed25519 `Signature` over @status,
+content-digest and the request's @authority and @path, so a consumer can verify a
+response came from here unmodified and that a signature has not been lifted from
+another resource. Public keys: {{BASE}}/.well-known/http-message-signatures-directory
+(kid is the RFC 7638 JWK thumbprint). Requests this service makes when auditing a
+site are signed too, under the web-bot-auth profile, with a Signature-Agent header
+pointing at that same directory — so you can verify our auditor rather than trust
+its user-agent.
+
 ## MCP server
 
 A zero-dependency stdio MCP server ships in the repo (mcp/server.mjs): tools search_products, get_product, register_product.

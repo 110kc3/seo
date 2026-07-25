@@ -63,6 +63,9 @@
   ul.checks .ok { color:var(--muted); }
   .locked { border:1px dashed var(--border); border-radius:8px; padding:.85rem 1rem; margin:1rem 0 0; }
   .locked h3 { margin:0 0 .35rem; font-size:.95rem; }
+  .try select { flex:1 1 18rem; min-width:0; padding:.6rem .7rem; font:inherit; font-size:.92rem;
+                color:var(--fg); background:var(--bg); border:1px solid var(--border); border-radius:7px; }
+  #api-out { margin:.9rem 0 0; max-height:22rem; overflow:auto; }
   .locked p { margin:.3rem 0; font-size:.9rem; }
 </style>
 </head>
@@ -99,8 +102,54 @@
 <p><code>POST /api/audit</code> is the paid half — the same 13 checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
 <pre><code>curl -X POST {{BASE}}/api/audit \
   -H 'content-type: application/json' \
-  -d '{"url": "https://example.com"}'</code></pre>
-<p class="badges">Live traffic for this index: <a href="api/stats.json">api/stats.json</a> · agent card: <a href=".well-known/agent.json">.well-known/agent.json</a></p>
+  -d '{"url": "https://example.com"}'   # 402 + the terms</code></pre>
+
+<h3 id="pay">Paying it, in five lines</h3>
+<p>Both x402 protocol versions are accepted, so every current client works. These were each run against this endpoint on 2026-07-25 — they reach settlement and stop only at the wallet's balance.</p>
+<p class="badges"><strong>Node</strong> — <code>npm i @x402/fetch @x402/core @x402/evm viem</code></p>
+<pre><code>import { wrapFetchWithPayment } from '@x402/fetch';
+import { x402Client } from '@x402/core/client';
+import { ExactEvmScheme } from '@x402/evm/exact/client';
+import { privateKeyToAccount } from 'viem/accounts';
+
+const client = new x402Client();
+client.register('eip155:*', new ExactEvmScheme(privateKeyToAccount(process.env.EVM_PRIVATE_KEY)));
+const res = await wrapFetchWithPayment(fetch, client)('{{BASE}}/api/audit', {
+  method: 'POST', headers: { 'content-type': 'application/json' },
+  body: JSON.stringify({ url: 'https://your-site.com' }),
+});</code></pre>
+<p class="badges"><strong>Python</strong> — <code>pip install "x402[evm,httpx]"</code> (the <code>evm</code> extra matters; <code>x402[httpx]</code> alone cannot sign)</p>
+<pre><code>from eth_account import Account
+from x402 import x402Client
+from x402.http.clients import x402HttpxClient
+from x402.mechanisms.evm import EthAccountSigner
+from x402.mechanisms.evm.exact.register import register_exact_evm_client
+
+client = x402Client()
+register_exact_evm_client(client, EthAccountSigner(Account.from_key(KEY)))
+async with x402HttpxClient(client) as http:
+    r = await http.post("{{BASE}}/api/audit", json={"url": "https://your-site.com"})</code></pre>
+<p class="badges">Runnable versions of both, plus LangChain / LlamaIndex / CrewAI tool wrappers: <a href="https://github.com/{{REPO}}/tree/main/clients">clients/</a> in the repo. Terms without provoking a 402: <a href="api/x402/info">api/x402/info</a>.</p>
+
+<h2 id="explore">Try the API</h2>
+<p>Every read endpoint, in the browser. No key, no signup — these are the same URLs an agent calls.</p>
+<div class="try">
+  <form id="api-form">
+    <select id="api-path" aria-label="Endpoint to call">
+      <option value="/api/index.json">GET /api/index.json — the whole registry</option>
+      <option value="/api/schema.json">GET /api/schema.json — listing schema</option>
+      <option value="/api/x402/info">GET /api/x402/info — payment terms</option>
+      <option value="/api/stats.json">GET /api/stats.json — who actually visits</option>
+      <option value="/.well-known/agent.json">GET /.well-known/agent.json — agent card</option>
+      <option value="/.well-known/http-message-signatures-directory">GET /.well-known/http-message-signatures-directory — signing keys</option>
+    </select>
+    <button type="submit" id="api-go">Send</button>
+  </form>
+  <p class="note" id="api-note">Responses carry <code>Signature-Input</code> and <code>Content-Digest</code> (RFC 9421), so you can verify one came from here unmodified.</p>
+  <pre id="api-out" hidden></pre>
+</div>
+
+<p class="badges">Live traffic for this index: <a href="api/stats.json">api/stats.json</a> · agent card: <a href=".well-known/agent.json">.well-known/agent.json</a> · signing keys: <a href=".well-known/http-message-signatures-directory">directory</a></p>
 
 <h2 id="listings">Listings</h2>
 <ul class="listings">
@@ -217,6 +266,43 @@
         var msg = (res.body && (res.body.error || res.body.errors && res.body.errors[0])) || 'could not audit that URL';
         note.textContent = res.status === 429 ? msg : 'Could not audit that URL: ' + msg;
         out.hidden = true;
+      })
+      .catch(function () { note.textContent = 'Network error — try again.'; })
+      .finally(function () { button.disabled = false; });
+  });
+})();
+</script>
+<script>
+// Zero-dependency API explorer. Deliberately not Swagger UI or Scalar: this is a
+// seven-endpoint read API that is already fully described in llms.txt and
+// openapi.yaml, and loading a megabyte of third-party bundle from a CDN on every
+// page view — on a site whose whole pitch is being clean and machine-readable —
+// costs more than it gives. This does the one thing a visitor wants: see a real
+// response.
+(function () {
+  var form = document.getElementById('api-form');
+  if (!form) return;
+  var select = document.getElementById('api-path');
+  var button = document.getElementById('api-go');
+  var note = document.getElementById('api-note');
+  var out = document.getElementById('api-out');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var path = select.value;
+    button.disabled = true;
+    note.textContent = 'GET ' + path;
+    fetch('.' + path, { headers: { accept: 'application/json' } })
+      .then(function (r) {
+        var sig = r.headers.get('signature-input');
+        return r.text().then(function (text) {
+          var body = text;
+          try { body = JSON.stringify(JSON.parse(text), null, 2); } catch (_) { /* not JSON */ }
+          out.textContent = body.length > 20000 ? body.slice(0, 20000) + '\n… truncated' : body;
+          out.hidden = false;
+          note.textContent = 'HTTP ' + r.status + ' · ' + path
+            + (sig ? ' · signed (' + sig.split(';')[0] + ')' : '');
+        });
       })
       .catch(function () { note.textContent = 'Network error — try again.'; })
       .finally(function () { button.disabled = false; });

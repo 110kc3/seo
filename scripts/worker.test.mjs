@@ -20,6 +20,7 @@ import { __testing as worker } from '../worker/index.js';
 import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
 import { handleScore, freeView, __testing as score } from '../worker/score.js';
 import { signResponse, keyDirectory, botAuthHeaders, signatureBase, contentDigest, signingKey, DIRECTORY_PATH, __testing as sign } from '../worker/signing.js';
+import { handleBadge, badgeSvg, __testing as badge } from '../worker/badge.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -61,6 +62,9 @@ test('classifyPath buckets paths into a stable set', () => {
   assert.equal(classifyPath('/api/score'), 'score_free');
   assert.equal(classifyPath('/dashboard'), 'dashboard');
   assert.equal(classifyPath('/dashboard.html'), 'dashboard');
+  assert.equal(classifyPath('/.well-known/agent.json'), 'agent_card');
+  assert.equal(classifyPath('/.well-known/http-message-signatures-directory'), 'sig_directory');
+  assert.equal(classifyPath('/badge.svg'), 'badge');
   assert.equal(classifyPath('/nope'), 'other');
 });
 
@@ -506,6 +510,67 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(res.response.status, 402);
   const body = await res.response.json();
   assert.equal(body.x402Version, 2);
+});
+
+// --- README badge -----------------------------------------------------------
+
+const LISTINGS = [
+  { slug: 'my-product', name: 'My Product', tier: 'free' },
+  { slug: 'paid-thing', name: 'Paid Thing', tier: 'featured' },
+];
+const callBadge = (qs) => handleBadge(new URL(`${BASE}/badge.svg${qs}`), LISTINGS);
+
+test('the badge reflects the listing tier', async () => {
+  const free = await callBadge('?slug=my-product').text();
+  assert.match(free, /<text[^>]*>indexed<\/text>/);
+  assert.match(free, /AI Agent Ready/);
+
+  const featured = await callBadge('?slug=paid-thing').text();
+  assert.match(featured, /featured/);
+  assert.match(featured, new RegExp(badge.COLOURS.featured));
+
+  // Slugs are matched case-insensitively; a README should not break on caps.
+  assert.match(await callBadge('?slug=MY-PRODUCT').text(), /indexed/);
+});
+
+test('a badge request never answers with a broken image', async () => {
+  // Every one of these arrives from an <img> in someone else's README, where a
+  // 4xx renders as a broken icon and reflects on them. Say it in the badge.
+  for (const [qs, expected] of [
+    ['', /pass \?slug=/],
+    ['?slug=', /pass \?slug=/],
+    ['?slug=does-not-exist', /not indexed/],
+  ]) {
+    const resp = await callBadge(qs);
+    assert.equal(resp.status, 200, `${qs} must still be a 200 image`);
+    assert.equal(resp.headers.get('content-type'), 'image/svg+xml; charset=utf-8');
+    assert.match(await resp.text(), expected);
+  }
+
+  // A real listing caches for longer than a miss.
+  const hit = await callBadge('?slug=my-product');
+  assert.match(hit.headers.get('cache-control'), /max-age=3600/);
+});
+
+test('badge text is escaped and cannot inject markup', async () => {
+  const evil = '"><script>alert(1)</script>';
+  const svg = badgeSvg(evil, 'x', '#000');
+  assert.ok(!svg.includes('<script>'), 'raw markup must not survive');
+  assert.match(svg, /&lt;script&gt;/);
+
+  // The label is caller-controlled via ?label=, so the same holds end to end.
+  const viaQuery = await handleBadge(new URL(`${BASE}/badge.svg?slug=my-product&label=${encodeURIComponent(evil)}`), LISTINGS).text();
+  assert.ok(!viaQuery.includes('<script>'));
+});
+
+test('badge geometry leaves room for its text', () => {
+  // Too-narrow pills clip glyphs; the estimate must never undershoot.
+  for (const text of ['A', 'indexed', 'AI Agent Ready', 'WWWWWWWWWW', 'iiiiiiiiii']) {
+    const svg = badgeSvg('AI Agent Ready', text, '#000');
+    const width = Number(svg.match(/width="(\d+)"/)[1]);
+    assert.ok(width >= badge.textWidth('AI Agent Ready') + badge.textWidth(text) + 36,
+      `${text} needs more room`);
+  }
 });
 
 // --- RFC 9421 response signing ----------------------------------------------

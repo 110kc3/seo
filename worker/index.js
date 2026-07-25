@@ -10,6 +10,9 @@
 // dynamic routes and the header layer on top.
 
 import cfg from '../site.config.json' with { type: 'json' };
+// The committed registry, so /badge.svg answers from the bundle rather than
+// fetching its own API. Deploys follow accepted registrations, so it is current.
+import registry from '../api/index.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
@@ -19,6 +22,7 @@ import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
+import { handleBadge } from './badge.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const MAX_AUDIT_BODY = 4 * 1024;
@@ -218,6 +222,8 @@ export default {
             },
           })
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
+      } else if (url.pathname === '/badge.svg') {
+        response = handleBadge(url, registry.listings ?? []);
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));
       } else if (url.pathname === '/api/stats.json') {

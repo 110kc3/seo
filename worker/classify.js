@@ -78,6 +78,9 @@ export function classifyPath(pathname) {
   if (pathname === '/api/x402/info') return 'x402_info';
   if (pathname === '/api/revenue.json') return 'revenue';
   if (pathname === '/dashboard.html' || pathname === '/dashboard') return 'dashboard';
+  if (pathname === '/.well-known/agent.json' || pathname === '/agents.json') return 'agent_card';
+  if (pathname === '/.well-known/http-message-signatures-directory') return 'sig_directory';
+  if (pathname === '/badge.svg') return 'badge';
   if (pathname.startsWith('/api/')) return 'api';
   if (pathname.startsWith('/listings/')) return 'listing_json';
   if (pathname.startsWith('/l/')) return 'listing_page';
