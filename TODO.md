@@ -12,8 +12,9 @@ optional rails.
 
 ### The one that matters
 
-- [ ] **Put $0.05 through it on testnet.** The only step left that code cannot do. Fund a *throwaway payer* wallet from a Base Sepolia USDC faucet — not the receiving address, since a 402 asks for someone else's money — and pay yourself with the copy-paste client in DEPLOY.md → Phase 2. Then confirm a replay is refused and the settlement shows on `sepolia.basescan.org`, and watch it appear on https://revenue.local.kc-it.pl.
-- [ ] **Then go to mainnet** — `node scripts/verify-rail.mjs mainnet`, eyeball the asset on basescan once, set `"active": "mainnet"`, push. Details below.
+- [x] **Mainnet rail is on** — done 2026-07-25: `"active": "mainnet"` (Base, USDC, PayAI facilitator). The testnet rehearsal below was **deliberately skipped**, so the rail is verified statically only — asset address against Circle's page and the chain, EIP-712 domain name against the token's `name()`, facilitator `/supported` against the network — and has never settled anything.
+- [ ] **Put $0.05 of real USDC through it.** The only step left that code cannot do, and now the *only* end-to-end proof the rail settles. Fund a *throwaway payer* wallet with real USDC on Base — not the receiving address, since a 402 asks for someone else's money — and pay yourself with the copy-paste client in DEPLOY.md → Phase 2, pointed at the live URL. Then confirm a replay is refused, the settlement shows on `basescan.org`, and it appears on https://revenue.local.kc-it.pl as a **live** rail rather than testnet.
+- [ ] **If it fails, rehearse instead of debugging in production** — `"active": "testnet"` and push is the whole rollback; DEPLOY.md → Phase 2 is the funded-faucet walkthrough.
 ### Distribution and optional rails
 
 - [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base).

@@ -2,7 +2,7 @@
 
 A machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
 
-> ⚠️ **Not deployed yet.** The code is complete and tested; the Cloudflare deployment has never run, so `index.kc-it.pl` does not resolve and nobody can reach or pay for this. The payment rail is also set to **testnet**, so no real money can move until it is deliberately switched. See **[DEPLOY.md](DEPLOY.md)** for exactly what is outstanding.
+> 🔴 **Live, on real money.** https://index.kc-it.pl is deployed, and the payment rail is set to **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. A caller who pays is really paying. The mainnet rail was flipped without a testnet rehearsal, so the first real payment is also the first end-to-end settlement this rail has ever done. See **[DEPLOY.md](DEPLOY.md)** for what that leaves outstanding.
 
 **Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
 
@@ -102,13 +102,19 @@ Migration knob: `site.config.json → base` is the single source for every absol
 
 Rails differ only in where they settle and who they answer to, so they live as named profiles under `payments.x402.profiles` with an `active` selector. **Moving from rehearsal to real money is one word, not five edited fields.** `scripts/x402-config.mjs → resolveX402()` is the single resolver; both the Worker and the `[upgrade]` issue flow read it, so the two can never disagree about which chain and asset are being accepted.
 
-Currently `active: "testnet"` — Base Sepolia, real protocol, worthless money.
+Currently `active: "mainnet"` — Base, USDC, real money.
 
 | Profile | Facilitator | Auth | Settles Base mainnet? | Ready? |
 |---|---|---|---|---|
-| `testnet` | `x402.org/facilitator` | none | no — testnet only | **yes — live now** |
-| `mainnet` | PayAI | none | yes, v1 + v2 | yes — flip `active` |
+| `mainnet` | PayAI | none | yes, v1 + v2 | **yes — active now** |
+| `testnet` | `x402.org/facilitator` | none | no — testnet only | yes — flip `active` back to rehearse |
 | `cdp` | Coinbase CDP | Bearer JWT | unverifiable without keys | needs a CDP API key |
+
+The flip to `mainnet` was made deliberately without first settling a testnet
+payment, so the profile's correctness rests on what was checked statically: the
+asset address against Circle's own page and the chain, the EIP-712 domain name
+against the token's `name()`, and the facilitator's `/supported` against the
+network. Reverting is the same one word.
 
 **The public `x402.org` facilitator cannot settle Base mainnet.** Its `/supported` advertises `eip155:84532` and no mainnet at all, and the x402 docs say plainly not to treat it as a production path — so `mainnet` points at [PayAI](https://facilitator.payai.network) from the official facilitator directory instead: no API key, and it advertises Base mainnet under both protocol versions. A third-party facilitator relays the transaction and pays the gas; it cannot redirect funds, because the authorization is signed to our address for our exact amount.
 
@@ -120,7 +126,7 @@ node scripts/verify-rail.mjs mainnet
 
 That reads the token's own `name()`, `symbol()`, `decimals()` and `version()` off chain and asks the facilitator what it will actually settle. It exists because two mistakes here are invisible until every payment fails: a wrong asset address, and a wrong EIP-712 domain name — `asset_name` is published as the domain the payer signs against, and USDC calls itself `"USDC"` on Base Sepolia but `"USD Coin"` on Base mainnet, which is why it is a per-profile field.
 
-To go live on mainnet: run the check above, eyeball the asset on basescan once, set `"active": "mainnet"`, push. `cdp` instead buys a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
+Going live on mainnet was exactly that: the check above, the asset eyeballed on basescan once, `"active": "mainnet"`, push. `cdp` instead buys a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
 
 **Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. `audit_price_atomic` covers `/api/audit`; `verified_tier_price_atomic` and `featured_tier_price_atomic` cover `[upgrade]`. Agents can read the live terms at `/api/x402/info` without provoking a 402.
 

@@ -122,7 +122,7 @@ x402 v2 (current spec):
 
 x402 v1 (what most clients ship today, e.g. x402-fetch):
 1. The same 402's JSON *body* carries {"x402Version": 1, "accepts": [...]} with
-   v1 field names — network as a name ("base-sepolia"), `maxAmountRequired`, and
+   v1 field names — network as a name ("base"), `maxAmountRequired`, and
    `resource` as a URL string.
 2. Retry with a base64 X-PAYMENT header.
 3. On success the 200 carries a base64 X-PAYMENT-RESPONSE header.

@@ -5,7 +5,7 @@
     "x402_address": "0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424",
     "stripe_payment_link": "",
     "x402": {
-      "active": "testnet",
+      "active": "mainnet",
       "asset_name": "USDC",
       "asset_version": "2",
       "asset_decimals": 6,

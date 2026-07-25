@@ -27,13 +27,17 @@ disappears if you ever set `workers_dev = false`.
 | Analytics Engine | ✅ enabled; `env.ANALYTICS` bound |
 | Private revenue dashboard | ✅ https://revenue.local.kc-it.pl — tailnet only, no token in the URL |
 | Published listing URLs | ✅ 200, after fixing a 307 that Workers Assets was injecting |
-| Active payment rail | `testnet` — Base Sepolia, tokens with no monetary value |
+| Active payment rail | 🔴 `mainnet` — Base, USDC, **real money** |
 
-Everything that can be verified without funds has been. The rail stays testnet
-until you deliberately flip it, so no real customer can be charged by accident.
+Everything that can be verified without funds has been. The rail was flipped to
+`mainnet` deliberately, **skipping the testnet rehearsal in Phase 2** — so a
+caller who pays now is really paying, and that first payment is also the first
+settlement this rail has ever completed end to end.
 
-**What is left is one thing: fund a payer wallet and put $0.05 through it**
-(Phase 2), then flip to mainnet (Phase 3).
+**What is left is one thing: pay yourself $0.05 through the live endpoint**
+(Phase 3.3) and confirm it settles on basescan. Until that has happened, the
+mainnet rail is verified statically but not exercised. To go back to rehearsal,
+set `"active": "testnet"` and push.
 
 ### How the custom domain is attached
 
@@ -163,9 +167,14 @@ curl -s -X POST $B/api/audit \
 
 ---
 
-## Phase 2 — Rehearse the payment on testnet
+## Phase 2 — Rehearse the payment on testnet *(skipped)*
 
-The rail is already configured and the address is already wired in. `POST /api/audit` returns a real 402 quoting $0.05 to `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` on Base Sepolia.
+**This phase was deliberately skipped**: the rail went straight from `testnet`
+to `mainnet` without a funded rehearsal. It is kept here because it is still the
+cheapest way to exercise the full path, and because flipping `active` back to
+`testnet` is all it takes to run it.
+
+With `"active": "testnet"`, `POST /api/audit` returns a real 402 quoting $0.05 to `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` on Base Sepolia.
 
 The one remaining unknown is funding. Everything downstream of it has already
 been exercised (see "What proven means" above), so this phase is short.
@@ -207,9 +216,10 @@ node scripts/verify-rail.mjs testnet          # does the same check, and compare
 
 ---
 
-## Phase 3 — Switch to real money
+## Phase 3 — Switch to real money *(done — rail is live)*
 
-Do not start this until Phase 2 has settled a payment end to end.
+`"active": "mainnet"` as of 2026-07-25. Phase 2 was skipped, so nothing has been
+settled on this rail yet; 3.3 below is the outstanding step.
 
 ### 3.1 The mainnet profile — filled in, and how it was checked
 
@@ -257,7 +267,7 @@ charged in something worthless, or nothing settles at all.
    money and gets no audit) or reports success without relaying (we serve one
    audit for free). Neither can move money anywhere we did not name.
 
-### 3.2 Flip the rail
+### 3.2 Flip the rail — done
 
 ```jsonc
 "active": "mainnet"   // or "cdp"
@@ -269,9 +279,20 @@ static output (the published files point at `/api/x402/info` for live terms), so
 `node scripts/build.mjs` is not needed for a rail change; run it anyway if you
 touched anything under `templates/`, because CI fails on a stale committed build.
 
-### 3.3 Run one real transaction
+### 3.3 Run one real transaction — outstanding
 
-Pay yourself five cents through the live endpoint before telling anyone the service exists.
+Pay yourself five cents through the live endpoint before telling anyone the
+service exists. This matters more than usual now that Phase 2 was skipped: it is
+the only end-to-end proof the mainnet rail settles at all, and the failure modes
+it would catch (a facilitator that will not relay, a domain-name mismatch) are
+invisible until a payment is attempted.
+
+Same client as Phase 2, pointed at the live URL, with a mainnet-funded throwaway
+payer — real USDC on Base, about $0.05 plus nothing for gas (the facilitator
+pays it). Confirm the settlement at
+`https://basescan.org/address/0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424`, and
+that it lands on https://revenue.local.kc-it.pl labelled as a live rail rather
+than as testnet.
 
 ---
 
