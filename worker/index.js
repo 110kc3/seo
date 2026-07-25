@@ -51,6 +51,32 @@ function record(env, request, url, clientType, status) {
   }
 }
 
+// --- asset layer -----------------------------------------------------------
+
+// Workers Assets rewrites `/foo.html` to `/foo` with a 307 (`html_handling`
+// defaults to "auto-trailing-slash"). Left to leak, that breaks two things:
+//
+//   * every published listing URL. The sitemap, canonical tags, JSON-LD @id and
+//     llms.txt all say `/l/<slug>.html`, so each one answered 307 rather than
+//     200 — a canonical that points at a redirect, on a site whose whole product
+//     is being readable to machines and which audits others for exactly this.
+//   * the dashboard, fatally. Its handler fetched `/dashboard.html`, got the
+//     redirect to `/dashboard`, and returned it verbatim — so `/dashboard`
+//     redirected to itself. It was unreachable on every path.
+//
+// Fixing it here rather than with `html_handling = "none"` keeps `/` serving
+// index.html, keeps the published `.html` URLs canonical, and keeps the build
+// host-agnostic — the same output still works on plain static hosting, where
+// extensionless paths would 404.
+async function fetchAsset(env, request, target) {
+  const response = await env.ASSETS.fetch(new Request(target, request));
+  if (response.status !== 307 && response.status !== 308) return response;
+  const location = response.headers.get('location');
+  if (!location) return response;
+  // Exactly one hop, so a redirect cycle cannot become a loop here.
+  return env.ASSETS.fetch(new Request(new URL(location, target), request));
+}
+
 // --- header layer ----------------------------------------------------------
 
 function decorate(response, url) {
@@ -146,14 +172,14 @@ function handleX402Info(cfgObj) {
 async function handleDashboardPage(request, env, url) {
   const auth = authorizeDashboard(request, env);
   if (auth.state !== 'ok') {
-    const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', url.origin), { headers: request.headers }));
+    const notFound = await fetchAsset(env, new Request(url, { headers: request.headers }), new URL('/404.html', url.origin));
     return new Response(notFound.body, {
       status: 404,
       headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex, nofollow' },
     });
   }
 
-  const page = await env.ASSETS.fetch(new Request(new URL('/dashboard.html', url.origin), request));
+  const page = await fetchAsset(env, request, new URL('/dashboard.html', url.origin));
   const headers = new Headers(page.headers);
   headers.set('cache-control', 'no-store');
   headers.set('x-robots-tag', 'noindex, nofollow');
@@ -164,6 +190,8 @@ async function handleDashboardPage(request, env, url) {
 }
 
 // --- router ----------------------------------------------------------------
+
+export const __testing = { fetchAsset };
 
 export default {
   async fetch(request, env, ctx) {
@@ -184,10 +212,8 @@ export default {
         response = await handleDashboardPage(request, env, url);
       } else {
         const alternate = negotiate(url.pathname, request.headers.get('accept'));
-        const assetRequest = alternate
-          ? new Request(new URL(alternate, url.origin), request)
-          : request;
-        response = decorate(await env.ASSETS.fetch(assetRequest), url);
+        const target = alternate ? new URL(alternate, url.origin) : url;
+        response = decorate(await fetchAsset(env, request, target), url);
       }
     } catch (e) {
       response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error' }, 500);

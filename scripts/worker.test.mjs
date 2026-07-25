@@ -16,6 +16,7 @@ import { __testing as stats } from '../worker/stats.js';
 import { resolveX402, needsCdpAuth } from './x402-config.mjs';
 import { createCdpAuthHeader, facilitatorHeaders } from '../worker/cdp-auth.js';
 import { handleRevenue, authorizeDashboard, sessionCookie, __testing as revenue } from '../worker/revenue.js';
+import { __testing as worker } from '../worker/index.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -499,6 +500,61 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(res.response.status, 402);
   const body = await res.response.json();
   assert.equal(body.x402Version, 2);
+});
+
+// --- asset redirect absorption ----------------------------------------------
+
+test('an ASSETS .html redirect is absorbed, not passed through', async () => {
+  // Workers Assets answers /foo.html with a 307 to /foo. Returning that verbatim
+  // made every published listing URL a redirect, and made the dashboard redirect
+  // to itself forever — it fetched /dashboard.html and handed back the 307 to
+  // /dashboard, which is the same request again.
+  const seen = [];
+  const env = {
+    ASSETS: {
+      async fetch(req) {
+        const path = new URL(req.url).pathname;
+        seen.push(path);
+        if (path.endsWith('.html')) {
+          return new Response(null, { status: 307, headers: { location: path.replace(/\.html$/, '') } });
+        }
+        return new Response(`content of ${path}`, { status: 200 });
+      },
+    },
+  };
+
+  const req = new Request(`${BASE}/l/my-product.html`);
+  const resp = await worker.fetchAsset(env, req, new URL(`${BASE}/l/my-product.html`));
+  assert.equal(resp.status, 200, 'the caller must get content, not a redirect');
+  assert.equal(await resp.text(), 'content of /l/my-product');
+  assert.deepEqual(seen, ['/l/my-product.html', '/l/my-product']);
+});
+
+test('absorbing a redirect follows exactly one hop', async () => {
+  // A binding that always redirects must not spin.
+  let calls = 0;
+  const env = {
+    ASSETS: {
+      async fetch() {
+        calls += 1;
+        return new Response(null, { status: 307, headers: { location: '/loop' } });
+      },
+    },
+  };
+  const resp = await worker.fetchAsset(env, new Request(`${BASE}/loop`), new URL(`${BASE}/loop`));
+  assert.equal(calls, 2, 'one hop only');
+  assert.equal(resp.status, 307, 'and the caller sees the unresolved redirect rather than hanging');
+});
+
+test('a non-redirect asset response is returned untouched', async () => {
+  const env = { ASSETS: { async fetch() { return new Response('ok', { status: 200 }); } } };
+  const resp = await worker.fetchAsset(env, new Request(`${BASE}/`), new URL(`${BASE}/`));
+  assert.equal(resp.status, 200);
+  assert.equal(await resp.text(), 'ok');
+
+  // A redirect with no Location cannot be followed; pass it through.
+  const noLoc = { ASSETS: { async fetch() { return new Response(null, { status: 307 }); } } };
+  assert.equal((await worker.fetchAsset(noLoc, new Request(`${BASE}/x`), new URL(`${BASE}/x`))).status, 307);
 });
 
 // --- audit scoring ----------------------------------------------------------
