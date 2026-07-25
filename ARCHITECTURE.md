@@ -172,7 +172,7 @@ The page asset is still uploaded (the Worker must be able to fetch it from the `
 
 ## Testing
 
-`node --test scripts/*.test.mjs` — 86 tests, no framework, no dependencies.
+`node --test scripts/*.test.mjs` — 109 tests, no framework, no dependencies.
 
 Use the explicit glob, **not** `node --test scripts/`: Node 22 resolves a bare directory argument as a module and fails before running anything.
 

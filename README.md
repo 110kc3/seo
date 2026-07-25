@@ -87,7 +87,7 @@ Use `scripts/*.test.mjs`, not `node --test scripts/` — Node 22 resolves a bare
 
 ## Deployment (Cloudflare)
 
-`.github/workflows/deploy.yml` runs tests, asserts the committed build is not stale, then `wrangler deploy` on every push to `main`. It skips the deploy with a notice while the two Cloudflare secrets are unset, so `main` stays green instead of collecting red Xs nobody reads. **Not yet deployed — steps 1 and 2 are outstanding; see DEPLOY.md.** One-time setup:
+`.github/workflows/deploy.yml` runs tests, asserts the committed build is not stale, then `wrangler deploy` on every push to `main`. It skips the deploy with a notice while the two Cloudflare secrets are unset, so `main` stays green instead of collecting red Xs nobody reads. **Deployed and green since 2026-07-25**; the setup below is recorded for a rebuild, not outstanding work. One-time setup:
 
 1. `npx wrangler kv namespace create PAYMENTS` → put the id in `wrangler.toml`.
 2. Repo secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`.
