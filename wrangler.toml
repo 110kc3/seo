@@ -21,6 +21,15 @@ not_found_handling = "404-page"
 # for anything that is not a dynamic route.
 run_worker_first = true
 
+# TEMPORARY 2026-07-25: a workers.dev hostname so the deployment can be exercised
+# while the custom domain is unattached. Attaching index.kc-it.pl needs the API
+# token to be scoped to the kc-it.pl zone (the first attempt failed with
+# `/zones/<id>/workers/routes → Authentication error [code: 10000]`, after the
+# Worker itself had uploaded fine). Remove this line once the domain is live —
+# published URLs all come from site.config.json → base, not from here, so nothing
+# canonical points at workers.dev.
+workers_dev = true
+
 [[routes]]
 pattern = "index.kc-it.pl"
 custom_domain = true

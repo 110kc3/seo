@@ -16,6 +16,7 @@ on:
         options:
           - kv-setup      # ensure the PAYMENTS KV namespace exists, print its id
           - whoami        # show what the token is allowed to do
+          - subdomain     # print the account's workers.dev subdomain
 
 permissions:
   contents: read
@@ -36,6 +37,22 @@ jobs:
       - name: whoami
         if: inputs.action == 'whoami'
         run: npx --yes wrangler@4 whoami
+
+      # The workers.dev hostname is how the deployment can be exercised before
+      # (or without) a custom domain, which needs zone-scoped permissions the
+      # deploy token may not have.
+      - name: Print the workers.dev subdomain
+        if: inputs.action == 'subdomain'
+        run: |
+          sub=$(curl -sf -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" \
+            | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+                const j=JSON.parse(s); process.stdout.write(j.result?.subdomain ?? "");})')
+          if [ -z "$sub" ]; then
+            echo "::error::could not read the workers.dev subdomain"
+            exit 1
+          fi
+          echo "::notice::WORKERS_DEV=https://ai-product-index.$sub.workers.dev"
 
       # Idempotent: an existing namespace is reported rather than duplicated,
       # so re-running this is safe and never orphans payment state.
