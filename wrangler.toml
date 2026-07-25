@@ -25,11 +25,12 @@ run_worker_first = true
 pattern = "index.kc-it.pl"
 custom_domain = true
 
-# Settled x402 payment nonces (replay protection) + the stats cache.
-# Create with: npx wrangler kv namespace create PAYMENTS
+# Settled x402 payment nonces (replay protection), the revenue ledger and the
+# stats cache. Created 2026-07-25 via `gh workflow run cf-admin -f action=kv-setup`.
+# A namespace id is an identifier, not a credential — it is safe in this file.
 [[kv_namespaces]]
 binding = "PAYMENTS"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "abdc346d8f1c428ead3a38f3b2a9e744"
 
 # Per-request telemetry. Free tier; no IPs or other PII are written.
 [[analytics_engine_datasets]]
