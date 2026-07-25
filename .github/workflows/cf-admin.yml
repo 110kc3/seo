@@ -17,6 +17,7 @@ on:
           - kv-setup      # ensure the PAYMENTS KV namespace exists, print its id
           - whoami        # show what the token is allowed to do
           - subdomain     # print the account's workers.dev subdomain
+          - push-secrets  # copy DASHBOARD_TOKEN from repo secrets to the Worker
 
 permissions:
   contents: read
@@ -37,6 +38,23 @@ jobs:
       - name: whoami
         if: inputs.action == 'whoami'
         run: npx --yes wrangler@4 whoami
+
+      # Worker secrets cannot be set from a laptop without the API token on it, and
+      # they must never be echoed. Piping a repo secret straight into `wrangler
+      # secret put` keeps the value inside the runner: it is never a command
+      # argument, never in a log, and never in the repo.
+      - name: Push DASHBOARD_TOKEN to the Worker
+        if: inputs.action == 'push-secrets'
+        env:
+          DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
+        run: |
+          if [ -z "$DASHBOARD_TOKEN" ]; then
+            echo "::error::repo secret DASHBOARD_TOKEN is not set"
+            exit 1
+          fi
+          printf '%s' "$DASHBOARD_TOKEN" | npx --yes wrangler@4 secret put DASHBOARD_TOKEN
+          echo "--- secrets now on the Worker ---"
+          npx --yes wrangler@4 secret list
 
       # The workers.dev hostname is how the deployment can be exercised before
       # (or without) a custom domain, which needs zone-scoped permissions the
