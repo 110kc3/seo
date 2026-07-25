@@ -11,6 +11,12 @@ name = "ai-product-index"
 main = "worker/index.js"
 compatibility_date = "2026-07-01"
 
+# A workers.dev hostname, so there is always a URL that exercises the real edge
+# independently of DNS: https://ai-product-index.110kc3.workers.dev
+# Nothing canonical points at it — every published URL comes from
+# site.config.json → base.
+workers_dev = true
+
 [assets]
 directory = "."
 binding = "ASSETS"
@@ -20,12 +26,6 @@ not_found_handling = "404-page"
 # response headers static hosting cannot set. It falls through to ASSETS
 # for anything that is not a dynamic route.
 run_worker_first = true
-
-# A workers.dev hostname, so there is always a URL that exercises the real edge
-# independently of DNS: https://ai-product-index.110kc3.workers.dev
-# Nothing canonical points at it — every published URL comes from
-# site.config.json → base.
-workers_dev = true
 
 # The custom domain is NOT declared here, deliberately.
 #
