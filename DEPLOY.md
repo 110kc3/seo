@@ -129,15 +129,33 @@ Dead ends worth knowing so you don't lose time: the portal's **x402 page is metr
 
 ## Phase 5 — Optional: dashboards
 
-### Revenue dashboard — `/dashboard.html`
+### Revenue dashboard — private
 
 ```bash
-npx wrangler secret put DASHBOARD_TOKEN     # any long random string
+npx wrangler secret put DASHBOARD_TOKEN     # e.g. openssl rand -base64 32
 ```
 
-Open `https://index.kc-it.pl/dashboard.html`, paste the token. Without the secret the feed returns `503 dashboard_not_enabled`; with it, `/api/revenue.json` requires a bearer token. The page is `noindex` and `Disallow`ed in robots.txt.
+Then open it once with the token in the URL:
 
-The dashboard reads the ledger the Worker writes on every settlement, so it is accurate from the first payment — including testnet ones, which it labels as such rather than calling them revenue.
+```
+https://index.kc-it.pl/dashboard.html?token=<DASHBOARD_TOKEN>
+```
+
+**The dashboard is invisible to everyone else.** Not merely unlisted — the Worker serves the ordinary 404 page to any unauthorized request, so its existence is not disclosed to anyone probing the site. That covers the anonymous case, a wrong token, and the state before `DASHBOARD_TOKEN` is ever set. `robots.txt` and the `noindex` meta are also there, but they are advisory; the 404 is the actual control.
+
+On that first visit the Worker trades the `?token=` for an **HttpOnly, Secure, SameSite=Strict session cookie** (12 hours) and the page immediately strips the token from the address bar, so it stops living in browser history, bookmarks or any onward referrer. The token is never readable by page JavaScript.
+
+| Request | Response |
+|---|---|
+| `/dashboard.html` anonymous | 404 |
+| `/dashboard.html?token=wrong` | 404 |
+| `/dashboard.html?token=<correct>` | 200 + sets session cookie |
+| `/api/revenue.json` anonymous | 401 |
+| anything, with `DASHBOARD_TOKEN` unset | 404 / 503 |
+
+The dashboard reads the ledger the Worker writes on every settlement, so it is accurate from the first payment — including testnet ones, which it labels as testnet rather than calling them revenue.
+
+To revoke access, rotate the secret: `npx wrangler secret put DASHBOARD_TOKEN`. Existing cookies stop matching immediately.
 
 ### Traffic stats — `/api/stats.json`
 

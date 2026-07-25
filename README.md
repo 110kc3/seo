@@ -35,7 +35,7 @@ That last row is the point: before the migration there was no way to tell whethe
 - `POST /api/audit` — the paid endpoint. Validates the target with `urlError()` **before** charging, gates on x402, then scores 13 weighted checks and returns ranked `next_steps`. `audit.js`.
 - `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
 - `GET /api/x402/info` — the active rail's payment terms, so an agent can read the price without provoking a 402.
-- `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard. Bearer-token gated on `DASHBOARD_TOKEN`; `503 dashboard_not_enabled` until that secret exists. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
+- `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard, **private**. The page itself is gated, not just the data: unauthorized requests get the ordinary 404, so its existence is never disclosed. Access is via `?token=<DASHBOARD_TOKEN>` once, traded for an HttpOnly session cookie. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
 - Everything else falls through to the `ASSETS` binding, decorated by `negotiate.js` (`Link:` header, `Accept`-based content negotiation) — the two agent-readiness checks the audit scored as impossible on static hosting.
 - Every request is logged to Analytics Engine with a bucketed path, a classified client type (`classify.js`), method, status class, truncated UA and ASN. **No IP addresses.**
 

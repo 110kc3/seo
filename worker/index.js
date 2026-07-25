@@ -16,7 +16,7 @@ import { handleStats } from './stats.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
-import { handleRevenue } from './revenue.js';
+import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const MAX_AUDIT_BODY = 4 * 1024;
@@ -132,6 +132,32 @@ function handleX402Info(cfgObj) {
   }, 200, { 'cache-control': 'public, max-age=300' });
 }
 
+// --- private dashboard -----------------------------------------------------
+
+// The page shell is private too, not just the data behind it. An unauthorized
+// request gets the ordinary 404 rather than a 401, so the dashboard's existence
+// is not disclosed to anyone probing the site — robots.txt and a noindex meta
+// are advisory, this is not.
+async function handleDashboardPage(request, env, url) {
+  const auth = authorizeDashboard(request, env);
+  if (auth.state !== 'ok') {
+    const notFound = await env.ASSETS.fetch(new Request(new URL('/404.html', url.origin), { headers: request.headers }));
+    return new Response(notFound.body, {
+      status: 404,
+      headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex, nofollow' },
+    });
+  }
+
+  const page = await env.ASSETS.fetch(new Request(new URL('/dashboard.html', url.origin), request));
+  const headers = new Headers(page.headers);
+  headers.set('cache-control', 'no-store');
+  headers.set('x-robots-tag', 'noindex, nofollow');
+  // Trade the one-time ?token= for a session cookie, so reloads work and the
+  // token stops travelling in URLs (and therefore in history and referrers).
+  if (auth.viaQuery) headers.append('set-cookie', sessionCookie(env.DASHBOARD_TOKEN));
+  return new Response(page.body, { status: page.status, headers });
+}
+
 // --- router ----------------------------------------------------------------
 
 export default {
@@ -149,6 +175,8 @@ export default {
         response = handleX402Info(cfg);
       } else if (url.pathname === '/api/revenue.json') {
         response = await handleRevenue(request, env, resolveX402(cfg));
+      } else if (url.pathname === '/dashboard.html' || url.pathname === '/dashboard') {
+        response = await handleDashboardPage(request, env, url);
       } else {
         const alternate = negotiate(url.pathname, request.headers.get('accept'));
         const assetRequest = alternate

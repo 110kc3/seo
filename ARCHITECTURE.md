@@ -109,9 +109,25 @@ Every optional capability degrades to an explicit, machine-readable refusal rath
 |---|---|
 | receiving address / asset | `payments_not_enabled` (503) |
 | CDP credentials on a `cdp` rail | `payments_not_enabled` (503) |
-| `DASHBOARD_TOKEN` | `dashboard_not_enabled` (503) |
+| `DASHBOARD_TOKEN` | `dashboard_not_enabled` (503) on the feed, 404 on the page |
 | analytics credentials | `stats_not_enabled` (503) |
 | listing URL dead 3 weeks running | delisted, page 404s |
+
+## Dashboard privacy
+
+The revenue dashboard is the one surface that is not public, and the **page** is gated rather than only the data behind it. An unauthorized request gets the ordinary 404 — not a 401 — so the dashboard's existence is not disclosed to anyone probing the site. `robots.txt` and the `noindex` meta are also present, but those are advisory; the 404 is the control.
+
+Authorization accepts three forms, and `authorizeDashboard()` in `worker/revenue.js` is the single place that decides:
+
+| Form | Used by |
+|---|---|
+| HttpOnly session cookie | the browser, after the first visit |
+| `?token=` | that first visit only |
+| `Authorization: Bearer` | programmatic callers of the feed |
+
+A valid `?token=` is traded for an **HttpOnly, Secure, SameSite=Strict** cookie and the page strips the parameter from the address bar via `history.replaceState`, so the token stops travelling in URLs — and therefore in history, bookmarks and referrers. HttpOnly means page JavaScript can never read it. Token comparison is length-independent, so a wrong guess leaks nothing by timing.
+
+The page asset is still uploaded (the Worker must be able to fetch it from the `ASSETS` binding to serve authorized users), which is safe because `run_worker_first = true` routes every request through the Worker first — the binding is not independently reachable.
 
 ## Testing
 

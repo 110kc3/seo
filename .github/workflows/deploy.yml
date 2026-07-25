@@ -40,7 +40,24 @@ jobs:
             exit 1
           fi
 
+      # Until the Cloudflare secrets exist there is nothing to deploy to.
+      # Skipping keeps main green and says why, instead of a red X on every
+      # push that everyone learns to ignore.
+      - name: Check Cloudflare credentials
+        id: creds
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping deploy — set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (see DEPLOY.md, Phase 1)."
+          fi
+
       - name: Deploy to Cloudflare
+        if: steps.creds.outputs.ready == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

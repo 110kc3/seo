@@ -12,6 +12,13 @@
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
 - [ ] **Directory submissions** — ready-to-run commands in `docs/distribution.md`. **Do these against `https://index.kc-it.pl/`, only after the Worker is live** — the old `110kc3.github.io/seo/` URL should never reach an external directory, since nothing links to it yet and re-submitting to fix stale links is painful. Blocked on you: they publish under your GitHub identity.
 
+## Revenue dashboard
+
+Private by construction — see DEPLOY.md → Phase 5. Set `DASHBOARD_TOKEN`, open
+`/dashboard.html?token=…` once, and the Worker trades it for an HttpOnly session
+cookie. Everyone else gets a 404, including before the secret is ever set, so
+nothing is exposed in the meantime.
+
 ## The decision gate
 
 The reason this work happened: after 16 days live, the registry had **zero organic registrations** — all 6 issues were self-authored E2E tests from 2026-07-09 — and GitHub Pages gave no logs, so there was no way to tell whether an agent had ever visited.

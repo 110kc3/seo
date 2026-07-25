@@ -14,7 +14,7 @@ import { parseAuditRequest, __testing as audit } from '../worker/audit.js';
 import { __testing as stats } from '../worker/stats.js';
 import { resolveX402, needsCdpAuth } from './x402-config.mjs';
 import { createCdpAuthHeader, facilitatorHeaders } from '../worker/cdp-auth.js';
-import { handleRevenue, __testing as revenue } from '../worker/revenue.js';
+import { handleRevenue, authorizeDashboard, sessionCookie, __testing as revenue } from '../worker/revenue.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -598,6 +598,53 @@ test('the token may also arrive as a query parameter', async () => {
   const env = { DASHBOARD_TOKEN: 'sekret', PAYMENTS: { list: async () => ({ keys: [] }) } };
   const res = await handleRevenue(new Request(`${BASE}/api/revenue.json?token=sekret`), env, null);
   assert.equal(res.status, 200);
+});
+
+// --- dashboard privacy -----------------------------------------------------
+
+const dashEnv = { DASHBOARD_TOKEN: 'sekret' };
+const dashReq = (init) => new Request(`${BASE}/dashboard.html`, init);
+
+test('authorizeDashboard reports disabled when no token is configured', () => {
+  assert.equal(authorizeDashboard(dashReq(), {}).state, 'disabled');
+});
+
+test('authorizeDashboard denies an anonymous request', () => {
+  assert.equal(authorizeDashboard(dashReq(), dashEnv).state, 'denied');
+  assert.equal(authorizeDashboard(dashReq({ headers: { authorization: 'Bearer wrong' } }), dashEnv).state, 'denied');
+  assert.equal(authorizeDashboard(new Request(`${BASE}/dashboard.html?token=wrong`), dashEnv).state, 'denied');
+  assert.equal(authorizeDashboard(dashReq({ headers: { cookie: 'aipi_dash=wrong' } }), dashEnv).state, 'denied');
+});
+
+test('authorizeDashboard accepts cookie, bearer and query, and flags the query case', () => {
+  assert.deepEqual(authorizeDashboard(dashReq({ headers: { cookie: 'aipi_dash=sekret' } }), dashEnv), { state: 'ok', viaQuery: false });
+  assert.deepEqual(authorizeDashboard(dashReq({ headers: { authorization: 'Bearer sekret' } }), dashEnv), { state: 'ok', viaQuery: false });
+  // viaQuery drives the one-time cookie handoff that gets the token out of the URL.
+  assert.deepEqual(authorizeDashboard(new Request(`${BASE}/dashboard.html?token=sekret`), dashEnv), { state: 'ok', viaQuery: true });
+});
+
+test('the cookie is found among other cookies, and is not confused by prefixes', () => {
+  assert.equal(revenue.cookieValue(dashReq({ headers: { cookie: 'a=1; aipi_dash=sekret; b=2' } }), 'aipi_dash'), 'sekret');
+  assert.equal(revenue.cookieValue(dashReq({ headers: { cookie: 'aipi_dash_other=sekret' } }), 'aipi_dash'), null);
+  assert.equal(revenue.cookieValue(dashReq(), 'aipi_dash'), null);
+});
+
+test('token comparison is length-independent and exact', () => {
+  assert.ok(revenue.tokensMatch('abc', 'abc'));
+  assert.ok(!revenue.tokensMatch('abc', 'abd'));
+  assert.ok(!revenue.tokensMatch('abc', 'abcd'));
+  assert.ok(!revenue.tokensMatch('', ''.padEnd(1)));
+  assert.ok(!revenue.tokensMatch(undefined, 'abc'));
+});
+
+test('sessionCookie is HttpOnly, Secure and SameSite=Strict', () => {
+  const c = sessionCookie('sekret');
+  // HttpOnly keeps the token out of page JavaScript entirely; Strict stops it
+  // riding any cross-site request.
+  assert.match(c, /^aipi_dash=sekret;/);
+  assert.match(c, /HttpOnly/);
+  assert.match(c, /Secure/);
+  assert.match(c, /SameSite=Strict/);
 });
 
 // --- stats shaping ---------------------------------------------------------

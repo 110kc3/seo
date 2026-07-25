@@ -8,10 +8,10 @@
 // Keys are `revenue:<ISO timestamp>:<short tx>`. KV lists lexicographically and
 // ISO-8601 sorts chronologically, so listing is already time-ordered.
 //
-// This is a business feed, so it is gated on a bearer token and fails closed
-// when none is configured. The payTo address is public and its inflows are
-// visible on-chain regardless — the gate is about not serving a convenient
-// aggregate, not about pretending the payments are secret.
+// This is a business feed, so both it and the dashboard page are gated and
+// fail closed when no token is configured. The payTo address is public and its
+// inflows are visible on-chain regardless — the gate is about not exposing a
+// convenient aggregate, not about pretending the payments are secret.
 
 const PREFIX = 'revenue:';
 const RETENTION_SECONDS = 60 * 60 * 24 * 400;
@@ -126,24 +126,71 @@ export function summarise(records) {
   };
 }
 
+export const COOKIE = 'aipi_dash';
+
+/** Length-independent comparison, so a wrong token leaks nothing by timing. */
+function tokensMatch(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+function cookieValue(request, name) {
+  const header = request.headers.get('cookie') ?? '';
+  for (const part of header.split(';')) {
+    const [k, ...v] = part.trim().split('=');
+    if (k === name) return decodeURIComponent(v.join('='));
+  }
+  return null;
+}
+
 /**
- * GET /api/revenue.json — bearer-token gated.
+ * Authorizes any dashboard surface — the page and the feed alike.
+ *
+ * Three ways to present the token: an HttpOnly cookie (set on first use, so
+ * reloads work and the token never reaches page JavaScript), `?token=` for that
+ * first navigation, or a bearer header for programmatic callers.
+ *
+ * @returns {{state: 'disabled'} | {state: 'denied'} | {state: 'ok', viaQuery: boolean}}
+ */
+export function authorizeDashboard(request, env) {
+  const expected = env?.DASHBOARD_TOKEN;
+  if (!expected) return { state: 'disabled' };
+
+  if (tokensMatch(cookieValue(request, COOKIE) ?? '', expected)) return { state: 'ok', viaQuery: false };
+
+  const bearer = (request.headers.get('authorization') ?? '').replace(/^Bearer\s+/i, '');
+  if (bearer && tokensMatch(bearer, expected)) return { state: 'ok', viaQuery: false };
+
+  const query = new URL(request.url).searchParams.get('token') ?? '';
+  if (query && tokensMatch(query, expected)) return { state: 'ok', viaQuery: true };
+
+  return { state: 'denied' };
+}
+
+/**
+ * Cookie for the authenticated session. HttpOnly so page scripts cannot read
+ * the token, SameSite=Strict so it never rides a cross-site request.
+ */
+export function sessionCookie(token) {
+  return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=43200`;
+}
+
+/**
+ * GET /api/revenue.json — gated.
  * No token configured => 503, so an unconfigured deployment never leaks the feed.
  */
 export async function handleRevenue(request, env, rail) {
-  const expected = env?.DASHBOARD_TOKEN;
-  if (!expected) {
+  const auth = authorizeDashboard(request, env);
+  if (auth.state === 'disabled') {
     return json({
       ok: false,
       code: 'dashboard_not_enabled',
       error: 'revenue reporting is not configured — set the DASHBOARD_TOKEN secret to enable it',
     }, 503);
   }
-
-  const presented = (request.headers.get('authorization') ?? '').replace(/^Bearer\s+/i, '')
-    || new URL(request.url).searchParams.get('token')
-    || '';
-  if (presented !== expected) {
+  if (auth.state === 'denied') {
     return json({ ok: false, code: 'unauthorized', error: 'valid bearer token required' }, 401, {
       'www-authenticate': 'Bearer realm="revenue"',
     });
@@ -166,4 +213,4 @@ export async function handleRevenue(request, env, rail) {
   });
 }
 
-export const __testing = { PREFIX, summarise, formatAmount };
+export const __testing = { PREFIX, summarise, formatAmount, tokensMatch, cookieValue };

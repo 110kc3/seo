@@ -103,9 +103,7 @@
   details { margin-top: .6rem; }
   summary { cursor: pointer; color: var(--text-secondary); font-size: .8rem; }
 
-  form.gate { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
-  input[type=password] { flex: 1 1 16rem; padding: .5rem .6rem; border-radius: 8px; border: 1px solid var(--border); background: var(--page); color: var(--text-primary); font: inherit; }
-  button { padding: .5rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--series-1); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; overflow-wrap: anywhere; }
   .err { color: #d03b3b; font-size: .85rem; margin-top: .5rem; }
 </style>
 </head>
@@ -121,12 +119,9 @@
 </header>
 
 <div id="gate" class="card" hidden>
-  <h2>Dashboard token</h2>
-  <p class="sub">Revenue data is not public. Paste the <code>DASHBOARD_TOKEN</code> secret set on the Worker.</p>
-  <form class="gate" id="gate-form">
-    <input type="password" id="token" placeholder="token" autocomplete="current-password" required>
-    <button type="submit">Open</button>
-  </form>
+  <h2>Session ended</h2>
+  <p class="sub">This dashboard is private. Reopen it with the access link:<br>
+    <code id="gate-hint">{{BASE}}/dashboard.html?token=&lt;DASHBOARD_TOKEN&gt;</code></p>
   <p class="err" id="gate-err" hidden></p>
 </div>
 
@@ -171,7 +166,6 @@
 <script>
 (function () {
   var BASE = '{{BASE}}';
-  var KEY = 'aipi-dashboard-token';
   var tip = document.getElementById('tip');
 
   function esc(s) {
@@ -343,15 +337,18 @@
     el('app').hidden = false;
   }
 
-  function load(token) {
-    return fetch('api/revenue.json', { headers: { authorization: 'Bearer ' + token } })
+  // The Worker only serves this page to an authorized request and answers 404
+  // otherwise, so arriving here already means authorized. Authentication rides
+  // an HttpOnly session cookie — the token is never readable by this script.
+  function load() {
+    return fetch('api/revenue.json', { credentials: 'same-origin' })
       .then(function (r) {
-        if (r.status === 401) throw new Error('That token was rejected.');
+        if (r.status === 401) throw new Error('Session expired. Reopen with the access link.');
         if (r.status === 503) throw new Error('DASHBOARD_TOKEN is not set on the Worker yet.');
         if (!r.ok) throw new Error('Request failed (HTTP ' + r.status + ').');
         return r.json();
       })
-      .then(function (d) { sessionStorage.setItem(KEY, token); render(d); });
+      .then(render);
   }
 
   function gate(msg) {
@@ -362,14 +359,13 @@
     e.textContent = msg || '';
   }
 
-  el('gate-form').addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    load(el('token').value.trim()).catch(function (err) { gate(err.message); });
-  });
+  // Drop ?token= from the address bar the moment the cookie exists, so it stops
+  // living in browser history, bookmarks and any onward referrer.
+  if (location.search.indexOf('token=') !== -1 && window.history.replaceState) {
+    window.history.replaceState({}, '', location.pathname);
+  }
 
-  var saved = sessionStorage.getItem(KEY);
-  if (saved) load(saved).catch(function (err) { gate(err.message); });
-  else gate('');
+  load().catch(function (err) { gate(err.message); });
 })();
 </script>
 </div>
