@@ -17,6 +17,21 @@
 //     cannot be used as a free fetch proxy or to burn our subrequest budget.
 
 import { auditUrl, parseAuditRequest, CHECK_LABELS } from './audit.js';
+import { botAuthHeaders, DIRECTORY_PATH } from './signing.js';
+
+/**
+ * Signs the auditor's outbound requests under the web-bot-auth profile, and
+ * points at our key directory so the audited site can resolve the keyid. Returns
+ * null when unkeyed, which leaves the fetches unsigned rather than half-signed.
+ */
+export function auditSigner(env, cfg) {
+  if (!env?.SIGNING_KEY) return null;
+  const agent = `${cfg.base.replace(/\/+$/, '')}${DIRECTORY_PATH}`;
+  return async (method, target) => ({
+    ...(await botAuthHeaders(env, method, target)),
+    'signature-agent': `"${agent}"`,
+  });
+}
 
 /**
  * A Worker cannot fetch its own hostname — Cloudflare answers 522, on the custom
@@ -148,7 +163,7 @@ export async function handleScore(request, env, cfg, rail) {
     }, 429, { 'retry-after': '3600' });
   }
 
-  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url));
+  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url), auditSigner(env, cfg));
   if (!result.ok) return json({ ok: false, code: 'audit_failed', error: result.error ?? 'could not read that site' }, 502);
 
   const view = freeView(result, upsell);

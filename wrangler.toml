@@ -11,11 +11,15 @@ name = "ai-product-index"
 main = "worker/index.js"
 compatibility_date = "2026-07-01"
 
-# A workers.dev hostname, so there is always a URL that exercises the real edge
-# independently of DNS: https://ai-product-index.110kc3.workers.dev
-# Nothing canonical points at it — every published URL comes from
-# site.config.json → base.
-workers_dev = true
+# Off since 2026-07-25, once index.kc-it.pl was confirmed working and surviving
+# redeploys. One canonical hostname is the point: this is a site whose product is
+# being machine-readable, and three public copies of it (custom domain,
+# workers.dev, GitHub Pages) is the wrong thing for crawlers to find. It also
+# retires the one case /api/score could not audit — a Worker gets 522 fetching
+# its own hostname, and host-matching cannot know an alternate one.
+#
+# Flip back to true for a debugging URL that does not depend on DNS.
+workers_dev = false
 
 [assets]
 directory = "."

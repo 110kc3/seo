@@ -18,14 +18,17 @@ const AI_CRAWLER_AGENTS = [
   'Claude-SearchBot', 'anthropic-ai', 'PerplexityBot', 'Google-Extended', 'CCBot',
 ];
 
-async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fetch } = {}) {
+async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fetch, signHeaders = null } = {}) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
+    // web-bot-auth: a site we audit can verify this fetch cryptographically
+    // instead of trusting a user-agent string anyone can copy.
+    const signed = signHeaders ? await signHeaders('GET', url) : {};
     const resp = await fetchImpl(url, {
       redirect: 'follow',
       signal: ctl.signal,
-      headers: { 'user-agent': UA, accept: '*/*' },
+      headers: { 'user-agent': UA, accept: '*/*', ...signed },
     });
     if (as === 'status') return { status: resp.status, ok: resp.ok, url: resp.url };
     const buf = await resp.arrayBuffer();
@@ -342,10 +345,10 @@ export function scoreChecks(checks) {
  *   outright. No check reads a response header, so serving those sub-requests
  *   from the asset binding scores identically.
  */
-export async function auditUrl(target, fetchImpl = fetch) {
+export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
   const origin = new URL(target).origin;
   const at = (p) => new URL(p, origin).toString();
-  const one = (url, opts = {}) => get(url, { ...opts, fetchImpl });
+  const one = (url, opts = {}) => get(url, { ...opts, fetchImpl, signHeaders });
 
   const [home, llms, llmsFull, robots, sitemap, wellKnown, agentsJson] = await Promise.all([
     one(target),

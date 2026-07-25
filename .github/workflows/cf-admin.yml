@@ -17,7 +17,8 @@ on:
           - kv-setup      # ensure the PAYMENTS KV namespace exists, print its id
           - whoami        # show what the token is allowed to do
           - subdomain     # print the account's workers.dev subdomain
-          - push-secrets  # copy DASHBOARD_TOKEN from repo secrets to the Worker
+          - push-secrets  # copy managed repo secrets to the Worker
+          - stats-probe   # can the deploy token read Analytics Engine?
 
 permissions:
   contents: read
@@ -43,18 +44,51 @@ jobs:
       # they must never be echoed. Piping a repo secret straight into `wrangler
       # secret put` keeps the value inside the runner: it is never a command
       # argument, never in a log, and never in the repo.
-      - name: Push DASHBOARD_TOKEN to the Worker
+      - name: Push managed secrets to the Worker
         if: inputs.action == 'push-secrets'
         env:
           DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
         run: |
-          if [ -z "$DASHBOARD_TOKEN" ]; then
-            echo "::error::repo secret DASHBOARD_TOKEN is not set"
-            exit 1
-          fi
-          printf '%s' "$DASHBOARD_TOKEN" | npx --yes wrangler@4 secret put DASHBOARD_TOKEN
+          set -u
+          pushed=0
+          for name in DASHBOARD_TOKEN SIGNING_KEY CF_ANALYTICS_TOKEN; do
+            value="${!name:-}"
+            if [ -z "$value" ]; then
+              echo "::notice::repo secret $name is not set — skipping"
+              continue
+            fi
+            printf '%s' "$value" | npx --yes wrangler@4 secret put "$name"
+            pushed=$((pushed + 1))
+          done
+
+          # The account id is not secret and is already a repo secret for deploys;
+          # /api/stats.json reads it as CF_ACCOUNT_ID, so mirror it rather than
+          # asking for the same value twice.
+          printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | npx --yes wrangler@4 secret put CF_ACCOUNT_ID
+          echo "::notice::pushed $pushed managed secret(s) plus CF_ACCOUNT_ID"
           echo "--- secrets now on the Worker ---"
           npx --yes wrangler@4 secret list
+
+      # /api/stats.json needs Account Analytics: Read. The deploy token was made
+      # from the "Edit Cloudflare Workers" template, which may already include it
+      # — worth finding out before asking for a second token.
+      - name: Probe whether the deploy token can read Analytics Engine
+        if: inputs.action == 'stats-probe'
+        run: |
+          code=$(curl -s -o /tmp/probe.txt -w '%{http_code}' \
+            -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/analytics_engine/sql" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H 'content-type: text/plain' \
+            --data "SELECT count() AS n FROM ai_product_index_requests WHERE timestamp > NOW() - INTERVAL '7' DAY")
+          echo "HTTP $code"
+          head -c 600 /tmp/probe.txt; echo
+          if [ "$code" = "200" ]; then
+            echo "::notice::the existing deploy token CAN read Analytics Engine — no second token needed"
+          else
+            echo "::notice::the deploy token cannot read Analytics Engine; create a token with Account Analytics: Read and set it as repo secret CF_ANALYTICS_TOKEN"
+          fi
 
       # The workers.dev hostname is how the deployment can be exercised before
       # (or without) a custom domain, which needs zone-scoped permissions the

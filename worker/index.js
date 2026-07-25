@@ -13,11 +13,12 @@ import cfg from '../site.config.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
-import { handleScore, fetcherFor } from './score.js';
+import { handleScore, fetcherFor, auditSigner } from './score.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
+import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const MAX_AUDIT_BODY = 4 * 1024;
@@ -120,7 +121,7 @@ async function handleAudit(request, env, cfgObj) {
   });
   if (!gate.paid) return gate.response;
 
-  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url));
+  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url), auditSigner(env, cfgObj));
   const status = result.ok ? 200 : 502;
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }
@@ -203,6 +204,20 @@ export default {
     try {
       if (url.pathname === '/api/audit') {
         response = await handleAudit(request, env, cfg);
+      } else if (url.pathname === DIRECTORY_PATH) {
+        // Discovery for RFC 9421 verifiers. 404 rather than an empty key set when
+        // unkeyed: advertising a directory with no keys in it is worse than not
+        // advertising one.
+        const directory = await keyDirectory(env);
+        response = directory
+          ? new Response(JSON.stringify(directory, null, 2) + '\n', {
+            headers: {
+              'content-type': DIRECTORY_CONTENT_TYPE,
+              'cache-control': 'public, max-age=3600',
+              'x-content-type-options': 'nosniff',
+            },
+          })
+          : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));
       } else if (url.pathname === '/api/stats.json') {
@@ -223,6 +238,14 @@ export default {
     }
 
     ctx.waitUntil(Promise.resolve(record(env, request, url, clientType, response.status)));
+
+    // Last thing before the wire, so the digest covers exactly what ships.
+    // Never allowed to fail the response: an unsigned answer beats no answer.
+    try {
+      response = await signResponse(request, response, env);
+    } catch (e) {
+      console.error(`response signing failed: ${e.message}`);
+    }
     return response;
   },
 };

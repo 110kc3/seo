@@ -19,6 +19,7 @@ import { handleRevenue, authorizeDashboard, sessionCookie, __testing as revenue 
 import { __testing as worker } from '../worker/index.js';
 import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
 import { handleScore, freeView, __testing as score } from '../worker/score.js';
+import { signResponse, keyDirectory, botAuthHeaders, signatureBase, contentDigest, signingKey, DIRECTORY_PATH, __testing as sign } from '../worker/signing.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -505,6 +506,130 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(res.response.status, 402);
   const body = await res.response.json();
   assert.equal(body.x402Version, 2);
+});
+
+// --- RFC 9421 response signing ----------------------------------------------
+
+// A real keypair, so signatures are verified rather than merely present.
+async function signingEnv() {
+  const pair = await crypto.subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify']);
+  const priv = await crypto.subtle.exportKey('jwk', pair.privateKey);
+  const pub = await crypto.subtle.exportKey('jwk', pair.publicKey);
+  const fromB64url = (v) => Buffer.from(v.replaceAll('-', '+').replaceAll('_', '/'), 'base64');
+  const blob = Buffer.concat([fromB64url(priv.d), fromB64url(pub.x)]);
+  assert.equal(blob.length, 64, 'seed||publicKey');
+  return { env: { SIGNING_KEY: blob.toString('base64') }, verifyKey: pair.publicKey, x: pub.x };
+}
+
+const B64_RE = /^[A-Za-z0-9+/]+={0,2}$/;
+
+test('a signed response verifies against the published key', async () => {
+  const { env, verifyKey, x } = await signingEnv();
+  const request = new Request(`${BASE}/api/index.json`);
+  const signed = await signResponse(request, new Response('{"count":2}', { status: 200 }), env, 1_800_000_000_000);
+
+  const digest = signed.headers.get('content-digest');
+  const input = signed.headers.get('signature-input');
+  const sig = signed.headers.get('signature');
+  assert.ok(digest && input && sig, 'all three headers must be present');
+  assert.match(digest, /^sha-256=:[A-Za-z0-9+/]+=*:$/);
+
+  // The digest must be over exactly the bytes that ship, or verification of the
+  // body is meaningless.
+  const body = await signed.clone().arrayBuffer();
+  assert.equal(digest, await contentDigest(new Uint8Array(body)));
+
+  // Rebuild the base the way a verifier would, from the headers alone.
+  const params = input.replace(/^sig1=/, '');
+  const base = signatureBase([
+    ['"@status"', '200'],
+    ['"content-digest"', digest],
+    ['"@authority";req', 'index.kc-it.pl'],
+    ['"@path";req', '/api/index.json'],
+  ], params);
+
+  const raw = sig.replace(/^sig1=:/, '').replace(/:$/, '');
+  assert.match(raw, B64_RE);
+  const ok = await crypto.subtle.verify(
+    'Ed25519', verifyKey, Buffer.from(raw, 'base64'), new TextEncoder().encode(base),
+  );
+  assert.ok(ok, 'the signature must verify over the reconstructed base');
+
+  // keyid must be the thumbprint a verifier computes from the directory entry.
+  const directory = await keyDirectory(env);
+  assert.equal(directory.keys[0].x, x);
+  assert.match(input, new RegExp(`keyid="${directory.keys[0].kid.replace(/[+/]/g, '\\$&')}"`));
+  assert.match(input, /alg="ed25519"/);
+  assert.match(input, /created=1800000000/);
+});
+
+test('a signature cannot be lifted onto another resource', async () => {
+  // @authority and @path are covered, so the same body signed for one path does
+  // not verify as the other — otherwise a cached signature would authenticate
+  // any endpoint.
+  const { env, verifyKey } = await signingEnv();
+  const signed = await signResponse(new Request(`${BASE}/api/index.json`), new Response('{}'), env);
+  const digest = signed.headers.get('content-digest');
+  const params = signed.headers.get('signature-input').replace(/^sig1=/, '');
+  const raw = signed.headers.get('signature').replace(/^sig1=:/, '').replace(/:$/, '');
+
+  const wrongPath = signatureBase([
+    ['"@status"', '200'],
+    ['"content-digest"', digest],
+    ['"@authority";req', 'index.kc-it.pl'],
+    ['"@path";req', '/api/revenue.json'],
+  ], params);
+  assert.equal(
+    await crypto.subtle.verify('Ed25519', verifyKey, Buffer.from(raw, 'base64'), new TextEncoder().encode(wrongPath)),
+    false,
+  );
+});
+
+test('without a key, nothing is signed and the directory is absent', async () => {
+  const plain = await signResponse(new Request(`${BASE}/`), new Response('hi'), {});
+  assert.equal(plain.headers.get('signature'), null);
+  assert.equal(plain.headers.get('content-digest'), null);
+  assert.equal(await keyDirectory({}), null);
+  assert.equal(await signingKey({}), null);
+
+  // A malformed key must not produce a bogus signature either.
+  assert.equal(await signingKey({ SIGNING_KEY: 'dG9vLXNob3J0' }), null);
+  assert.equal((await signResponse(new Request(`${BASE}/`), new Response('hi'), { SIGNING_KEY: 'dG9vLXNob3J0' })).headers.get('signature'), null);
+  assert.deepEqual(await botAuthHeaders({}, 'GET', 'https://example.com/'), {});
+});
+
+test('outbound audit requests are signed under the web-bot-auth profile', async () => {
+  const { env, verifyKey } = await signingEnv();
+  const headers = await botAuthHeaders(env, 'get', 'https://customer.example/llms.txt', 1_800_000_000_000);
+  const params = headers['signature-input'].replace(/^sig1=/, '');
+
+  assert.match(params, /tag="web-bot-auth"/);
+  assert.match(params, /expires=1800000300/, 'a request signature must expire');
+  assert.match(params, /^\("@method" "@authority" "@path"\)/);
+
+  const base = signatureBase([
+    ['"@method"', 'GET'],
+    ['"@authority"', 'customer.example'],
+    ['"@path"', '/llms.txt'],
+  ], params);
+  const raw = headers.signature.replace(/^sig1=:/, '').replace(/:$/, '');
+  assert.ok(await crypto.subtle.verify('Ed25519', verifyKey, Buffer.from(raw, 'base64'), new TextEncoder().encode(base)));
+});
+
+test('the key directory is shaped the way verifiers expect', async () => {
+  const { env, x } = await signingEnv();
+  const dir = await keyDirectory(env);
+  assert.deepEqual(Object.keys(dir).sort(), ['keys', 'purpose']);
+  const key = dir.keys[0];
+  assert.equal(key.kty, 'OKP');
+  assert.equal(key.crv, 'Ed25519');
+  assert.equal(key.x, x);
+  assert.ok(key.kid.length > 20, 'kid is the RFC 7638 thumbprint');
+  assert.ok(!('d' in key), 'the private half must never be published');
+  assert.equal(DIRECTORY_PATH, '/.well-known/http-message-signatures-directory');
+
+  // The thumbprint must be over the canonical JWK, members in lexical order.
+  assert.equal(key.kid, await sign.thumbprint(x));
 });
 
 // --- free score / paid fixes boundary ---------------------------------------
