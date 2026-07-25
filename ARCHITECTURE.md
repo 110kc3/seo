@@ -1,0 +1,122 @@
+# Architecture
+
+How the pieces fit, and why they are shaped this way. For *getting it running*, see [DEPLOY.md](DEPLOY.md).
+
+## The shape of the thing
+
+A committed static build, served by a Cloudflare Worker that owns a handful of dynamic routes on top.
+
+```
+listings/*.json  ──┐
+templates/*      ──┼─→  scripts/build.mjs  ─→  committed static output
+site.config.json ──┘                          (index.html, l/*.html, api/*.json,
+                                               llms.txt, sitemap.xml, .well-known/…)
+                                                        │
+GitHub issue  ─→  register.yml  ─→  process-issue.mjs  ─┤
+([register]/                        (validate, dedup,   │
+ [update]/                           liveness, write)   │
+ [upgrade])                                             ▼
+                                          worker/index.js  ─→  ASSETS binding
+                                                 │
+                            ┌────────────────────┼────────────────────┐
+                            ▼                    ▼                    ▼
+                    POST /api/audit      GET /api/stats.json   GET /api/x402/info
+                    (x402-gated)         GET /api/revenue.json
+```
+
+## Why a Worker at all
+
+The site was on GitHub Pages and worked. Three things forced the move, none of which any amount of static-site cleverness can solve:
+
+| | GitHub Pages | Worker |
+|---|---|---|
+| HTTP 402 + payment manifest | impossible | `POST /api/audit` |
+| Custom response headers, `Accept` negotiation | impossible | `Link:` alternates, JSON/markdown variants |
+| Request logs | none at all | Analytics Engine → `/api/stats.json` |
+
+That last row is the real one. On Pages there was no way to answer *"has any agent ever visited?"* — and after 16 days live with zero organic registrations, that was the only question worth answering.
+
+## Source of truth
+
+Hand-edited or workflow-written; everything else is derived.
+
+- `listings/<slug>.json` — one file per listing
+- `templates/` — page and protocol templates with `{{BASE}}` / `{{REPO}}` / `{{COUNT}}` / `{{LISTINGS_HTML}}` placeholders
+- `site.config.json` — base URL, repo slug, payment rails. **The single knob for migration.**
+- `scripts/validate.mjs` — the security boundary (see below)
+
+`scripts/build.mjs` regenerates every derived artifact and is a **pure function of those inputs**: no timestamps, so building twice yields a zero diff. `deploy.yml` asserts this — a dirty tree after a rebuild means someone hand-edited a generated file, and the deploy fails rather than shipping drift.
+
+## The security boundary
+
+Everything that reaches disk or generated HTML goes through `scripts/validate.mjs`:
+
+- **One `esc()`** for all HTML text and attributes. Not several.
+- **Scheme-allowlisted URLs only** (`urlError()`): http/https, public hostnames, no private/loopback/`.local` literals. This same function is the SSRF gate for the audit endpoint's attacker-supplied target — one boundary, two callers.
+- **JSON-LD `<`-escaped** against `</script>` breakout.
+- **Slug regex + resolved-path assertion** stop path traversal.
+- **`reconstruct()` rebuilds accepted objects field-by-field from an allowlist** — the submitted object is never written through, so `__proto__` and junk keys cannot survive.
+- `api/schema.json` is *generated from the same constants that enforce validation*, so published docs cannot drift from behaviour.
+
+## Payments
+
+### Rails as profiles
+
+Rails differ only in where they settle and who they answer to, so they are named profiles under `payments.x402.profiles` with an `active` selector. `scripts/x402-config.mjs → resolveX402()` is the single resolver, read by **both** the Worker and the `[upgrade]` issue flow — so the HTTP path and the issue path can never disagree about which chain and asset are accepted.
+
+`resolveX402()` returns `null` unless the rail is *completely* configured, and every caller treats null as `payments_not_enabled`. The mainnet profiles ship with `asset` blank on purpose: an unverified contract address disables the rail instead of quoting payments against the wrong token.
+
+### What the facilitator does *not* do
+
+The facilitator verifies signatures, balances, and simulates the transfer. **It has no idea what we charge.** So `worker/x402.js` — not the facilitator — is what stops a client paying one atomic unit to an address of its choosing:
+
+- every field of the client's `accepted` block is compared against our own requirements (scheme, network, asset, `payTo`, amount);
+- the **authorization is checked independently** — a payload with a correct-looking `accepted` block but an authorization paying elsewhere is rejected;
+- amounts compare as `BigInt`, so `"1e5"`, `" 10000"` and `"-10000"` never pass as `"10000"`;
+- the nonce is **reserved in KV before settling**, so a concurrent replay loses the race rather than settling twice;
+- the audit target passes `urlError()` **before any charge** — nobody pays for a request we would reject.
+
+### Two transports, two verification methods
+
+| Path | Transport | How payment is proven |
+|---|---|---|
+| `POST /api/audit` | HTTP | x402 v2 handshake — 402 → `PAYMENT-SIGNATURE` → facilitator `/verify` + `/settle` |
+| `[upgrade]` issue | GitHub issue | on-chain receipt lookup (`scripts/x402-receipt.mjs`) |
+
+They differ because a GitHub issue cannot carry a 402 handshake — by the time the issue is opened the payment has already settled, so the only honest check is an ERC-20 `Transfer` log lookup: right token, right recipient, enough value, enough confirmations. Spent transaction hashes burn into the committed `payments.json` ledger so one payment cannot buy two upgrades.
+
+### CDP authentication
+
+`worker/cdp-auth.js` mints the Bearer JWT the Coinbase facilitator requires, using WebCrypto and **no dependencies** — pulling `@coinbase/x402` would drag `viem`, `zod` and the whole CDP SDK into a Worker for one signature. The `uris` claim binds each token to a single method+host+path, so a `/verify` token cannot be replayed against `/settle`. A rail declaring `auth: "cdp"` with no credentials fails closed rather than firing unauthenticated and surfacing Coinbase's 401 as though the agent's payment were bad.
+
+## Data stores
+
+One KV namespace (`PAYMENTS`), three prefixes, chosen so each read is cheap:
+
+| Prefix | Holds | Why this shape |
+|---|---|---|
+| `x402:nonce:` | spent/reserved payment authorizations | reserve-before-settle beats a concurrent replay |
+| `revenue:` | settlement records **in KV metadata** | one `list()` returns every record — no N gets, and no read-modify-write to lose writes to a race |
+| `stats:` | cached analytics rollup | keeps the SQL API off the hot path |
+
+Analytics Engine holds per-request telemetry: bucketed path, classified client type, method, status class, truncated user-agent, ASN. **No IP addresses.** Client type is inferred from a self-reported user-agent, so it is a traffic-shape signal, not an identity claim — `/api/stats.json` says so in its own payload.
+
+## Failure posture
+
+Every optional capability degrades to an explicit, machine-readable refusal rather than a guess or a silent free ride:
+
+| Missing | Response |
+|---|---|
+| receiving address / asset | `payments_not_enabled` (503) |
+| CDP credentials on a `cdp` rail | `payments_not_enabled` (503) |
+| `DASHBOARD_TOKEN` | `dashboard_not_enabled` (503) |
+| analytics credentials | `stats_not_enabled` (503) |
+| listing URL dead 3 weeks running | delisted, page 404s |
+
+## Testing
+
+`node --test scripts/*.test.mjs` — 71 tests, no framework, no dependencies.
+
+Use the explicit glob, **not** `node --test scripts/`: Node 22 resolves a bare directory argument as a module and fails before running anything.
+
+The Worker modules are deliberately free of Cloudflare-only globals *at import time*, so they run under plain Node. Paths that genuinely need the runtime — `HTMLRewriter` in the audit, the ASSETS binding — are exercised with `wrangler dev` instead. The x402 rejection paths all resolve before any network call, so they run fully offline; a network call escaping the gate would fail loudly.

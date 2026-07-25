@@ -8,6 +8,7 @@
       "active": "testnet",
       "asset_name": "USDC",
       "asset_version": "2",
+      "asset_decimals": 6,
       "max_timeout_seconds": 60,
       "audit_price_atomic": "50000",
       "verified_tier_price_atomic": "5000000",

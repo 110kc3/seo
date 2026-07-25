@@ -14,6 +14,7 @@
 
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { facilitatorHeaders } from './cdp-auth.js';
+import { recordSettlement } from './revenue.js';
 
 const HDR_REQUIRED = 'PAYMENT-REQUIRED';
 const HDR_SIGNATURE = 'PAYMENT-SIGNATURE';
@@ -262,11 +263,26 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
   }
 
   // Settled: hold the nonce well past the authorization's validity window.
+  const at = new Date().toISOString();
   await env.PAYMENTS.put(nonceKey, JSON.stringify({
     transaction: settlement.transaction ?? '',
     payer: settlement.payer ?? auth.from ?? null,
-    at: new Date().toISOString(),
+    at,
   }), { expirationTtl: 60 * 60 * 24 * 30 });
+
+  // Revenue ledger. Deliberately awaited but internally non-throwing: money has
+  // already moved, so a bookkeeping failure must not fail the buyer's request.
+  await recordSettlement(env, {
+    ts: at,
+    amount: requirements.amount,
+    decimals: rail.asset_decimals,
+    asset_name: rail.asset_name,
+    network: requirements.network,
+    rail: rail.rail,
+    resource: resource?.url ?? '',
+    transaction: settlement.transaction ?? '',
+    payer: settlement.payer ?? auth.from ?? '',
+  });
 
   return { paid: true, settlement };
 }

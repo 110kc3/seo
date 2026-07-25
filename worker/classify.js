@@ -73,6 +73,8 @@ export function classifyPath(pathname) {
   if (pathname === '/api/audit') return 'audit';
   if (pathname === '/api/stats.json') return 'stats';
   if (pathname === '/api/x402/info') return 'x402_info';
+  if (pathname === '/api/revenue.json') return 'revenue';
+  if (pathname === '/dashboard.html') return 'dashboard';
   if (pathname.startsWith('/api/')) return 'api';
   if (pathname.startsWith('/listings/')) return 'listing_json';
   if (pathname.startsWith('/l/')) return 'listing_page';

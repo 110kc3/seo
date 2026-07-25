@@ -13,6 +13,7 @@
 const DEFAULTS = {
   asset_name: 'USDC',
   asset_version: '2',
+  asset_decimals: 6,
   max_timeout_seconds: 60,
   min_confirmations: 2,
 };
@@ -39,6 +40,7 @@ export function resolveX402(cfg) {
     min_confirmations: profile.min_confirmations ?? DEFAULTS.min_confirmations,
     asset_name: x402.asset_name ?? DEFAULTS.asset_name,
     asset_version: x402.asset_version ?? DEFAULTS.asset_version,
+    asset_decimals: x402.asset_decimals ?? DEFAULTS.asset_decimals,
     max_timeout_seconds: x402.max_timeout_seconds ?? DEFAULTS.max_timeout_seconds,
     audit_price_atomic: x402.audit_price_atomic,
     verified_tier_price_atomic: x402.verified_tier_price_atomic,

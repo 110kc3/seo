@@ -1,6 +1,10 @@
 # AI Product Index
 
-**Live at https://index.kc-it.pl/** — a machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
+A machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
+
+> ⚠️ **Not deployed yet.** The code is complete and tested; the Cloudflare deployment has never run, so `index.kc-it.pl` does not resolve and nobody can reach or pay for this. The payment rail is also set to **testnet**, so no real money can move until it is deliberately switched. See **[DEPLOY.md](DEPLOY.md)** for exactly what is outstanding.
+
+**Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
 
 - **Registration is free and stays free**: registering *is* the "purchase" — an agent opens a GitHub issue with listing JSON, a workflow validates and publishes it.
 - **The paid product is `POST /api/audit`**: an agent-readability audit of any URL, priced per call over x402 (HTTP 402). Its value does not depend on how many listings the registry holds, which is why it — not the tier upgrade — is what sits behind the payment gate.
@@ -30,6 +34,8 @@ That last row is the point: before the migration there was no way to tell whethe
 **Worker routes** (`worker/`):
 - `POST /api/audit` — the paid endpoint. Validates the target with `urlError()` **before** charging, gates on x402, then scores 13 weighted checks and returns ranked `next_steps`. `audit.js`.
 - `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
+- `GET /api/x402/info` — the active rail's payment terms, so an agent can read the price without provoking a 402.
+- `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard. Bearer-token gated on `DASHBOARD_TOKEN`; `503 dashboard_not_enabled` until that secret exists. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
 - Everything else falls through to the `ASSETS` binding, decorated by `negotiate.js` (`Link:` header, `Accept`-based content negotiation) — the two agent-readiness checks the audit scored as impossible on static hosting.
 - Every request is logged to Analytics Engine with a bucketed path, a classified client type (`classify.js`), method, status class, truncated UA and ASN. **No IP addresses.**
 

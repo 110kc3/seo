@@ -3,6 +3,9 @@
 
 User-agent: *
 Allow: /
+# Owner tooling, not content — no agent has any use for these.
+Disallow: /dashboard.html
+Disallow: /api/revenue.json
 
 User-agent: GPTBot
 Allow: /

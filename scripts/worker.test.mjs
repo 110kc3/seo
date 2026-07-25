@@ -14,6 +14,7 @@ import { parseAuditRequest, __testing as audit } from '../worker/audit.js';
 import { __testing as stats } from '../worker/stats.js';
 import { resolveX402, needsCdpAuth } from './x402-config.mjs';
 import { createCdpAuthHeader, facilitatorHeaders } from '../worker/cdp-auth.js';
+import { handleRevenue, __testing as revenue } from '../worker/revenue.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -489,6 +490,114 @@ test('parseJsonLd keeps only schema.org nodes and survives broken blocks', () =>
   ]);
   assert.equal(res.schemaOrg.length, 2);
   assert.equal(res.errors.length, 1);
+});
+
+// --- revenue ledger --------------------------------------------------------
+
+test('formatAmount converts atomic units without floating point', () => {
+  assert.equal(revenue.formatAmount('50000', 6), '0.05');
+  assert.equal(revenue.formatAmount('1', 6), '0.000001');
+  assert.equal(revenue.formatAmount('1000000', 6), '1');
+  assert.equal(revenue.formatAmount('1500000', 6), '1.5');
+  assert.equal(revenue.formatAmount('0', 6), '0');
+  // Beyond 2^53 — the exact reason this is string/BigInt work, not arithmetic.
+  assert.equal(revenue.formatAmount('123456789012345678901', 6), '123456789012345.678901');
+  assert.equal(revenue.formatAmount(undefined, 6), '0');
+});
+
+const ledgerRow = (over = {}) => ({
+  ts: '2026-07-20T10:00:00.000Z',
+  amount: '50000',
+  decimals: 6,
+  asset_name: 'USDC',
+  network: 'eip155:84532',
+  rail: 'testnet',
+  resource: 'https://index.kc-it.pl/api/audit',
+  transaction: `0x${'a'.repeat(64)}`,
+  payer: '0x857b06519E91e3A54538791bDbb0E22373e36b66',
+  ...over,
+});
+
+test('summarise totals, buckets and de-duplicates payers', () => {
+  const out = revenue.summarise([
+    ledgerRow(),
+    ledgerRow({ ts: '2026-07-20T12:00:00.000Z', amount: '50000' }),
+    ledgerRow({ ts: '2026-07-21T09:00:00.000Z', amount: '5000000', resource: 'https://index.kc-it.pl/upgrade', payer: '0xOTHER' }),
+  ]);
+
+  assert.equal(out.total, '5.1');
+  assert.equal(out.settlements, 3);
+  // Same payer twice on day one, a different one on day two.
+  assert.equal(out.unique_payers, 2);
+  assert.equal(out.by_day.length, 2);
+  assert.deepEqual(out.by_day.map((d) => d.date), ['2026-07-20', '2026-07-21']);
+  assert.equal(out.by_day[0].amount, '0.1');
+  assert.equal(out.by_day[0].count, 2);
+  // Endpoints rank by value, not by name or insertion order.
+  assert.equal(out.by_resource[0].resource, 'https://index.kc-it.pl/upgrade');
+  // Most recent first.
+  assert.equal(out.recent[0].ts, '2026-07-21T09:00:00.000Z');
+  assert.equal(out.last_payment_at, '2026-07-21T09:00:00.000Z');
+});
+
+test('summarise survives an empty ledger without dividing by zero', () => {
+  const out = revenue.summarise([]);
+  assert.equal(out.total, '0');
+  assert.equal(out.settlements, 0);
+  assert.equal(out.unique_payers, 0);
+  assert.equal(out.average, '0');
+  assert.equal(out.last_payment_at, null);
+  assert.deepEqual(out.by_day, []);
+  assert.deepEqual(out.recent, []);
+});
+
+test('summarise skips malformed amounts rather than throwing', () => {
+  const out = revenue.summarise([ledgerRow(), ledgerRow({ amount: 'not-a-number' })]);
+  assert.equal(out.total, '0.05');
+});
+
+test('revenue feed fails closed when no dashboard token is configured', async () => {
+  const res = await handleRevenue(new Request(`${BASE}/api/revenue.json`), {}, null);
+  assert.equal(res.status, 503);
+  assert.equal((await res.json()).code, 'dashboard_not_enabled');
+});
+
+test('revenue feed rejects a missing or wrong bearer token', async () => {
+  const env = { DASHBOARD_TOKEN: 'sekret', PAYMENTS: { list: async () => ({ keys: [] }) } };
+
+  const none = await handleRevenue(new Request(`${BASE}/api/revenue.json`), env, null);
+  assert.equal(none.status, 401);
+  assert.match(none.headers.get('www-authenticate'), /Bearer/);
+
+  const wrong = await handleRevenue(
+    new Request(`${BASE}/api/revenue.json`, { headers: { authorization: 'Bearer nope' } }), env, null);
+  assert.equal(wrong.status, 401);
+});
+
+test('revenue feed returns the ledger for a valid token', async () => {
+  const env = {
+    DASHBOARD_TOKEN: 'sekret',
+    // Records live in KV *metadata*, so one list() call returns them all.
+    PAYMENTS: { list: async () => ({ keys: [{ name: 'revenue:x', metadata: ledgerRow() }], list_complete: true }) },
+  };
+  const res = await handleRevenue(
+    new Request(`${BASE}/api/revenue.json`, { headers: { authorization: 'Bearer sekret' } }),
+    env,
+    resolveX402(CFG),
+  );
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.total, '0.05');
+  assert.equal(body.rail.name, 'testnet');
+  // Base Sepolia is not mainnet, so the dashboard must not call it live money.
+  assert.equal(body.rail.live, false);
+});
+
+test('the token may also arrive as a query parameter', async () => {
+  const env = { DASHBOARD_TOKEN: 'sekret', PAYMENTS: { list: async () => ({ keys: [] }) } };
+  const res = await handleRevenue(new Request(`${BASE}/api/revenue.json?token=sekret`), env, null);
+  assert.equal(res.status, 200);
 });
 
 // --- stats shaping ---------------------------------------------------------

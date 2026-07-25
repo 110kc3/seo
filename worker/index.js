@@ -16,6 +16,7 @@ import { handleStats } from './stats.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
+import { handleRevenue } from './revenue.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const MAX_AUDIT_BODY = 4 * 1024;
@@ -146,6 +147,8 @@ export default {
         response = await handleStats(env);
       } else if (url.pathname === '/api/x402/info') {
         response = handleX402Info(cfg);
+      } else if (url.pathname === '/api/revenue.json') {
+        response = await handleRevenue(request, env, resolveX402(cfg));
       } else {
         const alternate = negotiate(url.pathname, request.headers.get('accept'));
         const assetRequest = alternate
