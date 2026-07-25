@@ -33,9 +33,23 @@ binding = "PAYMENTS"
 id = "abdc346d8f1c428ead3a38f3b2a9e744"
 
 # Per-request telemetry. Free tier; no IPs or other PII are written.
-[[analytics_engine_datasets]]
-binding = "ANALYTICS"
-dataset = "ai_product_index_requests"
+#
+# COMMENTED OUT 2026-07-25 — not a design change, a one-click account blocker.
+# The first deploy failed with:
+#     You need to enable Analytics Engine [code: 10089]
+#     https://dash.cloudflare.com/<account-id>/workers/analytics-engine
+# Analytics Engine is an account-level opt-in that an API token cannot flip, and
+# the whole site was blocked behind it. Dropping the binding is safe: `record()`
+# in worker/index.js returns early when env.ANALYTICS is absent, and
+# /api/stats.json already fails closed on its own missing secrets — so nothing
+# errors, there is simply no telemetry.
+#
+# TO RESTORE (this is the measurement the migration existed for — do it):
+#   1. Click the link above and enable Analytics Engine.
+#   2. Uncomment the three lines below, commit, push.
+# [[analytics_engine_datasets]]
+# binding = "ANALYTICS"
+# dataset = "ai_product_index_requests"
 
 [observability]
 enabled = true
