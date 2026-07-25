@@ -1,29 +1,60 @@
 # Deployment runbook
 
-## Current status: NOT LIVE — two things left, both need your Cloudflare login
+## Current status: DEPLOYED AND SERVING — on workers.dev, not yet on the domain
 
-Verified 2026-07-25. The workflow is now on `main` and runs on every push; it
-stops at the credential check and says so, so `main` stays green.
+**https://ai-product-index.110kc3.workers.dev** — live, deployed from `main` by
+CI, verified 2026-07-25.
 
 | Check | State |
 |---|---|
-| `deploy.yml` on `main` | ✅ merged, ran on the last push |
-| Repo secrets `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | ❌ **not set** — `gh secret list` is empty, so every run skips the deploy step |
-| `wrangler.toml` KV namespace id | ❌ still the literal `REPLACE_WITH_KV_NAMESPACE_ID` |
-| DNS for `index.kc-it.pl` | ❌ no record (the parent `kc-it.pl` does resolve to Cloudflare) |
-| Worker boots and serves | ✅ proven locally under `wrangler dev` (see below) |
-| Payment rail, end to end | ✅ proven against the live facilitator, up to funding |
+| `deploy.yml` on `main` | ✅ green, deploys on every push |
+| Repo secrets `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | ✅ set |
+| `PAYMENTS` KV namespace | ✅ `abdc346d8f1c428ead3a38f3b2a9e744`, bound |
+| Worker serving, with its header layer | ✅ 200 + `Link:` alternates + `x-agent-protocol` |
+| `Accept:` content negotiation | ✅ `application/json` on `/` returns the registry |
+| Paid endpoint | ✅ 402 with a v1 challenge in the body and a v2 challenge in the header |
+| Payment handshake | ✅ real client signed and paid; the live facilitator verified the signature |
+| The audit itself | ✅ runs on the Workers runtime; scores this site 100/100 agent-ready |
+| **`index.kc-it.pl`** | ❌ **not attached** — needs one action from you, below |
+| **Analytics Engine** | ❌ **not enabled** — one click, and the binding is commented out until then |
 | Active payment rail | `testnet` — Base Sepolia, tokens with no monetary value |
 
-**The code is finished, tested, and the payment handshake has been driven end to
-end with the reference client.** What has never happened is the deployment. Even
-once deployed, the rail stays testnet until you deliberately flip it, so no real
-customer can be charged by accident.
+Everything that can be verified without funds has been. The rail stays testnet
+until you deliberately flip it, so no real customer can be charged by accident.
+
+### Two things left for you
+
+**1. Attach `index.kc-it.pl`.** The Worker uploads fine, but attaching the
+hostname is a *zone*-scoped call and the deploy token is account-scoped:
+
+```
+/zones/<kc-it.pl>/workers/routes → Authentication error [code: 10000]
+```
+
+Because wrangler applies all triggers as one phase, that single missing grant
+failed the whole deploy — including the workers.dev hostname. The route is now
+out of `wrangler.toml` so CI needs no zone permissions at all. Pick either:
+
+- **Dashboard (recommended, least privilege):** the Worker → **Settings →
+  Domains & Routes → Add → Custom domain** → `index.kc-it.pl`. It persists across
+  every later deploy, and CI keeps no zone access.
+- **Back into code:** add `kc-it.pl` to the token's **Zone Resources**
+  (dash → API Tokens → the token → Edit), then restore the `[[routes]]` block
+  documented in `wrangler.toml`.
+
+**2. Enable Analytics Engine** — one click at
+`https://dash.cloudflare.com/<account-id>/workers/analytics-engine`. The first
+deploy failed on it (`code: 10089`); it is an account-level opt-in no API token
+can flip, so the binding is commented out in `wrangler.toml` with restore
+instructions. **This is the measurement the whole migration existed for** — the
+only way to answer "has an agent ever actually used this?" — so it is worth the
+click, then uncomment the three lines and push.
 
 ### What "proven" means here
 
-Run against a local `wrangler dev` on 2026-07-25, with the official
-`x402-fetch@1.2.0` client and a freshly generated throwaway wallet:
+Run against the **deployed** Worker on 2026-07-25 (and first against a local
+`wrangler dev`), with the official `x402-fetch@1.2.0` client and a freshly
+generated throwaway wallet:
 
 1. The client parsed the 402, signed an EIP-3009 authorization, and sent it.
 2. This Worker validated every payment term and reserved the replay nonce.
@@ -38,9 +69,9 @@ Work through the phases below in order. Each one is independently verifiable.
 
 ---
 
-## Running it locally first
+## Running it locally
 
-Worth doing before any of the phases — it needs no Cloudflare account:
+Needs no Cloudflare account, and is the fastest loop for changing the Worker:
 
 ```bash
 npx wrangler dev --local --persist-to /tmp/seo-wstate
@@ -66,26 +97,37 @@ otherwise only surface as "the facilitator rejects every payment" in production
 
 ---
 
-## Phase 1 — Get it on the internet
+## Phase 1 — Get it on the internet — done except the hostname
 
-Nothing else matters until this is done.
+### 1.1 Create the KV namespace — done
 
-### 1.1 Create the KV namespace
+`abdc346d8f1c428ead3a38f3b2a9e744`, created via the `cf-admin` workflow and bound
+in `wrangler.toml`. This one namespace holds three things: x402
+replay-protection nonces, the revenue ledger, and the stats cache.
+
+The API token lives only as a repo secret, so authenticated Cloudflare commands
+run in Actions rather than on a laptop:
 
 ```bash
-npx wrangler kv namespace create PAYMENTS
+gh workflow run cf-admin -f action=kv-setup     # idempotent; prints the id
+gh workflow run cf-admin -f action=whoami       # what the token may do
+gh workflow run cf-admin -f action=subdomain    # the workers.dev hostname
 ```
 
-Copy the returned id into `wrangler.toml`, replacing `REPLACE_WITH_KV_NAMESPACE_ID`. This one namespace holds three things: x402 replay-protection nonces, the revenue ledger, and the stats cache.
+### 1.2 Cloudflare credentials as GitHub repo secrets — done
 
-### 1.2 Cloudflare credentials as GitHub repo secrets
-
-Settings → Secrets and variables → Actions:
+Both set 2026-07-25. For reference, or to rotate — Settings → Secrets and
+variables → Actions:
 
 | Secret | Where it comes from |
 |---|---|
 | `CLOUDFLARE_API_TOKEN` | Cloudflare dashboard → My Profile → API Tokens → Create → **Edit Cloudflare Workers** template |
 | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard → Workers & Pages → right sidebar |
+
+The template's account permissions are enough to deploy the Worker, upload the
+assets and create a KV namespace. It is **not** enough to attach a custom domain:
+that needs `kc-it.pl` in the token's **Zone Resources**, which the template leaves
+empty. See the status section above.
 
 ### 1.3 Merge to `main` — done
 
@@ -99,17 +141,22 @@ one without a commit:
 gh workflow run deploy
 ```
 
-### 1.4 Point the hostname at the Worker
+### 1.4 Point the hostname at the Worker — outstanding
 
-`wrangler.toml` already declares `index.kc-it.pl` as a custom domain. After the first successful deploy, confirm Cloudflare created the DNS record; if not, add it manually under the `kc-it.pl` zone.
+See "Two things left for you" above: the deploy token is account-scoped, so the
+hostname is attached out-of-band rather than by CI.
 
-**Verify Phase 1:**
+**Verify Phase 1** (works today against workers.dev; swap the host once the
+domain is attached):
 
 ```bash
-curl -sI https://index.kc-it.pl/                       # 200, and a Link: header with rel=alternate
-curl -s  https://index.kc-it.pl/api/index.json | head  # the registry JSON
-curl -s  https://index.kc-it.pl/api/x402/info          # payment terms
-curl -s -H 'accept: application/json' https://index.kc-it.pl/   # content negotiation → registry JSON
+B=https://ai-product-index.110kc3.workers.dev
+curl -sI $B/                                    # 200 + a Link: header with rel=alternate
+curl -s  $B/api/index.json | head               # the registry JSON
+curl -s  $B/api/x402/info                       # payment terms, and the versions accepted
+curl -s -H 'accept: application/json' $B/       # content negotiation → registry JSON
+curl -s -X POST $B/api/audit \
+  -H 'content-type: application/json' -d '{"url":"https://example.com"}'   # 402
 ```
 
 ---
