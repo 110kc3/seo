@@ -32,6 +32,8 @@ The Worker exists for the three things GitHub Pages structurally could not do:
 That last row is the point: before the migration there was no way to tell whether a single agent had ever hit the site.
 
 **Worker routes** (`worker/`):
+- `GET /badge.svg?slug=…` — the README badge a listed product embeds. Reads the committed registry, never audits, and always returns a 200 image: it renders inside someone else's README, where a 4xx is a broken icon. `badge.js`.
+- `GET /.well-known/http-message-signatures-directory` — Ed25519 public keys for the RFC 9421 signatures on every response. `signing.js`.
 - `GET /api/score?url=…` — **free**. The A–F letter grade, the numeric score, and all 13 checks by label with pass/fail. This is what the input box on the homepage calls; the audit runs server-side because a browser cannot read another origin's llms.txt or robots.txt. Cached per URL for an hour (cache hits unmetered), 20 uncached audits/hour/IP. `score.js`.
 - `POST /api/audit` — **paid**. The same 13 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet with the caller's own origin substituted in. Validates the target with `urlError()` **before** charging, then gates on x402. `audit.js`.
 - `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.

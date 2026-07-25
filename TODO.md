@@ -18,6 +18,7 @@ optional rails.
 
 - [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base).
 - [x] **Payment rail proven end to end** — done 2026-07-25. The official `x402-fetch@1.2.0` client was driven against a local `wrangler dev`: it parsed the 402, signed an EIP-3009 authorization, paid, and the **live** `x402.org` facilitator verified the signature and failed only on `invalid_exact_evm_insufficient_balance` (unfunded throwaway wallet). The same signature was also accepted through the v2 path. Nothing is left to prove but funding.
+- [ ] **Swap the analytics token for a scoped one.** `/api/stats.json` publishes today because `push-secrets` mirrors the deploy token into `CF_ANALYTICS_TOKEN` — it turned out to satisfy Account Analytics: Read. But it also carries Workers Scripts: Edit, so a bug that ever exposed the Worker's env would hand over deploy rights. Create a token with **only** Account Analytics: Read, `gh secret set CF_ANALYTICS_TOKEN`, re-run `gh workflow run cf-admin -f action=push-secrets`; the mirror then stops on its own.
 - [ ] **Optional: CDP API key** — no longer the only route to mainnet, so genuinely optional. Buys a free tier (1,000 tx/month) and auto-inclusion in the x402 Bazaar, which is real discovery for a site nobody visits. `portal.cdp.coinbase.com/access/api` → Secret API Key → Ed25519. The portal's x402 page is metrics-only and "Custodial Wallet" needs a business account — neither is the right door. Its `/supported` needs auth, so this is the one rail `verify-rail.mjs` cannot pre-check.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN** — draft ready in `docs/show-hn.md`. Wait for 2–3 organic listings first. Worth rewriting the angle around the paid audit endpoint and the measured agent share, which are more interesting than "another directory".
@@ -42,6 +43,18 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 
 - **`agent_share` is non-trivial** → the registry has an audience; keep feeding it and run the Show HN.
 - **`agent_share` is ~0** → that is the answer. Stop investing in the registry and put the hours into Track A sales, where the bot-traffic statistics are the pitch rather than the product. The audit endpoint stands on its own either way.
+
+## Done (v3.6 — signing, badges, clients, DX, 2026-07-25)
+
+- [x] **RFC 9421 response signing** — every response carries `Content-Digest` and an Ed25519 `Signature` over `@status`, content-digest and the request's `@authority`/`@path`, so a signature cannot be lifted onto another resource. Keys at `/.well-known/http-message-signatures-directory` (kid = RFC 7638 thumbprint), in the format Cloudflare's reference deployment serves. The public half is derived from the secret at runtime, so directory and key cannot drift. Unkeyed → nothing signed, directory 404s.
+- [x] **web-bot-auth on outbound audits** — the auditor signs its own fetches (`tag="web-bot-auth"` + `Signature-Agent`), so a site being audited can verify us cryptographically instead of trusting a user-agent string.
+- [x] **`/api/stats.json` publishes.** `stats-probe` found the deploy token already satisfies Account Analytics: Read, so the decision gate is readable now rather than after a second token. Over-privileged — see above.
+- [x] **`/badge.svg?slug=…`** — the reciprocal-link loop. Hand-built SVG (no shields.io in the path), reads the committed registry, never audits. Every failure mode returns a 200 image, because these render in other people's READMEs. Copy-paste markdown on each listing page.
+- [x] **`clients/`** — paste-ready LangChain, LlamaIndex, CrewAI and LangChain.js tools, plus runnable Node and Python x402 payment examples. Not published packages: a release pipeline is a commitment this index has not earned. All three official x402 clients were run against production first.
+- [x] **x402 snippets on the homepage** — a paid endpoint is unusable to someone who doesn't know how to pay it. Testing them corrected the official docs: the Python quickstart's `x402[httpx]` extra cannot sign, `x402[evm]` is needed.
+- [x] **A zero-dependency API explorer** instead of Swagger UI/Scalar — a 7-endpoint read API already described in llms.txt and openapi.yaml does not justify a CDN bundle on every page view, on a site whose pitch is being clean.
+- [x] **Duplicate hostnames retired** — GitHub Pages disabled, `workers_dev = false`. `index.kc-it.pl` is the only public copy.
+- [x] Show HN draft rewritten around the paid endpoint and the traffic numbers. 107 tests.
 
 ## Done (v3.5 — free score, paid fixes, 2026-07-25)
 
@@ -117,5 +130,7 @@ survived deployment and cost real money or real payments.
 - [ ] Join the Cloudflare Monetization Gateway waitlist — being on Cloudflare is the prerequisite, and it would let the same 402 metering apply to `/api/index.json` without code.
 - [ ] Automate Stripe reconciliation (webhook → repository_dispatch → set-tier) once there's a first paying customer.
 - [ ] x402 Bazaar listing — now genuinely applicable, since the index exposes a paid x402 endpoint.
-- [ ] RFC 9421 web-bot-auth response signing — now possible on Workers; was one of the audit checks static hosting could never pass.
-- [ ] Retire the old `110kc3.github.io/seo/` Pages deploy once `index.kc-it.pl` is confirmed live.
+- [x] ~~RFC 9421 web-bot-auth response signing~~ — done 2026-07-25, both directions.
+- [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
+- [ ] Score badge variant (`/badge.svg?url=…` showing the live A–F grade). Needs the weekly cron to store scores; rendering an audit per README view is not viable.
+- [x] ~~Retire the old `110kc3.github.io/seo/` Pages deploy~~ — done 2026-07-25.
