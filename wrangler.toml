@@ -1,0 +1,40 @@
+# Cloudflare Workers deployment for the AI Product Index.
+#
+# Workers-with-static-assets (not Pages, not the deprecated Workers Sites):
+# one deployment serves the committed static build AND the dynamic routes
+# that GitHub Pages could never serve — HTTP 402 payment gating, custom
+# response headers, and per-request logging.
+#
+# The static build in the repo root is the asset directory; .assetsignore
+# keeps source, tooling and docs out of the upload.
+name = "ai-product-index"
+main = "worker/index.js"
+compatibility_date = "2026-07-01"
+
+[assets]
+directory = "."
+binding = "ASSETS"
+# Unknown paths render the generated 404.html rather than a Cloudflare error.
+not_found_handling = "404-page"
+# The Worker sees every request — required for measurement and for the
+# response headers static hosting cannot set. It falls through to ASSETS
+# for anything that is not a dynamic route.
+run_worker_first = true
+
+[[routes]]
+pattern = "index.kc-it.pl"
+custom_domain = true
+
+# Settled x402 payment nonces (replay protection) + the stats cache.
+# Create with: npx wrangler kv namespace create PAYMENTS
+[[kv_namespaces]]
+binding = "PAYMENTS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Per-request telemetry. Free tier; no IPs or other PII are written.
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "ai_product_index_requests"
+
+[observability]
+enabled = true

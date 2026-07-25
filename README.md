@@ -1,9 +1,14 @@
 # AI Product Index
 
-**Live at https://110kc3.github.io/seo/** — a machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
+A machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
 
-- **v1 is free**: registering *is* the "purchase" — an agent opens a GitHub issue with listing JSON, a workflow validates and publishes it.
-- **v2 adds payments**: paid tiers (`verified`, `featured`) via x402 and/or card checkout. Every listing already carries a server-set `tier` field so nothing breaks when they arrive. See `TODO.md`.
+> ⚠️ **Not deployed yet.** The code is complete and tested; the Cloudflare deployment has never run, so `index.kc-it.pl` does not resolve and nobody can reach or pay for this. The payment rail is also set to **testnet**, so no real money can move until it is deliberately switched. See **[DEPLOY.md](DEPLOY.md)** for exactly what is outstanding.
+
+**Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
+
+- **Registration is free and stays free**: registering *is* the "purchase" — an agent opens a GitHub issue with listing JSON, a workflow validates and publishes it.
+- **The paid product is `POST /api/audit`**: an agent-readability audit of any URL, priced per call over x402 (HTTP 402). Its value does not depend on how many listings the registry holds, which is why it — not the tier upgrade — is what sits behind the payment gate.
+- **Paid tiers** (`verified`, `featured`) exist in the schema and ranking; the `[upgrade]` flow verifies x402 receipts on chain.
 
 What a listed product gets: a crawlable HTML page with schema.org JSON-LD (`/l/<slug>.html`), presence in the JSON registry (`/api/index.json` + `/listings/<slug>.json`), sitemap inclusion, and llms.txt/llms-full.txt presence.
 
@@ -14,7 +19,25 @@ What a listed product gets: a crawlable HTML page with schema.org JSON-LD (`/l/<
 
 ## How it works
 
-Static site on GitHub Pages (deploy from `main`, root, no Jekyll — `.nojekyll`). Zero dependencies; plain-Node scripts. Node ≥ 18.
+Static build in the repo root, served by a **Cloudflare Worker with static assets** (`wrangler.toml` → `worker/index.js`). Zero runtime dependencies; plain-Node scripts. Node ≥ 18.
+
+The Worker exists for the three things GitHub Pages structurally could not do:
+
+| | GitHub Pages | Worker |
+|---|---|---|
+| HTTP 402 + payment manifest | impossible | `POST /api/audit` |
+| Custom response headers, `Accept` negotiation | impossible | `Link:` alternates, JSON/markdown variants |
+| Request logs | none at all | Analytics Engine → `/api/stats.json` |
+
+That last row is the point: before the migration there was no way to tell whether a single agent had ever hit the site.
+
+**Worker routes** (`worker/`):
+- `POST /api/audit` — the paid endpoint. Validates the target with `urlError()` **before** charging, gates on x402, then scores 13 weighted checks and returns ranked `next_steps`. `audit.js`.
+- `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
+- `GET /api/x402/info` — the active rail's payment terms, so an agent can read the price without provoking a 402.
+- `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard, **private**. The page itself is gated, not just the data: unauthorized requests get the ordinary 404, so its existence is never disclosed. Access is via `?token=<DASHBOARD_TOKEN>` once, traded for an HttpOnly session cookie. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
+- Everything else falls through to the `ASSETS` binding, decorated by `negotiate.js` (`Link:` header, `Accept`-based content negotiation) — the two agent-readiness checks the audit scored as impossible on static hosting.
+- Every request is logged to Analytics Engine with a bucketed path, a classified client type (`classify.js`), method, status class, truncated UA and ASN. **No IP addresses.**
 
 **Source of truth** (hand-edited or workflow-written):
 - `listings/<slug>.json` — one file per listing
@@ -22,12 +45,12 @@ Static site on GitHub Pages (deploy from `main`, root, no Jekyll — `.nojekyll`
 - `site.config.json` — base URL + repo slug (the **single knob for migration**)
 - `scripts/validate.mjs` — the security boundary: field rules, `validate()`, `reconstruct()`, `esc()`, `jsonLd()`, plus `schemaJson()` so the published schema is generated from the same constants that enforce it
 
-**Generated by `node scripts/build.mjs`** (committed; deterministic — no timestamps, build twice → zero diff): `index.html`, `404.html`, `llms.txt`, `llms-full.txt`, `robots.txt`, `openapi.yaml`, `sitemap.xml`, `api/index.json`, `api/schema.json`, `l/*.html` (the `l/` dir is wiped and rebuilt so removed listings can't leave stale pages).
+**Generated by `node scripts/build.mjs`** (committed; deterministic — no timestamps, build twice → zero diff): `index.html`, `404.html`, `llms.txt`, `llms-full.txt`, `robots.txt`, `openapi.yaml`, `sitemap.xml`, `api/index.json`, `api/schema.json`, `.well-known/agent.json`, `l/*.html` (the `l/` dir is wiped and rebuilt so removed listings can't leave stale pages).
 
 **Write paths (the autonomous transactions)** — `.github/workflows/register.yml`, gated on issue-title prefix (not a label, which REST-API agents couldn't set):
 - **`[register]`** — new listing. `scripts/process-issue.mjs` (input via env only, never shell-interpolated): 20 KB cap → parse (```json fence or bare body) → `validate()` → unique slug + normalized-URL dedup → ≤ 10 listings per GitHub account → liveness check (product URL must answer < 400 in 10 s) → write reconstructed `listings/<slug>.json`.
 - **`[update]`** — full replacement of an existing listing; only the original `github_user` (or the repo owner) may update; `created`/`github_user`/`tier` preserved, `updated` stamped.
-- **`[upgrade]`** — paid tier change (`{"slug", "tier": "verified|featured", "rail", "receipt"}`): ownership + shape checks are live; payment verification rejects with code `payments_not_enabled` until rails are configured (see Payments below).
+- **`[upgrade]`** — paid tier change (`{"slug", "tier": "verified|featured", "rail": "x402", "receipt": {"transaction": "0x…"}}`): ownership + shape checks, then on-chain receipt verification via `scripts/x402-receipt.mjs` — the transaction must have succeeded, have enough confirmations, and contain an ERC-20 `Transfer` of at least the tier price in the configured asset to `payments.x402_address`. Spent transaction hashes are burned into the committed `payments.json` ledger so one payment cannot buy two upgrades. Rejects `payments_not_enabled` while the rail is unconfigured; `rail: "card"` returns `manual_reconciliation`.
 - All modes: build + commit + push with a reset-and-redo retry loop ×3 (not an Actions `concurrency` group, which silently cancels queued runs; after `reset --hard` the dedup re-runs, so a lost race fails cleanly), then a machine-readable bot comment (`{"ok":…,"code":…,"errors":…}`) and issue close. Pages redeploys on the push (~1 min).
 
 **Tiers**: `free` < `verified` < `featured` — paid tiers sort first in the index and get a badge. Manual flip (e.g. after an out-of-band payment): `node scripts/set-tier.mjs <slug> <tier>`, then commit + push.
@@ -36,29 +59,62 @@ Static site on GitHub Pages (deploy from `main`, root, no Jekyll — `.nojekyll`
 
 **MCP server** — `mcp/server.mjs`: zero-dependency stdio JSON-RPC (initialize/ping/tools/list/tools/call) with `search_products`, `get_product`, `register_product` (opens the `[register]` issue; needs env `GITHUB_TOKEN`, public_repo). Install: `claude mcp add ai-product-index -- node <clone>/mcp/server.mjs`.
 
-**Security model**: all HTML text/attributes through one `esc()`; hrefs only from scheme-allowlisted (http/https, public-host) URL fields; JSON-LD `<`-escaped against `</script>` breakout; slug regex + resolved-path assertion stop path traversal; accepted objects rebuilt field-by-field from an allowlist (no `__proto__` write-through); workflow token scoped to `contents: write, issues: write`. Tests: `node --test scripts/`.
+**Security model**: all HTML text/attributes through one `esc()`; hrefs only from scheme-allowlisted (http/https, public-host) URL fields; JSON-LD `<`-escaped against `</script>` breakout; slug regex + resolved-path assertion stop path traversal; accepted objects rebuilt field-by-field from an allowlist (no `__proto__` write-through); workflow token scoped to `contents: write, issues: write`.
+
+**Payment security** — the facilitator verifies signatures and balances; it has no idea what we charge, so `worker/x402.js` is what stops a client from paying one atomic unit to an address of its own choosing:
+- every field of the client's `accepted` block is compared against our own requirements (scheme, network, asset, `payTo`, amount), and the **authorization is checked independently** — a payload with a correct-looking `accepted` block but an authorization paying elsewhere is rejected;
+- amounts compare as `BigInt`, so `"1e5"`, `" 10000"` and `"-10000"` never pass as `"10000"`;
+- the nonce is **reserved in KV before settling**, so a concurrent replay loses the race instead of settling twice;
+- the audit target passes `urlError()` (public http/https hosts only) **before any charge** — nobody pays for a request we would reject.
 
 ## Local development
 
 ```bash
-node --test scripts/        # validator + escaping tests
-node scripts/build.mjs      # regenerate everything
-python3 -m http.server 8080 # preview (relative links work despite /seo/ base path)
+node --test scripts/*.test.mjs   # validator, escaping, worker, payment-gate, receipt tests
+node scripts/build.mjs           # regenerate everything (deterministic: build twice → zero diff)
+npx wrangler dev                 # serve assets + Worker routes locally
 # simulate a registration without GitHub:
 ISSUE_BODY='{"slug":"x-y-z","name":"X","url":"https://example.com","description":"d","category":"api","pricing":"free"}' \
 ISSUE_USER=you node scripts/process-issue.mjs   # SKIP_LIVENESS=1 to skip the URL check
 ```
 
-## Migration (planned: move off github.io later)
+Use `scripts/*.test.mjs`, not `node --test scripts/` — Node 22 resolves a bare directory argument as a module and fails before running anything.
 
-1. Edit `site.config.json` → new `base` (and `repo` if the repo moves).
-2. Update the hardcoded URLs in `.github/ISSUE_TEMPLATE/register.yml` + `config.yml` (issue-form text can't be templated).
-3. `node scripts/build.mjs`, commit, push; point the new host/custom domain at the repo (all intra-site links are relative, so only sitemap/canonical/JSON-LD/llms.txt absolute URLs change — and the build regenerates all of them).
+## Deployment (Cloudflare)
 
-## Payments (everything prepared — enabling is 3 steps, needs Kamil's credentials)
+`.github/workflows/deploy.yml` runs tests, asserts the committed build is not stale, then `wrangler deploy` on every push to `main`. One-time setup:
 
-The full upgrade pipeline is implemented and live except the final verification, which hard-rejects (`payments_not_enabled`) while `site.config.json → payments` is empty. To switch on:
-1. **x402 (agents)**: put the receiving wallet address in `payments.x402_address` and complete `verifyPayment()` in `scripts/process-issue.mjs` (marked `TODO(v2)`) against the Coinbase facilitator's verify endpoint.
-2. **Card (humans)**: create a Stripe payment link, put it in `payments.stripe_payment_link`; reconcile manually and flip with `scripts/set-tier.mjs` (automation later).
-3. Set prices in `templates/llms.txt` (currently says "not purchasable yet") and rebuild.
+1. `npx wrangler kv namespace create PAYMENTS` → put the id in `wrangler.toml`.
+2. Repo secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`.
+3. Point `index.kc-it.pl` at the Worker (the `kc-it.pl` zone is already on Cloudflare).
+4. Optional, for `/api/stats.json`: `npx wrangler secret put CF_ACCOUNT_ID` and `CF_ANALYTICS_TOKEN` (Account Analytics: Read). Without them the endpoint reports `stats_not_enabled` rather than pretending.
+
+Migration knob: `site.config.json → base` is the single source for every absolute URL; the build regenerates sitemap/canonical/JSON-LD/llms.txt/openapi from it. The three hardcoded URLs in `.github/ISSUE_TEMPLATE/*.yml` must be edited by hand (issue-form text can't be templated).
+
+## Payments — rails, and how to switch between them
+
+Rails differ only in where they settle and who they answer to, so they live as named profiles under `payments.x402.profiles` with an `active` selector. **Moving from rehearsal to real money is one word, not five edited fields.** `scripts/x402-config.mjs → resolveX402()` is the single resolver; both the Worker and the `[upgrade]` issue flow read it, so the two can never disagree about which chain and asset are being accepted.
+
+Currently `active: "testnet"` — Base Sepolia, real protocol, worthless money.
+
+| Profile | Facilitator | Auth | Ready? |
+|---|---|---|---|
+| `testnet` | `x402.org/facilitator` | none | **yes — live now** |
+| `mainnet` | `x402.org/facilitator` | none | needs the verified USDC address |
+| `cdp` | Coinbase CDP | Bearer JWT | needs the USDC address + CDP API key |
+
+**The mainnet profiles ship with `asset` deliberately blank.** `resolveX402()` returns `null` — i.e. `payments_not_enabled` — rather than quoting a payment against an empty contract. Read the Base USDC address off the token's official page and check it against a block explorer before filling it in; do not copy it from memory, from this README, or from a model.
+
+To go live on mainnet:
+
+1. **Verify and set the USDC contract** in the chosen profile's `asset`.
+2. **Pick the facilitator.** `mainnet` needs no credentials. `cdp` gives a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
+3. **Flip `active`**, rebuild, deploy.
+
+**Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. `audit_price_atomic` covers `/api/audit`; `verified_tier_price_atomic` and `featured_tier_price_atomic` cover `[upgrade]`. Agents can read the live terms at `/api/x402/info` without provoking a 402.
+
+**Card (humans)** — a Stripe payment link in `payments.stripe_payment_link`; `rail: "card"` upgrades answer `manual_reconciliation` and are flipped with `scripts/set-tier.mjs`. Stripe's own x402 product settles to a Stripe balance in fiat but is private preview behind an access request; adopting it later is a `facilitator_url` change, not a rewrite.
+
+**CDP authentication** (`worker/cdp-auth.js`) is hand-rolled on WebCrypto rather than pulling in `@coinbase/x402`, which would drag `viem`, `zod` and the whole CDP SDK into a Worker for one signature. The contract was read off those published package sources: header `{alg, kid, typ, nonce}` with `alg` of `EdDSA` (Ed25519) or `ES256` (EC), claims `{sub, iss: "cdp", nbf, exp, jti, uris}`. The `uris` claim binds each token to one method+host+path, so a `/verify` token cannot be replayed against `/settle`. A rail declaring `auth: "cdp"` with no credentials fails closed instead of firing unauthenticated and surfacing Coinbase's 401 as if the agent's payment were bad.
+
 The read API will not change shape — `tier` has been server-set on every listing since day one.

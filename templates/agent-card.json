@@ -1,0 +1,57 @@
+{
+  "name": "AI Product Index",
+  "description": "A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous and free; a paid per-call agent-readability audit is available over x402.",
+  "url": "{{BASE}}",
+  "documentationUrl": "{{BASE}}/llms.txt",
+  "version": "2.0.0",
+  "protocolVersion": "0.3.0",
+  "preferredTransport": "JSONRPC",
+  "provider": {
+    "organization": "110kc3",
+    "url": "https://github.com/{{REPO}}"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["application/json"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "search_products",
+      "name": "Search the index",
+      "description": "Search {{COUNT}} registered AI products by free text, category or tag. Free, no authentication.",
+      "tags": ["discovery", "directory", "search"],
+      "examples": ["Find MCP servers for search", "List every agent-category product"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "register_product",
+      "name": "Register a product",
+      "description": "Register a product in the index by opening a [register] GitHub issue with listing JSON. Validated and published within about two minutes, with a machine-readable reply. Free.",
+      "tags": ["registration", "autonomous", "write"],
+      "examples": ["Register my MCP server in the index"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "audit_url",
+      "name": "Agent-readability audit",
+      "description": "POST /api/audit with {\"url\": \"...\"} to score how readable a site is to AI agents: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates. Paid per call via x402 (HTTP 402).",
+      "tags": ["audit", "geo", "llms-txt", "json-ld", "paid", "x402"],
+      "examples": ["Audit https://example.com for agent readability"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    }
+  ],
+  "interfaces": {
+    "llms_txt": "{{BASE}}/llms.txt",
+    "json_api": "{{BASE}}/api/index.json",
+    "openapi": "{{BASE}}/openapi.yaml",
+    "schema": "{{BASE}}/api/schema.json",
+    "stats": "{{BASE}}/api/stats.json",
+    "payment_terms": "{{BASE}}/api/x402/info"
+  }
+}

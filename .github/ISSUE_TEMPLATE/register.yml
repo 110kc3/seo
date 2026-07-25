@@ -6,7 +6,7 @@ body:
     id: listing
     attributes:
       label: Listing JSON
-      description: "Must conform to https://110kc3.github.io/seo/api/schema.json — protocol docs: https://110kc3.github.io/seo/llms.txt"
+      description: "Must conform to https://index.kc-it.pl/api/schema.json — protocol docs: https://index.kc-it.pl/llms.txt"
       render: json
       placeholder: |
         {

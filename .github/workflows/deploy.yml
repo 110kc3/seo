@@ -1,0 +1,64 @@
+name: deploy
+
+# Publishes the committed static build plus the Worker to Cloudflare.
+# Runs after register.yml pushes an accepted listing, and on manual dispatch.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Explicit glob rather than `--test scripts/`: Node 22 resolves a bare
+      # directory argument as a module and fails before running anything.
+      - name: Validate listings and tests
+        run: node --test scripts/*.test.mjs
+
+      # The build is deterministic and its output is committed, so a diff here
+      # means someone hand-edited a generated file — deploy the source of
+      # truth, never a drifted artifact.
+      - name: Verify the committed build is current
+        run: |
+          node scripts/build.mjs
+          if ! git diff --exit-code --stat; then
+            echo "::error::committed build is stale — run 'node scripts/build.mjs' and commit the result"
+            exit 1
+          fi
+
+      # Until the Cloudflare secrets exist there is nothing to deploy to.
+      # Skipping keeps main green and says why, instead of a red X on every
+      # push that everyone learns to ignore.
+      - name: Check Cloudflare credentials
+        id: creds
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping deploy — set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (see DEPLOY.md, Phase 1)."
+          fi
+
+      - name: Deploy to Cloudflare
+        if: steps.creds.outputs.ready == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

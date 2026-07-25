@@ -132,9 +132,17 @@ const listItems = listings.map((l) => {
 writeFileSync(join(ROOT, 'index.html'), fill(tpl('index.html'), { LISTINGS_HTML: listItems }));
 
 writeFileSync(join(ROOT, '404.html'), fill(tpl('404.html')));
+// Owner tool, not content: noindex on the page, Disallow in robots, absent
+// from the sitemap. The data behind it is bearer-gated at the Worker.
+writeFileSync(join(ROOT, 'dashboard.html'), fill(tpl('dashboard.html')));
 writeFileSync(join(ROOT, 'llms.txt'), fill(tpl('llms.txt')));
 writeFileSync(join(ROOT, 'robots.txt'), fill(tpl('robots.txt')));
 writeFileSync(join(ROOT, 'openapi.yaml'), fill(tpl('openapi.yaml')));
+
+// A2A agent card. Only reachable now that the index sits at a domain root —
+// on the old /seo/ project path there was no /.well-known to serve.
+mkdirSync(join(ROOT, '.well-known'), { recursive: true });
+writeFileSync(join(ROOT, '.well-known', 'agent.json'), fill(tpl('agent-card.json')));
 
 const fullBlocks = listings.map((l) => {
   const lines = [

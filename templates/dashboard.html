@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Revenue — AI Product Index</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --muted:          #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --series-1:       #2a78d6;
+    --border:         rgba(11,11,11,0.10);
+    --warning:        #fab219;
+    --good:           #0ca30c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --page:           #0d0d0d;
+      --surface-1:      #1a1a19;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted:          #898781;
+      --grid:           #2c2c2a;
+      --baseline:       #383835;
+      --series-1:       #3987e5;
+      --border:         rgba(255,255,255,0.10);
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --page:           #0d0d0d;
+    --surface-1:      #1a1a19;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --muted:          #898781;
+    --grid:           #2c2c2a;
+    --baseline:       #383835;
+    --series-1:       #3987e5;
+    --border:         rgba(255,255,255,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); }
+  .viz-root {
+    background: var(--page); color: var(--text-primary);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+  }
+  h1 { font-size: 1.35rem; margin: 0 0 .15rem; }
+  h2 { font-size: .95rem; font-weight: 600; margin: 0 0 .1rem; }
+  .sub { color: var(--text-secondary); font-size: .85rem; margin: 0; }
+  a { color: var(--series-1); }
+
+  header { display: flex; flex-wrap: wrap; gap: 1rem; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; }
+
+  .banner { display: flex; gap: .6rem; align-items: flex-start; border: 1px solid var(--border); border-left: 3px solid var(--warning); border-radius: 8px; padding: .7rem .9rem; background: var(--surface-1); margin-bottom: 1.25rem; font-size: .88rem; }
+  .banner.good { border-left-color: var(--good); }
+  .banner .ico { font-size: 1rem; line-height: 1.3; }
+
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; margin-bottom: 1rem; }
+
+  .hero-value { font-size: 3.2rem; line-height: 1.05; font-weight: 650; letter-spacing: -0.02em; margin: .2rem 0 0; }
+  .hero-unit { font-size: 1.1rem; color: var(--text-secondary); font-weight: 500; margin-left: .35rem; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; margin-bottom: 1rem; }
+  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: .8rem .9rem; }
+  .kpi .label { color: var(--text-secondary); font-size: .78rem; }
+  .kpi .value { font-size: 1.5rem; font-weight: 620; margin-top: .1rem; }
+
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .axis-line { stroke: var(--baseline); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .mark { fill: var(--series-1); }
+  .line { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .dot { fill: var(--series-1); stroke: var(--surface-1); stroke-width: 2; }
+  .hit { fill: transparent; cursor: pointer; }
+  .crosshair { stroke: var(--baseline); stroke-width: 1; }
+
+  .tooltip { position: fixed; pointer-events: none; z-index: 10; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border); border-radius: 8px; padding: .45rem .6rem; font-size: .8rem; box-shadow: 0 4px 14px rgba(0,0,0,.18); opacity: 0; transition: opacity .1s; }
+  .tooltip .t-val { font-weight: 640; font-variant-numeric: tabular-nums; }
+
+  /* min-width keeps columns legible on a phone: the wrapper scrolls sideways
+     instead of the cells squeezing to unreadable. */
+  table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: .85rem; }
+  th, td { text-align: left; padding: .45rem .5rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--text-secondary); font-weight: 600; font-size: .78rem; position: sticky; top: 0; background: var(--surface-1); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; }
+
+  .empty { color: var(--text-secondary); text-align: center; padding: 2rem 1rem; }
+  .scroll { overflow-x: auto; }
+  /* 50 rows would otherwise make the page thousands of pixels tall. */
+  .scroll.tall { max-height: 26rem; overflow-y: auto; }
+  details { margin-top: .6rem; }
+  summary { cursor: pointer; color: var(--text-secondary); font-size: .8rem; }
+
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; overflow-wrap: anywhere; }
+  .err { color: #d03b3b; font-size: .85rem; margin-top: .5rem; }
+</style>
+</head>
+<body>
+<div class="viz-root">
+
+<header>
+  <div>
+    <h1>Revenue</h1>
+    <p class="sub">AI Product Index · <a href="index.html">site</a> · <a href="api/stats.json">traffic stats</a></p>
+  </div>
+  <p class="sub" id="generated"></p>
+</header>
+
+<div id="gate" class="card" hidden>
+  <h2>Session ended</h2>
+  <p class="sub">This dashboard is private. Reopen it with the access link:<br>
+    <code id="gate-hint">{{BASE}}/dashboard.html?token=&lt;DASHBOARD_TOKEN&gt;</code></p>
+  <p class="err" id="gate-err" hidden></p>
+</div>
+
+<div id="app" hidden>
+  <div class="banner" id="rail-banner" hidden><span class="ico" id="rail-ico">⚠</span><span id="rail-text"></span></div>
+
+  <div class="card">
+    <h2>Total settled</h2>
+    <p class="sub" id="total-sub">All payments recorded by this Worker</p>
+    <p class="hero-value" id="hero">—<span class="hero-unit" id="hero-unit"></span></p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Settlements</div><div class="value" id="k-count">—</div></div>
+    <div class="kpi"><div class="label">Average payment</div><div class="value" id="k-avg">—</div></div>
+    <div class="kpi"><div class="label">Unique payers</div><div class="value" id="k-payers">—</div></div>
+    <div class="kpi"><div class="label">Last payment</div><div class="value" id="k-last">—</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Revenue per day</h2>
+    <p class="sub" id="day-sub"></p>
+    <div id="chart-day"></div>
+    <details id="day-table-wrap"><summary>Table view</summary><div class="scroll" id="day-table"></div></details>
+  </div>
+
+  <div class="card">
+    <h2>Revenue by endpoint</h2>
+    <p class="sub" id="res-sub"></p>
+    <div id="chart-res"></div>
+  </div>
+
+  <div class="card">
+    <h2>Recent settlements</h2>
+    <p class="sub">Most recent first, newest 50. Every row is verifiable on-chain.</p>
+    <div class="scroll tall" id="recent"></div>
+  </div>
+</div>
+
+<div class="tooltip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var BASE = '{{BASE}}';
+  var tip = document.getElementById('tip');
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function el(id) { return document.getElementById(id); }
+  function shortHash(h) { return h && h.length > 14 ? h.slice(0, 8) + '…' + h.slice(-6) : (h || '—'); }
+
+  function showTip(html, evt) {
+    tip.innerHTML = html;
+    tip.style.opacity = '1';
+    var pad = 12;
+    var r = tip.getBoundingClientRect();
+    var x = Math.min(evt.clientX + pad, window.innerWidth - r.width - pad);
+    var y = Math.max(evt.clientY - r.height - pad, pad);
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+  function hideTip() { tip.style.opacity = '0'; }
+
+  // --- charts (inline SVG, no libraries) ---
+
+  function areaChart(host, rows, currency) {
+    if (!rows.length) { host.innerHTML = '<p class="empty">No settlements yet.</p>'; return; }
+    var W = 720, H = 220, L = 52, R = 12, T = 12, B = 30;
+    var pw = W - L - R, ph = H - T - B;
+    var vals = rows.map(function (r) { return parseFloat(r.amount); });
+    var max = Math.max.apply(null, vals) || 1;
+    var n = rows.length;
+    var x = function (i) { return L + (n === 1 ? pw / 2 : (pw * i) / (n - 1)); };
+    var y = function (v) { return T + ph - (ph * v) / max; };
+
+    var ticks = [0, max / 2, max];
+    var g = '';
+    ticks.forEach(function (t) {
+      g += '<line class="grid-line" x1="' + L + '" y1="' + y(t) + '" x2="' + (W - R) + '" y2="' + y(t) + '"/>';
+      g += '<text class="tick" x="' + (L - 8) + '" y="' + (y(t) + 4) + '" text-anchor="end">' + t.toFixed(2) + '</text>';
+    });
+
+    var d = rows.map(function (r, i) { return (i ? 'L' : 'M') + x(i) + ' ' + y(parseFloat(r.amount)); }).join(' ');
+    var area = d + ' L' + x(n - 1) + ' ' + y(0) + ' L' + x(0) + ' ' + y(0) + ' Z';
+
+    var marks = '', hits = '';
+    rows.forEach(function (r, i) {
+      marks += '<circle class="dot" cx="' + x(i) + '" cy="' + y(parseFloat(r.amount)) + '" r="4"/>';
+      // Hit area is a full-height column so the target is never pinpoint.
+      hits += '<rect class="hit" x="' + (x(i) - pw / (2 * Math.max(n - 1, 1))) + '" y="' + T
+        + '" width="' + Math.max(pw / Math.max(n - 1, 1), 24) + '" height="' + ph
+        + '" data-i="' + i + '"/>';
+    });
+
+    // Selective direct labels: first and last only, never every point.
+    var lab = '';
+    [0, n - 1].forEach(function (i, k) {
+      if (n === 1 && k === 1) return;
+      lab += '<text class="tick" x="' + x(i) + '" y="' + (H - 10) + '" text-anchor="'
+        + (i === 0 ? 'start' : 'end') + '">' + esc(rows[i].date) + '</text>';
+    });
+
+    host.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Revenue per day">'
+      + g
+      + '<path d="' + area + '" fill="var(--series-1)" opacity="0.13"/>'
+      + '<path class="line" d="' + d + '"/>'
+      + marks
+      + '<line class="axis-line" x1="' + L + '" y1="' + y(0) + '" x2="' + (W - R) + '" y2="' + y(0) + '"/>'
+      + lab + hits + '</svg>';
+
+    host.querySelectorAll('.hit').forEach(function (h) {
+      function on(e) {
+        var r = rows[+h.dataset.i];
+        showTip('<div>' + esc(r.date) + '</div><div class="t-val">' + esc(r.amount) + ' ' + esc(currency)
+          + '</div><div>' + r.count + ' payment' + (r.count === 1 ? '' : 's') + '</div>', e);
+      }
+      h.addEventListener('mousemove', on);
+      h.addEventListener('mouseleave', hideTip);
+    });
+  }
+
+  function barChart(host, rows, currency) {
+    if (!rows.length) { host.innerHTML = '<p class="empty">No settlements yet.</p>'; return; }
+    var rowH = 34, W = 720, L = 200, R = 60, T = 6;
+    var H = T + rows.length * rowH + 8;
+    var pw = W - L - R;
+    var max = Math.max.apply(null, rows.map(function (r) { return parseFloat(r.amount); })) || 1;
+
+    var body = '';
+    rows.forEach(function (r, i) {
+      var v = parseFloat(r.amount);
+      // One series, one color for every bar — never a value-ramp on nominal categories.
+      var w = Math.max((pw * v) / max, 2);
+      var yy = T + i * rowH + 6;
+      var name = r.resource.replace(BASE, '') || r.resource;
+      body += '<text class="tick" x="' + (L - 10) + '" y="' + (yy + 14) + '" text-anchor="end">' + esc(name) + '</text>'
+        + '<rect class="mark" x="' + L + '" y="' + yy + '" width="' + w + '" height="18" rx="4"/>'
+        + '<text class="tick" x="' + (L + w + 8) + '" y="' + (yy + 14) + '">' + esc(r.amount) + '</text>'
+        + '<rect class="hit" x="' + L + '" y="' + (yy - 6) + '" width="' + pw + '" height="' + rowH + '" data-i="' + i + '"/>';
+    });
+
+    host.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Revenue by endpoint">'
+      + body + '<line class="axis-line" x1="' + L + '" y1="' + T + '" x2="' + L + '" y2="' + (H - 8) + '"/></svg>';
+
+    host.querySelectorAll('.hit').forEach(function (h) {
+      function on(e) {
+        var r = rows[+h.dataset.i];
+        showTip('<div>' + esc(r.resource) + '</div><div class="t-val">' + esc(r.amount) + ' ' + esc(currency)
+          + '</div><div>' + r.count + ' call' + (r.count === 1 ? '' : 's') + '</div>', e);
+      }
+      h.addEventListener('mousemove', on);
+      h.addEventListener('mouseleave', hideTip);
+    });
+  }
+
+  function table(host, cols, rows, render) {
+    if (!rows.length) { host.innerHTML = '<p class="empty">Nothing recorded yet.</p>'; return; }
+    var head = cols.map(function (c) { return '<th class="' + (c.num ? 'num' : '') + '">' + esc(c.label) + '</th>'; }).join('');
+    var body = rows.map(function (r) { return '<tr>' + render(r) + '</tr>'; }).join('');
+    host.innerHTML = '<table><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table>';
+  }
+
+  // --- render ---
+
+  function render(d) {
+    el('generated').textContent = 'updated ' + new Date(d.generated_at).toLocaleString();
+    el('hero').innerHTML = esc(d.total) + '<span class="hero-unit">' + esc(d.currency) + '</span>';
+    el('k-count').textContent = d.settlements;
+    el('k-avg').textContent = d.average;
+    el('k-payers').textContent = d.unique_payers;
+    el('k-last').textContent = d.last_payment_at ? new Date(d.last_payment_at).toLocaleDateString() : '—';
+
+    if (d.rail) {
+      var b = el('rail-banner'), live = d.rail.live;
+      b.hidden = false;
+      b.className = 'banner' + (live ? ' good' : '');
+      el('rail-ico').textContent = live ? '●' : '⚠';
+      el('rail-text').innerHTML = live
+        ? '<strong>Live rail</strong> — ' + esc(d.rail.name) + ' on ' + esc(d.rail.network) + '. These are real payments.'
+        : '<strong>Test rail</strong> — ' + esc(d.rail.name) + ' on ' + esc(d.rail.network)
+          + '. Amounts below are testnet tokens with no monetary value.';
+    }
+
+    el('day-sub').textContent = d.by_day.length ? d.by_day.length + ' day(s) with settlements' : '';
+    el('res-sub').textContent = d.by_resource.length ? d.by_resource.length + ' endpoint(s)' : '';
+    areaChart(el('chart-day'), d.by_day, d.currency);
+    barChart(el('chart-res'), d.by_resource, d.currency);
+
+    el('day-table-wrap').hidden = !d.by_day.length;
+    table(el('day-table'), [{ label: 'Date' }, { label: 'Amount', num: true }, { label: 'Payments', num: true }],
+      d.by_day, function (r) {
+        return '<td>' + esc(r.date) + '</td><td class="num">' + esc(r.amount) + '</td><td class="num">' + r.count + '</td>';
+      });
+
+    var ex = d.rail && d.rail.explorer;
+    table(el('recent'),
+      [{ label: 'When' }, { label: 'Amount', num: true }, { label: 'Endpoint' }, { label: 'Payer' }, { label: 'Transaction' }],
+      d.recent, function (r) {
+        var tx = ex && r.transaction
+          ? '<a href="' + esc(ex) + '/tx/' + esc(r.transaction) + '" rel="noreferrer noopener">' + esc(shortHash(r.transaction)) + '</a>'
+          : esc(shortHash(r.transaction));
+        return '<td>' + esc(new Date(r.ts).toLocaleString()) + '</td>'
+          + '<td class="num">' + esc(r.amount) + '</td>'
+          + '<td>' + esc((r.resource || '').replace(BASE, '')) + '</td>'
+          + '<td class="mono">' + esc(shortHash(r.payer)) + '</td>'
+          + '<td class="mono">' + tx + '</td>';
+      });
+
+    el('gate').hidden = true;
+    el('app').hidden = false;
+  }
+
+  // The Worker only serves this page to an authorized request and answers 404
+  // otherwise, so arriving here already means authorized. Authentication rides
+  // an HttpOnly session cookie — the token is never readable by this script.
+  function load() {
+    return fetch('api/revenue.json', { credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401) throw new Error('Session expired. Reopen with the access link.');
+        if (r.status === 503) throw new Error('DASHBOARD_TOKEN is not set on the Worker yet.');
+        if (!r.ok) throw new Error('Request failed (HTTP ' + r.status + ').');
+        return r.json();
+      })
+      .then(render);
+  }
+
+  function gate(msg) {
+    el('gate').hidden = false;
+    el('app').hidden = true;
+    var e = el('gate-err');
+    e.hidden = !msg;
+    e.textContent = msg || '';
+  }
+
+  // Drop ?token= from the address bar the moment the cookie exists, so it stops
+  // living in browser history, bookmarks and any onward referrer.
+  if (location.search.indexOf('token=') !== -1 && window.history.replaceState) {
+    window.history.replaceState({}, '', location.pathname);
+  }
+
+  load().catch(function (err) { gate(err.message); });
+})();
+</script>
+</div>
+</body>
+</html>

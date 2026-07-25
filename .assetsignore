@@ -1,0 +1,27 @@
+# Paths excluded from the Cloudflare static-asset upload (gitignore syntax,
+# relative to the asset directory = repo root). Everything NOT listed here is
+# published, so new generated artifacts are served by default.
+#
+# Served on purpose: index.html, 404.html, llms.txt, llms-full.txt, robots.txt,
+# sitemap.xml, openapi.yaml, health.json, api/, l/, listings/, assets/.
+.git
+.github
+.gitignore
+.nojekyll
+.assetsignore
+node_modules
+scripts
+templates
+worker
+docs
+mcp
+wrangler.toml
+package.json
+package-lock.json
+site.config.json
+README.md
+TODO.md
+result.md
+health-report.md
+payments.json
+
