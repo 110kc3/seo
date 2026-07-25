@@ -1,0 +1,79 @@
+name: cf-admin
+
+# Manually-triggered Cloudflare admin commands, for the account operations that
+# need the API token. The token lives only as a repo secret, so these cannot be
+# run from a developer machine without copying it around — which is the point.
+#
+# Run with: gh workflow run cf-admin -f action=kv-setup
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: What to run
+        required: true
+        default: kv-setup
+        type: choice
+        options:
+          - kv-setup      # ensure the PAYMENTS KV namespace exists, print its id
+          - whoami        # show what the token is allowed to do
+
+permissions:
+  contents: read
+
+jobs:
+  admin:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: whoami
+        if: inputs.action == 'whoami'
+        run: npx --yes wrangler@4 whoami
+
+      # Idempotent: an existing namespace is reported rather than duplicated,
+      # so re-running this is safe and never orphans payment state.
+      - name: Ensure the PAYMENTS KV namespace exists
+        if: inputs.action == 'kv-setup'
+        run: |
+          set -o pipefail
+          echo "--- existing namespaces ---"
+          npx --yes wrangler@4 kv namespace list | tee /tmp/ns.json
+
+          id=$(node -e '
+            const list = JSON.parse(require("fs").readFileSync("/tmp/ns.json", "utf8"));
+            const hit = list.find((n) => n.title === "PAYMENTS" || /(^|-)PAYMENTS$/.test(n.title));
+            process.stdout.write(hit ? hit.id : "");
+          ')
+
+          if [ -n "$id" ]; then
+            echo "::notice::PAYMENTS already exists"
+          else
+            echo "--- creating PAYMENTS ---"
+            npx --yes wrangler@4 kv namespace create PAYMENTS | tee /tmp/create.log
+            npx --yes wrangler@4 kv namespace list > /tmp/ns.json
+            id=$(node -e '
+              const list = JSON.parse(require("fs").readFileSync("/tmp/ns.json", "utf8"));
+              const hit = list.find((n) => n.title === "PAYMENTS" || /(^|-)PAYMENTS$/.test(n.title));
+              process.stdout.write(hit ? hit.id : "");
+            ')
+          fi
+
+          if [ -z "$id" ]; then
+            echo "::error::could not determine the PAYMENTS namespace id"
+            exit 1
+          fi
+
+          # A namespace id is not a secret — it ships in the committed
+          # wrangler.toml — so printing it here is how it gets back to the repo.
+          echo "::notice::PAYMENTS_KV_NAMESPACE_ID=$id"
+          echo "### PAYMENTS namespace id" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "$id" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
