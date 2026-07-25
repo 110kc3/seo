@@ -44,6 +44,13 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 - **`agent_share` is non-trivial** → the registry has an audience; keep feeding it and run the Show HN.
 - **`agent_share` is ~0** → that is the answer. Stop investing in the registry and put the hours into Track A sales, where the bot-traffic statistics are the pitch rather than the product. The audit endpoint stands on its own either way.
 
+## Done (v3.7 — score badge, publish guard, flows re-verified, 2026-07-25)
+
+- [x] **Score badge** — `/badge.svg?slug=…&show=score` shows the live A–F grade from `scores.json`, not an audit per request: the badge renders in other people's READMEs, so it is hit by every page view of every listee. `scripts/score-listings.mjs` runs weekly in the health cron and asks our own public `/api/score`, which dogfoods the endpoint an agent would call. A transient failure keeps last week's grade rather than blanking a badge; a listing the cron has not reached says "not scored yet" rather than implying an F. Both badges are offered on every listing page.
+- [x] **A guard against publishing source by accident** — `clients/` was being served as static assets. The asset directory is the repo root and `.assetsignore` is a denylist, so anything added at the top level ships unless someone remembers; this had already bitten with `DEPLOY.md`/`ARCHITECTURE.md` and `.wrangler`. A test now fails on any top-level entry that is neither ignored nor deliberately classified as site content. Verified by adding a directory and watching it fail — and it caught `scores.json` on its first run.
+- [x] **The autonomous flows re-verified**, untested since the Cloudflare migration: `[register]` accepts, `[update]` preserves `created`/`tier` and refuses a non-owner, duplicate slugs and malformed bodies are refused, and every rejection exits non-zero so the workflow replies and closes as not-planned. `[upgrade]` now reaches **live on-chain receipt verification** and correctly answers `tx_not_found` for an invented hash — the payment path had never run post-migration.
+- [x] Workflows off deprecated Node 20. 109 tests.
+
 ## Done (v3.6 — signing, badges, clients, DX, 2026-07-25)
 
 - [x] **RFC 9421 response signing** — every response carries `Content-Digest` and an Ed25519 `Signature` over `@status`, content-digest and the request's `@authority`/`@path`, so a signature cannot be lifted onto another resource. Keys at `/.well-known/http-message-signatures-directory` (kid = RFC 7638 thumbprint), in the format Cloudflare's reference deployment serves. The public half is derived from the secret at runtime, so directory and key cannot drift. Unkeyed → nothing signed, directory 404s.
@@ -132,5 +139,5 @@ survived deployment and cost real money or real payments.
 - [ ] x402 Bazaar listing — now genuinely applicable, since the index exposes a paid x402 endpoint.
 - [x] ~~RFC 9421 web-bot-auth response signing~~ — done 2026-07-25, both directions.
 - [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
-- [ ] Score badge variant (`/badge.svg?url=…` showing the live A–F grade). Needs the weekly cron to store scores; rendering an audit per README view is not viable.
+- [x] ~~Score badge variant~~ — done 2026-07-25 as `/badge.svg?slug=…&show=score`, fed by `scores.json` from the weekly cron.
 - [x] ~~Retire the old `110kc3.github.io/seo/` Pages deploy~~ — done 2026-07-25.
