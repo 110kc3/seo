@@ -7,6 +7,12 @@ Also answers on `https://ai-product-index.110kc3.workers.dev` (a debugging
 fallback; `workers_dev = false` in `wrangler.toml` turns it off, and every
 canonical URL points at the custom domain regardless).
 
+Known edge case: `/api/score` can audit `index.kc-it.pl` (it serves those
+sub-requests from the ASSETS binding, because a Worker gets 522 fetching its own
+hostname) but **not** the workers.dev hostname, since host-matching cannot know
+an alternate hostname. Auditing the fallback URL returns a clean 522 error. It
+disappears if you ever set `workers_dev = false`.
+
 | Check | State |
 |---|---|
 | `deploy.yml` on `main` | ✅ green, deploys on every push |

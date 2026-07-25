@@ -32,7 +32,8 @@ The Worker exists for the three things GitHub Pages structurally could not do:
 That last row is the point: before the migration there was no way to tell whether a single agent had ever hit the site.
 
 **Worker routes** (`worker/`):
-- `POST /api/audit` — the paid endpoint. Validates the target with `urlError()` **before** charging, gates on x402, then scores 13 weighted checks and returns ranked `next_steps`. `audit.js`.
+- `GET /api/score?url=…` — **free**. The A–F letter grade, the numeric score, and all 13 checks by label with pass/fail. This is what the input box on the homepage calls; the audit runs server-side because a browser cannot read another origin's llms.txt or robots.txt. Cached per URL for an hour (cache hits unmetered), 20 uncached audits/hour/IP. `score.js`.
+- `POST /api/audit` — **paid**. The same 13 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet with the caller's own origin substituted in. Validates the target with `urlError()` **before** charging, then gates on x402. `audit.js`.
 - `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
 - `GET /api/x402/info` — the active rail's payment terms and the protocol versions accepted, so an agent can read the price without provoking a 402.
 - `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard, **private**. The page itself is gated, not just the data: unauthorized requests get the ordinary 404, so its existence is never disclosed. Access is via `?token=<DASHBOARD_TOKEN>` once, traded for an HttpOnly session cookie. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
@@ -60,6 +61,8 @@ That last row is the point: before the migration there was no way to tell whethe
 **MCP server** — `mcp/server.mjs`: zero-dependency stdio JSON-RPC (initialize/ping/tools/list/tools/call) with `search_products`, `get_product`, `register_product` (opens the `[register]` issue; needs env `GITHUB_TOKEN`, public_repo). Install: `claude mcp add ai-product-index -- node <clone>/mcp/server.mjs`.
 
 **Security model**: all HTML text/attributes through one `esc()`; hrefs only from scheme-allowlisted (http/https, public-host) URL fields; JSON-LD `<`-escaped against `</script>` breakout; slug regex + resolved-path assertion stop path traversal; accepted objects rebuilt field-by-field from an allowlist (no `__proto__` write-through); workflow token scoped to `contents: write, issues: write`.
+
+**The free/paid boundary** is a whitelist, not a delete. `freeView()` in `score.js` names the fields the free tier keeps, so a field added to the audit later cannot leak into it by omission — and a test asserts a hypothetical new paid field stays out. The free tier deliberately answers "do I have a problem, and roughly where"; the paid tier answers "here is the code that fixes it".
 
 **Payment security** — the facilitator verifies signatures and balances; it has no idea what we charge, so `worker/x402.js` is what stops a client from paying one atomic unit to an address of its own choosing:
 - every field of the client's `accepted` block is compared against our own requirements (scheme, network, asset, `payTo`, amount), and the **authorization is checked independently** — a payload with a correct-looking `accepted` block but an authorization paying elsewhere is rejected;

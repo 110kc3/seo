@@ -43,6 +43,14 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 - **`agent_share` is non-trivial** → the registry has an audience; keep feeding it and run the Show HN.
 - **`agent_share` is ~0** → that is the answer. Stop investing in the registry and put the hours into Track A sales, where the bot-traffic statistics are the pitch rather than the product. The audit endpoint stands on its own either way.
 
+## Done (v3.5 — free score, paid fixes, 2026-07-25)
+
+- [x] **`GET /api/score?url=…` — free A–F grade**, with all 13 checks by label and pass/fail. Homepage now leads with an input box that calls it: type a domain, get a grade. The audit runs server-side because a browser cannot read another origin's llms.txt or robots.txt.
+- [x] **The paid endpoint now sells fixes, not just a verdict** — every failing check comes back with a paste-ready code snippet (llms.txt, JSON-LD, robots.txt AI-crawler stanza, sitemap, OG tags, canonical, alternates, agent card) with the caller's own origin substituted in, plus `next_steps` ranked by weight.
+- [x] **The paywall boundary is a whitelist, not a delete.** `freeView()` names the fields the free tier keeps, so a field added to the audit later cannot leak by omission; a test asserts a hypothetical new paid field stays out.
+- [x] **Abuse boundary for a free URL-fetching endpoint** — same `urlError()` validation as the paid path (no SSRF hop), results cached per URL for an hour, 20 uncached audits/hour/IP. Cache hits are unmetered because they cost nothing. `/api/score` is its own telemetry bucket, so free→paid conversion is measurable.
+- [x] **A Worker cannot fetch its own hostname** (522, on both hostnames), so auditing our own site — the 100/100 showcase, and the first URL anyone types — failed. Same-host targets are now served from the ASSETS binding. 98 tests.
+
 ## Done (v3.4 — dashboard on the tailnet, and two live bugs, 2026-07-25)
 
 - [x] **Workers Assets' `.html` redirect was leaking, and it broke two things.** `html_handling` defaults to rewriting `/foo.html` → `/foo` with a 307. Returned verbatim, that made *every published listing URL* answer 307 rather than 200 — sitemap, canonical, JSON-LD `@id` and llms.txt all say `/l/<slug>.html`, so every canonical URL pointed at a redirect on a site whose product is machine-readability. Worse, the dashboard fetched `/dashboard.html`, got the 307 to `/dashboard` and handed it back, so `/dashboard` redirected to itself: **it had never been reachable on any path.** Asset fetches now absorb one internal hop. Fixed here rather than with `html_handling = "none"`, which would stop `/` serving index.html and would couple the build to Cloudflare.
