@@ -156,8 +156,28 @@ function parseJsonLd(blocks) {
 const check = (id, weight, pass, detail, fix) => ({ id, weight, pass: Boolean(pass), detail, ...(pass ? {} : { fix }) });
 
 /**
+ * Percentage of the achievable weight, plus the band it falls in. Pure and
+ * exported so the "a perfect site scores exactly 100" invariant is testable —
+ * `auditUrl` itself needs HTMLRewriter and so cannot run under `node --test`.
+ */
+export function scoreChecks(checks) {
+  const totalWeight = checks.reduce((sum, c) => sum + c.weight, 0);
+  const earned = checks.reduce((sum, c) => sum + (c.pass ? c.weight : 0), 0);
+  const score = totalWeight ? Math.round((earned / totalWeight) * 100) : 0;
+  const grade = score >= 80 ? 'agent-ready'
+    : score >= 55 ? 'partially readable'
+      : score >= 30 ? 'weak' : 'invisible to agents';
+  return { score, grade };
+}
+
+/**
  * Runs the audit. Assumes `target` already passed urlError().
- * Total weight is 100 so `score` reads directly as a percentage.
+ *
+ * `score` is normalised to a percentage of the total weight rather than assuming
+ * the weights happen to add up to 100 — they summed to 105, so a fully agent-ready
+ * site was reported as `score: 105` against `max_score: 100`. Deriving the
+ * denominator keeps every weight as the relative importance it was chosen to be,
+ * and makes adding or reweighting a check impossible to get wrong.
  */
 export async function auditUrl(target) {
   const origin = new URL(target).origin;
@@ -238,8 +258,7 @@ export async function auditUrl(target) {
       'Serve over HTTPS; several crawlers will not follow an http:// origin at all.'),
   ];
 
-  const score = checks.reduce((sum, c) => sum + (c.pass ? c.weight : 0), 0);
-  const grade = score >= 80 ? 'agent-ready' : score >= 55 ? 'partially readable' : score >= 30 ? 'weak' : 'invisible to agents';
+  const { score, grade } = scoreChecks(checks);
 
   return {
     ok: true,
@@ -267,4 +286,4 @@ export function parseAuditRequest(obj) {
   return { url: obj.url };
 }
 
-export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS };
+export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks };

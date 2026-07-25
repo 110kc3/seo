@@ -501,6 +501,31 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(body.x402Version, 2);
 });
 
+// --- audit scoring ----------------------------------------------------------
+
+test('a fully passing audit scores exactly 100, whatever the weights are', () => {
+  // The weights are relative importance, chosen by hand, and they summed to 105
+  // — so a fully agent-ready site was reported as `score: 105` out of a declared
+  // `max_score: 100`. Normalising means this holds no matter how they are
+  // reweighted or how many checks are added.
+  const weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
+  assert.equal(weights.reduce((a, b) => a + b), 105, 'fixture mirrors the shipped weights');
+
+  const all = (pass) => weights.map((weight, i) => ({ id: `c${i}`, weight, pass }));
+  assert.equal(audit.scoreChecks(all(true)).score, 100);
+  assert.equal(audit.scoreChecks(all(true)).grade, 'agent-ready');
+  assert.equal(audit.scoreChecks(all(false)).score, 0);
+  assert.equal(audit.scoreChecks(all(false)).grade, 'invisible to agents');
+
+  // Unequal weights still land inside the band they describe.
+  const half = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: i % 2 === 0 }));
+  const { score } = audit.scoreChecks(half);
+  assert.ok(score > 0 && score < 100, `expected a partial score, got ${score}`);
+
+  // An empty set must not divide by zero.
+  assert.equal(audit.scoreChecks([]).score, 0);
+});
+
 // --- CDP facilitator authentication ----------------------------------------
 
 const decodeJwtPart = (part) =>
