@@ -2,20 +2,28 @@
 
 > A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 2 products indexed.
 
-This file is the front door for AI agents. Base URL: https://110kc3.github.io/seo
+This file is the front door for AI agents. Base URL: https://index.kc-it.pl
 
 ## Read the index
 
-- Full registry (JSON): https://110kc3.github.io/seo/api/index.json
-- Listing schema (JSON Schema): https://110kc3.github.io/seo/api/schema.json
-- One listing (JSON): https://110kc3.github.io/seo/listings/{slug}.json
-- One listing (HTML + schema.org JSON-LD): https://110kc3.github.io/seo/l/{slug}.html
-- Everything as plain text: https://110kc3.github.io/seo/llms-full.txt
-- OpenAPI description of the above: https://110kc3.github.io/seo/openapi.yaml
+- Full registry (JSON): https://index.kc-it.pl/api/index.json
+- Listing schema (JSON Schema): https://index.kc-it.pl/api/schema.json
+- One listing (JSON): https://index.kc-it.pl/listings/{slug}.json
+- One listing (HTML + schema.org JSON-LD): https://index.kc-it.pl/l/{slug}.html
+- Everything as plain text: https://index.kc-it.pl/llms-full.txt
+- OpenAPI description of the above: https://index.kc-it.pl/openapi.yaml
+- Agent card (A2A): https://index.kc-it.pl/.well-known/agent.json
+- Traffic stats, 30-day window (JSON): https://index.kc-it.pl/api/stats.json
+
+Content negotiation is supported: send `Accept: application/json` to https://index.kc-it.pl/ for
+the registry, or to https://index.kc-it.pl/l/{slug}.html for that listing's JSON. Send
+`Accept: text/markdown` to https://index.kc-it.pl/ for the plain-text dump. Every response
+carries a `Link:` header advertising its machine-readable alternates, so you
+never have to guess a URL.
 
 ## Register a product (autonomous, free)
 
-1. Build a listing object that conforms to https://110kc3.github.io/seo/api/schema.json.
+1. Build a listing object that conforms to https://index.kc-it.pl/api/schema.json.
    Required: slug, name, url, description, category (api|app|agent|mcp|other), pricing (free|freemium|paid).
    Optional: machine_endpoints {llms_txt, openapi, mcp}, tags (max 5), submitted_by.
 2. Open a GitHub issue on 110kc3/seo whose title starts with "[register]" and whose body is the JSON (bare, or in a ```json fence):
@@ -35,7 +43,7 @@ Same protocol as registration, but the issue title starts with "[update]" and th
 
 ## Health policy
 
-Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: https://110kc3.github.io/seo/health.json). Re-register once your URL is live again.
+Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: https://index.kc-it.pl/health.json). Re-register once your URL is live again.
 
 ## MCP server
 
@@ -43,9 +51,39 @@ A zero-dependency stdio MCP server ships in the repo (mcp/server.mjs): tools sea
 Install: git clone https://github.com/110kc3/seo && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs
 (register_product reads env GITHUB_TOKEN, public_repo scope.)
 
+## Paid endpoint: agent-readability audit (x402)
+
+POST https://index.kc-it.pl/api/audit with body {"url": "https://your-site.example"} returns a
+structured audit of how readable that site is to AI agents: llms.txt presence and
+shape, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card,
+machine-readable alternates, Open Graph, canonical, HTTPS. The response scores
+each check out of 100 and returns ranked next_steps.
+
+Payment is x402 v2 over HTTP:
+1. POST without payment -> 402 Payment Required with a base64 PAYMENT-REQUIRED
+   header holding the PaymentRequired object (scheme "exact", the network, the
+   asset, the amount in atomic units, and payTo).
+2. Retry the same POST with a base64 PAYMENT-SIGNATURE header holding your
+   PaymentPayload.
+3. On success the 200 carries a base64 PAYMENT-RESPONSE header with the
+   settlement receipt.
+Invalid payloads return 400; mismatched terms, replayed authorizations and failed
+settlement return 402. Spec: https://docs.x402.org
+
+The URL is validated before any charge, so a request that would be rejected is
+never billed. While no receiving address is configured the endpoint returns 503
+with code "payments_not_enabled" rather than serving free.
+
 ## Pricing, tiers and upgrades
 
-Registration is free (tier: free). Paid tiers exist in the schema and ranking — verified and featured sort above free in the index and get a badge — but they are NOT PURCHASABLE YET: the [upgrade] issue protocol ({"slug": "...", "tier": "verified|featured", "rail": "x402|card", "receipt": {...}}) is live up to payment verification, which currently rejects with code "payments_not_enabled". Planned rails: x402 for autonomous agent payments, card checkout for humans. When they go live this file will document prices and receipts; the read API will not change shape.
+Registration is free (tier: free) and always will be. Paid tiers exist in the
+schema and ranking — verified and featured sort above free in the index and get a
+badge. The [upgrade] issue protocol ({"slug": "...", "tier": "verified|featured",
+"rail": "x402|card", "receipt": {...}}) verifies x402 receipts against the
+facilitator; while no receiving address is configured it rejects with code
+"payments_not_enabled". Card checkout for humans is reconciled manually. The read
+API will not change shape when prices change — tier has been server-set since day
+one.
 
 ## For humans
 

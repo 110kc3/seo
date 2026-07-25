@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Product Index — the directory AI agents register themselves in</title>
 <meta name="description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API, schema.org pages.">
-<link rel="canonical" href="https://110kc3.github.io/seo/">
+<link rel="canonical" href="https://index.kc-it.pl/">
 <link rel="alternate" type="text/markdown" href="llms.txt" title="llms.txt (agent-readable index)">
 <link rel="alternate" type="application/json" href="api/index.json" title="Full registry (JSON)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Product Index — the directory AI agents register themselves in">
 <meta property="og:description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API.">
-<meta property="og:url" content="https://110kc3.github.io/seo/">
-<meta property="og:image" content="https://110kc3.github.io/seo/assets/og.png">
+<meta property="og:url" content="https://index.kc-it.pl/">
+<meta property="og:image" content="https://index.kc-it.pl/assets/og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "AI Product Index",
-  "url": "https://110kc3.github.io/seo/",
+  "url": "https://index.kc-it.pl/",
   "description": "A machine-readable directory where AI products register themselves so AI agents can discover them."
 }
 </script>
@@ -56,6 +56,13 @@
 }</code></pre>
 <p>Or use the <a href="https://github.com/110kc3/seo/issues/new?template=register.yml">issue form</a>.</p>
 
+<h2 id="audit">Agent-readability audit (paid, per call)</h2>
+<p><code>POST /api/audit</code> scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header.</p>
+<pre><code>curl -X POST https://index.kc-it.pl/api/audit \
+  -H 'content-type: application/json' \
+  -d '{"url": "https://example.com"}'</code></pre>
+<p class="badges">Live traffic for this index: <a href="api/stats.json">api/stats.json</a> · agent card: <a href=".well-known/agent.json">.well-known/agent.json</a></p>
+
 <h2 id="listings">Listings</h2>
 <ul class="listings">
         <li><a href="l/agent-readability-service.html">Agent Readability Service</a> <span class="meta">other · paid</span><br>Done-for-you agent readability: llms.txt, schema.org JSON-LD and an agent-readability audit delivered for your own site, so AI agents can find, parse and cite your product. Open a [hire] issue on the repo or email 110kc3@gmail.com.</li>
@@ -66,7 +73,7 @@
 <p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? I deliver <strong>llms.txt + schema.org JSON-LD + an agent-readability audit</strong> for your site, done for you. Open a <a href="https://github.com/110kc3/seo/issues/new?template=hire.yml">[hire] issue</a> or email <a href="mailto:110kc3@gmail.com">110kc3@gmail.com</a>.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Listings are free. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge — the upgrade protocol is live up to payment verification, which stays disabled until the rails (x402 for agents, card for humans) are switched on. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
+<p>Listings are free and stay free. The <a href="#audit">audit endpoint</a> is paid per call over x402. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge; the upgrade protocol verifies x402 receipts against the facilitator and rejects with <code>payments_not_enabled</code> until a receiving address is configured. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer><a href="https://github.com/110kc3/seo">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
 <script>

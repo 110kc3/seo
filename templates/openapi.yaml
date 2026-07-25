@@ -17,9 +17,12 @@ info:
     HEALTH: listing URLs are re-checked weekly; 3 consecutive failures delist
     (strike state at {{BASE}}/health.json).
 
-    PAYMENTS: not enabled yet. Paid tiers (verified, featured) already exist in
-    the schema and index ranking; x402 + card rails are planned and the tier
-    field is server-set, so the read API will not change shape when they arrive.
+    PAID: POST /api/audit returns an agent-readability audit of any URL, priced
+    per call over x402 v2 (HTTP 402 + PAYMENT-REQUIRED / PAYMENT-SIGNATURE /
+    PAYMENT-RESPONSE headers). Paid tiers (verified, featured) exist in the
+    schema and index ranking; the tier field is server-set, so the read API does
+    not change shape when prices change. While no receiving address is
+    configured, paid paths reject with code payments_not_enabled.
   contact:
     url: https://github.com/{{REPO}}
 servers:
@@ -85,3 +88,85 @@ paths:
           description: Plain-text dump of every listing.
           content:
             text/plain: {}
+  /api/stats.json:
+    get:
+      operationId: getStats
+      summary: Traffic stats for this index over a 30-day window
+      description: |
+        Aggregated request counts by inferred client type (ai_agent, ai_crawler,
+        browser, script, ...) and by path bucket, plus agent_share. Client type is
+        inferred from the self-reported user-agent; no IP addresses or other
+        personal data are collected.
+      responses:
+        "200":
+          description: Aggregated counters.
+          content:
+            application/json: {}
+        "503":
+          description: Stats not published yet (code stats_not_enabled).
+  /api/audit:
+    post:
+      operationId: auditUrl
+      summary: Agent-readability audit of one URL (paid, x402)
+      description: |
+        Scores how readable a site is to AI agents across 13 weighted checks
+        (llms.txt presence and shape, llms-full.txt, robots.txt, AI-crawler
+        posture, sitemap, schema.org JSON-LD, title/description, Open Graph,
+        canonical, machine-readable alternates, agent card, HTTPS) and returns
+        ranked next_steps.
+
+        Payment is x402 v2 over HTTP. An unpaid request returns 402 with a
+        base64 PAYMENT-REQUIRED header; retry with a base64 PAYMENT-SIGNATURE
+        header; the 200 carries a base64 PAYMENT-RESPONSE settlement receipt.
+        The target URL is validated before any charge.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  pattern: "^https?://"
+                  description: Public http(s) URL to audit. Private and local hosts are rejected.
+      responses:
+        "200":
+          description: The audit. PAYMENT-RESPONSE header carries the settlement receipt.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, url, score, max_score, grade, checks]
+                properties:
+                  ok: { type: boolean }
+                  url: { type: string }
+                  audited_at: { type: string, format: date-time }
+                  score: { type: integer }
+                  max_score: { type: integer }
+                  grade: { type: string }
+                  checks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        weight: { type: integer }
+                        pass: { type: boolean }
+                        detail: { type: string }
+                        fix: { type: string }
+                  next_steps:
+                    type: array
+                    items: { type: string }
+        "400":
+          description: Invalid JSON, invalid target URL, or malformed payment payload.
+        "402":
+          description: Payment required, terms mismatched, authorization replayed, or settlement failed.
+        "413":
+          description: Body too large.
+        "502":
+          description: Target unreachable, or the payment facilitator did not respond.
+        "503":
+          description: Payment rails not configured (code payments_not_enabled).

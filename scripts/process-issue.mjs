@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, appendFileSync } 
 import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate, reconstruct, normalizeUrl, MAX_LISTINGS_PER_USER, SLUG_RE, PAID_TIERS } from './validate.mjs';
+import { verifyReceipt, tierPriceAtomic, TX_RE } from './x402-receipt.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
@@ -92,17 +93,67 @@ function safeTarget(slug) {
 
 // ---------------------------------------------------------------- upgrade --
 // Body: {"slug": "...", "tier": "verified"|"featured", "rail": "x402"|"card", "receipt": {...}}
-// The pipeline is live up to payment verification; verification rejects until
-// payment rails are configured in site.config.json (payments.*) and
-// verifyPayment() is completed against the chosen facilitator.
-function verifyPayment(/* rail, receipt, tier */) {
+// x402 receipts are verified on chain (see scripts/x402-receipt.mjs for why the
+// facilitator cannot serve this transport). Card payments have no automated
+// rail — they are reconciled by hand with scripts/set-tier.mjs.
+//
+// Spent transaction hashes are recorded in the committed ledger so one payment
+// cannot buy two upgrades. Same pattern as health.json: state that must survive
+// a workflow run lives in the repo.
+const LEDGER = join(ROOT, 'payments.json');
+
+function loadLedger() {
+  if (!existsSync(LEDGER)) return {};
+  try {
+    return JSON.parse(readFileSync(LEDGER, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+async function verifyPayment(rail, receipt, tier) {
   const p = cfg.payments ?? {};
+  const x = p.x402 ?? {};
+
   if (!p.x402_address && !p.stripe_payment_link) {
     return { ok: false, code: 'payments_not_enabled', error: `tier upgrades are not purchasable yet — payment rails (x402, card) are planned; watch ${BASE}/llms.txt` };
   }
-  // TODO(v2, needs credentials): x402 — verify the receipt with the facilitator
-  // against payments.x402_address; card — reconcile against the Stripe payment.
-  return { ok: false, code: 'payments_not_enabled', error: 'payment verification not yet implemented for the configured rail' };
+  if (rail === 'card') {
+    return { ok: false, code: 'manual_reconciliation', error: `card payments are reconciled by hand — pay at ${p.stripe_payment_link || 'the published payment link'} and the tier is applied once the payment clears` };
+  }
+  if (rail !== 'x402') {
+    return { ok: false, code: 'invalid', error: 'rail must be "x402" or "card"' };
+  }
+  if (!p.x402_address || !x.rpc_url || !x.asset) {
+    return { ok: false, code: 'payments_not_enabled', error: `the x402 rail is not fully configured yet (needs a receiving address and a chain RPC); watch ${BASE}/llms.txt` };
+  }
+
+  const price = tierPriceAtomic(x, tier);
+  if (!price) {
+    return { ok: false, code: 'payments_not_enabled', error: `no published price for tier "${tier}"` };
+  }
+  if (typeof receipt !== 'object' || receipt === null || Array.isArray(receipt)) {
+    return { ok: false, code: 'invalid', error: 'receipt must be an object like {"transaction": "0x..."}' };
+  }
+
+  const tx = String(receipt.transaction ?? '').toLowerCase();
+  if (!TX_RE.test(tx)) {
+    return { ok: false, code: 'invalid', error: 'receipt.transaction must be a 32-byte hex transaction hash' };
+  }
+  const spent = loadLedger()[tx];
+  if (spent) {
+    return { ok: false, code: 'receipt_already_used', error: `transaction ${tx} was already redeemed for listing "${spent.slug}" on ${spent.date}` };
+  }
+
+  const res = await verifyReceipt(x.rpc_url, {
+    transaction: tx,
+    asset: x.asset,
+    payTo: p.x402_address,
+    minAmount: price,
+    minConfirmations: x.min_confirmations ?? 2,
+  });
+  if (!res.ok) return res;
+  return { ok: true, tx, payer: res.payer, value: res.value };
 }
 
 if (MODE === 'upgrade') {
@@ -113,17 +164,23 @@ if (MODE === 'upgrade') {
   if (!existsSync(target)) reject([`no such listing: ${obj.slug}`], 'not_found');
   const existing = loadListing(obj.slug);
   assertOwnership(existing);
-  const pay = verifyPayment(obj.rail, obj.receipt, obj.tier);
+  const pay = await verifyPayment(obj.rail, obj.receipt, obj.tier);
   if (!pay.ok) reject([pay.error], pay.code);
   existing.tier = obj.tier;
   existing.updated = today;
   writeFileSync(target, JSON.stringify(existing, null, 2) + '\n');
+  // Burn the receipt before the listing change is announced, so a retry of the
+  // same transaction cannot buy a second upgrade.
+  const ledger = loadLedger();
+  ledger[pay.tx] = { slug: existing.slug, tier: existing.tier, date: today, payer: pay.payer, value: pay.value };
+  writeFileSync(LEDGER, JSON.stringify(ledger, null, 2) + '\n');
   writeFileSync(join(ROOT, 'result.md'), [
     '## Upgraded',
     '',
     `**${existing.name.replaceAll('`', "'")}** is now tier \`${existing.tier}\`.`,
     '',
     `- Listing page: ${BASE}/l/${existing.slug}.html`,
+    `- Payment: \`${pay.tx}\` (${pay.value} atomic units)`,
   ].join('\n') + '\n');
   output({ slug: existing.slug, verb: 'Upgrade' });
   console.log(`upgraded: ${existing.slug} -> ${existing.tier}`);

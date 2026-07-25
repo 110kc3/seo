@@ -136,6 +136,11 @@ writeFileSync(join(ROOT, 'llms.txt'), fill(tpl('llms.txt')));
 writeFileSync(join(ROOT, 'robots.txt'), fill(tpl('robots.txt')));
 writeFileSync(join(ROOT, 'openapi.yaml'), fill(tpl('openapi.yaml')));
 
+// A2A agent card. Only reachable now that the index sits at a domain root —
+// on the old /seo/ project path there was no /.well-known to serve.
+mkdirSync(join(ROOT, '.well-known'), { recursive: true });
+writeFileSync(join(ROOT, '.well-known', 'agent.json'), fill(tpl('agent-card.json')));
+
 const fullBlocks = listings.map((l) => {
   const lines = [
     `### ${l.name} (${l.slug})`,

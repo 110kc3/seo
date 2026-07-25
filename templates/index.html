@@ -56,6 +56,13 @@
 }</code></pre>
 <p>Or use the <a href="https://github.com/{{REPO}}/issues/new?template=register.yml">issue form</a>.</p>
 
+<h2 id="audit">Agent-readability audit (paid, per call)</h2>
+<p><code>POST /api/audit</code> scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header.</p>
+<pre><code>curl -X POST {{BASE}}/api/audit \
+  -H 'content-type: application/json' \
+  -d '{"url": "https://example.com"}'</code></pre>
+<p class="badges">Live traffic for this index: <a href="api/stats.json">api/stats.json</a> · agent card: <a href=".well-known/agent.json">.well-known/agent.json</a></p>
+
 <h2 id="listings">Listings</h2>
 <ul class="listings">
         {{LISTINGS_HTML}}
@@ -65,7 +72,7 @@
 <p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? I deliver <strong>llms.txt + schema.org JSON-LD + an agent-readability audit</strong> for your site, done for you. Open a <a href="https://github.com/{{REPO}}/issues/new?template=hire.yml">[hire] issue</a> or email <a href="mailto:110kc3@gmail.com">110kc3@gmail.com</a>.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Listings are free. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge — the upgrade protocol is live up to payment verification, which stays disabled until the rails (x402 for agents, card for humans) are switched on. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
+<p>Listings are free and stay free. The <a href="#audit">audit endpoint</a> is paid per call over x402. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge; the upgrade protocol verifies x402 receipts against the facilitator and rejects with <code>payments_not_enabled</code> until a receiving address is configured. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer><a href="https://github.com/{{REPO}}">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
 <script>

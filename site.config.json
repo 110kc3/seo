@@ -1,8 +1,21 @@
 {
-  "base": "https://110kc3.github.io/seo",
+  "base": "https://index.kc-it.pl",
   "repo": "110kc3/seo",
   "payments": {
     "x402_address": "",
-    "stripe_payment_link": ""
+    "stripe_payment_link": "",
+    "x402": {
+      "facilitator_url": "https://x402.org/facilitator",
+      "rpc_url": "https://sepolia.base.org",
+      "min_confirmations": 2,
+      "network": "eip155:84532",
+      "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "asset_name": "USDC",
+      "asset_version": "2",
+      "max_timeout_seconds": 60,
+      "audit_price_atomic": "10000",
+      "verified_tier_price_atomic": "5000000",
+      "featured_tier_price_atomic": "25000000"
+    }
   }
 }

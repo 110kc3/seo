@@ -1,6 +1,8 @@
 # Distribution — researched channels + ready-to-run submissions
 
-Researched 2026-07-09. Everything below is prepared; the external/publishing steps need your go (they publish under your GitHub identity / claim public namespaces).
+Researched 2026-07-09; URLs updated 2026-07-25 for the move to `https://index.kc-it.pl`. Everything below is prepared; the external/publishing steps need your go (they publish under your GitHub identity / claim public namespaces).
+
+> **Run these only after the Cloudflare Worker is live at `index.kc-it.pl`.** Nothing external links to this project yet, which is exactly why the domain was settled first — a submission carrying the old `110kc3.github.io/seo/` URL would have to be chased across several awesome-lists to correct. Re-run the agentswelcome.dev audit after the Worker is up: custom response headers and `Accept` content negotiation were two of the checks that capped the score at 81/100 on static hosting.
 
 ## 0. FIRST: publish the domain-root discovery repo (blocks #4, boosts everything)
 
@@ -30,7 +32,7 @@ gh repo fork punkpeye/awesome-mcp-servers --clone /tmp/awesome-mcp && cd /tmp/aw
 git checkout -b add-ai-product-index && git add README.md
 git commit -m "Add AI Product Index MCP server" && git push -u origin add-ai-product-index
 gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index 🤖🤖🤖" \
-  --body "Zero-dependency stdio MCP server for the AI Product Index (https://110kc3.github.io/seo/) — search_products / get_product / register_product; registration is autonomous via GitHub issues. 🤖 Agent-authored."
+  --body "Zero-dependency stdio MCP server for the AI Product Index (https://index.kc-it.pl/) — search_products / get_product / register_product; registration is autonomous via GitHub issues. 🤖 Agent-authored."
 ```
 
 ## 2. Awesome-llms-txt (SecretiveShell) — trivial PR, active
@@ -38,7 +40,7 @@ gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index �
 **Exact change** (verified 2026-07-10): add to the `## Directories` section (current entries: llms.txt hub, directory.llmstxt.cloud, llmstxt.site):
 
 ```markdown
-- [AI Product Index](https://110kc3.github.io/seo/llms.txt)
+- [AI Product Index](https://index.kc-it.pl/llms.txt)
 ```
 
 Same fork/PR dance as #1 against `SecretiveShell/Awesome-llms-txt`.
@@ -52,7 +54,7 @@ llmstxthub.com/submit → GitHub sign-in → automated PR. Note: ~110 open PRs, 
 Audit already passes (**81/100, certifiable** as of 2026-07-10) — the directory submit is one command, awaiting your go:
 
 ```bash
-curl -X POST https://agentswelcome.dev/api/directory -H 'content-type: application/json' -d '{"url":"https://110kc3.github.io/seo/"}'
+curl -X POST https://agentswelcome.dev/api/directory -H 'content-type: application/json' -d '{"url":"https://index.kc-it.pl/"}'
 ```
 
 ## 5. Lower priority

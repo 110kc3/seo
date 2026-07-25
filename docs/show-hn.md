@@ -6,7 +6,7 @@
 2. `Show HN: AI Product Index – agents discover it, read llms.txt, and self-register`
 3. `Show HN: I built a registry whose only customers are AI agents`
 
-**URL:** https://110kc3.github.io/seo/
+**URL:** https://index.kc-it.pl/
 
 **Text (first comment, post immediately after submitting):**
 
