@@ -18,6 +18,17 @@
 
 import { auditUrl, parseAuditRequest, CHECK_LABELS } from './audit.js';
 
+/**
+ * A Worker cannot fetch its own hostname — Cloudflare answers 522, on the custom
+ * domain and the workers.dev one alike. Comparing against the *request's* host
+ * rather than a configured base covers every hostname this deployment answers on,
+ * now and later, with nothing to keep in sync.
+ */
+export function fetcherFor(request, env, target) {
+  const sameHost = new URL(target).host === new URL(request.url).host;
+  return sameHost && env.ASSETS ? env.ASSETS.fetch.bind(env.ASSETS) : undefined;
+}
+
 const CACHE_PREFIX = 'score:v1:';
 const CACHE_TTL_SECONDS = 3600;
 const RATE_PREFIX = 'score:rl:';
@@ -137,7 +148,7 @@ export async function handleScore(request, env, cfg, rail) {
     }, 429, { 'retry-after': '3600' });
   }
 
-  const result = await auditUrl(parsed.url);
+  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url));
   if (!result.ok) return json({ ok: false, code: 'audit_failed', error: result.error ?? 'could not read that site' }, 502);
 
   const view = freeView(result, upsell);
@@ -147,4 +158,4 @@ export async function handleScore(request, env, cfg, rail) {
   return json(view, 200, { 'cache-control': `public, max-age=${CACHE_TTL_SECONDS}` });
 }
 
-export const __testing = { freeView, upsellFor, RATE_LIMIT_PER_HOUR, CACHE_PREFIX, RATE_PREFIX };
+export const __testing = { freeView, upsellFor, fetcherFor, RATE_LIMIT_PER_HOUR, CACHE_PREFIX, RATE_PREFIX };

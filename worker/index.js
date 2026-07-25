@@ -13,7 +13,7 @@ import cfg from '../site.config.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
-import { handleScore } from './score.js';
+import { handleScore, fetcherFor } from './score.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
@@ -120,7 +120,7 @@ async function handleAudit(request, env, cfgObj) {
   });
   if (!gate.paid) return gate.response;
 
-  const result = await auditUrl(parsed.url);
+  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url));
   const status = result.ok ? 200 : 502;
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }

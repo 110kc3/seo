@@ -18,11 +18,11 @@ const AI_CRAWLER_AGENTS = [
   'Claude-SearchBot', 'anthropic-ai', 'PerplexityBot', 'Google-Extended', 'CCBot',
 ];
 
-async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES } = {}) {
+async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fetch } = {}) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
-    const resp = await fetch(url, {
+    const resp = await fetchImpl(url, {
       redirect: 'follow',
       signal: ctl.signal,
       headers: { 'user-agent': UA, accept: '*/*' },
@@ -332,18 +332,29 @@ export function scoreChecks(checks) {
  * denominator keeps every weight as the relative importance it was chosen to be,
  * and makes adding or reweighting a check impossible to get wrong.
  */
-export async function auditUrl(target) {
+/**
+ * @param {string} target        already through urlError()
+ * @param {Function} [fetchImpl] fetcher for the target's own origin. Defaults to
+ *   the global fetch; callers pass the ASSETS binding when the target *is* this
+ *   deployment, because a Worker cannot fetch its own hostname — Cloudflare
+ *   answers 522 on both the custom domain and the workers.dev one, so auditing
+ *   our own site (the showcase, and the first thing anyone types) failed
+ *   outright. No check reads a response header, so serving those sub-requests
+ *   from the asset binding scores identically.
+ */
+export async function auditUrl(target, fetchImpl = fetch) {
   const origin = new URL(target).origin;
   const at = (p) => new URL(p, origin).toString();
+  const one = (url, opts = {}) => get(url, { ...opts, fetchImpl });
 
   const [home, llms, llmsFull, robots, sitemap, wellKnown, agentsJson] = await Promise.all([
-    get(target),
-    get(at('/llms.txt')),
-    get(at('/llms-full.txt'), { maxBytes: 4096 }),
-    get(at('/robots.txt'), { maxBytes: 64 * 1024 }),
-    get(at('/sitemap.xml'), { maxBytes: 4096 }),
-    get(at('/.well-known/agent.json'), { maxBytes: 32 * 1024 }),
-    get(at('/agents.json'), { maxBytes: 32 * 1024 }),
+    one(target),
+    one(at('/llms.txt')),
+    one(at('/llms-full.txt'), { maxBytes: 4096 }),
+    one(at('/robots.txt'), { maxBytes: 64 * 1024 }),
+    one(at('/sitemap.xml'), { maxBytes: 4096 }),
+    one(at('/.well-known/agent.json'), { maxBytes: 32 * 1024 }),
+    one(at('/agents.json'), { maxBytes: 32 * 1024 }),
   ]);
 
   if (!home.ok) {

@@ -584,6 +584,28 @@ test('every check has a label, and every fixable one a snippet for the right ori
   assert.equal(snippetFor('nonexistent_check', 'https://x.example'), null);
 });
 
+test('auditing our own hostname goes through ASSETS, not the network', () => {
+  // A Worker cannot fetch its own hostname: Cloudflare answers 522 on the custom
+  // domain and the workers.dev one alike, so auditing our own site — the
+  // showcase, and the first URL anyone tries — failed outright.
+  const assets = { fetch() { return new Response('x'); } };
+  const req = new Request('https://index.kc-it.pl/api/score?url=x');
+
+  assert.ok(score.fetcherFor(req, { ASSETS: assets }, 'https://index.kc-it.pl/'),
+    'same host must be served from the binding');
+  assert.equal(score.fetcherFor(req, { ASSETS: assets }, 'https://example.com/'), undefined,
+    'a third-party host must use the real network');
+
+  // Matching on the request host, not a configured base, covers every hostname
+  // this deployment answers on.
+  const wd = new Request('https://ai-product-index.110kc3.workers.dev/api/score?url=x');
+  assert.ok(score.fetcherFor(wd, { ASSETS: assets }, 'https://ai-product-index.110kc3.workers.dev/x'));
+  assert.equal(score.fetcherFor(wd, { ASSETS: assets }, 'https://index.kc-it.pl/'), undefined);
+
+  // No binding (bare Node tests) must degrade to the default fetcher.
+  assert.equal(score.fetcherFor(req, {}, 'https://index.kc-it.pl/'), undefined);
+});
+
 test('the free score refuses the same targets the paid one does', async () => {
   const cfg = { base: BASE, payments: CFG.payments };
   const call = (qs) => handleScore(new Request(`${BASE}/api/score${qs}`), {}, cfg, resolveX402(cfg));
