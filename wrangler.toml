@@ -21,18 +21,32 @@ not_found_handling = "404-page"
 # for anything that is not a dynamic route.
 run_worker_first = true
 
-# TEMPORARY 2026-07-25: a workers.dev hostname so the deployment can be exercised
-# while the custom domain is unattached. Attaching index.kc-it.pl needs the API
-# token to be scoped to the kc-it.pl zone (the first attempt failed with
-# `/zones/<id>/workers/routes → Authentication error [code: 10000]`, after the
-# Worker itself had uploaded fine). Remove this line once the domain is live —
-# published URLs all come from site.config.json → base, not from here, so nothing
-# canonical points at workers.dev.
+# A workers.dev hostname, so there is always a URL that exercises the real edge
+# independently of DNS: https://ai-product-index.110kc3.workers.dev
+# Nothing canonical points at it — every published URL comes from
+# site.config.json → base.
 workers_dev = true
 
-[[routes]]
-pattern = "index.kc-it.pl"
-custom_domain = true
+# The custom domain is NOT declared here, deliberately.
+#
+# `wrangler deploy` applies triggers after uploading the script, and attaching
+# index.kc-it.pl is a zone-scoped operation:
+#     /zones/<kc-it.pl>/workers/routes → Authentication error [code: 10000]
+# The deploy token is account-scoped, so that call failed on every attempt *after*
+# the Worker itself had uploaded fine — and because triggers are applied as one
+# phase, it also stopped workers.dev from being enabled. One missing zone grant
+# took down the whole deployment.
+#
+# Keeping the hostname out of here means CI needs no zone permissions at all
+# (least privilege), and a custom domain attached once — in the dashboard under
+# the Worker's Settings → Domains & Routes, or by a token with kc-it.pl in its
+# Zone Resources — persists across every later deploy.
+#
+# To move it back into code: add kc-it.pl to the token's Zone Resources, then
+# restore:
+#   [[routes]]
+#   pattern = "index.kc-it.pl"
+#   custom_domain = true
 
 # Settled x402 payment nonces (replay protection), the revenue ledger and the
 # stats cache. Created 2026-07-25 via `gh workflow run cf-admin -f action=kv-setup`.
