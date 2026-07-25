@@ -2,11 +2,16 @@
 
 ## Blocked on Kamil (everything else is implemented)
 
-- [ ] **Cloudflare setup for `index.kc-it.pl`** — the `kc-it.pl` zone is already on Cloudflare, so this is configuration, not a purchase. Four steps in README → Deployment: create the `PAYMENTS` KV namespace and paste its id into `wrangler.toml`; add repo secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`; point the hostname at the Worker; optionally add the two analytics secrets so `/api/stats.json` publishes. **Nothing deploys until this is done.**
-- [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base). The testnet rail is now live: `/api/audit` returns a real 402 quoting $0.05 to that address.
-- [ ] **Run the testnet rehearsal** — fund that address on Base Sepolia, drive one client through 402 → pay → 200, confirm the `PAYMENT-RESPONSE` receipt and that a replay is refused. Settlement is visible on `sepolia.basescan.org`, not in the Binance app (wallets don't list testnets).
-- [ ] **Go to mainnet** — verify the Base USDC contract against a block explorer, put it in the `mainnet` (or `cdp`) profile's `asset`, flip `active`. The profiles ship with `asset` blank on purpose so a wrong remembered address cannot take payments.
-- [ ] **Optional: CDP API key** — only needed for the `cdp` profile. Buys a free tier (1,000 tx/month) and auto-inclusion in the x402 Bazaar, which is real discovery for a site nobody visits. `portal.cdp.coinbase.com/access/api` → Secret API Key → Ed25519. The portal's x402 page is metrics-only and "Custodial Wallet" needs a business account — neither is the right door.
+Two steps stand between this and taking money. Both need your Cloudflare login;
+neither is code. Full detail in DEPLOY.md → Phase 1.
+
+- [ ] **1. Cloudflare credentials** — add repo secrets `CLOUDFLARE_API_TOKEN` (dashboard → My Profile → API Tokens → *Edit Cloudflare Workers* template) and `CLOUDFLARE_ACCOUNT_ID` (Workers & Pages → right sidebar). `gh secret list` is currently empty, which is why every `deploy` run skips the deploy step and exits green. `deploy.yml` itself is already on `main` and running.
+- [ ] **2. KV namespace** — `npx wrangler kv namespace create PAYMENTS`, paste the id over `REPLACE_WITH_KV_NAMESPACE_ID` in `wrangler.toml`. Then `gh workflow run deploy`. DNS for `index.kc-it.pl` should appear automatically (`wrangler.toml` declares the custom domain); add it by hand under the `kc-it.pl` zone if not.
+- [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base).
+- [x] **Payment rail proven end to end** — done 2026-07-25. The official `x402-fetch@1.2.0` client was driven against a local `wrangler dev`: it parsed the 402, signed an EIP-3009 authorization, paid, and the **live** `x402.org` facilitator verified the signature and failed only on `invalid_exact_evm_insufficient_balance` (unfunded throwaway wallet). The same signature was also accepted through the v2 path. Nothing is left to prove but funding.
+- [ ] **Run the testnet rehearsal** — fund a *throwaway payer* wallet (not the receiving address — the 402 asks for someone else's money) from a Base Sepolia USDC faucet and pay yourself $0.05. Copy-paste client in DEPLOY.md → Phase 2. Settlement shows on `sepolia.basescan.org`, not in the Binance app (wallets don't list testnets).
+- [ ] **Go to mainnet** — the `mainnet` profile is now filled in and pre-checked: asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` (Circle's published address, confirmed on chain: name "USD Coin", symbol USDC, 6 decimals, version 2), facilitator PayAI. Run `node scripts/verify-rail.mjs mainnet`, eyeball the address on basescan once, then set `"active": "mainnet"` and push. **No Coinbase account needed** — see below.
+- [ ] **Optional: CDP API key** — no longer the only route to mainnet, so genuinely optional. Buys a free tier (1,000 tx/month) and auto-inclusion in the x402 Bazaar, which is real discovery for a site nobody visits. `portal.cdp.coinbase.com/access/api` → Secret API Key → Ed25519. The portal's x402 page is metrics-only and "Custodial Wallet" needs a business account — neither is the right door. Its `/supported` needs auth, so this is the one rail `verify-rail.mjs` cannot pre-check.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN** — draft ready in `docs/show-hn.md`. Wait for 2–3 organic listings first. Worth rewriting the angle around the paid audit endpoint and the measured agent share, which are more interesting than "another directory".
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
@@ -38,6 +43,18 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 - [x] `Link:` alternates header and `Accept`-based content negotiation — the two agent-readiness checks that static hosting made impossible.
 - [x] `.well-known/agent.json` A2A agent card, generated by the build (only possible now that the index sits at a domain root).
 - [x] 54 tests covering classification, negotiation, payment-gate rejection paths, the audit's SSRF boundary, robots.txt group scoping, and receipt verification.
+
+## Done (v3.2 — the rail actually works, 2026-07-25)
+
+Three defects found by running the thing instead of reading it. Each would have
+survived deployment and cost real money or real payments.
+
+- [x] **x402 v1 is now served alongside v2** — the reference client (`x402-fetch@1.2.0`, current npm latest) *threw a ZodError* on our v2-only 402: it requires `network: "base-sepolia"` rather than a CAIP-2 id, `maxAmountRequired` rather than `amount`, and it sends `X-PAYMENT`, not `PAYMENT-SIGNATURE`. A perfect deploy would still have taken zero payments. One 402 now answers both: v2 in the `PAYMENT-REQUIRED` header, v1 in the body (they cannot be merged into one `accepts` array — a v1 client validates the whole array and rejects the response). Receipts go back in whichever header the payer listens on, and the replay nonce is keyed on the CAIP-2 network so it spans both versions rather than allowing one replay per version.
+- [x] **`asset_name` is per-profile** — it is published as the EIP-712 domain the payer signs against, and USDC's own `name()` is `"USDC"` on Base Sepolia but `"USD Coin"` on Base mainnet. The single shared value would have published a wrong domain on mainnet, making the facilitator reject *every* payment as an invalid signature.
+- [x] **`.wrangler/` and the root runbooks are excluded from the asset upload** — the asset directory is the repo root, so a `wrangler deploy` from a machine that had ever run `wrangler dev` would have published the local KV state at `/.wrangler/…`. `DEPLOY.md` and `ARCHITECTURE.md` were likewise being served (README/TODO were already excluded, so this was an oversight, not a decision). `.wrangler/` is gitignored too.
+- [x] **`scripts/verify-rail.mjs`** — pre-flight for any profile: reads the token's `name`/`symbol`/`decimals`/`version` off chain and asks the facilitator what it will settle, then compares both against the config. Catches the two mistakes above, and the third one below, before money is involved.
+- [x] **The mainnet facilitator was wrong** — `mainnet` pointed at `x402.org/facilitator`, which is **testnet only** (its `/supported` lists no Base mainnet, and the x402 docs say not to use it in production). Now PayAI, from the official facilitator directory: no API key, and it advertises Base mainnet under both protocol versions.
+- [x] 86 tests (was 63), including the v1 transport, cross-version replay protection, per-version receipt headers, and invariants on the shipped `site.config.json` itself.
 
 ## Done (v3.1 — x402 rail switched on, 2026-07-25)
 

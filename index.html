@@ -57,7 +57,7 @@
 <p>Or use the <a href="https://github.com/110kc3/seo/issues/new?template=register.yml">issue form</a>.</p>
 
 <h2 id="audit">Agent-readability audit (paid, per call)</h2>
-<p><code>POST /api/audit</code> scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header.</p>
+<p><code>POST /api/audit</code> scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
 <pre><code>curl -X POST https://index.kc-it.pl/api/audit \
   -H 'content-type: application/json' \
   -d '{"url": "https://example.com"}'</code></pre>

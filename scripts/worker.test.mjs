@@ -6,10 +6,11 @@
 // (readHead/auditUrl) are exercised with `wrangler dev`, not here.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 
 import { classifyUserAgent, classifyPath } from '../worker/classify.js';
 import { alternatesFor, negotiate } from '../worker/negotiate.js';
-import { paymentRequirements, requirePayment, __testing as x402 } from '../worker/x402.js';
+import { paymentRequirements, paymentRequirementsV1, requirePayment, attachSettlement, __testing as x402 } from '../worker/x402.js';
 import { parseAuditRequest, __testing as audit } from '../worker/audit.js';
 import { __testing as stats } from '../worker/stats.js';
 import { resolveX402, needsCdpAuth } from './x402-config.mjs';
@@ -114,8 +115,9 @@ const CFG = {
           rpc_url: 'https://sepolia.base.org',
           min_confirmations: 2,
         },
-        // Ships deliberately blank: the mainnet USDC contract must be verified
-        // against a block explorer, never recalled from memory.
+        // Deliberately blank here — this fixture exists to pin the fail-closed
+        // contract for an unverified asset address. The real site.config.json
+        // has its own invariants, asserted separately below.
         mainnet: {
           facilitator_url: 'https://x402.org/facilitator',
           auth: 'none',
@@ -176,6 +178,50 @@ test('paymentRequirements emits a spec-shaped exact-scheme requirement', () => {
     maxTimeoutSeconds: 60,
     extra: { name: 'USDC', version: '2' },
   });
+});
+
+test('a profile overrides the shared EIP-712 asset name', () => {
+  // extra.{name,version} is the EIP-712 domain the payer signs
+  // transferWithAuthorization against, and it must equal the token contract's
+  // own name() on that chain. USDC calls itself "USDC" on Base Sepolia and
+  // "USD Coin" on Base mainnet, so this cannot be one shared value.
+  const cfg = withRail('cdp');
+  cfg.payments.x402.profiles = {
+    ...cfg.payments.x402.profiles,
+    cdp: { ...cfg.payments.x402.profiles.cdp, asset_name: 'USD Coin' },
+  };
+  assert.equal(resolveX402(cfg).asset_name, 'USD Coin');
+  assert.equal(paymentRequirements(cfg, '10000').extra.name, 'USD Coin');
+
+  // A profile that says nothing still inherits the shared value.
+  assert.equal(resolveX402(CFG).asset_name, 'USDC');
+});
+
+// Guards the shipped config, not the fixtures: these are the mistakes that
+// would only surface as "the facilitator rejects every payment" in production.
+test('the real site.config.json rails are internally consistent', async () => {
+  const cfg = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const x402cfg = cfg.payments.x402;
+
+  for (const [name, profile] of Object.entries(x402cfg.profiles)) {
+    if (!profile.asset) continue;   // an incomplete rail is disabled anyway
+    assert.match(profile.asset, /^0x[0-9a-fA-F]{40}$/, `${name}.asset is not an address`);
+
+    // Inheriting the EIP-712 name across chains is exactly the bug this guards.
+    assert.ok(profile.asset_name, `${name} sets an asset but no explicit asset_name`);
+
+    // The public x402.org facilitator advertises testnet networks only, so a
+    // mainnet rail pointed at it fails at settlement — after the payer signed.
+    if (profile.network === 'eip155:8453') {
+      assert.ok(
+        !/^https:\/\/x402\.org\//.test(profile.facilitator_url),
+        `${name} is a Base mainnet rail but points at the testnet-only x402.org facilitator`,
+      );
+    }
+  }
+
+  // The rail that is switched on must actually resolve.
+  assert.ok(resolveX402(cfg), `the active rail "${x402cfg.active}" does not resolve`);
 });
 
 test('amounts compare numerically, not as strings', () => {
@@ -313,6 +359,146 @@ test('malformed payment payloads are 400, not 402', async () => {
 
   const badNonce = await gate(validPayload({ authorization: { nonce: '0x1234' } }));
   assert.equal(badNonce.response.status, 400);
+});
+
+// --- x402 v1 compatibility --------------------------------------------------
+//
+// The reference client (x402-fetch 1.2.0) validates the 402 body against a v1
+// schema and throws rather than degrading, so a v2-only endpoint is unpayable by
+// it. These tests pin the dual-version behaviour that makes it payable.
+
+// Same fixture, plus the v1 network name that switches v1 on.
+const CFG_V1 = {
+  ...CFG,
+  payments: {
+    ...CFG.payments,
+    x402: {
+      ...CFG.payments.x402,
+      profiles: {
+        ...CFG.payments.x402.profiles,
+        testnet: { ...CFG.payments.x402.profiles.testnet, network_v1: 'base-sepolia' },
+      },
+    },
+  },
+};
+
+function validPayloadV1(overrides = {}) {
+  const terms = paymentRequirementsV1(CFG_V1, '10000', RESOURCE);
+  return {
+    x402Version: 1,
+    scheme: overrides.scheme ?? terms.scheme,
+    network: overrides.network ?? terms.network,
+    payload: {
+      signature: `0x${'11'.repeat(65)}`,
+      authorization: {
+        from: '0x857b06519E91e3A54538791bDbb0E22373e36b66',
+        to: terms.payTo,
+        value: terms.maxAmountRequired,
+        validAfter: '1740672089',
+        validBefore: '1740672154',
+        nonce: NONCE,
+        ...(overrides.authorization ?? {}),
+      },
+    },
+  };
+}
+
+const gateV1 = (payload, { kv = stubKv(), cfg = CFG_V1 } = {}) => {
+  const headers = payload === undefined ? {} : { 'X-PAYMENT': typeof payload === 'string' ? payload : x402.b64encode(payload) };
+  const request = new Request(`${BASE}/api/audit`, { method: 'POST', headers });
+  return requirePayment(request, { PAYMENTS: kv }, cfg, { amountAtomic: '10000', resource: RESOURCE });
+};
+
+test('the v1 challenge uses v1 field names and a network name, not a CAIP-2 id', () => {
+  const terms = paymentRequirementsV1(CFG_V1, '10000', RESOURCE);
+  assert.equal(terms.network, 'base-sepolia');
+  assert.equal(terms.maxAmountRequired, '10000');
+  assert.equal(terms.resource, RESOURCE.url);          // a flat URL string in v1
+  assert.equal(terms.amount, undefined);               // v2's name must not leak
+  assert.deepEqual(terms.extra, { name: 'USDC', version: '2' });
+
+  // No v1 network name configured → v1 is off rather than guessed at.
+  assert.equal(paymentRequirementsV1(CFG, '10000', RESOURCE), null);
+});
+
+test('one 402 answers both versions: v1 in the body, v2 in the header', async () => {
+  const res = await gateV1(undefined);
+  assert.equal(res.response.status, 402);
+
+  // A v1 client reads the body, and parses the whole accepts array with its own
+  // schema — so it must contain v1 entries only.
+  const body = await res.response.json();
+  assert.equal(body.x402Version, 1);
+  assert.equal(body.accepts.length, 1);
+  assert.equal(body.accepts[0].network, 'base-sepolia');
+  assert.equal(body.accepts[0].maxAmountRequired, '10000');
+
+  // A v2 client reads the header, which still speaks pure v2.
+  const header = x402.b64decode(res.response.headers.get('PAYMENT-REQUIRED'));
+  assert.equal(header.x402Version, 2);
+  assert.equal(header.accepts[0].network, 'eip155:84532');
+  assert.equal(header.accepts[0].amount, '10000');
+});
+
+test('a v1 payer cannot redirect or shave the payment', async () => {
+  // v1 carries no asset/payTo/amount of its own, so the authorization is the
+  // only place a v1 client can lie about money. It is checked directly.
+  const wrongRecipient = await gateV1(validPayloadV1({ authorization: { to: '0xdead000000000000000000000000000000000001' } }));
+  assert.equal(wrongRecipient.paid, false);
+  assert.match(await wrongRecipient.response.text(), /authorization recipient or value/);
+
+  const shaved = await gateV1(validPayloadV1({ authorization: { value: '9999' } }));
+  assert.equal(shaved.paid, false);
+
+  for (const overrides of [{ network: 'base' }, { scheme: 'upto' }]) {
+    const res = await gateV1(validPayloadV1(overrides));
+    assert.equal(res.paid, false, `expected rejection for ${JSON.stringify(overrides)}`);
+    assert.equal(res.response.status, 402);
+  }
+});
+
+test('replay protection spans both versions for the same chain', async () => {
+  // v1 calls this chain "base-sepolia" and v2 "eip155:84532". Keying the spent
+  // nonce on the version's own label would let one authorization be replayed
+  // once per version, so both must collide on the CAIP-2 key.
+  const key = `x402:nonce:eip155:84532:${NONCE}`;
+  const v1 = await gateV1(validPayloadV1(), { kv: stubKv({ [key]: 'spent' }) });
+  assert.match(await v1.response.text(), /already been used/);
+
+  const v2 = await gate(validPayload(), { kv: stubKv({ [key]: 'spent' }) });
+  assert.match(await v2.response.text(), /already been used/);
+});
+
+test('each version is answered in the header it listens on', () => {
+  const settlement = { success: true, transaction: `0x${'cd'.repeat(32)}`, network: 'base-sepolia' };
+  const v1 = attachSettlement(new Response('{}'), settlement, 1);
+  assert.ok(v1.headers.get('X-PAYMENT-RESPONSE'));
+  assert.equal(v1.headers.get('PAYMENT-RESPONSE'), null);
+
+  const v2 = attachSettlement(new Response('{}'), settlement, 2);
+  assert.ok(v2.headers.get('PAYMENT-RESPONSE'));
+  assert.equal(v2.headers.get('X-PAYMENT-RESPONSE'), null);
+});
+
+test('a version-mismatched payload is refused rather than coerced', async () => {
+  // v2 content in the v1 header, and vice versa.
+  const v2InV1Header = await gateV1({ ...validPayloadV1(), x402Version: 2 });
+  assert.equal(v2InV1Header.response.status, 400);
+  assert.equal((await v2InV1Header.response.json()).code, 'unsupported_version');
+
+  const v1InV2Header = await gate({ ...validPayload(), x402Version: 1 }, { cfg: CFG_V1 });
+  assert.equal(v1InV2Header.response.status, 400);
+  assert.equal((await v1InV2Header.response.json()).code, 'unsupported_version');
+});
+
+test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
+  // CFG has no network_v1, so a v1 payload must not be honoured by accident —
+  // it gets the challenge, not a free audit.
+  const res = await gateV1(validPayloadV1(), { cfg: CFG });
+  assert.equal(res.paid, false);
+  assert.equal(res.response.status, 402);
+  const body = await res.response.json();
+  assert.equal(body.x402Version, 2);
 });
 
 // --- CDP facilitator authentication ----------------------------------------

@@ -64,16 +64,30 @@ Current terms, without provoking a 402: https://index.kc-it.pl/api/x402/info —
 network, asset, price in atomic units and payTo address. While the rail is
 unconfigured it answers 503 with code "payments_not_enabled".
 
-Payment is x402 v2 over HTTP:
-1. POST without payment -> 402 Payment Required with a base64 PAYMENT-REQUIRED
-   header holding the PaymentRequired object (scheme "exact", the network, the
-   asset, the amount in atomic units, and payTo).
-2. Retry the same POST with a base64 PAYMENT-SIGNATURE header holding your
-   PaymentPayload.
-3. On success the 200 carries a base64 PAYMENT-RESPONSE header with the
-   settlement receipt.
+Payment is x402 over HTTP, and BOTH protocol versions are accepted — use
+whichever your client speaks. One 402 answers both at once.
+
+x402 v2 (current spec):
+1. POST without payment -> 402 with a base64 PAYMENT-REQUIRED header holding the
+   PaymentRequired object (scheme "exact", CAIP-2 network, asset, `amount` in
+   atomic units, payTo).
+2. Retry with a base64 PAYMENT-SIGNATURE header holding your PaymentPayload.
+3. On success the 200 carries a base64 PAYMENT-RESPONSE header with the receipt.
+
+x402 v1 (what most clients ship today, e.g. x402-fetch):
+1. The same 402's JSON *body* carries {"x402Version": 1, "accepts": [...]} with
+   v1 field names — network as a name ("base-sepolia"), `maxAmountRequired`, and
+   `resource` as a URL string.
+2. Retry with a base64 X-PAYMENT header.
+3. On success the 200 carries a base64 X-PAYMENT-RESPONSE header.
+
+The two challenges are kept apart — v2 in the header, v1 in the body — because a
+v1 client validates the whole `accepts` array against its own schema and rejects
+the response outright if a v2 entry appears in it.
+
 Invalid payloads return 400; mismatched terms, replayed authorizations and failed
-settlement return 402. Spec: https://docs.x402.org
+settlement return 402. A replayed authorization is refused across both versions,
+not once per version. Spec: https://docs.x402.org
 
 The URL is validated before any charge, so a request that would be rejected is
 never billed. While no receiving address is configured the endpoint returns 503

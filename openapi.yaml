@@ -18,8 +18,10 @@ info:
     (strike state at https://index.kc-it.pl/health.json).
 
     PAID: POST /api/audit returns an agent-readability audit of any URL, priced
-    per call over x402 v2 (HTTP 402 + PAYMENT-REQUIRED / PAYMENT-SIGNATURE /
-    PAYMENT-RESPONSE headers). Paid tiers (verified, featured) exist in the
+    per call over x402. Both protocol versions are accepted: v2 (PAYMENT-REQUIRED
+    / PAYMENT-SIGNATURE / PAYMENT-RESPONSE) and v1 (X-PAYMENT /
+    X-PAYMENT-RESPONSE), so clients on either spec can pay. Paid tiers (verified,
+    featured) exist in the
     schema and index ranking; the tier field is server-set, so the read API does
     not change shape when prices change. While no receiving address is
     configured, paid paths reject with code payments_not_enabled.
@@ -109,9 +111,9 @@ paths:
       operationId: getPaymentTerms
       summary: Payment terms for the paid endpoint, without provoking a 402
       description: |
-        Returns the active rail's network, asset, price in atomic units and payTo
-        address. Everything here also appears in the 402 challenge — this just
-        saves a wasted request.
+        Returns the active rail's network, asset, price in atomic units, payTo
+        address and the x402 protocol versions accepted. Everything here also
+        appears in the 402 challenge — this just saves a wasted request.
       responses:
         "200":
           description: Active payment terms.
@@ -130,10 +132,13 @@ paths:
         canonical, machine-readable alternates, agent card, HTTPS) and returns
         ranked next_steps.
 
-        Payment is x402 v2 over HTTP. An unpaid request returns 402 with a
-        base64 PAYMENT-REQUIRED header; retry with a base64 PAYMENT-SIGNATURE
-        header; the 200 carries a base64 PAYMENT-RESPONSE settlement receipt.
-        The target URL is validated before any charge.
+        Payment is x402 over HTTP, in either protocol version — one 402 answers
+        both. v2 clients read the base64 PAYMENT-REQUIRED header, retry with
+        PAYMENT-SIGNATURE, and get the receipt in PAYMENT-RESPONSE. v1 clients
+        read the same 402's JSON body (v1 field names: maxAmountRequired, a
+        network name, a flat resource URL), retry with X-PAYMENT, and get the
+        receipt in X-PAYMENT-RESPONSE. The target URL is validated before any
+        charge, so a request that would be rejected is never billed.
       requestBody:
         required: true
         content:

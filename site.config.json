@@ -18,16 +18,20 @@
           "facilitator_url": "https://x402.org/facilitator",
           "auth": "none",
           "network": "eip155:84532",
+          "network_v1": "base-sepolia",
           "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "asset_name": "USDC",
           "rpc_url": "https://sepolia.base.org",
           "min_confirmations": 2,
           "explorer": "https://sepolia.basescan.org"
         },
         "mainnet": {
-          "facilitator_url": "https://x402.org/facilitator",
+          "facilitator_url": "https://facilitator.payai.network",
           "auth": "none",
           "network": "eip155:8453",
-          "asset": "",
+          "network_v1": "base",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "asset_name": "USD Coin",
           "rpc_url": "https://mainnet.base.org",
           "min_confirmations": 3,
           "explorer": "https://basescan.org"
@@ -36,7 +40,9 @@
           "facilitator_url": "https://api.cdp.coinbase.com/platform/v2/x402",
           "auth": "cdp",
           "network": "eip155:8453",
-          "asset": "",
+          "network_v1": "base",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "asset_name": "USD Coin",
           "rpc_url": "https://mainnet.base.org",
           "min_confirmations": 3,
           "explorer": "https://basescan.org"

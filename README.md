@@ -34,7 +34,7 @@ That last row is the point: before the migration there was no way to tell whethe
 **Worker routes** (`worker/`):
 - `POST /api/audit` — the paid endpoint. Validates the target with `urlError()` **before** charging, gates on x402, then scores 13 weighted checks and returns ranked `next_steps`. `audit.js`.
 - `GET /api/stats.json` — 30-day request counters by inferred client type and path bucket, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
-- `GET /api/x402/info` — the active rail's payment terms, so an agent can read the price without provoking a 402.
+- `GET /api/x402/info` — the active rail's payment terms and the protocol versions accepted, so an agent can read the price without provoking a 402.
 - `GET /api/revenue.json` + `/dashboard.html` — the revenue ledger and its dashboard, **private**. The page itself is gated, not just the data: unauthorized requests get the ordinary 404, so its existence is never disclosed. Access is via `?token=<DASHBOARD_TOKEN>` once, traded for an HttpOnly session cookie. The dashboard labels testnet settlements as testnet rather than calling them revenue. `revenue.js`.
 - Everything else falls through to the `ASSETS` binding, decorated by `negotiate.js` (`Link:` header, `Accept`-based content negotiation) — the two agent-readiness checks the audit scored as impossible on static hosting.
 - Every request is logged to Analytics Engine with a bucketed path, a classified client type (`classify.js`), method, status class, truncated UA and ASN. **No IP addresses.**
@@ -82,12 +82,14 @@ Use `scripts/*.test.mjs`, not `node --test scripts/` — Node 22 resolves a bare
 
 ## Deployment (Cloudflare)
 
-`.github/workflows/deploy.yml` runs tests, asserts the committed build is not stale, then `wrangler deploy` on every push to `main`. One-time setup:
+`.github/workflows/deploy.yml` runs tests, asserts the committed build is not stale, then `wrangler deploy` on every push to `main`. It skips the deploy with a notice while the two Cloudflare secrets are unset, so `main` stays green instead of collecting red Xs nobody reads. **Not yet deployed — steps 1 and 2 are outstanding; see DEPLOY.md.** One-time setup:
 
 1. `npx wrangler kv namespace create PAYMENTS` → put the id in `wrangler.toml`.
 2. Repo secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`.
 3. Point `index.kc-it.pl` at the Worker (the `kc-it.pl` zone is already on Cloudflare).
 4. Optional, for `/api/stats.json`: `npx wrangler secret put CF_ACCOUNT_ID` and `CF_ANALYTICS_TOKEN` (Account Analytics: Read). Without them the endpoint reports `stats_not_enabled` rather than pretending.
+
+Locally, run it with `npx wrangler dev --local --persist-to /tmp/seo-wstate`. The `--persist-to` outside the repo matters: the asset directory is the repo root, so wrangler's state dir otherwise lands in the watched tree and reload-loops forever.
 
 Migration knob: `site.config.json → base` is the single source for every absolute URL; the build regenerates sitemap/canonical/JSON-LD/llms.txt/openapi from it. The three hardcoded URLs in `.github/ISSUE_TEMPLATE/*.yml` must be edited by hand (issue-form text can't be templated).
 
@@ -97,19 +99,23 @@ Rails differ only in where they settle and who they answer to, so they live as n
 
 Currently `active: "testnet"` — Base Sepolia, real protocol, worthless money.
 
-| Profile | Facilitator | Auth | Ready? |
-|---|---|---|---|
-| `testnet` | `x402.org/facilitator` | none | **yes — live now** |
-| `mainnet` | `x402.org/facilitator` | none | needs the verified USDC address |
-| `cdp` | Coinbase CDP | Bearer JWT | needs the USDC address + CDP API key |
+| Profile | Facilitator | Auth | Settles Base mainnet? | Ready? |
+|---|---|---|---|---|
+| `testnet` | `x402.org/facilitator` | none | no — testnet only | **yes — live now** |
+| `mainnet` | PayAI | none | yes, v1 + v2 | yes — flip `active` |
+| `cdp` | Coinbase CDP | Bearer JWT | unverifiable without keys | needs a CDP API key |
 
-**The mainnet profiles ship with `asset` deliberately blank.** `resolveX402()` returns `null` — i.e. `payments_not_enabled` — rather than quoting a payment against an empty contract. Read the Base USDC address off the token's official page and check it against a block explorer before filling it in; do not copy it from memory, from this README, or from a model.
+**The public `x402.org` facilitator cannot settle Base mainnet.** Its `/supported` advertises `eip155:84532` and no mainnet at all, and the x402 docs say plainly not to treat it as a production path — so `mainnet` points at [PayAI](https://facilitator.payai.network) from the official facilitator directory instead: no API key, and it advertises Base mainnet under both protocol versions. A third-party facilitator relays the transaction and pays the gas; it cannot redirect funds, because the authorization is signed to our address for our exact amount.
 
-To go live on mainnet:
+Check any profile against the chain and its facilitator before switching to it:
 
-1. **Verify and set the USDC contract** in the chosen profile's `asset`.
-2. **Pick the facilitator.** `mainnet` needs no credentials. `cdp` gives a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
-3. **Flip `active`**, rebuild, deploy.
+```bash
+node scripts/verify-rail.mjs mainnet
+```
+
+That reads the token's own `name()`, `symbol()`, `decimals()` and `version()` off chain and asks the facilitator what it will actually settle. It exists because two mistakes here are invisible until every payment fails: a wrong asset address, and a wrong EIP-712 domain name — `asset_name` is published as the domain the payer signs against, and USDC calls itself `"USDC"` on Base Sepolia but `"USD Coin"` on Base mainnet, which is why it is a per-profile field.
+
+To go live on mainnet: run the check above, eyeball the asset on basescan once, set `"active": "mainnet"`, push. `cdp` instead buys a free tier (1,000 tx/month, then $0.001) and auto-inclusion in the x402 Bazaar, at the cost of a CDP API key — `wrangler secret put CDP_API_KEY_ID` and `CDP_API_KEY_SECRET`, never in `site.config.json`.
 
 **Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. `audit_price_atomic` covers `/api/audit`; `verified_tier_price_atomic` and `featured_tier_price_atomic` cover `[upgrade]`. Agents can read the live terms at `/api/x402/info` without provoking a 402.
 

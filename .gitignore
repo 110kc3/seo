@@ -1,3 +1,6 @@
 node_modules/
 result.md
 health-report.md
+
+# wrangler dev writes local state (its own KV contents, build cache) in here.
+.wrangler/

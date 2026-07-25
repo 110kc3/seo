@@ -95,7 +95,7 @@ async function handleAudit(request, env, cfgObj) {
 
   const result = await auditUrl(parsed.url);
   const status = result.ok ? 200 : 502;
-  return attachSettlement(json(result, status), gate.settlement);
+  return attachSettlement(json(result, status), gate.settlement, gate.version);
 }
 
 // --- public payment terms --------------------------------------------------
@@ -116,8 +116,13 @@ function handleX402Info(cfgObj) {
   return json({
     ok: true,
     protocol: 'x402',
+    // Both versions are accepted. A v2 client sends PAYMENT-SIGNATURE and reads
+    // the PAYMENT-REQUIRED header; a v1 client sends X-PAYMENT and reads the
+    // 402 body, where the terms appear under v1's own field names.
+    x402Versions: rail.network_v1 ? [2, 1] : [2],
     x402Version: 2,
     network: rail.network,
+    network_v1: rail.network_v1 || undefined,
     asset: rail.asset,
     asset_name: rail.asset_name,
     payTo: rail.payTo,

@@ -64,7 +64,48 @@ Everything that reaches disk or generated HTML goes through `scripts/validate.mj
 
 Rails differ only in where they settle and who they answer to, so they are named profiles under `payments.x402.profiles` with an `active` selector. `scripts/x402-config.mjs → resolveX402()` is the single resolver, read by **both** the Worker and the `[upgrade]` issue flow — so the HTTP path and the issue path can never disagree about which chain and asset are accepted.
 
-`resolveX402()` returns `null` unless the rail is *completely* configured, and every caller treats null as `payments_not_enabled`. The mainnet profiles ship with `asset` blank on purpose: an unverified contract address disables the rail instead of quoting payments against the wrong token.
+`resolveX402()` returns `null` unless the rail is *completely* configured, and every caller treats null as `payments_not_enabled` — an incomplete rail disables payments instead of quoting them against a wrong or empty token contract.
+
+Two fields are per-profile rather than shared, both for the same reason: they are *published in the payment terms* and the payer signs against them, so a value that is right on one chain is a silent failure on another.
+
+- **`asset_name`** is the EIP-712 domain name for `transferWithAuthorization`, and must equal the token's own `name()`. USDC's is `"USDC"` on Base Sepolia and `"USD Coin"` on Base mainnet; publishing the wrong one makes the facilitator reject every payment as an invalid signature.
+- **`network_v1`** is the same chain under x402 v1's naming (`base-sepolia`, `base`) rather than its CAIP-2 id. Absent, only v2 is offered.
+
+`scripts/verify-rail.mjs` exists because neither can be checked from inside the repo: it reads `name`/`symbol`/`decimals`/`version` off chain and asks the facilitator which `{version, scheme, network}` triples it will settle, then compares both against the profile.
+
+### Why one 402 speaks two protocol versions
+
+v2 is the current spec, and the endpoint was built to it. But the *installed
+client base* is on v1: the reference client (`x402-fetch@1.2.0`, npm latest as of
+July 2026) validates the 402 body against a v1 schema and **throws** rather than
+degrading — it wants `network: "base-sepolia"` rather than a CAIP-2 id and
+`maxAmountRequired` rather than `amount`, and it sends its payload in
+`X-PAYMENT`. Driving it against a v2-only build produced a `ZodError`, not a
+payment. A spec-perfect endpoint that no shipping client can pay earns nothing.
+
+So each version is answered where its own spec says to look:
+
+| | v2 | v1 |
+|---|---|---|
+| Challenge | `PAYMENT-REQUIRED` header | the 402 JSON **body** |
+| Payment | `PAYMENT-SIGNATURE` | `X-PAYMENT` |
+| Receipt | `PAYMENT-RESPONSE` | `X-PAYMENT-RESPONSE` |
+
+The two challenges are **not** merged into one `accepts` array. A v1 client parses
+the whole array with its own schema, so a single v2 entry in it makes the client
+reject the entire response — the exact failure the split avoids.
+
+Consequences worth knowing:
+
+- The **replay nonce is keyed on the CAIP-2 network**, never on the version's own
+  label. v1 calls this chain `base-sepolia` and v2 calls it `eip155:84532`;
+  keying on the label would allow one authorization to be replayed once per
+  version.
+- **v1 asserts less.** Its payload carries only `scheme` and `network` — no
+  asset, recipient or amount — so those are pinned by the `paymentRequirements`
+  *we* send the facilitator, by the token's EIP-712 domain, and by the
+  authorization check, never by the client's word. The code checks each version
+  for exactly what it actually claims rather than pretending v1 said more.
 
 ### What the facilitator does *not* do
 
@@ -80,7 +121,7 @@ The facilitator verifies signatures, balances, and simulates the transfer. **It 
 
 | Path | Transport | How payment is proven |
 |---|---|---|
-| `POST /api/audit` | HTTP | x402 v2 handshake — 402 → `PAYMENT-SIGNATURE` → facilitator `/verify` + `/settle` |
+| `POST /api/audit` | HTTP | x402 handshake, **v1 and v2** — 402 → `PAYMENT-SIGNATURE` (v2) or `X-PAYMENT` (v1) → facilitator `/verify` + `/settle` |
 | `[upgrade]` issue | GitHub issue | on-chain receipt lookup (`scripts/x402-receipt.mjs`) |
 
 They differ because a GitHub issue cannot carry a 402 handshake — by the time the issue is opened the payment has already settled, so the only honest check is an ERC-20 `Transfer` log lookup: right token, right recipient, enough value, enough confirmations. Spent transaction hashes burn into the committed `payments.json` ledger so one payment cannot buy two upgrades.
@@ -131,7 +172,7 @@ The page asset is still uploaded (the Worker must be able to fetch it from the `
 
 ## Testing
 
-`node --test scripts/*.test.mjs` — 71 tests, no framework, no dependencies.
+`node --test scripts/*.test.mjs` — 86 tests, no framework, no dependencies.
 
 Use the explicit glob, **not** `node --test scripts/`: Node 22 resolves a bare directory argument as a module and fails before running anything.
 
