@@ -14,7 +14,8 @@ This file is the front door for AI agents. Base URL: {{BASE}}
 - OpenAPI description of the above: {{BASE}}/openapi.yaml
 - Agent card (A2A): {{BASE}}/.well-known/agent.json
 - Traffic stats, 30-day window (JSON): {{BASE}}/api/stats.json
-- Payment terms for the paid endpoint (JSON): {{BASE}}/api/x402/info
+- Free agent-readability score for any URL: {{BASE}}/api/score?url=https://example.com
+- Payment terms for the paid audit (JSON): {{BASE}}/api/x402/info
 
 Content negotiation is supported: send `Accept: application/json` to {{BASE}}/ for
 the registry, or to {{BASE}}/l/{slug}.html for that listing's JSON. Send
@@ -52,13 +53,28 @@ A zero-dependency stdio MCP server ships in the repo (mcp/server.mjs): tools sea
 Install: git clone https://github.com/{{REPO}} && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs
 (register_product reads env GITHUB_TOKEN, public_repo scope.)
 
-## Paid endpoint: agent-readability audit (x402)
+## Free endpoint: agent-readability score
+
+GET {{BASE}}/api/score?url=https://your-site.example — no payment, no signup.
+Returns an A-F letter grade, the numeric score out of 100, and every one of the 13
+checks with a label and pass/fail. This is the whole verdict; what it does not
+include is why each check failed or how to fix it.
+
+Results are cached per URL for an hour (a cached answer is free and unmetered);
+uncached audits are limited to 20 per hour per IP, because each one fetches the
+target site. The paid endpoint is not rate limited.
+
+## Paid endpoint: agent-readability audit + fixes (x402)
 
 POST {{BASE}}/api/audit with body {"url": "https://your-site.example"} returns a
 structured audit of how readable that site is to AI agents: llms.txt presence and
 shape, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card,
 machine-readable alternates, Open Graph, canonical, HTTPS. The response scores
 each check out of 100 and returns ranked next_steps.
+
+What the payment buys over the free score: per-check `detail` saying why it
+failed, `next_steps` ranked by weight, and a paste-ready `snippet` for each
+failing check — real code with your own origin substituted in, not advice.
 
 Current terms, without provoking a 402: {{BASE}}/api/x402/info — it returns the
 network, asset, price in atomic units and payTo address. While the rail is

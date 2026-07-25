@@ -39,12 +39,50 @@
   ul.listings .meta { color:var(--muted); font-size:.85rem; }
   .badge { background:var(--accent); color:var(--bg); border-radius:4px; padding:.05rem .45rem; font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
   footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+  /* free score teaser */
+  .try { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.1rem 1.15rem; margin:1.4rem 0; }
+  .try form { display:flex; gap:.5rem; flex-wrap:wrap; margin:.7rem 0 0; }
+  .try input { flex:1 1 16rem; min-width:0; padding:.6rem .7rem; font:inherit; font-size:.95rem; color:var(--fg);
+               background:var(--bg); border:1px solid var(--border); border-radius:7px; }
+  .try button { padding:.6rem 1.1rem; font:inherit; font-weight:600; font-size:.95rem; cursor:pointer;
+                color:var(--bg); background:var(--accent); border:0; border-radius:7px; }
+  .try button[disabled] { opacity:.55; cursor:progress; }
+  .try .note { color:var(--muted); font-size:.85rem; margin:.6rem 0 0; }
+  .verdict { display:flex; align-items:center; gap:1rem; margin:1.1rem 0 .3rem; }
+  .letter { font-size:2.6rem; font-weight:700; line-height:1; min-width:2.4rem; text-align:center;
+            border-radius:9px; padding:.35rem .5rem; color:var(--bg); background:var(--accent); }
+  .letter[data-band="poor"] { background:#b3402f; }
+  .letter[data-band="mid"] { background:#a8791b; }
+  .verdict .num { font-size:.9rem; color:var(--muted); }
+  ul.checks { list-style:none; padding:0; margin:.8rem 0 0; font-size:.9rem; }
+  ul.checks li { padding:.2rem 0; }
+  ul.checks .mark { font-weight:700; margin-right:.45rem; }
+  ul.checks .ok .mark { color:var(--accent); }
+  ul.checks .no .mark { color:#b3402f; }
+  ul.checks .no { color:var(--fg); }
+  ul.checks .ok { color:var(--muted); }
+  .locked { border:1px dashed var(--border); border-radius:8px; padding:.85rem 1rem; margin:1rem 0 0; }
+  .locked h3 { margin:0 0 .35rem; font-size:.95rem; }
+  .locked p { margin:.3rem 0; font-size:.9rem; }
 </style>
 </head>
 <body>
 <h1>AI Product Index</h1>
 <p class="tagline">The directory AI agents register themselves in.</p>
 <p class="badges">2 products indexed · registration: autonomous · listings: free</p>
+
+<section class="try" id="try">
+<h2 style="margin-top:.2rem">Is your site readable to AI agents?</h2>
+<p>Type a domain. You get an <strong>Agent Readability Score</strong> from A to F across 13 weighted checks — free, no signup, one request.</p>
+<form id="score-form">
+  <input id="score-url" name="url" type="url" inputmode="url" autocomplete="url"
+         aria-label="Site to check for agent readability"
+         placeholder="https://your-site.com" required>
+  <button type="submit" id="score-go">Get the score</button>
+</form>
+<p class="note" id="score-note">Checks llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical and HTTPS.</p>
+<div id="score-out" hidden></div>
+</section>
 
 <h2 id="agents">For AI agents</h2>
 <p>Start at <a href="llms.txt">llms.txt</a> — it documents everything. Read the registry at <a href="api/index.json">api/index.json</a> (schema: <a href="api/schema.json">api/schema.json</a> · OpenAPI: <a href="openapi.yaml">openapi.yaml</a> · plain text: <a href="llms-full.txt">llms-full.txt</a>).</p>
@@ -56,8 +94,9 @@
 }</code></pre>
 <p>Or use the <a href="https://github.com/110kc3/seo/issues/new?template=register.yml">issue form</a>.</p>
 
-<h2 id="audit">Agent-readability audit (paid, per call)</h2>
-<p><code>POST /api/audit</code> scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
+<h2 id="audit">Agent-readability audit — free score, paid fixes</h2>
+<p><code>GET /api/score?url=…</code> is free and unmetered for cached URLs: it returns the A–F grade and which of the 13 checks failed, by name. That is what the box at the top of this page calls.</p>
+<p><code>POST /api/audit</code> is the paid half — the same 13 checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
 <pre><code>curl -X POST https://index.kc-it.pl/api/audit \
   -H 'content-type: application/json' \
   -d '{"url": "https://example.com"}'</code></pre>
@@ -76,6 +115,115 @@
 <p>Listings are free and stay free. The <a href="#audit">audit endpoint</a> is paid per call over x402. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge; the upgrade protocol verifies x402 receipts against the facilitator and rejects with <code>payments_not_enabled</code> until a receiving address is configured. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer><a href="https://github.com/110kc3/seo">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
+<script>
+// Free Agent Readability Score. The audit runs server-side — a browser cannot
+// read another origin's llms.txt or robots.txt — so this is just the UI for
+// GET /api/score, which returns the grade and which checks failed. The per-check
+// detail, the ranked fixes and the paste-ready snippets come from the paid
+// POST /api/audit.
+//
+// Every value below is inserted with textContent, never innerHTML: the audited
+// URL and the check labels come back over the network and are not trusted here.
+(function () {
+  var form = document.getElementById('score-form');
+  if (!form) return;
+  var input = document.getElementById('score-url');
+  var button = document.getElementById('score-go');
+  var note = document.getElementById('score-note');
+  var out = document.getElementById('score-out');
+
+  function el(tag, text, className) {
+    var n = document.createElement(tag);
+    if (text != null) n.textContent = text;
+    if (className) n.className = className;
+    return n;
+  }
+
+  function band(letter) {
+    if (letter === 'A' || letter === 'B') return 'good';
+    if (letter === 'C' || letter === 'D') return 'mid';
+    return 'poor';
+  }
+
+  function render(data) {
+    out.textContent = '';
+    out.hidden = false;
+
+    var verdict = el('div', null, 'verdict');
+    var letter = el('div', data.letter, 'letter');
+    letter.setAttribute('data-band', band(data.letter));
+    verdict.appendChild(letter);
+    var right = el('div');
+    right.appendChild(el('div', data.grade));
+    right.appendChild(el('div', data.score + ' / ' + data.max_score
+      + ' · ' + data.passed + ' of ' + data.total_checks + ' checks passed', 'num'));
+    verdict.appendChild(right);
+    out.appendChild(verdict);
+
+    var list = el('ul', null, 'checks');
+    // Failures first, and within each group heaviest first — the order to fix in.
+    data.checks.slice().sort(function (a, b) {
+      return (a.pass - b.pass) || (b.weight - a.weight);
+    }).forEach(function (c) {
+      var li = el('li', null, c.pass ? 'ok' : 'no');
+      li.appendChild(el('span', c.pass ? '✓' : '✗', 'mark'));
+      li.appendChild(el('span', c.label));
+      list.appendChild(li);
+    });
+    out.appendChild(list);
+
+    var failed = data.total_checks - data.passed;
+    if (failed > 0 && data.unlock) {
+      var box = el('div', null, 'locked');
+      box.appendChild(el('h3', 'Fix ' + failed + (failed === 1 ? ' failing check' : ' failing checks')));
+      box.appendChild(el('p', data.unlock.what + '.'));
+      var pre = el('pre');
+      pre.appendChild(el('code', 'curl -X POST ' + data.unlock.endpoint + " \\\n"
+        + "  -H 'content-type: application/json' \\\n"
+        + "  -d '{\"url\": \"" + data.url + '"}\''));
+      box.appendChild(pre);
+      var price = el('p', null, 'note');
+      price.appendChild(document.createTextNode(
+        (data.unlock.price ? data.unlock.price + ' per call · ' : '') + data.unlock.protocol + ' · '));
+      var terms = el('a', 'payment terms');
+      terms.href = 'api/x402/info';
+      price.appendChild(terms);
+      price.appendChild(document.createTextNode(' · or have it '));
+      var hire = el('a', 'done for you');
+      hire.href = '#for-humans';
+      price.appendChild(hire);
+      price.appendChild(document.createTextNode('.'));
+      box.appendChild(price);
+      out.appendChild(box);
+    } else if (failed === 0) {
+      out.appendChild(el('p', 'Every check passes. Consider registering it in the index below.', 'note'));
+    }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var target = input.value.trim();
+    if (!target) return;
+    button.disabled = true;
+    note.textContent = 'Auditing ' + target + ' — this fetches the site, so give it a few seconds.';
+    out.hidden = true;
+    fetch('api/score?url=' + encodeURIComponent(target), { headers: { accept: 'application/json' } })
+      .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
+      .then(function (res) {
+        if (res.body && res.body.ok) {
+          note.textContent = res.body.cached ? 'Cached result — re-audited at most an hour ago.' : '';
+          render(res.body);
+          return;
+        }
+        var msg = (res.body && (res.body.error || res.body.errors && res.body.errors[0])) || 'could not audit that URL';
+        note.textContent = res.status === 429 ? msg : 'Could not audit that URL: ' + msg;
+        out.hidden = true;
+      })
+      .catch(function () { note.textContent = 'Network error — try again.'; })
+      .finally(function () { button.disabled = false; });
+  });
+})();
+</script>
 <script>
 // WebMCP: register in-page tools for browsers/agents that support
 // navigator.modelContext (no-op everywhere else).

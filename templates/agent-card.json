@@ -39,7 +39,7 @@
     {
       "id": "audit_url",
       "name": "Agent-readability audit",
-      "description": "POST /api/audit with {\"url\": \"...\"} to score how readable a site is to AI agents: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates. Paid per call via x402 (HTTP 402).",
+      "description": "POST /api/audit with {\"url\": \"...\"} for the full audit: 13 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet for that origin. Paid per call via x402 (HTTP 402). For the free A-F grade with no payment, GET /api/score?url=... instead.",
       "tags": ["audit", "geo", "llms-txt", "json-ld", "paid", "x402"],
       "examples": ["Audit https://example.com for agent readability"],
       "inputModes": ["application/json"],

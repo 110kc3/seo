@@ -155,6 +155,159 @@ function parseJsonLd(blocks) {
 
 const check = (id, weight, pass, detail, fix) => ({ id, weight, pass: Boolean(pass), detail, ...(pass ? {} : { fix }) });
 
+// Human labels, so the free score can name what failed without shipping the
+// paid `detail`/`fix`/`snippet` fields. Keyed by check id; a missing id falls
+// back to the id itself rather than throwing.
+export const CHECK_LABELS = {
+  llms_txt: 'llms.txt published',
+  llms_txt_summary: 'llms.txt has a title and summary',
+  llms_full_txt: 'llms-full.txt published',
+  robots_txt: 'robots.txt published',
+  ai_crawlers_allowed: 'AI crawlers not blocked',
+  sitemap: 'sitemap.xml published',
+  json_ld: 'schema.org JSON-LD on the page',
+  title_and_description: 'title and meta description',
+  open_graph: 'Open Graph tags',
+  canonical: 'canonical URL declared',
+  machine_alternates: 'machine-readable alternates advertised',
+  agent_card: 'agent card at /.well-known/agent.json',
+  https: 'served over HTTPS',
+};
+
+/**
+ * A–F band for the score. The descriptive `grade` stays as it was; this is the
+ * one-glance version the free teaser leads with.
+ */
+export function letterGrade(score) {
+  if (score >= 90) return 'A';
+  if (score >= 80) return 'B';
+  if (score >= 70) return 'C';
+  if (score >= 60) return 'D';
+  if (score >= 45) return 'E';
+  return 'F';
+}
+
+// The paid deliverable: paste-ready code for each failure, not just advice.
+// `{{ORIGIN}}` is replaced with the audited site's origin so the output is
+// specific to the caller's domain rather than a generic example.
+const SNIPPETS = {
+  llms_txt: `# /llms.txt  — publish at {{ORIGIN}}/llms.txt
+
+# Your Product Name
+
+> One sentence on what this is and who it is for.
+
+## Docs
+- [Getting started]({{ORIGIN}}/docs/start): what it says on the tin.
+- [API reference]({{ORIGIN}}/docs/api): endpoints, auth, limits.
+
+## Contact
+- [Email](mailto:you@example.com)`,
+
+  llms_txt_summary: `# /llms.txt must open with an H1 and a blockquote summary:
+
+# Your Product Name
+
+> One sentence on what this is and who it is for.
+
+# ...then your linked sections. Agents read the blockquote first.`,
+
+  llms_full_txt: `# /llms-full.txt — the same content as llms.txt but expanded:
+# full prose for each section instead of links, so an agent can answer
+# questions without fetching every page. Concatenate your key docs.`,
+
+  robots_txt: `# /robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: {{ORIGIN}}/sitemap.xml`,
+
+  ai_crawlers_allowed: `# /robots.txt — allow the AI crawlers explicitly. A bare
+# "User-agent: * / Disallow: /" hides you from every assistant.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /`,
+
+  sitemap: `<?xml version="1.0" encoding="UTF-8"?>
+<!-- /sitemap.xml -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ORIGIN}}/</loc></url>
+  <!-- one <url><loc> per page you want read -->
+</urlset>`,
+
+  json_ld: `<!-- in <head> -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Your Product Name",
+  "url": "{{ORIGIN}}/",
+  "description": "One sentence on what it does.",
+  "applicationCategory": "BusinessApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>`,
+
+  title_and_description: `<!-- in <head> -->
+<title>Your Product — what it does in five words</title>
+<meta name="description" content="One sentence, under 160 characters, that answers what this is and who it is for.">`,
+
+  open_graph: `<!-- in <head> -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Your Product — what it does">
+<meta property="og:description" content="One sentence on what this is.">
+<meta property="og:url" content="{{ORIGIN}}/">
+<meta property="og:image" content="{{ORIGIN}}/og.png">`,
+
+  canonical: `<!-- in <head>. Must be the URL that actually serves 200, not a redirect. -->
+<link rel="canonical" href="{{ORIGIN}}/">`,
+
+  machine_alternates: `<!-- in <head>: point agents at the machine-readable twin of each page -->
+<link rel="alternate" type="text/markdown" href="{{ORIGIN}}/llms.txt" title="llms.txt">
+<link rel="alternate" type="application/json" href="{{ORIGIN}}/api/index.json" title="JSON API">
+
+<!-- ...and/or as a response header, which agents see without parsing HTML: -->
+Link: <{{ORIGIN}}/llms.txt>; rel="alternate"; type="text/markdown"`,
+
+  agent_card: `{
+  "_comment": "publish at {{ORIGIN}}/.well-known/agent.json (A2A agent card)",
+  "name": "Your Product",
+  "description": "One sentence on what it does.",
+  "url": "{{ORIGIN}}/",
+  "provider": { "organization": "Your Company", "url": "{{ORIGIN}}/" },
+  "version": "1.0.0",
+  "capabilities": { "streaming": false },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [{
+    "id": "example",
+    "name": "Example skill",
+    "description": "What an agent can ask this service to do.",
+    "tags": ["example"]
+  }]
+}`,
+};
+
+/** Paste-ready fix for a failing check, specific to the audited origin. */
+export function snippetFor(id, origin) {
+  const template = SNIPPETS[id];
+  return template ? template.replaceAll('{{ORIGIN}}', origin.replace(/\/+$/, '')) : null;
+}
+
 /**
  * Percentage of the achievable weight, plus the band it falls in. Pure and
  * exported so the "a perfect site scores exactly 100" invariant is testable —
@@ -259,6 +412,7 @@ export async function auditUrl(target) {
   ];
 
   const { score, grade } = scoreChecks(checks);
+  const failing = checks.filter((c) => !c.pass).sort((a, b) => b.weight - a.weight);
 
   return {
     ok: true,
@@ -266,11 +420,23 @@ export async function auditUrl(target) {
     audited_at: new Date().toISOString(),
     score,
     max_score: 100,
+    letter: letterGrade(score),
     grade,
     passed: checks.filter((c) => c.pass).length,
     total_checks: checks.length,
-    checks,
-    next_steps: checks.filter((c) => !c.pass).sort((a, b) => b.weight - a.weight).map((c) => c.fix),
+    checks: checks.map((c) => ({
+      ...c,
+      label: CHECK_LABELS[c.id] ?? c.id,
+      // The paid half: paste-ready code for this specific origin, not advice.
+      ...(c.pass ? {} : { snippet: snippetFor(c.id, origin) }),
+    })),
+    next_steps: failing.map((c) => ({
+      check: c.id,
+      label: CHECK_LABELS[c.id] ?? c.id,
+      weight: c.weight,
+      fix: c.fix,
+      snippet: snippetFor(c.id, origin),
+    })),
   };
 }
 

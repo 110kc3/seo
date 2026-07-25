@@ -71,10 +71,13 @@ export function classifyPath(pathname) {
   if (pathname === '/sitemap.xml') return 'sitemap';
   if (pathname === '/openapi.yaml') return 'openapi';
   if (pathname === '/api/audit') return 'audit';
+  // Separate bucket from 'audit' on purpose: free-score vs paid-audit counts are
+  // the conversion rate of the funnel.
+  if (pathname === '/api/score') return 'score_free';
   if (pathname === '/api/stats.json') return 'stats';
   if (pathname === '/api/x402/info') return 'x402_info';
   if (pathname === '/api/revenue.json') return 'revenue';
-  if (pathname === '/dashboard.html') return 'dashboard';
+  if (pathname === '/dashboard.html' || pathname === '/dashboard') return 'dashboard';
   if (pathname.startsWith('/api/')) return 'api';
   if (pathname.startsWith('/listings/')) return 'listing_json';
   if (pathname.startsWith('/l/')) return 'listing_page';

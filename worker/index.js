@@ -13,6 +13,7 @@ import cfg from '../site.config.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
+import { handleScore } from './score.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
 import { alternatesFor, negotiate } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
@@ -202,6 +203,8 @@ export default {
     try {
       if (url.pathname === '/api/audit') {
         response = await handleAudit(request, env, cfg);
+      } else if (url.pathname === '/api/score') {
+        response = await handleScore(request, env, cfg, resolveX402(cfg));
       } else if (url.pathname === '/api/stats.json') {
         response = await handleStats(env);
       } else if (url.pathname === '/api/x402/info') {

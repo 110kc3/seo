@@ -17,14 +17,17 @@ info:
     HEALTH: listing URLs are re-checked weekly; 3 consecutive failures delist
     (strike state at {{BASE}}/health.json).
 
-    PAID: POST /api/audit returns an agent-readability audit of any URL, priced
-    per call over x402. Both protocol versions are accepted: v2 (PAYMENT-REQUIRED
-    / PAYMENT-SIGNATURE / PAYMENT-RESPONSE) and v1 (X-PAYMENT /
-    X-PAYMENT-RESPONSE), so clients on either spec can pay. Paid tiers (verified,
-    featured) exist in the
-    schema and index ranking; the tier field is server-set, so the read API does
-    not change shape when prices change. While no receiving address is
-    configured, paid paths reject with code payments_not_enabled.
+    AUDIT: GET /api/score?url=... is free and returns an A-F grade plus per-check
+    pass/fail. POST /api/audit is the paid half — the same checks, plus why each
+    one failed, fixes ranked by weight, and a paste-ready code snippet per
+    failure. Priced per call over x402, and both protocol versions are accepted:
+    v2 (PAYMENT-REQUIRED / PAYMENT-SIGNATURE / PAYMENT-RESPONSE) and v1
+    (X-PAYMENT / X-PAYMENT-RESPONSE), so clients on either spec can pay.
+
+    TIERS: verified and featured exist in the schema and index ranking; the tier
+    field is server-set, so the read API does not change shape when prices
+    change. While no receiving address is configured, paid paths reject with code
+    payments_not_enabled.
   contact:
     url: https://github.com/{{REPO}}
 servers:
@@ -121,6 +124,41 @@ paths:
             application/json: {}
         "503":
           description: Rail not configured (code payments_not_enabled).
+  /api/score:
+    get:
+      operationId: getFreeScore
+      summary: Agent-readability score (free, no payment)
+      description: |
+        Returns an A-F letter grade, the numeric score out of 100, and all 13
+        checks with a label and pass/fail — the verdict, free and without signup.
+
+        It deliberately omits what POST /api/audit sells: the per-check reason for
+        failure, fixes ranked by weight, and a paste-ready code snippet for each
+        failing check.
+
+        Results are cached per URL for an hour and a cached answer is unmetered;
+        uncached audits are limited to 20/hour/IP because each fetches the target.
+        Private, loopback and link-local targets are refused, same as the paid path.
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uri
+            pattern: "^https?://"
+          description: Public http(s) URL to score.
+      responses:
+        "200":
+          description: The score.
+          content:
+            application/json: {}
+        "400":
+          description: Missing or rejected url.
+        "429":
+          description: Rate limited (code rate_limited).
+        "502":
+          description: The target site could not be read.
   /api/audit:
     post:
       operationId: auditUrl

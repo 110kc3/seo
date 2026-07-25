@@ -17,6 +17,8 @@ import { resolveX402, needsCdpAuth } from './x402-config.mjs';
 import { createCdpAuthHeader, facilitatorHeaders } from '../worker/cdp-auth.js';
 import { handleRevenue, authorizeDashboard, sessionCookie, __testing as revenue } from '../worker/revenue.js';
 import { __testing as worker } from '../worker/index.js';
+import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
+import { handleScore, freeView, __testing as score } from '../worker/score.js';
 
 const BASE = 'https://index.kc-it.pl';
 
@@ -55,6 +57,9 @@ test('classifyPath buckets paths into a stable set', () => {
   assert.equal(classifyPath('/listings/my-product.json'), 'listing_json');
   assert.equal(classifyPath('/api/index.json'), 'api');
   assert.equal(classifyPath('/api/audit'), 'audit');
+  assert.equal(classifyPath('/api/score'), 'score_free');
+  assert.equal(classifyPath('/dashboard'), 'dashboard');
+  assert.equal(classifyPath('/dashboard.html'), 'dashboard');
   assert.equal(classifyPath('/nope'), 'other');
 });
 
@@ -500,6 +505,141 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(res.response.status, 402);
   const body = await res.response.json();
   assert.equal(body.x402Version, 2);
+});
+
+// --- free score / paid fixes boundary ---------------------------------------
+
+const FULL_RESULT = {
+  ok: true,
+  url: 'https://example.com/',
+  audited_at: '2026-07-25T00:00:00.000Z',
+  score: 62,
+  max_score: 100,
+  letter: 'D',
+  grade: 'partially readable',
+  passed: 8,
+  total_checks: 13,
+  checks: [
+    { id: 'llms_txt', label: 'llms.txt published', weight: 15, pass: false, detail: 'HTTP 404', fix: 'Publish /llms.txt …', snippet: '# /llms.txt …' },
+    { id: 'https', label: 'served over HTTPS', weight: 5, pass: true, detail: 'served over https' },
+  ],
+  next_steps: [{ check: 'llms_txt', label: 'llms.txt published', weight: 15, fix: 'Publish …', snippet: '# …' }],
+};
+
+test('the free view withholds exactly what the paid audit sells', () => {
+  const view = freeView(FULL_RESULT, { what: 'more' });
+
+  // Kept: the verdict, and the name of every check.
+  assert.equal(view.letter, 'D');
+  assert.equal(view.score, 62);
+  assert.equal(view.tier, 'free');
+  assert.equal(view.checks.length, 2);
+  assert.equal(view.checks[0].label, 'llms.txt published');
+  assert.equal(view.checks[0].pass, false);
+
+  // Withheld: everything actionable.
+  const serialised = JSON.stringify(view);
+  for (const leaked of ['detail', 'fix', 'snippet', 'next_steps', 'HTTP 404']) {
+    assert.ok(!serialised.includes(leaked), `free tier leaked "${leaked}"`);
+  }
+});
+
+test('the free view whitelists fields, so a new paid field cannot leak by omission', () => {
+  const withNewSecret = {
+    ...FULL_RESULT,
+    competitor_analysis: 'a future paid field',
+    checks: [{ ...FULL_RESULT.checks[0], remediation_cost: '$$$' }],
+  };
+  const serialised = JSON.stringify(freeView(withNewSecret, {}));
+  assert.ok(!serialised.includes('competitor_analysis'));
+  assert.ok(!serialised.includes('remediation_cost'));
+});
+
+test('letterGrade bands cover A to F with no gaps', () => {
+  assert.equal(letterGrade(100), 'A');
+  assert.equal(letterGrade(90), 'A');
+  assert.equal(letterGrade(89), 'B');
+  assert.equal(letterGrade(80), 'B');
+  assert.equal(letterGrade(70), 'C');
+  assert.equal(letterGrade(60), 'D');
+  assert.equal(letterGrade(45), 'E');
+  assert.equal(letterGrade(44), 'F');
+  assert.equal(letterGrade(0), 'F');
+  // Every score maps to something.
+  for (let n = 0; n <= 100; n += 1) assert.match(letterGrade(n), /^[A-F]$/);
+});
+
+test('every check has a label, and every fixable one a snippet for the right origin', () => {
+  const ids = Object.keys(CHECK_LABELS);
+  assert.equal(ids.length, 13, 'a label per check');
+  for (const id of ids) assert.ok(CHECK_LABELS[id].length > 3, `${id} needs a readable label`);
+
+  const snippet = snippetFor('llms_txt', 'https://customer.example/');
+  assert.match(snippet, /customer\.example/);
+  assert.ok(!snippet.includes('{{ORIGIN}}'), 'placeholder must be substituted');
+  assert.ok(!snippet.includes('customer.example//'), 'trailing slash must not double up');
+
+  // https is a server-config fix with nothing to paste; that is allowed.
+  assert.equal(snippetFor('https', 'https://x.example'), null);
+  assert.equal(snippetFor('nonexistent_check', 'https://x.example'), null);
+});
+
+test('the free score refuses the same targets the paid one does', async () => {
+  const cfg = { base: BASE, payments: CFG.payments };
+  const call = (qs) => handleScore(new Request(`${BASE}/api/score${qs}`), {}, cfg, resolveX402(cfg));
+
+  assert.equal((await call('')).status, 400);                                  // no url
+  assert.equal((await call('?url=http://127.0.0.1/')).status, 400);            // loopback
+  assert.equal((await call('?url=http://169.254.169.254/')).status, 400);      // cloud metadata
+  assert.equal((await call('?url=file:///etc/passwd')).status, 400);           // wrong scheme
+  assert.equal((await call('?url=not-a-url')).status, 400);
+
+  const body = await (await call('')).json();
+  assert.equal(body.code, 'missing_url');
+  assert.match(body.example, /\/api\/score\?url=/);
+});
+
+test('the upsell names a real price from the active rail', () => {
+  const up = score.upsellFor(BASE, resolveX402(CFG));
+  assert.equal(up.price, '0.01 USDC');       // 10000 atomic at 6 decimals in the fixture
+  assert.match(up.endpoint, /\/api\/audit$/);
+  assert.match(up.terms, /\/api\/x402\/info$/);
+
+  // An unconfigured rail must not invent a price.
+  assert.equal(score.upsellFor(BASE, null).price, null);
+});
+
+test('the free score is rate limited per IP, and cache hits are not', async () => {
+  const store = new Map();
+  const kv = {
+    async get(k) { return store.get(k) ?? null; },
+    async put(k, v) { store.set(k, v); },
+    async delete(k) { store.delete(k); },
+  };
+  const cfg = { base: BASE, payments: CFG.payments };
+  // Pre-seed the per-IP counter at the limit and the cache for one URL.
+  const hour = new Date().toISOString().slice(0, 13);
+  store.set(`${score.RATE_PREFIX}9.9.9.9:${hour}`, String(score.RATE_LIMIT_PER_HOUR));
+  store.set(`${score.CACHE_PREFIX}https://cached.example/`, JSON.stringify({ ok: true, letter: 'B', tier: 'free' }));
+
+  const call = (target) => handleScore(
+    new Request(`${BASE}/api/score?url=${encodeURIComponent(target)}`, { headers: { 'cf-connecting-ip': '9.9.9.9' } }),
+    { PAYMENTS: kv }, cfg, resolveX402(cfg),
+  );
+
+  // A fresh URL from a spent IP is refused before any outbound fetch.
+  const limited = await call('https://fresh.example/');
+  assert.equal(limited.status, 429);
+  const limitedBody = await limited.json();
+  assert.equal(limitedBody.code, 'rate_limited');
+  assert.ok(limitedBody.unlock, 'a refusal should still point at the paid endpoint');
+
+  // The cached URL still answers, because serving it costs us nothing.
+  const cached = await call('https://cached.example/');
+  assert.equal(cached.status, 200);
+  const cachedBody = await cached.json();
+  assert.equal(cachedBody.cached, true);
+  assert.equal(cachedBody.letter, 'B');
 });
 
 // --- asset redirect absorption ----------------------------------------------
