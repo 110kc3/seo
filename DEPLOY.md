@@ -1,9 +1,11 @@
 # Deployment runbook
 
-## Current status: DEPLOYED AND SERVING — on workers.dev, not yet on the domain
+## Current status: LIVE
 
-**https://ai-product-index.110kc3.workers.dev** — live, deployed from `main` by
-CI, verified 2026-07-25.
+**https://index.kc-it.pl** — deployed from `main` by CI, verified 2026-07-25.
+Also answers on `https://ai-product-index.110kc3.workers.dev` (a debugging
+fallback; `workers_dev = false` in `wrangler.toml` turns it off, and every
+canonical URL points at the custom domain regardless).
 
 | Check | State |
 |---|---|
@@ -15,40 +17,34 @@ CI, verified 2026-07-25.
 | Paid endpoint | ✅ 402 with a v1 challenge in the body and a v2 challenge in the header |
 | Payment handshake | ✅ real client signed and paid; the live facilitator verified the signature |
 | The audit itself | ✅ runs on the Workers runtime; scores this site 100/100 agent-ready |
-| **`index.kc-it.pl`** | ❌ **not attached** — needs one action from you, below |
-| **Analytics Engine** | ❌ **not enabled** — one click, and the binding is commented out until then |
+| `index.kc-it.pl` custom domain | ✅ attached, and survives a redeploy |
+| Analytics Engine | ✅ enabled; `env.ANALYTICS` bound |
+| Private revenue dashboard | ✅ https://revenue.local.kc-it.pl — tailnet only, no token in the URL |
+| Published listing URLs | ✅ 200, after fixing a 307 that Workers Assets was injecting |
 | Active payment rail | `testnet` — Base Sepolia, tokens with no monetary value |
 
 Everything that can be verified without funds has been. The rail stays testnet
 until you deliberately flip it, so no real customer can be charged by accident.
 
-### Two things left for you
+**What is left is one thing: fund a payer wallet and put $0.05 through it**
+(Phase 2), then flip to mainnet (Phase 3).
 
-**1. Attach `index.kc-it.pl`.** The Worker uploads fine, but attaching the
-hostname is a *zone*-scoped call and the deploy token is account-scoped:
+### How the custom domain is attached
+
+Not in `wrangler.toml`, on purpose. Attaching a hostname is a *zone*-scoped call
+and the deploy token is account-scoped:
 
 ```
 /zones/<kc-it.pl>/workers/routes → Authentication error [code: 10000]
 ```
 
 Because wrangler applies all triggers as one phase, that single missing grant
-failed the whole deploy — including the workers.dev hostname. The route is now
-out of `wrangler.toml` so CI needs no zone permissions at all. Pick either:
-
-- **Dashboard (recommended, least privilege):** the Worker → **Settings →
-  Domains & Routes → Add → Custom domain** → `index.kc-it.pl`. It persists across
-  every later deploy, and CI keeps no zone access.
-- **Back into code:** add `kc-it.pl` to the token's **Zone Resources**
-  (dash → API Tokens → the token → Edit), then restore the `[[routes]]` block
-  documented in `wrangler.toml`.
-
-**2. Enable Analytics Engine** — one click at
-`https://dash.cloudflare.com/<account-id>/workers/analytics-engine`. The first
-deploy failed on it (`code: 10089`); it is an account-level opt-in no API token
-can flip, so the binding is commented out in `wrangler.toml` with restore
-instructions. **This is the measurement the whole migration existed for** — the
-only way to answer "has an agent ever actually used this?" — so it is worth the
-click, then uncomment the three lines and push.
+failed the entire deploy — the workers.dev hostname included, which made it look
+as though nothing had deployed when the script had uploaded fine. The domain is
+attached out-of-band (Worker → Settings → Domains & Routes) and persists across
+deploys, so CI needs no zone permissions at all. To move it back into code, add
+`kc-it.pl` to the token's Zone Resources and restore the `[[routes]]` block
+documented in `wrangler.toml`.
 
 ### What "proven" means here
 
@@ -300,33 +296,63 @@ Dead ends worth knowing so you don't lose time: the portal's **x402 page is metr
 
 ## Phase 5 — Optional: dashboards
 
-### Revenue dashboard — private
+### Revenue dashboard — private, and reachable only on the tailnet
 
-```bash
-npx wrangler secret put DASHBOARD_TOKEN     # e.g. openssl rand -base64 32
-```
+**https://revenue.local.kc-it.pl** — live. No token in the URL, nothing to
+remember, and invisible to the internet.
 
-Then open it once with the token in the URL:
+How the pieces fit:
 
-```
-https://index.kc-it.pl/dashboard.html?token=<DASHBOARD_TOKEN>
-```
+1. The dashboard is served by the **public Worker**, which answers the ordinary
+   404 to anyone without `DASHBOARD_TOKEN` — so its existence is not disclosed
+   even to someone probing `index.kc-it.pl`.
+2. **Caddy on the Pi** (`~/docker/command-center/Caddyfile`) fronts a
+   `revenue.local.kc-it.pl` vhost that reverse-proxies to `index.kc-it.pl` and
+   injects `Authorization: Bearer <token>` from `AIPI_DASHBOARD_TOKEN` in
+   `~/docker/.env`. The secret therefore never reaches a browser, an address bar,
+   shell history or a bookmark.
+3. `*.local.kc-it.pl` is a wildcard A record pointing at the Pi's **Tailscale**
+   address, so the name resolves publicly (real Let's Encrypt certs via
+   Cloudflare DNS-01) but only routes inside the tailnet. No new DNS record was
+   needed.
+4. Because Caddy holds the token, reaching that vhost *is* authorisation — so the
+   vhost additionally **404s any source outside `100.64.0.0/10`**. Ports 80/443
+   are bound on every interface; DNS is routing, not access control.
 
-**The dashboard is invisible to everyone else.** Not merely unlisted — the Worker serves the ordinary 404 page to any unauthorized request, so its existence is not disclosed to anyone probing the site. That covers the anonymous case, a wrong token, and the state before `DASHBOARD_TOKEN` is ever set. `robots.txt` and the `noindex` meta are also there, but they are advisory; the 404 is the actual control.
-
-On that first visit the Worker trades the `?token=` for an **HttpOnly, Secure, SameSite=Strict session cookie** (12 hours) and the page immediately strips the token from the address bar, so it stops living in browser history, bookmarks or any onward referrer. The token is never readable by page JavaScript.
+The same three-tier model as the other private services (`vault`, `obsidian`,
+`claude`), and it survives a Worker redeploy untouched.
 
 | Request | Response |
 |---|---|
-| `/dashboard.html` anonymous | 404 |
-| `/dashboard.html?token=wrong` | 404 |
-| `/dashboard.html?token=<correct>` | 200 + sets session cookie |
-| `/api/revenue.json` anonymous | 401 |
+| `revenue.local.kc-it.pl/` from the tailnet | 302 → `/dashboard`, then 200 |
+| `revenue.local.kc-it.pl` from off-tailnet | 404 |
+| `index.kc-it.pl/dashboard` anonymous | 404 |
+| `index.kc-it.pl/api/revenue.json` anonymous | 401 |
+| `index.kc-it.pl/dashboard.html?token=<token>` | 200, sets a 12 h HttpOnly cookie |
 | anything, with `DASHBOARD_TOKEN` unset | 404 / 503 |
 
-The dashboard reads the ledger the Worker writes on every settlement, so it is accurate from the first payment — including testnet ones, which it labels as testnet rather than calling them revenue.
+The `?token=` route still works for a device off the tailnet; the Worker trades it
+for an HttpOnly, Secure, SameSite=Strict cookie and the page strips it from the
+address bar. Prefer the tailnet host — a URL with a secret in it ends up in
+history and referrers.
 
-To revoke access, rotate the secret: `npx wrangler secret put DASHBOARD_TOKEN`. Existing cookies stop matching immediately.
+**To rotate**, change all three copies together:
+
+```bash
+NEW=$(openssl rand -base64 32)
+# 1. the Pi: edit AIPI_DASHBOARD_TOKEN in ~/docker/.env, then
+cd ~/docker && docker compose up -d command-center     # env changes need a recreate
+# 2. the repo secret
+gh secret set DASHBOARD_TOKEN --repo 110kc3/seo
+# 3. the Worker
+gh workflow run cf-admin -f action=push-secrets
+```
+
+Existing cookies stop matching the moment step 3 lands.
+
+The dashboard reads the ledger the Worker writes on every settlement, so it is
+accurate from the first payment — including testnet ones, which it labels as
+testnet rather than calling them revenue. Right now it correctly shows zero.
 
 ### Traffic stats — `/api/stats.json`
 

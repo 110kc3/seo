@@ -1,31 +1,38 @@
 # TODO
 
-## DEPLOYED — https://ai-product-index.110kc3.workers.dev
+## LIVE — https://index.kc-it.pl
 
-Live as of 2026-07-25, deployed from `main` by CI. Serving the registry, the
-header layer, content negotiation, and a real 402 on `POST /api/audit`. Full
-status table in DEPLOY.md.
+Deployed 2026-07-25 from `main` by CI. Custom domain attached, Analytics Engine
+enabled, KV bound, private revenue dashboard up. Full status table in DEPLOY.md.
 
 ## Blocked on Kamil
 
-- [ ] **Attach `index.kc-it.pl`** — the Worker deploys fine, but attaching the hostname is a *zone*-scoped call and the token is account-scoped (`/zones/<kc-it.pl>/workers/routes → Authentication error [code: 10000]`). Because wrangler applies all triggers in one phase, that one missing grant failed the entire deploy, workers.dev included. The route is now out of `wrangler.toml`, so CI needs no zone access. Either add the custom domain in the dashboard (Worker → Settings → Domains & Routes → Add → Custom domain — recommended, keeps CI least-privilege and persists across deploys), or add `kc-it.pl` to the token's Zone Resources and restore the `[[routes]]` block documented in `wrangler.toml`. **Until this is done, every published absolute URL points at a hostname that does not resolve** — so hold off on directory submissions.
-- [ ] **Enable Analytics Engine** — one click at `dash.cloudflare.com/<account-id>/workers/analytics-engine`, then uncomment the three lines in `wrangler.toml` and push. The first deploy failed on it (`code: 10089`): it is an account-level opt-in no API token can flip. Safe to run without (telemetry is skipped, nothing errors), but **this is the measurement the whole migration existed for** — without it the decision gate below cannot be answered.
+One thing stands between this and real revenue; the rest is distribution and
+optional rails.
+
+### The one that matters
+
+- [ ] **Put $0.05 through it on testnet.** The only step left that code cannot do. Fund a *throwaway payer* wallet from a Base Sepolia USDC faucet — not the receiving address, since a 402 asks for someone else's money — and pay yourself with the copy-paste client in DEPLOY.md → Phase 2. Then confirm a replay is refused and the settlement shows on `sepolia.basescan.org`, and watch it appear on https://revenue.local.kc-it.pl.
+- [ ] **Then go to mainnet** — `node scripts/verify-rail.mjs mainnet`, eyeball the asset on basescan once, set `"active": "mainnet"`, push. Details below.
+### Distribution and optional rails
+
 - [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base).
 - [x] **Payment rail proven end to end** — done 2026-07-25. The official `x402-fetch@1.2.0` client was driven against a local `wrangler dev`: it parsed the 402, signed an EIP-3009 authorization, paid, and the **live** `x402.org` facilitator verified the signature and failed only on `invalid_exact_evm_insufficient_balance` (unfunded throwaway wallet). The same signature was also accepted through the v2 path. Nothing is left to prove but funding.
-- [ ] **Run the testnet rehearsal** — fund a *throwaway payer* wallet (not the receiving address — the 402 asks for someone else's money) from a Base Sepolia USDC faucet and pay yourself $0.05. Copy-paste client in DEPLOY.md → Phase 2. Settlement shows on `sepolia.basescan.org`, not in the Binance app (wallets don't list testnets).
-- [ ] **Go to mainnet** — the `mainnet` profile is now filled in and pre-checked: asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` (Circle's published address, confirmed on chain: name "USD Coin", symbol USDC, 6 decimals, version 2), facilitator PayAI. Run `node scripts/verify-rail.mjs mainnet`, eyeball the address on basescan once, then set `"active": "mainnet"` and push. **No Coinbase account needed** — see below.
 - [ ] **Optional: CDP API key** — no longer the only route to mainnet, so genuinely optional. Buys a free tier (1,000 tx/month) and auto-inclusion in the x402 Bazaar, which is real discovery for a site nobody visits. `portal.cdp.coinbase.com/access/api` → Secret API Key → Ed25519. The portal's x402 page is metrics-only and "Custodial Wallet" needs a business account — neither is the right door. Its `/supported` needs auth, so this is the one rail `verify-rail.mjs` cannot pre-check.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN** — draft ready in `docs/show-hn.md`. Wait for 2–3 organic listings first. Worth rewriting the angle around the paid audit endpoint and the measured agent share, which are more interesting than "another directory".
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
-- [ ] **Directory submissions** — ready-to-run commands in `docs/distribution.md`. **Do these against `https://index.kc-it.pl/`, only after the Worker is live** — the old `110kc3.github.io/seo/` URL should never reach an external directory, since nothing links to it yet and re-submitting to fix stale links is painful. Blocked on you: they publish under your GitHub identity.
+- [ ] **Directory submissions — now unblocked.** `https://index.kc-it.pl/` is live and every published URL resolves and returns 200, so the reason to wait is gone. Ready-to-run commands in `docs/distribution.md`; still blocked on you only because they publish under your GitHub identity. Submit the custom domain, never the old `110kc3.github.io/seo/` URL or the workers.dev fallback.
 
-## Revenue dashboard
+## Revenue dashboard — live at https://revenue.local.kc-it.pl
 
-Private by construction — see DEPLOY.md → Phase 5. Set `DASHBOARD_TOKEN`, open
-`/dashboard.html?token=…` once, and the Worker trades it for an HttpOnly session
-cookie. Everyone else gets a 404, including before the secret is ever set, so
-nothing is exposed in the meantime.
+Tailnet only, and no token in the URL. Caddy on the Pi injects the bearer token
+from `~/docker/.env`, so the secret never reaches a browser, address bar or
+bookmark; the vhost also 404s anything outside `100.64.0.0/10`, because ports
+80/443 are bound on every interface and DNS is routing rather than access
+control. Publicly, `index.kc-it.pl/dashboard` is an ordinary 404 — its existence
+is not disclosed. Full design and the three-place rotation procedure in
+DEPLOY.md → Phase 5.
 
 ## The decision gate
 
@@ -36,16 +43,13 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 - **`agent_share` is non-trivial** → the registry has an audience; keep feeding it and run the Show HN.
 - **`agent_share` is ~0** → that is the answer. Stop investing in the registry and put the hours into Track A sales, where the bot-traffic statistics are the pitch rather than the product. The audit endpoint stands on its own either way.
 
-## Done (v3 — Cloudflare migration + paid endpoint, 2026-07-25)
+## Done (v3.4 — dashboard on the tailnet, and two live bugs, 2026-07-25)
 
-- [x] Migrated off GitHub Pages to a Cloudflare Worker with static assets (`wrangler.toml`, `worker/`, `.assetsignore`, `.github/workflows/deploy.yml`). Base URL is now `https://index.kc-it.pl`.
-- [x] Per-request measurement to Analytics Engine (bucketed path, classified client type, method, status class, truncated UA, ASN — no IPs) + public `/api/stats.json` with `agent_share`.
-- [x] `POST /api/audit` — 13-check agent-readability audit, paid per call over x402 v2 (PAYMENT-REQUIRED / PAYMENT-SIGNATURE / PAYMENT-RESPONSE). Target URL validated before any charge.
-- [x] Payment-term enforcement server-side (scheme/network/asset/payTo/amount + independent authorization check), BigInt amount comparison, reserve-before-settle KV nonce replay protection.
-- [x] `[upgrade]` rail completed — on-chain receipt verification in `scripts/x402-receipt.mjs` (success, confirmations, ERC-20 `Transfer` to our address in the right asset for at least the tier price) + a committed `payments.json` ledger that burns spent transaction hashes.
-- [x] `Link:` alternates header and `Accept`-based content negotiation — the two agent-readiness checks that static hosting made impossible.
-- [x] `.well-known/agent.json` A2A agent card, generated by the build (only possible now that the index sits at a domain root).
-- [x] 54 tests covering classification, negotiation, payment-gate rejection paths, the audit's SSRF boundary, robots.txt group scoping, and receipt verification.
+- [x] **Workers Assets' `.html` redirect was leaking, and it broke two things.** `html_handling` defaults to rewriting `/foo.html` → `/foo` with a 307. Returned verbatim, that made *every published listing URL* answer 307 rather than 200 — sitemap, canonical, JSON-LD `@id` and llms.txt all say `/l/<slug>.html`, so every canonical URL pointed at a redirect on a site whose product is machine-readability. Worse, the dashboard fetched `/dashboard.html`, got the 307 to `/dashboard` and handed it back, so `/dashboard` redirected to itself: **it had never been reachable on any path.** Asset fetches now absorb one internal hop. Fixed here rather than with `html_handling = "none"`, which would stop `/` serving index.html and would couple the build to Cloudflare.
+- [x] **Private dashboard on the tailnet** — `revenue.local.kc-it.pl`, same pattern as `vault`/`obsidian`/`claude`: Caddy vhost, TLS via Cloudflare DNS-01, wildcard `*.local.kc-it.pl` A record on the Pi's Tailscale address. Caddy injects `Authorization: Bearer`, so no token in the URL, plus a `remote_ip 100.64.0.0/10` guard as defence in depth.
+- [x] **`cf-admin -f action=push-secrets`** — pushes `DASHBOARD_TOKEN` from repo secrets into the Worker without the value touching a command line, a log or the repo.
+- [x] Analytics Engine binding restored; custom domain confirmed to survive redeploys.
+- [x] 90 tests.
 
 ## Done (v3.3 — first deployment, 2026-07-25)
 
@@ -77,6 +81,17 @@ survived deployment and cost real money or real payments.
 - [x] `GET /api/x402/info` — public payment terms without provoking a 402; referenced from llms.txt, the agent card and OpenAPI.
 - [x] Mainnet profiles ship with `asset` blank so an unverified contract address cannot take payments.
 - [x] 63 tests passing, including real Ed25519/ES256 signature round-trips.
+
+## Done (v3 — Cloudflare migration + paid endpoint, 2026-07-25)
+
+- [x] Migrated off GitHub Pages to a Cloudflare Worker with static assets (`wrangler.toml`, `worker/`, `.assetsignore`, `.github/workflows/deploy.yml`). Base URL is now `https://index.kc-it.pl`.
+- [x] Per-request measurement to Analytics Engine (bucketed path, classified client type, method, status class, truncated UA, ASN — no IPs) + public `/api/stats.json` with `agent_share`.
+- [x] `POST /api/audit` — 13-check agent-readability audit, paid per call over x402 v2 (PAYMENT-REQUIRED / PAYMENT-SIGNATURE / PAYMENT-RESPONSE). Target URL validated before any charge.
+- [x] Payment-term enforcement server-side (scheme/network/asset/payTo/amount + independent authorization check), BigInt amount comparison, reserve-before-settle KV nonce replay protection.
+- [x] `[upgrade]` rail completed — on-chain receipt verification in `scripts/x402-receipt.mjs` (success, confirmations, ERC-20 `Transfer` to our address in the right asset for at least the tier price) + a committed `payments.json` ledger that burns spent transaction hashes.
+- [x] `Link:` alternates header and `Accept`-based content negotiation — the two agent-readiness checks that static hosting made impossible.
+- [x] `.well-known/agent.json` A2A agent card, generated by the build (only possible now that the index sits at a domain root).
+- [x] 54 tests covering classification, negotiation, payment-gate rejection paths, the audit's SSRF boundary, robots.txt group scoping, and receipt verification.
 
 ## Done (v1 + v2 autonomous scope, 2026-07-09)
 
