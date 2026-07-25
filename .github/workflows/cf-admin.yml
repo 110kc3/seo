@@ -67,6 +67,20 @@ jobs:
           # /api/stats.json reads it as CF_ACCOUNT_ID, so mirror it rather than
           # asking for the same value twice.
           printf '%s' "$CLOUDFLARE_ACCOUNT_ID" | npx --yes wrangler@4 secret put CF_ACCOUNT_ID
+
+          # Analytics fallback. The deploy token turns out to satisfy Account
+          # Analytics: Read (verified with `stats-probe`), so stats can publish
+          # today instead of waiting on a second token.
+          #
+          # It is NOT the right long-term credential: it also carries Workers
+          # Scripts: Edit, so a bug that ever exposed the Worker's env would hand
+          # over deploy rights to the account. Create a token with ONLY
+          # Account Analytics: Read, set it as repo secret CF_ANALYTICS_TOKEN, and
+          # re-run this action — the mirror below then stops on its own.
+          if [ -z "$CF_ANALYTICS_TOKEN" ]; then
+            echo "::warning::mirroring the deploy token into CF_ANALYTICS_TOKEN — over-privileged, replace with an Account Analytics: Read token"
+            printf '%s' "$CLOUDFLARE_API_TOKEN" | npx --yes wrangler@4 secret put CF_ANALYTICS_TOKEN
+          fi
           echo "::notice::pushed $pushed managed secret(s) plus CF_ACCOUNT_ID"
           echo "--- secrets now on the Worker ---"
           npx --yes wrangler@4 secret list
