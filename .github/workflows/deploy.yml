@@ -56,9 +56,15 @@ jobs:
             echo "::notice::Skipping deploy — set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (see DEPLOY.md, Phase 1)."
           fi
 
+      # Deliberately `npx wrangler@4` rather than cloudflare/wrangler-action@v3:
+      # the action pins a wrangler whose esbuild cannot parse import attributes
+      # (`import cfg from '...json' with { type: 'json' }` in worker/index.js) and
+      # rejects `run_worker_first` in [assets] as an unknown field. Both are valid
+      # current config; the action's wrangler is simply too old. This is also the
+      # same invocation cf-admin.yml uses, so one wrangler version covers both.
       - name: Deploy to Cloudflare
         if: steps.creds.outputs.ready == 'true'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 deploy
