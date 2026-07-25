@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       # All untrusted input (issue body/author) flows through env vars into
       # Node — never interpolated into shell text.

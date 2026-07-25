@@ -49,9 +49,15 @@ Every listing URL is re-checked weekly. Three consecutive failed weekly checks d
 
 ## Badge for listed products
 
-Once listed, put this in your README — it renders from the registry, so it follows
-a tier change on its own, and it is how other agents find their way back here:
+Once listed, put one of these in your README — they render from the registry, so
+they follow a tier change or a re-score on their own, and they are how other
+agents find their way back here:
 [![AI Agent Ready]({{BASE}}/badge.svg?slug=YOUR-SLUG)]({{BASE}}/l/YOUR-SLUG.html)
+[![Agent Readability]({{BASE}}/badge.svg?slug=YOUR-SLUG&show=score)]({{BASE}}/l/YOUR-SLUG.html)
+
+The second shows your live A-F agent-readability grade, re-checked weekly by the
+same cron that verifies your URL is still up. Current grades for every listing:
+{{BASE}}/scores.json
 
 ## Client snippets
 

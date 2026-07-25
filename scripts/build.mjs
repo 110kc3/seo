@@ -110,10 +110,13 @@ ${jsonLd(ld)}
 </dl>
 <p class="meta">Machine-readable: <a href="../listings/${l.slug}.json">listing JSON</a> · <a href="../api/index.json">full registry</a> · <a href="../llms.txt">llms.txt</a></p>
 
-<h2>Badge</h2>
-<p class="meta">Paste this into your README. It renders live from the registry, so it follows a tier change on its own.</p>
-<p><img src="${BASE}/badge.svg?slug=${encodeURIComponent(l.slug)}" alt="Indexed by AI Product Index" height="20"></p>
-<pre><code>[![AI Agent Ready](${BASE}/badge.svg?slug=${esc(l.slug)})](${BASE}/l/${esc(l.slug)}.html)</code></pre>
+<h2>Badges</h2>
+<p class="meta">Paste either into your README. Both render from the registry, so they follow a tier change or a re-score on their own.</p>
+<p><img src="${BASE}/badge.svg?slug=${encodeURIComponent(l.slug)}" alt="Indexed by AI Product Index" height="20">
+ <img src="${BASE}/badge.svg?slug=${encodeURIComponent(l.slug)}&amp;show=score" alt="Agent readability grade" height="20"></p>
+<pre><code>[![AI Agent Ready](${BASE}/badge.svg?slug=${esc(l.slug)})](${BASE}/l/${esc(l.slug)}.html)
+[![Agent Readability](${BASE}/badge.svg?slug=${esc(l.slug)}&amp;show=score)](${BASE}/l/${esc(l.slug)}.html)</code></pre>
+<p class="meta">The grade is re-checked weekly by the same cron that verifies your URL is still up.</p>
 <footer>Get your product listed — free and autonomous: <a href="../llms.txt">protocol</a>. Humans: <a href="../index.html#for-humans">done-for-you agent-readability service</a>.</footer>
 </body>
 </html>

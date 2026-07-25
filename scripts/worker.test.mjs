@@ -6,7 +6,7 @@
 // (readHead/auditUrl) are exercised with `wrangler dev`, not here.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 
 import { classifyUserAgent, classifyPath } from '../worker/classify.js';
 import { alternatesFor, negotiate } from '../worker/negotiate.js';
@@ -512,13 +512,44 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(body.x402Version, 2);
 });
 
+// --- what the deploy publishes ----------------------------------------------
+
+test('no source directory is published as a static asset by accident', async () => {
+  // The asset directory is the repo root and .assetsignore is a denylist, so
+  // *anything* added at the top level ships publicly unless someone remembers to
+  // exclude it. That has now bitten three times — DEPLOY.md/ARCHITECTURE.md, the
+  // .wrangler state directory, and clients/ — so the expectation is pinned here
+  // rather than left to memory. Adding a file at the repo root should fail this
+  // test until it is deliberately classified.
+  const root = new URL('../', import.meta.url);
+  const entries = (await readdir(root, { withFileTypes: true })).map((e) => e.name).sort();
+  const ignored = new Set(
+    (await readFile(new URL('../.assetsignore', import.meta.url), 'utf8'))
+      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')),
+  );
+
+  // Everything here is site content on purpose.
+  const published = new Set([
+    '404.html', 'api', 'assets', 'dashboard.html', 'health.json', 'index.html',
+    'l', 'listings', 'llms-full.txt', 'llms.txt', 'openapi.yaml', 'robots.txt',
+    // Published for the same reason health.json is: the registry's own state
+    // about its listings should be inspectable by whoever it describes.
+    'scores.json', 'sitemap.xml', '.well-known',
+  ]);
+
+  const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));
+  assert.deepEqual(unclassified, [],
+    `add these to .assetsignore, or to the published list in this test: ${unclassified.join(', ')}`);
+});
+
 // --- README badge -----------------------------------------------------------
 
 const LISTINGS = [
   { slug: 'my-product', name: 'My Product', tier: 'free' },
   { slug: 'paid-thing', name: 'Paid Thing', tier: 'featured' },
 ];
-const callBadge = (qs) => handleBadge(new URL(`${BASE}/badge.svg${qs}`), LISTINGS);
+const SCORES = { 'my-product': { letter: 'B', score: 84 } };
+const callBadge = (qs) => handleBadge(new URL(`${BASE}/badge.svg${qs}`), LISTINGS, SCORES);
 
 test('the badge reflects the listing tier', async () => {
   const free = await callBadge('?slug=my-product').text();
@@ -531,6 +562,23 @@ test('the badge reflects the listing tier', async () => {
 
   // Slugs are matched case-insensitively; a README should not break on caps.
   assert.match(await callBadge('?slug=MY-PRODUCT').text(), /indexed/);
+});
+
+test('the score badge shows a stored grade, never an audit', async () => {
+  const scored = await callBadge('?slug=my-product&show=score');
+  const svg = await scored.text();
+  assert.match(svg, /B · 84\/100/);
+  assert.match(svg, new RegExp(badge.GRADE_COLOURS.B));
+  assert.match(svg, /Agent Readability/, 'the score badge gets its own default label');
+
+  // A listing the weekly run has not reached yet must say so rather than imply
+  // an F, and must not be cached as long as a real grade.
+  const unscored = await callBadge('?slug=paid-thing&show=score');
+  assert.match(await unscored.text(), /not scored yet/);
+  assert.match(unscored.headers.get('cache-control'), /max-age=900/);
+
+  // Without show=score it stays the tier badge.
+  assert.match(await callBadge('?slug=my-product').text(), /indexed/);
 });
 
 test('a badge request never answers with a broken image', async () => {

@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       # Explicit glob rather than `--test scripts/`: Node 22 resolves a bare
       # directory argument as a module and fails before running anything.

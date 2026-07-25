@@ -15,6 +15,7 @@ templates
 worker
 docs
 mcp
+clients
 wrangler.toml
 package.json
 package-lock.json

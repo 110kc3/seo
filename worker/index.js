@@ -13,6 +13,9 @@ import cfg from '../site.config.json' with { type: 'json' };
 // The committed registry, so /badge.svg answers from the bundle rather than
 // fetching its own API. Deploys follow accepted registrations, so it is current.
 import registry from '../api/index.json' with { type: 'json' };
+// Grades refreshed weekly by scripts/score-listings.mjs, committed so the badge
+// stays an O(1) lookup rather than an audit per README view.
+import scores from '../scores.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
@@ -223,7 +226,7 @@ export default {
           })
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/badge.svg') {
-        response = handleBadge(url, registry.listings ?? []);
+        response = handleBadge(url, registry.listings ?? [], scores);
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));
       } else if (url.pathname === '/api/stats.json') {

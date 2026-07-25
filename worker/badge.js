@@ -42,6 +42,9 @@ const COLOURS = {
   unknown: '#6a737d',
 };
 
+// Grade colours, so a badge reads at a glance without anyone parsing the letter.
+const GRADE_COLOURS = { A: '#0b6e4f', B: '#4c9141', C: '#a8791b', D: '#c26a1c', E: '#b3402f', F: '#9b2c1e' };
+
 /**
  * Shields-style two-pill badge. Pure and exported so its geometry and escaping
  * are testable without a runtime.
@@ -93,10 +96,17 @@ const svg = (body, maxAge) => new Response(body, {
 
 /**
  * @param {object[]} listings the committed registry
+ * @param {Record<string, {letter: string, score: number}>} scores  from
+ *   scores.json, refreshed weekly by scripts/score-listings.mjs. Not computed
+ *   here on purpose: this renders in other people's READMEs, so it is hit by
+ *   every page view of every listee, and auditing a site per image request would
+ *   mean seven outbound fetches to draw a picture.
  */
-export function handleBadge(url, listings) {
+export function handleBadge(url, listings, scores = {}) {
   const slug = (url.searchParams.get('slug') ?? '').trim().toLowerCase();
-  const label = (url.searchParams.get('label') ?? 'AI Agent Ready').slice(0, 40);
+  const wantScore = url.searchParams.get('show') === 'score';
+  const label = (url.searchParams.get('label')
+    ?? (wantScore ? 'Agent Readability' : 'AI Agent Ready')).slice(0, 40);
 
   if (!slug) {
     // No slug is not an error worth an error image — every badge request comes
@@ -108,8 +118,19 @@ export function handleBadge(url, listings) {
   const listing = listings.find((l) => l.slug === slug);
   if (!listing) return svg(badgeSvg(label, 'not indexed', COLOURS.unknown), 300);
 
+  if (wantScore) {
+    const graded = scores[slug];
+    // A listing scored before the weekly run has reached it says so, rather than
+    // implying an F.
+    if (!graded?.letter) return svg(badgeSvg(label, 'not scored yet', COLOURS.unknown), 900);
+    return svg(
+      badgeSvg(label, `${graded.letter} · ${graded.score}/100`, GRADE_COLOURS[graded.letter] ?? COLOURS.unknown),
+      3600,
+    );
+  }
+
   const tier = listing.tier === 'featured' || listing.tier === 'verified' ? listing.tier : 'indexed';
   return svg(badgeSvg(label, tier, COLOURS[listing.tier] ?? COLOURS.free), 3600);
 }
 
-export const __testing = { textWidth, esc, COLOURS };
+export const __testing = { textWidth, esc, COLOURS, GRADE_COLOURS };
