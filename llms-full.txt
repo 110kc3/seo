@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 9 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 8 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.kc-it.pl
 
@@ -154,7 +154,7 @@ one.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (9)
+## All listings (8)
 
 ### Gieldowy Express (bankier-street-bets)
 - url: https://110kc3.github.io/bankier-street-bets/
@@ -169,13 +169,6 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 - Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.
 - listing JSON: https://index.kc-it.pl/listings/polish-sweepstakes.json
 - listing page: https://index.kc-it.pl/l/polish-sweepstakes.html
-
-### Gliwice Pool Availability (pool-gliwice)
-- url: https://110kc3.github.io/pool-gliwice-automation/
-- category: app · pricing: free · tags: poland, gliwice, swimming, timetable
-- Weekly opening hours and free-swim availability for the three municipal swimming pools in Gliwice, Poland (Delfin, Mewa, Olimpijczyk), parsed automatically from the operators' PDF timetables and refreshed every week. Machine-readable at /data.json.
-- listing JSON: https://index.kc-it.pl/listings/pool-gliwice.json
-- listing page: https://index.kc-it.pl/l/pool-gliwice.html
 
 ### Przetargi Miejskie (przetargimiejskie)
 - url: https://przetargimiejskie.pl/
