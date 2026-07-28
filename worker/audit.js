@@ -135,24 +135,53 @@ function llmsTxtShape(text) {
   return { hasH1: h1 !== -1, hasSummary: quote !== -1 && (h1 === -1 || quote > h1) };
 }
 
-function parseJsonLd(blocks) {
+const isSchemaOrgContext = (ctx) =>
+  (typeof ctx === 'string' ? ctx : JSON.stringify(ctx ?? '')).includes('schema.org');
+
+// `@type` is a string for one type and an array for a node that is several at
+// once (`["Organization","LocalBusiness"]` is ordinary in local-business markup).
+const hasType = (n) =>
+  typeof n['@type'] === 'string' ||
+  (Array.isArray(n['@type']) && n['@type'].some((t) => typeof t === 'string' && t));
+
+/**
+ * Flattens one parsed block into the typed nodes it actually asserts.
+ *
+ * The `@graph` container is the shape a page uses to declare several entities in
+ * one block — it carries the `@context` itself and leaves `@type` to its members,
+ * so matching on a top-level `@type` scores a correctly-marked-up page as having
+ * no structured data at all. Yoast emits this for every page it touches and
+ * schema.org's own multi-entity examples use it, so it is not an edge case.
+ *
+ * Members inherit the container's `@context`, which is where it is defined for
+ * them; a member carrying its own `@context` keeps it.
+ */
+function expandGraph(node) {
+  if (!Array.isArray(node['@graph'])) return [node];
+  const members = node['@graph']
+    .filter((m) => m && typeof m === 'object')
+    .map((m) => (m['@context'] === undefined && node['@context'] !== undefined
+      ? { ...m, '@context': node['@context'] }
+      : m));
+  // Keep the container too when it is itself a typed node, so a
+  // `{"@type":"WebPage","@graph":[…]}` is not silently dropped.
+  return hasType(node) ? [node, ...members] : members;
+}
+
+export function parseJsonLd(blocks) {
   const parsed = [];
   const errors = [];
   for (const b of blocks) {
     try {
       const v = JSON.parse(b);
       for (const node of Array.isArray(v) ? v : [v]) {
-        if (node && typeof node === 'object') parsed.push(node);
+        if (node && typeof node === 'object') parsed.push(...expandGraph(node));
       }
     } catch (e) {
       errors.push(e.message.slice(0, 120));
     }
   }
-  const schemaOrg = parsed.filter((n) => {
-    const ctx = n['@context'];
-    const ctxStr = typeof ctx === 'string' ? ctx : JSON.stringify(ctx ?? '');
-    return ctxStr.includes('schema.org') && typeof n['@type'] === 'string';
-  });
+  const schemaOrg = parsed.filter((n) => isSchemaOrgContext(n['@context']) && hasType(n));
   return { parsed, schemaOrg, errors };
 }
 
@@ -399,7 +428,7 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
       'Publish /sitemap.xml and reference it from robots.txt with a Sitemap: line.'),
     check('json_ld', 15, ld.schemaOrg.length > 0,
       ld.schemaOrg.length
-        ? `${ld.schemaOrg.length} schema.org JSON-LD node(s): ${ld.schemaOrg.map((n) => n['@type']).join(', ')}`
+        ? `${ld.schemaOrg.length} schema.org JSON-LD node(s): ${ld.schemaOrg.flatMap((n) => n['@type']).join(', ')}`
         : (ld.errors.length ? `JSON-LD present but failed to parse: ${ld.errors[0]}` : 'no schema.org JSON-LD found'),
       'Add a <script type="application/ld+json"> block with @context https://schema.org and a concrete @type (Organization, SoftwareApplication, Product...).'),
     check('title_and_description', 7, head.title.length > 0 && head.description.length > 0,

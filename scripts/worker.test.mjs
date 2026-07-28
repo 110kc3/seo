@@ -1159,6 +1159,42 @@ test('parseJsonLd keeps only schema.org nodes and survives broken blocks', () =>
   assert.equal(res.errors.length, 1);
 });
 
+test('parseJsonLd counts @graph members, which carry the type instead of the container', () => {
+  // The shape Yoast emits and schema.org's multi-entity examples use: @context on
+  // the wrapper, @type only on the members. Matching a top-level @type scored this
+  // as "no structured data" on a fully marked-up page.
+  const res = audit.parseJsonLd([
+    '{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"X"},{"@type":"ItemList"}]}',
+  ]);
+  assert.equal(res.schemaOrg.length, 2);
+  assert.deepEqual(res.schemaOrg.map((n) => n['@type']), ['WebSite', 'ItemList']);
+  // Members inherit the container's @context — that is where it is defined for them.
+  assert.ok(res.schemaOrg.every((n) => n['@context'] === 'https://schema.org'));
+});
+
+test('parseJsonLd keeps a typed @graph container alongside its members', () => {
+  const res = audit.parseJsonLd([
+    '{"@context":"https://schema.org","@type":"WebPage","@graph":[{"@type":"Organization"}]}',
+  ]);
+  assert.deepEqual(res.schemaOrg.map((n) => n['@type']), ['WebPage', 'Organization']);
+});
+
+test('parseJsonLd accepts an array @type', () => {
+  const res = audit.parseJsonLd([
+    '{"@context":"https://schema.org","@type":["Organization","LocalBusiness"],"name":"X"}',
+  ]);
+  assert.equal(res.schemaOrg.length, 1);
+});
+
+test('parseJsonLd still rejects untyped and non-schema.org nodes', () => {
+  const res = audit.parseJsonLd([
+    '{"@context":"https://schema.org","name":"no type"}',
+    '{"@context":"https://schema.org","@type":[],"name":"empty type"}',
+    '{"@context":"https://example.org","@graph":[{"@type":"Thing"}]}',
+  ]);
+  assert.equal(res.schemaOrg.length, 0);
+});
+
 // --- revenue ledger --------------------------------------------------------
 
 test('formatAmount converts atomic units without floating point', () => {
