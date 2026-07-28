@@ -19,6 +19,8 @@ on:
           - subdomain     # print the account's workers.dev subdomain
           - push-secrets  # copy managed repo secrets to the Worker
           - stats-probe   # can the deploy token read Analytics Engine?
+          - robots-report # read the managed-robots.txt setting on every zone
+          - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
 
 permissions:
   contents: read
@@ -160,3 +162,91 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           echo "$id" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      # ---------------------------------------------------------------------
+      # Managed robots.txt / AI-crawler blocking.
+      #
+      # Cloudflare can prepend a managed block to a zone's robots.txt that
+      # Disallows the AI crawlers (ClaudeBot, GPTBot, CCBot, Google-Extended,
+      # Amazonbot and friends). It is injected at the edge *above* whatever the
+      # origin serves, so a repo's own `Allow: /` cannot override it and editing
+      # robots.txt in git changes nothing at all.
+      #
+      # `robots-report` only reads. `robots-allow` is the one that writes, and it
+      # is a separate action precisely so that inspecting the current state can
+      # never change it by accident.
+      # ---------------------------------------------------------------------
+      - name: robots-report / robots-allow
+        if: inputs.action == 'robots-report' || inputs.action == 'robots-allow'
+        env:
+          APPLY: ${{ inputs.action == 'robots-allow' && '1' || '' }}
+        run: |
+          set -euo pipefail
+          base=https://api.cloudflare.com/client/v4
+          api() { curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                       -H "Content-Type: application/json" "$@"; }
+          # Reads one field out of an API envelope on stdin: envelope-level keys
+          # (`success`) first, then the `result` body. Keeps jq out of it, and
+          # keeps the token off any command line.
+          field() { node -e '
+            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+              let r; try{ r=JSON.parse(s) }catch{ console.log(""); return }
+              const k=process.argv[1];
+              const v=(r && k in r) ? r[k] : ((r && r.result) || {})[k];
+              console.log(v===undefined||v===null?"-":String(v));
+            })' "$1"; }
+
+          zones=$(api "$base/zones?account.id=$CLOUDFLARE_ACCOUNT_ID&per_page=50" | node -e '
+            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+              const r=JSON.parse(s);
+              if(!r.success){ console.error(JSON.stringify(r.errors)); process.exit(1); }
+              for(const z of r.result) console.log(z.id+" "+z.name);
+            })')
+
+          {
+            echo "### Managed robots.txt by zone"
+            echo
+            echo "| zone | is_robots_txt_managed | cf_robots_variant | ai_bots_protection |"
+            echo "|---|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          changed=0
+          while read -r id name; do
+            [ -n "${id:-}" ] || continue
+            cfg=$(api "$base/zones/$id/bot_management")
+            managed=$(printf '%s' "$cfg" | field is_robots_txt_managed)
+            variant=$(printf '%s' "$cfg" | field cf_robots_variant)
+            aibots=$(printf '%s' "$cfg" | field ai_bots_protection)
+            echo "| $name | $managed | $variant | $aibots |" >> "$GITHUB_STEP_SUMMARY"
+            echo "zone $name: managed=$managed variant=$variant ai_bots=$aibots"
+
+            if [ -n "$APPLY" ] && { [ "$managed" = "true" ] || [ "$aibots" = "block" ]; }; then
+              # policy_only keeps Cloudflare's Content Signals Policy — the
+              # Article 4 reservation — while dropping the AI-crawler Disallow
+              # rules, so agents may read the site and the training preference
+              # stays declared. If a zone's plan will not take the variant, fall
+              # back to switching the managed file off outright.
+              out=$(api -X PUT "$base/zones/$id/bot_management" \
+                    --data '{"is_robots_txt_managed":true,"cf_robots_variant":"policy_only","ai_bots_protection":"disabled"}') || true
+              ok=$(printf '%s' "$out" | field success)
+              if [ "$ok" != "true" ]; then
+                echo "  policy_only rejected; falling back to is_robots_txt_managed=false"
+                out=$(api -X PUT "$base/zones/$id/bot_management" \
+                      --data '{"is_robots_txt_managed":false,"ai_bots_protection":"disabled"}')
+                ok=$(printf '%s' "$out" | field success)
+              fi
+              if [ "$ok" = "true" ]; then
+                echo "  -> updated $name"; changed=$((changed+1))
+              else
+                echo "::error::failed to update $name"
+                printf '%s\n' "$out" | head -c 800
+                exit 1
+              fi
+            fi
+          done <<< "$zones"
+
+          if [ -n "$APPLY" ]; then
+            echo "::notice::updated $changed zone(s)"
+          else
+            echo "::notice::report only — nothing was changed"
+          fi
