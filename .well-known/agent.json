@@ -29,7 +29,7 @@
     {
       "id": "search_products",
       "name": "Search the index",
-      "description": "Search 2 registered AI products by free text, category or tag. Free, no authentication.",
+      "description": "Search 9 registered AI products by free text, category or tag. Free, no authentication.",
       "tags": ["discovery", "directory", "search"],
       "examples": ["Find MCP servers for search", "List every agent-category product"],
       "inputModes": ["application/json"],

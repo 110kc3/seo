@@ -1,0 +1,13 @@
+{
+  "slug": "polish-sweepstakes",
+  "name": "Konkursy i loterie bez zakupu",
+  "url": "https://110kc3.github.io/polish-sweepstakes/",
+  "description": "Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.",
+  "category": "app",
+  "pricing": "free",
+  "tags": ["poland", "sweepstakes", "open-data"],
+  "submitted_by": "registry (seed)",
+  "created": "2026-07-28",
+  "github_user": "110kc3",
+  "tier": "free"
+}

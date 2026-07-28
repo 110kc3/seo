@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 2 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 9 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.kc-it.pl
 
@@ -154,7 +154,59 @@ one.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (2)
+## All listings (9)
+
+### Gieldowy Express (bankier-street-bets)
+- url: https://110kc3.github.io/bankier-street-bets/
+- category: app · pricing: free · tags: poland, stocks, sentiment, satire
+- Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.
+- listing JSON: https://index.kc-it.pl/listings/bankier-street-bets.json
+- listing page: https://index.kc-it.pl/l/bankier-street-bets.html
+
+### Konkursy i loterie bez zakupu (polish-sweepstakes)
+- url: https://110kc3.github.io/polish-sweepstakes/
+- category: app · pricing: free · tags: poland, sweepstakes, open-data
+- Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.
+- listing JSON: https://index.kc-it.pl/listings/polish-sweepstakes.json
+- listing page: https://index.kc-it.pl/l/polish-sweepstakes.html
+
+### Gliwice Pool Availability (pool-gliwice)
+- url: https://110kc3.github.io/pool-gliwice-automation/
+- category: app · pricing: free · tags: poland, gliwice, swimming, timetable
+- Weekly opening hours and free-swim availability for the three municipal swimming pools in Gliwice, Poland (Delfin, Mewa, Olimpijczyk), parsed automatically from the operators' PDF timetables and refreshed every week. Machine-readable at /data.json.
+- listing JSON: https://index.kc-it.pl/listings/pool-gliwice.json
+- listing page: https://index.kc-it.pl/l/pool-gliwice.html
+
+### Przetargi Miejskie (przetargimiejskie)
+- url: https://przetargimiejskie.pl/
+- category: app · pricing: free · tags: poland, property, auctions, open-data
+- History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/<city>/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office's own documents are binding.
+- llms_txt: https://przetargimiejskie.pl/llms.txt
+- listing JSON: https://index.kc-it.pl/listings/przetargimiejskie.json
+- listing page: https://index.kc-it.pl/l/przetargimiejskie.html
+
+### Wykop czy Wyborcza? (puzle)
+- url: https://110kc3.github.io/puzle/
+- category: app · pricing: free · tags: poland, game, news, quiz
+- Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.
+- listing JSON: https://index.kc-it.pl/listings/puzle.json
+- listing page: https://index.kc-it.pl/l/puzle.html
+
+### Rentgen Ofert (rentgen-ofert)
+- url: https://110kc3.github.io/rentgen-ofert/
+- category: app · pricing: free · tags: poland, property, real-estate, open-data
+- Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.
+- llms_txt: https://110kc3.github.io/rentgen-ofert/llms.txt
+- listing JSON: https://index.kc-it.pl/listings/rentgen-ofert.json
+- listing page: https://index.kc-it.pl/l/rentgen-ofert.html
+
+### Stare Aparaty (stare-aparaty)
+- url: https://stareaparaty.com/
+- category: app · pricing: free · tags: poland, cameras, analog, catalog, shopping
+- Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner's live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.
+- llms_txt: https://stareaparaty.com/llms.txt
+- listing JSON: https://index.kc-it.pl/listings/stare-aparaty.json
+- listing page: https://index.kc-it.pl/l/stare-aparaty.html
 
 ### Agent Readability Service (agent-readability-service)
 - url: https://github.com/110kc3/seo

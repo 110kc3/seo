@@ -1,7 +1,142 @@
 {
-  "count": 2,
-  "updated": "2026-07-09",
+  "count": 9,
+  "updated": "2026-07-28",
   "listings": [
+    {
+      "slug": "bankier-street-bets",
+      "name": "Gieldowy Express",
+      "url": "https://110kc3.github.io/bankier-street-bets/",
+      "description": "Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "stocks",
+        "sentiment",
+        "satire"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "polish-sweepstakes",
+      "name": "Konkursy i loterie bez zakupu",
+      "url": "https://110kc3.github.io/polish-sweepstakes/",
+      "description": "Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "sweepstakes",
+        "open-data"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "pool-gliwice",
+      "name": "Gliwice Pool Availability",
+      "url": "https://110kc3.github.io/pool-gliwice-automation/",
+      "description": "Weekly opening hours and free-swim availability for the three municipal swimming pools in Gliwice, Poland (Delfin, Mewa, Olimpijczyk), parsed automatically from the operators' PDF timetables and refreshed every week. Machine-readable at /data.json.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "gliwice",
+        "swimming",
+        "timetable"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "przetargimiejskie",
+      "name": "Przetargi Miejskie",
+      "url": "https://przetargimiejskie.pl/",
+      "description": "History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/<city>/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office's own documents are binding.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "property",
+        "auctions",
+        "open-data"
+      ],
+      "machine_endpoints": {
+        "llms_txt": "https://przetargimiejskie.pl/llms.txt"
+      },
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "puzle",
+      "name": "Wykop czy Wyborcza?",
+      "url": "https://110kc3.github.io/puzle/",
+      "description": "Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "game",
+        "news",
+        "quiz"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "rentgen-ofert",
+      "name": "Rentgen Ofert",
+      "url": "https://110kc3.github.io/rentgen-ofert/",
+      "description": "Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "property",
+        "real-estate",
+        "open-data"
+      ],
+      "machine_endpoints": {
+        "llms_txt": "https://110kc3.github.io/rentgen-ofert/llms.txt"
+      },
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "stare-aparaty",
+      "name": "Stare Aparaty",
+      "url": "https://stareaparaty.com/",
+      "description": "Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner's live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "poland",
+        "cameras",
+        "analog",
+        "catalog",
+        "shopping"
+      ],
+      "machine_endpoints": {
+        "llms_txt": "https://stareaparaty.com/llms.txt"
+      },
+      "submitted_by": "registry (seed)",
+      "created": "2026-07-28",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
     {
       "slug": "agent-readability-service",
       "name": "Agent Readability Service",

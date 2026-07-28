@@ -1,0 +1,14 @@
+{
+  "slug": "przetargimiejskie",
+  "name": "Przetargi Miejskie",
+  "url": "https://przetargimiejskie.pl/",
+  "description": "History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/<city>/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office's own documents are binding.",
+  "category": "app",
+  "pricing": "free",
+  "tags": ["poland", "property", "auctions", "open-data"],
+  "machine_endpoints": { "llms_txt": "https://przetargimiejskie.pl/llms.txt" },
+  "submitted_by": "registry (seed)",
+  "created": "2026-07-28",
+  "github_user": "110kc3",
+  "tier": "free"
+}

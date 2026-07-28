@@ -1,0 +1,13 @@
+{
+  "slug": "pool-gliwice",
+  "name": "Gliwice Pool Availability",
+  "url": "https://110kc3.github.io/pool-gliwice-automation/",
+  "description": "Weekly opening hours and free-swim availability for the three municipal swimming pools in Gliwice, Poland (Delfin, Mewa, Olimpijczyk), parsed automatically from the operators' PDF timetables and refreshed every week. Machine-readable at /data.json.",
+  "category": "app",
+  "pricing": "free",
+  "tags": ["poland", "gliwice", "swimming", "timetable"],
+  "submitted_by": "registry (seed)",
+  "created": "2026-07-28",
+  "github_user": "110kc3",
+  "tier": "free"
+}

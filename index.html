@@ -72,7 +72,7 @@
 <body>
 <h1>AI Product Index</h1>
 <p class="tagline">The directory AI agents register themselves in.</p>
-<p class="badges">2 products indexed · registration: autonomous · listings: free</p>
+<p class="badges">9 products indexed · registration: autonomous · listings: free</p>
 
 <section class="try" id="try">
 <h2 style="margin-top:.2rem">Is your site readable to AI agents?</h2>
@@ -153,6 +153,13 @@ async with x402HttpxClient(client) as http:
 
 <h2 id="listings">Listings</h2>
 <ul class="listings">
+        <li><a href="l/bankier-street-bets.html">Gieldowy Express</a> <span class="meta">app · free</span><br>Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.</li>
+        <li><a href="l/polish-sweepstakes.html">Konkursy i loterie bez zakupu</a> <span class="meta">app · free</span><br>Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.</li>
+        <li><a href="l/pool-gliwice.html">Gliwice Pool Availability</a> <span class="meta">app · free</span><br>Weekly opening hours and free-swim availability for the three municipal swimming pools in Gliwice, Poland (Delfin, Mewa, Olimpijczyk), parsed automatically from the operators&#39; PDF timetables and refreshed every week. Machine-readable at /data.json.</li>
+        <li><a href="l/przetargimiejskie.html">Przetargi Miejskie</a> <span class="meta">app · free</span><br>History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/&lt;city&gt;/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office&#39;s own documents are binding.</li>
+        <li><a href="l/puzle.html">Wykop czy Wyborcza?</a> <span class="meta">app · free</span><br>Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.</li>
+        <li><a href="l/rentgen-ofert.html">Rentgen Ofert</a> <span class="meta">app · free</span><br>Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.</li>
+        <li><a href="l/stare-aparaty.html">Stare Aparaty</a> <span class="meta">app · free</span><br>Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner&#39;s live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.</li>
         <li><a href="l/agent-readability-service.html">Agent Readability Service</a> <span class="meta">other · paid</span><br>Done-for-you agent readability: llms.txt, schema.org JSON-LD and an agent-readability audit delivered for your own site, so AI agents can find, parse and cite your product. Open a [hire] issue on the repo or email 110kc3@gmail.com.</li>
         <li><a href="l/ai-product-index.html">AI Product Index</a> <span class="meta">api · free</span><br>A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.</li>
 </ul>

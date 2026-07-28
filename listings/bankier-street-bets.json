@@ -1,0 +1,13 @@
+{
+  "slug": "bankier-street-bets",
+  "name": "Gieldowy Express",
+  "url": "https://110kc3.github.io/bankier-street-bets/",
+  "description": "Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.",
+  "category": "app",
+  "pricing": "free",
+  "tags": ["poland", "stocks", "sentiment", "satire"],
+  "submitted_by": "registry (seed)",
+  "created": "2026-07-28",
+  "github_user": "110kc3",
+  "tier": "free"
+}
