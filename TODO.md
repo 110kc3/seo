@@ -7,24 +7,38 @@ enabled, KV bound, private revenue dashboard up. Full status table in DEPLOY.md.
 
 ## Fleet sweep — 2026-07-28
 
-The audit was pointed at all nine deployed sites in `/home/borg/repos`, and what
-it found got fixed. Fleet average **74.8 → 98.9**; eight of nine now score
-100/100, `stareaparaty.com` sits at 90 with one check left that is a Cloudflare
-dashboard setting, not a commit (see below).
+The audit was pointed at every deployed site in `/home/borg/repos`, and what it
+found got fixed. Fleet average **68.6 → 97.5**; nine of twelve now score 100/100
+and the other three sit at 90, each held there by the same Cloudflare dashboard
+setting rather than by anything a commit can reach (see below).
 
-| site | before | after |
-|---|---|---|
-| index.kc-it.pl | A 100 | A 100 |
-| 110kc3.github.io | C 79 | **A 100** |
-| …/polish-sweepstakes | A 93 | **A 100** |
-| …/rentgen-ofert | C 78 | **A 100** |
-| …/bankier-street-bets | C 73 | **A 100** |
-| przetargimiejskie.pl | D 69 | **A 100** |
-| …/puzle | D 67 | **A 100** |
-| …/pool-gliwice-automation | D 60 | **A 100** |
-| stareaparaty.com | E 54 | **A 90** |
+| site | repo | before | after |
+|---|---|---|---|
+| index.kc-it.pl | seo | A 100 | A 100 |
+| kc-it.pl | personal-page | E 48 | **A 100** |
+| 110kc3.github.io | 110kc3.github.io | C 79 | **A 100** |
+| …/polish-sweepstakes | polish-sweepstakes | A 93 | **A 100** |
+| …/rentgen-ofert | rentgen-ofert | C 78 | **A 100** |
+| …/bankier-street-bets | bankier-street-bets | C 73 | **A 100** |
+| przetargimiejskie.pl | przetargimiejskie | D 69 | **A 100** |
+| …/puzle | puzle | D 67 | **A 100** |
+| …/pool-gliwice-automation | pool-gliwice-automation | D 60 | **A 100** |
+| stareaparaty.com | stare-aparaty | E 54 | **A 90** |
+| protocolindex.eu | blueprint | D 64 | **A 90** |
+| overtimelog.com | overtime-guard-slack | F 38 | **A 90** |
 
-Two findings worth keeping:
+Three findings worth keeping:
+
+- **Three of the twelve were invisible to the fleet collector**, and were missed
+  on the first pass because its list was trusted as the list of deployed sites.
+  `collect-repos.mjs` detects a published site three ways — GitHub Pages API, a
+  committed `CNAME`, `site.config.json` — and `protocolindex.eu` (blueprint),
+  `kc-it.pl` (personal-page) and `overtimelog.com` (overtime-guard-slack) use
+  none of them: all three are **Cloudflare Pages** projects wired up in the
+  Cloudflare dashboard, with nothing in the repo naming the domain except prose.
+  They were also the three worst-scoring sites in the fleet, which is what being
+  unmeasured tends to buy. To enumerate deployed sites, grep the repos for
+  self-owned domains and probe them; do not trust `repos.json` alone.
 
 - **The auditor was wrong about three of them.** `parseJsonLd` only matched a
   top-level string `@type`, so the `@graph` container form scored as "no
@@ -57,7 +71,7 @@ optional rails.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN** — draft ready in `docs/show-hn.md`. Wait for 2–3 organic listings first. Worth rewriting the angle around the paid audit endpoint and the measured agent share, which are more interesting than "another directory".
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
-- [ ] **Turn off the Cloudflare AI-crawler block on `stareaparaty.com`.** The only check that site still fails, and the only one in the whole fleet that no commit can fix. Its `robots.txt` is served with a Cloudflare-managed block (`# BEGIN Cloudflare Managed content`) disallowing ClaudeBot, GPTBot, CCBot, Google-Extended, Applebot-Extended, Bytespider, Amazonbot and meta-externalagent — the repo's own `robots.txt` says `Allow: /` and is appended below it. Cloudflare dashboard → the `stareaparaty.com` zone → AI Crawl Control / "Block AI bots". Worth 10 points and takes it from 90 to 100; leave it on if blocking is deliberate, in which case the E grade was the honest one all along.
+- [ ] **Turn off the Cloudflare AI-crawler block on three zones.** The only check the fleet still fails anywhere, and the only one no commit can reach: `stareaparaty.com`, `protocolindex.eu` and `overtimelog.com` are each stuck at 90/100 by it. All three serve a `robots.txt` with a Cloudflare-managed block (`# BEGIN Cloudflare Managed content`) disallowing ClaudeBot, GPTBot, CCBot, Google-Extended, Applebot-Extended, Bytespider, Amazonbot and meta-externalagent — injected at the edge *above* each repo's own `Allow: /`, which is why editing the file changes nothing. Cloudflare dashboard → each zone → AI Crawl Control / "Block AI bots". Worth 10 points each. Worth a moment's thought rather than a reflex: on `protocolindex.eu` the block includes **Amazonbot**, on a site whose entire purpose is Amazon affiliate links. If the blocking is deliberate, the lower grades were the honest ones and these should stay as they are.
 - [ ] **Directory submissions — now unblocked.** `https://index.kc-it.pl/` is live and every published URL resolves and returns 200, so the reason to wait is gone. Ready-to-run commands in `docs/distribution.md`; still blocked on you only because they publish under your GitHub identity. Submit the custom domain, never the old `110kc3.github.io/seo/` URL or the workers.dev fallback.
 
 ## Revenue dashboard — live at https://revenue.local.kc-it.pl
