@@ -217,6 +217,14 @@ jobs:
             managed=$(printf '%s' "$cfg" | field is_robots_txt_managed)
             variant=$(printf '%s' "$cfg" | field cf_robots_variant)
             aibots=$(printf '%s' "$cfg" | field ai_bots_protection)
+            # A bot_management body carries no secrets, so when a field is
+            # missing the envelope itself is the diagnosis — usually a token
+            # that cannot read this zone, not a zone with the feature off.
+            if [ "$managed" = "-" ]; then
+              echo "  raw GET envelope for $name:"
+              printf '%s\n' "$cfg" | head -c 600
+              echo
+            fi
             echo "| $name | $managed | $variant | $aibots |" >> "$GITHUB_STEP_SUMMARY"
             echo "zone $name: managed=$managed variant=$variant ai_bots=$aibots"
 
