@@ -15,7 +15,7 @@ What a listed product gets: a crawlable HTML page with schema.org JSON-LD (`/l/<
 ## Strategy: two tracks, one build
 
 - **Track A — human-paid GEO service (revenue now).** Humans already pay $29–489/mo for AI visibility. The offer: done-for-you llms.txt + schema.org JSON-LD + agent-readability audit on the customer's own domain. Sold via the landing page's "For humans" section — `[hire]` issue or email. First jobs delivered by hand; no payment infra until someone pays.
-- **Track B — the agent registry (asset that ages).** This repo. It markets Track A: every listing page is a live demo of the deliverable, and the funnel is built in (agent registers free → operator sees the listing → upsell). The seed listings are the registry itself and the Track A service (dogfood).
+- **Track B — the agent registry (asset that ages).** This repo. It markets Track A: every listing page is a live demo of the deliverable, and the funnel is built in (agent registers free → operator sees the listing → upsell). The seed listings are the registry itself, the Track A service, and the operator's seven other deployed sites (dogfood).
 
 ## How it works
 

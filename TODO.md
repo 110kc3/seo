@@ -5,6 +5,39 @@
 Deployed 2026-07-25 from `main` by CI. Custom domain attached, Analytics Engine
 enabled, KV bound, private revenue dashboard up. Full status table in DEPLOY.md.
 
+## Fleet sweep — 2026-07-28
+
+The audit was pointed at all nine deployed sites in `/home/borg/repos`, and what
+it found got fixed. Fleet average **74.8 → 98.9**; eight of nine now score
+100/100, `stareaparaty.com` sits at 90 with one check left that is a Cloudflare
+dashboard setting, not a commit (see below).
+
+| site | before | after |
+|---|---|---|
+| index.kc-it.pl | A 100 | A 100 |
+| 110kc3.github.io | C 79 | **A 100** |
+| …/polish-sweepstakes | A 93 | **A 100** |
+| …/rentgen-ofert | C 78 | **A 100** |
+| …/bankier-street-bets | C 73 | **A 100** |
+| przetargimiejskie.pl | D 69 | **A 100** |
+| …/puzle | D 67 | **A 100** |
+| …/pool-gliwice-automation | D 60 | **A 100** |
+| stareaparaty.com | E 54 | **A 90** |
+
+Two findings worth keeping:
+
+- **The auditor was wrong about three of them.** `parseJsonLd` only matched a
+  top-level string `@type`, so the `@graph` container form scored as "no
+  structured data" — on `stareaparaty.com`, `przetargimiejskie.pl` and
+  `rentgen-ofert`, all of which serve complete `@graph` blocks. A paying caller
+  would have been sold a fix for markup they already had. Fixed, with tests.
+- **Checks resolve against the origin, not the page.** For the six
+  `110kc3.github.io/<repo>/` project sites, `/llms.txt`, `/robots.txt`,
+  `/sitemap.xml` and `/.well-known/agent.json` all resolve to the
+  `110kc3.github.io` **root repo**, so those four checks are owned by one repo
+  and the per-project work is only the `<head>`. Worth remembering before
+  "fixing" llms.txt in a project that cannot serve one.
+
 ## Blocked on Kamil
 
 One thing stands between this and real revenue; the rest is distribution and
@@ -24,6 +57,7 @@ optional rails.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN** — draft ready in `docs/show-hn.md`. Wait for 2–3 organic listings first. Worth rewriting the angle around the paid audit endpoint and the measured agent share, which are more interesting than "another directory".
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
+- [ ] **Turn off the Cloudflare AI-crawler block on `stareaparaty.com`.** The only check that site still fails, and the only one in the whole fleet that no commit can fix. Its `robots.txt` is served with a Cloudflare-managed block (`# BEGIN Cloudflare Managed content`) disallowing ClaudeBot, GPTBot, CCBot, Google-Extended, Applebot-Extended, Bytespider, Amazonbot and meta-externalagent — the repo's own `robots.txt` says `Allow: /` and is appended below it. Cloudflare dashboard → the `stareaparaty.com` zone → AI Crawl Control / "Block AI bots". Worth 10 points and takes it from 90 to 100; leave it on if blocking is deliberate, in which case the E grade was the honest one all along.
 - [ ] **Directory submissions — now unblocked.** `https://index.kc-it.pl/` is live and every published URL resolves and returns 200, so the reason to wait is gone. Ready-to-run commands in `docs/distribution.md`; still blocked on you only because they publish under your GitHub identity. Submit the custom domain, never the old `110kc3.github.io/seo/` URL or the workers.dev fallback.
 
 ## Revenue dashboard — live at https://revenue.local.kc-it.pl
