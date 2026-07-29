@@ -1,8 +1,17 @@
 # Distribution — researched channels + ready-to-run submissions
 
-Researched 2026-07-09; URLs updated 2026-07-25 for the move to `https://index.kc-it.pl`. Everything below is prepared; the external/publishing steps need your go (they publish under your GitHub identity / claim public namespaces).
+Researched 2026-07-09; URLs updated 2026-07-25 for the move to `https://index.kc-it.pl`. **Executed 2026-07-29** with Kamil's go-ahead — status per section below. Everything still marked as prepared needs a browser sign-in or a web form, which an agent cannot drive.
 
 > **Run these only after the Cloudflare Worker is live at `index.kc-it.pl`.** Nothing external links to this project yet, which is exactly why the domain was settled first — a submission carrying the old `110kc3.github.io/seo/` URL would have to be chased across several awesome-lists to correct. Re-run the agentswelcome.dev audit after the Worker is up: custom response headers and `Accept` content negotiation were two of the checks that capped the score at 81/100 on static hosting.
+
+## Status at a glance (2026-07-29)
+
+| channel | status |
+|---|---|
+| punkpeye/awesome-mcp-servers | ✅ PR [#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152) |
+| SecretiveShell/Awesome-llms-txt | ✅ PR [#114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114) |
+| agentswelcome.dev | ❌ 422, scores 60/100 and the gate is 70 — see #4 |
+| llms-txt-hub, directory.llmstxt.cloud, llmstxt.site, mcpservers.org | ⏳ browser sign-in or web form, manual |
 
 ## 0. FIRST: publish the domain-root discovery repo (blocks #4, boosts everything)
 
@@ -35,6 +44,8 @@ gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index �
   --body "Zero-dependency stdio MCP server for the AI Product Index (https://index.kc-it.pl/) — search_products / get_product / register_product; registration is autonomous via GitHub issues. 🤖 Agent-authored."
 ```
 
+**✅ SUBMITTED 2026-07-29** — <https://github.com/punkpeye/awesome-mcp-servers/pull/11152>, one-line diff, upstream `check-submission` CI green. Re-verified against upstream first: the section is now headed `### 🔎 <a name="search"></a>Search & Data Extraction` (anchor added, same section), no entry for this project existed, and CONTRIBUTING.md still fast-tracks agent PRs titled with a trailing `🤖🤖🤖`. CONTRIBUTING asks for alphabetical order within a category but the tail of that section is plainly append-ordered, so the prepared line went at the end as planned.
+
 ## 2. Awesome-llms-txt (SecretiveShell) — trivial PR, active
 
 **Exact change** (verified 2026-07-10): add to the `## Directories` section (current entries: llms.txt hub, directory.llmstxt.cloud, llmstxt.site):
@@ -45,23 +56,48 @@ gh pr create --repo punkpeye/awesome-mcp-servers --title "Add AI Product Index �
 
 Same fork/PR dance as #1 against `SecretiveShell/Awesome-llms-txt`.
 
+**✅ SUBMITTED 2026-07-29** — <https://github.com/SecretiveShell/Awesome-llms-txt/pull/114>, one-line diff, Socket Security checks green. Re-verified first: `## Directories` still holds exactly those three entries and nothing pointed here yet. Worth knowing before the next edit: that repo's README is **partly generated**. `scripts/normalize_lists.py` rewrites and re-sorts the block from the first list entry up to the next `## ` heading, and a `pull_request` workflow runs it with `--check`. `## Directories` sits after that heading, so it is in the untouched suffix — appending there is safe, but an edit to the main llms.txt list must be normalized locally or CI fails. Ran `--check` on the branch before pushing; it passes.
+
 ## 3. llms-txt-hub (thedaviddias) — largest llms.txt directory
 
 llmstxthub.com/submit → GitHub sign-in → automated PR. Note: ~110 open PRs, merges slow. Do after #0 so the root URL exists.
 
-## 4. agentswelcome.dev — no account, pure API, our exact niche
+**⏳ MANUAL — not done.** The submit flow is an OAuth sign-in in a browser; there is no API to POST to, so this one waits for you.
 
-Audit already passes (**81/100, certifiable** as of 2026-07-10) — the directory submit is one command, awaiting your go:
+## 4. agentswelcome.dev — no account, pure API, our exact niche
 
 ```bash
 curl -X POST https://agentswelcome.dev/api/directory -H 'content-type: application/json' -d '{"url":"https://index.kc-it.pl/"}'
 ```
 
+**❌ RUN 2026-07-29, REFUSED — HTTP 422:** `{"error":"Score 54/100 — certification needs ≥ 70.", …}`.
+
+The 81/100 recorded above was **`110kc3.github.io`**, audited 2026-07-10 — not this site. `index.kc-it.pl` had never been put through that auditor, and it scores lower. `POST /api/audit` (3 free/hour, same 100-point scale) gives the breakdown; run the same day it returned **60/100, "partially legible"**, 40 points lost across seven checks:
+
+| w | check | evidence |
+|---|---|---|
+| 9 | `markdown-negotiation` | `content-type: text/plain` |
+| 7 | `agents-manifest` | `/.well-known/agents.json` → 404 |
+| 5 | `json-api` | not advertised (no agents.json) |
+| 5 | `webmcp` | not advertised (no agents.json) |
+| 5 | `web-bot-auth` | no identity block in agents.json |
+| 5 | `agent-welcome-header` | no agent-welcoming header |
+| 4 | `security-txt` | `/.well-known/security.txt` → 404 |
+
+Three of these are near-free, and one file carries most of the weight:
+
+- **`/.well-known/agents.json` is worth 22 points on its own** — `agents-manifest` plus the three checks that only read what the manifest advertises (`json_api`, `webmcp`, `identity`). Note the **plural**: this site serves `/.well-known/agent.json`, the A2A card, which is a different spec and does not satisfy it. `110kc3.github.io` serves both, which is why it scored 81. Publishing it alone takes 60 → 82, past the certification gate.
+- **`security.txt`** (4) — a `Contact:` and an `Expires:`, generated by the build like the agent card.
+- **`agent-welcome-header`** (5) — the Worker sends `X-Agent-Protocol: …/llms.txt`; the auditor looks for `X-Agent-Welcome`. Sending both costs one line.
+- **`markdown-negotiation`** (9) is the only real work: `Accept: text/markdown` on `/` already returns the llms.txt body and `Vary: Accept` is correct, but the response is labelled `text/plain`, so the check fails on the content type alone. This is our own audit's mirror-image blind spot — worth checking whether `worker/`'s negotiation path should return `text/markdown`.
+
+Re-POST to `/api/directory` after those land; the endpoint is idempotent to retry and states so (`"retry": "Fix these, then POST again."`).
+
 ## 5. Lower priority
 
-- directory.llmstxt.cloud — Tally form https://tally.so/r/wAydjB (2 min, no account, activity unclear).
-- llmstxt.site — form at /submit (semi-active).
-- wong2/awesome-mcp-servers — smaller sibling of #1, same PR pattern.
+- directory.llmstxt.cloud — Tally form https://tally.so/r/wAydjB (2 min, no account, activity unclear). **⏳ MANUAL — not done**, browser form.
+- llmstxt.site — form at /submit (semi-active). **⏳ MANUAL — not done**, browser form.
+- wong2/awesome-mcp-servers — ~~smaller sibling of #1, same PR pattern~~. **❌ NOT APPLICABLE as of 2026-07-29** — the README now opens with `> [!NOTE] We do not accept PRs. Please submit your MCP on the website: https://mcpservers.org/submit`. That submit page is a client-side React form (server name / description / link / category / contact email, with a $39 "premium" queue-skip upsell), so there is no request to script. **⏳ MANUAL** if 4.2k★ is judged worth the form; the free tier is fine.
 - Official MCP Registry (registry.modelcontextprotocol.io) — needs the server packaged as an `mcpb` bundle attached to a GitHub Release + `mcp-publisher` device auth. Medium effort; do if the MCP server gets traction.
 - Skip: mcp.so (stale/403), Glama & Smithery (auto-index; passive benefit already flows from #1).
 
