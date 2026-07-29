@@ -1,8 +1,8 @@
 {
   "agent-readability-service": {
     "letter": "A",
-    "score": 100,
-    "passed": 13,
+    "score": 90,
+    "passed": 12,
     "total": 13,
     "checked": "2026-07-29"
   },

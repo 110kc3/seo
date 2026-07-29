@@ -2,7 +2,7 @@
 
 A machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
 
-> 🟢 **Live, on real money, and proven.** https://index.kc-it.pl is deployed with the payment rail on **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. The rail completed its first end-to-end settlement on 2026-07-29: paid by the stock `x402-fetch` client, settled on chain, replay refused, recorded on the revenue dashboard. Details in **[DEPLOY.md](DEPLOY.md)** → Phase 3.3.
+> 🟢 **Live, on real money, and proven.** https://index.percall.dev is deployed with the payment rail on **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. The rail completed its first end-to-end settlement on 2026-07-29: paid by the stock `x402-fetch` client, settled on chain, replay refused, recorded on the revenue dashboard. Details in **[DEPLOY.md](DEPLOY.md)** → Phase 3.3. Migrated the same day from `index.kc-it.pl`, which stays attached and answers a method-preserving 308 — percall.dev is the umbrella domain for the paid-services portfolio this is becoming.
 
 **Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
 
@@ -91,7 +91,7 @@ Use `scripts/*.test.mjs`, not `node --test scripts/` — Node 22 resolves a bare
 
 1. `npx wrangler kv namespace create PAYMENTS` → put the id in `wrangler.toml`.
 2. Repo secrets `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit) and `CLOUDFLARE_ACCOUNT_ID`.
-3. Point `index.kc-it.pl` at the Worker (the `kc-it.pl` zone is already on Cloudflare).
+3. Point `index.percall.dev` at the Worker — `gh workflow run cf-admin -f action=attach-domain -f hostname=index.percall.dev` (the zone must be on the Cloudflare account and the token needs its zone rights).
 4. Optional, for `/api/stats.json`: `npx wrangler secret put CF_ACCOUNT_ID` and `CF_ANALYTICS_TOKEN` (Account Analytics: Read). Without them the endpoint reports `stats_not_enabled` rather than pretending.
 
 Locally, run it with `npx wrangler dev --local --persist-to /tmp/seo-wstate`. The `--persist-to` outside the repo matters: the asset directory is the repo root, so wrangler's state dir otherwise lands in the watched tree and reload-loops forever.

@@ -7,9 +7,11 @@ Also answers on `https://ai-product-index.110kc3.workers.dev` (a debugging
 fallback; `workers_dev = false` in `wrangler.toml` turns it off, and every
 canonical URL points at the custom domain regardless).
 
-Known edge case: `/api/score` can audit `index.kc-it.pl` (it serves those
-sub-requests from the ASSETS binding, because a Worker gets 522 fetching its own
-hostname) but **not** the workers.dev hostname, since host-matching cannot know
+Known edge case: `/api/score` can audit `index.percall.dev` — and, since the
+2026-07-29 migration, the `percall.dev` apex and old `index.kc-it.pl` too, via
+the `host_aliases` rewrite (it serves those sub-requests from the ASSETS
+binding, because a Worker gets 522 fetching its own hostname) — but **not** the
+workers.dev hostname, since host-matching cannot know
 an alternate hostname. Auditing the fallback URL returns a clean 522 error. It
 disappears if you ever set `workers_dev = false`.
 
@@ -23,7 +25,7 @@ disappears if you ever set `workers_dev = false`.
 | Paid endpoint | ✅ 402 with a v1 challenge in the body and a v2 challenge in the header |
 | Payment handshake | ✅ real client signed and paid; the live facilitator verified the signature |
 | The audit itself | ✅ runs on the Workers runtime; scores this site 100/100 agent-ready |
-| `index.kc-it.pl` custom domain | ✅ attached, and survives a redeploy |
+| `index.percall.dev` custom domain | ✅ attached 2026-07-29 (`cf-admin attach-domain`); `percall.dev` apex and old `index.kc-it.pl` also attached, both 308 |
 | Analytics Engine | ✅ enabled; `env.ANALYTICS` bound |
 | Private revenue dashboard | ✅ https://revenue.local.kc-it.pl — tailnet only, no token in the URL |
 | Published listing URLs | ✅ 200, after fixing a 307 that Workers Assets was injecting |
@@ -186,7 +188,7 @@ node --input-type=module -e '
 import { privateKeyToAccount } from "viem/accounts";
 import { wrapFetchWithPayment } from "x402-fetch";
 const paid = wrapFetchWithPayment(fetch, privateKeyToAccount(process.env.PK));
-const r = await paid("https://index.kc-it.pl/api/audit", {
+const r = await paid("https://index.percall.dev/api/audit", {
   method: "POST", headers: {"content-type":"application/json"},
   body: JSON.stringify({url:"https://example.com"}),
 });
@@ -333,9 +335,9 @@ How the pieces fit:
 
 1. The dashboard is served by the **public Worker**, which answers the ordinary
    404 to anyone without `DASHBOARD_TOKEN` — so its existence is not disclosed
-   even to someone probing `index.kc-it.pl`.
+   even to someone probing `index.percall.dev`.
 2. **Caddy on the Pi** (`~/docker/command-center/Caddyfile`) fronts a
-   `revenue.local.kc-it.pl` vhost that reverse-proxies to `index.kc-it.pl` and
+   `revenue.local.kc-it.pl` vhost that reverse-proxies to `index.percall.dev` and
    injects `Authorization: Bearer <token>` from `AIPI_DASHBOARD_TOKEN` in
    `~/docker/.env`. The secret therefore never reaches a browser, an address bar,
    shell history or a bookmark.
@@ -354,9 +356,9 @@ The same three-tier model as the other private services (`vault`, `obsidian`,
 |---|---|
 | `revenue.local.kc-it.pl/` from the tailnet | 302 → `/dashboard`, then 200 |
 | `revenue.local.kc-it.pl` from off-tailnet | 404 |
-| `index.kc-it.pl/dashboard` anonymous | 404 |
-| `index.kc-it.pl/api/revenue.json` anonymous | 401 |
-| `index.kc-it.pl/dashboard.html?token=<token>` | 200, sets a 12 h HttpOnly cookie |
+| `index.percall.dev/dashboard` anonymous | 404 |
+| `index.percall.dev/api/revenue.json` anonymous | 401 |
+| `index.percall.dev/dashboard.html?token=<token>` | 200, sets a 12 h HttpOnly cookie |
 | anything, with `DASHBOARD_TOKEN` unset | 404 / 503 |
 
 The `?token=` route still works for a device off the tailnet; the Worker trades it

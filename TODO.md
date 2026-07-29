@@ -1,6 +1,9 @@
 # TODO
 
-## LIVE — https://index.kc-it.pl
+## LIVE — https://index.percall.dev
+
+Migrated 2026-07-29 from `index.kc-it.pl` (bought `percall.dev` as the umbrella
+for the paid-services portfolio). Old host and the apex stay attached and 308.
 
 Deployed 2026-07-25 from `main` by CI. Custom domain attached, Analytics Engine
 enabled, KV bound, private revenue dashboard up. Full status table in DEPLOY.md.
@@ -81,7 +84,7 @@ Tailnet only, and no token in the URL. Caddy on the Pi injects the bearer token
 from `~/docker/.env`, so the secret never reaches a browser, address bar or
 bookmark; the vhost also 404s anything outside `100.64.0.0/10`, because ports
 80/443 are bound on every interface and DNS is routing rather than access
-control. Publicly, `index.kc-it.pl/dashboard` is an ordinary 404 — its existence
+control. Publicly, `index.percall.dev/dashboard` is an ordinary 404 — its existence
 is not disclosed. Full design and the three-place rotation procedure in
 DEPLOY.md → Phase 5.
 
