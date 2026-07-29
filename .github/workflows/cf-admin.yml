@@ -21,6 +21,12 @@ on:
           - stats-probe   # can the deploy token read Analytics Engine?
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
+          - attach-domain # attach `hostname` to the Worker as a custom domain
+      hostname:
+        description: Hostname for attach-domain (e.g. index.percall.dev)
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -162,6 +168,46 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           echo "$id" >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      # Attaching a hostname is a one-time zone-scoped operation (wrangler.toml
+      # documents why it is not declared there: a zone grant the deploy lacks
+      # must not be able to take the whole deploy down). This action does the
+      # attach without the token ever leaving GitHub. Idempotent: re-attaching
+      # an already-attached hostname succeeds.
+      - name: Attach a custom domain to the Worker
+        if: inputs.action == 'attach-domain'
+        env:
+          ATTACH_HOSTNAME: ${{ inputs.hostname }}
+        run: |
+          set -euo pipefail
+          base=https://api.cloudflare.com/client/v4
+          api() { curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                       -H "Content-Type: application/json" "$@"; }
+          host="${ATTACH_HOSTNAME:?the hostname input is required for attach-domain}"
+          # The owning zone is the longest zone name that suffixes the hostname.
+          zone=$(api "$base/zones?account.id=$CLOUDFLARE_ACCOUNT_ID&per_page=50" | node -e '
+            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+              const r=JSON.parse(s);
+              if(!r.success){ console.error(JSON.stringify(r.errors)); process.exit(1); }
+              const host=process.argv[1];
+              const hit=r.result
+                .filter(z=>host===z.name||host.endsWith("."+z.name))
+                .sort((a,b)=>b.name.length-a.name.length)[0];
+              if(!hit){ console.error("no zone in this account owns "+host); process.exit(1); }
+              console.log(hit.id);
+            })' "$host")
+          out=$(api -X PUT "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/domains" \
+                --data "{\"zone_id\":\"$zone\",\"hostname\":\"$host\",\"service\":\"ai-product-index\",\"environment\":\"production\"}")
+          printf '%s\n' "$out" | head -c 800; echo
+          ok=$(printf '%s' "$out" | node -e '
+            let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{
+              try{ console.log(JSON.parse(s).success===true?"true":"false") }
+              catch{ console.log("false") }})')
+          if [ "$ok" != "true" ]; then
+            echo "::error::attach failed for $host — if the error is code 10000, the token lacks zone-level Workers Routes / DNS rights for this zone; attach in the dashboard instead (Worker -> Settings -> Domains & Routes)"
+            exit 1
+          fi
+          echo "::notice::attached $host to ai-product-index"
 
       # ---------------------------------------------------------------------
       # Managed robots.txt / AI-crawler blocking.
