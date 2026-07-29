@@ -152,4 +152,4 @@ one.
 
 ## For humans
 
-Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
+Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
