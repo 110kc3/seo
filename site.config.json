@@ -1,5 +1,6 @@
 {
   "base": "https://index.percall.dev",
+  "host_aliases": ["percall.dev", "index.kc-it.pl"],
   "repo": "110kc3/seo",
   "payments": {
     "x402_address": "0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424",

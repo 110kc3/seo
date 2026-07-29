@@ -44,6 +44,26 @@ export function fetcherFor(request, env, target) {
   return sameHost && env.ASSETS ? env.ASSETS.fetch.bind(env.ASSETS) : undefined;
 }
 
+// Hosts attached to this Worker that are not the canonical one — the percall.dev
+// apex and the pre-migration index.kc-it.pl, which both answer 308. A Worker
+// cannot fetch its own hostnames, so an audit target on any of them must be
+// rewritten to the canonical host, which the same-host ASSETS path can serve.
+// Found the expensive way: without this, a *paid* audit of the old domain
+// settles the payment and then answers 502.
+export function canonicalTarget(target, cfg) {
+  const aliases = cfg.host_aliases ?? [];
+  try {
+    const url = new URL(target);
+    if (aliases.includes(url.host)) {
+      url.host = new URL(cfg.base).host;
+      return url.href;
+    }
+  } catch {
+    // target is validated upstream; an unparsable one is returned unchanged.
+  }
+  return target;
+}
+
 const CACHE_PREFIX = 'score:v1:';
 const CACHE_TTL_SECONDS = 3600;
 const RATE_PREFIX = 'score:rl:';
@@ -138,7 +158,8 @@ export async function handleScore(request, env, cfg, rail) {
   const parsed = parseAuditRequest({ url: target });
   if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
 
-  const cacheKey = `${CACHE_PREFIX}${parsed.url}`;
+  const targetUrl = canonicalTarget(parsed.url, cfg);
+  const cacheKey = `${CACHE_PREFIX}${targetUrl}`;
   if (env.PAYMENTS) {
     const hit = await env.PAYMENTS.get(cacheKey);
     if (hit) {
@@ -163,7 +184,7 @@ export async function handleScore(request, env, cfg, rail) {
     }, 429, { 'retry-after': '3600' });
   }
 
-  const result = await auditUrl(parsed.url, fetcherFor(request, env, parsed.url), auditSigner(env, cfg));
+  const result = await auditUrl(targetUrl, fetcherFor(request, env, targetUrl), auditSigner(env, cfg));
   if (!result.ok) return json({ ok: false, code: 'audit_failed', error: result.error ?? 'could not read that site' }, 502);
 
   const view = freeView(result, upsell);
@@ -173,4 +194,4 @@ export async function handleScore(request, env, cfg, rail) {
   return json(view, 200, { 'cache-control': `public, max-age=${CACHE_TTL_SECONDS}` });
 }
 
-export const __testing = { freeView, upsellFor, fetcherFor, RATE_LIMIT_PER_HOUR, CACHE_PREFIX, RATE_PREFIX };
+export const __testing = { freeView, upsellFor, fetcherFor, canonicalTarget, RATE_LIMIT_PER_HOUR, CACHE_PREFIX, RATE_PREFIX };

@@ -106,6 +106,18 @@ test('a negotiated markdown twin is labelled text/markdown, not text/plain', () 
   assert.equal(alternateContentType('/listings/my-product.json'), null);
 });
 
+test('audit targets on our own alias hosts are canonicalized before fetching', () => {
+  // A Worker cannot fetch its own hostnames, and both aliases 308 anyway. A
+  // paid audit of the pre-migration domain settled and then 502'd — this is
+  // the regression test for that five-cent lesson.
+  assert.equal(score.canonicalTarget('https://percall.dev/x?y=1', cfgFile), `${BASE}/x?y=1`);
+  assert.equal(score.canonicalTarget('https://index.kc-it.pl/', cfgFile), `${BASE}/`);
+  assert.equal(score.canonicalTarget('https://example.com/', cfgFile), 'https://example.com/');
+  // The alias list must never contain the canonical host itself, or the
+  // rewrite would be a no-op loop hiding a misconfigured base.
+  assert.ok(!(cfgFile.host_aliases ?? []).includes(new URL(cfgFile.base).host));
+});
+
 test('non-canonical hosts 308 to the canonical host, path and query intact', () => {
   // 308, not 301: the paid endpoint is a POST, and a 301 lets clients degrade
   // the replayed request to GET. The old hostname stays attached forever, so
