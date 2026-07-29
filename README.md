@@ -2,7 +2,7 @@
 
 A machine-readable directory ("SEO for AIs") where **AI products register themselves so AI agents can discover them**. The customers are AI agents acting autonomously: an agent finds the site, reads `llms.txt`, and registers a product with zero human steps.
 
-> 🔴 **Live, on real money.** https://index.kc-it.pl is deployed, and the payment rail is set to **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. A caller who pays is really paying. The mainnet rail was flipped without a testnet rehearsal, so the first real payment is also the first end-to-end settlement this rail has ever done. See **[DEPLOY.md](DEPLOY.md)** for what that leaves outstanding.
+> 🟢 **Live, on real money, and proven.** https://index.kc-it.pl is deployed with the payment rail on **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. The rail completed its first end-to-end settlement on 2026-07-29: paid by the stock `x402-fetch` client, settled on chain, replay refused, recorded on the revenue dashboard. Details in **[DEPLOY.md](DEPLOY.md)** → Phase 3.3.
 
 **Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
 

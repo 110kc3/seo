@@ -54,14 +54,13 @@ Three findings worth keeping:
 
 ## Blocked on Kamil
 
-One thing stands between this and real revenue; the rest is distribution and
-optional rails.
+The rail is proven end to end as of 2026-07-29; what stands between this and
+revenue now is distribution.
 
 ### The one that matters
 
-- [x] **Mainnet rail is on** — done 2026-07-25: `"active": "mainnet"` (Base, USDC, PayAI facilitator). The testnet rehearsal below was **deliberately skipped**, so the rail is verified statically only — asset address against Circle's page and the chain, EIP-712 domain name against the token's `name()`, facilitator `/supported` against the network — and has never settled anything.
-- [ ] **Put $0.05 of real USDC through it.** The only step left that code cannot do, and now the *only* end-to-end proof the rail settles. Fund a *throwaway payer* wallet with real USDC on Base — not the receiving address, since a 402 asks for someone else's money — and pay yourself with the copy-paste client in DEPLOY.md → Phase 2, pointed at the live URL. Then confirm a replay is refused, the settlement shows on `basescan.org`, and it appears on https://revenue.local.kc-it.pl as a **live** rail rather than testnet.
-- [ ] **If it fails, rehearse instead of debugging in production** — `"active": "testnet"` and push is the whole rollback; DEPLOY.md → Phase 2 is the funded-faucet walkthrough.
+- [x] **Mainnet rail is on** — done 2026-07-25: `"active": "mainnet"` (Base, USDC, PayAI facilitator). The testnet rehearsal below was **deliberately skipped**, so the rail was verified statically only — until the settlement below.
+- [x] **Put $0.05 of real USDC through it** — done 2026-07-29, the rail's first end-to-end settlement. Throwaway payer `0xC8b3…87D4` (key on the Pi: `~/.x402-test/payer.key`, funded 6.25 USDC from Coinbase) paid the live endpoint via `x402-fetch@1.2.0`: HTTP 200 + receipt, audit delivered (kc-it.pl A 100/100), replay of the same authorization refused with `already been used`, settlement on chain in block 49270394 (tx `0x6b68…8842`, 0.05 USDC throwaway → receiving address, facilitator paid the gas), dashboard shows settlements 1 / $0.05 / rail **live**. Full record: DEPLOY.md → Phase 3.3. ~6.20 USDC stays in the throwaway as protocol play-money — each further self-audit just moves five cents home.
 ### Distribution and optional rails
 
 - [x] **Receiving address** — done 2026-07-25: `0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424` (Binance Web3 Wallet, self-custodial, Base).

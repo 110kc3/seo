@@ -27,17 +27,12 @@ disappears if you ever set `workers_dev = false`.
 | Analytics Engine | ✅ enabled; `env.ANALYTICS` bound |
 | Private revenue dashboard | ✅ https://revenue.local.kc-it.pl — tailnet only, no token in the URL |
 | Published listing URLs | ✅ 200, after fixing a 307 that Workers Assets was injecting |
-| Active payment rail | 🔴 `mainnet` — Base, USDC, **real money** |
+| Active payment rail | 🟢 `mainnet` — Base, USDC, **proven end to end 2026-07-29** |
 
-Everything that can be verified without funds has been. The rail was flipped to
-`mainnet` deliberately, **skipping the testnet rehearsal in Phase 2** — so a
-caller who pays now is really paying, and that first payment is also the first
-settlement this rail has ever completed end to end.
-
-**What is left is one thing: pay yourself $0.05 through the live endpoint**
-(Phase 3.3) and confirm it settles on basescan. Until that has happened, the
-mainnet rail is verified statically but not exercised. To go back to rehearsal,
-set `"active": "testnet"` and push.
+The rail was flipped to `mainnet` deliberately, **skipping the testnet
+rehearsal in Phase 2** — and the gap that left was closed on 2026-07-29, when
+the rail completed its first real settlement (Phase 3.3, now done). To go back
+to rehearsal anyway, set `"active": "testnet"` and push.
 
 ### How the custom domain is attached
 
@@ -218,8 +213,8 @@ node scripts/verify-rail.mjs testnet          # does the same check, and compare
 
 ## Phase 3 — Switch to real money *(done — rail is live)*
 
-`"active": "mainnet"` as of 2026-07-25. Phase 2 was skipped, so nothing has been
-settled on this rail yet; 3.3 below is the outstanding step.
+`"active": "mainnet"` as of 2026-07-25. Phase 2 was skipped; the first real
+settlement (3.3 below) followed on 2026-07-29.
 
 ### 3.1 The mainnet profile — filled in, and how it was checked
 
@@ -279,20 +274,26 @@ static output (the published files point at `/api/x402/info` for live terms), so
 `node scripts/build.mjs` is not needed for a rail change; run it anyway if you
 touched anything under `templates/`, because CI fails on a stale committed build.
 
-### 3.3 Run one real transaction — outstanding
+### 3.3 Run one real transaction — done 2026-07-29
 
-Pay yourself five cents through the live endpoint before telling anyone the
-service exists. This matters more than usual now that Phase 2 was skipped: it is
-the only end-to-end proof the mainnet rail settles at all, and the failure modes
-it would catch (a facilitator that will not relay, a domain-name mismatch) are
-invisible until a payment is attempted.
+The rail's first end-to-end settlement, run exactly as prescribed: a throwaway
+payer (`0xC8b3…87D4`, generated on the Pi, key at `~/.x402-test/payer.key`,
+funded with 6.25 USDC from Coinbase over Base) drove `x402-fetch@1.2.0` against
+the live endpoint.
 
-Same client as Phase 2, pointed at the live URL, with a mainnet-funded throwaway
-payer — real USDC on Base, about $0.05 plus nothing for gas (the facilitator
-pays it). Confirm the settlement at
-`https://basescan.org/address/0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424`, and
-that it lands on https://revenue.local.kc-it.pl labelled as a live rail rather
-than as testnet.
+- **Paid**: HTTP 200 + settlement receipt; the audit itself was delivered
+  (kc-it.pl, A 100/100).
+- **Replay refused**: the identical `X-PAYMENT` header re-sent verbatim →
+  402 `payment authorization has already been used`.
+- **On chain**: tx `0x6b68f50889062fedabc414acf4c82b2df57a995e4bd733395ec99e542fe68842`,
+  block 49270394 — a 0.05 USDC `Transfer` from the throwaway to the receiving
+  address, gas paid by the PayAI facilitator, zero gas spent by the payer.
+- **Ledger**: https://revenue.local.kc-it.pl shows settlements 1, total $0.05,
+  rail **live** (not testnet).
+
+~6.20 USDC remains in the throwaway as a demo/test budget; each further
+self-audit just moves five more cents back to the receiving address. The
+harness that ran this is `~/.x402-test/pay-and-replay.mjs`.
 
 ---
 
