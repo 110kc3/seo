@@ -58,10 +58,12 @@ jobs:
           DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          CDP_API_KEY_ID: ${{ secrets.CDP_API_KEY_ID }}
+          CDP_API_KEY_SECRET: ${{ secrets.CDP_API_KEY_SECRET }}
         run: |
           set -u
           pushed=0
-          for name in DASHBOARD_TOKEN SIGNING_KEY CF_ANALYTICS_TOKEN; do
+          for name in DASHBOARD_TOKEN SIGNING_KEY CF_ANALYTICS_TOKEN CDP_API_KEY_ID CDP_API_KEY_SECRET; do
             value="${!name:-}"
             if [ -z "$value" ]; then
               echo "::notice::repo secret $name is not set — skipping"
