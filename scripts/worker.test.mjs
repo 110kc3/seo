@@ -750,7 +750,7 @@ test('a signed response verifies against the published key', async () => {
   const base = signatureBase([
     ['"@status"', '200'],
     ['"content-digest"', digest],
-    ['"@authority";req', 'index.kc-it.pl'],
+    ['"@authority";req', new URL(BASE).host],
     ['"@path";req', '/api/index.json'],
   ], params);
 
