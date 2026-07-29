@@ -21,8 +21,12 @@ import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
 import { handleScore, freeView, __testing as score } from '../worker/score.js';
 import { signResponse, keyDirectory, botAuthHeaders, signatureBase, contentDigest, signingKey, DIRECTORY_PATH, __testing as sign } from '../worker/signing.js';
 import { handleBadge, badgeSvg, __testing as badge } from '../worker/badge.js';
+import cfgFile from '../site.config.json' with { type: 'json' };
 
-const BASE = 'https://index.kc-it.pl';
+// Derived from the shipped config, not hardcoded: these tests pin "artifacts
+// match the config", and pinning a literal hostname instead turned all of them
+// red on the percall.dev migration without catching anything real.
+const BASE = cfgFile.base.replace(/\/+$/, '');
 
 // --- client classification -------------------------------------------------
 
