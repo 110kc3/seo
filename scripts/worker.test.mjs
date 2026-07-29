@@ -595,7 +595,8 @@ test('agents.json advertises only interfaces this site actually serves', async (
   // really does publish keys at that path. If signing is ever removed, this
   // advertisement must go with it.
   assert.equal(manifest.interfaces.web_bot_auth, `${BASE}${DIRECTORY_PATH}`);
-  assert.equal(manifest.identity.web_bot_auth.signature_directory, `${BASE}${DIRECTORY_PATH}`);
+  assert.equal(manifest.identity.signature_directory, `${BASE}${DIRECTORY_PATH}`);
+  assert.equal(manifest.web_bot_auth.signature_directory, `${BASE}${DIRECTORY_PATH}`);
   assert.match(manifest.identity.contact, /^mailto:/);
 
   // The in-page WebMCP tools named here are the ones templates/index.html

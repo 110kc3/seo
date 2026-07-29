@@ -16,6 +16,7 @@
     "llms_txt": "https://index.kc-it.pl/llms.txt",
     "markdown": "https://index.kc-it.pl/llms-full.txt",
     "web_bot_auth": "https://index.kc-it.pl/.well-known/http-message-signatures-directory",
+    "identity": "https://index.kc-it.pl/.well-known/http-message-signatures-directory",
     "payment_terms": "https://index.kc-it.pl/api/x402/info",
     "security_txt": "https://index.kc-it.pl/.well-known/security.txt"
   },
@@ -105,14 +106,21 @@
     "github": "https://github.com/110kc3",
     "contact": "mailto:110kc3@gmail.com",
     "security_txt": "https://index.kc-it.pl/.well-known/security.txt",
-    "web_bot_auth": {
-      "supported": true,
-      "spec": "RFC 9421",
-      "algorithm": "ed25519",
-      "signature_directory": "https://index.kc-it.pl/.well-known/http-message-signatures-directory",
-      "response_signing": "Every response carries Content-Digest, Signature-Input and Signature over @status, content-digest and the request's @authority and @path, tagged ai-product-index.",
-      "outbound_requests": "Requests this service makes while auditing a URL are signed under the web-bot-auth profile and carry a Signature-Agent header, so the audited site can verify the fetch."
-    }
+    "web_bot_auth": true,
+    "spec": "RFC 9421",
+    "algorithm": "ed25519",
+    "signature_directory": "https://index.kc-it.pl/.well-known/http-message-signatures-directory",
+    "signature_agent": "https://index.kc-it.pl/",
+    "key_directory_content_type": "application/http-message-signatures-directory+json"
+  },
+  "web_bot_auth": {
+    "supported": true,
+    "spec": "RFC 9421",
+    "algorithm": "ed25519",
+    "signature_directory": "https://index.kc-it.pl/.well-known/http-message-signatures-directory",
+    "signature_agent": "https://index.kc-it.pl/",
+    "response_signing": "Every response carries Content-Digest, Signature-Input and Signature over @status, content-digest and the request's @authority and @path, tagged ai-product-index.",
+    "outbound_requests": "Requests this service makes while auditing a URL are signed under the web-bot-auth profile and carry a Signature-Agent header, so the audited site can verify the fetch is really this service."
   },
   "policies": {
     "ai_crawlers": "explicitly allowed in https://index.kc-it.pl/robots.txt",
