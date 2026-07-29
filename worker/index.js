@@ -21,7 +21,7 @@ import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
 import { handleScore, fetcherFor, auditSigner } from './score.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
-import { alternatesFor, negotiate } from './negotiate.js';
+import { alternatesFor, negotiate, alternateContentType } from './negotiate.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
@@ -88,11 +88,21 @@ async function fetchAsset(env, request, target) {
 
 // --- header layer ----------------------------------------------------------
 
-function decorate(response, url) {
+// `alternate` is the path content negotiation swapped in, when it did. It is
+// needed here because the swap changes what the body *is*, and therefore how it
+// must be labelled — see alternateContentType().
+function decorate(response, url, alternate = null) {
   const headers = new Headers(response.headers);
   headers.set('link', alternatesFor(BASE, url.pathname));
   headers.set('x-agent-protocol', `${BASE}/llms.txt`);
+  // Same pointer under the name agent-readiness auditors actually look for.
+  // Both are sent: x-agent-protocol is what existing clients were told to read.
+  headers.set('x-agent-welcome', `${BASE}/llms.txt`);
   headers.set('vary', headers.has('vary') ? `${headers.get('vary')}, Accept` : 'Accept');
+  if (alternate && response.status === 200) {
+    const type = alternateContentType(alternate);
+    if (type) headers.set('content-type', type);
+  }
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
 
@@ -200,7 +210,7 @@ async function handleDashboardPage(request, env, url) {
 
 // --- router ----------------------------------------------------------------
 
-export const __testing = { fetchAsset };
+export const __testing = { fetchAsset, decorate };
 
 export default {
   async fetch(request, env, ctx) {
@@ -240,7 +250,7 @@ export default {
       } else {
         const alternate = negotiate(url.pathname, request.headers.get('accept'));
         const target = alternate ? new URL(alternate, url.origin) : url;
-        response = decorate(await fetchAsset(env, request, target), url);
+        response = decorate(await fetchAsset(env, request, target), url, alternate);
       }
     } catch (e) {
       response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error' }, 500);

@@ -42,3 +42,19 @@ export function negotiate(pathname, accept) {
   if (listing && wantsJson && SLUG_RE.test(listing[1])) return `/listings/${listing[1]}.json`;
   return null;
 }
+
+/**
+ * The content type a *negotiated* alternate must be labelled with.
+ *
+ * The asset binding types by file extension, so the markdown twin goes out as
+ * `text/plain` — honest about the file, wrong about the representation. A client
+ * that asked for `text/markdown` and is answered `text/plain` cannot tell it got
+ * the twin it asked for, and every agent-readiness audit scores that as a failed
+ * negotiation. Only the negotiated response is relabelled: a direct GET of
+ * /llms.txt is left exactly as the binding serves it.
+ *
+ * @returns {string|null} content type to set, or null to keep the binding's own.
+ */
+export function alternateContentType(path) {
+  return path.endsWith('.txt') ? 'text/markdown; charset=utf-8' : null;
+}

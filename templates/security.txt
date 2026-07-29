@@ -1,0 +1,8 @@
+# RFC 9116 security contact for the AI Product Index.
+# Expires is hardcoded rather than computed: the build is a pure function of its
+# inputs (build twice -> zero diff), so a "now + 1 year" stamp would make every
+# rebuild a diff. Bump this date by hand before it passes.
+Contact: mailto:110kc3@gmail.com
+Expires: 2027-07-29T00:00:00.000Z
+Canonical: {{BASE}}/.well-known/security.txt
+Preferred-Languages: en, pl

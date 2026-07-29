@@ -1,0 +1,126 @@
+{
+  "name": "AI Product Index",
+  "description": "A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous and free (GitHub issue in, published listing out); a paid per-call agent-readability audit is available over x402.",
+  "url": "{{BASE}}/",
+  "documentation": "{{BASE}}/llms.txt",
+  "llms_txt": "{{BASE}}/llms.txt",
+  "terms": "{{BASE}}/llms.txt",
+  "listings": {{COUNT}},
+  "interfaces": {
+    "json_api": "{{BASE}}/api/index.json",
+    "openapi": "{{BASE}}/openapi.yaml",
+    "schema": "{{BASE}}/api/schema.json",
+    "webmcp": "{{BASE}}/",
+    "mcp": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
+    "agent_card": "{{BASE}}/.well-known/agent.json",
+    "llms_txt": "{{BASE}}/llms.txt",
+    "markdown": "{{BASE}}/llms-full.txt",
+    "web_bot_auth": "{{BASE}}/.well-known/http-message-signatures-directory",
+    "payment_terms": "{{BASE}}/api/x402/info",
+    "security_txt": "{{BASE}}/.well-known/security.txt"
+  },
+  "api": {
+    "openapi": "{{BASE}}/openapi.yaml",
+    "registry": "{{BASE}}/api/index.json",
+    "schema": "{{BASE}}/api/schema.json",
+    "content_negotiation": "Send Accept: application/json to {{BASE}}/ for the registry or to {{BASE}}/l/{slug}.html for that listing; Accept: text/markdown returns the markdown twin. Responses carry Vary: Accept and Link: rel=alternate."
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/index.json",
+      "description": "The full registry: every listing, with count and last-updated date.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/schema.json",
+      "description": "JSON Schema for a listing, generated from the same constants that enforce validation.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/listings/{slug}.json",
+      "description": "One listing as JSON.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/score?url=https://example.com",
+      "description": "Agent-readability grade for any URL: an A-F letter, the numeric score, and all 13 checks with pass/fail.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "POST",
+      "url": "{{BASE}}/api/audit",
+      "description": "The full agent-readability audit of one URL: the same 13 checks plus, per failure, why it failed, a fix ranked by weight, and a paste-ready snippet for that origin.",
+      "auth": "x402",
+      "price": "per call, quoted at {{BASE}}/api/x402/info",
+      "request": {"url": "https://example.com"}
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/x402/info",
+      "description": "Live payment terms for the paid endpoint: chain, asset, recipient, amount and accepted protocol versions. Readable without provoking a 402.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/stats.json",
+      "description": "30-day request counters by inferred client type and path bucket, plus agent_share. No IP addresses are stored.",
+      "auth": "none",
+      "price": "free"
+    }
+  ],
+  "webmcp": {
+    "type": "in-page",
+    "runtime": "navigator.modelContext",
+    "url": "{{BASE}}/",
+    "tools": [
+      {"name": "search_products", "description": "Search the registry by free text and category."},
+      {"name": "get_product", "description": "Fetch one listing by slug."}
+    ]
+  },
+  "mcp": {
+    "transport": "stdio",
+    "source": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
+    "install": "git clone https://github.com/{{REPO}} && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs",
+    "tools": ["search_products", "get_product", "register_product"]
+  },
+  "write_api": {
+    "type": "github-issues",
+    "repo": "https://github.com/{{REPO}}",
+    "endpoint": "https://api.github.com/repos/{{REPO}}/issues",
+    "protocols": ["[register]", "[update]", "[upgrade]"],
+    "description": "Open an issue whose title starts with the protocol tag and whose body is the listing JSON. Validated, published and answered with a machine-readable comment in about two minutes. No human in the loop.",
+    "docs": "{{BASE}}/llms.txt"
+  },
+  "identity": {
+    "operator": "Kamil (110kc3)",
+    "github": "https://github.com/110kc3",
+    "contact": "mailto:110kc3@gmail.com",
+    "security_txt": "{{BASE}}/.well-known/security.txt",
+    "web_bot_auth": {
+      "supported": true,
+      "spec": "RFC 9421",
+      "algorithm": "ed25519",
+      "signature_directory": "{{BASE}}/.well-known/http-message-signatures-directory",
+      "response_signing": "Every response carries Content-Digest, Signature-Input and Signature over @status, content-digest and the request's @authority and @path, tagged ai-product-index.",
+      "outbound_requests": "Requests this service makes while auditing a URL are signed under the web-bot-auth profile and carry a Signature-Agent header, so the audited site can verify the fetch."
+    }
+  },
+  "policies": {
+    "ai_crawlers": "explicitly allowed in {{BASE}}/robots.txt",
+    "robots_txt": "{{BASE}}/robots.txt",
+    "sitemap": "{{BASE}}/sitemap.xml",
+    "registration": "free, autonomous, no account beyond a GitHub identity; up to 10 listings per GitHub account",
+    "rate_limits": "20 uncached free audits per hour per IP on /api/score; cache hits unmetered",
+    "health": "listing URLs are re-checked weekly; three consecutive failures delist ({{BASE}}/health.json)",
+    "pricing": "Listings are free and stay free. The paid product is POST /api/audit, priced per call over x402; verified and featured tiers are paid upgrades."
+  }
+}

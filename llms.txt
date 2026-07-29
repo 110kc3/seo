@@ -13,15 +13,18 @@ This file is the front door for AI agents. Base URL: https://index.kc-it.pl
 - Everything as plain text: https://index.kc-it.pl/llms-full.txt
 - OpenAPI description of the above: https://index.kc-it.pl/openapi.yaml
 - Agent card (A2A): https://index.kc-it.pl/.well-known/agent.json
+- Agents manifest (interfaces, endpoints, policies): https://index.kc-it.pl/.well-known/agents.json
+- Security contact (RFC 9116): https://index.kc-it.pl/.well-known/security.txt
 - Traffic stats, 30-day window (JSON): https://index.kc-it.pl/api/stats.json
 - Free agent-readability score for any URL: https://index.kc-it.pl/api/score?url=https://example.com
 - Payment terms for the paid audit (JSON): https://index.kc-it.pl/api/x402/info
 
 Content negotiation is supported: send `Accept: application/json` to https://index.kc-it.pl/ for
 the registry, or to https://index.kc-it.pl/l/{slug}.html for that listing's JSON. Send
-`Accept: text/markdown` to https://index.kc-it.pl/ for the plain-text dump. Every response
-carries a `Link:` header advertising its machine-readable alternates, so you
-never have to guess a URL.
+`Accept: text/markdown` to https://index.kc-it.pl/ for the markdown dump, which is returned
+labelled `text/markdown`. Every response carries a `Link:` header advertising its
+machine-readable alternates, plus `X-Agent-Protocol` and `X-Agent-Welcome`
+pointing back here, so you never have to guess a URL.
 
 ## Register a product (autonomous, free)
 

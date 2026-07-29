@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 
 import { classifyUserAgent, classifyPath } from '../worker/classify.js';
-import { alternatesFor, negotiate } from '../worker/negotiate.js';
+import { alternatesFor, negotiate, alternateContentType } from '../worker/negotiate.js';
 import { paymentRequirements, paymentRequirementsV1, requirePayment, attachSettlement, __testing as x402 } from '../worker/x402.js';
 import { parseAuditRequest, __testing as audit } from '../worker/audit.js';
 import { __testing as stats } from '../worker/stats.js';
@@ -89,6 +89,38 @@ test('negotiate leaves browsers alone', () => {
 test('negotiate refuses slugs that are not valid slugs', () => {
   assert.equal(negotiate('/l/-bad-.html', 'application/json'), null);
   assert.equal(negotiate('/l/x.html', 'application/json'), null);
+});
+
+test('a negotiated markdown twin is labelled text/markdown, not text/plain', () => {
+  // The asset binding types by extension, so /llms-full.txt goes out as
+  // text/plain. Answering a request for text/markdown with text/plain is a
+  // failed negotiation as far as any agent (or auditor) can tell — it cost this
+  // site 9 points on agentswelcome.dev while the *body* was already correct.
+  assert.equal(alternateContentType('/llms-full.txt'), 'text/markdown; charset=utf-8');
+  // JSON twins already carry the right type from the binding; leave them alone.
+  assert.equal(alternateContentType('/api/index.json'), null);
+  assert.equal(alternateContentType('/listings/my-product.json'), null);
+});
+
+test('decorate relabels only the negotiated response, and sends both agent headers', async () => {
+  const url = new URL(`${BASE}/`);
+  const asset = () => new Response('# llms\n', { status: 200, headers: { 'content-type': 'text/plain' } });
+
+  const swapped = worker.decorate(asset(), url, '/llms-full.txt');
+  assert.equal(swapped.headers.get('content-type'), 'text/markdown; charset=utf-8');
+  assert.equal(swapped.headers.get('vary'), 'Accept');
+  // X-Agent-Protocol is what existing clients were told to read; X-Agent-Welcome
+  // is the name auditors look for. Removing either is a regression.
+  assert.equal(swapped.headers.get('x-agent-protocol'), `${BASE}/llms.txt`);
+  assert.equal(swapped.headers.get('x-agent-welcome'), `${BASE}/llms.txt`);
+
+  // No negotiation happened: the binding's own type stands.
+  const plain = worker.decorate(asset(), url, null);
+  assert.equal(plain.headers.get('content-type'), 'text/plain');
+
+  // A 404 for a missing twin must not be dressed up as markdown.
+  const missing = worker.decorate(new Response('nope', { status: 404, headers: { 'content-type': 'text/html' } }), url, '/llms-full.txt');
+  assert.equal(missing.headers.get('content-type'), 'text/html');
 });
 
 test('alternatesFor advertises the machine-readable twin of each path', () => {
@@ -540,6 +572,52 @@ test('no source directory is published as a static asset by accident', async () 
   const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));
   assert.deepEqual(unclassified, [],
     `add these to .assetsignore, or to the published list in this test: ${unclassified.join(', ')}`);
+});
+
+// --- the well-known surfaces the build generates ------------------------------
+
+const wellKnown = (name) => readFile(new URL(`../.well-known/${name}`, import.meta.url), 'utf8');
+
+test('agents.json advertises only interfaces this site actually serves', async () => {
+  // The PLURAL agents.json is a different spec from the A2A card at
+  // /.well-known/agent.json, and both are published. Auditors read this one for
+  // the site's machine-readable interfaces; three separate checks do nothing but
+  // look at what it advertises, so an advertisement that is not backed by a real
+  // endpoint is worse than a missing file.
+  const raw = await wellKnown('agents.json');
+  assert.doesNotMatch(raw, /\{\{/, 'an unfilled {{PLACEHOLDER}} survived the build');
+  const manifest = JSON.parse(raw);
+
+  assert.equal(manifest.interfaces.json_api, `${BASE}/api/index.json`);
+  assert.equal(manifest.interfaces.webmcp, `${BASE}/`);
+  assert.equal(manifest.interfaces.agent_card, `${BASE}/.well-known/agent.json`);
+  // Honest only because worker/signing.js really does sign every response and
+  // really does publish keys at that path. If signing is ever removed, this
+  // advertisement must go with it.
+  assert.equal(manifest.interfaces.web_bot_auth, `${BASE}${DIRECTORY_PATH}`);
+  assert.equal(manifest.identity.web_bot_auth.signature_directory, `${BASE}${DIRECTORY_PATH}`);
+  assert.match(manifest.identity.contact, /^mailto:/);
+
+  // The in-page WebMCP tools named here are the ones templates/index.html
+  // registers on navigator.modelContext.
+  const home = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  for (const tool of manifest.webmcp.tools) {
+    assert.match(home, new RegExp(`name: '${tool.name}'`), `agents.json advertises a WebMCP tool the page does not register: ${tool.name}`);
+  }
+});
+
+test('security.txt is a valid, unexpired RFC 9116 file', async () => {
+  const raw = await wellKnown('security.txt');
+  assert.match(raw, /^Contact: mailto:.+@.+$/m);
+  assert.match(raw, new RegExp(`^Canonical: ${BASE}/\\.well-known/security\\.txt$`, 'm'));
+
+  const expires = raw.match(/^Expires: (.+)$/m);
+  assert.ok(expires, 'RFC 9116 requires exactly one Expires field');
+  // Deliberate tripwire. The date is hardcoded because the build must stay a
+  // pure function of its inputs, which means nothing renews it — so the test
+  // fails *before* the site starts serving an expired security contact.
+  assert.ok(new Date(expires[1]).getTime() > Date.now(),
+    'security.txt has expired — bump Expires in templates/security.txt and rebuild');
 });
 
 // --- README badge -----------------------------------------------------------

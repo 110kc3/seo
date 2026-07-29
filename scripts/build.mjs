@@ -147,10 +147,18 @@ writeFileSync(join(ROOT, 'llms.txt'), fill(tpl('llms.txt')));
 writeFileSync(join(ROOT, 'robots.txt'), fill(tpl('robots.txt')));
 writeFileSync(join(ROOT, 'openapi.yaml'), fill(tpl('openapi.yaml')));
 
-// A2A agent card. Only reachable now that the index sits at a domain root —
+// Well-known surfaces. Only reachable now that the index sits at a domain root —
 // on the old /seo/ project path there was no /.well-known to serve.
 mkdirSync(join(ROOT, '.well-known'), { recursive: true });
+// A2A agent card (singular). Describes this service as an A2A agent.
 writeFileSync(join(ROOT, '.well-known', 'agent.json'), fill(tpl('agent-card.json')));
+// agents.json (PLURAL) — a different spec from the card above, and the one
+// agent-readiness auditors read: it enumerates the machine-readable interfaces,
+// endpoints and policies of the *site*. Everything it advertises is served.
+writeFileSync(join(ROOT, '.well-known', 'agents.json'), fill(tpl('agents-manifest.json')));
+// RFC 9116 security contact. The Expires date is fixed in the template, not
+// computed, so the build stays a pure function of its inputs.
+writeFileSync(join(ROOT, '.well-known', 'security.txt'), fill(tpl('security.txt')));
 
 const fullBlocks = listings.map((l) => {
   const lines = [
@@ -176,4 +184,4 @@ const smUrls = [
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);
 
-console.log(`built ${listings.length} listing(s): api/, l/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml`);
+console.log(`built ${listings.length} listing(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml`);
