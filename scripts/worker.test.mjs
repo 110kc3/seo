@@ -102,6 +102,16 @@ test('a negotiated markdown twin is labelled text/markdown, not text/plain', () 
   assert.equal(alternateContentType('/listings/my-product.json'), null);
 });
 
+test('non-canonical hosts 308 to the canonical host, path and query intact', () => {
+  // 308, not 301: the paid endpoint is a POST, and a 301 lets clients degrade
+  // the replayed request to GET. The old hostname stays attached forever, so
+  // every URL published before the percall.dev migration keeps resolving.
+  const moved = worker.canonicalRedirect(new URL('https://index.kc-it.pl/api/audit?x=1'));
+  assert.equal(moved.status, 308);
+  assert.equal(moved.headers.get('location'), `${BASE}/api/audit?x=1`);
+  assert.equal(worker.canonicalRedirect(new URL(`${BASE}/llms.txt`)), null);
+});
+
 test('decorate relabels only the negotiated response, and sends both agent headers', async () => {
   const url = new URL(`${BASE}/`);
   const asset = () => new Response('# llms\n', { status: 200, headers: { 'content-type': 'text/plain' } });

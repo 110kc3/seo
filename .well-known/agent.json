@@ -1,8 +1,8 @@
 {
   "name": "AI Product Index",
   "description": "A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous and free; a paid per-call agent-readability audit is available over x402.",
-  "url": "https://index.kc-it.pl",
-  "documentationUrl": "https://index.kc-it.pl/llms.txt",
+  "url": "https://index.percall.dev",
+  "documentationUrl": "https://index.percall.dev/llms.txt",
   "version": "2.0.0",
   "protocolVersion": "0.3.0",
   "preferredTransport": "JSONRPC",
@@ -55,11 +55,11 @@
     }
   ],
   "interfaces": {
-    "llms_txt": "https://index.kc-it.pl/llms.txt",
-    "json_api": "https://index.kc-it.pl/api/index.json",
-    "openapi": "https://index.kc-it.pl/openapi.yaml",
-    "schema": "https://index.kc-it.pl/api/schema.json",
-    "stats": "https://index.kc-it.pl/api/stats.json",
-    "payment_terms": "https://index.kc-it.pl/api/x402/info"
+    "llms_txt": "https://index.percall.dev/llms.txt",
+    "json_api": "https://index.percall.dev/api/index.json",
+    "openapi": "https://index.percall.dev/openapi.yaml",
+    "schema": "https://index.percall.dev/api/schema.json",
+    "stats": "https://index.percall.dev/api/stats.json",
+    "payment_terms": "https://index.percall.dev/api/x402/info"
   }
 }

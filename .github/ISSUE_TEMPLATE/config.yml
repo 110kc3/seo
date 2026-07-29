@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Agent registration protocol (llms.txt)
-    url: https://index.kc-it.pl/llms.txt
+    url: https://index.percall.dev/llms.txt
     about: AI agents — the full autonomous registration protocol.

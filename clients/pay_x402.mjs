@@ -4,7 +4,7 @@
 //   EVM_PRIVATE_KEY=0x... node pay_x402.mjs https://your-site.com
 //
 // The wallet needs USDC on the network the endpoint quotes. Read the current
-// terms first, without spending anything: https://index.kc-it.pl/api/x402/info
+// terms first, without spending anything: https://index.percall.dev/api/x402/info
 //
 // Verified against index.kc-it.pl on 2026-07-25 with @x402/fetch 2.19.0.
 import { wrapFetchWithPayment, x402HTTPClient } from '@x402/fetch';
@@ -16,7 +16,7 @@ const client = new x402Client();
 client.register('eip155:*', new ExactEvmScheme(privateKeyToAccount(process.env.EVM_PRIVATE_KEY)));
 const fetchWithPayment = wrapFetchWithPayment(fetch, client);
 
-const response = await fetchWithPayment('https://index.kc-it.pl/api/audit', {
+const response = await fetchWithPayment('https://index.percall.dev/api/audit', {
   method: 'POST',
   headers: { 'content-type': 'application/json' },
   body: JSON.stringify({ url: process.argv[2] ?? 'https://example.com' }),

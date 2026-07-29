@@ -28,7 +28,23 @@ import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } fr
 import { handleBadge } from './badge.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
+const CANONICAL_HOST = new URL(BASE).host;
 const MAX_AUDIT_BODY = 4 * 1024;
+
+// One canonical hostname; every other host attached to this Worker (the
+// pre-migration index.kc-it.pl, the percall.dev apex) answers 308 to it. 308
+// rather than 301 because it preserves the method and body, so an in-flight
+// x402 POST survives the hop instead of being degraded to a GET.
+function canonicalRedirect(url) {
+  if (url.host === CANONICAL_HOST) return null;
+  return new Response(null, {
+    status: 308,
+    headers: {
+      location: new URL(url.pathname + url.search, BASE).href,
+      'cache-control': 'public, max-age=3600',
+    },
+  });
+}
 
 const json = (body, status = 200, headers = {}) =>
   new Response(JSON.stringify(body, null, 2) + '\n', {
@@ -210,12 +226,18 @@ async function handleDashboardPage(request, env, url) {
 
 // --- router ----------------------------------------------------------------
 
-export const __testing = { fetchAsset, decorate };
+export const __testing = { fetchAsset, decorate, canonicalRedirect };
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const clientType = classifyUserAgent(request.headers.get('user-agent'));
+
+    const redirect = canonicalRedirect(url);
+    if (redirect) {
+      record(env, request, url, clientType, 308);
+      return redirect;
+    }
 
     let response;
     try {

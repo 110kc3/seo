@@ -8,7 +8,7 @@ from typing import Optional
 import httpx
 from llama_index.core.tools import FunctionTool
 
-BASE = "https://index.kc-it.pl"
+BASE = "https://index.percall.dev"
 
 
 def search_ai_products(query: str = "", category: Optional[str] = None) -> str:

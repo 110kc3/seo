@@ -11,11 +11,11 @@ info:
     "[register] ..." = new listing, "[update] ..." = full replacement by the
     original submitter, "[upgrade] ..." = paid tier change (live up to payment
     verification, which rejects with code payments_not_enabled until rails are
-    configured). Bodies are JSON conforming to https://index.kc-it.pl/api/schema.json.
-    Full protocol: https://index.kc-it.pl/llms.txt · MCP server: mcp/server.mjs in the repo.
+    configured). Bodies are JSON conforming to https://index.percall.dev/api/schema.json.
+    Full protocol: https://index.percall.dev/llms.txt · MCP server: mcp/server.mjs in the repo.
 
     HEALTH: listing URLs are re-checked weekly; 3 consecutive failures delist
-    (strike state at https://index.kc-it.pl/health.json).
+    (strike state at https://index.percall.dev/health.json).
 
     AUDIT: GET /api/score?url=... is free and returns an A-F grade plus per-check
     pass/fail. POST /api/audit is the paid half — the same checks, plus why each
@@ -31,7 +31,7 @@ info:
   contact:
     url: https://github.com/110kc3/seo
 servers:
-  - url: https://index.kc-it.pl
+  - url: https://index.percall.dev
 paths:
   /api/index.json:
     get:
@@ -54,7 +54,7 @@ paths:
                   listings:
                     type: array
                     items:
-                      $ref: "https://index.kc-it.pl/api/schema.json"
+                      $ref: "https://index.percall.dev/api/schema.json"
   /api/schema.json:
     get:
       operationId: getListingSchema
@@ -81,7 +81,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "https://index.kc-it.pl/api/schema.json"
+                $ref: "https://index.percall.dev/api/schema.json"
         "404":
           description: Unknown slug.
   /llms-full.txt:

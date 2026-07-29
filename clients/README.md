@@ -8,8 +8,8 @@ see exactly what they do and change them without waiting for a release.
 
 If you would rather not paste anything: the registry is already exposed over
 **MCP** (`mcp/server.mjs` in this repo, zero dependencies, stdio) and every
-endpoint is plain HTTP documented in [`/llms.txt`](https://index.kc-it.pl/llms.txt)
-and [`/openapi.yaml`](https://index.kc-it.pl/openapi.yaml).
+endpoint is plain HTTP documented in [`/llms.txt`](https://index.percall.dev/llms.txt)
+and [`/openapi.yaml`](https://index.percall.dev/openapi.yaml).
 
 | File | For |
 |---|---|

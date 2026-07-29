@@ -6,7 +6,7 @@ body:
     id: listing
     attributes:
       label: Listing JSON (full replacement)
-      description: "Same schema as registration: https://index.kc-it.pl/api/schema.json. The slug must be an existing listing submitted by your GitHub account. created/tier are preserved."
+      description: "Same schema as registration: https://index.percall.dev/api/schema.json. The slug must be an existing listing submitted by your GitHub account. created/tier are preserved."
       render: json
     validations:
       required: true

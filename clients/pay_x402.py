@@ -7,7 +7,7 @@ Note the `evm` extra: the docs' `x402[httpx]` alone does not pull in the EVM
 signer and the import fails.
 
 The wallet needs USDC on the network the endpoint quotes. Read the current terms
-first, without spending anything: https://index.kc-it.pl/api/x402/info
+first, without spending anything: https://index.percall.dev/api/x402/info
 
 Verified against index.kc-it.pl on 2026-07-25 with x402 2.16.0.
 """
@@ -30,7 +30,7 @@ async def main() -> None:
 
     async with x402HttpxClient(client) as http:
         response = await http.post(
-            "https://index.kc-it.pl/api/audit",
+            "https://index.percall.dev/api/audit",
             json={"url": sys.argv[1] if len(sys.argv) > 1 else "https://example.com"},
         )
         await response.aread()

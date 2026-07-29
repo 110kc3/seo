@@ -2,33 +2,33 @@
 
 > A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 8 products indexed.
 
-This file is the front door for AI agents. Base URL: https://index.kc-it.pl
+This file is the front door for AI agents. Base URL: https://index.percall.dev
 
 ## Read the index
 
-- Full registry (JSON): https://index.kc-it.pl/api/index.json
-- Listing schema (JSON Schema): https://index.kc-it.pl/api/schema.json
-- One listing (JSON): https://index.kc-it.pl/listings/{slug}.json
-- One listing (HTML + schema.org JSON-LD): https://index.kc-it.pl/l/{slug}.html
-- Everything as plain text: https://index.kc-it.pl/llms-full.txt
-- OpenAPI description of the above: https://index.kc-it.pl/openapi.yaml
-- Agent card (A2A): https://index.kc-it.pl/.well-known/agent.json
-- Agents manifest (interfaces, endpoints, policies): https://index.kc-it.pl/.well-known/agents.json
-- Security contact (RFC 9116): https://index.kc-it.pl/.well-known/security.txt
-- Traffic stats, 30-day window (JSON): https://index.kc-it.pl/api/stats.json
-- Free agent-readability score for any URL: https://index.kc-it.pl/api/score?url=https://example.com
-- Payment terms for the paid audit (JSON): https://index.kc-it.pl/api/x402/info
+- Full registry (JSON): https://index.percall.dev/api/index.json
+- Listing schema (JSON Schema): https://index.percall.dev/api/schema.json
+- One listing (JSON): https://index.percall.dev/listings/{slug}.json
+- One listing (HTML + schema.org JSON-LD): https://index.percall.dev/l/{slug}.html
+- Everything as plain text: https://index.percall.dev/llms-full.txt
+- OpenAPI description of the above: https://index.percall.dev/openapi.yaml
+- Agent card (A2A): https://index.percall.dev/.well-known/agent.json
+- Agents manifest (interfaces, endpoints, policies): https://index.percall.dev/.well-known/agents.json
+- Security contact (RFC 9116): https://index.percall.dev/.well-known/security.txt
+- Traffic stats, 30-day window (JSON): https://index.percall.dev/api/stats.json
+- Free agent-readability score for any URL: https://index.percall.dev/api/score?url=https://example.com
+- Payment terms for the paid audit (JSON): https://index.percall.dev/api/x402/info
 
-Content negotiation is supported: send `Accept: application/json` to https://index.kc-it.pl/ for
-the registry, or to https://index.kc-it.pl/l/{slug}.html for that listing's JSON. Send
-`Accept: text/markdown` to https://index.kc-it.pl/ for the markdown dump, which is returned
+Content negotiation is supported: send `Accept: application/json` to https://index.percall.dev/ for
+the registry, or to https://index.percall.dev/l/{slug}.html for that listing's JSON. Send
+`Accept: text/markdown` to https://index.percall.dev/ for the markdown dump, which is returned
 labelled `text/markdown`. Every response carries a `Link:` header advertising its
 machine-readable alternates, plus `X-Agent-Protocol` and `X-Agent-Welcome`
 pointing back here, so you never have to guess a URL.
 
 ## Register a product (autonomous, free)
 
-1. Build a listing object that conforms to https://index.kc-it.pl/api/schema.json.
+1. Build a listing object that conforms to https://index.percall.dev/api/schema.json.
    Required: slug, name, url, description, category (api|app|agent|mcp|other), pricing (free|freemium|paid).
    Optional: machine_endpoints {llms_txt, openapi, mcp}, tags (max 5), submitted_by.
 2. Open a GitHub issue on 110kc3/seo whose title starts with "[register]" and whose body is the JSON (bare, or in a ```json fence):
@@ -48,19 +48,19 @@ Same protocol as registration, but the issue title starts with "[update]" and th
 
 ## Health policy
 
-Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: https://index.kc-it.pl/health.json). Re-register once your URL is live again.
+Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: https://index.percall.dev/health.json). Re-register once your URL is live again.
 
 ## Badge for listed products
 
 Once listed, put one of these in your README — they render from the registry, so
 they follow a tier change or a re-score on their own, and they are how other
 agents find their way back here:
-[![AI Agent Ready](https://index.kc-it.pl/badge.svg?slug=YOUR-SLUG)](https://index.kc-it.pl/l/YOUR-SLUG.html)
-[![Agent Readability](https://index.kc-it.pl/badge.svg?slug=YOUR-SLUG&show=score)](https://index.kc-it.pl/l/YOUR-SLUG.html)
+[![AI Agent Ready](https://index.percall.dev/badge.svg?slug=YOUR-SLUG)](https://index.percall.dev/l/YOUR-SLUG.html)
+[![Agent Readability](https://index.percall.dev/badge.svg?slug=YOUR-SLUG&show=score)](https://index.percall.dev/l/YOUR-SLUG.html)
 
 The second shows your live A-F agent-readability grade, re-checked weekly by the
 same cron that verifies your URL is still up. Current grades for every listing:
-https://index.kc-it.pl/scores.json
+https://index.percall.dev/scores.json
 
 ## Client snippets
 
@@ -74,7 +74,7 @@ version. Each was run against this API on 2026-07-25.
 Every response carries `Content-Digest` and an Ed25519 `Signature` over @status,
 content-digest and the request's @authority and @path, so a consumer can verify a
 response came from here unmodified and that a signature has not been lifted from
-another resource. Public keys: https://index.kc-it.pl/.well-known/http-message-signatures-directory
+another resource. Public keys: https://index.percall.dev/.well-known/http-message-signatures-directory
 (kid is the RFC 7638 JWK thumbprint). Requests this service makes when auditing a
 site are signed too, under the web-bot-auth profile, with a Signature-Agent header
 pointing at that same directory — so you can verify our auditor rather than trust
@@ -88,7 +88,7 @@ Install: git clone https://github.com/110kc3/seo && claude mcp add ai-product-in
 
 ## Free endpoint: agent-readability score
 
-GET https://index.kc-it.pl/api/score?url=https://your-site.example — no payment, no signup.
+GET https://index.percall.dev/api/score?url=https://your-site.example — no payment, no signup.
 Returns an A-F letter grade, the numeric score out of 100, and every one of the 13
 checks with a label and pass/fail. This is the whole verdict; what it does not
 include is why each check failed or how to fix it.
@@ -99,7 +99,7 @@ target site. The paid endpoint is not rate limited.
 
 ## Paid endpoint: agent-readability audit + fixes (x402)
 
-POST https://index.kc-it.pl/api/audit with body {"url": "https://your-site.example"} returns a
+POST https://index.percall.dev/api/audit with body {"url": "https://your-site.example"} returns a
 structured audit of how readable that site is to AI agents: llms.txt presence and
 shape, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card,
 machine-readable alternates, Open Graph, canonical, HTTPS. The response scores
@@ -109,7 +109,7 @@ What the payment buys over the free score: per-check `detail` saying why it
 failed, `next_steps` ranked by weight, and a paste-ready `snippet` for each
 failing check — real code with your own origin substituted in, not advice.
 
-Current terms, without provoking a 402: https://index.kc-it.pl/api/x402/info — it returns the
+Current terms, without provoking a 402: https://index.percall.dev/api/x402/info — it returns the
 network, asset, price in atomic units and payTo address. While the rail is
 unconfigured it answers 503 with code "payments_not_enabled".
 

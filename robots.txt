@@ -1,5 +1,5 @@
 # AI Product Index — all crawlers welcome, AI crawlers explicitly invited.
-# Agents: start at https://index.kc-it.pl/llms.txt
+# Agents: start at https://index.percall.dev/llms.txt
 
 User-agent: *
 Allow: /
@@ -46,4 +46,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://index.kc-it.pl/sitemap.xml
+Sitemap: https://index.percall.dev/sitemap.xml

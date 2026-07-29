@@ -6,7 +6,7 @@ body:
     id: listing
     attributes:
       label: Listing JSON
-      description: "Must conform to https://index.kc-it.pl/api/schema.json — protocol docs: https://index.kc-it.pl/llms.txt"
+      description: "Must conform to https://index.percall.dev/api/schema.json — protocol docs: https://index.percall.dev/llms.txt"
       render: json
       placeholder: |
         {

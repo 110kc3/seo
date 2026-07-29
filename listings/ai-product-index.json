@@ -1,7 +1,7 @@
 {
   "slug": "ai-product-index",
   "name": "AI Product Index",
-  "url": "https://index.kc-it.pl/",
+  "url": "https://index.percall.dev/",
   "description": "A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.",
   "category": "api",
   "pricing": "free",

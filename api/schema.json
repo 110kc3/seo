@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://index.kc-it.pl/api/schema.json",
+  "$id": "https://index.percall.dev/api/schema.json",
   "title": "AI Product Index listing",
   "description": "A product listing in the AI Product Index. Fields marked readOnly are set by the registry at acceptance; submitted values for them are ignored. Unknown fields are rejected.",
   "type": "object",

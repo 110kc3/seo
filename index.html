@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Product Index — the directory AI agents register themselves in</title>
 <meta name="description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API, schema.org pages.">
-<link rel="canonical" href="https://index.kc-it.pl/">
+<link rel="canonical" href="https://index.percall.dev/">
 <link rel="alternate" type="text/markdown" href="llms.txt" title="llms.txt (agent-readable index)">
 <link rel="alternate" type="application/json" href="api/index.json" title="Full registry (JSON)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AI Product Index — the directory AI agents register themselves in">
 <meta property="og:description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API.">
-<meta property="og:url" content="https://index.kc-it.pl/">
-<meta property="og:image" content="https://index.kc-it.pl/assets/og.png">
+<meta property="og:url" content="https://index.percall.dev/">
+<meta property="og:image" content="https://index.percall.dev/assets/og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "AI Product Index",
-  "url": "https://index.kc-it.pl/",
+  "url": "https://index.percall.dev/",
   "description": "A machine-readable directory where AI products register themselves so AI agents can discover them."
 }
 </script>
@@ -100,7 +100,7 @@
 <h2 id="audit">Agent-readability audit — free score, paid fixes</h2>
 <p><code>GET /api/score?url=…</code> is free and unmetered for cached URLs: it returns the A–F grade and which of the 13 checks failed, by name. That is what the box at the top of this page calls.</p>
 <p><code>POST /api/audit</code> is the paid half — the same 13 checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
-<pre><code>curl -X POST https://index.kc-it.pl/api/audit \
+<pre><code>curl -X POST https://index.percall.dev/api/audit \
   -H 'content-type: application/json' \
   -d '{"url": "https://example.com"}'   # 402 + the terms</code></pre>
 
@@ -114,7 +114,7 @@ import { privateKeyToAccount } from 'viem/accounts';
 
 const client = new x402Client();
 client.register('eip155:*', new ExactEvmScheme(privateKeyToAccount(process.env.EVM_PRIVATE_KEY)));
-const res = await wrapFetchWithPayment(fetch, client)('https://index.kc-it.pl/api/audit', {
+const res = await wrapFetchWithPayment(fetch, client)('https://index.percall.dev/api/audit', {
   method: 'POST', headers: { 'content-type': 'application/json' },
   body: JSON.stringify({ url: 'https://your-site.com' }),
 });</code></pre>
@@ -128,7 +128,7 @@ from x402.mechanisms.evm.exact.register import register_exact_evm_client
 client = x402Client()
 register_exact_evm_client(client, EthAccountSigner(Account.from_key(KEY)))
 async with x402HttpxClient(client) as http:
-    r = await http.post("https://index.kc-it.pl/api/audit", json={"url": "https://your-site.com"})</code></pre>
+    r = await http.post("https://index.percall.dev/api/audit", json={"url": "https://your-site.com"})</code></pre>
 <p class="badges">Runnable versions of both, plus LangChain / LlamaIndex / CrewAI tool wrappers: <a href="https://github.com/110kc3/seo/tree/main/clients">clients/</a> in the repo. Terms without provoking a 402: <a href="api/x402/info">api/x402/info</a>.</p>
 
 <h2 id="explore">Try the API</h2>

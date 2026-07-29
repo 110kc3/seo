@@ -7,7 +7,7 @@
 import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 
-const BASE = 'https://index.kc-it.pl';
+const BASE = 'https://index.percall.dev';
 
 type Listing = {
   slug: string; name: string; url: string; description: string;

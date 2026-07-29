@@ -9,7 +9,7 @@ import httpx
 from crewai_tools import BaseTool
 from pydantic import BaseModel, Field
 
-BASE = "https://index.kc-it.pl"
+BASE = "https://index.percall.dev"
 
 
 class SearchInput(BaseModel):

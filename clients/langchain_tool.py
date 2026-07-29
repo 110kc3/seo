@@ -11,7 +11,7 @@ from typing import Optional
 import httpx
 from langchain_core.tools import tool
 
-BASE = "https://index.kc-it.pl"
+BASE = "https://index.percall.dev"
 
 
 @tool

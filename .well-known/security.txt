@@ -4,5 +4,5 @@
 # rebuild a diff. Bump this date by hand before it passes.
 Contact: mailto:110kc3@gmail.com
 Expires: 2027-07-29T00:00:00.000Z
-Canonical: https://index.kc-it.pl/.well-known/security.txt
+Canonical: https://index.percall.dev/.well-known/security.txt
 Preferred-Languages: en, pl
