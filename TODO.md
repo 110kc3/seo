@@ -105,6 +105,40 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
+## Done (v3.11 — the catalogs are now checked, 2026-08-01)
+
+Neither upstream registry checks whether its entries still answer. The Bazaar
+keeps an entry for 30 days after its last settlement; the MCP registry lists
+whatever a publisher declared. So "which of these ~24,700 endpoints actually
+answer" was a question nobody could answer. Now it is published weekly.
+
+- [x] **`scripts/probe-catalogs.mjs`**, wired into the Monday cron, writing `api/x402/health.json` and `api/mcp/health.json` — served as static assets, so the liveness data is public the same way the catalogs are.
+- [x] **Search flags, never hides.** A confirmed-unreachable result carries `unreachable: true` and stays exactly where it ranked. One probe is evidence, not proof: it is a weekly sample from one network path, so removing entries on that basis would silently delete working endpoints. Two consecutive misses before anything is called dead, and a recovery forgives the record outright.
+- [x] **Liveness is an enrichment, never a dependency.** The health file is absent until the first cron run and stale between them; search works identically without it. Not knowing is not the same as knowing everything is fine, and neither is a reason to fail a query.
+- 186 tests (was 171).
+
+**The design mistake worth recording, because the first real run caught it.**
+The sampler took a contiguous window, `rows[cursor..cursor+600]`. That looked
+obviously fine and was obviously wrong: these files are sorted, so anything
+correlated with the sort order clusters. Placeholder URLs are **1.6% of the MCP
+catalog but were 54% of its first 120 rows**, and the first window reported
+"76.4% answered". Sampling every stride-th row instead — cursor advancing one
+per run, so a full pass still covers every entry exactly once — the same
+catalog reports **94.0%**. Coverage was never the problem; representativeness
+was, and only a real run against real data showed it.
+
+**First readings** (rotating sample, so these will move):
+
+| catalog | answered | untestable | note |
+|---|---|---|---|
+| x402 | **98.0%** | 0% | healthier than the 30-day-stale worry suggested |
+| MCP | **94.0%** | 1.6% | untestable = `https://{tenant_host}/mcp` templates a publisher never filled in |
+
+"Answered" deliberately counts 401 and 402 as alive — a 402 is the *correct*
+reply from a paid endpoint, and treating it as a failure would mark the entire
+point of an x402 catalog as dead. Only transport failures and 5xx count against
+an endpoint.
+
 ## Done (v3.10 — the outage, and the three things it exposed, 2026-08-01)
 
 A four-hour deploy outage, and then a verification pass over the whole project
@@ -125,21 +159,7 @@ RFC 9421 signing present, x402 402 shape correct, CDP rail key accepted with
 **Found and left open:** the register path has not executed since 2026-07-09 —
 see item 3 of the pending list below, which is a decision rather than a task.
 
-### Next engineering item, needing no input from Kamil
-
-**Health-check a rotating slice of the catalogs.** Nothing in either catalog is
-probed, and the Bazaar keeps an entry for 30 days after its last settlement, so
-an unknown share of those 14,661 endpoints are dead. Probing all of them weekly
-is too much; probing a rotating slice is not. "Which x402 endpoints actually
-answer" is a question nobody can answer today, which makes it the most valuable
-thing left in the repo — and unlike everything else outstanding, it needs no
-browser and no decision.
-
-Not started because it is a real feature with choices worth making
-deliberately — slice size, where results live (committed JSON like `health.json`
-versus KV), whether a dead endpoint is hidden from search or merely flagged, and
-how staleness is shown to a caller. Worth picking those on purpose rather than
-inheriting them from whatever the first implementation happened to do.
+### ~~Next engineering item~~ — done 2026-08-01, see v3.11 below
 
 ## Done (v3.9 — two niches indexed exhaustively, 2026-08-01)
 

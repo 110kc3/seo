@@ -22,6 +22,7 @@ answers "what can I call right now", not "what exists".
 - Search: https://index.percall.dev/api/mcp/search?q=github&auth=none — filters: `transport`, `host`, `auth`, `limit`
 - Full catalog (JSON): https://index.percall.dev/api/mcp/catalog.json
 - Aggregates and the exact scope rule: https://index.percall.dev/api/mcp/stats.json
+- Liveness of a weekly rotating sample: https://index.percall.dev/api/mcp/health.json
 
 ## Find a paid API you can call (the x402 catalog)
 
@@ -31,10 +32,20 @@ they can actually be searched — upstream offers offset paging and no query.
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
 - Full catalog (JSON, ~15k entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
+- Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
 This is a mirror and says so: source, fetch date and upstream URL travel with
 the data, and the facts belong to the endpoint operators. Refreshed weekly. To
 have an entry corrected or removed, open an issue on https://github.com/110kc3/seo.
+
+**Neither upstream registry checks whether its entries still answer, so this one
+does.** A rotating sample of both catalogs is probed weekly and the results are
+published at the `health.json` URLs above. A search result that has failed twice
+running carries `unreachable: true` — flagged, never hidden, because one probe
+is a weekly sample from one network path and that is evidence rather than proof.
+"Answers" means answers, not succeeds: a 402 from a paid endpoint and a 401 from
+one wanting credentials both prove something is listening, so only transport
+failures and 5xx count against an entry.
 
 ## Read the index
 

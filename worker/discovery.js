@@ -196,11 +196,29 @@ const catalogPromises = new Map();
 function loadCatalog(env, base, key) {
   if (!catalogPromises.has(key)) {
     const promise = (async () => {
-      const url = `${base}/api/${CATALOGS[key].path}/index.json`;
-      const resp = env?.ASSETS ? await env.ASSETS.fetch(new Request(url)) : await fetch(url);
+      const path = CATALOGS[key].path;
+      const get = (u) => (env?.ASSETS ? env.ASSETS.fetch(new Request(u)) : fetch(u));
+      const resp = await get(`${base}/api/${path}/index.json`);
       if (!resp.ok) throw new Error(`catalog unavailable (HTTP ${resp.status})`);
       const body = await resp.json();
-      return { ...body, at: Object.fromEntries(body.fields.map((f, i) => [f, i])) };
+
+      // Liveness is optional and must stay optional: it is written by a weekly
+      // cron, so it is absent until the first run and stale between them.
+      // Search has to work without it — a missing health file means we know
+      // nothing about these endpoints, which is different from knowing they
+      // are fine, but it is never a reason to fail the query.
+      let unreachable = new Set();
+      let probed = null;
+      try {
+        const h = await get(`${base}/api/${path}/health.json`);
+        if (h.ok) {
+          const health = await h.json();
+          probed = health.probed_at ?? null;
+          unreachable = new Set((health.unreachable ?? []).filter((e) => (e.misses ?? 0) >= 2).map((e) => e.url));
+        }
+      } catch { /* liveness is an enrichment, never a dependency */ }
+
+      return { ...body, at: Object.fromEntries(body.fields.map((f, i) => [f, i])), unreachable, probed };
     })().catch((e) => {
       // A failed load must not poison every later request: drop the cached
       // promise so the next caller retries rather than replaying the error.
@@ -268,7 +286,16 @@ export async function handleCatalogSearch(key, url, env, base) {
     || (tie === null ? 0 : (a[1][tie] ?? Infinity) - (b[1][tie] ?? Infinity))
     || String(a[1][at.url]).localeCompare(String(b[1][at.url])));
 
-  const view = ([, row]) => Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
+  // Flagged, never hidden. A probe failure is evidence, not proof — the sample
+  // is weekly and taken from one network path — so removing the entry would
+  // silently delete endpoints on the strength of one bad moment. Saying so and
+  // leaving it ranked lets the caller decide, which is the only honest option
+  // when the alternative is an empty result set.
+  const view = ([, row]) => {
+    const out = Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
+    if (catalog.unreachable?.has(out.url)) out.unreachable = true;
+    return out;
+  };
   return json({
     ok: true,
     query: q,
@@ -281,6 +308,7 @@ export async function handleCatalogSearch(key, url, env, base) {
       [spec.unit]: catalog.count,
       full: `${base}/api/${spec.path}/catalog.json`,
       stats: `${base}/api/${spec.path}/stats.json`,
+      ...(catalog.probed ? { liveness: `${base}/api/${spec.path}/health.json`, liveness_sampled: catalog.probed } : {}),
     },
   }, 200, { 'cache-control': 'public, max-age=600' });
 }

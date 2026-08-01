@@ -1838,6 +1838,57 @@ test('x402 search filters by chain, method and host', async () => {
   assert.deepEqual((await x402Get('host=b.example')).results.map((r) => r.host), ['b.example']);
 });
 
+// --- catalog liveness -------------------------------------------------------
+
+const withHealth = (health) => ({
+  ASSETS: {
+    fetch: async (req) => {
+      if (new URL(req.url).pathname.endsWith('/health.json')) {
+        return health
+          ? new Response(JSON.stringify(health), { headers: { 'content-type': 'application/json' } })
+          : new Response('not found', { status: 404 });
+      }
+      return new Response(JSON.stringify(X402_INDEX), { headers: { 'content-type': 'application/json' } });
+    },
+  },
+});
+
+test('an endpoint confirmed unreachable is flagged, not removed', async () => {
+  discovery.resetCatalog();
+  const env = withHealth({
+    probed_at: '2026-08-01',
+    unreachable: [
+      { url: 'https://b.example/weather', reason: 'timeout', misses: 2 },
+      // One miss is a bad moment, not a death — it must not reach the caller.
+      { url: 'https://a.example/weather', reason: 'timeout', misses: 1 },
+    ],
+  });
+  const body = await (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?q=weather`), env, BASE)).json();
+
+  // Still ranked first: flagging must not quietly reorder or drop results, or
+  // the caller loses the cheapest endpoint on one week's evidence.
+  assert.equal(body.results[0].url, 'https://b.example/weather');
+  assert.equal(body.results[0].unreachable, true);
+  assert.equal(body.results.length, 3, 'a flagged endpoint was dropped from results');
+  assert.equal(body.results.find((r) => r.url === 'https://a.example/weather').unreachable, undefined);
+  assert.equal(body.catalog.liveness_sampled, '2026-08-01');
+  discovery.resetCatalog();
+});
+
+test('search works unchanged when liveness has never run', async () => {
+  // The health file is absent until the first cron run and stale between them.
+  // Not knowing is different from knowing everything is fine, and neither is a
+  // reason to fail a query.
+  discovery.resetCatalog();
+  const body = await (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?q=weather`), withHealth(null), BASE)).json();
+
+  assert.equal(body.ok, true);
+  assert.equal(body.results.length, 3);
+  assert.ok(body.results.every((r) => r.unreachable === undefined));
+  assert.equal(body.catalog.liveness, undefined);
+  discovery.resetCatalog();
+});
+
 test('an unpriced x402 endpoint is excluded by a price filter, not treated as free', async () => {
   // d.example is priced in an asset whose decimals are unknown, so its price is
   // unknown — not zero. Sorting it first as "cheapest" would be a lie an agent

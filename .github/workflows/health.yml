@@ -54,6 +54,18 @@ jobs:
         continue-on-error: true
         run: node scripts/bazaar-check.mjs
 
+      # Neither upstream registry checks whether its entries still answer, so an
+      # unknown share of ~24,700 endpoints are dead. Probes a rotating sample —
+      # every stride-th row, cursor advancing one per run — so each week is a
+      # spread sample of the whole catalog and a full pass completes over time.
+      # Runs last because it is the slowest step and the least important: it
+      # enriches the catalogs rather than producing them. continue-on-error for
+      # the same reason as the refreshes above — a flaky network on our side
+      # must not cost the week's liveness and scoring work.
+      - name: Probe a rotating sample of both catalogs
+        continue-on-error: true
+        run: node scripts/probe-catalogs.mjs
+
       # No longer gated on the liveness/score steps reporting a change: the
       # catalog refresh also produces one and has no such flag, so the gate is
       # now "did anything actually change on disk", asked of git rather than
