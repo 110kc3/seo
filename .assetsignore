@@ -27,6 +27,10 @@ node_modules
 /package.json
 /package-lock.json
 /site.config.json
+# Registry metadata and the stdio server's build spec — read by Glama off the
+# GitHub repo, never served by the site.
+/glama.json
+/Dockerfile
 /README.md
 /TODO.md
 /DEPLOY.md

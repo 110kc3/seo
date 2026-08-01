@@ -209,7 +209,56 @@ confirm by email except (c), so the only way to know is to look again in a week.
 - llmstxt.site — form at /submit (semi-active). **⏳ MANUAL — not done**, browser form.
 - wong2/awesome-mcp-servers — ~~smaller sibling of #1, same PR pattern~~. **❌ NOT APPLICABLE as of 2026-07-29** — the README now opens with `> [!NOTE] We do not accept PRs. Please submit your MCP on the website: https://mcpservers.org/submit`. That submit page is a client-side React form (server name / description / link / category / contact email, with a $39 "premium" queue-skip upsell), so there is no request to script. **⏳ MANUAL** if 4.2k★ is judged worth the form; the free tier is fine.
 - Official MCP Registry (registry.modelcontextprotocol.io) — needs the server packaged as an `mcpb` bundle attached to a GitHub Release + `mcp-publisher` device auth. Medium effort; do if the MCP server gets traction.
-- Skip: mcp.so (stale/403), Glama & Smithery (auto-index; passive benefit already flows from #1).
+- Skip: mcp.so (stale/403), Smithery (auto-index; passive benefit already flows from #1).
+
+### Glama — promoted out of "skip": #1 now *requires* it (2026-08-01)
+
+Glama was written off here as a passive auto-index. That is no longer true, and
+it is now a hard dependency of the 90k★ PR rather than a nice-to-have. The
+`glama-check` bot commented on
+[#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152) on
+2026-07-29 with new listing requirements:
+
+1. the server must be listed on Glama and pass its checks, and
+2. the PR entry must carry a score badge —
+   `[![110kc3/seo MCP server](https://glama.ai/mcp/servers/110kc3/seo/badges/score.svg)](https://glama.ai/mcp/servers/110kc3/seo)`
+
+Every neighbouring entry in the Search & Data Extraction category already
+carries one; ours is the only recent addition without. Both the badge and the
+server page 404 today, which is simply what "not yet listed" looks like.
+
+**Glama has two separate front doors, and the badge only comes from one:**
+
+| route | what it takes | gives a badge? |
+|---|---|---|
+| `glama.ai/mcp/servers/add` | a **GitHub repo**; Glama builds it and runs the stdio server | **yes** — `/mcp/servers/110kc3/seo` |
+| `glama.ai/mcp/connectors` | a public **streamable-http URL** | no |
+
+So the repo route is the one that unblocks #11152. The connectors route is worth
+doing too — the bot's own P.S. invites it and `https://index.percall.dev/mcp` is
+exactly what it wants — but it will not produce the badge.
+
+**Repo side is done and verified** (`glama.json` + `Dockerfile`, 2026-08-01).
+Glama's health check starts the server and calls `initialize` and `tools/list`;
+that exact exchange was run against the built image and both answered, so the
+check has no reason to fail. `glama.json` carries only `maintainers`, which is
+all its schema defines.
+
+**Left to do, and it needs a browser + GitHub OAuth:** submit `110kc3/seo` at
+https://glama.ai/mcp/servers/add. Once the server page resolves, the badge line
+goes onto the PR — batched with the tool-list correction below so a 90k★ repo
+gets one notification instead of two.
+
+**Also stale in the PR entry:** it names four tools, and the hosted server now
+answers six — `search_x402_endpoints` and `search_mcp_servers` shipped with
+v3.9. Note the repo's stdio server (`mcp/server.mjs`) still exposes only three
+(`search_products`, `get_product`, `register_product`) and has drifted from the
+Worker; the entry advertises the hosted endpoint, so it should describe the six.
+
+**The GLAMA_API_KEY question is answered: it is not needed here.** Glama's API
+docs are for the Gateway, an OpenAI-compatible inference product. Registry
+submission is a web form, not an API call. Unless the key is something other
+than a gateway key, delete it rather than leave an unread credential around.
 
 ## Passive channels already live
 
