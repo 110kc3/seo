@@ -17,7 +17,7 @@
 //     cannot be used as a free fetch proxy or to burn our subrequest budget.
 
 import { auditUrl, parseAuditRequest, CHECK_LABELS } from './audit.js';
-import { botAuthHeaders, DIRECTORY_PATH } from './signing.js';
+import { botAuthHeaders, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 
 /**
  * Signs the auditor's outbound requests under the web-bot-auth profile, and
@@ -41,7 +41,34 @@ export function auditSigner(env, cfg) {
  */
 export function fetcherFor(request, env, target) {
   const sameHost = new URL(target).host === new URL(request.url).host;
-  return sameHost && env.ASSETS ? env.ASSETS.fetch.bind(env.ASSETS) : undefined;
+  if (!sameHost || !env.ASSETS) return undefined;
+  const assets = env.ASSETS.fetch.bind(env.ASSETS);
+
+  // The ASSETS binding serves committed files and nothing else, so a same-host
+  // audit is blind to every route this Worker generates at request time. That
+  // made us report ourselves as lacking web-bot-auth while the directory
+  // answered 200 to everyone else — a self-audit understating the site it runs
+  // on, which is the one direction of error nobody would think to check.
+  //
+  // Only the routes the audit actually probes need covering, and there is
+  // exactly one: the key directory. It is answered from the same function
+  // index.js serves it with, so this measures the real thing rather than
+  // asserting it exists.
+  return async (input, init) => {
+    const url = new URL(typeof input === 'string' ? input : input.url);
+    if (url.pathname === DIRECTORY_PATH) {
+      const directory = await keyDirectory(env);
+      // An unkeyed deployment has no directory. Falling through to the binding
+      // yields its 404, which is the truth; serving the literal "null" with a
+      // 200 would report web-bot-auth as present on a site that cannot sign.
+      if (directory) {
+        return new Response(JSON.stringify(directory, null, 2), {
+          headers: { 'content-type': DIRECTORY_CONTENT_TYPE },
+        });
+      }
+    }
+    return assets(input, init);
+  };
 }
 
 // Hosts attached to this Worker that are not the canonical one — the percall.dev

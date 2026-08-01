@@ -1092,6 +1092,34 @@ test('auditing our own hostname goes through ASSETS, not the network', () => {
   assert.equal(score.fetcherFor(req, {}, 'https://index.kc-it.pl/'), undefined);
 });
 
+test('a self-audit can see the routes the Worker generates, not just its files', async () => {
+  // The ASSETS binding serves committed files and nothing else, so a same-host
+  // audit was blind to every route generated at request time — and reported us
+  // as lacking web-bot-auth while the key directory answered 200 to everyone
+  // else. A self-audit understating its own site is the one direction of error
+  // nobody thinks to check, so it is pinned here.
+  const { DIRECTORY_PATH } = await import('../worker/signing.js');
+  const keyed = await signingEnv();
+  const assets = { fetch() { return new Response('not found', { status: 404 }); } };
+  const env = { ...keyed.env, ASSETS: assets };
+  const req = new Request('https://index.percall.dev/api/score?url=x');
+  const fetcher = score.fetcherFor(req, env, 'https://index.percall.dev/');
+
+  const directory = await fetcher(`https://index.percall.dev${DIRECTORY_PATH}`);
+  assert.equal(directory.status, 200, 'the key directory 404d in a self-audit');
+  assert.ok((await directory.json()).keys?.length, 'the directory served no keys');
+
+  // Everything else still goes to the binding — this is a targeted patch over
+  // one known dynamic route, not a general bypass of it.
+  assert.equal((await fetcher('https://index.percall.dev/llms.txt')).status, 404);
+
+  // An unkeyed deployment genuinely has no directory, and must say so rather
+  // than serving the literal string "null" with a 200 — which would report
+  // web-bot-auth as present on a site that cannot sign anything.
+  const unkeyed = score.fetcherFor(req, { ASSETS: assets }, 'https://index.percall.dev/');
+  assert.equal((await unkeyed(`https://index.percall.dev${DIRECTORY_PATH}`)).status, 404);
+});
+
 test('the free score refuses the same targets the paid one does', async () => {
   const cfg = { base: BASE, payments: CFG.payments };
   const call = (qs) => handleScore(new Request(`${BASE}/api/score${qs}`), {}, cfg, resolveX402(cfg));

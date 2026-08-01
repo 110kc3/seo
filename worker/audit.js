@@ -18,7 +18,7 @@ const AI_CRAWLER_AGENTS = [
   'Claude-SearchBot', 'anthropic-ai', 'PerplexityBot', 'Google-Extended', 'CCBot',
 ];
 
-async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fetch, signHeaders = null } = {}) {
+async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fetch, signHeaders = null, accept = '*/*' } = {}) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -28,12 +28,15 @@ async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fe
     const resp = await fetchImpl(url, {
       redirect: 'follow',
       signal: ctl.signal,
-      headers: { 'user-agent': UA, accept: '*/*', ...signed },
+      headers: { 'user-agent': UA, accept, ...signed },
     });
-    if (as === 'status') return { status: resp.status, ok: resp.ok, url: resp.url };
+    // `type` is needed to tell content negotiation from a site that ignores
+    // Accept and hands back the same HTML whatever you ask for.
+    const type = resp.headers?.get?.('content-type') ?? null;
+    if (as === 'status') return { status: resp.status, ok: resp.ok, url: resp.url, type };
     const buf = await resp.arrayBuffer();
     const body = new TextDecoder().decode(buf.slice(0, maxBytes));
-    return { status: resp.status, ok: resp.ok, url: resp.url, body, truncated: buf.byteLength > maxBytes };
+    return { status: resp.status, ok: resp.ok, url: resp.url, type, body, truncated: buf.byteLength > maxBytes };
   } catch (e) {
     return { status: 0, ok: false, url, error: e.name === 'AbortError' ? 'timeout' : (e.cause?.code ?? e.name) };
   } finally {
@@ -417,7 +420,7 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
   const one = (url, opts = {}) => get(url, { ...opts, fetchImpl, signHeaders });
 
   const [home, llms, llmsFull, robots, sitemap, agentCard, wellKnown, agentsJson,
-    apiCatalog, mcpCard, mcpServerCard, agentSkills, botAuthDir] = await Promise.all([
+    apiCatalog, mcpCard, mcpServerCard, agentSkills, botAuthDir, markdownAlt] = await Promise.all([
     one(target),
     one(at('/llms.txt')),
     one(at('/llms-full.txt'), { maxBytes: 4096 }),
@@ -438,6 +441,10 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
     one(at('/.well-known/mcp/server-card.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/agent-skills/index.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/http-message-signatures-directory'), { maxBytes: 32 * 1024 }),
+    // The same page asked for as markdown. Cheap for us, and the only way to
+    // tell a site that negotiates from one that ignores Accept — a status code
+    // proves nothing here, since ignoring the header also returns 200.
+    one(target, { accept: 'text/markdown', maxBytes: 1024 }),
   ]);
 
   if (!home.ok) {
@@ -531,6 +538,12 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
     signal('agent_skills', 'Agent Skills index', agentSkills.ok,
       agentSkills.ok ? '/.well-known/agent-skills/index.json is available' : 'no /.well-known/agent-skills/index.json',
       'Publish an Agent Skills index at /.well-known/agent-skills/index.json describing what an agent can accomplish here, so it need not read your docs to find out.'),
+    signal('markdown_negotiation', 'Serves markdown to callers that ask for it',
+      markdownAlt.ok && /markdown/i.test(markdownAlt.type ?? ''),
+      markdownAlt.ok && /markdown/i.test(markdownAlt.type ?? '')
+        ? `Accept: text/markdown returns ${markdownAlt.type}`
+        : `Accept: text/markdown returns ${markdownAlt.type ?? 'no content-type'} — the Accept header is ignored`,
+      'Answer Accept: text/markdown with a markdown twin of the page. An agent parsing your HTML is guessing at which parts are content; markdown removes the guess, and it costs one content-negotiation branch.'),
     signal('web_bot_auth', 'Web Bot Auth key directory', botAuthDir.ok,
       botAuthDir.ok ? '/.well-known/http-message-signatures-directory is available' : 'no /.well-known/http-message-signatures-directory',
       'Publish Ed25519 keys at /.well-known/http-message-signatures-directory (RFC 9421 web-bot-auth) so callers can verify your responses, and so you can tell a signed agent from an anonymous scraper.'),
