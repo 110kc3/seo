@@ -31,6 +31,13 @@ jobs:
         continue-on-error: true
         run: node scripts/score-listings.mjs
 
+      # Bazaar cataloging is CDP-side and gives no signal when it happens, so
+      # the weekly run watches for it rather than leaving it to be remembered.
+      # Never fails the job: not being listed is the status quo, not a fault.
+      - name: Are we in the x402 Bazaar yet?
+        continue-on-error: true
+        run: node scripts/bazaar-check.mjs
+
       - name: Commit health state / delistings
         if: steps.check.outputs.changed == 'true' || steps.score.outputs.changed == 'true'
         run: |
