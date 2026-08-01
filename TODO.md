@@ -112,15 +112,32 @@ Three findings worth keeping:
 - [x] **Agent Skills published** — four at `/.well-known/agent-skills/index.json`: grade a site, find a paid API, find an MCP server, list a product. Each wraps capability that already ships. **Generated, not hand-written**, because the index publishes a sha256 of every skill body and a client is entitled to check it; a stale digest does not read as an oversight, it reads as tampering. Descriptions come from each skill's own frontmatter so the index and the file cannot disagree.
 - 191 tests (was 188). Verified live: all four digests match the bytes actually served.
 
-**Known limitation, and it only affects us.** When this site audits *itself*,
-`fetcherFor()` uses the `ASSETS` binding — a Worker cannot fetch its own
-hostname. `ASSETS` serves static files only, so **dynamic Worker routes are
-invisible in a self-audit**, and our own `web_bot_auth` signal reads absent
-though `/.well-known/http-message-signatures-directory` answers 200 to everyone
-else. External audits use real fetch and are unaffected. The fix is to answer
-same-host probes for known dynamic routes from the router instead of the binding;
-not done, because it is a self-dogfooding artifact rather than a customer-facing
-fault. Our own signals therefore *understate* us by one.
+**Known limitation, and it only affects us — half fixed 2026-08-01.** When this
+site audits *itself*, `fetcherFor()` uses the `ASSETS` binding, because a Worker
+cannot fetch its own hostname. `ASSETS` serves committed files only, so
+**anything the Worker does at request time is invisible in a self-audit.**
+
+`web_bot_auth` is fixed: the key directory is now answered from the same
+function `index.js` serves it with, so a self-audit measures the real thing.
+Verified live — it reads present again.
+
+**`markdown_negotiation` has the same root cause and is not fixed.** Content
+negotiation happens in the Worker's header layer, which `ASSETS` never runs, so
+a self-audit sees raw HTML and reports the signal absent — while
+`curl -H 'accept: text/markdown' https://index.percall.dev/` returns
+`text/markdown; charset=utf-8` to everyone else.
+
+Patching it the way `web_bot_auth` was patched would mean re-implementing
+`negotiate.js` inside `score.js` — a second copy of the negotiation rules that
+can drift, which is the exact anti-pattern the MCP tool-list fix removed. **The
+right fix is general: route same-host audits through the Worker's own fetch
+handler rather than the binding**, so every request-time behaviour is exercised
+at once. That needs a recursion guard first (auditing our own `/api/score` would
+otherwise re-enter), which is why it is written down rather than rushed.
+
+Impact is bounded: signals are unscored, so no grade is affected, and external
+audits use real fetch and are correct. Only our own informational signal block
+understates us, by one.
 
 ## Done (v3.12 — caught up with where the specs moved, 2026-08-01)
 
@@ -288,7 +305,7 @@ revenue now is distribution.
 - [x] **Payment rail proven end to end** — done 2026-07-25. The official `x402-fetch@1.2.0` client was driven against a local `wrangler dev`: it parsed the 402, signed an EIP-3009 authorization, paid, and the **live** `x402.org` facilitator verified the signature and failed only on `invalid_exact_evm_insufficient_balance` (unfunded throwaway wallet). The same signature was also accepted through the v2 path. Nothing is left to prove but funding.
 - [x] **Swap the analytics token for a scoped one** — done 2026-08-01. `CF_ANALYTICS_TOKEN` is now its own credential rather than a mirror of the deploy token, so the Worker's env no longer carries Workers Scripts: Edit. `push-secrets` pushed it and logged no mirror warning, which is how the mirror reports that it stopped; `/api/stats.json` went 403 → 200 on the same run. The old over-privileged deploy token has been deleted account-side.
 - [x] **CDP API key, and the rail switched onto it** — done 2026-08-01. Kamil created a **Secret API Key** (Ed25519) at `portal.cdp.coinbase.com/access/api` — the portal's x402 page is metrics-only and "Custodial Wallet" wants a US business account, so neither is the right door. Both halves are repo secrets, pushed to the Worker by `cf-admin -f action=push-secrets` and never in `site.config.json`. `verify-rail.mjs` used to be unable to check this rail because CDP's `/supported` answers 401; it now signs the request with the Worker's own auth code, so `cf-admin -f action=verify-cdp` verifies it on the runner where the secrets live — **key accepted, 24 kinds advertised, both v2 `eip155:8453` and v1 `base` settled**. `"active": "cdp"` since, proven by a real $0.05 payment (tx `0x28f4…8292`, block 49327142) with the replay refused. Buys a free tier of 1,000 tx/month and — the actual point — Bazaar cataloging.
-- [ ] **Get the endpoint into the x402 Bazaar.** Everything on our side is done; the listing has not appeared. Not lag alone: CDP builds a listing from discovery metadata attached to a **settlement**, and we attached none for the first four. Read off the live catalog (the docs are vague), 1,698 of its 1,795 v1 resources carry `discoverable: true` inside the v1 `outputSchema`, and their published `extensions.bazaar.info` is visibly derived from it. `/api/audit` now publishes exactly that (plus `extensions.bazaar` for v2) and has settled a payment carrying it — and is still not listed minutes later. Check with `node scripts/bazaar-check.mjs`, which scans all ~14.7k entries by receiving address and prints what to rule out. If it stays absent for a few days, the likely answer is CDP-side: `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, no maintainer reply.
+- [ ] **Get the endpoint into the x402 Bazaar.** Everything on our side is done; the listing has not appeared. Not lag alone: CDP builds a listing from discovery metadata attached to a **settlement**, and we attached none for the first four. Read off the live catalog (the docs are vague), 1,698 of its 1,795 v1 resources carry `discoverable: true` inside the v1 `outputSchema`, and their published `extensions.bazaar.info` is visibly derived from it. `/api/audit` now publishes exactly that (plus `extensions.bazaar` for v2) and has settled a payment carrying it — and is still not listed minutes later. Check with `node scripts/bazaar-check.mjs`, which scans all ~14.7k entries by receiving address and prints what to rule out. If it stays absent for a few days, the likely answer is CDP-side: `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, no maintainer reply. **Re-checked 2026-08-01 evening: still absent, now across 14,815 catalog entries** (the catalog grew by ~150 in a few hours, so their indexer is running — it is simply not indexing us).
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN — draft rewritten 2026-08-01 and ready to go; only the posting is left, and that is Kamil's.** The day-7 gate opened it (see below), so it no longer waits on organic listings. The draft leads with the measured numbers and the zero-conversion finding rather than the directory, and carries three new "did not expect" items worth more than the old ones: the Bazaar's undocumented wire format, the Worker-cannot-fetch-itself 502-after-charging bug, and the spec-vs-installed-base split. Titles, the three comment threads to expect and prepared answers are all in `docs/show-hn.md`. Re-read `/api/stats.json` the morning you post and refresh the five figures — stale numbers are the one thing that would sink it.
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
