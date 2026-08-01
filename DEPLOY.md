@@ -299,28 +299,82 @@ harness that ran this is `~/.x402-test/pay-and-replay.mjs`.
 
 ---
 
-## Phase 4 — Optional: the Coinbase CDP facilitator
+## Phase 4 — The Coinbase CDP facilitator — **done 2026-08-01**
 
-Genuinely optional now. It was previously the only route to mainnet; the PayAI
-facilitator in the `mainnet` profile removes that dependency. What CDP still buys
-is a free tier (1,000 transactions/month, then $0.001 each) and **auto-inclusion
-in the x402 Bazaar**, which is real discovery for a site with no traffic.
-
-Note that `verify-rail.mjs cdp` cannot check CDP's network support without keys —
-its `/supported` returns 401 — so the CDP rail's v1/v2 coverage is the one thing
-still unverified. Prefer `mainnet` unless you specifically want the Bazaar.
+This is the live rail. It was optional once the PayAI facilitator removed CDP as
+the only route to mainnet; what brought it back is a free tier (1,000
+transactions/month, then $0.001 each) and **cataloging in the x402 Bazaar**,
+which is the only real discovery channel for a site with no human traffic.
 
 1. `portal.cdp.coinbase.com/access/api` → **Secret API Key** → key type **Ed25519**. The private key is shown exactly once.
-2. Set them as Worker secrets:
+2. Set them as repo secrets and let the runner push them to the Worker, so the
+   values never touch a laptop:
 
 ```bash
-npx wrangler secret put CDP_API_KEY_ID
-npx wrangler secret put CDP_API_KEY_SECRET
+gh secret set CDP_API_KEY_ID
+gh secret set CDP_API_KEY_SECRET
+gh workflow run cf-admin -f action=push-secrets
 ```
 
-3. Set `"active": "cdp"`, fill in the verified USDC address, rebuild, deploy.
+3. **Verify before flipping.** CDP's `/supported` returns 401, so this is the one
+   rail that cannot be checked from a developer machine. `verify-rail.mjs` now
+   signs the request with the Worker's own auth code when the two variables are
+   present, and `cf-admin` runs it where they are:
+
+```bash
+gh workflow run cf-admin -f action=verify-cdp
+```
+
+   It answered: key accepted, **24 kinds advertised**, covering both this
+   profile's v2 `eip155:8453` and v1 `base`. That was the last unverified thing
+   about the rail.
+
+4. `"active": "cdp"`, rebuild, deploy. Proof it settles: tx
+   `0x28f42d67097fd388fe915a848da7e2f5fcb47252a6c7ea36d0ed99f2c3618292`,
+   block 49327142 — 0.05 USDC to the receiving address, replay of the same
+   authorization refused. Payers see no difference: address, price and asset are
+   unchanged, only whose facilitator settles.
 
 Dead ends worth knowing so you don't lose time: the portal's **x402 page is metrics-only**; the avatar menu has **no API Keys entry** (it is under *Manage account*); and **Custodial Wallet** requires a business account and a sales conversation.
+
+### Getting listed in the Bazaar is a second, separate thing
+
+Switching the facilitator does **not** list you. CDP builds a catalog entry from
+discovery metadata attached to a *settlement*, so an endpoint can take real
+money forever and stay invisible — which is exactly what happened here for the
+first four settlements.
+
+The docs describe the SDK helper (`declareDiscoveryExtension()`), not the wire,
+so the shape below was read off the live catalog instead: of its 1,795 x402 v1
+resources, **1,698 carry `discoverable: true` inside the v1 `outputSchema`** of
+their payment requirements, and the `extensions.bazaar.info` that CDP publishes
+for them is visibly derived from it. `/api/audit` now sends:
+
+```jsonc
+"outputSchema": {                       // v1; the same object rides as
+  "input": {                            // extensions.bazaar for v2
+    "type": "http", "method": "POST",
+    "discoverable": true,               // the opt-in — without it, no listing
+    "bodyType": "json",
+    "body": { "url": { "type": "string", "required": true, "description": "…" } }
+  },
+  "output": { "type": "object", "properties": { /* the audit result */ } }
+}
+```
+
+The requirements object is what gets POSTed to `/settle`, so it arrives where
+the catalog is built. Check the result with:
+
+```bash
+node scripts/bazaar-check.mjs          # scans all ~14.7k entries by payTo
+node scripts/bazaar-check.mjs --sample # what a listed v1 entry looks like
+```
+
+**Status: still not listed** as of 2026-08-01, minutes after a settlement
+carrying the metadata. If it stays that way, suspect CDP rather than this repo:
+[x402-foundation/x402#2112](https://github.com/x402-foundation/x402/issues/2112)
+reports the identical symptom — 8 settlements, full official-SDK extension
+setup, never indexed, no maintainer reply.
 
 ---
 
