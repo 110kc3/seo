@@ -19,17 +19,21 @@ Workers. That is exactly the shape of narrowing one token to
 
 **The fix — do not narrow the deploy token.** Two tokens, two jobs:
 
-1. Cloudflare dashboard → My Profile → API Tokens → the token used for deploys →
-   **Edit** → restore **Account → Workers Scripts → Edit** (the "Edit Cloudflare
-   Workers" template is the safe reset). Deploys work again immediately; nothing
-   needs re-pushing, just re-run the failed job.
-2. *Then*, separately, **Create Token → Custom → Account → Account Analytics:
-   Read**, and only that. `gh secret set CF_ANALYTICS_TOKEN`, then
-   `gh workflow run cf-admin -f action=push-secrets`. The Worker stops using the
-   deploy token for analytics on its own.
+1. ⬅️ **STILL PENDING, this is the blocker.** Cloudflare dashboard → My Profile →
+   API Tokens → the token used for deploys → **Edit** → restore **Account →
+   Workers Scripts → Edit** (the "Edit Cloudflare Workers" template is the safe
+   reset). Deploys work again immediately; nothing needs re-pushing, just re-run
+   the failed job.
+2. ✅ **Done 2026-08-01.** `CF_ANALYTICS_TOKEN` is set as a repo secret. It
+   cannot reach the Worker yet: `push-secrets` runs `wrangler secret put`, which
+   needs the same Workers Scripts: Edit that step 1 restores. Run
+   `gh workflow run cf-admin -f action=push-secrets` *after* step 1 — the Worker
+   then stops using the deploy token for analytics on its own.
 
-Confirmed absent right now: `gh secret list` shows no `CF_ANALYTICS_TOKEN`
-(it does show `GLAMA_API_KEY`, set the same day).
+Re-verified 13:48 UTC: re-running the failed deploy still ends in
+`Authentication error [code: 10000]`, plus `Unable to get membership roles` —
+the token authenticates but has no Workers write. Nothing in the repo can fix
+this; it is a dashboard edit.
 
 Waiting on this, all live: the x402 catalog, the MCP catalog, 30 curated
 listings, `/api/x402/search`, `/api/mcp/search`, and two new MCP tools.
