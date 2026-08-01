@@ -99,6 +99,18 @@ export function freeView(result, upsell) {
       pass: c.pass,
       weight: c.weight,
     })),
+    // Free too. These are unscored observations, so withholding them would be
+    // withholding the part that is only useful as information — and a free
+    // score that already names the 2026 surfaces is the clearest argument that
+    // the paid audit is current. The per-signal `fix` text stays paid, same as
+    // for the scored checks.
+    signals: result.signals
+      ? {
+        detected: result.signals.detected,
+        total: result.signals.total,
+        items: result.signals.items.map((s) => ({ id: s.id, label: s.label, present: s.present })),
+      }
+      : undefined,
     tier: 'free',
     unlock: upsell,
   };
