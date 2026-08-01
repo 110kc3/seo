@@ -121,11 +121,12 @@ Two things worth knowing before the next run at this endpoint:
 
 Re-POST to `/api/directory` after a change; the endpoint is idempotent to retry and states so (`"retry": "Fix these, then POST again."`).
 
-## 4b. The four browser-only channels — paste-ready answers (2026-08-01)
+## 4b. The five browser-only channels — paste-ready answers (2026-08-01)
 
-These cannot be scripted: two are OAuth sign-ins, two are hosted forms. What
-*can* be prepared is every answer, so the whole set is ten minutes of pasting.
-Field labels below were read off the live forms on 2026-08-01, not guessed.
+These cannot be scripted: three are OAuth sign-ins, two are hosted forms. All of
+them were re-checked for an API route first, and none has one. What *can* be
+prepared is every answer, so the whole set is ~15 minutes of pasting. Field
+labels below were read off the live forms on 2026-08-01, not guessed.
 
 **The canonical answers.** Every one of these forms asks a subset of this:
 
@@ -136,7 +137,7 @@ Field labels below were read off the live forms on 2026-08-01, not guessed.
 | llms.txt URL | `https://index.percall.dev/llms.txt` |
 | llms-full.txt URL | `https://index.percall.dev/llms-full.txt` |
 | short description (≤160 chars) | `Machine-readable directory of AI products, with a free agent-readability score and a paid audit an agent can buy over x402.` |
-| longer description | `A directory AI agents can read, register in, and buy from. GET /api/score grades any URL across 13 agent-readability checks for free; POST /api/audit returns per-check fixes and paste-ready snippets for $0.05, settled in USDC on Base via HTTP 402. Products self-register by opening a GitHub issue against a published schema — no human step. Zero dependencies, 121 tests, traffic published at /api/stats.json.` |
+| longer description | `A directory AI agents can read, register in, and buy from. GET /api/score grades any URL across 13 agent-readability checks for free; POST /api/audit returns per-check fixes and paste-ready snippets for $0.05, settled in USDC on Base via HTTP 402. Products self-register by opening a GitHub issue against a published schema — no human step. Zero dependencies, 145 tests, traffic published at /api/stats.json.` |
 | contact | `110kc3@gmail.com` |
 | your name | `Kamil` |
 
@@ -198,10 +199,69 @@ this is an MCP directory and reviewers look for source. Description:
 There is a **$39 one-time "premium review"** upsell — skip it. The free queue is
 the same directory.
 
+### e. Glama — TWO separate submissions, and only one of them matters for the PR
+
+**Do this one first.** It is the only item in this section that another channel
+is blocked on: PR #11152 (90k★) will not be merged until it is done. Full
+background in §5; this is just the pasting.
+
+Both need a Glama account — GitHub OAuth, no password. Neither can be scripted:
+registry submission is not part of Glama's API (that API is the Gateway, an
+OpenAI-compatible inference product, and is unrelated). The add page is a
+client-side app with no form action and no unauthenticated route, so there is
+nothing to POST to. Browser automation would work if the Claude in Chrome
+extension were connected; it is not.
+
+**e1. The repo listing — https://glama.ai/mcp/servers/add** ← unblocks the badge
+
+| asked as | value |
+|---|---|
+| repository | `https://github.com/110kc3/seo` |
+| display name | `AI Product Index` |
+| short description | `Machine-readable directory of AI products that register themselves, plus an agent-readability grader for any URL.` |
+
+If it asks for a Dockerfile — the bot's wording is that you add it "directly to
+Glama" — the repo root already has one, and this is it:
+
+```dockerfile
+FROM node:22-alpine
+WORKDIR /app
+COPY site.config.json ./
+COPY mcp/ ./mcp/
+ENTRYPOINT ["node", "mcp/server.mjs"]
+```
+
+Glama's check starts the server and calls `initialize` then `tools/list`. That
+exact exchange was run against this image on 2026-08-01 and both answered, so
+the check has no known reason to fail. `glama.json` (maintainers: `110kc3`) is
+already committed.
+
+**When the page at https://glama.ai/mcp/servers/110kc3/seo resolves**, the badge
+below goes onto the PR entry — batched with the four-tools→six-tools correction,
+so the 90k★ repo gets one notification rather than two:
+
+```
+[![110kc3/seo MCP server](https://glama.ai/mcp/servers/110kc3/seo/badges/score.svg)](https://glama.ai/mcp/servers/110kc3/seo)
+```
+
+**e2. The connector listing — https://glama.ai/mcp/connectors → "Add Server"**
+
+A real channel in its own right (10,627 servers indexed), and the `glama-check`
+bot's own P.S. invites it. It produces **no badge**, so it does not unblock
+anything — do it second, or skip it under time pressure.
+
+| asked as | value |
+|---|---|
+| URL | `https://index.percall.dev/mcp` |
+| transport | streamable-http |
+| auth | none |
+
 ### After submitting
 
 Note the date against each channel in the status table above. None of these
 confirm by email except (c), so the only way to know is to look again in a week.
+Glama is the exception that reports quickly: most submissions pass automated
+checks within minutes, so the server page either resolves or it does not.
 
 ## 5. Lower priority
 
