@@ -490,6 +490,39 @@ test('the v1 challenge uses v1 field names and a network name, not a CAIP-2 id',
   assert.equal(paymentRequirementsV1(CFG, '10000', RESOURCE), null);
 });
 
+// The CDP facilitator builds a Bazaar listing out of whatever discovery
+// metadata rides along with the settlement, and nothing else. Dropping these
+// fields would not fail a payment — it would silently un-list the endpoint,
+// which is the sort of regression only an explicit test catches.
+test('discovery metadata rides along in both versions, and only when declared', () => {
+  const described = { ...RESOURCE, outputSchema: { input: { type: 'http', method: 'POST', discoverable: true } } };
+
+  const v1 = paymentRequirementsV1(CFG_V1, '10000', described);
+  assert.deepEqual(v1.outputSchema, described.outputSchema);
+  assert.equal(v1.outputSchema.input.discoverable, true);
+
+  // v2 carries the same thing under the name CDP reads for v2.
+  const v2 = paymentRequirements(CFG_V1, '10000', described);
+  assert.deepEqual(v2.extensions, { bazaar: { info: described.outputSchema } });
+
+  // Undeclared means absent from the wire, not present-and-null: a caller that
+  // publishes no schema publishes exactly what it did before.
+  assert.ok(!('outputSchema' in paymentRequirementsV1(CFG_V1, '10000', RESOURCE)));
+  assert.ok(!('extensions' in paymentRequirements(CFG_V1, '10000', RESOURCE)));
+});
+
+test('the audit endpoint declares itself discoverable, with its real request shape', () => {
+  const schema = worker.AUDIT_SCHEMA;
+
+  assert.equal(schema.input.discoverable, true, 'without this the endpoint is never catalogued');
+  assert.equal(schema.input.method, 'POST');
+  assert.equal(schema.input.bodyType, 'json');
+  // The documented request field must be the one parseAuditRequest actually reads.
+  assert.equal(schema.input.body.url.required, true);
+  assert.deepEqual(Object.keys(schema.input.body), ['url']);
+  assert.equal(parseAuditRequest({ url: 'https://example.com' }).error, undefined);
+});
+
 test('one 402 answers both versions: v1 in the body, v2 in the header', async () => {
   const res = await gateV1(undefined);
   assert.equal(res.response.status, 402);

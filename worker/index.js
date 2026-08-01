@@ -124,6 +124,45 @@ function decorate(response, url, alternate = null) {
 
 // --- paid route ------------------------------------------------------------
 
+// What this endpoint takes and returns, in the shape the CDP facilitator reads
+// off a settlement to build a Bazaar listing. `discoverable: true` is the opt
+// in — without it the endpoint settles payments perfectly well and is never
+// catalogued, which is exactly what happened here for four settlements.
+//
+// It doubles as machine-readable API documentation in every 402 challenge, so
+// an agent learns the request shape from the refusal rather than from prose.
+const AUDIT_SCHEMA = {
+  input: {
+    type: 'http',
+    method: 'POST',
+    discoverable: true,
+    bodyType: 'json',
+    body: {
+      url: {
+        type: 'string',
+        required: true,
+        description: 'Absolute http(s) URL of the page to audit. Redirects are followed; the response is not stored.',
+      },
+    },
+  },
+  output: {
+    type: 'object',
+    properties: {
+      ok: { type: 'boolean', description: 'False when the target could not be fetched; the response is then HTTP 502.' },
+      url: { type: 'string', description: 'The URL that was audited, after redirects.' },
+      audited_at: { type: 'string', description: 'ISO 8601 timestamp of the audit.' },
+      score: { type: 'number', description: 'Agent-readability score, 0–100.' },
+      max_score: { type: 'number', description: 'Always 100.' },
+      letter: { type: 'string', description: 'Letter grade A–F derived from the score.' },
+      grade: { type: 'string', description: 'Plain-language grade, e.g. "agent-ready".' },
+      passed: { type: 'number', description: 'How many checks passed.' },
+      total_checks: { type: 'number', description: 'How many checks were run.' },
+      checks: { type: 'array', description: 'Every check: id, label, pass, weight, a human-readable detail, and a paste-ready snippet.' },
+      next_steps: { type: 'array', description: 'Failing checks ranked by weight, each with its fix and snippet.' },
+    },
+  },
+};
+
 async function handleAudit(request, env, cfgObj) {
   if (request.method !== 'POST') {
     return json({ ok: false, code: 'method_not_allowed', error: 'POST a JSON body like {"url": "https://example.com"}' }, 405, { allow: 'POST' });
@@ -150,6 +189,7 @@ async function handleAudit(request, env, cfgObj) {
       url: `${BASE}/api/audit`,
       description: 'Agent-readability audit of one URL: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, agent card, machine-readable alternates.',
       mimeType: 'application/json',
+      outputSchema: AUDIT_SCHEMA,
     },
   });
   if (!gate.paid) return gate.response;
@@ -227,7 +267,7 @@ async function handleDashboardPage(request, env, url) {
 
 // --- router ----------------------------------------------------------------
 
-export const __testing = { fetchAsset, decorate, canonicalRedirect };
+export const __testing = { fetchAsset, decorate, canonicalRedirect, AUDIT_SCHEMA };
 
 export default {
   async fetch(request, env, ctx) {

@@ -76,8 +76,12 @@ function sameAmount(a, b) {
 /**
  * Builds the PaymentRequirements we are willing to accept. Returns null when
  * payment rails are unconfigured — callers must fail closed, never serve free.
+ *
+ * `resource.outputSchema` rides along under v2's `extensions.bazaar`, which is
+ * where the CDP facilitator reads discovery metadata for v2 — see
+ * paymentRequirementsV1 for the v1 half and why any of this is here.
  */
-export function paymentRequirements(cfg, amountAtomic) {
+export function paymentRequirements(cfg, amountAtomic, resource) {
   const rail = resolveX402(cfg);
   if (!rail || !amountAtomic) return null;
   return {
@@ -88,6 +92,9 @@ export function paymentRequirements(cfg, amountAtomic) {
     payTo: rail.payTo,
     maxTimeoutSeconds: rail.max_timeout_seconds,
     extra: { name: rail.asset_name, version: rail.asset_version },
+    // Spread, not `key: undefined`: a caller that declares no schema gets back
+    // exactly the object it got before, with no key to explain.
+    ...(resource?.outputSchema ? { extensions: { bazaar: { info: resource.outputSchema } } } : {}),
   };
 }
 
@@ -97,6 +104,13 @@ export function paymentRequirements(cfg, amountAtomic) {
  *
  * Returns null when the profile declares no v1 network name, which switches v1
  * off for that rail rather than guessing a name the facilitator may not know.
+ *
+ * `outputSchema` is the v1 field the CDP facilitator turns into a Bazaar
+ * listing. It is not decoration: the requirements object below is what gets
+ * POSTed to /settle, and CDP catalogs the endpoint from that — an endpoint
+ * that settles without one is simply never indexed, which is what kept this
+ * one out of the Bazaar after its first four settlements. Of the 1,795 v1
+ * resources in the live catalog, 1,698 carry `discoverable: true` in here.
  */
 export function paymentRequirementsV1(cfg, amountAtomic, resource) {
   const rail = resolveX402(cfg);
@@ -112,6 +126,7 @@ export function paymentRequirementsV1(cfg, amountAtomic, resource) {
     maxTimeoutSeconds: rail.max_timeout_seconds,
     asset: rail.asset,
     extra: { name: rail.asset_name, version: rail.asset_version },
+    ...(resource?.outputSchema ? { outputSchema: resource.outputSchema } : {}),
   };
 }
 
@@ -167,7 +182,7 @@ async function facilitator(url, path, body, authHeaders = {}) {
  *   for that `version` (see attachSettlement).
  */
 export async function requirePayment(request, env, cfg, { amountAtomic, resource }) {
-  const requirements = paymentRequirements(cfg, amountAtomic);
+  const requirements = paymentRequirements(cfg, amountAtomic, resource);
   const requirementsV1 = paymentRequirementsV1(cfg, amountAtomic, resource);
   if (!requirements) {
     // Same fail-closed contract the [upgrade] issue flow uses, so agents get
