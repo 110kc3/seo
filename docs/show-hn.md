@@ -111,7 +111,7 @@ the same honest column as the zero organic payments.
 
 Zero npm dependencies throughout: the payment gate, the EIP-712 handling, the
 RFC 9421 response signing and the CDP JWT auth are hand-rolled on WebCrypto.
-121 tests.
+171 tests.
 
 Repo: https://github.com/110kc3/seo — the whole protocol is in
 https://index.percall.dev/llms.txt, the traffic is at

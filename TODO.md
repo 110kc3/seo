@@ -105,6 +105,26 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
+## Done (v3.10 — the outage, and the three things it exposed, 2026-08-01)
+
+A four-hour deploy outage, and then a verification pass over the whole project
+that found more than the outage did. **171 tests (was 144).**
+
+- [x] **Deploys unblocked** — full account at the top of this file. Two credentials, two mistakes, four rounds. The keeper: `10000` is a permissions problem and `9109` is a bad token value; checking `/user/tokens/verify` before setting the secret tells you which in one request.
+- [x] **The MCP catalog was never uploaded.** `/api/mcp/search` answered 503 while `/api/x402/search` worked, and all 7.3 MB of `api/mcp/` was 404 in production despite being committed, current and green. `.assetsignore` is gitignore syntax, where an unanchored pattern matches at *every* depth — the bare `mcp` line written for the top-level `mcp/` directory also excluded `api/mcp/`. Wrangler skipped it and reported Success. Every entry is now anchored (`/mcp`); `node_modules` stays unanchored on purpose. The old test only guarded against files shipping by accident, so a second test guards the other direction, confirmed to fail against the pre-fix file.
+- [x] **`process-issue.mjs` now has tests** — 25 of them, and it had none. It is the only script here that takes input from a stranger and turns it into a committed file, and it enforces ownership, the per-account cap and single-use payment receipts. It is a program rather than a module, so it is tested as a subprocess against a throwaway copy of the repo — the same way `register.yml` invokes it, and with no refactor of code nothing was exercising. Covers ownership, dedup by slug and normalized URL, the account cap, payload shapes, path-escape attempts, and the upgrade ledger including hash recasing.
+- [x] **The two MCP servers no longer disagree.** `worker/discovery.js` had grown to six tools while `mcp/server.mjs` still declared three, so what a client could do depended on which server it reached. The stdio server now imports the Worker's definitions and forwards `tools/call` to the Worker's own `/mcp`; there is no second copy left to drift. `register_product` stays as the one deliberate addition — it needs a GitHub token, which a public Worker must not carry. `tools/list` stays offline for registry health checks, verified under `docker run --network none`.
+- [x] **`/ask` summarizes by default** — the item gated on the corpus decision, which shipped. `mode=list` opts out, and the change only adds a field. A miss now names the two catalogs instead of saying there is nothing: "nothing matches" was only ever true of the *registry*, which is the small half of what this site indexes, and saying it flatly sent agents away from an answer one endpoint over.
+- [x] **Glama prep** — `glama.json` and a `Dockerfile`, because PR #11152 now requires a Glama listing and a score badge. Health check verified against the built image.
+
+**Verification pass, 2026-08-01** — build determinism PASS, 171/171 tests, 0
+listings delisted or failing, 20/20 live surfaces, self-audit **100/100 (13/13)**,
+RFC 9421 signing present, x402 402 shape correct, CDP rail key accepted with
+`eip155:8453` live, `/api/stats.json` publishing again.
+
+**Found and left open:** the register path has not executed since 2026-07-09 —
+see the pending list below.
+
 ## Done (v3.9 — two niches indexed exhaustively, 2026-08-01)
 
 The corpus question, answered as **(b) + (c)**. The index went from 10 listings
@@ -146,15 +166,21 @@ decision that would change it.
 
 ## Blocked on Kamil — the short version (2026-08-01)
 
-Everything that could be done without you is done. Six things need your hands,
-in the order I would do them. Detail for each is further down this section.
+Everything that could be done without you is done, and re-verified on
+2026-08-01. What is left needs a browser, a public GitHub action, or a decision
+— nothing here is waiting on code. In the order I would do them.
 
-1. **Post the Show HN.** Draft rewritten and ready in `docs/show-hn.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post. Tue–Thu, 14:00–16:00 UTC. *~30 min, then two hours of replies.*
-2. **Four directory submissions.** Every answer is prepared in `docs/distribution.md` §4b — field labels read off the live forms, both constrained dropdowns already resolved. *~10 min of pasting.*
-3. ~~Decide the corpus question~~ — **done, you said (b)+(c) and both shipped.** See v3.9.
+**Every answer for every form is prepared in `docs/distribution.md` §4b.** None
+of these five channels has an API; all were checked, not assumed.
+
+0. **Submit to Glama — do this first, it blocks the 90k★ PR.** ~2 min, browser + GitHub OAuth. See item 7 below for why; the paste-ready values are in §4b(e).
+1. **Post the Show HN.** Draft rewritten and ready in `docs/show-hn.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post — they are already slightly stale (draft says 4,672 requests / 7.19%; live was 4,950 / 7.09% on 2026-08-01). Tue–Thu, 14:00–16:00 UTC, so the next window is **Tue 4 Aug**. *~30 min, then two hours of replies.*
+2. **Four directory submissions.** §4b(a–d) — field labels read off the live forms, both constrained dropdowns already resolved. *~10 min of pasting.*
+3. **Decide: re-verify the register path?** It has not executed since 2026-07-09, and the code has changed substantially since — its last run failed, though two of the three failures that day were intentional negative tests and the logs are past retention. It now has 25 tests covering ownership, dedup, caps and the payment ledger, but tests exercise the script, not the *workflow*: issue trigger, token permissions, the commit-and-push retry loop and the bot comment are all untested by anything but a real run. Verifying it means opening a real `[register]` issue on the public repo, which creates a public artifact and a real listing — your call, not mine. Say the word and I will run it end to end and delete the listing afterwards.
 4. ~~Restore the deploy token, then create a separate analytics one~~ — **done 2026-08-01, 14:16 UTC.** A fresh Workers token replaced the narrowed one and `CF_ANALYTICS_TOKEN` is a genuinely separate credential on the Worker. Both old credentials have been deleted. See the block at the top of this file for what it actually was.
 5. ~~Add the remote MCP endpoint to the awesome-list PRs~~ — **done 2026-08-01.** [#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152) now leads with `claude mcp add --transport http ai-product-index https://index.percall.dev/mcp` and lists all four tools; branch and PR body both updated, still MERGEABLE. #114 is an llms.txt *Directories* entry where MCP is not relevant — checked, and it already carries the right URL.
 6. **Optional: request Stripe machine-payments access.** Slow-moving, so worth filing before you need it.
+6b. **Optional: join the Cloudflare Monetization Gateway waitlist.** Browser form; being on Cloudflare is the only prerequisite. It would let the same 402 metering cover `/api/index.json` and the catalogs without writing code. Promoted out of "Later" because the catalogs are now the largest thing this site serves and the only metered surface is `/api/audit`.
 7. **Submit `110kc3/seo` at https://glama.ai/mcp/servers/add** — browser + GitHub OAuth, ~2 minutes. This is now a **blocker on PR #11152**, not an optional channel: the `glama-check` bot requires the server to be listed on Glama and the entry to carry a score badge, and every neighbouring entry already has one. The repo side is done and verified — `glama.json` and a `Dockerfile` are in, and Glama's exact health check (start, `initialize`, `tools/list`) was run against the built image and passed. Once the server page resolves I will put the badge on the PR, batched with a tool-list fix. Worth also adding `https://index.percall.dev/mcp` at https://glama.ai/mcp/connectors — the bot's P.S. invites it — though that route gives no badge. **The `GLAMA_API_KEY` question is settled: nothing needs it.** Glama's API is the Gateway (OpenAI-compatible inference); registry submission is a web form. Delete the secret unless it is something other than a gateway key. Detail in `docs/distribution.md` §5.
 
 ### 3. The corpus question — DECIDED and DONE
@@ -315,10 +341,10 @@ survived deployment and cost real money or real payments.
 
 ## Later / nice-to-have
 
-- [ ] Join the Cloudflare Monetization Gateway waitlist — being on Cloudflare is the prerequisite, and it would let the same 402 metering apply to `/api/index.json` without code.
+- [ ] ~~Join the Cloudflare Monetization Gateway waitlist~~ — promoted into the pending-on-Kamil list above as 6b.
 - [ ] Automate Stripe reconciliation (webhook → repository_dispatch → set-tier) once there's a first paying customer.
 - [ ] x402 Bazaar listing — promoted out of "later": it is now the open item under Distribution above. Re-checked 2026-08-01 ~2h after the metadata-carrying settlement: still absent from all 14,658 catalog entries.
-- [ ] Once the corpus question is decided, revisit whether `/ask` should summarize by default. It only summarizes on `prefer.mode=summarize` today, which is right for ten listings and probably wrong for a few hundred.
+- [x] ~~Once the corpus question is decided, revisit whether `/ask` should summarize by default~~ — done 2026-08-01, and it does. `mode=list` opts out; a miss now names the two catalogs. See v3.10.
 - [x] ~~RFC 9421 web-bot-auth response signing~~ — done 2026-07-25, both directions.
 - [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
 - [x] ~~Score badge variant~~ — done 2026-07-25 as `/badge.svg?slug=…&show=score`, fed by `scores.json` from the weekly cron.
