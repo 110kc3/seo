@@ -123,7 +123,23 @@ RFC 9421 signing present, x402 402 shape correct, CDP rail key accepted with
 `eip155:8453` live, `/api/stats.json` publishing again.
 
 **Found and left open:** the register path has not executed since 2026-07-09 —
-see the pending list below.
+see item 3 of the pending list below, which is a decision rather than a task.
+
+### Next engineering item, needing no input from Kamil
+
+**Health-check a rotating slice of the catalogs.** Nothing in either catalog is
+probed, and the Bazaar keeps an entry for 30 days after its last settlement, so
+an unknown share of those 14,661 endpoints are dead. Probing all of them weekly
+is too much; probing a rotating slice is not. "Which x402 endpoints actually
+answer" is a question nobody can answer today, which makes it the most valuable
+thing left in the repo — and unlike everything else outstanding, it needs no
+browser and no decision.
+
+Not started because it is a real feature with choices worth making
+deliberately — slice size, where results live (committed JSON like `health.json`
+versus KV), whether a dead endpoint is hidden from search or merely flagged, and
+how staleness is shown to a caller. Worth picking those on purpose rather than
+inheriting them from whatever the first implementation happened to do.
 
 ## Done (v3.9 — two niches indexed exhaustively, 2026-08-01)
 
