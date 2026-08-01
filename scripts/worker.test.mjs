@@ -617,7 +617,9 @@ test('no source directory is published as a static asset by accident', async () 
   const entries = (await readdir(root, { withFileTypes: true })).map((e) => e.name).sort();
   const ignored = new Set(
     (await readFile(new URL('../.assetsignore', import.meta.url), 'utf8'))
-      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#')),
+      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
+      // Entries are anchored (`/docs`); the names read off disk are not.
+      .map((l) => l.replace(/^\//, '')),
   );
 
   // Everything here is site content on purpose.
@@ -635,6 +637,36 @@ test('no source directory is published as a static asset by accident', async () 
   const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));
   assert.deepEqual(unclassified, [],
     `add these to .assetsignore, or to the published list in this test: ${unclassified.join(', ')}`);
+});
+
+test('no .assetsignore pattern silently excludes a nested published file', async () => {
+  // The test above guards one direction — nothing ships by accident. This guards
+  // the other, which is the one that actually bit: an unanchored gitignore
+  // pattern matches at EVERY depth, so the `mcp` line written for the top-level
+  // `mcp/` directory also excluded `api/mcp/`. The catalog was committed, the
+  // build was current, the tests passed, the deploy said Success — and
+  // /api/mcp/search answered 503 in production because the files were never
+  // uploaded. Nothing in CI could see it, so the rule is pinned here instead.
+  const root = new URL('../', import.meta.url);
+  const unanchored = (await readFile(new URL('../.assetsignore', import.meta.url), 'utf8'))
+    .split('\n').map((l) => l.trim())
+    .filter((l) => l && !l.startsWith('#') && !l.startsWith('/'));
+
+  // Every directory and file name below the trees the site actually serves.
+  const names = new Set();
+  const walk = async (rel) => {
+    for (const e of await readdir(new URL(rel, root), { withFileTypes: true })) {
+      names.add(e.name);
+      if (e.isDirectory()) await walk(`${rel}${e.name}/`);
+    }
+  };
+  for (const dir of ['api/', 'assets/', 'l/', 'listings/', '.well-known/']) await walk(dir);
+
+  // node_modules is unanchored on purpose and must never appear in a served tree.
+  const collisions = unanchored.filter((p) => names.has(p));
+  assert.deepEqual(collisions, [],
+    `these .assetsignore patterns also match published files nested under api/, l/, `
+    + `listings/, assets/ or .well-known/ — anchor them with a leading slash: ${collisions.join(', ')}`);
 });
 
 // --- the well-known surfaces the build generates ------------------------------

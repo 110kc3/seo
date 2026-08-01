@@ -4,31 +4,38 @@
 #
 # Served on purpose: index.html, 404.html, llms.txt, llms-full.txt, robots.txt,
 # sitemap.xml, openapi.yaml, health.json, api/, l/, listings/, assets/.
-.git
-.github
-.gitignore
-.nojekyll
-.assetsignore
+#
+# EVERY ENTRY HERE IS ANCHORED WITH A LEADING SLASH, and new ones must be too.
+# These are gitignore patterns: unanchored, they match at every depth, not just
+# the repo root. The bare `mcp` line below once excluded `api/mcp/` as well as
+# the top-level `mcp/` it was written for, so the whole MCP catalog 404'd in
+# production while CI stayed green — the build was right, the upload was short.
+# `node_modules` is the one deliberate exception: it should vanish at any depth.
+/.git
+/.github
+/.gitignore
+/.nojekyll
+/.assetsignore
 node_modules
-scripts
-templates
-worker
-docs
-mcp
-clients
-wrangler.toml
-package.json
-package-lock.json
-site.config.json
-README.md
-TODO.md
-DEPLOY.md
-ARCHITECTURE.md
-result.md
-health-report.md
-payments.json
+/scripts
+/templates
+/worker
+/docs
+/mcp
+/clients
+/wrangler.toml
+/package.json
+/package-lock.json
+/site.config.json
+/README.md
+/TODO.md
+/DEPLOY.md
+/ARCHITECTURE.md
+/result.md
+/health-report.md
+/payments.json
 # `wrangler dev` writes local state here, including the contents of the local
 # KV namespace. The asset directory is the repo root, so without this line a
 # deploy from a machine that has ever run `wrangler dev` publishes it.
-.wrangler
+/.wrangler
 

@@ -1,42 +1,48 @@
 # TODO
 
-## 🚨 DEPLOYS ARE BROKEN — one Cloudflare setting, ~2 minutes (2026-08-01)
+## ✅ Deploys are unblocked again (2026-08-01, 14:16 UTC)
 
-**Everything since `667339b` is committed and green but not live.** Every deploy
-since 11:50 UTC fails identically:
+The four-hour outage from 11:50 is over. Everything since `667339b` is live:
+the x402 catalog, the MCP catalog, 30 curated listings, `/api/x402/search`,
+`/api/mcp/search`, and two new MCP tools. `/api/stats.json` answers again too.
 
-```
-A request to the Cloudflare API (/accounts/…/workers/services/ai-product-index) failed.
-  Authentication error [code: 10000]
-```
+**What it actually was, in order** — worth keeping, because three of the four
+diagnoses along the way were wrong:
 
-**What happened.** The `CLOUDFLARE_API_TOKEN` repo secret is unchanged (still
-dated 2026-07-25), and `wrangler whoami` still authenticates — so the token
-value is fine and the *token itself* was edited in the Cloudflare dashboard. It
-now reads Analytics Engine (`stats-probe` → HTTP 200) but can no longer write
-Workers. That is exactly the shape of narrowing one token to
-**Account Analytics: Read** instead of creating a second, separate token.
+1. The deploy token lost **Workers Scripts: Edit** in the dashboard. Symptom:
+   `Authentication error [code: 10000]` on `/workers/services/ai-product-index`,
+   while `wrangler whoami` still succeeded. Editing the token to restore it did
+   not work twice — the second attempt dropped Analytics Read too
+   (`stats-probe` 200 → 403) without adding Workers write back.
+2. A replacement token was created, but the value set as the secret was an R2
+   **Secret Access Key**, not the API token. Symptom changed to
+   `Invalid access token [code: 9109]` on `/accounts` — the token value itself
+   was rejected, not its permissions. The distinction between those two error
+   codes is what identified it.
+3. With the correct API token value in place, `wrangler deploy` succeeded on the
+   first try and `push-secrets` moved `CF_ANALYTICS_TOKEN` onto the Worker.
+4. `/api/mcp/search` still answered 503 afterwards — an unrelated bug the
+   outage had been hiding. See below.
 
-**The fix — do not narrow the deploy token.** Two tokens, two jobs:
+**Lesson worth keeping:** `10000` is a permissions problem, `9109` is a bad
+token value. Check `/user/tokens/verify` with the value *before* setting the
+secret; it distinguishes the two in one request and skips a whole round trip.
 
-1. ⬅️ **STILL PENDING, this is the blocker.** Cloudflare dashboard → My Profile →
-   API Tokens → the token used for deploys → **Edit** → restore **Account →
-   Workers Scripts → Edit** (the "Edit Cloudflare Workers" template is the safe
-   reset). Deploys work again immediately; nothing needs re-pushing, just re-run
-   the failed job.
-2. ✅ **Done 2026-08-01.** `CF_ANALYTICS_TOKEN` is set as a repo secret. It
-   cannot reach the Worker yet: `push-secrets` runs `wrangler secret put`, which
-   needs the same Workers Scripts: Edit that step 1 restores. Run
-   `gh workflow run cf-admin -f action=push-secrets` *after* step 1 — the Worker
-   then stops using the deploy token for analytics on its own.
+## Fixed: the MCP catalog was never uploaded (2026-08-01)
 
-Re-verified 13:48 UTC: re-running the failed deploy still ends in
-`Authentication error [code: 10000]`, plus `Unable to get membership roles` —
-the token authenticates but has no Workers write. Nothing in the repo can fix
-this; it is a dashboard edit.
+`/api/mcp/search` returned `catalog_unavailable (HTTP 404)` while
+`/api/x402/search` worked. All of `api/mcp/` was 404 in production despite being
+committed, current, and passing every test.
 
-Waiting on this, all live: the x402 catalog, the MCP catalog, 30 curated
-listings, `/api/x402/search`, `/api/mcp/search`, and two new MCP tools.
+`.assetsignore` is gitignore syntax, where **an unanchored pattern matches at
+every depth**. The bare `mcp` line, written for the top-level `mcp/` directory,
+therefore also excluded `api/mcp/` — 7.3 MB of catalog that wrangler simply
+never uploaded. It reported `Success`.
+
+Every entry is now anchored with a leading slash (`/mcp`), except
+`node_modules`, which should vanish at any depth. The existing test only checked
+that nothing ships *by accident*; a second test now checks the other direction,
+and was confirmed to fail against the pre-fix file.
 
 ## LIVE — https://index.percall.dev
 
