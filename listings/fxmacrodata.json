@@ -1,0 +1,19 @@
+{
+  "slug": "fxmacrodata",
+  "name": "FXMacroData",
+  "url": "https://fxmacrodata.com",
+  "description": "Macroeconomic and FX time-series data for AI agents: indicators, calendars, COT, forex, commodities.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://fxmacrodata.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

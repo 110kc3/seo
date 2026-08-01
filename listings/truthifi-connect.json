@@ -1,0 +1,19 @@
+{
+  "slug": "truthifi-connect",
+  "name": "Truthifi Connect",
+  "url": "https://truthifi-connect.ai",
+  "description": "Connects AI agents to live, verified financial data from 18,000+ institutions — ready to reason from",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.truthifi.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

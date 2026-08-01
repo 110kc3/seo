@@ -1,0 +1,19 @@
+{
+  "slug": "soma-brewing-company",
+  "name": "SOMA Brewing Company",
+  "url": "https://getsoma.store/agents",
+  "description": "India's first non-alcoholic craft brewery: catalog, nutrition, wallet, checkout links for AI agents.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://getsoma.store/api/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "carbone-mcp",
+  "name": "Carbone MCP",
+  "url": "https://carbone.io",
+  "description": "Generate PDF/DOCX/XLSX/PPTX from templates+JSON. Convert Office/HTML/MD to PDF. Universal templating",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.carbone.io"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

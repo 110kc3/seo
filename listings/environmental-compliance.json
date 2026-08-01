@@ -1,0 +1,19 @@
+{
+  "slug": "environmental-compliance",
+  "name": "Environmental Compliance",
+  "url": "https://github.com/martc03/gov-mcp-servers",
+  "description": "EPA air quality monitoring and HUD foreclosure data. 3 MCP tools for environmental and housing data.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://environmental-compliance-mcp.apify.actor/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

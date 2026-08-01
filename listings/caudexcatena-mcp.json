@@ -1,0 +1,19 @@
+{
+  "slug": "caudexcatena-mcp",
+  "name": "CaudexCatena MCP",
+  "url": "https://mcp.caudexcatena.com/",
+  "description": "Blockchain intelligence for tracing funds, screening addresses, and investigating on-chain activity.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp-api.caudexcatena.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

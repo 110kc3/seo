@@ -1,0 +1,19 @@
+{
+  "slug": "ultramemory",
+  "name": "UltraMemory",
+  "url": "https://ultramemory.io",
+  "description": "One memory, every AI: Claude, ChatGPT, Perplexity, Gemini, Cursor, OpenClaw, Hermes, any MCP client.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.ultramemory.us/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

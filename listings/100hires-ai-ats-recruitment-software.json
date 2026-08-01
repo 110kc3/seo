@@ -1,0 +1,19 @@
+{
+  "slug": "100hires-ai-ats-recruitment-software",
+  "name": "100Hires - AI ATS & Recruitment Software",
+  "url": "https://100hires.com/mcp",
+  "description": "Official 100Hires MCP: AI ATS & Recruitment Software for candidates, jobs, applications, interviews.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.100hires.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

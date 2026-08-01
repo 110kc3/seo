@@ -1,0 +1,19 @@
+{
+  "slug": "changethisfile",
+  "name": "ChangeThisFile",
+  "url": "https://changethisfile.com",
+  "description": "Convert files between 690+ formats: image, video, audio, documents, ebooks, archives. Free, no auth.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://changethisfile.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

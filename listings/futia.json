@@ -1,0 +1,19 @@
+{
+  "slug": "futia",
+  "name": "FUTIA",
+  "url": "https://futia.io",
+  "description": "SEO answers for AI agents: Search Console reads free, plus competitor, keyword, backlink, SERP data.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://futia.io/api/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

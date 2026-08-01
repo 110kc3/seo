@@ -1,0 +1,19 @@
+{
+  "slug": "newzai-mcp-server",
+  "name": "NewzAI MCP Server",
+  "url": "https://github.com/Gauraviitkgp/news-mcp",
+  "description": "News MCP: real-time headlines & custom news search across 7 regions. Free, just sign in with Google.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.newzai.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

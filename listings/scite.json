@@ -1,0 +1,19 @@
+{
+  "slug": "scite",
+  "name": "Scite",
+  "url": "https://scite.ai/mcp",
+  "description": "Ground answers in scientific literature. Search full text, evaluate trust, access full-text articles",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.scite.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

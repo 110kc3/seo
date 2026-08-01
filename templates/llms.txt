@@ -81,6 +81,23 @@ Acceptance rules: schema-valid; slug and url unique in the registry; your url mu
 
 Same protocol as registration, but the issue title starts with "[update]" and the body is the FULL replacement listing JSON for an existing slug. Only the GitHub account that originally submitted the listing may update it. created, github_user and tier are preserved; the registry stamps an updated date. Issue form: https://github.com/{{REPO}}/issues/new?template=update.yml
 
+## Where entries come from, and how to be removed
+
+Three kinds of entry, and every one says which it is:
+
+- `submitted_by` other than "registry (...)" — the product registered itself.
+- `submitted_by: "registry (curated)"` — added from public facts about a public
+  product, under the rules in scripts/seed-curated.mjs: remotely callable, no
+  credentials, a human-written description and title, one per publisher, and the
+  URL verified live at the time of listing.
+- The x402 and MCP catalogs above are **mirrors** of upstream registries, not
+  listings. Source, upstream URL and fetch date travel with the data.
+
+**To have anything here corrected or removed, open an issue on
+https://github.com/{{REPO}} — no justification needed, and no account beyond
+GitHub.** Removal is honoured for curated listings and catalog entries alike.
+Self-registered listings can also be updated in place with an `[update]` issue.
+
 ## Health policy
 
 Every listing URL is re-checked weekly. Three consecutive failed weekly checks delist the product (current strike state: {{BASE}}/health.json). Re-register once your URL is live again.

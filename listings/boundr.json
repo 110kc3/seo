@@ -1,0 +1,19 @@
+{
+  "slug": "boundr",
+  "name": "Boundr",
+  "url": "https://boundr.dev",
+  "description": "UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.boundr.dev/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "vocab-voyage",
+  "name": "Vocab Voyage",
+  "url": "https://vocab.voyage/mcp",
+  "description": "20 MCP tools + 17 widgets for SAT/ISEE/SSAT/GRE/GMAT/LSAT prep. Flashcards, quizzes & games. Hosted.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://gponcrussdahcdyrlhcr.supabase.co/functions/v1/mcp-server?ref=mcp_registry"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

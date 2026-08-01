@@ -1,0 +1,19 @@
+{
+  "slug": "default-privacy",
+  "name": "Default Privacy",
+  "url": "https://defaultprivacy.com",
+  "description": "Privacy Protocol directory, guides, diagnostics, formation intake. 23 tools, 7 resources, 6 prompts.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://defaultprivacy.com/api/privacy/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

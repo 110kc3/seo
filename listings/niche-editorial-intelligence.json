@@ -1,0 +1,19 @@
+{
+  "slug": "niche-editorial-intelligence",
+  "name": "Niche — Editorial Intelligence",
+  "url": "https://nicheangle.com",
+  "description": "Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.nicheangle.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

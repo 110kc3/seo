@@ -1,0 +1,19 @@
+{
+  "slug": "chiplab",
+  "name": "Chiplab",
+  "url": "https://veecle.ai",
+  "description": "Run, build, and validate firmware on virtual hardware from your AI agent. Hardware knowledge corpus.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://chiplab.veecle.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

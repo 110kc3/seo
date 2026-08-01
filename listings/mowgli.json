@@ -1,0 +1,19 @@
+{
+  "slug": "mowgli",
+  "name": "Mowgli",
+  "url": "https://mowgli.ai/agent",
+  "description": "Intelligent product canvas: iterate on your product's design with your coding agent, synced to code.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://app.mowgli.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

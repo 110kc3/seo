@@ -1,0 +1,19 @@
+{
+  "slug": "food-near-me",
+  "name": "Food Near Me",
+  "url": "https://foodnear.me",
+  "description": "AI-native restaurant discovery: verified/menu-indexed/discovered tiers + signed allergy-safety data.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://foodnear.me/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

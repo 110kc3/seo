@@ -1,0 +1,19 @@
+{
+  "slug": "arcadia-finance",
+  "name": "Arcadia Finance",
+  "url": "https://arcadia.finance",
+  "description": "Concentrated liquidity on Uniswap/Aerodrome (rebalance, compound, leverage) or single-sided lending.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.arcadia.finance/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

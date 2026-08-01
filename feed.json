@@ -6,6 +6,318 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
+      "url": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
+      "title": "100Hires - AI ATS & Recruitment Software",
+      "content_text": "Official 100Hires MCP: AI ATS & Recruitment Software for candidates, jobs, applications, interviews.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://100hires.com/mcp"
+    },
+    {
+      "id": "https://index.percall.dev/l/3tg-test-generation.html",
+      "url": "https://index.percall.dev/l/3tg-test-generation.html",
+      "title": "3TG Test Generation",
+      "content_text": "3rd Generation Testing (3TG) — generate deterministic test suites from Markdown spec tables via MCP.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://3tg.dev"
+    },
+    {
+      "id": "https://index.percall.dev/l/ai-visibility-checker.html",
+      "url": "https://index.percall.dev/l/ai-visibility-checker.html",
+      "title": "AI Visibility Checker",
+      "content_text": "Free, no signup. Check if ChatGPT, Perplexity & Google AI recommend a brand in 15 markets (GEO/AEO).",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://aivisibility.agentexchange.work"
+    },
+    {
+      "id": "https://index.percall.dev/l/arcadia-finance.html",
+      "url": "https://index.percall.dev/l/arcadia-finance.html",
+      "title": "Arcadia Finance",
+      "content_text": "Concentrated liquidity on Uniswap/Aerodrome (rebalance, compound, leverage) or single-sided lending.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://arcadia.finance"
+    },
+    {
+      "id": "https://index.percall.dev/l/avo.html",
+      "url": "https://index.percall.dev/l/avo.html",
+      "title": "Avo",
+      "content_text": "Define, ship & query your analytics tracking from one source of truth, trusted by humans and agents.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://www.avo.app/docs/reference/avo-mcp/tools"
+    },
+    {
+      "id": "https://index.percall.dev/l/bezbaseina.html",
+      "url": "https://index.percall.dev/l/bezbaseina.html",
+      "title": "BezBaseina",
+      "content_text": "Latvian property portal: search rentals, sales & nightly stays; market stats; owner tools via OAuth.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://bezbaseina.lv"
+    },
+    {
+      "id": "https://index.percall.dev/l/boundr.html",
+      "url": "https://index.percall.dev/l/boundr.html",
+      "title": "Boundr",
+      "content_text": "UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://boundr.dev"
+    },
+    {
+      "id": "https://index.percall.dev/l/carbone-mcp.html",
+      "url": "https://index.percall.dev/l/carbone-mcp.html",
+      "title": "Carbone MCP",
+      "content_text": "Generate PDF/DOCX/XLSX/PPTX from templates+JSON. Convert Office/HTML/MD to PDF. Universal templating",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://carbone.io"
+    },
+    {
+      "id": "https://index.percall.dev/l/caudexcatena-mcp.html",
+      "url": "https://index.percall.dev/l/caudexcatena-mcp.html",
+      "title": "CaudexCatena MCP",
+      "content_text": "Blockchain intelligence for tracing funds, screening addresses, and investigating on-chain activity.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://mcp.caudexcatena.com/"
+    },
+    {
+      "id": "https://index.percall.dev/l/changethisfile.html",
+      "url": "https://index.percall.dev/l/changethisfile.html",
+      "title": "ChangeThisFile",
+      "content_text": "Convert files between 690+ formats: image, video, audio, documents, ebooks, archives. Free, no auth.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://changethisfile.com"
+    },
+    {
+      "id": "https://index.percall.dev/l/chiplab.html",
+      "url": "https://index.percall.dev/l/chiplab.html",
+      "title": "Chiplab",
+      "content_text": "Run, build, and validate firmware on virtual hardware from your AI agent. Hardware knowledge corpus.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://veecle.ai"
+    },
+    {
+      "id": "https://index.percall.dev/l/default-privacy.html",
+      "url": "https://index.percall.dev/l/default-privacy.html",
+      "title": "Default Privacy",
+      "content_text": "Privacy Protocol directory, guides, diagnostics, formation intake. 23 tools, 7 resources, 6 prompts.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://defaultprivacy.com"
+    },
+    {
+      "id": "https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html",
+      "url": "https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html",
+      "title": "Embers: Tabletop RPG Toolkit",
+      "content_text": "Characters, campaigns, adventures & worlds for D&D 5e/5.5e, Pathfinder, Savage Worlds, Fate, & more.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://embersds.com"
+    },
+    {
+      "id": "https://index.percall.dev/l/environmental-compliance.html",
+      "url": "https://index.percall.dev/l/environmental-compliance.html",
+      "title": "Environmental Compliance",
+      "content_text": "EPA air quality monitoring and HUD foreclosure data. 3 MCP tools for environmental and housing data.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://github.com/martc03/gov-mcp-servers"
+    },
+    {
+      "id": "https://index.percall.dev/l/fastcrw.html",
+      "url": "https://index.percall.dev/l/fastcrw.html",
+      "title": "fastCRW",
+      "content_text": "Scrape, crawl, map & search the web. Open-source, self-hostable Rust crawler & search for AI agents.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://fastcrw.com"
+    },
+    {
+      "id": "https://index.percall.dev/l/food-near-me.html",
+      "url": "https://index.percall.dev/l/food-near-me.html",
+      "title": "Food Near Me",
+      "content_text": "AI-native restaurant discovery: verified/menu-indexed/discovered tiers + signed allergy-safety data.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://foodnear.me"
+    },
+    {
+      "id": "https://index.percall.dev/l/futia.html",
+      "url": "https://index.percall.dev/l/futia.html",
+      "title": "FUTIA",
+      "content_text": "SEO answers for AI agents: Search Console reads free, plus competitor, keyword, backlink, SERP data.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://futia.io"
+    },
+    {
+      "id": "https://index.percall.dev/l/fxmacrodata.html",
+      "url": "https://index.percall.dev/l/fxmacrodata.html",
+      "title": "FXMacroData",
+      "content_text": "Macroeconomic and FX time-series data for AI agents: indicators, calendars, COT, forex, commodities.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://fxmacrodata.com"
+    },
+    {
+      "id": "https://index.percall.dev/l/hlido-agent-reviews.html",
+      "url": "https://index.percall.dev/l/hlido-agent-reviews.html",
+      "title": "Hlido Agent Reviews",
+      "content_text": "Independent AI-agent reviews: trust checks, evidence scorecards, incident registry, recommendations.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://hlido.eu"
+    },
+    {
+      "id": "https://index.percall.dev/l/jp-bids-mcp.html",
+      "url": "https://index.percall.dev/l/jp-bids-mcp.html",
+      "title": "JP Bids MCP",
+      "content_text": "Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://github.com/sugukurukabe/koko-call-mcp"
+    },
+    {
+      "id": "https://index.percall.dev/l/llm-optimizer.html",
+      "url": "https://index.percall.dev/l/llm-optimizer.html",
+      "title": "LLM Optimizer",
+      "content_text": "AI brand visibility analytics: visibility scores, optimizations, video, Reddit, and search rankings.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://github.com/jonradoff/llmopt"
+    },
+    {
+      "id": "https://index.percall.dev/l/mowgli.html",
+      "url": "https://index.percall.dev/l/mowgli.html",
+      "title": "Mowgli",
+      "content_text": "Intelligent product canvas: iterate on your product's design with your coding agent, synced to code.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://mowgli.ai/agent"
+    },
+    {
+      "id": "https://index.percall.dev/l/newzai-mcp-server.html",
+      "url": "https://index.percall.dev/l/newzai-mcp-server.html",
+      "title": "NewzAI MCP Server",
+      "content_text": "News MCP: real-time headlines & custom news search across 7 regions. Free, just sign in with Google.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://github.com/Gauraviitkgp/news-mcp"
+    },
+    {
+      "id": "https://index.percall.dev/l/niche-editorial-intelligence.html",
+      "url": "https://index.percall.dev/l/niche-editorial-intelligence.html",
+      "title": "Niche — Editorial Intelligence",
+      "content_text": "Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://nicheangle.com"
+    },
+    {
       "id": "https://index.percall.dev/l/overtimelog.html",
       "url": "https://index.percall.dev/l/overtimelog.html",
       "title": "OvertimeLog",
@@ -35,6 +347,84 @@
         "multilingual"
       ],
       "external_url": "https://protocolindex.eu/"
+    },
+    {
+      "id": "https://index.percall.dev/l/scite.html",
+      "url": "https://index.percall.dev/l/scite.html",
+      "title": "Scite",
+      "content_text": "Ground answers in scientific literature. Search full text, evaluate trust, access full-text articles",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://scite.ai/mcp"
+    },
+    {
+      "id": "https://index.percall.dev/l/signvoy.html",
+      "url": "https://index.percall.dev/l/signvoy.html",
+      "title": "Signvoy",
+      "content_text": "Send documents for e-signature, track signing status, and download signed PDFs. No API key required.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://signvoy.com/developers/mcp"
+    },
+    {
+      "id": "https://index.percall.dev/l/soma-brewing-company.html",
+      "url": "https://index.percall.dev/l/soma-brewing-company.html",
+      "title": "SOMA Brewing Company",
+      "content_text": "India's first non-alcoholic craft brewery: catalog, nutrition, wallet, checkout links for AI agents.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://getsoma.store/agents"
+    },
+    {
+      "id": "https://index.percall.dev/l/truthifi-connect.html",
+      "url": "https://index.percall.dev/l/truthifi-connect.html",
+      "title": "Truthifi Connect",
+      "content_text": "Connects AI agents to live, verified financial data from 18,000+ institutions — ready to reason from",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://truthifi-connect.ai"
+    },
+    {
+      "id": "https://index.percall.dev/l/ultramemory.html",
+      "url": "https://index.percall.dev/l/ultramemory.html",
+      "title": "UltraMemory",
+      "content_text": "One memory, every AI: Claude, ChatGPT, Perplexity, Gemini, Cursor, OpenClaw, Hermes, any MCP client.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://ultramemory.io"
+    },
+    {
+      "id": "https://index.percall.dev/l/vocab-voyage.html",
+      "url": "https://index.percall.dev/l/vocab-voyage.html",
+      "title": "Vocab Voyage",
+      "content_text": "20 MCP tools + 17 widgets for SAT/ISEE/SSAT/GRE/GMAT/LSAT prep. Flashcards, quizzes & games. Hosted.",
+      "date_published": "2026-08-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "remote"
+      ],
+      "external_url": "https://vocab.voyage/mcp"
     },
     {
       "id": "https://index.percall.dev/l/agent-readability-service.html",

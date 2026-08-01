@@ -1,0 +1,19 @@
+{
+  "slug": "signvoy",
+  "name": "Signvoy",
+  "url": "https://signvoy.com/developers/mcp",
+  "description": "Send documents for e-signature, track signing status, and download signed PDFs. No API key required.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://api.signvoy.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

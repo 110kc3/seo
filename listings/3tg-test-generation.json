@@ -1,0 +1,19 @@
+{
+  "slug": "3tg-test-generation",
+  "name": "3TG Test Generation",
+  "url": "https://3tg.dev",
+  "description": "3rd Generation Testing (3TG) — generate deterministic test suites from Markdown spec tables via MCP.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.3tg.dev/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

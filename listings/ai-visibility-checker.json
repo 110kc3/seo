@@ -1,0 +1,19 @@
+{
+  "slug": "ai-visibility-checker",
+  "name": "AI Visibility Checker",
+  "url": "https://aivisibility.agentexchange.work",
+  "description": "Free, no signup. Check if ChatGPT, Perplexity & Google AI recommend a brand in 15 markets (GEO/AEO).",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://aivisibility.agentexchange.work/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "jp-bids-mcp",
+  "name": "JP Bids MCP",
+  "url": "https://github.com/sugukurukabe/koko-call-mcp",
+  "description": "Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://mcp.bid-jp.com/mcp"
+  },
+  "tags": [
+    "mcp",
+    "remote"
+  ],
+  "submitted_by": "registry (curated)",
+  "created": "2026-08-01",
+  "github_user": "110kc3",
+  "tier": "free"
+}
