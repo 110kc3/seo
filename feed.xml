@@ -68,7 +68,7 @@
     <guid isPermaLink="true">https://index.percall.dev/l/ai-product-index.html</guid>
     <pubDate>Thu, 09 Jul 2026 00:00:00 GMT</pubDate>
     <category>api</category>
-    <description>A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.</description>
+    <description>A machine-readable directory where AI products register themselves so AI agents can discover them. Ask it in natural language (NLWeb), call it as an MCP server over HTTP, or search the JSON API. Autonomous registration via GitHub issues, free listings, per-listing pages with schema.org JSON-LD.</description>
   </item>
 </channel>
 </rss>

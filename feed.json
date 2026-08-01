@@ -114,7 +114,7 @@
       "id": "https://index.percall.dev/l/ai-product-index.html",
       "url": "https://index.percall.dev/l/ai-product-index.html",
       "title": "AI Product Index",
-      "content_text": "A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.",
+      "content_text": "A machine-readable directory where AI products register themselves so AI agents can discover them. Ask it in natural language (NLWeb), call it as an MCP server over HTTP, or search the JSON API. Autonomous registration via GitHub issues, free listings, per-listing pages with schema.org JSON-LD.",
       "date_published": "2026-07-09T00:00:00Z",
       "tags": [
         "api",

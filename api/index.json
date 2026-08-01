@@ -142,12 +142,13 @@
       "slug": "ai-product-index",
       "name": "AI Product Index",
       "url": "https://index.percall.dev/",
-      "description": "A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.",
+      "description": "A machine-readable directory where AI products register themselves so AI agents can discover them. Ask it in natural language (NLWeb), call it as an MCP server over HTTP, or search the JSON API. Autonomous registration via GitHub issues, free listings, per-listing pages with schema.org JSON-LD.",
       "category": "api",
       "pricing": "free",
       "machine_endpoints": {
-        "llms_txt": "https://index.kc-it.pl/llms.txt",
-        "openapi": "https://index.kc-it.pl/openapi.yaml"
+        "llms_txt": "https://index.percall.dev/llms.txt",
+        "openapi": "https://index.percall.dev/openapi.yaml",
+        "mcp": "https://index.percall.dev/mcp"
       },
       "tags": [
         "directory",

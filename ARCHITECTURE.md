@@ -18,11 +18,22 @@ GitHub issue  ─→  register.yml  ─→  process-issue.mjs  ─┤
  [upgrade])                                             ▼
                                           worker/index.js  ─→  ASSETS binding
                                                  │
-                            ┌────────────────────┼────────────────────┐
-                            ▼                    ▼                    ▼
-                    POST /api/audit      GET /api/stats.json   GET /api/x402/info
-                    (x402-gated)         GET /api/revenue.json
+              ┌───────────────┬──────────────────┼────────────────────┐
+              ▼               ▼                  ▼                    ▼
+      GET /api/search   POST /api/audit   GET /api/stats.json   GET /api/x402/info
+      POST /ask         (x402-gated)      GET /api/revenue.json
+      POST /mcp
+      (discovery.js)
 ```
+
+The left column is the newest and the one that changes reach. Everything else
+here serves a *document* you have to already know the URL of; those three take
+a *question*. `/mcp` matters most: the stdio MCP server needed a clone and a
+config edit, so it was only ever going to be used by someone who had already
+found the project. A streamable-HTTP endpoint needs a URL, which means any MCP
+client can mount this index as a tool source and every question it asks lands
+here. All three answer from the registry bundled into the Worker at build time
+— one CPU slice, no network, and no second copy of the data that can drift.
 
 ## Why a Worker at all
 

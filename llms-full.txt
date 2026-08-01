@@ -225,8 +225,9 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 ### AI Product Index (ai-product-index)
 - url: https://index.percall.dev/
 - category: api · pricing: free · tags: directory, discovery, seo, registry
-- A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.
-- llms_txt: https://index.kc-it.pl/llms.txt
-- openapi: https://index.kc-it.pl/openapi.yaml
+- A machine-readable directory where AI products register themselves so AI agents can discover them. Ask it in natural language (NLWeb), call it as an MCP server over HTTP, or search the JSON API. Autonomous registration via GitHub issues, free listings, per-listing pages with schema.org JSON-LD.
+- llms_txt: https://index.percall.dev/llms.txt
+- openapi: https://index.percall.dev/openapi.yaml
+- mcp: https://index.percall.dev/mcp
 - listing JSON: https://index.percall.dev/listings/ai-product-index.json
 - listing page: https://index.percall.dev/l/ai-product-index.html
