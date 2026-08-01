@@ -150,6 +150,105 @@ export function handleSearch(url, listings, base) {
   }, 200, { 'cache-control': 'public, max-age=300' });
 }
 
+// --- the x402 endpoint catalog ----------------------------------------------
+//
+// A normalized mirror of the Coinbase CDP Bazaar (~14.7k paid endpoints), which
+// publishes offset paging and nothing else — no query, no filter, no aggregate.
+// Answering "is there an x402 endpoint that does X, and what does it cost"
+// upstream means pulling every record yourself. This answers it in one call.
+//
+// The index is loaded from our own static assets on first use and kept in
+// module scope for the life of the isolate: ~3.6 MB parsed once, then free. It
+// is loaded lazily rather than at import so that the 99% of requests which
+// never touch it pay nothing.
+
+let catalogPromise = null;
+
+function loadCatalog(env, base) {
+  if (!catalogPromise) {
+    catalogPromise = (async () => {
+      const url = `${base}/api/x402/index.json`;
+      const resp = env?.ASSETS
+        ? await env.ASSETS.fetch(new Request(url))
+        : await fetch(url);
+      if (!resp.ok) throw new Error(`catalog unavailable (HTTP ${resp.status})`);
+      const body = await resp.json();
+      const at = Object.fromEntries(body.fields.map((f, i) => [f, i]));
+      return { ...body, at };
+    })().catch((e) => {
+      // A failed load must not poison every later request: clear the cached
+      // promise so the next caller retries rather than replaying the error.
+      catalogPromise = null;
+      throw e;
+    });
+  }
+  return catalogPromise;
+}
+
+/** GET /api/x402/search?q=…&chain=…&max_price=…&method=…&host=…&limit=… */
+export async function handleX402Search(url, env, base) {
+  let catalog;
+  try {
+    catalog = await loadCatalog(env, base);
+  } catch (e) {
+    return json({ ok: false, code: 'catalog_unavailable', error: e.message }, 503);
+  }
+
+  const p = url.searchParams;
+  const q = (p.get('q') ?? p.get('query') ?? '').trim().toLowerCase().slice(0, MAX_QUERY);
+  const terms = q ? q.split(/\s+/).filter(Boolean) : [];
+  const chain = (p.get('chain') ?? '').toLowerCase();
+  const host = (p.get('host') ?? '').toLowerCase();
+  const method = (p.get('method') ?? '').toUpperCase();
+  const maxPrice = p.get('max_price') !== null ? Number(p.get('max_price')) : null;
+  const limit = Math.min(Math.max(Number(p.get('limit')) || DEFAULT_LIMIT, 1), MAX_LIMIT);
+  const { at } = catalog;
+
+  const scored = [];
+  for (const row of catalog.rows) {
+    if (chain && String(row[at.chain] ?? '').toLowerCase() !== chain) continue;
+    if (method && String(row[at.method] ?? '').toUpperCase() !== method) continue;
+    if (host && !String(row[at.host] ?? '').toLowerCase().includes(host)) continue;
+    // Unpriced endpoints are excluded by a price filter rather than treated as
+    // free: an unknown asset means the price could not be computed, not zero.
+    if (maxPrice !== null && Number.isFinite(maxPrice)) {
+      const price = row[at.price];
+      if (typeof price !== 'number' || price > maxPrice) continue;
+    }
+
+    let score = 0;
+    if (terms.length) {
+      const text = String(row[at.description] ?? '').toLowerCase();
+      const path = String(row[at.url] ?? '').toLowerCase();
+      for (const term of terms) {
+        score += 6 * strength(text, term);
+        score += 4 * strength(path, term);
+        score += 2 * strength(String(row[at.host] ?? '').toLowerCase(), term);
+      }
+      if (score === 0) continue;
+    }
+    scored.push([score, row]);
+  }
+
+  // Cheapest first within a relevance band: on a rail where the whole point is
+  // paying per call, price is the tiebreak an agent actually cares about.
+  scored.sort((a, b) => b[0] - a[0]
+    || (a[1][at.price] ?? Infinity) - (b[1][at.price] ?? Infinity)
+    || String(a[1][at.url]).localeCompare(String(b[1][at.url])));
+
+  const view = ([, row]) => Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
+  return json({
+    ok: true,
+    query: q,
+    total: scored.length,
+    count: Math.min(scored.length, limit),
+    results: scored.slice(0, limit).map(view),
+    source: 'Coinbase CDP x402 Bazaar',
+    fetched: catalog.fetched,
+    catalog: { endpoints: catalog.count, full: `${base}/api/x402/catalog.json`, stats: `${base}/api/x402/stats.json` },
+  }, 200, { 'cache-control': 'public, max-age=600' });
+}
+
 // --- NLWeb ------------------------------------------------------------------
 // nlweb.ai: POST /ask with {query: {text}}, answered with schema.org objects
 // under `results`. The protocol's whole premise is that a site already
@@ -295,6 +394,22 @@ export function mcpTools(base) {
       },
     },
     {
+      name: 'search_x402_endpoints',
+      title: 'Find a paid API you can call with x402',
+      description: 'Search ~14,700 x402-payable HTTP endpoints — the machine-payable web, normalized from the Coinbase CDP Bazaar. Use this to find an API an agent can pay for per call (USDC on Base and other chains) and to see what it costs before calling it. Filter by chain, HTTP method, host or maximum price; results are ranked by relevance then cheapest first.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'What the endpoint should do, e.g. "weather forecast" or "token price".' },
+          chain: { type: 'string', description: 'Restrict to one chain, e.g. base, solana, polygon.' },
+          method: { type: 'string', description: 'Restrict to an HTTP method, e.g. GET or POST.' },
+          host: { type: 'string', description: 'Restrict to endpoints on a hostname (substring match).' },
+          max_price: { type: 'number', description: 'Maximum price per call in USD. Endpoints priced in an unrecognised asset are excluded when this is set, because their price is unknown rather than zero.' },
+          limit: { type: 'integer', minimum: 1, maximum: MAX_LIMIT },
+        },
+      },
+    },
+    {
       name: 'how_to_register',
       title: 'How to get listed',
       description: 'Returns the exact steps and schema for registering a product in the index — autonomous, free, no human approval.',
@@ -309,7 +424,7 @@ const textContent = (value) => ({
   content: [{ type: 'text', text: typeof value === 'string' ? value : JSON.stringify(value, null, 2) }],
 });
 
-async function callMcpTool(name, args, { listings, base, scoreUrl }) {
+async function callMcpTool(name, args, { listings, base, scoreUrl, x402Search }) {
   if (name === 'search_products') {
     const { total, hits } = searchListings(listings, {
       q: args.query ?? '',
@@ -342,6 +457,15 @@ async function callMcpTool(name, args, { listings, base, scoreUrl }) {
     return scored.ok === false ? { ...textContent(scored), isError: true } : textContent(scored);
   }
 
+  if (name === 'search_x402_endpoints') {
+    // Reuses the HTTP handler so the MCP tool and the URL cannot drift apart —
+    // the same failure mode `score_url` avoids by proxying /api/score.
+    const params = new URLSearchParams();
+    for (const [k, v] of Object.entries(args)) if (v !== undefined && v !== null) params.set(k, String(v));
+    const res = await x402Search(new URL(`${base}/api/x402/search?${params}`));
+    return textContent(await res.json());
+  }
+
   if (name === 'how_to_register') {
     return textContent({
       cost: 'free',
@@ -361,7 +485,7 @@ async function callMcpTool(name, args, { listings, base, scoreUrl }) {
 }
 
 /** POST /mcp — JSON-RPC 2.0 over HTTP. */
-export async function handleMcp(request, { listings, base, scoreUrl }) {
+export async function handleMcp(request, { listings, base, scoreUrl, x402Search }) {
   if (request.method === 'GET') {
     // The transport allows a GET that opens an SSE stream for server-initiated
     // messages. We have none, so say that plainly instead of holding a socket
@@ -387,13 +511,13 @@ export async function handleMcp(request, { listings, base, scoreUrl }) {
   if (Array.isArray(msg)) {
     const replies = [];
     for (const one of msg) {
-      const r = await dispatch(one, { listings, base, scoreUrl });
+      const r = await dispatch(one, { listings, base, scoreUrl, x402Search });
       if (r) replies.push(r);
     }
     return replies.length ? json(replies) : new Response(null, { status: 202 });
   }
 
-  const reply = await dispatch(msg, { listings, base, scoreUrl });
+  const reply = await dispatch(msg, { listings, base, scoreUrl, x402Search });
   // A notification (no id) gets no body — the transport says 202.
   return reply ? json(reply) : new Response(null, { status: 202 });
 }
@@ -437,4 +561,9 @@ async function dispatch(msg, ctx) {
   return rpcError(id, -32601, `method not found: ${method}`);
 }
 
-export const __testing = { asSchemaOrg, publicFields, dispatch, MCP_PROTOCOL_VERSION, NLWEB_VERSION };
+// The catalog cache lives for the life of the isolate on purpose, which makes
+// it shared state a test cannot escape by constructing a new request. Tests get
+// an explicit reset rather than a re-import hack.
+const resetCatalog = () => { catalogPromise = null; };
+
+export const __testing = { asSchemaOrg, publicFields, dispatch, resetCatalog, strength, MCP_PROTOCOL_VERSION, NLWEB_VERSION };

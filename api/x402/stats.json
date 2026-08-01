@@ -1,0 +1,142 @@
+{
+  "source": "Coinbase CDP x402 Bazaar",
+  "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
+  "fetched": "2026-08-01",
+  "endpoints": 14661,
+  "hosts": 1527,
+  "concentration": {
+    "top_10_hosts_share": 0.271,
+    "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
+  },
+  "by_chain": {
+    "base": 14356,
+    "solana": 161,
+    "base-sepolia": 118,
+    "x-layer": 18,
+    "algorand": 5,
+    "arbitrum": 1,
+    "eip155:56": 1,
+    "eip155:4663": 1
+  },
+  "by_version": {
+    "1": 1794,
+    "2": 12867
+  },
+  "by_method": {
+    "GET": 9641,
+    "POST": 4993,
+    "HEAD": 20,
+    "DELETE": 6,
+    "PUT": 1
+  },
+  "price_usd": {
+    "priced": 14635,
+    "unpriced": 26,
+    "min": 0.0001,
+    "p50": 0.014,
+    "p90": 0.15,
+    "max": 10000
+  },
+  "top_hosts": [
+    {
+      "host": "clonecho.builda.company",
+      "endpoints": 993
+    },
+    {
+      "host": "agent402.tools",
+      "endpoints": 526
+    },
+    {
+      "host": "api.x402node.dev",
+      "endpoints": 449
+    },
+    {
+      "host": "x402.forgemesh.io",
+      "endpoints": 415
+    },
+    {
+      "host": "oracles-production.up.railway.app",
+      "endpoints": 369
+    },
+    {
+      "host": "api.agentstools.dev",
+      "endpoints": 300
+    },
+    {
+      "host": "x402.glassnode.com",
+      "endpoints": 297
+    },
+    {
+      "host": "api.24klabs.ai",
+      "endpoints": 253
+    },
+    {
+      "host": "proxy.suverse.io",
+      "endpoints": 189
+    },
+    {
+      "host": "www.stratalize.com",
+      "endpoints": 188
+    },
+    {
+      "host": "api.relaystation.ai",
+      "endpoints": 158
+    },
+    {
+      "host": "blockrun.ai",
+      "endpoints": 149
+    },
+    {
+      "host": "x402-services-production.up.railway.app",
+      "endpoints": 147
+    },
+    {
+      "host": "x402.openwebninja.com",
+      "endpoints": 145
+    },
+    {
+      "host": "2s.io",
+      "endpoints": 141
+    },
+    {
+      "host": "library.forgemesh.io",
+      "endpoints": 141
+    },
+    {
+      "host": "agents.x402stock.xyz",
+      "endpoints": 132
+    },
+    {
+      "host": "402.com.tr",
+      "endpoints": 126
+    },
+    {
+      "host": "gateway.apiosk.com",
+      "endpoints": 124
+    },
+    {
+      "host": "api.socialfetch.dev",
+      "endpoints": 103
+    },
+    {
+      "host": "eltociear-tokenguard.hf.space",
+      "endpoints": 100
+    },
+    {
+      "host": "netintel.dev",
+      "endpoints": 100
+    },
+    {
+      "host": "x402-factory.com",
+      "endpoints": 98
+    },
+    {
+      "host": "api.strale.io",
+      "endpoints": 92
+    },
+    {
+      "host": "data.greeneris.io",
+      "endpoints": 91
+    }
+  ]
+}

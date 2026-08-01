@@ -31,6 +31,17 @@ jobs:
         continue-on-error: true
         run: node scripts/score-listings.mjs
 
+      # The x402 catalog is a mirror, so it goes stale on its own. Refreshed
+      # here rather than on its own schedule because it commits alongside the
+      # other weekly state, and the output is sorted by URL so the diff is the
+      # week's actual churn rather than a 15k-line rewrite. continue-on-error:
+      # an upstream hiccup should leave last week's catalog standing, not fail
+      # the liveness run.
+      - name: Refresh the x402 endpoint catalog
+        id: catalog
+        continue-on-error: true
+        run: node scripts/fetch-x402-catalog.mjs
+
       # Bazaar cataloging is CDP-side and gives no signal when it happens, so
       # the weekly run watches for it rather than leaving it to be remembered.
       # Never fails the job: not being listed is the status quo, not a fault.
@@ -38,15 +49,22 @@ jobs:
         continue-on-error: true
         run: node scripts/bazaar-check.mjs
 
-      - name: Commit health state / delistings
-        if: steps.check.outputs.changed == 'true' || steps.score.outputs.changed == 'true'
+      # No longer gated on the liveness/score steps reporting a change: the
+      # catalog refresh also produces one and has no such flag, so the gate is
+      # now "did anything actually change on disk", asked of git rather than
+      # inferred from step outputs.
+      - name: Commit health state / delistings / catalog
         run: |
           git config user.name "registry-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3; do
             node scripts/build.mjs
             git add -A
-            git commit -m "Weekly check: liveness + agent-readability scores"
+            if git diff --cached --quiet; then
+              echo "::notice::nothing changed this week"
+              exit 0
+            fi
+            git commit -m "Weekly check: liveness, agent-readability scores, x402 catalog"
             if git push origin main; then
               exit 0
             fi
@@ -54,6 +72,7 @@ jobs:
             git reset --hard origin/main
             node scripts/check-liveness.mjs
             node scripts/score-listings.mjs || true
+            node scripts/fetch-x402-catalog.mjs || true
             sleep $(( (RANDOM % 5) + 2 ))
           done
           exit 1

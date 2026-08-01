@@ -43,6 +43,10 @@
       "description": "Grade any public URL A-F across 13 agent-readability checks."
     },
     {
+      "name": "search_x402_endpoints",
+      "description": "Search ~14,700 x402-payable HTTP endpoints by what they do, what they cost and which chain they settle on."
+    },
+    {
       "name": "how_to_register",
       "description": "The exact steps and schema for adding a product to the index."
     }

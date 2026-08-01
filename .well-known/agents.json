@@ -15,6 +15,9 @@
     "mcp_card": "https://index.percall.dev/.well-known/mcp.json",
     "nlweb": "https://index.percall.dev/ask",
     "search": "https://index.percall.dev/api/search?q=",
+    "x402_search": "https://index.percall.dev/api/x402/search?q=",
+    "x402_catalog": "https://index.percall.dev/api/x402/catalog.json",
+    "x402_stats": "https://index.percall.dev/api/x402/stats.json",
     "opensearch": "https://index.percall.dev/opensearch.xml",
     "feed": "https://index.percall.dev/feed.xml",
     "json_feed": "https://index.percall.dev/feed.json",
@@ -69,6 +72,13 @@
       "auth": "none",
       "price": "free",
       "request": {"query": {"text": "free MCP servers"}}
+    },
+    {
+      "method": "GET",
+      "url": "https://index.percall.dev/api/x402/search?q=weather&max_price=0.01",
+      "description": "Search ~14,700 x402-payable HTTP endpoints — the machine-payable web, normalized from the Coinbase CDP Bazaar, which offers offset paging and no query of its own. Filters: chain, method, host, max_price, limit. Ranked by relevance, then cheapest first.",
+      "auth": "none",
+      "price": "free"
     },
     {
       "method": "POST",

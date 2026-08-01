@@ -15,6 +15,9 @@
     "mcp_card": "{{BASE}}/.well-known/mcp.json",
     "nlweb": "{{BASE}}/ask",
     "search": "{{BASE}}/api/search?q=",
+    "x402_search": "{{BASE}}/api/x402/search?q=",
+    "x402_catalog": "{{BASE}}/api/x402/catalog.json",
+    "x402_stats": "{{BASE}}/api/x402/stats.json",
     "opensearch": "{{BASE}}/opensearch.xml",
     "feed": "{{BASE}}/feed.xml",
     "json_feed": "{{BASE}}/feed.json",
@@ -69,6 +72,13 @@
       "auth": "none",
       "price": "free",
       "request": {"query": {"text": "free MCP servers"}}
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/x402/search?q=weather&max_price=0.01",
+      "description": "Search ~14,700 x402-payable HTTP endpoints — the machine-payable web, normalized from the Coinbase CDP Bazaar, which offers offset paging and no query of its own. Filters: chain, method, host, max_price, limit. Ranked by relevance, then cheapest first.",
+      "auth": "none",
+      "price": "free"
     },
     {
       "method": "POST",
