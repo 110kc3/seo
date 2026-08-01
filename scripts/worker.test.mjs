@@ -1684,3 +1684,19 @@ test('every query surface the manifests advertise is actually routed', async () 
   const advertised = manifest.endpoints.map((e) => new URL(e.url).pathname);
   for (const path of routed) assert.ok(advertised.includes(path), `${path} is routed but not advertised`);
 });
+
+test('a natural-language answer drops the incidental matches a search keeps', () => {
+  // Every listing in this corpus says "polish", so an unfiltered search finds
+  // all three. Only one is actually about property.
+  const polish = [
+    { slug: 'auctions', name: 'Property Auctions', description: 'Polish municipal property auctions.', category: 'app', pricing: 'free', tags: ['property', 'poland'] },
+    { slug: 'quiz', name: 'Headline Quiz', description: 'A polish newspaper guessing game.', category: 'app', pricing: 'free', tags: ['poland'] },
+    { slug: 'cameras', name: 'Old Cameras', description: 'Polish catalog of film cameras.', category: 'app', pricing: 'free', tags: ['poland'] },
+  ];
+  const search = searchListings(polish, { q: 'polish property' });
+  assert.equal(search.total, 3, '/api/search returns every match; the caller ranks and limits');
+
+  const answered = searchListings(polish, { q: 'polish property', minScoreRatio: 0.5 });
+  assert.deepEqual(answered.hits.map((h) => h.listing.slug), ['auctions']);
+  assert.equal(answered.total, 1, 'total reflects what was offered, not what was scored');
+});

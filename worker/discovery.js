@@ -31,7 +31,7 @@ const json = (body, status = 200, headers = {}) =>
  * Weights: name beats tag beats description, and a whole-word hit beats a
  * substring, so "api" does not rank "rapidfire" over "API Gateway".
  */
-export function searchListings(listings, { q = '', category = '', tag = '', limit = DEFAULT_LIMIT } = {}) {
+export function searchListings(listings, { q = '', category = '', tag = '', limit = DEFAULT_LIMIT, minScoreRatio = 0 } = {}) {
   const needle = String(q).trim().toLowerCase().slice(0, MAX_QUERY);
   const terms = needle ? needle.split(/\s+/).filter(Boolean) : [];
 
@@ -60,8 +60,19 @@ export function searchListings(listings, { q = '', category = '', tag = '', limi
   // Stable within a score band: slug order, so the same query answers the same
   // way twice. An agent comparing two runs must not see phantom churn.
   scored.sort((a, b) => b.score - a.score || String(a.listing.slug).localeCompare(String(b.listing.slug)));
+
+  // A relevance floor, relative to the best hit rather than absolute — scores
+  // scale with how many words the query had, so any fixed threshold is wrong
+  // for some query length. /api/search does not use one (an explicit query
+  // wants every match, and the caller sets the limit), but a natural-language
+  // answer does: "polish property auctions" matching seven of eight listings
+  // because they all say "polish" is a worse answer than two right ones.
+  const relevant = minScoreRatio > 0 && scored.length
+    ? scored.filter((s) => s.score >= scored[0].score * minScoreRatio)
+    : scored;
+
   const capped = Math.min(Math.max(Number(limit) || DEFAULT_LIMIT, 1), MAX_LIMIT);
-  return { total: scored.length, hits: scored.slice(0, capped) };
+  return { total: relevant.length, hits: relevant.slice(0, capped) };
 }
 
 const publicFields = (l, base) => ({
@@ -178,7 +189,10 @@ export async function handleAsk(request, listings, base) {
   const keywords = text.toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, ' ').split(/\s+/)
     .filter((w) => w.length > 1 && !STOP.has(w));
 
-  const { total, hits } = searchListings(listings, { q: keywords.join(' '), limit: 10 });
+  // 0.5: a hit has to be at least half as good as the best one to be offered
+  // as part of an answer. Tuned against the real corpus, where a one-word
+  // incidental match ("polish") scores 1–3 against a name-and-tag match's 15+.
+  const { total, hits } = searchListings(listings, { q: keywords.join(' '), limit: 10, minScoreRatio: 0.5 });
 
   return json({
     _meta: {
