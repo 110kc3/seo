@@ -105,6 +105,36 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
+## Done (v3.12 — caught up with where the specs moved, 2026-08-01)
+
+Researched what agent-facing sites publish in 2026 and measured this one against
+**Cloudflare's Agent Readiness checklist** — the audit we are judged by anyway,
+being hosted there. Full findings, the gap table and the staged plan:
+**`docs/agent-readiness-2026.md`**.
+
+The finding was not a missing feature. We were ahead on protocols and behind on
+**paths**: specs we already implement have moved, and we were still serving the
+old locations only.
+
+- [x] **`/.well-known/agent-card.json`** — A2A is 1.0 under the Linux Foundation and the card lives here; `/.well-known/agent.json` is the pre-0.3 path, where **a spec-compliant 1.0 client never looks**. Both are now written from one template, so neither generation of client is blind to us.
+- [x] **`/.well-known/mcp/server-card.json`** — same shape, except here the specs disagree with each other rather than with their own past: SEP-2127 says `/.well-known/mcp.json`, Cloudflare reads `mcp/server-card.json`. Both served.
+- [x] **Our own scorer was grading others on the old path.** `agent card at /.well-known/agent.json` — we sell agent-readiness audits and were telling sites they passed while a current client could not find them. The check now accepts either, says which answered, and the advice names the 1.0 path.
+- [x] **`/.well-known/api-catalog`** (RFC 9727) — a linkset over the seven query/commerce endpoints, served as `application/linkset+json` with the rfc9727 profile. States no new facts; states them where a machine looking for APIs is specified to look.
+- [x] `agents.json` now advertises the 1.0 card path, which three agent-readiness checks read.
+- 188 tests (was 186).
+
+### Still open from that plan — two need a decision, one is a project
+
+- [ ] **Phase 2 — Content Signals in `robots.txt`.** One line, and **the usual default is wrong for us**. Cloudflare's default is `search=yes, ai-train=no`, written for a publisher protecting an archive. This site is a directory whose entire purpose is to be consumed by models, so `ai-train=yes` is very likely right — being in training data is distribution, not leakage. That is a call about your content, so it is yours: say the word and it ships in five minutes. Only 4% of sites declare it, and Cloudflare scores it.
+- [ ] **Phase 4 — extend `/api/score` from 13 checks to ~20.** The revenue-relevant one: our checklist is 2025's and the standard is 2026's. Candidates are all mechanically detectable (Content Signals, the 1.0 card path, MCP server card, API catalog, agent skills, web-bot-auth, markdown negotiation). **The trap is that changing the scorer changes everyone's grade** — `scores.json`, the badges rendering in other people's READMEs, and the fleet's 100/100s all move, and several of our own sites would drop from A to B through no change of their own. Needs check-set versioning and a re-score before announcing, not a quiet weight tweak.
+- [ ] **Phase 5 — Agent Skills** (`/.well-known/agent-skills/index.json`). The only item needing writing rather than wiring: real SKILL.md files with SHA-256 digests. The honest candidates already exist as MCP tools — grade a URL, find a paid API, find a callable MCP server, register a product — so the skills would wrap shipped capability rather than promise new.
+
+**The caveat worth keeping:** adoption of most of these is tiny — fewer than 15
+sites in a 200,000 sample had an MCP Server Card or API Catalog. Nobody should
+expect traffic from publishing a linkset. The reasons to do it are that auditors
+already check, and that being unable to pass the checklist we *sell* is a
+credibility problem long before it is a traffic problem.
+
 ## Done (v3.11 — the catalogs are now checked, 2026-08-01)
 
 Neither upstream registry checks whether its entries still answer. The Bazaar
