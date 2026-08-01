@@ -1,0 +1,125 @@
+{
+  "source": "Official MCP Registry",
+  "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
+  "fetched": "2026-08-01",
+  "remote_endpoints": 10080,
+  "hosts": 7519,
+  "scope": {
+    "rule": "active + latest + remotely callable",
+    "registry_records_seen": 63360,
+    "excluded_superseded": 43839,
+    "excluded_inactive": 205,
+    "excluded_packages_only": 9569,
+    "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
+  },
+  "by_transport": {
+    "streamable-http": 9341,
+    "sse": 739
+  },
+  "by_auth": {
+    "none": 8106,
+    "required": 1974
+  },
+  "top_hosts": [
+    {
+      "host": "gateway.pipeworx.io",
+      "endpoints": 1305
+    },
+    {
+      "host": "server.smithery.ai",
+      "endpoints": 216
+    },
+    {
+      "host": "api.mcp.ai",
+      "endpoints": 99
+    },
+    {
+      "host": "tooloracle.io",
+      "endpoints": 57
+    },
+    {
+      "host": "api.lazy-mac.com",
+      "endpoints": 54
+    },
+    {
+      "host": "mcp.apify.com",
+      "endpoints": 43
+    },
+    {
+      "host": "mcp.olyport.com",
+      "endpoints": 38
+    },
+    {
+      "host": "api.meok.ai",
+      "endpoints": 34
+    },
+    {
+      "host": "nexgendata-mcp-proxy.steve-corbeil.workers.dev",
+      "endpoints": 33
+    },
+    {
+      "host": "antibody-package-occasional-floppy.trycloudflare.com",
+      "endpoints": 30
+    },
+    {
+      "host": "mcp.viridisconservation.com",
+      "endpoints": 30
+    },
+    {
+      "host": "waystation.ai",
+      "endpoints": 24
+    },
+    {
+      "host": "lab.flashalpha.com",
+      "endpoints": 20
+    },
+    {
+      "host": "hive-mcp-gateway.onrender.com",
+      "endpoints": 19
+    },
+    {
+      "host": "mcp.infobip.com",
+      "endpoints": 18
+    },
+    {
+      "host": "app.daedalmap.com",
+      "endpoints": 17
+    },
+    {
+      "host": "mcp.mcpbundles.com",
+      "endpoints": 17
+    },
+    {
+      "host": "{host}",
+      "endpoints": 16
+    },
+    {
+      "host": "doc2mcp.site",
+      "endpoints": 15
+    },
+    {
+      "host": "roxyapi.com",
+      "endpoints": 13
+    },
+    {
+      "host": "mcp.ansvar.eu",
+      "endpoints": 12
+    },
+    {
+      "host": "stagenth.com",
+      "endpoints": 11
+    },
+    {
+      "host": "whensport.com",
+      "endpoints": 11
+    },
+    {
+      "host": "agent365.svc.cloud.microsoft",
+      "endpoints": 9
+    },
+    {
+      "host": "feedoracle.io",
+      "endpoints": 8
+    }
+  ]
+}

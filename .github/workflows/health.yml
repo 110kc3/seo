@@ -42,6 +42,11 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-x402-catalog.mjs
 
+      - name: Refresh the remote-MCP-server catalog
+        id: mcp-catalog
+        continue-on-error: true
+        run: node scripts/fetch-mcp-catalog.mjs
+
       # Bazaar cataloging is CDP-side and gives no signal when it happens, so
       # the weekly run watches for it rather than leaving it to be remembered.
       # Never fails the job: not being listed is the status quo, not a fault.
@@ -73,6 +78,7 @@ jobs:
             node scripts/check-liveness.mjs
             node scripts/score-listings.mjs || true
             node scripts/fetch-x402-catalog.mjs || true
+            node scripts/fetch-mcp-catalog.mjs || true
             sleep $(( (RANDOM % 5) + 2 ))
           done
           exit 1

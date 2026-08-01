@@ -26,11 +26,17 @@ import { resolveX402 } from '../scripts/x402-config.mjs';
 import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { handleBadge } from './badge.js';
-import { handleSearch, handleAsk, handleMcp, handleX402Search } from './discovery.js';
+import { handleSearch, handleAsk, handleMcp, handleCatalogSearch, CATALOGS } from './discovery.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
 const MAX_AUDIT_BODY = 4 * 1024;
+
+// Derived from the catalog declarations rather than written out, so adding a
+// catalog cannot leave its search route unrouted.
+const CATALOG_SEARCH = Object.fromEntries(
+  Object.entries(CATALOGS).map(([key, spec]) => [`/api/${spec.path}/search`, key]),
+);
 
 // One canonical hostname; every other host attached to this Worker (the
 // pre-migration index.kc-it.pl, the percall.dev apex) answers 308 to it. 308
@@ -307,8 +313,8 @@ export default {
         response = handleSearch(url, registry.listings ?? [], BASE);
       } else if (url.pathname === '/ask') {
         response = await handleAsk(request, registry.listings ?? [], BASE);
-      } else if (url.pathname === '/api/x402/search') {
-        response = await handleX402Search(url, env, BASE);
+      } else if (CATALOG_SEARCH[url.pathname]) {
+        response = await handleCatalogSearch(CATALOG_SEARCH[url.pathname], url, env, BASE);
       } else if (url.pathname === '/mcp') {
         // score_url goes back through the real /api/score handler rather than
         // calling the auditor directly, so an MCP caller gets the same cache,
@@ -321,7 +327,7 @@ export default {
           listings: registry.listings ?? [],
           base: BASE,
           scoreUrl,
-          x402Search: (searchUrl) => handleX402Search(searchUrl, env, BASE),
+          catalogSearch: (key, searchUrl) => handleCatalogSearch(key, searchUrl, env, BASE),
         });
       } else if (url.pathname === '/api/stats.json') {
         response = await handleStats(env);

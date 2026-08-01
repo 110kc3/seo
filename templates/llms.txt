@@ -10,7 +10,18 @@ Three ways to query this index, in ascending order of how little you have to kno
 
 - Search (JSON): {{BASE}}/api/search?q=mcp+server — also `category=` (api|app|agent|mcp|other), `tag=`, `limit=`
 - Natural language (NLWeb): POST {{BASE}}/ask with `{"query": {"text": "free MCP servers"}}` — answers with schema.org objects. GET {{BASE}}/ask?query=… works too.
-- Model Context Protocol: POST {{BASE}}/mcp — streamable HTTP, no auth, no install. Tools: search_products, get_product, score_url, search_x402_endpoints, how_to_register. Server card: {{BASE}}/.well-known/mcp.json
+- Model Context Protocol: POST {{BASE}}/mcp — streamable HTTP, no auth, no install. Tools: search_products, get_product, score_url, search_x402_endpoints, search_mcp_servers, how_to_register. Server card: {{BASE}}/.well-known/mcp.json
+
+## Find an MCP server you can connect to (the MCP catalog)
+
+~10,000 remotely-callable MCP servers, normalized from the official MCP registry.
+Every entry has a URL, so it can be added without installing anything. Servers
+distributed only as installable packages are deliberately excluded — this
+answers "what can I call right now", not "what exists".
+
+- Search: {{BASE}}/api/mcp/search?q=github&auth=none — filters: `transport`, `host`, `auth`, `limit`
+- Full catalog (JSON): {{BASE}}/api/mcp/catalog.json
+- Aggregates and the exact scope rule: {{BASE}}/api/mcp/stats.json
 
 ## Find a paid API you can call (the x402 catalog)
 

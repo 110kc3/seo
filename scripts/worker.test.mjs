@@ -21,7 +21,7 @@ import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
 import { handleScore, freeView, __testing as score } from '../worker/score.js';
 import { signResponse, keyDirectory, botAuthHeaders, signatureBase, contentDigest, signingKey, DIRECTORY_PATH, __testing as sign } from '../worker/signing.js';
 import { handleBadge, badgeSvg, __testing as badge } from '../worker/badge.js';
-import { searchListings, handleSearch, handleAsk, handleMcp, handleX402Search, mcpTools, __testing as discovery } from '../worker/discovery.js';
+import { searchListings, handleSearch, handleAsk, handleMcp, handleCatalogSearch, mcpTools, __testing as discovery } from '../worker/discovery.js';
 import cfgFile from '../site.config.json' with { type: 'json' };
 
 // Derived from the shipped config, not hardcoded: these tests pin "artifacts
@@ -1611,7 +1611,7 @@ test('MCP initialize declares tools and echoes the client protocol version', asy
 test('MCP tools/list matches the tools the server card advertises', async () => {
   const body = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 2, method: 'tools/list' }), mcpCtx)).json();
   const names = body.result.tools.map((t) => t.name);
-  assert.deepEqual(names, ['search_products', 'get_product', 'score_url', 'search_x402_endpoints', 'how_to_register']);
+  assert.deepEqual(names, ['search_products', 'get_product', 'score_url', 'search_x402_endpoints', 'search_mcp_servers', 'how_to_register']);
   assert.deepEqual(names, mcpTools(BASE).map((t) => t.name));
   for (const t of body.result.tools) assert.equal(t.inputSchema.type, 'object');
 });
@@ -1673,7 +1673,7 @@ test('every query surface the manifests advertise is actually routed', async () 
   // promising an endpoint the router does not have.
   const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
   const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
-  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search'];
+  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search'];
 
   assert.equal(manifest.interfaces.mcp, `${BASE}/mcp`);
   assert.equal(manifest.interfaces.nlweb, `${BASE}/ask`);
@@ -1745,7 +1745,7 @@ const X402_INDEX = {
 const x402Env = {
   ASSETS: { fetch: async () => new Response(JSON.stringify(X402_INDEX), { headers: { 'content-type': 'application/json' } }) },
 };
-const x402Get = async (qs) => (await handleX402Search(new URL(`${BASE}/api/x402/search?${qs}`), x402Env, BASE)).json();
+const x402Get = async (qs) => (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?${qs}`), x402Env, BASE)).json();
 
 test('x402 search ranks by relevance, then by price', async () => {
   const body = await x402Get('q=weather');
@@ -1788,13 +1788,13 @@ test('x402 search survives a missing catalog without poisoning later requests', 
     },
   };
   const url = new URL(`${BASE}/api/x402/search?q=weather`);
-  const first = await handleX402Search(url, flaky, BASE);
+  const first = await handleCatalogSearch('x402', url, flaky, BASE);
   assert.equal(first.status, 503);
   assert.equal((await first.json()).code, 'catalog_unavailable');
 
   // The cached promise must have been cleared, or every later request replays
   // the failure for the life of the isolate.
-  const second = await handleX402Search(url, flaky, BASE);
+  const second = await handleCatalogSearch('x402', url, flaky, BASE);
   assert.equal(second.status, 200);
 });
 
@@ -1818,4 +1818,43 @@ test('the x402 catalog artifacts carry their provenance', async () => {
   // Sorted by URL, so a weekly refresh is a small diff rather than a rewrite.
   const urls = catalog.endpoints.map((e) => e.url);
   assert.deepEqual(urls, [...urls].sort((a, b) => a.localeCompare(b)));
+});
+
+test('the MCP catalog is scoped honestly and searchable by auth', async () => {
+  const index = {
+    fetched: '2026-08-01',
+    count: 3,
+    fields: ['url', 'host', 'name', 'title', 'description', 'transport', 'auth'],
+    rows: [
+      ['https://a.example/mcp', 'a.example', 'io.a/gh', 'GitHub Tools', 'Read and write GitHub issues.', 'streamable-http', 'required'],
+      ['https://b.example/mcp', 'b.example', 'io.b/gh', 'Git Browser', 'Browse github repositories.', 'streamable-http', 'none'],
+      ['https://c.example/sse', 'c.example', 'io.c/web', 'Web Fetch', 'Fetch a page.', 'sse', 'none'],
+    ],
+  };
+  const env = { ASSETS: { fetch: async () => new Response(JSON.stringify(index)) } };
+  const get = async (qs) => (await handleCatalogSearch('mcp', new URL(`${BASE}/api/mcp/search?${qs}`), env, BASE)).json();
+
+  discovery.resetCatalog();
+  const hits = await get('q=github');
+  assert.equal(hits.total, 2);
+  assert.equal(hits.source, 'Official MCP Registry (registry.modelcontextprotocol.io)');
+  assert.equal(hits.catalog.servers, 3, 'each catalog names its own unit');
+
+  // "I want one I can call without going and finding a token first" is the
+  // most common real constraint, so it has to be a filter and not a re-read.
+  assert.deepEqual((await get('q=github&auth=none')).results.map((r) => r.host), ['b.example']);
+  assert.deepEqual((await get('transport=sse')).results.map((r) => r.host), ['c.example']);
+
+  // The committed artifact must state what it leaves out, or "10,080 servers"
+  // reads as "every server".
+  const st = JSON.parse(await readFile(new URL('../api/mcp/stats.json', import.meta.url), 'utf8'));
+  assert.equal(st.scope.rule, 'active + latest + remotely callable');
+  assert.ok(st.scope.excluded_packages_only > 0);
+  assert.match(st.scope.note, /excluded/);
+});
+
+test('an unknown catalog is refused rather than guessed at', async () => {
+  const res = await handleCatalogSearch('nope', new URL(`${BASE}/api/nope/search?q=x`), {}, BASE);
+  assert.equal(res.status, 404);
+  assert.equal((await res.json()).code, 'unknown_catalog');
 });
