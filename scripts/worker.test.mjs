@@ -1204,6 +1204,49 @@ test('a fully passing audit scores exactly 100, whatever the weights are', () =>
   assert.equal(audit.scoreChecks([]).score, 0);
 });
 
+test('the 2026 signals cannot move a grade', async () => {
+  // The whole point of reporting them as `signals` rather than adding weighted
+  // checks. Grades are stamped into scores.json and rendered as badges inside
+  // other people's READMEs; a site that changed nothing must never wake up
+  // graded lower because we learned about a new spec. If someone ever gives a
+  // signal a weight and folds it into `checks`, this fails.
+  const { contentSignalsIn, __testing: a } = await import('../worker/audit.js');
+  const weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
+  const checks = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: true }));
+  const before = a.scoreChecks(checks).score;
+
+  // Signals carry no weight at all, so they cannot contribute to either side of
+  // the ratio even if someone passes them in by mistake.
+  const signals = [
+    a.signal('content_signals', 'x', false, 'absent', 'add it'),
+    a.signal('api_catalog', 'y', true, 'present'),
+  ];
+  assert.ok(signals.every((s) => s.weight === undefined), 'a signal grew a weight');
+  assert.equal(a.scoreChecks([...checks, ...signals]).score, before);
+
+  // A present signal carries no fix; an absent one does. That asymmetry is what
+  // keeps the paid audit's advice list free of noise about things you have.
+  assert.equal(signals[1].fix, undefined);
+  assert.equal(signals[0].fix, 'add it');
+  void contentSignalsIn;
+});
+
+test('Content-Signal is read out of robots.txt, not merely detected', async () => {
+  const { contentSignalsIn } = await import('../worker/audit.js');
+
+  // The declared values are the useful part — "has a Content-Signal line" says
+  // nothing about whether the site allows training.
+  assert.equal(contentSignalsIn('User-agent: *\nContent-Signal: search=yes, ai-train=no\nAllow: /'),
+    'search=yes, ai-train=no');
+  // Case and leading space are both legal in robots.txt.
+  assert.equal(contentSignalsIn('  content-signal:search=yes'), 'search=yes');
+
+  assert.equal(contentSignalsIn('User-agent: *\nAllow: /'), null);
+  assert.equal(contentSignalsIn(null), null);
+  // A URL in a comment mentioning content-signal is not a declaration.
+  assert.equal(contentSignalsIn('# see https://contentsignals.org/ for content-signal docs'), null);
+});
+
 // --- CDP facilitator authentication ----------------------------------------
 
 const decodeJwtPart = (part) =>

@@ -187,6 +187,36 @@ export function parseJsonLd(blocks) {
 
 const check = (id, weight, pass, detail, fix) => ({ id, weight, pass: Boolean(pass), detail, ...(pass ? {} : { fix }) });
 
+/**
+ * The 2026 signals, reported and deliberately NOT scored.
+ *
+ * The scored checklist is thirteen items and the standard has grown past it —
+ * Cloudflare's agent-readiness score now reads Content Signals, an API catalog,
+ * an Agent Skills index, an MCP server card and Web Bot Auth. Detecting those is
+ * straightforward. *Scoring* them is not, and the reason is other people:
+ * grades are stamped into `scores.json`, rendered as badges inside other
+ * people's READMEs, and quoted in our own fleet numbers. Adding weighted checks
+ * would move every one of those overnight — a site that changed nothing would
+ * wake up a letter lower and be told it had got worse.
+ *
+ * So these arrive as `signals` beside `checks`: the audit reports what it found,
+ * `scoreChecks` never sees them, and no existing grade moves by a point.
+ * Promoting them into the score is a separate, deliberate decision that needs a
+ * versioned check set and a fleet re-score first — see docs/agent-readiness-2026.md.
+ *
+ * Adoption of most of these is tiny today, so a site missing them is normal
+ * rather than negligent. `detail` says so; none of this is phrased as a failure.
+ */
+const signal = (id, label, present, detail, fix) => ({ id, label, present: Boolean(present), detail, ...(present ? {} : { fix }) });
+
+/** Does robots.txt carry a Content-Signal declaration (contentsignals.org)? */
+export function contentSignalsIn(robotsBody) {
+  if (typeof robotsBody !== 'string') return null;
+  const line = robotsBody.split(/\r?\n/).find((l) => /^\s*content-signal\s*:/i.test(l));
+  if (!line) return null;
+  return line.split(':').slice(1).join(':').trim();
+}
+
 // Human labels, so the free score can name what failed without shipping the
 // paid `detail`/`fix`/`snippet` fields. Keyed by check id; a missing id falls
 // back to the id itself rather than throwing.
@@ -346,8 +376,15 @@ export function snippetFor(id, origin) {
  * `auditUrl` itself needs HTMLRewriter and so cannot run under `node --test`.
  */
 export function scoreChecks(checks) {
-  const totalWeight = checks.reduce((sum, c) => sum + c.weight, 0);
-  const earned = checks.reduce((sum, c) => sum + (c.pass ? c.weight : 0), 0);
+  // A weightless entry contributes nothing instead of poisoning the total.
+  // Without this, one item with no `weight` makes the sum NaN, NaN is falsy, and
+  // the function returns 0 — so a flawless site would be graded "invisible to
+  // agents" because something weightless got into the array. The 2026 signals
+  // are deliberately weightless and live in their own list, but the arithmetic
+  // should not depend on nobody ever mixing the two.
+  const weightOf = (c) => (Number.isFinite(c.weight) ? c.weight : 0);
+  const totalWeight = checks.reduce((sum, c) => sum + weightOf(c), 0);
+  const earned = checks.reduce((sum, c) => sum + (c.pass ? weightOf(c) : 0), 0);
   const score = totalWeight ? Math.round((earned / totalWeight) * 100) : 0;
   const grade = score >= 80 ? 'agent-ready'
     : score >= 55 ? 'partially readable'
@@ -379,7 +416,8 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
   const at = (p) => new URL(p, origin).toString();
   const one = (url, opts = {}) => get(url, { ...opts, fetchImpl, signHeaders });
 
-  const [home, llms, llmsFull, robots, sitemap, agentCard, wellKnown, agentsJson] = await Promise.all([
+  const [home, llms, llmsFull, robots, sitemap, agentCard, wellKnown, agentsJson,
+    apiCatalog, mcpCard, mcpServerCard, agentSkills, botAuthDir] = await Promise.all([
     one(target),
     one(at('/llms.txt')),
     one(at('/llms-full.txt'), { maxBytes: 4096 }),
@@ -392,6 +430,14 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
     one(at('/.well-known/agent-card.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/agent.json'), { maxBytes: 32 * 1024 }),
     one(at('/agents.json'), { maxBytes: 32 * 1024 }),
+    // The 2026 surfaces. Reported as signals, never scored — see signal() above.
+    // Small ceilings: these are all manifests, and a site that answers a
+    // multi-megabyte body at one of these paths has not implemented the spec.
+    one(at('/.well-known/api-catalog'), { maxBytes: 32 * 1024 }),
+    one(at('/.well-known/mcp.json'), { maxBytes: 32 * 1024 }),
+    one(at('/.well-known/mcp/server-card.json'), { maxBytes: 32 * 1024 }),
+    one(at('/.well-known/agent-skills/index.json'), { maxBytes: 32 * 1024 }),
+    one(at('/.well-known/http-message-signatures-directory'), { maxBytes: 32 * 1024 }),
   ]);
 
   if (!home.ok) {
@@ -465,6 +511,31 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
       'Serve over HTTPS; several crawlers will not follow an http:// origin at all.'),
   ];
 
+  const declaredSignals = contentSignalsIn(robots.ok ? robots.body : null);
+  const signals = [
+    signal('content_signals', 'Content Signals declared in robots.txt', declaredSignals !== null,
+      declaredSignals !== null ? `robots.txt declares Content-Signal: ${declaredSignals}` : 'robots.txt carries no Content-Signal line',
+      'Add a Content-Signal line to robots.txt (contentsignals.org) stating how your content may be used: search, ai-input, ai-train. Roughly 4% of sites declare it, so it is a differentiator rather than a baseline — and pick the values deliberately, because the common default (ai-train=no) suits a publisher protecting an archive and not everyone is one.'),
+    signal('agent_card_current_path', 'A2A card at the 1.0 path', agentCard.ok,
+      agentCard.ok ? '/.well-known/agent-card.json is available'
+        : (wellKnown.ok ? 'a card exists at the pre-0.3 /.well-known/agent.json, but not at the 1.0 path' : 'no card at /.well-known/agent-card.json'),
+      'A2A 1.0 reads /.well-known/agent-card.json; /.well-known/agent.json is the pre-0.3 path a 1.0 client never looks at. Serve the same document at both while the installed base catches up.'),
+    signal('mcp_server_card', 'MCP server card published', mcpCard.ok || mcpServerCard.ok,
+      mcpCard.ok || mcpServerCard.ok
+        ? `MCP server card at ${mcpCard.ok ? '/.well-known/mcp.json' : ''}${mcpCard.ok && mcpServerCard.ok ? ' and ' : ''}${mcpServerCard.ok ? '/.well-known/mcp/server-card.json' : ''}`
+        : 'no MCP server card at /.well-known/mcp.json or /.well-known/mcp/server-card.json',
+      'If you run an MCP server, publish a server card so clients can find it without being handed a URL. The specs disagree on the path — SEP-2127 says /.well-known/mcp.json, Cloudflare reads /.well-known/mcp/server-card.json — so serve both.'),
+    signal('api_catalog', 'API catalog (RFC 9727)', apiCatalog.ok,
+      apiCatalog.ok ? '/.well-known/api-catalog is available' : 'no /.well-known/api-catalog',
+      'Publish an RFC 9727 API catalog at /.well-known/api-catalog: a linkset pointing at your OpenAPI description and endpoints, served as application/linkset+json. It states nothing new if you already publish OpenAPI — it states it where a machine is specified to look.'),
+    signal('agent_skills', 'Agent Skills index', agentSkills.ok,
+      agentSkills.ok ? '/.well-known/agent-skills/index.json is available' : 'no /.well-known/agent-skills/index.json',
+      'Publish an Agent Skills index at /.well-known/agent-skills/index.json describing what an agent can accomplish here, so it need not read your docs to find out.'),
+    signal('web_bot_auth', 'Web Bot Auth key directory', botAuthDir.ok,
+      botAuthDir.ok ? '/.well-known/http-message-signatures-directory is available' : 'no /.well-known/http-message-signatures-directory',
+      'Publish Ed25519 keys at /.well-known/http-message-signatures-directory (RFC 9421 web-bot-auth) so callers can verify your responses, and so you can tell a signed agent from an anonymous scraper.'),
+  ];
+
   const { score, grade } = scoreChecks(checks);
   const failing = checks.filter((c) => !c.pass).sort((a, b) => b.weight - a.weight);
 
@@ -491,6 +562,14 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
       fix: c.fix,
       snippet: snippetFor(c.id, origin),
     })),
+    // Reported, never scored. `score` above is a function of `checks` alone, so
+    // adding to this list can never move anyone's grade or badge.
+    signals: {
+      $comment: 'Emerging 2026 agent-readiness surfaces. Detected and reported, deliberately not scored: grades here are stamped into badges on other people\'s sites, and a site that changed nothing should never wake up graded lower. Adoption of most of these is still tiny, so absence is normal rather than negligent.',
+      detected: signals.filter((s) => s.present).length,
+      total: signals.length,
+      items: signals,
+    },
   };
 }
 
@@ -506,4 +585,4 @@ export function parseAuditRequest(obj) {
   return { url: obj.url };
 }
 
-export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks };
+export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal };
