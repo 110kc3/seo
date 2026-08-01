@@ -1,8 +1,8 @@
 # Distribution — researched channels + ready-to-run submissions
 
-Researched 2026-07-09; URLs updated 2026-07-25 for the move to `https://index.kc-it.pl`. **Executed 2026-07-29** with Kamil's go-ahead — status per section below. Everything still marked as prepared needs a browser sign-in or a web form, which an agent cannot drive.
+Researched 2026-07-09; URLs updated 2026-07-25 for the move to `index.kc-it.pl` and again **2026-08-01 for `https://index.percall.dev`**, which is the canonical host now — §4b has the current values, and the command blocks in §1–4 below are kept verbatim as the record of what was actually submitted on the day, old URLs and all. **Executed 2026-07-29** with Kamil's go-ahead — status per section below. Everything still marked as prepared needs a browser sign-in or a web form, which an agent cannot drive.
 
-> **Run these only after the Cloudflare Worker is live at `index.kc-it.pl`.** Nothing external links to this project yet, which is exactly why the domain was settled first — a submission carrying the old `110kc3.github.io/seo/` URL would have to be chased across several awesome-lists to correct. Re-run the agentswelcome.dev audit after the Worker is up: custom response headers and `Accept` content negotiation were two of the checks that capped the score at 81/100 on static hosting. **Both now pass — the site audits 100/100 and is certified (#4).**
+> **Submit the canonical host and nothing else — `https://index.percall.dev`.** Nothing external links to this project yet, which is exactly why the domain was settled first: a submission carrying a since-retired URL has to be chased across several awesome-lists to correct, and that has already cost one round of edits. Re-run the agentswelcome.dev audit after the Worker is up: custom response headers and `Accept` content negotiation were two of the checks that capped the score at 81/100 on static hosting. **Both now pass — the site audits 100/100 and is certified (#4).**
 
 ## Status at a glance (2026-07-29)
 
@@ -11,7 +11,7 @@ Researched 2026-07-09; URLs updated 2026-07-25 for the move to `https://index.kc
 | punkpeye/awesome-mcp-servers | ✅ PR [#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152) |
 | SecretiveShell/Awesome-llms-txt | ✅ PR [#114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114) |
 | agentswelcome.dev | ✅ **certified 100/100, "exemplary"** — listed, see #4 |
-| llms-txt-hub, directory.llmstxt.cloud, llmstxt.site, mcpservers.org | ⏳ browser sign-in or web form, manual |
+| llms-txt-hub, directory.llmstxt.cloud, llmstxt.site, mcpservers.org | ⏳ browser sign-in or web form — **every answer is prepared in §4b**, ten minutes of pasting |
 
 ## 0. FIRST: publish the domain-root discovery repo (blocks #4, boosts everything)
 
@@ -120,6 +120,88 @@ Two things worth knowing before the next run at this endpoint:
 - **Re-POSTing `/api/directory` updates the existing entry in place.** The response carries a fresh `id` each time, which looks like a duplicate but is not: `GET /api/directory` still shows one row for this site, with the newer score. The first submission scored **78**, not the 95 the audit had just returned, because a cold Cloudflare POP still had `/.well-known/agents.json` as a 404 — exactly the 7+5+5 weight of the three manifest checks. **Wait for the new artifact to serve from several requests before submitting**, or the directory records a stale score.
 
 Re-POST to `/api/directory` after a change; the endpoint is idempotent to retry and states so (`"retry": "Fix these, then POST again."`).
+
+## 4b. The four browser-only channels — paste-ready answers (2026-08-01)
+
+These cannot be scripted: two are OAuth sign-ins, two are hosted forms. What
+*can* be prepared is every answer, so the whole set is ten minutes of pasting.
+Field labels below were read off the live forms on 2026-08-01, not guessed.
+
+**The canonical answers.** Every one of these forms asks a subset of this:
+
+| asked as | value |
+|---|---|
+| name / product / server name | `AI Product Index` |
+| website / domain / link | `https://index.percall.dev` |
+| llms.txt URL | `https://index.percall.dev/llms.txt` |
+| llms-full.txt URL | `https://index.percall.dev/llms-full.txt` |
+| short description (≤160 chars) | `Machine-readable directory of AI products, with a free agent-readability score and a paid audit an agent can buy over x402.` |
+| longer description | `A directory AI agents can read, register in, and buy from. GET /api/score grades any URL across 13 agent-readability checks for free; POST /api/audit returns per-check fixes and paste-ready snippets for $0.05, settled in USDC on Base via HTTP 402. Products self-register by opening a GitHub issue against a published schema — no human step. Zero dependencies, 121 tests, traffic published at /api/stats.json.` |
+| contact | `110kc3@gmail.com` |
+| your name | `Kamil` |
+
+**Never submit** `110kc3.github.io/seo/`, `index.kc-it.pl`, or the workers.dev
+fallback. The old hosts 308 here, but a directory that records the redirect
+target is one you have to go back and correct.
+
+### a. llms-txt-hub — llmstxthub.com/submit
+
+GitHub OAuth (recommended over email — it opens the PR for you and gets the
+contributor badge). ~1,405 entries, ~110 open PRs, merges are slow.
+
+The form maps onto their `websites.json` schema: `name`, `domain`,
+`description`, `llmsTxtUrl`, `category`. **Category must be one of exactly
+five**: `ai-ml` (538), `developer-tools` (548), `data-analytics` (199),
+`infrastructure-cloud` (62), `security-identity` (58). **Pick `ai-ml`** — this
+is an AI-product directory, not a dev tool; `developer-tools` is the fallback if
+a reviewer pushes back.
+
+### b. directory.llmstxt.cloud — Tally form at https://tally.so/r/wAydjB
+
+Live, verified 2026-08-01. No account. Fields: website/product name
+(required), llms.txt URL (required — it finds llms-full.txt itself), category,
+email (optional), X username (optional), an open "adoption story" box, and a
+sponsorship-interest question.
+
+For the adoption story, something true and short beats marketing:
+
+> Built the site so agents could read it, then measured whether they do:
+> 7.19% of 4,672 requests over 30 days are AI crawlers. llms.txt is the first
+> thing they fetch after robots.txt.
+
+Say **no** to sponsorship. Submissions wait on their curation team.
+
+### c. llmstxt.site — form at /submit
+
+Fields: Product Name, Website URL, Your Name, Email Address, llms.txt URL,
+llms-full.txt URL, Additional Notes. Both txt URLs exist and return 200 — this
+is the only channel that asks for `llms-full.txt`, so use the table above.
+
+### d. mcpservers.org/submit — replaces PRs to wong2/awesome-mcp-servers
+
+4.2k★ sibling of #1; its README now refuses PRs and points here. Client-side
+React form, so nothing to script. Fields: Server Name, Short Description, Link
+(GitHub or docs), Category, Contact Email.
+
+**Category: `Search`** (options are Development, Productivity, Database, Search,
+Web Scraping, File System, Version Control, Communication, Cloud Service, Cloud
+Storage, Marketing, Finance, Design, Memory, Other — `Search` matches the
+category the awesome-mcp-servers PR used).
+
+For **Link**, use the repo `https://github.com/110kc3/seo` rather than the site:
+this is an MCP directory and reviewers look for source. Description:
+
+> Zero-dependency stdio MCP server for the AI Product Index: search_products /
+> get_product / register_product. Registration lands autonomously via GitHub
+> issues.
+
+There is a **$39 one-time "premium review"** upsell — skip it. The free queue is
+the same directory.
+
+### After submitting
+
+Note the date against each channel in the status table above. None of these
+confirm by email except (c), so the only way to know is to look again in a week.
 
 ## 5. Lower priority
 
