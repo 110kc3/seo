@@ -1700,3 +1700,31 @@ test('a natural-language answer drops the incidental matches a search keeps', ()
   assert.deepEqual(answered.hits.map((h) => h.listing.slug), ['auctions']);
   assert.equal(answered.total, 1, 'total reflects what was offered, not what was scored');
 });
+
+test('term matching survives plurals and nominalisations, at a discount', () => {
+  const service = [{
+    slug: 'agent-readability-service', name: 'Agent Readability Service',
+    description: 'Done-for-you agent readability: llms.txt, schema.org JSON-LD.',
+    category: 'other', pricing: 'paid', tags: ['audit', 'llms-txt'],
+  }];
+  // The query that used to score this listing zero: agents != agent, and
+  // readable != readability.
+  const hits = searchListings(service, { q: 'readable ai agents' }).hits;
+  assert.equal(hits.length, 1);
+  assert.ok(hits[0].score > 0);
+
+  // But an exact hit must still beat a stem hit, or the discount is pointless.
+  const both = [
+    { slug: 'exact', name: 'Agent Directory', description: 'x', category: 'api', pricing: 'free', tags: [] },
+    { slug: 'stemmed', name: 'Agentic Toolkit', description: 'x', category: 'api', pricing: 'free', tags: [] },
+  ];
+  assert.equal(searchListings(both, { q: 'agent' }).hits[0].listing.slug, 'exact');
+});
+
+test('stem matching does not pair short unrelated words', () => {
+  const corpus = [{ slug: 'api-gw', name: 'API Gateway', description: 'Routing.', category: 'api', pricing: 'free', tags: [] }];
+  // Four-character floor: "app" must not stem-match "API", and a query with no
+  // real relationship must still return nothing rather than a weak guess.
+  assert.equal(searchListings(corpus, { q: 'sourdough' }).hits.length, 0);
+  assert.equal(searchListings(corpus, { q: 'gatehouse' }).hits.length, 0);
+});

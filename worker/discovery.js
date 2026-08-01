@@ -22,6 +22,40 @@ const json = (body, status = 200, headers = {}) =>
     headers: { 'content-type': 'application/json; charset=utf-8', ...headers },
   });
 
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * How well one term matches one field, as a multiplier on that field's weight.
+ *
+ *   1.0  the whole word is there          "camera" in "old cameras"? no — see below
+ *   0.6  it appears inside another word   "api" in "rapid"
+ *   0.5  a word shares its stem           "agents"/"agent", "readable"/"readability"
+ *
+ * The stem tier exists because English plurals and nominalisations broke real
+ * queries: "how do I make my site readable to AI agents" missed the listing
+ * called *Agent Readability Service* — `agents` is not `agent` and `readable`
+ * is not `readability`, so an exact matcher scored it zero. Rather than ship a
+ * stemmer, two words count as the same stem when they share a prefix at least
+ * 60% as long as the shorter of them (minimum four characters). It is crude and
+ * it will occasionally pair unrelated words, which is why it scores half: an
+ * exact hit always outranks it, and the relevance floor drops it when nothing
+ * better exists to compare against.
+ */
+function strength(haystack, term) {
+  if (!haystack || !term) return 0;
+  if (new RegExp(`\\b${escapeRe(term)}\\b`).test(haystack)) return 1;
+  if (haystack.includes(term)) return 0.6;
+
+  const floor = Math.max(4, Math.ceil(term.length * 0.6));
+  for (const word of haystack.split(/[^\p{L}\p{N}]+/u)) {
+    if (word.length < floor) continue;
+    let i = 0;
+    while (i < word.length && i < term.length && word[i] === term[i]) i += 1;
+    if (i >= floor && i >= Math.ceil(Math.min(word.length, term.length) * 0.6)) return 0.5;
+  }
+  return 0;
+}
+
 /**
  * Ranked substring search. Deliberately not a fuzzy matcher: with a registry
  * this small, a scorer that can rank an unrelated listing above an exact name
@@ -44,13 +78,13 @@ export function searchListings(listings, { q = '', category = '', tag = '', limi
     if (terms.length) {
       const name = String(l.name ?? '').toLowerCase();
       const desc = String(l.description ?? '').toLowerCase();
-      const tags = (l.tags ?? []).map((t) => String(t).toLowerCase());
+      const tags = (l.tags ?? []).map((t) => String(t).toLowerCase()).join(' ');
+      const slug = String(l.slug ?? '').toLowerCase().replace(/-/g, ' ');
       for (const term of terms) {
-        const word = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
-        if (name.includes(term)) score += word.test(name) ? 10 : 6;
-        if (tags.some((t) => t.includes(term))) score += 5;
-        if (desc.includes(term)) score += word.test(desc) ? 3 : 1;
-        if (String(l.slug ?? '').toLowerCase().includes(term)) score += 4;
+        score += 10 * strength(name, term);
+        score += 5 * strength(tags, term);
+        score += 4 * strength(slug, term);
+        score += 3 * strength(desc, term);
       }
       if (score === 0) continue;
     }
