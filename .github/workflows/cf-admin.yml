@@ -19,6 +19,7 @@ on:
           - subdomain     # print the account's workers.dev subdomain
           - push-secrets  # copy managed repo secrets to the Worker
           - stats-probe   # can the deploy token read Analytics Engine?
+          - verify-cdp    # check the CDP rail using the CDP credentials
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
           - attach-domain # attach `hostname` to the Worker as a custom domain
@@ -94,6 +95,18 @@ jobs:
           echo "::notice::pushed $pushed managed secret(s) plus CF_ACCOUNT_ID"
           echo "--- secrets now on the Worker ---"
           npx --yes wrangler@4 secret list
+
+      # The CDP facilitator answers 401 to anonymous callers, so verify-rail.mjs
+      # cannot check it from a developer machine — the credentials only exist as
+      # repo secrets. Here they do, so this is the one place the CDP rail can be
+      # verified end to end (key accepted + Base mainnet actually settled)
+      # *before* real money is pointed at it.
+      - name: Verify the CDP rail with its credentials
+        if: inputs.action == 'verify-cdp'
+        env:
+          CDP_API_KEY_ID: ${{ secrets.CDP_API_KEY_ID }}
+          CDP_API_KEY_SECRET: ${{ secrets.CDP_API_KEY_SECRET }}
+        run: node scripts/verify-rail.mjs cdp
 
       # /api/stats.json needs Account Analytics: Read. The deploy token was made
       # from the "Edit Cloudflare Workers" template, which may already include it

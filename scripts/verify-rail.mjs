@@ -25,6 +25,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { resolveX402 } from './x402-config.mjs';
+import { facilitatorHeaders } from '../worker/cdp-auth.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
@@ -84,17 +85,31 @@ async function readToken(rpcUrl, asset) {
   return out;
 }
 
-/** Asks the facilitator what it will actually settle. */
-async function readSupported(facilitatorUrl) {
-  const url = `${facilitatorUrl.replace(/\/+$/, '')}/supported`;
+/**
+ * Asks the facilitator what it will actually settle.
+ *
+ * A CDP rail answers 401 to anonymous callers, so this signs the request with
+ * the same code path the Worker uses when CDP_API_KEY_ID / CDP_API_KEY_SECRET
+ * are in the environment. That turns the check from "cannot be verified" into
+ * a real one, and it doubles as a credential test: a malformed or revoked key
+ * shows up here rather than at the first paid call.
+ */
+async function readSupported(rail) {
+  const url = `${rail.facilitator_url.replace(/\/+$/, '')}/supported`;
+  const headers = { accept: 'application/json', 'user-agent': 'ai-product-index-verify-rail' };
+
+  const auth = await facilitatorHeaders(rail, process.env, 'GET', url);
+  if (auth.ok) Object.assign(headers, auth.headers);
+  else note(`could not sign the facilitator request: ${auth.error}`);
+
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 20_000);
   try {
-    const resp = await fetch(url, { headers: { accept: 'application/json', 'user-agent': 'ai-product-index-verify-rail' }, signal: ctl.signal });
+    const resp = await fetch(url, { headers, signal: ctl.signal });
     const text = await resp.text();
     let json = null;
     try { json = JSON.parse(text); } catch { /* not JSON */ }
-    return { status: resp.status, kinds: Array.isArray(json?.kinds) ? json.kinds : null };
+    return { status: resp.status, kinds: Array.isArray(json?.kinds) ? json.kinds : null, authenticated: Boolean(auth.ok && auth.headers.Authorization) };
   } finally {
     clearTimeout(timer);
   }
@@ -169,12 +184,12 @@ if (ADDRESS_RE.test(rail.asset) && rail.rpc_url) {
 // --- 3. the facilitator, asked directly -------------------------------------
 
 try {
-  const supported = await readSupported(rail.facilitator_url);
+  const supported = await readSupported(rail);
   if (supported.kinds) {
     const advertises = (v, network) =>
       supported.kinds.some((k) => k.x402Version === v && k.scheme === 'exact' && k.network === network);
     const listFor = (v) => [...new Set(supported.kinds.filter((k) => k.x402Version === v).map((k) => k.network))];
-    console.log(`facilitator:  advertises ${supported.kinds.length} kind(s)`);
+    console.log(`facilitator:  advertises ${supported.kinds.length} kind(s)${supported.authenticated ? ' (answered an authenticated request — the CDP key works)' : ''}`);
     console.log(`   v2 networks: ${listFor(2).join(', ') || '(none)'}`);
     console.log(`   v1 networks: ${listFor(1).join(', ') || '(none)'}`);
 
@@ -191,7 +206,11 @@ try {
       note('this profile sets no network_v1, so only x402 v2 is offered. The reference client (x402-fetch) speaks v1 and will not be able to pay.');
     }
   } else if (supported.status === 401 || supported.status === 403) {
-    note(`facilitator /supported needs authentication (HTTP ${supported.status}) — expected for the CDP rail; its network support cannot be checked without CDP_API_KEY_ID / CDP_API_KEY_SECRET.`);
+    if (supported.authenticated) {
+      fail(`facilitator rejected a signed request (HTTP ${supported.status}) — CDP_API_KEY_ID / CDP_API_KEY_SECRET are set but not accepted. Wrong key, revoked key, or a key without x402 access.`);
+    } else {
+      note(`facilitator /supported needs authentication (HTTP ${supported.status}) — expected for the CDP rail; its network support cannot be checked without CDP_API_KEY_ID / CDP_API_KEY_SECRET in the environment. Run this where they are set (\`gh workflow run cf-admin -f action=verify-cdp\`).`);
+    }
   } else {
     note(`facilitator /supported returned HTTP ${supported.status} with no "kinds" array — could not confirm network support.`);
   }
