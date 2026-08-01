@@ -11,7 +11,14 @@
     "openapi": "{{BASE}}/openapi.yaml",
     "schema": "{{BASE}}/api/schema.json",
     "webmcp": "{{BASE}}/",
-    "mcp": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
+    "mcp": "{{BASE}}/mcp",
+    "mcp_card": "{{BASE}}/.well-known/mcp.json",
+    "nlweb": "{{BASE}}/ask",
+    "search": "{{BASE}}/api/search?q=",
+    "opensearch": "{{BASE}}/opensearch.xml",
+    "feed": "{{BASE}}/feed.xml",
+    "json_feed": "{{BASE}}/feed.json",
+    "plugin_manifest": "{{BASE}}/.well-known/ai-plugin.json",
     "agent_card": "{{BASE}}/.well-known/agent.json",
     "llms_txt": "{{BASE}}/llms.txt",
     "markdown": "{{BASE}}/llms-full.txt",
@@ -45,6 +52,28 @@
       "method": "GET",
       "url": "{{BASE}}/listings/{slug}.json",
       "description": "One listing as JSON.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "{{BASE}}/api/search?q=mcp+server",
+      "description": "Ranked search over the registry. Filters: category, tag, limit. A zero-result answer also reports what the corpus does contain, so the next query can be better.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "POST",
+      "url": "{{BASE}}/ask",
+      "description": "NLWeb natural-language query. Body {\"query\": {\"text\": \"...\"}}; answers with schema.org objects under `results`. GET ?query= is accepted for convenience.",
+      "auth": "none",
+      "price": "free",
+      "request": {"query": {"text": "free MCP servers"}}
+    },
+    {
+      "method": "POST",
+      "url": "{{BASE}}/mcp",
+      "description": "Model Context Protocol over streamable HTTP. No auth, nothing to install. Tools: search_products, get_product, score_url, how_to_register.",
       "auth": "none",
       "price": "free"
     },
@@ -88,10 +117,26 @@
     ]
   },
   "mcp": {
-    "transport": "stdio",
-    "source": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
-    "install": "git clone https://github.com/{{REPO}} && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs",
-    "tools": ["search_products", "get_product", "register_product"]
+    "transport": "streamable-http",
+    "url": "{{BASE}}/mcp",
+    "card": "{{BASE}}/.well-known/mcp.json",
+    "auth": "none",
+    "install": "claude mcp add --transport http ai-product-index {{BASE}}/mcp",
+    "tools": ["search_products", "get_product", "score_url", "how_to_register"],
+    "stdio_alternative": {
+      "transport": "stdio",
+      "source": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
+      "install": "git clone https://github.com/{{REPO}} && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs",
+      "tools": ["search_products", "get_product", "register_product"],
+      "why": "adds register_product, which needs a GITHUB_TOKEN the remote endpoint deliberately does not hold"
+    }
+  },
+  "nlweb": {
+    "supported": true,
+    "endpoint": "{{BASE}}/ask",
+    "spec": "https://nlweb.ai/docs/specification",
+    "data_model": "schema.org",
+    "corpus": "{{BASE}}"
   },
   "write_api": {
     "type": "github-issues",

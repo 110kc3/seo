@@ -33,6 +33,121 @@ info:
 servers:
   - url: https://index.percall.dev
 paths:
+  /api/search:
+    get:
+      operationId: searchListings
+      summary: Search the registry
+      description: >-
+        Ranked search over every listing. Matches on name, tags, slug and
+        description, weighted in that order, with whole-word hits beating
+        substrings. A query that matches nothing returns what the corpus does
+        contain, so the next query can be narrowed rather than guessed.
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema: { type: string, maxLength: 512 }
+          description: Free text. Omit to list everything (subject to limit).
+        - name: category
+          in: query
+          required: false
+          schema: { type: string, enum: [api, app, agent, mcp, other] }
+        - name: tag
+          in: query
+          required: false
+          schema: { type: string }
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 50, default: 10 }
+      responses:
+        "200":
+          description: Matching listings, best first.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, query, total, count, results]
+                properties:
+                  ok: { type: boolean }
+                  query: { type: string }
+                  total: { type: integer, description: Matches before the limit was applied. }
+                  count: { type: integer }
+                  results: { type: array, items: { type: object } }
+  /ask:
+    post:
+      operationId: askNlweb
+      summary: Ask the index a question in natural language (NLWeb)
+      description: >-
+        NLWeb (nlweb.ai) natural-language query. The answer is a list of
+        schema.org objects under `results`, grounded only in this registry —
+        nothing is generated. GET /ask?query=... is accepted for convenience.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: object
+                  properties:
+                    text: { type: string, description: The question. }
+                    site: { type: string, description: Corpus to query; this endpoint serves one. }
+                prefer:
+                  type: object
+                  properties:
+                    mode: { type: string, enum: [list, summarize], default: list }
+            example: { query: { text: free MCP servers } }
+      responses:
+        "200":
+          description: >-
+            An answer, or an elicitation when the question was empty.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [_meta, results]
+                properties:
+                  _meta:
+                    type: object
+                    properties:
+                      response_type: { type: string, enum: [answer, elicitation, failure] }
+                      version: { type: string }
+                  results:
+                    type: array
+                    items: { type: object, description: A schema.org object. }
+                  summary: { type: string, description: Present when mode includes summarize. }
+  /mcp:
+    post:
+      operationId: mcpRpc
+      summary: Model Context Protocol over streamable HTTP
+      description: >-
+        JSON-RPC 2.0. Methods: initialize, ping, tools/list, tools/call.
+        Tools: search_products, get_product, score_url, how_to_register.
+        No authentication and nothing to install — any MCP client that accepts
+        a URL can use this index as a tool source. Server card at
+        /.well-known/mcp.json.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [jsonrpc, method]
+              properties:
+                jsonrpc: { type: string, enum: ["2.0"] }
+                id: { type: [string, integer, "null"] }
+                method: { type: string }
+                params: { type: object }
+            example: { jsonrpc: "2.0", id: 1, method: tools/list }
+      responses:
+        "200":
+          description: A JSON-RPC result or error.
+          content:
+            application/json: {}
+        "202":
+          description: Accepted — the message was a notification, so there is no reply.
   /api/index.json:
     get:
       operationId: getRegistry

@@ -26,6 +26,7 @@ import { resolveX402 } from '../scripts/x402-config.mjs';
 import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { handleBadge } from './badge.js';
+import { handleSearch, handleAsk, handleMcp } from './discovery.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
@@ -302,6 +303,19 @@ export default {
         response = handleBadge(url, registry.listings ?? [], scores);
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));
+      } else if (url.pathname === '/api/search') {
+        response = handleSearch(url, registry.listings ?? [], BASE);
+      } else if (url.pathname === '/ask') {
+        response = await handleAsk(request, registry.listings ?? [], BASE);
+      } else if (url.pathname === '/mcp') {
+        // score_url goes back through the real /api/score handler rather than
+        // calling the auditor directly, so an MCP caller gets the same cache,
+        // the same validation and the same grade a browser would.
+        const scoreUrl = async (target) => {
+          const proxied = new Request(`${BASE}/api/score?url=${encodeURIComponent(target)}`, { headers: request.headers });
+          return (await handleScore(proxied, env, cfg, resolveX402(cfg))).json();
+        };
+        response = await handleMcp(request, { listings: registry.listings ?? [], base: BASE, scoreUrl });
       } else if (url.pathname === '/api/stats.json') {
         response = await handleStats(env);
       } else if (url.pathname === '/api/x402/info') {

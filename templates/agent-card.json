@@ -29,9 +29,18 @@
     {
       "id": "search_products",
       "name": "Search the index",
-      "description": "Search {{COUNT}} registered AI products by free text, category or tag. Free, no authentication.",
+      "description": "GET /api/search?q=... searches {{COUNT}} registered AI products by free text, category or tag. Free, no authentication. Also callable as an MCP tool at /mcp.",
       "tags": ["discovery", "directory", "search"],
       "examples": ["Find MCP servers for search", "List every agent-category product"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "ask",
+      "name": "Ask in natural language (NLWeb)",
+      "description": "POST /ask with {\"query\": {\"text\": \"...\"}} to query the index in plain language. Answers with schema.org objects, per the NLWeb protocol. Free, no authentication.",
+      "tags": ["nlweb", "search", "natural-language", "schema.org"],
+      "examples": ["Are there any free MCP servers here?", "What agents does this index know about?"],
       "inputModes": ["application/json"],
       "outputModes": ["application/json"]
     },
@@ -57,8 +66,14 @@
   "interfaces": {
     "llms_txt": "{{BASE}}/llms.txt",
     "json_api": "{{BASE}}/api/index.json",
+    "search": "{{BASE}}/api/search?q=",
+    "nlweb": "{{BASE}}/ask",
+    "mcp": "{{BASE}}/mcp",
+    "mcp_card": "{{BASE}}/.well-known/mcp.json",
     "openapi": "{{BASE}}/openapi.yaml",
     "schema": "{{BASE}}/api/schema.json",
+    "feed": "{{BASE}}/feed.xml",
+    "opensearch": "{{BASE}}/opensearch.xml",
     "stats": "{{BASE}}/api/stats.json",
     "payment_terms": "{{BASE}}/api/x402/info"
   }

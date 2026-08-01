@@ -21,6 +21,7 @@ import { CHECK_LABELS, letterGrade, snippetFor } from '../worker/audit.js';
 import { handleScore, freeView, __testing as score } from '../worker/score.js';
 import { signResponse, keyDirectory, botAuthHeaders, signatureBase, contentDigest, signingKey, DIRECTORY_PATH, __testing as sign } from '../worker/signing.js';
 import { handleBadge, badgeSvg, __testing as badge } from '../worker/badge.js';
+import { searchListings, handleSearch, handleAsk, handleMcp, mcpTools } from '../worker/discovery.js';
 import cfgFile from '../site.config.json' with { type: 'json' };
 
 // Derived from the shipped config, not hardcoded: these tests pin "artifacts
@@ -626,6 +627,9 @@ test('no source directory is published as a static asset by accident', async () 
     // Published for the same reason health.json is: the registry's own state
     // about its listings should be inspectable by whoever it describes.
     'scores.json', 'sitemap.xml', '.well-known',
+    // Discovery surfaces. Static on purpose: a feed and a search description
+    // that need the Worker awake are worse than ones the CDN can serve cold.
+    'feed.xml', 'feed.json', 'opensearch.xml',
   ]);
 
   const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));
@@ -1505,4 +1509,178 @@ test('stats shaping handles an empty dataset without dividing by zero', () => {
   const body = stats.shape([]);
   assert.equal(body.total_requests, 0);
   assert.equal(body.agent_share, 0);
+});
+
+// --- query surfaces: search, NLWeb /ask, remote MCP -------------------------
+//
+// These are the endpoints that answer a question rather than serve a file, so
+// what is pinned here is the *answer's* quality: that ranking cannot put an
+// unrelated listing above an exact name match, and that an empty answer still
+// tells the caller something it can act on.
+
+const CORPUS = [
+  { slug: 'alpha-mcp', name: 'Alpha MCP Server', url: 'https://alpha.example', description: 'A search server.', category: 'mcp', pricing: 'free', tier: 'free', tags: ['search', 'mcp'] },
+  { slug: 'beta-api', name: 'Beta API', url: 'https://beta.example', description: 'An API that wraps an MCP server for search.', category: 'api', pricing: 'paid', tier: 'verified', tags: ['api'] },
+  { slug: 'gamma-agent', name: 'Gamma', url: 'https://gamma.example', description: 'An autonomous agent.', category: 'agent', pricing: 'freemium', tier: 'free', tags: ['agent'] },
+];
+const mcpCtx = { listings: CORPUS, base: BASE, scoreUrl: async (u) => ({ ok: true, url: u, letter: 'A', score: 100 }) };
+const rpc = (body) => new Request(`${BASE}/mcp`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+
+test('search ranks a name match above a description match', () => {
+  const { hits } = searchListings(CORPUS, { q: 'alpha mcp' });
+  assert.equal(hits[0].listing.slug, 'alpha-mcp');
+  // beta-api only mentions MCP in prose, so it must not outrank the server
+  // actually called that — the failure mode this weighting exists to prevent.
+  assert.ok(hits[0].score > hits[1].score);
+});
+
+test('search filters, limits, and orders stably within a score band', () => {
+  assert.deepEqual(searchListings(CORPUS, { q: '', category: 'mcp' }).hits.map((h) => h.listing.slug), ['alpha-mcp']);
+  assert.deepEqual(searchListings(CORPUS, { q: '', tag: 'agent' }).hits.map((h) => h.listing.slug), ['gamma-agent']);
+
+  const limited = searchListings(CORPUS, { q: '', limit: 2 });
+  assert.equal(limited.total, 3, 'total counts every match, not just the page');
+  assert.equal(limited.hits.length, 2);
+  // Same query twice must not reorder equal-scoring listings.
+  assert.deepEqual(
+    searchListings(CORPUS, { q: '' }).hits.map((h) => h.listing.slug),
+    searchListings(CORPUS, { q: '' }).hits.map((h) => h.listing.slug),
+  );
+  // A limit outside the allowed range is clamped rather than honoured.
+  assert.equal(searchListings(CORPUS, { q: '', limit: 9999 }).hits.length, 3);
+});
+
+test('a search that matches nothing still says what the corpus holds', async () => {
+  const res = handleSearch(new URL(`${BASE}/api/search?q=zzzznotathing`), CORPUS, BASE);
+  const body = await res.json();
+  assert.equal(body.total, 0);
+  assert.equal(body.corpus.listings, 3);
+  assert.deepEqual(body.corpus.categories, ['agent', 'api', 'mcp']);
+  assert.ok(body.register.endsWith('/llms.txt'), 'a dead end must point somewhere');
+});
+
+test('/ask answers an NLWeb query with schema.org objects', async () => {
+  const res = await handleAsk(
+    new Request(`${BASE}/ask`, { method: 'POST', body: JSON.stringify({ query: { text: 'Do you have any MCP servers?' } }) }),
+    CORPUS, BASE,
+  );
+  const body = await res.json();
+  assert.equal(body._meta.response_type, 'answer');
+  assert.ok(body.results.length > 0, 'stop-words must not swallow the real term');
+  assert.equal(body.results[0]['@context'], 'https://schema.org');
+  assert.equal(body.results[0]['@type'], 'SoftwareApplication');
+  assert.equal(body.results[0].name, 'Alpha MCP Server');
+  assert.equal(body.results[0].subjectOf.url, `${BASE}/l/alpha-mcp.html`);
+});
+
+test('/ask accepts the shapes clients actually send, not only the spec one', async () => {
+  const spec = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"agent"}}' }), CORPUS, BASE)).json();
+  const bare = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":"agent"}' }), CORPUS, BASE)).json();
+  const get = await (await handleAsk(new Request(`${BASE}/ask?query=agent`), CORPUS, BASE)).json();
+  assert.deepEqual(bare.results, spec.results);
+  assert.deepEqual(get.results, spec.results);
+});
+
+test('/ask asks back when the question is empty, and refuses another corpus', async () => {
+  const empty = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{}' }), CORPUS, BASE)).json();
+  assert.equal(empty._meta.response_type, 'elicitation');
+  assert.ok(empty.elicitation.length > 0);
+
+  const wrong = await handleAsk(
+    new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"x","site":"example.com"}}' }), CORPUS, BASE,
+  );
+  assert.equal(wrong.status, 400);
+  assert.equal((await wrong.json())._meta.response_type, 'failure');
+});
+
+test('/ask summarizes only when asked to', async () => {
+  const plain = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"}}' }), CORPUS, BASE)).json();
+  assert.equal(plain.summary, undefined);
+  const summed = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"},"prefer":{"mode":"summarize"}}' }), CORPUS, BASE)).json();
+  assert.match(summed.summary, /Alpha MCP Server/);
+});
+
+test('MCP initialize declares tools and echoes the client protocol version', async () => {
+  const body = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-03-26' } }), mcpCtx)).json();
+  assert.equal(body.result.protocolVersion, '2025-03-26');
+  assert.deepEqual(body.result.capabilities, { tools: { listChanged: false } });
+  assert.equal(body.result.serverInfo.name, 'ai-product-index');
+  assert.ok(body.result.instructions.includes('/llms.txt'));
+});
+
+test('MCP tools/list matches the tools the server card advertises', async () => {
+  const body = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 2, method: 'tools/list' }), mcpCtx)).json();
+  const names = body.result.tools.map((t) => t.name);
+  assert.deepEqual(names, ['search_products', 'get_product', 'score_url', 'how_to_register']);
+  assert.deepEqual(names, mcpTools(BASE).map((t) => t.name));
+  for (const t of body.result.tools) assert.equal(t.inputSchema.type, 'object');
+});
+
+test('MCP tools/call runs search, get and score', async () => {
+  const search = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'search_products', arguments: { query: 'mcp' } } }), mcpCtx)).json();
+  assert.equal(JSON.parse(search.result.content[0].text).results[0].slug, 'alpha-mcp');
+
+  const get = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'get_product', arguments: { slug: 'gamma-agent' } } }), mcpCtx)).json();
+  assert.equal(JSON.parse(get.result.content[0].text).name, 'Gamma');
+
+  // score_url goes through the same handler a browser hits, stubbed here.
+  const scored = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 5, method: 'tools/call', params: { name: 'score_url', arguments: { url: 'https://example.com' } } }), mcpCtx)).json();
+  assert.equal(JSON.parse(scored.result.content[0].text).letter, 'A');
+});
+
+test('a failing MCP tool is a tool result, not a protocol error', async () => {
+  // The model has to be able to see and react to the failure; a JSON-RPC error
+  // is swallowed by the client instead.
+  const body = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'get_product', arguments: { slug: 'nope' } } }), mcpCtx)).json();
+  assert.equal(body.error, undefined);
+  assert.equal(body.result.isError, true);
+  assert.match(body.result.content[0].text, /no listing with slug/);
+
+  const boom = { ...mcpCtx, scoreUrl: async () => { throw new Error('upstream exploded'); } };
+  const thrown = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 7, method: 'tools/call', params: { name: 'score_url', arguments: { url: 'https://x.example' } } }), boom)).json();
+  assert.equal(thrown.result.isError, true);
+  assert.match(thrown.result.content[0].text, /upstream exploded/);
+});
+
+test('MCP handles notifications, batches, unknown methods and a stray GET', async () => {
+  // A notification has no id, so it gets no body — 202, not an empty object.
+  const notif = await handleMcp(rpc({ jsonrpc: '2.0', method: 'notifications/initialized' }), mcpCtx);
+  assert.equal(notif.status, 202);
+  assert.equal(await notif.text(), '');
+
+  const batch = await (await handleMcp(rpc([
+    { jsonrpc: '2.0', id: 'a', method: 'ping' },
+    { jsonrpc: '2.0', method: 'notifications/initialized' },
+    { jsonrpc: '2.0', id: 'b', method: 'tools/list' },
+  ]), mcpCtx)).json();
+  assert.equal(batch.length, 2, 'the notification contributes no reply');
+  assert.deepEqual(batch.map((r) => r.id), ['a', 'b']);
+
+  const unknown = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 8, method: 'resources/list' }), mcpCtx)).json();
+  assert.equal(unknown.error.code, -32601);
+
+  const get = await handleMcp(new Request(`${BASE}/mcp`), mcpCtx);
+  assert.equal(get.status, 405);
+  assert.equal(get.headers.get('allow'), 'POST');
+
+  const garbage = await handleMcp(new Request(`${BASE}/mcp`, { method: 'POST', body: 'not json' }), mcpCtx);
+  assert.equal(garbage.status, 400);
+  assert.equal((await garbage.json()).error.code, -32700);
+});
+
+test('every query surface the manifests advertise is actually routed', async () => {
+  // The manifests are hand-written, so this is the check that stops them
+  // promising an endpoint the router does not have.
+  const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
+  const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
+  const routed = ['/api/search', '/ask', '/mcp'];
+
+  assert.equal(manifest.interfaces.mcp, `${BASE}/mcp`);
+  assert.equal(manifest.interfaces.nlweb, `${BASE}/ask`);
+  assert.equal(manifest.nlweb.endpoint, `${BASE}/ask`);
+  assert.equal(card.remotes[0].url, `${BASE}/mcp`);
+  assert.deepEqual(card.tools.map((t) => t.name), mcpTools(BASE).map((t) => t.name));
+
+  const advertised = manifest.endpoints.map((e) => new URL(e.url).pathname);
+  for (const path of routed) assert.ok(advertised.includes(path), `${path} is routed but not advertised`);
 });

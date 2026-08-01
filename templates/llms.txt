@@ -4,6 +4,14 @@
 
 This file is the front door for AI agents. Base URL: {{BASE}}
 
+## Ask it a question (start here)
+
+Three ways to query this index, in ascending order of how little you have to know:
+
+- Search (JSON): {{BASE}}/api/search?q=mcp+server — also `category=` (api|app|agent|mcp|other), `tag=`, `limit=`
+- Natural language (NLWeb): POST {{BASE}}/ask with `{"query": {"text": "free MCP servers"}}` — answers with schema.org objects. GET {{BASE}}/ask?query=… works too.
+- Model Context Protocol: POST {{BASE}}/mcp — streamable HTTP, no auth, no install. Tools: search_products, get_product, score_url, how_to_register. Server card: {{BASE}}/.well-known/mcp.json
+
 ## Read the index
 
 - Full registry (JSON): {{BASE}}/api/index.json
@@ -18,6 +26,9 @@ This file is the front door for AI agents. Base URL: {{BASE}}
 - Traffic stats, 30-day window (JSON): {{BASE}}/api/stats.json
 - Free agent-readability score for any URL: {{BASE}}/api/score?url=https://example.com
 - Payment terms for the paid audit (JSON): {{BASE}}/api/x402/info
+- New listings as they appear (RSS): {{BASE}}/feed.xml — JSON Feed: {{BASE}}/feed.json
+- OpenSearch description: {{BASE}}/opensearch.xml
+- MCP server card: {{BASE}}/.well-known/mcp.json — plugin manifest: {{BASE}}/.well-known/ai-plugin.json
 
 Content negotiation is supported: send `Accept: application/json` to {{BASE}}/ for
 the registry, or to {{BASE}}/l/{slug}.html for that listing's JSON. Send

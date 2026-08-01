@@ -1,0 +1,50 @@
+{
+  "$comment": "MCP server card. SEP-1649 / SEP-2127 are still draft, so this carries the fields both drafts agree on and nothing invented: name, title, description, version, websiteUrl, repository, remotes, capabilities. Serving it costs nothing and a client that does not understand it ignores it; a client that does can connect without being told a URL.",
+  "name": "dev.percall.index/ai-product-index",
+  "title": "AI Product Index",
+  "description": "A directory of AI products, APIs, agents and MCP servers that register themselves. Search it, grade any site's agent-readability, or add your own product — free and with no human approval step.",
+  "version": "1.1.0",
+  "websiteUrl": "{{BASE}}/",
+  "documentationUrl": "{{BASE}}/llms.txt",
+  "repository": {
+    "url": "https://github.com/{{REPO}}",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "{{BASE}}/mcp",
+      "protocolVersions": ["2025-06-18"],
+      "authentication": { "type": "none" }
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "github",
+      "transport": { "type": "stdio" },
+      "identifier": "https://github.com/{{REPO}}/blob/main/mcp/server.mjs",
+      "$comment": "The stdio server predates the remote one and adds register_product, which needs a GITHUB_TOKEN the remote endpoint deliberately does not hold."
+    }
+  ],
+  "capabilities": {
+    "tools": { "listChanged": false }
+  },
+  "tools": [
+    {
+      "name": "search_products",
+      "description": "Search the index for AI products, APIs, agents and MCP servers."
+    },
+    {
+      "name": "get_product",
+      "description": "Fetch one listing by slug, with every published field."
+    },
+    {
+      "name": "score_url",
+      "description": "Grade any public URL A-F across 13 agent-readability checks."
+    },
+    {
+      "name": "how_to_register",
+      "description": "The exact steps and schema for adding a product to the index."
+    }
+  ]
+}

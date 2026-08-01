@@ -1,0 +1,129 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "AI Product Index",
+  "home_page_url": "https://index.percall.dev/",
+  "feed_url": "https://index.percall.dev/feed.json",
+  "description": "AI products, APIs, agents and MCP servers as they register themselves.",
+  "items": [
+    {
+      "id": "https://index.percall.dev/l/agent-readability-service.html",
+      "url": "https://index.percall.dev/l/agent-readability-service.html",
+      "title": "Agent Readability Service",
+      "content_text": "Done-for-you agent readability: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture and a 13-check agent-readability audit delivered for your own domain, so AI agents can find, parse and cite your product. Case study: 12 sites, average score 68.6 to 97.5. Open a [hire] issue on the repo or email 110kc3@gmail.com.",
+      "date_published": "2026-07-29T00:00:00Z",
+      "tags": [
+        "other",
+        "geo",
+        "llms-txt",
+        "json-ld",
+        "audit"
+      ],
+      "external_url": "https://kc-it.pl/services/agent-readability"
+    },
+    {
+      "id": "https://index.percall.dev/l/bankier-street-bets.html",
+      "url": "https://index.percall.dev/l/bankier-street-bets.html",
+      "title": "Gieldowy Express",
+      "content_text": "Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "stocks",
+        "sentiment",
+        "satire"
+      ],
+      "external_url": "https://110kc3.github.io/bankier-street-bets/"
+    },
+    {
+      "id": "https://index.percall.dev/l/polish-sweepstakes.html",
+      "url": "https://index.percall.dev/l/polish-sweepstakes.html",
+      "title": "Konkursy i loterie bez zakupu",
+      "content_text": "Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "sweepstakes",
+        "open-data"
+      ],
+      "external_url": "https://110kc3.github.io/polish-sweepstakes/"
+    },
+    {
+      "id": "https://index.percall.dev/l/przetargimiejskie.html",
+      "url": "https://index.percall.dev/l/przetargimiejskie.html",
+      "title": "Przetargi Miejskie",
+      "content_text": "History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/<city>/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office's own documents are binding.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "property",
+        "auctions",
+        "open-data"
+      ],
+      "external_url": "https://przetargimiejskie.pl/"
+    },
+    {
+      "id": "https://index.percall.dev/l/puzle.html",
+      "url": "https://index.percall.dev/l/puzle.html",
+      "title": "Wykop czy Wyborcza?",
+      "content_text": "Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "game",
+        "news",
+        "quiz"
+      ],
+      "external_url": "https://110kc3.github.io/puzle/"
+    },
+    {
+      "id": "https://index.percall.dev/l/rentgen-ofert.html",
+      "url": "https://index.percall.dev/l/rentgen-ofert.html",
+      "title": "Rentgen Ofert",
+      "content_text": "Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "property",
+        "real-estate",
+        "open-data"
+      ],
+      "external_url": "https://110kc3.github.io/rentgen-ofert/"
+    },
+    {
+      "id": "https://index.percall.dev/l/stare-aparaty.html",
+      "url": "https://index.percall.dev/l/stare-aparaty.html",
+      "title": "Stare Aparaty",
+      "content_text": "Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner's live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.",
+      "date_published": "2026-07-28T00:00:00Z",
+      "tags": [
+        "app",
+        "poland",
+        "cameras",
+        "analog",
+        "catalog",
+        "shopping"
+      ],
+      "external_url": "https://stareaparaty.com/"
+    },
+    {
+      "id": "https://index.percall.dev/l/ai-product-index.html",
+      "url": "https://index.percall.dev/l/ai-product-index.html",
+      "title": "AI Product Index",
+      "content_text": "A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration via GitHub issues, free listings, JSON API, per-listing pages with schema.org JSON-LD.",
+      "date_published": "2026-07-09T00:00:00Z",
+      "tags": [
+        "api",
+        "directory",
+        "discovery",
+        "seo",
+        "registry"
+      ],
+      "external_url": "https://index.percall.dev/"
+    }
+  ]
+}

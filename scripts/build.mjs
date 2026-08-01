@@ -159,6 +159,61 @@ writeFileSync(join(ROOT, '.well-known', 'agents.json'), fill(tpl('agents-manifes
 // RFC 9116 security contact. The Expires date is fixed in the template, not
 // computed, so the build stays a pure function of its inputs.
 writeFileSync(join(ROOT, '.well-known', 'security.txt'), fill(tpl('security.txt')));
+// MCP server card — how a client finds the remote MCP endpoint at /mcp without
+// being handed a URL. Draft convention (SEP-1649/2127); harmless if ignored.
+writeFileSync(join(ROOT, '.well-known', 'mcp.json'), fill(tpl('mcp-card.json')));
+// The OpenAI plugin manifest. Superseded, and still probed by enough crawlers
+// that answering costs less than the 404s do.
+writeFileSync(join(ROOT, '.well-known', 'ai-plugin.json'), fill(tpl('ai-plugin.json')));
+// OpenSearch: the only discovery format that turns a domain into a callable
+// search box for a client that knows nothing else about it.
+writeFileSync(join(ROOT, 'opensearch.xml'), fill(tpl('opensearch.xml')));
+
+// --- feeds ------------------------------------------------------------------
+// A directory that gains entries is a feed, and feeds are how aggregators and
+// several crawlers notice change without polling every listing. Two formats
+// because the consumers differ: RSS for readers and crawlers, JSON Feed for
+// anything that would rather not parse XML.
+const feedItems = [...listings]
+  .sort((a, b) => String(b.updated ?? b.created).localeCompare(String(a.updated ?? a.created)))
+  .slice(0, 50);
+const rfc822 = (d) => new Date(`${d}T00:00:00Z`).toUTCString();
+
+writeFileSync(join(ROOT, 'feed.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n`
+  + `<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n`
+  + `<channel>\n`
+  + `  <title>AI Product Index</title>\n`
+  + `  <link>${BASE}/</link>\n`
+  + `  <description>AI products, APIs, agents and MCP servers as they register themselves.</description>\n`
+  + `  <language>en</language>\n`
+  + `  <atom:link href="${BASE}/feed.xml" rel="self" type="application/rss+xml"/>\n`
+  + feedItems.map((l) => `  <item>\n`
+    + `    <title>${esc(l.name)}</title>\n`
+    + `    <link>${BASE}/l/${l.slug}.html</link>\n`
+    + `    <guid isPermaLink="true">${BASE}/l/${l.slug}.html</guid>\n`
+    + `    <pubDate>${rfc822(l.updated ?? l.created)}</pubDate>\n`
+    + `    <category>${esc(l.category)}</category>\n`
+    + `    <description>${esc(l.description)}</description>\n`
+    + `  </item>`).join('\n')
+  + `\n</channel>\n</rss>\n`);
+
+writeFileSync(join(ROOT, 'feed.json'), JSON.stringify({
+  version: 'https://jsonfeed.org/version/1.1',
+  title: 'AI Product Index',
+  home_page_url: `${BASE}/`,
+  feed_url: `${BASE}/feed.json`,
+  description: 'AI products, APIs, agents and MCP servers as they register themselves.',
+  items: feedItems.map((l) => ({
+    id: `${BASE}/l/${l.slug}.html`,
+    url: `${BASE}/l/${l.slug}.html`,
+    title: l.name,
+    content_text: l.description,
+    date_published: `${l.updated ?? l.created}T00:00:00Z`,
+    tags: [l.category, ...(l.tags ?? [])],
+    external_url: l.url,
+  })),
+}, null, 2) + '\n');
 
 const fullBlocks = listings.map((l) => {
   const lines = [
@@ -179,9 +234,14 @@ writeFileSync(join(ROOT, 'llms-full.txt'),
 
 const smUrls = [
   `  <url><loc>${BASE}/</loc></url>`,
+  // The query endpoints belong in the sitemap even though they take
+  // parameters: a crawler that reads sitemaps and nothing else would otherwise
+  // never learn this site can be asked questions.
+  `  <url><loc>${BASE}/ask</loc></url>`,
+  `  <url><loc>${BASE}/api/search</loc></url>`,
   ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);
 
-console.log(`built ${listings.length} listing(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml`);
+console.log(`built ${listings.length} listing(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml, opensearch.xml, feed.xml, feed.json`);

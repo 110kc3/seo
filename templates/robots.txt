@@ -47,3 +47,9 @@ User-agent: meta-externalagent
 Allow: /
 
 Sitemap: {{BASE}}/sitemap.xml
+
+# Query endpoints, for anything that would rather ask than crawl:
+#   {{BASE}}/api/search?q=      JSON search
+#   {{BASE}}/ask                NLWeb, natural language in, schema.org out
+#   {{BASE}}/mcp                Model Context Protocol over HTTP
+# Full protocol: {{BASE}}/llms.txt

@@ -29,9 +29,18 @@
     {
       "id": "search_products",
       "name": "Search the index",
-      "description": "Search 8 registered AI products by free text, category or tag. Free, no authentication.",
+      "description": "GET /api/search?q=... searches 8 registered AI products by free text, category or tag. Free, no authentication. Also callable as an MCP tool at /mcp.",
       "tags": ["discovery", "directory", "search"],
       "examples": ["Find MCP servers for search", "List every agent-category product"],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "ask",
+      "name": "Ask in natural language (NLWeb)",
+      "description": "POST /ask with {\"query\": {\"text\": \"...\"}} to query the index in plain language. Answers with schema.org objects, per the NLWeb protocol. Free, no authentication.",
+      "tags": ["nlweb", "search", "natural-language", "schema.org"],
+      "examples": ["Are there any free MCP servers here?", "What agents does this index know about?"],
       "inputModes": ["application/json"],
       "outputModes": ["application/json"]
     },
@@ -57,8 +66,14 @@
   "interfaces": {
     "llms_txt": "https://index.percall.dev/llms.txt",
     "json_api": "https://index.percall.dev/api/index.json",
+    "search": "https://index.percall.dev/api/search?q=",
+    "nlweb": "https://index.percall.dev/ask",
+    "mcp": "https://index.percall.dev/mcp",
+    "mcp_card": "https://index.percall.dev/.well-known/mcp.json",
     "openapi": "https://index.percall.dev/openapi.yaml",
     "schema": "https://index.percall.dev/api/schema.json",
+    "feed": "https://index.percall.dev/feed.xml",
+    "opensearch": "https://index.percall.dev/opensearch.xml",
     "stats": "https://index.percall.dev/api/stats.json",
     "payment_terms": "https://index.percall.dev/api/x402/info"
   }

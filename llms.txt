@@ -4,6 +4,14 @@
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
+## Ask it a question (start here)
+
+Three ways to query this index, in ascending order of how little you have to know:
+
+- Search (JSON): https://index.percall.dev/api/search?q=mcp+server — also `category=` (api|app|agent|mcp|other), `tag=`, `limit=`
+- Natural language (NLWeb): POST https://index.percall.dev/ask with `{"query": {"text": "free MCP servers"}}` — answers with schema.org objects. GET https://index.percall.dev/ask?query=… works too.
+- Model Context Protocol: POST https://index.percall.dev/mcp — streamable HTTP, no auth, no install. Tools: search_products, get_product, score_url, how_to_register. Server card: https://index.percall.dev/.well-known/mcp.json
+
 ## Read the index
 
 - Full registry (JSON): https://index.percall.dev/api/index.json
@@ -18,6 +26,9 @@ This file is the front door for AI agents. Base URL: https://index.percall.dev
 - Traffic stats, 30-day window (JSON): https://index.percall.dev/api/stats.json
 - Free agent-readability score for any URL: https://index.percall.dev/api/score?url=https://example.com
 - Payment terms for the paid audit (JSON): https://index.percall.dev/api/x402/info
+- New listings as they appear (RSS): https://index.percall.dev/feed.xml — JSON Feed: https://index.percall.dev/feed.json
+- OpenSearch description: https://index.percall.dev/opensearch.xml
+- MCP server card: https://index.percall.dev/.well-known/mcp.json — plugin manifest: https://index.percall.dev/.well-known/ai-plugin.json
 
 Content negotiation is supported: send `Accept: application/json` to https://index.percall.dev/ for
 the registry, or to https://index.percall.dev/l/{slug}.html for that listing's JSON. Send

@@ -11,7 +11,14 @@
     "openapi": "https://index.percall.dev/openapi.yaml",
     "schema": "https://index.percall.dev/api/schema.json",
     "webmcp": "https://index.percall.dev/",
-    "mcp": "https://github.com/110kc3/seo/blob/main/mcp/server.mjs",
+    "mcp": "https://index.percall.dev/mcp",
+    "mcp_card": "https://index.percall.dev/.well-known/mcp.json",
+    "nlweb": "https://index.percall.dev/ask",
+    "search": "https://index.percall.dev/api/search?q=",
+    "opensearch": "https://index.percall.dev/opensearch.xml",
+    "feed": "https://index.percall.dev/feed.xml",
+    "json_feed": "https://index.percall.dev/feed.json",
+    "plugin_manifest": "https://index.percall.dev/.well-known/ai-plugin.json",
     "agent_card": "https://index.percall.dev/.well-known/agent.json",
     "llms_txt": "https://index.percall.dev/llms.txt",
     "markdown": "https://index.percall.dev/llms-full.txt",
@@ -45,6 +52,28 @@
       "method": "GET",
       "url": "https://index.percall.dev/listings/{slug}.json",
       "description": "One listing as JSON.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "GET",
+      "url": "https://index.percall.dev/api/search?q=mcp+server",
+      "description": "Ranked search over the registry. Filters: category, tag, limit. A zero-result answer also reports what the corpus does contain, so the next query can be better.",
+      "auth": "none",
+      "price": "free"
+    },
+    {
+      "method": "POST",
+      "url": "https://index.percall.dev/ask",
+      "description": "NLWeb natural-language query. Body {\"query\": {\"text\": \"...\"}}; answers with schema.org objects under `results`. GET ?query= is accepted for convenience.",
+      "auth": "none",
+      "price": "free",
+      "request": {"query": {"text": "free MCP servers"}}
+    },
+    {
+      "method": "POST",
+      "url": "https://index.percall.dev/mcp",
+      "description": "Model Context Protocol over streamable HTTP. No auth, nothing to install. Tools: search_products, get_product, score_url, how_to_register.",
       "auth": "none",
       "price": "free"
     },
@@ -88,10 +117,26 @@
     ]
   },
   "mcp": {
-    "transport": "stdio",
-    "source": "https://github.com/110kc3/seo/blob/main/mcp/server.mjs",
-    "install": "git clone https://github.com/110kc3/seo && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs",
-    "tools": ["search_products", "get_product", "register_product"]
+    "transport": "streamable-http",
+    "url": "https://index.percall.dev/mcp",
+    "card": "https://index.percall.dev/.well-known/mcp.json",
+    "auth": "none",
+    "install": "claude mcp add --transport http ai-product-index https://index.percall.dev/mcp",
+    "tools": ["search_products", "get_product", "score_url", "how_to_register"],
+    "stdio_alternative": {
+      "transport": "stdio",
+      "source": "https://github.com/110kc3/seo/blob/main/mcp/server.mjs",
+      "install": "git clone https://github.com/110kc3/seo && claude mcp add ai-product-index -- node <clone>/mcp/server.mjs",
+      "tools": ["search_products", "get_product", "register_product"],
+      "why": "adds register_product, which needs a GITHUB_TOKEN the remote endpoint deliberately does not hold"
+    }
+  },
+  "nlweb": {
+    "supported": true,
+    "endpoint": "https://index.percall.dev/ask",
+    "spec": "https://nlweb.ai/docs/specification",
+    "data_model": "schema.org",
+    "corpus": "https://index.percall.dev"
   },
   "write_api": {
     "type": "github-issues",

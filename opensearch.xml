@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OpenSearch description. Old, boring, and still the one thing that makes a
+     site's search callable by something that only knows the site's domain:
+     browsers, feed readers and several crawlers fetch it by convention. It
+     points at the JSON search endpoint, not at an HTML results page, because
+     the callers that matter here parse rather than render. -->
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>AI Product Index</ShortName>
+  <Description>Search a directory of AI products, APIs, agents and MCP servers.</Description>
+  <Tags>ai agents mcp llms directory</Tags>
+  <Contact>110kc3@gmail.com</Contact>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="application/json" template="https://index.percall.dev/api/search?q={searchTerms}"/>
+  <Url type="text/html" template="https://index.percall.dev/?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://index.percall.dev/opensearch.xml"/>
+  <Language>en-us</Language>
+</OpenSearchDescription>
