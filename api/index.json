@@ -1,7 +1,50 @@
 {
-  "count": 8,
-  "updated": "2026-07-29",
+  "count": 10,
+  "updated": "2026-08-01",
   "listings": [
+    {
+      "slug": "overtimelog",
+      "name": "OvertimeLog",
+      "url": "https://overtimelog.com/",
+      "description": "A local-only desktop app that detects after-hours Slack activity and turns it into billable, evidence-backed overtime records. Built for the EU Right to Disconnect era: analysis runs entirely on the user's own machine, the activity data never leaves it, and there is no server to send it to. Exports to PDF, Excel and CSV.",
+      "category": "app",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://overtimelog.com/llms.txt"
+      },
+      "tags": [
+        "slack",
+        "overtime",
+        "eu-compliance",
+        "privacy",
+        "desktop"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-08-01",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
+    {
+      "slug": "protocol-index",
+      "name": "Protocol Index",
+      "url": "https://protocolindex.eu/",
+      "description": "An index mapping Bryan Johnson's publicly-documented Blueprint supplement stack (54 entries) to localized Amazon links across seven marketplaces, with a six-language UI, a build-by-goal flow over benefit tags, per-supplement dosage, timing and source rationale, and a printable daily checklist. An index, not medical advice, and not affiliated with anyone it references.",
+      "category": "app",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://protocolindex.eu/llms.txt"
+      },
+      "tags": [
+        "supplements",
+        "blueprint",
+        "catalog",
+        "multilingual"
+      ],
+      "submitted_by": "registry (seed)",
+      "created": "2026-08-01",
+      "github_user": "110kc3",
+      "tier": "free"
+    },
     {
       "slug": "bankier-street-bets",
       "name": "Gieldowy Express",
