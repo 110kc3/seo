@@ -639,6 +639,28 @@ test('no source directory is published as a static asset by accident', async () 
     `add these to .assetsignore, or to the published list in this test: ${unclassified.join(', ')}`);
 });
 
+test('the stdio server offers exactly the Worker tools plus register_product', async () => {
+  // These two servers answer the same clients, so a tool present on one and
+  // absent from the other means the answer depends on which one a client
+  // happened to reach. That is what had happened: the Worker grew to six tools
+  // while mcp/server.mjs still declared three, invisibly, for a whole release.
+  // The stdio server now imports these definitions rather than restating them,
+  // so this test is really asserting that nobody has reintroduced a second copy.
+  const { TOOLS, HOSTED_TOOLS } = await import('../mcp/server.mjs');
+  assert.deepEqual(HOSTED_TOOLS.map((t) => t.name), mcpTools(BASE).map((t) => t.name));
+
+  // register_product is the one deliberate difference, and only ever an
+  // addition: it needs a GitHub token, which the public Worker must not carry.
+  const extra = TOOLS.map((t) => t.name).filter((n) => !mcpTools(BASE).some((t) => t.name === n));
+  assert.deepEqual(extra, ['register_product']);
+
+  // Every tool a client can list must be one it can actually call.
+  for (const t of TOOLS) {
+    assert.equal(typeof t.description, 'string', `${t.name} has no description`);
+    assert.equal(t.inputSchema?.type, 'object', `${t.name} has no object inputSchema`);
+  }
+});
+
 test('no .assetsignore pattern silently excludes a nested published file', async () => {
   // The test above guards one direction — nothing ships by accident. This guards
   // the other, which is the one that actually bit: an unanchored gitignore
@@ -1625,11 +1647,32 @@ test('/ask asks back when the question is empty, and refuses another corpus', as
   assert.equal((await wrong.json())._meta.response_type, 'failure');
 });
 
-test('/ask summarizes only when asked to', async () => {
+test('/ask summarizes by default, and mode=list opts out', async () => {
+  // The default flipped once the corpus outgrew "read all of it yourself".
   const plain = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"}}' }), CORPUS, BASE)).json();
-  assert.equal(plain.summary, undefined);
-  const summed = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"},"prefer":{"mode":"summarize"}}' }), CORPUS, BASE)).json();
-  assert.match(summed.summary, /Alpha MCP Server/);
+  assert.match(plain.summary, /Alpha MCP Server/);
+  const get = await (await handleAsk(new Request(`${BASE}/ask?query=mcp`), CORPUS, BASE)).json();
+  assert.match(get.summary, /Alpha MCP Server/);
+
+  // Still opt-out-able, both ways in.
+  const listed = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"},"prefer":{"mode":"list"}}' }), CORPUS, BASE)).json();
+  assert.equal(listed.summary, undefined);
+  assert.equal((await (await handleAsk(new Request(`${BASE}/ask?query=mcp&mode=list`), CORPUS, BASE)).json()).summary, undefined);
+
+  // The results are the answer either way — opting out of prose must not
+  // change what matched.
+  assert.deepEqual(listed.results, plain.results);
+});
+
+test('/ask points a miss at the catalogs instead of saying there is nothing', async () => {
+  // The registry is the small half of what this site indexes. A flat "nothing
+  // matches" would send an agent away from an answer that exists one endpoint
+  // over — which is the whole failure this directory is meant to fix.
+  const miss = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"zzzznotathing"}}' }), CORPUS, BASE)).json();
+  assert.equal(miss.results.length, 0);
+  assert.match(miss.summary, /\/api\/x402\/search/);
+  assert.match(miss.summary, /\/api\/mcp\/search/);
+  assert.equal(miss.register, `${BASE}/llms.txt`);
 });
 
 test('MCP initialize declares tools and echoes the client protocol version', async () => {

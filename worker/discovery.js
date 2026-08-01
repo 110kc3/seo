@@ -309,7 +309,13 @@ const asSchemaOrg = (l, base) => ({
 export async function handleAsk(request, listings, base) {
   let text = '';
   let site = '';
-  let mode = 'list';
+  // Summarizing is the default. It was not, back when the corpus was ten
+  // listings and reading all ten *was* the answer; a caller asking a question
+  // in English now gets a sentence first and the structured results after,
+  // rather than a ranked list it has to interpret itself. `mode=list` still
+  // turns it off. This only ever adds a field, so a client that ignores
+  // `summary` sees exactly what it saw before.
+  let mode = 'summarize';
 
   if (request.method === 'POST') {
     let body;
@@ -323,12 +329,12 @@ export async function handleAsk(request, listings, base) {
     // 400 teaches it nothing it could not be told by answering.
     text = typeof body.query === 'string' ? body.query : (body.query?.text ?? body.text ?? '');
     site = body.query?.site ?? body.site ?? '';
-    mode = body.prefer?.mode ?? 'list';
+    mode = body.prefer?.mode ?? mode;
   } else {
     const p = new URL(request.url).searchParams;
     text = p.get('query') ?? p.get('q') ?? '';
     site = p.get('site') ?? '';
-    mode = p.get('mode') ?? 'list';
+    mode = p.get('mode') ?? mode;
   }
 
   if (typeof text !== 'string' || !text.trim()) {
@@ -375,7 +381,10 @@ export async function handleAsk(request, listings, base) {
     ...(mode.includes('summarize') && {
       summary: hits.length
         ? `${total} of ${listings.length} indexed products match "${text}". Top result: ${hits[0].listing.name} — ${hits[0].listing.description}`
-        : `Nothing in this directory matches "${text}". It indexes ${listings.length} AI products; anything can be added autonomously via ${base}/llms.txt.`,
+        // "Nothing matches" is only true of the registry, which is the small
+        // half of what this site indexes. Saying it without naming the two
+        // catalogs would send an agent away from an answer we actually have.
+        : `Nothing in the registry matches "${text}". The registry holds ${listings.length} self-registered AI products, and two larger catalogs are searchable separately: ${base}/api/x402/search for paid APIs an agent can call per request, and ${base}/api/mcp/search for remotely-callable MCP servers. Anything can be added to the registry autonomously via ${base}/llms.txt.`,
     }),
     ...(hits.length === 0 && { register: `${base}/llms.txt` }),
   }, 200, { 'cache-control': 'public, max-age=300' });

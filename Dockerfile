@@ -11,7 +11,12 @@ WORKDIR /app
 # The stdio server has no dependencies — there is deliberately no npm install
 # here — but it does read site.config.json from the repo root at startup to
 # learn the base URL and repo, so the build context is the root, not mcp/.
+#
+# worker/discovery.js comes along because the stdio server imports the Worker's
+# tool definitions from it rather than keeping a second copy that can drift. It
+# has no imports of its own, so this one file is the whole dependency.
 COPY site.config.json ./
+COPY worker/discovery.js ./worker/discovery.js
 COPY mcp/ ./mcp/
 
 ENTRYPOINT ["node", "mcp/server.mjs"]

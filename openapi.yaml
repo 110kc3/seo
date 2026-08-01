@@ -97,7 +97,7 @@ paths:
                 prefer:
                   type: object
                   properties:
-                    mode: { type: string, enum: [list, summarize], default: list }
+                    mode: { type: string, enum: [list, summarize], default: summarize }
             example: { query: { text: free MCP servers } }
       responses:
         "200":
@@ -117,7 +117,7 @@ paths:
                   results:
                     type: array
                     items: { type: object, description: A schema.org object. }
-                  summary: { type: string, description: Present when mode includes summarize. }
+                  summary: { type: string, description: One-sentence answer. Present by default; send mode=list to omit it. }
   /mcp:
     post:
       operationId: mcpRpc
