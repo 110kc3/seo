@@ -8,6 +8,12 @@ for the paid-services portfolio). Old host and the apex stay attached and 308.
 Deployed 2026-07-25 from `main` by CI. Custom domain attached, Analytics Engine
 enabled, KV bound, private revenue dashboard up. Full status table in DEPLOY.md.
 
+Since 2026-08-01 the index also **answers questions** rather than only serving
+documents: `GET /api/search?q=`, `POST /ask` (NLWeb) and `POST /mcp` (Model
+Context Protocol over HTTP — `claude mcp add --transport http ai-product-index
+https://index.percall.dev/mcp`). Payment rail is the **Coinbase CDP**
+facilitator as of the same week.
+
 ## Fleet sweep — 2026-07-28
 
 The audit was pointed at every deployed site in `/home/borg/repos`, and what it
@@ -55,7 +61,59 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
-## Blocked on Kamil
+## Done (v3.8 — the index answers questions, 2026-08-01)
+
+The site served documents you had to know the URL of. An agent arriving with a
+question had nowhere to put it. Three endpoints now take one, and the static
+surfaces exist so something that knows only the domain can find them.
+
+- [x] **`GET /api/search?q=…`** — ranked search, with `category` / `tag` / `limit`. Weighted by field (name > tags > slug > description) and tiered by match quality (whole word 1.0 > substring 0.6 > shared stem 0.5). Not fuzzy on purpose: on a corpus this small, a scorer that can rank an unrelated listing above an exact name match is worse than one returning nothing, because an agent can widen its own query but cannot tell a confident wrong answer from a right one. Empty results carry the corpus summary and the register link, so a dead end still teaches something.
+- [x] **`POST /ask` — NLWeb** ([nlweb.ai](https://nlweb.ai/docs/specification), Microsoft/R.V. Guha; Shopify, Snowflake, O'Reilly and Tripadvisor are on it). Natural language in, schema.org objects out, grounded only in the registry. Accepts the spec's `{"query":{"text":…}}`, a bare `{"query":"…"}` and `GET ?query=…`. Two rounds of tuning against real questions were needed and both were worth it: a **relevance floor** at half the top score (before it, "where can I find polish property auction data?" returned seven of eight listings, because they all say "polish"), and a **stem tier** in matching (before it, "how do I make my site readable to AI agents?" scored the listing literally called *Agent Readability Service* at zero — `agents` ≠ `agent`, `readable` ≠ `readability`).
+- [x] **`POST /mcp` — Model Context Protocol over streamable HTTP.** The reach change. The stdio server needed a clone and a config edit, so only someone who had already found the project would ever run it; this needs a URL, so any MCP client can mount the index as a tool source: `claude mcp add --transport http ai-product-index https://index.percall.dev/mcp`. Tools: `search_products`, `get_product`, `score_url`, `how_to_register`. `score_url` is proxied through the real `/api/score` handler rather than reimplemented, so an MCP caller and a browser cannot disagree about a grade. JSON-RPC only — no SSE, because a server with no server-initiated messages has nothing to stream, and `initialize` declares only `tools` to say so. Batches, notifications (202, no body) and tool-level errors (`isError`, not a protocol error, so the model can see and react) all handled.
+- [x] **Static discovery surfaces** so the three above are findable: `/.well-known/mcp.json` (server card; SEP-1649/2127 are draft, so it carries only fields both drafts agree on), `/opensearch.xml`, `/feed.xml` + `/feed.json`, `/.well-known/ai-plugin.json` (superseded, still probed often enough to be worth answering). All advertised from llms.txt, robots.txt, both manifests, the agent card, the sitemap and openapi.yaml — and **a test asserts the manifests cannot advertise a route the router lacks**, since they are hand-written.
+- [x] **Two live products added to our own index** — OvertimeLog and Protocol Index had been in the weekly fleet sweep for months and were never listed in the directory sitting next to them. 8 → 10 listings.
+- [x] **`overtimelog.com` serves a real robots.txt and sitemap** (`overtime-guard-slack@089225e`). Cloudflare Pages falls back to index.html for unmatched paths, so `/robots.txt` was answering 200 with the landing page's HTML — a crawler asking for crawl rules got a document it cannot parse, and several treat that as disallow-everything. Noted in the 2026-07-29 sweep, fixed and live.
+- [x] Our own listing had pointed at `index.kc-it.pl` since the migration and did not mention `/mcp`. A directory whose own entry is stale fails the check it sells.
+- 137 tests (was 121).
+
+**The honest limit on all of this:** the endpoints are good and the corpus is
+thin. Ten listings, six of them Kamil's Polish apps, will not win a specific
+search no matter how well the ranking works — see "Blocked on Kamil" for the
+decision that would change it.
+
+## Blocked on Kamil — the short version (2026-08-01)
+
+Everything that could be done without you is done. Six things need your hands,
+in the order I would do them. Detail for each is further down this section.
+
+1. **Post the Show HN.** Draft rewritten and ready in `docs/show-hn.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post. Tue–Thu, 14:00–16:00 UTC. *~30 min, then two hours of replies.*
+2. **Four directory submissions.** Every answer is prepared in `docs/distribution.md` §4b — field labels read off the live forms, both constrained dropdowns already resolved. *~10 min of pasting.*
+3. **Decide the corpus question** (new, and the one that actually governs the goal — see below). *A decision, then I do the work.*
+4. **Swap the analytics token.** Cloudflare dashboard → My Profile → API Tokens → Create Token → Custom → *Account* → **Account Analytics: Read**, nothing else. Then `gh secret set CF_ANALYTICS_TOKEN` and `gh workflow run cf-admin -f action=push-secrets`. The mirror of the deploy token stops on its own. *~5 min.* I cannot do this: creating a token needs a User→API Tokens→Edit credential that deliberately does not exist on the Pi or in CI, and writing a repo secret needs a PAT the workflow token cannot be.
+5. **Add the remote MCP endpoint to the two open awesome-list PRs** — or tell me to, and I will push the edits. Both PRs currently describe a stdio server that needs a clone; `https://index.percall.dev/mcp` is a URL anyone can paste, which is a materially better pitch to those reviewers.
+6. **Optional: request Stripe machine-payments access.** Slow-moving, so worth filing before you need it.
+7. **Glama.ai — say which key you have.** Nothing in this repo reads a Glama credential and nothing needs one: Glama indexes MCP servers by scraping `punkpeye/awesome-mcp-servers`, so PR #11152 is already the route in. But Glama sells two different things — a gateway/inference API (irrelevant here) and the MCP directory. **If yours is a directory key that allows direct submission**, that is a real channel worth adding to `docs/distribution.md` §5, and it matters more now that `/mcp` is a URL rather than a clone. Tell me which and I will wire it. Until something reads it, do not push it to the Worker: an unused credential on a production Worker is pure downside, the same reasoning as the `CF_ANALYTICS_TOKEN` item above.
+
+### 3. The corpus question — the real ceiling on "every AI ends up here"
+
+The query endpoints are now good: ask `/ask` a specific question and the right
+listing comes back first, every time I tried. But the index holds **ten**
+listings, six of them your own Polish apps. A directory wins a specific search
+by *having the answer*, and ten entries mostly cannot. This is now the binding
+constraint — no further endpoint work moves it.
+
+Three ways forward; they are not exclusive, and I need your call because two of
+them are editorial positions, not code:
+
+- **(a) Stay self-registration-only.** Purest, matches the pitch ("products register themselves"), and grows at whatever rate distribution delivers — which so far is zero organic registrations in 23 days.
+- **(b) Seed it as a curated index.** Add high-quality public AI products the way any directory does — public facts about public products, no consent needed, each carrying `submitted_by: "registry (curated)"` so the provenance is never disguised. Gets to a few hundred entries and makes the search surfaces worth calling. Changes the story from "self-registration directory" to "curated index that also accepts self-registration". **My recommendation**, because a search endpoint with nothing to find is the worst of both.
+- **(c) Pick a niche and own it.** Rather than compete with the 20,000-Actor generic listings, index one thing exhaustively — e.g. every x402-payable endpoint (the Bazaar's 14.7k resources are public and machine-readable, and nothing indexes them *well*), or Polish-market data APIs. Narrow, defensible, and it feeds the x402 scale-up plan directly.
+
+Say **(b)**, **(c)**, or **(b)+(c)** and I will build it. Under (b) or (c) I
+would also want a stated rule for de-listing on request, which is cheap now and
+expensive later.
+
+## Blocked on Kamil — detail
 
 The rail is proven end to end as of 2026-07-29; what stands between this and
 revenue now is distribution.
@@ -74,7 +132,7 @@ revenue now is distribution.
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
 - [ ] **Post Show HN — draft rewritten 2026-08-01 and ready to go; only the posting is left, and that is Kamil's.** The day-7 gate opened it (see below), so it no longer waits on organic listings. The draft leads with the measured numbers and the zero-conversion finding rather than the directory, and carries three new "did not expect" items worth more than the old ones: the Bazaar's undocumented wire format, the Worker-cannot-fetch-itself 502-after-charging bug, and the spec-vs-installed-base split. Titles, the three comment threads to expect and prepared answers are all in `docs/show-hn.md`. Re-read `/api/stats.json` the morning you post and refresh the five figures — stale numbers are the one thing that would sink it.
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
-- [x] **Managed AI-crawler block cleared on every zone** — done 2026-07-29, after Kamil's second token update finally carried Zone → Bot Management → Edit. `robots-report` read all five zones (four had `managed=true, ai_bots=block`; percall.dev was clean); `robots-allow` updated all four — every zone's plan refused the `policy_only` variant, so the fallback `is_robots_txt_managed: false` applied. Verified live: the managed stanza is gone from all three affected origins, and fresh audits score `stareaparaty.com`, `protocolindex.eu` and `overtimelog.com` at **A 100** — the whole 12-site fleet now sits at 100/100. Two footnotes: the Amazonbot-on-an-affiliate-site question resolved itself (the block was Cloudflare's wholesale default, not curation, and Amazonbot crawling an affiliate site costs nothing); and dropping the managed file exposed that `overtimelog.com` serves its SPA HTML at `/robots.txt` — the audit forgives it, but a real robots.txt in `overtime-guard-slack` would be the honest fix.
+- [x] **Managed AI-crawler block cleared on every zone** — done 2026-07-29, after Kamil's second token update finally carried Zone → Bot Management → Edit. `robots-report` read all five zones (four had `managed=true, ai_bots=block`; percall.dev was clean); `robots-allow` updated all four — every zone's plan refused the `policy_only` variant, so the fallback `is_robots_txt_managed: false` applied. Verified live: the managed stanza is gone from all three affected origins, and fresh audits score `stareaparaty.com`, `protocolindex.eu` and `overtimelog.com` at **A 100** — the whole 12-site fleet now sits at 100/100. Two footnotes: the Amazonbot-on-an-affiliate-site question resolved itself (the block was Cloudflare's wholesale default, not curation, and Amazonbot crawling an affiliate site costs nothing); and dropping the managed file exposed that `overtimelog.com` serves its SPA HTML at `/robots.txt` — the audit forgives it, but a real robots.txt in `overtime-guard-slack` would be the honest fix. **Fixed 2026-08-01** (`overtime-guard-slack@089225e`): a real robots.txt and sitemap.xml, both live. Cloudflare Pages' index.html fallback was the cause, so the same trap applies to every Pages site in the fleet that has no explicit robots.txt.
 
 - [x] **Re-home the `agent-readability-service` listing onto an origin we control** — done 2026-07-29. The listing now points at **https://kc-it.pl/services/agent-readability**, which scores **A 100/100 (13/13)** against `/api/score`; it used to point at `https://github.com/110kc3/seo` and read **E 51** — the Track A shopfront failing its own audit (found in the 2026-07-29 review). The page is the sales page the review asked for: the offer, the 2026-07-28 fleet-sweep case study as before/after evidence, and the three entry points (free score, $0.05 x402 audit, `[hire]`). It lives in `personal-page` (`services/agent-readability.html`, plus a JSON twin and an OG card), is listed in that site's `llms.txt`, and is linked from the "For humans" section here. `scores.json` was refreshed by hand rather than waiting for the weekly cron.
 - [ ] **Directory submissions — the two PR-shaped ones are out; the rest need a browser.** Executed 2026-07-29 with your go: **PR [punkpeye/awesome-mcp-servers#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** (90k★, the big one, agent-PR fast-track title, upstream CI green) and **PR [SecretiveShell/Awesome-llms-txt#114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)**. Both are one-line diffs and both now wait on their maintainers; on the 2026-07-29 domain migration both PRs were updated in place to carry `https://index.percall.dev` (branch push for #114, body PATCH for #11152). **agentswelcome.dev is done — certified and listed 2026-07-29 at 100/100, "exemplary", all 18 checks passing** (entry `6cd7585c82eb`; re-certified after the domain migration as `https://index.percall.dev`, entry `ae21017ab44f`, again 100/100 — the old-URL entry 308s and will age out on their side). It first refused the submit with HTTP 422 at 54–60/100 against a 70 gate; the four failing checks were closed in `6a2cc70` (the plural `/.well-known/agents.json` generated from a template, RFC 9116 `security.txt`, the negotiated markdown twin relabelled `text/markdown` instead of `text/plain`, and an `X-Agent-Welcome` header beside the existing `X-Agent-Protocol`) and `4ca744a` (flattening the web-bot-auth advertisement — these auditors read shallow, and a capability nested one level too deep reads as absent). Full write-up, including the 3-audits/hour free tier and why the first submission recorded a stale 78, in `docs/distribution.md` §4. **wong2/awesome-mcp-servers no longer takes PRs** — its README redirects submissions to a web form at mcpservers.org/submit. Still manual, all browser sign-ins or forms: llms-txt-hub (llmstxthub.com/submit, GitHub OAuth), directory.llmstxt.cloud (Tally form), llmstxt.site, mcpservers.org. **Every answer for all four is prepared in `docs/distribution.md` §4b** — field labels read off the live forms 2026-08-01, including the two constrained dropdowns (llms-txt-hub takes one of exactly five categories → `ai-ml`; mcpservers.org → `Search`), so it is ten minutes of pasting. Never submit the old `110kc3.github.io/seo/` URL, `index.kc-it.pl`, or the workers.dev fallback.
@@ -208,7 +266,8 @@ survived deployment and cost real money or real payments.
 
 - [ ] Join the Cloudflare Monetization Gateway waitlist — being on Cloudflare is the prerequisite, and it would let the same 402 metering apply to `/api/index.json` without code.
 - [ ] Automate Stripe reconciliation (webhook → repository_dispatch → set-tier) once there's a first paying customer.
-- [ ] x402 Bazaar listing — promoted out of "later": it is now the open item under Distribution above.
+- [ ] x402 Bazaar listing — promoted out of "later": it is now the open item under Distribution above. Re-checked 2026-08-01 ~2h after the metadata-carrying settlement: still absent from all 14,658 catalog entries.
+- [ ] Once the corpus question is decided, revisit whether `/ask` should summarize by default. It only summarizes on `prefer.mode=summarize` today, which is right for ten listings and probably wrong for a few hundred.
 - [x] ~~RFC 9421 web-bot-auth response signing~~ — done 2026-07-25, both directions.
 - [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
 - [x] ~~Score badge variant~~ — done 2026-07-25 as `/badge.svg?slug=…&show=score`, fed by `scores.json` from the weekly cron.
