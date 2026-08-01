@@ -1,5 +1,39 @@
 # TODO
 
+## 🚨 DEPLOYS ARE BROKEN — one Cloudflare setting, ~2 minutes (2026-08-01)
+
+**Everything since `667339b` is committed and green but not live.** Every deploy
+since 11:50 UTC fails identically:
+
+```
+A request to the Cloudflare API (/accounts/…/workers/services/ai-product-index) failed.
+  Authentication error [code: 10000]
+```
+
+**What happened.** The `CLOUDFLARE_API_TOKEN` repo secret is unchanged (still
+dated 2026-07-25), and `wrangler whoami` still authenticates — so the token
+value is fine and the *token itself* was edited in the Cloudflare dashboard. It
+now reads Analytics Engine (`stats-probe` → HTTP 200) but can no longer write
+Workers. That is exactly the shape of narrowing one token to
+**Account Analytics: Read** instead of creating a second, separate token.
+
+**The fix — do not narrow the deploy token.** Two tokens, two jobs:
+
+1. Cloudflare dashboard → My Profile → API Tokens → the token used for deploys →
+   **Edit** → restore **Account → Workers Scripts → Edit** (the "Edit Cloudflare
+   Workers" template is the safe reset). Deploys work again immediately; nothing
+   needs re-pushing, just re-run the failed job.
+2. *Then*, separately, **Create Token → Custom → Account → Account Analytics:
+   Read**, and only that. `gh secret set CF_ANALYTICS_TOKEN`, then
+   `gh workflow run cf-admin -f action=push-secrets`. The Worker stops using the
+   deploy token for analytics on its own.
+
+Confirmed absent right now: `gh secret list` shows no `CF_ANALYTICS_TOKEN`
+(it does show `GLAMA_API_KEY`, set the same day).
+
+Waiting on this, all live: the x402 catalog, the MCP catalog, 30 curated
+listings, `/api/x402/search`, `/api/mcp/search`, and two new MCP tools.
+
 ## LIVE — https://index.percall.dev
 
 Migrated 2026-07-29 from `index.kc-it.pl` (bought `percall.dev` as the umbrella
@@ -61,6 +95,25 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
+## Done (v3.9 — two niches indexed exhaustively, 2026-08-01)
+
+The corpus question, answered as **(b) + (c)**. The index went from 10 listings
+to 40 listings plus **24,741 catalogued callable things**.
+
+- [x] **The x402 catalog — 14,661 paid endpoints, 1,527 hosts.** `GET /api/x402/search?q=weather&max_price=0.01`, plus `/api/x402/catalog.json` and `/api/x402/stats.json`. The Bazaar publishes offset paging and nothing else, so "is there an x402 endpoint that does X and what does it cost" meant pulling all 15k records yourself. Prices are computed only for assets whose decimals are known — guessing 6 would print a number wrong by orders of magnitude — and an unpriced endpoint is *excluded* by a price filter rather than sorted first as free. Ranked by relevance then cheapest. The aggregate worth knowing: **the top 10 hosts hold 27% of all endpoints**, median price $0.014. It is a smaller ecosystem than 14.7k suggests.
+- [x] **The MCP catalog — 10,080 remotely-callable servers, 7,519 hosts.** `GET /api/mcp/search?q=github&auth=none`. Scope rule is the opinion: *active + latest + remotely callable*. A package-only server is a thing you install; one with a URL is a thing an agent can use now. Exclusions are counted in `stats.json` and stated in the artifact. **Nearly shipped at less than half size** — the first run stopped at a 200-page cap and reported 4,748, looking exactly like a complete catalog. The pager now hard-fails if it stops with a cursor in hand; silent truncation is the one failure mode a mirror cannot have.
+- [x] **Both reachable as MCP tools** — `search_x402_endpoints`, `search_mcp_servers`. The x402 search generalized rather than being copied: catalogs declare source, filters, field weights and tiebreak, and routes plus tools are derived from that table, so a third catalog cannot ship half-wired.
+- [x] **30 curated listings** (`scripts/seed-curated.mjs`), 10 → 40. Rules published in the script: remotely callable, no credentials, real description and title, one per publisher namespace, URL verified live. Two rules came from reading the first dry run — reverse-DNS ids were leaking in as product names, and one publisher had three entries across three hosts. Candidates fell 2,450 → 1,370 and the list got visibly better.
+- [x] **Provenance and a removal route.** llms.txt now states which of three kinds each entry is — self-registered, curated, mirrored — and that removal needs no justification. Republishing other people's data without a stated way out of it is the part that would have been wrong.
+- [x] **Weekly refresh** wired into the health cron; the commit gate now asks git whether anything changed instead of trusting step outputs, since the catalog steps have no such flag.
+- 144 tests (was 137).
+
+**Still open on the corpus:** nothing in either catalog is health-checked. The
+Bazaar keeps an entry for 30 days after its last settlement, so an unknown share
+of those 14,661 endpoints are dead. Probing all of them weekly is too much;
+probing a rotating slice is not, and "which x402 endpoints actually answer" is a
+question literally nobody can answer today.
+
 ## Done (v3.8 — the index answers questions, 2026-08-01)
 
 The site served documents you had to know the URL of. An agent arriving with a
@@ -88,30 +141,18 @@ in the order I would do them. Detail for each is further down this section.
 
 1. **Post the Show HN.** Draft rewritten and ready in `docs/show-hn.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post. Tue–Thu, 14:00–16:00 UTC. *~30 min, then two hours of replies.*
 2. **Four directory submissions.** Every answer is prepared in `docs/distribution.md` §4b — field labels read off the live forms, both constrained dropdowns already resolved. *~10 min of pasting.*
-3. **Decide the corpus question** (new, and the one that actually governs the goal — see below). *A decision, then I do the work.*
-4. **Swap the analytics token.** Cloudflare dashboard → My Profile → API Tokens → Create Token → Custom → *Account* → **Account Analytics: Read**, nothing else. Then `gh secret set CF_ANALYTICS_TOKEN` and `gh workflow run cf-admin -f action=push-secrets`. The mirror of the deploy token stops on its own. *~5 min.* I cannot do this: creating a token needs a User→API Tokens→Edit credential that deliberately does not exist on the Pi or in CI, and writing a repo secret needs a PAT the workflow token cannot be.
-5. **Add the remote MCP endpoint to the two open awesome-list PRs** — or tell me to, and I will push the edits. Both PRs currently describe a stdio server that needs a clone; `https://index.percall.dev/mcp` is a URL anyone can paste, which is a materially better pitch to those reviewers.
+3. ~~Decide the corpus question~~ — **done, you said (b)+(c) and both shipped.** See v3.9.
+4. **Restore the deploy token, then create a separate analytics one.** See the 🚨 block at the top of this file — the deploy token was narrowed instead of a second token being created, and every deploy has failed since. This is now the only thing standing between the v3.9 work and production.
+5. ~~Add the remote MCP endpoint to the awesome-list PRs~~ — **done 2026-08-01.** [#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152) now leads with `claude mcp add --transport http ai-product-index https://index.percall.dev/mcp` and lists all four tools; branch and PR body both updated, still MERGEABLE. #114 is an llms.txt *Directories* entry where MCP is not relevant — checked, and it already carries the right URL.
 6. **Optional: request Stripe machine-payments access.** Slow-moving, so worth filing before you need it.
 7. **Glama.ai — say which key you have.** Nothing in this repo reads a Glama credential and nothing needs one: Glama indexes MCP servers by scraping `punkpeye/awesome-mcp-servers`, so PR #11152 is already the route in. But Glama sells two different things — a gateway/inference API (irrelevant here) and the MCP directory. **If yours is a directory key that allows direct submission**, that is a real channel worth adding to `docs/distribution.md` §5, and it matters more now that `/mcp` is a URL rather than a clone. Tell me which and I will wire it. Until something reads it, do not push it to the Worker: an unused credential on a production Worker is pure downside, the same reasoning as the `CF_ANALYTICS_TOKEN` item above.
 
-### 3. The corpus question — the real ceiling on "every AI ends up here"
+### 3. The corpus question — DECIDED and DONE
 
-The query endpoints are now good: ask `/ask` a specific question and the right
-listing comes back first, every time I tried. But the index holds **ten**
-listings, six of them your own Polish apps. A directory wins a specific search
-by *having the answer*, and ten entries mostly cannot. This is now the binding
-constraint — no further endpoint work moves it.
-
-Three ways forward; they are not exclusive, and I need your call because two of
-them are editorial positions, not code:
-
-- **(a) Stay self-registration-only.** Purest, matches the pitch ("products register themselves"), and grows at whatever rate distribution delivers — which so far is zero organic registrations in 23 days.
-- **(b) Seed it as a curated index.** Add high-quality public AI products the way any directory does — public facts about public products, no consent needed, each carrying `submitted_by: "registry (curated)"` so the provenance is never disguised. Gets to a few hundred entries and makes the search surfaces worth calling. Changes the story from "self-registration directory" to "curated index that also accepts self-registration". **My recommendation**, because a search endpoint with nothing to find is the worst of both.
-- **(c) Pick a niche and own it.** Rather than compete with the 20,000-Actor generic listings, index one thing exhaustively — e.g. every x402-payable endpoint (the Bazaar's 14.7k resources are public and machine-readable, and nothing indexes them *well*), or Polish-market data APIs. Narrow, defensible, and it feeds the x402 scale-up plan directly.
-
-Say **(b)**, **(c)**, or **(b)+(c)** and I will build it. Under (b) or (c) I
-would also want a stated rule for de-listing on request, which is cheap now and
-expensive later.
+You chose **(b) + (c)**, and both shipped on 2026-08-01: 30 curated listings
+(10 → 40) and two niches indexed exhaustively — 14,661 x402-payable endpoints
+and 10,080 remotely-callable MCP servers, both searchable, both reachable as MCP
+tools. Details in the v3.9 section. Nothing pending on you here.
 
 ## Blocked on Kamil — detail
 
