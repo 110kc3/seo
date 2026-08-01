@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { validate, esc, jsonLd, normalizeUrl, schemaJson } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -178,6 +179,40 @@ const mcpCard = fill(tpl('mcp-card.json'));
 writeFileSync(join(ROOT, '.well-known', 'mcp.json'), mcpCard);
 mkdirSync(join(ROOT, '.well-known', 'mcp'), { recursive: true });
 writeFileSync(join(ROOT, '.well-known', 'mcp', 'server-card.json'), mcpCard);
+// Agent Skills (schemas.agentskills.io 0.2.0). Each skill says what an agent can
+// accomplish here, so it does not have to read the docs to find out.
+//
+// The digests are the reason this is generated rather than hand-maintained: the
+// index publishes a sha256 of every skill body, and a hand-written one goes
+// wrong the first time anyone edits a SKILL.md and forgets. Computing it from
+// the bytes actually written means the index cannot disagree with the file.
+//
+// Every skill here wraps capability that already ships — grade a URL, search
+// either catalog, register a product — rather than promising anything new. A
+// skills index describing things the site cannot do is worse than none.
+const skillsDir = join(ROOT, 'templates', 'skills');
+const skillNames = readdirSync(skillsDir, { withFileTypes: true })
+  .filter((e) => e.isDirectory()).map((e) => e.name).sort();
+mkdirSync(join(ROOT, '.well-known', 'agent-skills'), { recursive: true });
+const skills = skillNames.map((name) => {
+  const body = fill(readFileSync(join(skillsDir, name, 'SKILL.md'), 'utf8'));
+  mkdirSync(join(ROOT, '.well-known', 'agent-skills', name), { recursive: true });
+  writeFileSync(join(ROOT, '.well-known', 'agent-skills', name, 'SKILL.md'), body);
+  // Description comes from the skill's own frontmatter, so the index and the
+  // file can never describe the skill differently.
+  const described = body.match(/^description:\s*(.+)$/m);
+  if (!described) throw new Error(`skill ${name} has no description in its frontmatter`);
+  return {
+    name,
+    type: 'skill-md',
+    description: described[1].trim(),
+    url: `/.well-known/agent-skills/${name}/SKILL.md`,
+    digest: `sha256:${createHash('sha256').update(body).digest('hex')}`,
+  };
+});
+writeFileSync(join(ROOT, '.well-known', 'agent-skills', 'index.json'),
+  JSON.stringify({ $schema: 'https://schemas.agentskills.io/discovery/0.2.0/schema.json', skills }, null, 2) + '\n');
+
 // RFC 9727 API Catalog. Extensionless on purpose — the RFC fixes the URI as
 // /.well-known/api-catalog — so worker/index.js labels it application/linkset+json;
 // the asset store would otherwise serve it as something a strict client rejects.

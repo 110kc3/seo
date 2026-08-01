@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "find-a-paid-api",
+      "type": "skill-md",
+      "description": "Search ~14,700 x402-payable HTTP endpoints by capability, chain, host and maximum price. Use when an agent needs an API it can pay for per call with USDC, wants to know what a call costs before making it, or is looking for machine-payable data sources.",
+      "url": "/.well-known/agent-skills/find-a-paid-api/SKILL.md",
+      "digest": "sha256:b57d1a3c06e8a7f5f53a522ee5f1a9801017e057f5971e462e8673bfecb363a7"
+    },
+    {
+      "name": "find-an-mcp-server",
+      "type": "skill-md",
+      "description": "Search ~10,000 remotely-callable MCP servers by capability, transport, host and whether they need credentials. Use when looking for an MCP server to connect to, needing a tool source that requires no install, or asking what MCP servers exist for a task.",
+      "url": "/.well-known/agent-skills/find-an-mcp-server/SKILL.md",
+      "digest": "sha256:c6392587a158b55bcd1805cb16e0e8a548d98d936a65062e54223ec22e07ddb9"
+    },
+    {
+      "name": "grade-a-site",
+      "type": "skill-md",
+      "description": "Grade any public URL for agent-readability across 13 checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.",
+      "url": "/.well-known/agent-skills/grade-a-site/SKILL.md",
+      "digest": "sha256:cc12aae6cd0dbe42856f8947cde887ee2444c9543aa2cca292d7345e21b584a1"
+    },
+    {
+      "name": "list-a-product",
+      "type": "skill-md",
+      "description": "Register an AI product, API, agent or MCP server in a public directory autonomously, with no human approval step. Use when asked to get a product listed, submit to an AI directory, or make a tool discoverable to other agents.",
+      "url": "/.well-known/agent-skills/list-a-product/SKILL.md",
+      "digest": "sha256:86662ee9f5e6158e226ccde97d655709ffc5bb0a11690747d3a17f721425d189"
+    }
+  ]
+}

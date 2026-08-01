@@ -695,6 +695,32 @@ test('no .assetsignore pattern silently excludes a nested published file', async
 
 const wellKnown = (name) => readFile(new URL(`../.well-known/${name}`, import.meta.url), 'utf8');
 
+test('every published skill matches the digest the index claims for it', async () => {
+  // The index publishes a sha256 of each skill body, and a client is entitled to
+  // check it. A stale digest is worse than a missing index: it looks like
+  // tampering. This is exactly the failure a hand-maintained index would hit the
+  // first time someone edited a SKILL.md, which is why the build computes it.
+  const { createHash } = await import('node:crypto');
+  const index = JSON.parse(await wellKnown('agent-skills/index.json'));
+
+  assert.ok(index.skills.length > 0, 'the skills index is empty');
+  assert.match(index.$schema, /schemas\.agentskills\.io/);
+
+  for (const skill of index.skills) {
+    assert.match(skill.name, /^[a-z0-9-]{1,64}$/, `${skill.name} is not a legal skill name`);
+    assert.ok(['skill-md', 'archive'].includes(skill.type), `${skill.name} has type ${skill.type}`);
+    assert.ok(skill.description.length <= 1024, `${skill.name} description exceeds 1024 chars`);
+
+    const body = await readFile(new URL(`..${skill.url}`, import.meta.url), 'utf8');
+    const digest = `sha256:${createHash('sha256').update(body).digest('hex')}`;
+    assert.equal(skill.digest, digest, `${skill.name}: index digest does not match the published file`);
+
+    // A skill promising something the site does not serve is the same failure
+    // as a manifest advertising a route the router lacks.
+    assert.doesNotMatch(body, /\{\{/, `${skill.name} shipped with an unfilled placeholder`);
+  }
+});
+
 test('the A2A card is served at both the 1.0 path and the pre-0.3 one', async () => {
   // A2A 1.0 puts the card at /.well-known/agent-card.json and a compliant 1.0
   // client will never look at /.well-known/agent.json — but most cards in the

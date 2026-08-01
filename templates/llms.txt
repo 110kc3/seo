@@ -23,6 +23,7 @@ answers "what can I call right now", not "what exists".
 - Full catalog (JSON): {{BASE}}/api/mcp/catalog.json
 - Aggregates and the exact scope rule: {{BASE}}/api/mcp/stats.json
 - Liveness of a weekly rotating sample: {{BASE}}/api/mcp/health.json
+- What you can accomplish here, as Agent Skills: {{BASE}}/.well-known/agent-skills/index.json
 
 ## Find a paid API you can call (the x402 catalog)
 
