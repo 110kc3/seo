@@ -202,7 +202,7 @@ export const CHECK_LABELS = {
   open_graph: 'Open Graph tags',
   canonical: 'canonical URL declared',
   machine_alternates: 'machine-readable alternates advertised',
-  agent_card: 'agent card at /.well-known/agent.json',
+  agent_card: 'agent card at /.well-known/agent-card.json',
   https: 'served over HTTPS',
 };
 
@@ -316,7 +316,7 @@ Allow: /`,
 Link: <{{ORIGIN}}/llms.txt>; rel="alternate"; type="text/markdown"`,
 
   agent_card: `{
-  "_comment": "publish at {{ORIGIN}}/.well-known/agent.json (A2A agent card)",
+  "_comment": "publish at {{ORIGIN}}/.well-known/agent-card.json (A2A 1.0), and at {{ORIGIN}}/.well-known/agent.json for pre-0.3 clients",
   "name": "Your Product",
   "description": "One sentence on what it does.",
   "url": "{{ORIGIN}}/",
@@ -379,12 +379,17 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
   const at = (p) => new URL(p, origin).toString();
   const one = (url, opts = {}) => get(url, { ...opts, fetchImpl, signHeaders });
 
-  const [home, llms, llmsFull, robots, sitemap, wellKnown, agentsJson] = await Promise.all([
+  const [home, llms, llmsFull, robots, sitemap, agentCard, wellKnown, agentsJson] = await Promise.all([
     one(target),
     one(at('/llms.txt')),
     one(at('/llms-full.txt'), { maxBytes: 4096 }),
     one(at('/robots.txt'), { maxBytes: 64 * 1024 }),
     one(at('/sitemap.xml'), { maxBytes: 4096 }),
+    // Both A2A card paths. agent-card.json is where the 1.0 spec puts it;
+    // agent.json is the pre-0.3 path most published cards still use. A site
+    // passing on either is reachable by some real client, so both are fetched
+    // and the advice below names the current one.
+    one(at('/.well-known/agent-card.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/agent.json'), { maxBytes: 32 * 1024 }),
     one(at('/agents.json'), { maxBytes: 32 * 1024 }),
   ]);
@@ -445,10 +450,16 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
         ? `${machineAlternates.length} machine-readable alternate(s): ${machineAlternates.map((a) => a.type || 'untyped').join(', ')}`
         : 'no rel=alternate link to a JSON or Markdown representation',
       'Add <link rel="alternate" type="application/json"> (and text/markdown) pointing at machine-readable versions of the page.'),
-    check('agent_card', 10, wellKnown.ok || agentsJson.ok,
-      wellKnown.ok ? '/.well-known/agent.json is available'
-        : (agentsJson.ok ? '/agents.json is available' : 'no agent card at /.well-known/agent.json or /agents.json'),
-      'Publish an agent card at /.well-known/agent.json describing your callable interfaces (A2A) — this is what turns a page into a tool.'),
+    // Passing on the old path still counts — a card at agent.json is reachable
+    // by every client written before A2A 0.3, which is most of them. But the
+    // evidence says which path answered, and a site on the old one is told so,
+    // because "you pass" while a spec-compliant 1.0 client cannot find you is
+    // exactly the kind of advice that is worse than none.
+    check('agent_card', 10, agentCard.ok || wellKnown.ok || agentsJson.ok,
+      agentCard.ok ? '/.well-known/agent-card.json is available'
+        : (wellKnown.ok ? '/.well-known/agent.json is available — the pre-0.3 path; A2A 1.0 clients look at /.well-known/agent-card.json'
+          : (agentsJson.ok ? '/agents.json is available' : 'no agent card at /.well-known/agent-card.json, /.well-known/agent.json or /agents.json')),
+      'Publish an agent card at /.well-known/agent-card.json describing your callable interfaces (A2A 1.0) — this is what turns a page into a tool. Serve the same document at /.well-known/agent.json too, for clients written before the path moved.'),
     check('https', 5, new URL(home.url ?? target).protocol === 'https:',
       `served over ${new URL(home.url ?? target).protocol.replace(':', '')}`,
       'Serve over HTTPS; several crawlers will not follow an http:// origin at all.'),

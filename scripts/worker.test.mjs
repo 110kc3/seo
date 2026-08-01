@@ -695,6 +695,30 @@ test('no .assetsignore pattern silently excludes a nested published file', async
 
 const wellKnown = (name) => readFile(new URL(`../.well-known/${name}`, import.meta.url), 'utf8');
 
+test('the A2A card is served at both the 1.0 path and the pre-0.3 one', async () => {
+  // A2A 1.0 puts the card at /.well-known/agent-card.json and a compliant 1.0
+  // client will never look at /.well-known/agent.json — but most cards in the
+  // wild are still at the old path, so clients written against it are real too.
+  // Serving one and not the other means being invisible to one generation.
+  const current = await wellKnown('agent-card.json');
+  const legacy = await wellKnown('agent.json');
+
+  // Byte-identical because they come from one template. If these ever diverge,
+  // the two paths are describing different agents to different clients.
+  assert.equal(current, legacy, 'the two agent card paths have drifted apart');
+  assert.ok(JSON.parse(current).name, 'the agent card has no name');
+});
+
+test('the MCP server card is served at both paths the specs disagree on', async () => {
+  // SEP-2127 says /.well-known/mcp.json; Cloudflare's agent-readiness check
+  // reads /.well-known/mcp/server-card.json. Neither is wrong, so serve both.
+  const sep = await wellKnown('mcp.json');
+  const cloudflare = await wellKnown('mcp/server-card.json');
+
+  assert.equal(sep, cloudflare, 'the two MCP card paths have drifted apart');
+  assert.ok(JSON.parse(sep), 'the MCP server card is not valid JSON');
+});
+
 test('agents.json advertises only interfaces this site actually serves', async () => {
   // The PLURAL agents.json is a different spec from the A2A card at
   // /.well-known/agent.json, and both are published. Auditors read this one for

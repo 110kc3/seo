@@ -151,7 +151,16 @@ writeFileSync(join(ROOT, 'openapi.yaml'), fill(tpl('openapi.yaml')));
 // on the old /seo/ project path there was no /.well-known to serve.
 mkdirSync(join(ROOT, '.well-known'), { recursive: true });
 // A2A agent card (singular). Describes this service as an A2A agent.
-writeFileSync(join(ROOT, '.well-known', 'agent.json'), fill(tpl('agent-card.json')));
+//
+// Written to BOTH paths from one template, because the spec moved and the
+// installed base did not. A2A is 1.0 under the Linux Foundation and the card
+// belongs at /.well-known/agent-card.json; /.well-known/agent.json is the
+// pre-0.3 path, where a spec-compliant 1.0 client will never look. Older
+// clients only know the old path. One template, two files, no drift — the
+// alternative is being invisible to one generation of client or the other.
+const agentCard = fill(tpl('agent-card.json'));
+writeFileSync(join(ROOT, '.well-known', 'agent-card.json'), agentCard);
+writeFileSync(join(ROOT, '.well-known', 'agent.json'), agentCard);
 // agents.json (PLURAL) — a different spec from the card above, and the one
 // agent-readiness auditors read: it enumerates the machine-readable interfaces,
 // endpoints and policies of the *site*. Everything it advertises is served.
@@ -160,8 +169,15 @@ writeFileSync(join(ROOT, '.well-known', 'agents.json'), fill(tpl('agents-manifes
 // computed, so the build stays a pure function of its inputs.
 writeFileSync(join(ROOT, '.well-known', 'security.txt'), fill(tpl('security.txt')));
 // MCP server card — how a client finds the remote MCP endpoint at /mcp without
-// being handed a URL. Draft convention (SEP-1649/2127); harmless if ignored.
-writeFileSync(join(ROOT, '.well-known', 'mcp.json'), fill(tpl('mcp-card.json')));
+// being handed a URL. Two paths for one card again, and this time the specs
+// disagree with each other rather than with their own past: SEP-2127 says
+// /.well-known/mcp.json, Cloudflare's agent-readiness check reads
+// /.well-known/mcp/server-card.json. Serving both costs a file and lets the
+// client be right either way.
+const mcpCard = fill(tpl('mcp-card.json'));
+writeFileSync(join(ROOT, '.well-known', 'mcp.json'), mcpCard);
+mkdirSync(join(ROOT, '.well-known', 'mcp'), { recursive: true });
+writeFileSync(join(ROOT, '.well-known', 'mcp', 'server-card.json'), mcpCard);
 // The OpenAI plugin manifest. Superseded, and still probed by enough crawlers
 // that answering costs less than the 404s do.
 writeFileSync(join(ROOT, '.well-known', 'ai-plugin.json'), fill(tpl('ai-plugin.json')));
