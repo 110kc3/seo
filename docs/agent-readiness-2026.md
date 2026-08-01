@@ -38,16 +38,24 @@ Verified against the live site on 2026-08-01, not assumed:
 | x402 commerce | `/api/x402/info` | ✅ live rail |
 | WebMCP | `navigator.modelContext` on the homepage | ✅ already registered |
 | security.txt (RFC 9116) | `/.well-known/security.txt` | ✅ |
-| **Content Signals** | `robots.txt` | ❌ **missing** |
-| **A2A agent card (1.0 path)** | `/.well-known/agent-card.json` | ❌ **404** |
-| **MCP Server Card (CF path)** | `/.well-known/mcp/server-card.json` | ❌ **404** |
-| **API Catalog (RFC 9727)** | `/.well-known/api-catalog` | ❌ **404** |
-| **Agent Skills** | `/.well-known/agent-skills/index.json` | ❌ **404** |
+| **A2A agent card (1.0 path)** | `/.well-known/agent-card.json` | ❌ 404 → ✅ **shipped same day** |
+| **MCP Server Card (CF path)** | `/.well-known/mcp/server-card.json` | ❌ 404 → ✅ **shipped same day** |
+| **API Catalog (RFC 9727)** | `/.well-known/api-catalog` | ❌ 404 → ✅ **shipped same day** |
+| **Agent Skills** | `/.well-known/agent-skills/index.json` | ❌ 404 → ✅ **shipped same day** |
+| **Content Signals** | `robots.txt` | ❌ **still missing — needs a decision, Phase 2** |
 | OAuth protected resource | `/.well-known/oauth-protected-resource` | ❌ n/a today, see below |
 | ai.txt / RSL licensing | `/ai.txt`, `/rsl.xml` | ❌ deliberately skipped, see below |
 
-We serve `/.well-known/agent.json` and `/.well-known/mcp.json`. Both are real
-files at real paths — they are simply **the previous locations**.
+We served `/.well-known/agent.json` and `/.well-known/mcp.json`. Both are real
+files at real paths — they are simply **the previous locations**. Both are still
+served alongside the new ones.
+
+**Status as of 2026-08-01, end of day:** everything above except Content Signals
+is live, and Content Signals is the one item that is a decision rather than a
+task. Our own audit reports **4 of 6 signals** detected — the two absent are
+Content Signals, which is genuinely missing, and Web Bot Auth, which is *present
+but invisible to a self-audit* because same-host probes go through the `ASSETS`
+binding, which serves static files and not dynamic Worker routes.
 
 ## The two findings that actually matter
 
@@ -147,7 +155,7 @@ Generate it from `build.mjs` off the same config the OpenAPI template uses, and
 serve the content type via the Worker — a static asset will otherwise go out as
 `application/json` and fail a strict check.
 
-### Phase 4 — extend the audit from 13 checks to ~20 (~half a day, real care)
+### ~~Phase 4~~ — extend the audit — **detection done 2026-08-01; the scoring decision is still open**
 
 The revenue-relevant phase. Candidate checks, all mechanically detectable:
 
@@ -173,7 +181,7 @@ A to B overnight through no change of their own. Handle it deliberately:
 - Re-score the fleet *before* announcing, so the Show HN and the badges do not
   disagree for a week.
 
-### Phase 5 — Agent Skills (~half a day, and the most speculative)
+### ~~Phase 5~~ — Agent Skills — **done 2026-08-01**
 
 `/.well-known/agent-skills/index.json`, schema
 `https://schemas.agentskills.io/discovery/0.2.0/schema.json`. Each entry needs

@@ -105,6 +105,23 @@ Three findings worth keeping:
   and the per-project work is only the `<head>`. Worth remembering before
   "fixing" llms.txt in a project that cannot serve one.
 
+## Done (v3.13 — the audit reports 2026, and the site publishes skills, 2026-08-01)
+
+- [x] **The 2026 signals are reported, and deliberately not scored.** `/api/score` and `/api/audit` now detect Content Signals, the A2A 1.0 card path, an MCP server card, an RFC 9727 API catalog, an Agent Skills index and a Web Bot Auth directory — as `signals`, beside `checks`. `scoreChecks()` never sees them, so **no existing grade moved by a point**: badges in other people's READMEs and the fleet's 100/100s are untouched. Promoting them into the score stays a separate decision (see below). Free callers get the detections; the per-signal fixes stay paid, same rule as the scored checks.
+- [x] **A real fault behind that test.** `scoreChecks()` summed `c.weight` directly, so one weightless entry made the total `NaN` — and `NaN` being falsy, the function returned **0**. A flawless site would have been graded "invisible to agents" because something weightless got into the array. Weights are now read defensively.
+- [x] **Agent Skills published** — four at `/.well-known/agent-skills/index.json`: grade a site, find a paid API, find an MCP server, list a product. Each wraps capability that already ships. **Generated, not hand-written**, because the index publishes a sha256 of every skill body and a client is entitled to check it; a stale digest does not read as an oversight, it reads as tampering. Descriptions come from each skill's own frontmatter so the index and the file cannot disagree.
+- 191 tests (was 188). Verified live: all four digests match the bytes actually served.
+
+**Known limitation, and it only affects us.** When this site audits *itself*,
+`fetcherFor()` uses the `ASSETS` binding — a Worker cannot fetch its own
+hostname. `ASSETS` serves static files only, so **dynamic Worker routes are
+invisible in a self-audit**, and our own `web_bot_auth` signal reads absent
+though `/.well-known/http-message-signatures-directory` answers 200 to everyone
+else. External audits use real fetch and are unaffected. The fix is to answer
+same-host probes for known dynamic routes from the router instead of the binding;
+not done, because it is a self-dogfooding artifact rather than a customer-facing
+fault. Our own signals therefore *understate* us by one.
+
 ## Done (v3.12 — caught up with where the specs moved, 2026-08-01)
 
 Researched what agent-facing sites publish in 2026 and measured this one against
@@ -126,8 +143,8 @@ old locations only.
 ### Still open from that plan — two need a decision, one is a project
 
 - [ ] **Phase 2 — Content Signals in `robots.txt`.** One line, and **the usual default is wrong for us**. Cloudflare's default is `search=yes, ai-train=no`, written for a publisher protecting an archive. This site is a directory whose entire purpose is to be consumed by models, so `ai-train=yes` is very likely right — being in training data is distribution, not leakage. That is a call about your content, so it is yours: say the word and it ships in five minutes. Only 4% of sites declare it, and Cloudflare scores it.
-- [ ] **Phase 4 — extend `/api/score` from 13 checks to ~20.** The revenue-relevant one: our checklist is 2025's and the standard is 2026's. Candidates are all mechanically detectable (Content Signals, the 1.0 card path, MCP server card, API catalog, agent skills, web-bot-auth, markdown negotiation). **The trap is that changing the scorer changes everyone's grade** — `scores.json`, the badges rendering in other people's READMEs, and the fleet's 100/100s all move, and several of our own sites would drop from A to B through no change of their own. Needs check-set versioning and a re-score before announcing, not a quiet weight tweak.
-- [ ] **Phase 5 — Agent Skills** (`/.well-known/agent-skills/index.json`). The only item needing writing rather than wiring: real SKILL.md files with SHA-256 digests. The honest candidates already exist as MCP tools — grade a URL, find a paid API, find a callable MCP server, register a product — so the skills would wrap shipped capability rather than promise new.
+- [x] ~~**Phase 4** — extend `/api/score`~~ — **done as detection, not scoring** (v3.13). All six signals are detected and reported; none is weighted. That was the safe half and it required no decision. **What is still open is the decision itself: should any of them count toward the grade?** Doing so needs a versioned check set and a fleet re-score first, because it moves badges on other people's sites.
+- [x] ~~**Phase 5** — Agent Skills~~ — **done** (v3.13), four skills, digests generated.
 
 **The caveat worth keeping:** adoption of most of these is tiny — fewer than 15
 sites in a 200,000 sample had an MCP Server Card or API Catalog. Nobody should
