@@ -122,6 +122,13 @@ function decorate(response, url, alternate = null) {
   // Both are sent: x-agent-protocol is what existing clients were told to read.
   headers.set('x-agent-welcome', `${BASE}/llms.txt`);
   headers.set('vary', headers.has('vary') ? `${headers.get('vary')}, Accept` : 'Accept');
+  // RFC 9727 fixes the catalog's URI as extensionless, so the asset store has no
+  // extension to infer a type from and labels it as a download. The profile
+  // parameter is part of the contract, not decoration: it is how a client knows
+  // the linkset it just fetched is an API catalog rather than any other linkset.
+  if (url.pathname === '/.well-known/api-catalog' && response.status === 200) {
+    headers.set('content-type', 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"');
+  }
   if (alternate && response.status === 200) {
     const type = alternateContentType(alternate);
     if (type) headers.set('content-type', type);

@@ -178,6 +178,12 @@ const mcpCard = fill(tpl('mcp-card.json'));
 writeFileSync(join(ROOT, '.well-known', 'mcp.json'), mcpCard);
 mkdirSync(join(ROOT, '.well-known', 'mcp'), { recursive: true });
 writeFileSync(join(ROOT, '.well-known', 'mcp', 'server-card.json'), mcpCard);
+// RFC 9727 API Catalog. Extensionless on purpose — the RFC fixes the URI as
+// /.well-known/api-catalog — so worker/index.js labels it application/linkset+json;
+// the asset store would otherwise serve it as something a strict client rejects.
+// It adds no new facts, it just states the ones in openapi.yaml where a machine
+// looking for APIs is specified to look.
+writeFileSync(join(ROOT, '.well-known', 'api-catalog'), fill(tpl('api-catalog.json')));
 // The OpenAI plugin manifest. Superseded, and still probed by enough crawlers
 // that answering costs less than the 404s do.
 writeFileSync(join(ROOT, '.well-known', 'ai-plugin.json'), fill(tpl('ai-plugin.json')));

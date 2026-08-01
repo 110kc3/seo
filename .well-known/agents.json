@@ -25,7 +25,7 @@
     "feed": "https://index.percall.dev/feed.xml",
     "json_feed": "https://index.percall.dev/feed.json",
     "plugin_manifest": "https://index.percall.dev/.well-known/ai-plugin.json",
-    "agent_card": "https://index.percall.dev/.well-known/agent.json",
+    "agent_card": "https://index.percall.dev/.well-known/agent-card.json",
     "llms_txt": "https://index.percall.dev/llms.txt",
     "markdown": "https://index.percall.dev/llms-full.txt",
     "web_bot_auth": "https://index.percall.dev/.well-known/http-message-signatures-directory",

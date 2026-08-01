@@ -1,0 +1,34 @@
+{
+  "_comment": "RFC 9727 API Catalog, served at /.well-known/api-catalog as application/linkset+json (RFC 9264). The Worker sets that content type — the file is extensionless, so the asset store would otherwise label it as something a strict client rejects.",
+  "linkset": [
+    {
+      "anchor": "https://index.percall.dev/.well-known/api-catalog",
+      "item": [
+        { "href": "https://index.percall.dev/api/search", "title": "Search the registry" },
+        { "href": "https://index.percall.dev/api/score", "title": "Grade any URL for agent-readiness (free)" },
+        { "href": "https://index.percall.dev/api/audit", "title": "Full audit with per-check fixes (paid, x402)" },
+        { "href": "https://index.percall.dev/api/x402/search", "title": "Search x402-payable endpoints" },
+        { "href": "https://index.percall.dev/api/mcp/search", "title": "Search remotely-callable MCP servers" },
+        { "href": "https://index.percall.dev/ask", "title": "Natural-language query (NLWeb)" },
+        { "href": "https://index.percall.dev/mcp", "title": "Model Context Protocol over streamable HTTP" }
+      ]
+    },
+    {
+      "anchor": "https://index.percall.dev/api/search",
+      "service-desc": [{ "href": "https://index.percall.dev/openapi.yaml", "type": "application/yaml" }],
+      "service-doc": [{ "href": "https://index.percall.dev/llms.txt", "type": "text/plain" }],
+      "status": [{ "href": "https://index.percall.dev/health.json" }]
+    },
+    {
+      "anchor": "https://index.percall.dev/api/audit",
+      "service-desc": [{ "href": "https://index.percall.dev/openapi.yaml", "type": "application/yaml" }],
+      "service-doc": [{ "href": "https://index.percall.dev/llms.txt", "type": "text/plain" }],
+      "payment": [{ "href": "https://index.percall.dev/api/x402/info", "title": "x402 payment terms" }]
+    },
+    {
+      "anchor": "https://index.percall.dev/mcp",
+      "service-desc": [{ "href": "https://index.percall.dev/.well-known/mcp/server-card.json", "type": "application/json" }],
+      "service-doc": [{ "href": "https://index.percall.dev/llms.txt", "type": "text/plain" }]
+    }
+  ]
+}

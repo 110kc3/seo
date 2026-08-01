@@ -25,7 +25,7 @@
     "feed": "{{BASE}}/feed.xml",
     "json_feed": "{{BASE}}/feed.json",
     "plugin_manifest": "{{BASE}}/.well-known/ai-plugin.json",
-    "agent_card": "{{BASE}}/.well-known/agent.json",
+    "agent_card": "{{BASE}}/.well-known/agent-card.json",
     "llms_txt": "{{BASE}}/llms.txt",
     "markdown": "{{BASE}}/llms-full.txt",
     "web_bot_auth": "{{BASE}}/.well-known/http-message-signatures-directory",

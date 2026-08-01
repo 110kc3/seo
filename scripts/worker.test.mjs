@@ -731,7 +731,9 @@ test('agents.json advertises only interfaces this site actually serves', async (
 
   assert.equal(manifest.interfaces.json_api, `${BASE}/api/index.json`);
   assert.equal(manifest.interfaces.webmcp, `${BASE}/`);
-  assert.equal(manifest.interfaces.agent_card, `${BASE}/.well-known/agent.json`);
+  // The 1.0 path, not the pre-0.3 one. Both files are served, but what we
+  // *advertise* should be the location the current spec sends clients to.
+  assert.equal(manifest.interfaces.agent_card, `${BASE}/.well-known/agent-card.json`);
   // Honest only because worker/signing.js really does sign every response and
   // really does publish keys at that path. If signing is ever removed, this
   // advertisement must go with it.

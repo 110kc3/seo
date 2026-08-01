@@ -36,6 +36,7 @@ Verified against the live site on 2026-08-01, not assumed:
 | AI bot rules | `robots.txt` | ✅ explicit allow-list |
 | Web Bot Auth | `/.well-known/http-message-signatures-directory` | ✅ |
 | x402 commerce | `/api/x402/info` | ✅ live rail |
+| WebMCP | `navigator.modelContext` on the homepage | ✅ already registered |
 | security.txt (RFC 9116) | `/.well-known/security.txt` | ✅ |
 | **Content Signals** | `robots.txt` | ❌ **missing** |
 | **A2A agent card (1.0 path)** | `/.well-known/agent-card.json` | ❌ **404** |
@@ -86,7 +87,7 @@ have the crawler, the scoring model, the paid endpoint and the badge.
 Ordered by value per hour. Phases 1–2 are unambiguous; 3 onward involve real
 judgement calls, flagged inline.
 
-### Phase 1 — serve the current paths (~1 hour, no judgement needed)
+### ~~Phase 1~~ — serve the current paths — **done 2026-08-01**
 
 1. **`/.well-known/agent-card.json`** — same content as `agent.json`, generated
    from the same template so they cannot drift. Keep `agent.json` for
@@ -123,7 +124,7 @@ copying a default that was written for a newspaper.
 The three signals: `search` (indexing and link/snippet), `ai-input` (real-time
 use in generated answers, i.e. RAG), `ai-train` (training and fine-tuning).
 
-### Phase 3 — API Catalog, RFC 9727 (~1 hour)
+### ~~Phase 3~~ — API Catalog, RFC 9727 — **done 2026-08-01**
 
 `/.well-known/api-catalog`, media type `application/linkset+json`, profile
 `https://www.rfc-editor.org/info/rfc9727`. We already publish `openapi.yaml`, so
@@ -201,8 +202,10 @@ digest requirement means it needs a build step to stay correct.
 - **RSL (Really Simple Licensing)** — aimed at publishers licensing content for
   payment. Our catalogs are explicitly mirrors whose facts belong to the endpoint
   operators; claiming licensable rights over them would be wrong.
-- **WebMCP** — browser-side, and we are a JSON-first site with a thin HTML
-  surface. Worth re-reading once the spec settles, not now.
+*(An earlier draft of this document listed WebMCP here. That was wrong — the
+homepage already registers tools on `navigator.modelContext`, and a test asserts
+`agents.json` cannot advertise a WebMCP tool the page does not register. We pass
+that check today.)*
 
 ## The honest caveat
 

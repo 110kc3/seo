@@ -1,0 +1,34 @@
+{
+  "_comment": "RFC 9727 API Catalog, served at /.well-known/api-catalog as application/linkset+json (RFC 9264). The Worker sets that content type — the file is extensionless, so the asset store would otherwise label it as something a strict client rejects.",
+  "linkset": [
+    {
+      "anchor": "{{BASE}}/.well-known/api-catalog",
+      "item": [
+        { "href": "{{BASE}}/api/search", "title": "Search the registry" },
+        { "href": "{{BASE}}/api/score", "title": "Grade any URL for agent-readiness (free)" },
+        { "href": "{{BASE}}/api/audit", "title": "Full audit with per-check fixes (paid, x402)" },
+        { "href": "{{BASE}}/api/x402/search", "title": "Search x402-payable endpoints" },
+        { "href": "{{BASE}}/api/mcp/search", "title": "Search remotely-callable MCP servers" },
+        { "href": "{{BASE}}/ask", "title": "Natural-language query (NLWeb)" },
+        { "href": "{{BASE}}/mcp", "title": "Model Context Protocol over streamable HTTP" }
+      ]
+    },
+    {
+      "anchor": "{{BASE}}/api/search",
+      "service-desc": [{ "href": "{{BASE}}/openapi.yaml", "type": "application/yaml" }],
+      "service-doc": [{ "href": "{{BASE}}/llms.txt", "type": "text/plain" }],
+      "status": [{ "href": "{{BASE}}/health.json" }]
+    },
+    {
+      "anchor": "{{BASE}}/api/audit",
+      "service-desc": [{ "href": "{{BASE}}/openapi.yaml", "type": "application/yaml" }],
+      "service-doc": [{ "href": "{{BASE}}/llms.txt", "type": "text/plain" }],
+      "payment": [{ "href": "{{BASE}}/api/x402/info", "title": "x402 payment terms" }]
+    },
+    {
+      "anchor": "{{BASE}}/mcp",
+      "service-desc": [{ "href": "{{BASE}}/.well-known/mcp/server-card.json", "type": "application/json" }],
+      "service-doc": [{ "href": "{{BASE}}/llms.txt", "type": "text/plain" }]
+    }
+  ]
+}
