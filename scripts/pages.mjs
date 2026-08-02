@@ -56,7 +56,7 @@ const usd = (n) => (Number(n) < 0.01 ? `$${Number(n).toFixed(4)}` : `$${Number(n
  * The standard page shell. `depth` is how many directories deep the page sits,
  * so relative links resolve from `/checks/foo.html` as well as from `/x402.html`.
  */
-export function page({ base, path, title, description, body, ld = null, depth = 0 }) {
+export function page({ base, path, title, description, body, ld = null, depth = 0, crumb = null, footer = null }) {
   const up = '../'.repeat(depth) || './';
   return `<!DOCTYPE html>
 <html lang="en">
@@ -76,11 +76,11 @@ ${ld ? `<script type="application/ld+json">\n${jsonLd(ld)}\n</script>` : ''}
 <style>${PAGE_CSS}</style>
 </head>
 <body>
-<p class="crumb"><a href="${up}index.html">AI Product Index</a>${path === '/' ? '' : ` / ${esc(title.split(' — ')[0])}`}</p>
+${crumb ?? `<p class="crumb"><a href="${up}index.html">AI Product Index</a>${path === '/' ? '' : ` / ${esc(title.split(' — ')[0])}`}</p>`}
 ${body}
-<footer>Generated from the data files this site publishes — nothing here is hand-maintained.
+<footer>${footer ?? `Generated from the data files this site publishes — nothing here is hand-maintained.
 Machine-readable: <a href="${up}llms.txt">llms.txt</a> · <a href="${up}api/index.json">registry JSON</a> · <a href="${up}openapi.yaml">OpenAPI</a>.
-Humans: <a href="${up}index.html#for-humans">done-for-you agent readability</a>.</footer>
+Humans: <a href="${up}index.html#for-humans">done-for-you agent readability</a>.`}</footer>
 </body>
 </html>
 `;
@@ -791,6 +791,99 @@ which is why the check set here is versioned in public.</p>
       headline: 'How agent-readiness checkers differ',
       url: `${base}/compare.html`,
       publisher: { '@type': 'Organization', name: 'AI Product Index', url: `${base}/` },
+    },
+    body,
+  });
+}
+
+// --- (4) the umbrella apex --------------------------------------------------
+
+/**
+ * The portfolio page at the apex.
+ *
+ * `percall.dev` was bought as the umbrella for paid, machine-callable services
+ * and then pointed straight at the first one, so the domain that is supposed to
+ * name a portfolio answered a 308 and described nothing. This is the page that
+ * was missing.
+ *
+ * It is deliberately not a second copy of the index. The apex answers "what is
+ * this domain and what runs under it"; every service answers for itself on its
+ * own subdomain. And it does not pretend to a portfolio that does not exist —
+ * there is one service live, the page says one service is live, and the roadmap
+ * is described as intent rather than as inventory.
+ */
+export function apexPage({ apexBase, serviceBase, x402, mcp, traffic, listingCount }) {
+  const latest = traffic?.series?.at(-1);
+  const body = `
+<h1>percall.dev</h1>
+<p class="lede">Paid services built to be called by software rather than clicked
+by people. Machine-readable in, machine-readable out, priced per call and payable
+without a human in the loop.</p>
+
+<h2>Live now</h2>
+<div class="card" style="padding:1.2rem 1.3rem">
+  <h3 style="margin-top:0"><a href="${serviceBase}/">AI Product Index</a> <span class="meta">index.percall.dev</span></h3>
+  <p>A directory AI agents can read, register in and buy from — and an
+  agent-readability grader for any URL on the web.</p>
+  <ul>
+    <li><strong>Free:</strong> <a href="${serviceBase}/api/score?url=https://example.com"><code>GET /api/score</code></a> grades any site A–F across 20 published checks.</li>
+    <li><strong>Paid:</strong> <code>POST /api/audit</code> returns why each check failed and a paste-ready fix for your own origin — $0.05, settled in USDC on Base over HTTP 402.</li>
+    <li><strong>Catalogued:</strong> <a href="${serviceBase}/x402.html">${num(x402.endpoints)} machine-payable endpoints</a> and <a href="${serviceBase}/mcp-servers.html">${num(mcp.remote_endpoints)} callable MCP servers</a>, both probed weekly for whether they still answer.</li>
+    <li><strong>Callable as a tool:</strong> <code>claude mcp add --transport http ai-product-index ${serviceBase}/mcp</code></li>
+  </ul>
+  <p class="meta">${num(listingCount)} products listed · <a href="${serviceBase}/llms.txt">llms.txt</a> ·
+  <a href="${serviceBase}/openapi.yaml">OpenAPI</a> · <a href="${serviceBase}/report.html">what the traffic looks like</a></p>
+</div>
+
+<h2>The rail underneath</h2>
+<p>Every paid endpoint here settles the same way: HTTP 402 with machine-readable
+terms, an EIP-3009 authorization signed by the caller, settlement in USDC on Base
+through the Coinbase CDP facilitator. No account, no dashboard, no human step —
+an agent that can sign a transaction can buy from any of it in one session.</p>
+<p>That rail is proven rather than intended: it has taken real settlements on
+mainnet, refuses replays, and publishes its terms at
+<a href="${serviceBase}/api/x402/info">/api/x402/info</a> so a caller can read the
+price without provoking a 402.</p>
+
+<h2>What is honest about the state of this</h2>
+<p><strong>One service is live.</strong> The domain is an umbrella because more are
+intended, not because more exist — additional services get their own subdomain as
+they ship, and this page will list them when they do rather than before.</p>
+${latest ? `<p>The other honest number: agents are arriving — <strong>${pct(latest.agent_share, 2)}</strong> of
+requests to the live service are AI agents and the share is rising — and
+<strong>not one of them has ever paid for anything</strong>. That finding, with the
+measurements behind it, is published in full at
+<a href="${serviceBase}/report.html">the state of the agent web</a>. It is the most
+useful thing here and it is free.</p>` : ''}
+
+<h2>Humans</h2>
+<p>The machine-callable services live here. Consulting for people — cloud
+infrastructure, Kubernetes, and done-for-you agent readability on your own domain
+— is at <a href="https://kc-it.pl/">kc-it.pl</a>. Two audiences, two brands, one
+operator.</p>
+<p class="meta">Built by Kamil Choiński. Source for the live service:
+<a href="https://github.com/110kc3/seo">github.com/110kc3/seo</a>.</p>
+`;
+
+  return page({
+    base: apexBase,
+    path: '/',
+    title: 'percall.dev — paid services for software that buys its own inputs',
+    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index — a free agent-readability grade for any URL, a $0.05 per-check audit, and 24,700 catalogued callable endpoints.',
+    crumb: '',
+    footer: `Machine-readable entry points live on the service host:
+<a href="${serviceBase}/llms.txt">llms.txt</a> ·
+<a href="${serviceBase}/openapi.yaml">OpenAPI</a> ·
+<a href="${serviceBase}/.well-known/agent-card.json">agent card</a>.
+Everything on this domain except this page redirects there, so there is exactly one copy of it.`,
+    ld: {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'percall.dev',
+      url: `${apexBase}/`,
+      description: 'Paid services built to be called by software rather than by people, settled per call in USDC over HTTP 402.',
+      founder: { '@type': 'Person', name: 'Kamil Choiński', url: 'https://kc-it.pl/' },
+      subOrganization: [{ '@type': 'Organization', name: 'AI Product Index', url: `${serviceBase}/` }],
     },
     body,
   });

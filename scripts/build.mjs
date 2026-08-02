@@ -3,7 +3,7 @@
 // of those inputs (no timestamps): running the build twice yields zero diff.
 // Fails hard on any invalid listing so a bad manual edit can't reach the site.
 import { readFileSync, writeFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
-import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage } from './pages.mjs';
+import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage, apexPage } from './pages.mjs';
 import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../worker/audit.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -337,6 +337,21 @@ const checkHtml = checkPages({
 for (const [name, html] of checkHtml) {
   writeFileSync(join(ROOT, 'checks', name), html);
   pagePaths.push([name === 'index.html' ? '/checks/' : `/checks/${name}`, null]);
+}
+
+// The umbrella apex. Served only at the apex host's root — every other path
+// there still 308s here, so this is a page the portfolio needed rather than a
+// second copy of the index. Its canonical points at the apex, so serving the
+// same asset from the canonical host cannot create a duplicate.
+if (cfg.apex_host && x402Stats && mcpStats) {
+  writeFileSync(join(ROOT, 'apex.html'), apexPage({
+    apexBase: `https://${cfg.apex_host}`,
+    serviceBase: BASE,
+    x402: x402Stats,
+    mcp: mcpStats,
+    traffic,
+    listingCount: listings.length,
+  }));
 }
 
 writeFileSync(join(ROOT, 'compare.html'),

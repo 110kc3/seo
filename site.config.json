@@ -1,6 +1,8 @@
 {
   "base": "https://index.percall.dev",
   "host_aliases": ["percall.dev", "index.kc-it.pl"],
+  "_apex_host": "The umbrella domain. Unlike the other aliases it is not retired: its root serves a portfolio page naming the services underneath, while every other path still 308s to the canonical host so there stays exactly one copy of everything else.",
+  "apex_host": "percall.dev",
   "repo": "110kc3/seo",
   "payments": {
     "x402_address": "0x48934cDA4F8f3F692d4deEED3D2B4f15852E2424",

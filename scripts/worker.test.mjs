@@ -637,6 +637,10 @@ test('no source directory is published as a static asset by accident', async () 
     // nothing to read; these are what they read.
     'report.html', 'x402.html', 'mcp-servers.html', 'leaderboard.html',
     'compare.html', 'checks',
+    // The umbrella apex's portfolio page. Served from the shared asset store at
+    // the apex root, so the apex needs no deploy of its own; its canonical names
+    // the apex, so being reachable here too is not a duplicate.
+    'apex.html',
   ]);
 
   const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));
@@ -2313,4 +2317,47 @@ test('generated pages are all in the sitemap', async () => {
   }
   const checkPageCount = (sitemap.match(/\/checks\//g) ?? []).length;
   assert.ok(checkPageCount > 20, `expected a page per check in the sitemap, found ${checkPageCount}`);
+});
+
+test('the apex root serves the portfolio; every other apex path still redirects', async () => {
+  // The whole point of the canonical-host discipline is that content has one
+  // address. The apex is the single deliberate exception and it is exactly one
+  // path wide: a directory that records percall.dev/llms.txt as this site's
+  // llms.txt would be recording a URL that should have been a redirect.
+  // The Worker reads the real site.config.json at module load, so the routing
+  // assertions have to be made against that file rather than the test fixture.
+  const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const apex = REAL.apex_host;
+  const REAL_BASE = REAL.base.replace(/\/+$/, '');
+  assert.ok(apex, 'no apex_host configured');
+
+  assert.equal(worker.canonicalRedirect(new URL(`https://${apex}/`)), null,
+    'the apex root should be served, not redirected');
+  assert.equal(worker.canonicalRedirect(new URL(`https://${apex}/index.html`)), null);
+
+  for (const path of ['/llms.txt', '/robots.txt', '/api/index.json', '/l/x.html', '/report.html', '/checks/']) {
+    const r = worker.canonicalRedirect(new URL(`https://${apex}${path}`));
+    assert.ok(r, `${path} on the apex should redirect`);
+    assert.equal(r.status, 308);
+    assert.equal(r.headers.get('location'), `${REAL_BASE}${path}`);
+  }
+
+  // A retired alias is not an apex: index.kc-it.pl redirects at the root too.
+  const retired = REAL.host_aliases.find((h) => h !== apex);
+  const rr = worker.canonicalRedirect(new URL(`https://${retired}/`));
+  assert.ok(rr, `${retired} is retired and its root should still redirect`);
+  assert.equal(rr.status, 308);
+});
+
+test('the apex page names the apex as its canonical, not the service host', async () => {
+  // It is served from the shared asset store, so it is also reachable at
+  // /apex.html on the canonical host. Without a self-referential canonical that
+  // is duplicate content — on a site that audits other people for exactly this.
+  const html = await readFile(new URL('../apex.html', import.meta.url), 'utf8');
+  const apex = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8')).apex_host;
+  assert.match(html, new RegExp(`<link rel="canonical" href="https://${apex}/">`),
+    'the apex page does not declare the apex as its canonical');
+  assert.match(html, new RegExp(`<meta property="og:url" content="https://${apex}/">`));
+  // And it must not claim to be the index.
+  assert.ok(!html.includes('<h1>AI Product Index</h1>'), 'the apex is a portfolio page, not a copy of the index');
 });

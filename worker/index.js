@@ -31,6 +31,12 @@ import { handleSearch, handleAsk, handleMcp, handleCatalogSearch, CATALOGS } fro
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
+// The umbrella domain. Unlike the other host aliases it is not a retired name:
+// its root serves the portfolio page that says what runs under it. Everything
+// else on that host still redirects, so exactly one copy of the content exists.
+const APEX_HOST = cfg.apex_host ?? null;
+const isApexRoot = (url) =>
+  Boolean(APEX_HOST) && url.host === APEX_HOST && (url.pathname === '/' || url.pathname === '/index.html');
 const MAX_AUDIT_BODY = 4 * 1024;
 
 // Derived from the catalog declarations rather than written out, so adding a
@@ -45,6 +51,9 @@ const CATALOG_SEARCH = Object.fromEntries(
 // x402 POST survives the hop instead of being degraded to a GET.
 function canonicalRedirect(url) {
   if (url.host === CANONICAL_HOST) return null;
+  // The apex root is a page, not a redirect. Only the root: a request for any
+  // other path on the apex is asking for content that has one canonical home.
+  if (isApexRoot(url)) return null;
   return new Response(null, {
     status: 308,
     headers: {
@@ -295,6 +304,12 @@ export default {
         response = await handleRevenue(request, env, resolveX402(cfg));
       } else if (url.pathname === '/dashboard.html' || url.pathname === '/dashboard') {
         response = await handleDashboardPage(request, env, url);
+      } else if (isApexRoot(url)) {
+        // Served from the shared asset store, so the apex needs no deploy of its
+        // own. The page declares its canonical as the apex, which is why the
+        // same asset being reachable at /apex.html on the canonical host is not
+        // a duplicate.
+        response = await serveStatic(env, new URL('/apex.html', url.origin), request.headers);
       } else {
         response = await serveStatic(env, url, request.headers);
       }
