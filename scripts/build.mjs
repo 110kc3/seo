@@ -3,6 +3,8 @@
 // of those inputs (no timestamps): running the build twice yields zero diff.
 // Fails hard on any invalid listing so a bad manual edit can't reach the site.
 import { readFileSync, writeFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
+import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage } from './pages.mjs';
+import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../worker/audit.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -42,6 +44,9 @@ listings.sort((a, b) => {
 });
 
 const tpl = (name) => readFileSync(join(ROOT, 'templates', name), 'utf8');
+const readJson = (rel) => {
+  try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
+};
 const fill = (s, extra = {}) =>
   Object.entries({ BASE, REPO, COUNT: String(listings.length), ...extra })
     .reduce((acc, [k, v]) => acc.replaceAll(`{{${k}}}`, v), s);
@@ -289,6 +294,55 @@ const fullBlocks = listings.map((l) => {
 writeFileSync(join(ROOT, 'llms-full.txt'),
   `${fill(tpl('llms.txt'))}\n## All listings (${listings.length})\n\n${fullBlocks.join('\n\n')}\n`);
 
+// --- generated human-facing pages -------------------------------------------
+// Everything below renders from committed data files. Each returns null-safe:
+// a page whose data file is missing is skipped rather than built empty, because
+// the catalogs are refreshed by a weekly cron and a fresh clone may not have
+// them yet. `pagePaths` feeds the sitemap, so a skipped page is also absent
+// from the sitemap rather than advertised as a 404.
+const pagePaths = [];
+const x402Stats = readJson('api/x402/stats.json');
+const mcpStats = readJson('api/mcp/stats.json');
+const x402Health = readJson('api/x402/health.json');
+const mcpHealth = readJson('api/mcp/health.json');
+const traffic = readJson('api/traffic.json');
+const scores = readJson('scores.json') ?? {};
+
+if (x402Stats && mcpStats) {
+  writeFileSync(join(ROOT, 'report.html'),
+    reportPage({ base: BASE, x402: x402Stats, mcp: mcpStats, x402Health, mcpHealth, traffic, scores }));
+  pagePaths.push(['/report.html', traffic?.series?.at(-1)?.date]);
+}
+if (x402Stats) {
+  writeFileSync(join(ROOT, 'x402.html'), x402Page({ base: BASE, stats: x402Stats, health: x402Health }));
+  pagePaths.push(['/x402.html', x402Stats.fetched]);
+}
+if (mcpStats) {
+  writeFileSync(join(ROOT, 'mcp-servers.html'), mcpPage({ base: BASE, stats: mcpStats, health: mcpHealth }));
+  pagePaths.push(['/mcp-servers.html', mcpStats.fetched]);
+}
+if (Object.keys(scores).length) {
+  writeFileSync(join(ROOT, 'leaderboard.html'), leaderboardPage({ base: BASE, scores, listings }));
+  pagePaths.push(['/leaderboard.html', Object.values(scores).map((s) => s.checked).filter(Boolean).sort().at(-1)]);
+}
+
+// The checklist is wiped and rebuilt like l/, so a check removed from the
+// scorer cannot leave a page behind claiming it is still graded.
+rmSync(join(ROOT, 'checks'), { recursive: true, force: true });
+mkdirSync(join(ROOT, 'checks'), { recursive: true });
+const checkHtml = checkPages({
+  base: BASE, checkMeta: CHECK_META, signalMeta: SIGNAL_META,
+  v2Weights: V2_WEIGHTS, labels: CHECK_LABELS, snippets: SNIPPETS,
+});
+for (const [name, html] of checkHtml) {
+  writeFileSync(join(ROOT, 'checks', name), html);
+  pagePaths.push([name === 'index.html' ? '/checks/' : `/checks/${name}`, null]);
+}
+
+writeFileSync(join(ROOT, 'compare.html'),
+  comparePage({ base: BASE, checkCount: Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length }));
+pagePaths.push(['/compare.html', null]);
+
 const smUrls = [
   `  <url><loc>${BASE}/</loc></url>`,
   // The query endpoints belong in the sitemap even though they take
@@ -296,9 +350,10 @@ const smUrls = [
   // never learn this site can be asked questions.
   `  <url><loc>${BASE}/ask</loc></url>`,
   `  <url><loc>${BASE}/api/search</loc></url>`,
+  ...pagePaths.map(([p, lastmod]) => `  <url><loc>${BASE}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`),
   ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);
 
-console.log(`built ${listings.length} listing(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml, opensearch.xml, feed.xml, feed.json`);
+console.log(`built ${listings.length} listing(s) and ${pagePaths.length} page(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml, opensearch.xml, feed.xml, feed.json`);

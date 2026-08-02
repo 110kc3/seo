@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How agent-readiness checkers differ — AI Product Index</title>
+<meta name="description" content="An honest comparison of Cloudflare Agent Readiness, agentswelcome.dev and this site, including where this one is the weaker choice.">
+<link rel="canonical" href="https://index.percall.dev/compare.html">
+<link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How agent-readiness checkers differ — AI Product Index">
+<meta property="og:description" content="An honest comparison of Cloudflare Agent Readiness, agentswelcome.dev and this site, including where this one is the weaker choice.">
+<meta property="og:url" content="https://index.percall.dev/compare.html">
+<meta property="og:image" content="https://index.percall.dev/assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How agent-readiness checkers differ",
+  "url": "https://index.percall.dev/compare.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Product Index",
+    "url": "https://index.percall.dev/"
+  }
+}
+</script>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
+  body { margin:0 auto; max-width:52rem; padding:2.5rem 1.25rem 4rem; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  h1 { font-size:1.7rem; line-height:1.2; margin:.2rem 0 .6rem; }
+  h2 { font-size:1.25rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1.05rem; margin:1.6rem 0 .4rem; }
+  a { color:var(--accent); }
+  .crumb, .meta { color:var(--muted); font-size:.9rem; }
+  .lede { font-size:1.05rem; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.94rem; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:.4rem .7rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+  th { color:var(--muted); font-weight:600; }
+  td.wrap, th.wrap { white-space:normal; min-width:18rem; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.8rem; margin:1rem 0; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; }
+  .card .n { font-size:1.5rem; font-weight:600; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .card .k { color:var(--muted); font-size:.85rem; }
+  .bar { background:var(--card); border:1px solid var(--border); border-radius:4px; height:.55rem; overflow:hidden; min-width:6rem; }
+  .bar > i { display:block; height:100%; background:var(--accent); }
+  .grade { font-weight:600; font-variant-numeric:tabular-nums; }
+  code, pre { background:var(--card); border:1px solid var(--border); border-radius:6px; }
+  code { padding:.05rem .35rem; font-size:.9em; }
+  pre { padding:.8rem 1rem; overflow-x:auto; }
+  pre code { background:none; border:none; padding:0; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<p class="crumb"><a href="./index.html">AI Product Index</a> / How agent-readiness checkers differ</p>
+
+<h1>How agent-readiness checkers differ</h1>
+<p class="lede">There are several ways to be told whether AI agents can read your
+site, and they disagree — not about the facts, but about what counts. This page
+is the honest map, including where this one is the weaker choice.</p>
+
+<h2>The three worth knowing</h2>
+<table>
+<thead><tr><th class="wrap">checker</th><th class="wrap">what it is</th><th class="wrap">how you use it</th></tr></thead>
+<tbody>
+<tr>
+  <td class="wrap"><strong>Cloudflare Agent Readiness</strong></td>
+  <td class="wrap">The most complete published checklist: discoverability, content, bot access control, capabilities, and commerce as a checked-but-unscored dimension.</td>
+  <td class="wrap">Tied to Cloudflare's own tooling and audience. The checklist itself is public and worth reading whoever hosts you.</td>
+</tr>
+<tr>
+  <td class="wrap"><strong>agentswelcome.dev</strong></td>
+  <td class="wrap">18 checks and a certification gate at 70/100, plus a public directory of sites that pass.</td>
+  <td class="wrap">Pure API, no account: POST a URL and it audits you live. The directory listing is the point — it is a place to be found.</td>
+</tr>
+<tr>
+  <td class="wrap"><strong>This site</strong></td>
+  <td class="wrap">20 weighted checks across two published generations, with every weight and remedy documented at <a href="checks/">/checks/</a>.</td>
+  <td class="wrap">Free grade over GET, paid per-check fixes over HTTP 402. Callable by an agent without a human present, which is the part the others do not do.</td>
+</tr>
+</tbody></table>
+
+<h2>Where this one is genuinely different</h2>
+<ul>
+<li><strong>It is callable and payable by a machine.</strong> An agent can grade a URL and buy the detailed fixes in the same session, with no signup, no dashboard and no human. That is the whole design, and it is why the price is five cents rather than a monthly plan.</li>
+<li><strong>The scoring is versioned and published.</strong> Grades record which checklist produced them, so a re-score under a newer set is distinguishable from a site that got worse. Weights are in the open at <a href="checks/">/checks/</a>.</li>
+<li><strong>The remedy is code, not advice.</strong> Every failing check comes back with a paste-ready snippet carrying your own origin.</li>
+</ul>
+
+<h2>Where it is not the right tool</h2>
+<ul>
+<li><strong>One page, not a crawl.</strong> The audit reads your origin and its well-known paths. If you need every page on a large site checked, this is the wrong shape and no amount of five-cent calls fixes that.</li>
+<li><strong>No certification badge anyone else recognises.</strong> agentswelcome.dev's directory is a real distribution surface; a grade from here is a grade from here. Being listed there is worth doing regardless of this site — <a href="https://index.percall.dev/report.html">we did it</a>.</li>
+<li><strong>It cannot see inside your infrastructure.</strong> If Cloudflare hosts you, their audit sees configuration this one has to infer from the outside, and theirs will be right where they disagree.</li>
+</ul>
+
+<h2>The honest advice</h2>
+<p>Run all three. They are free, they take a minute each, and they overlap enough
+that anything all three flag is real. Where they differ is mostly recency: checklists
+have been moving fast, several specs changed paths in the last year, and a checker
+that has not been updated recently will pass you on a path a current client no longer
+reads. That is the failure mode worth checking for in any of them, including this one —
+which is why the check set here is versioned in public.</p>
+<p><a href="https://index.percall.dev/api/score?url=https://example.com">Try the free grade</a> ·
+<a href="checks/">read the checklist</a> ·
+<a href="https://index.percall.dev/leaderboard.html">see how others score</a>.</p>
+
+<footer>Generated from the data files this site publishes — nothing here is hand-maintained.
+Machine-readable: <a href="./llms.txt">llms.txt</a> · <a href="./api/index.json">registry JSON</a> · <a href="./openapi.yaml">OpenAPI</a>.
+Humans: <a href="./index.html#for-humans">done-for-you agent readability</a>.</footer>
+</body>
+</html>

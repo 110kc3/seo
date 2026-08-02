@@ -48,6 +48,25 @@ is a weekly sample from one network path and that is evidence rather than proof.
 one wanting credentials both prove something is listening, so only transport
 failures and 5xx count against an entry.
 
+## Reports and reference pages (written for people, readable by anything)
+
+Generated from the data files above, so they never disagree with the JSON.
+
+- https://index.percall.dev/report.html — **the state of the agent web**: what share of this
+  site's traffic is agents and how it is trending, how much of the machine-payable
+  web actually answers, and the finding that matters most — how many agents have
+  ever paid for anything here. Dated, sourced, and regenerated with the data.
+- https://index.percall.dev/x402.html — the machine-payable web: every x402 endpoint by price,
+  chain and operator, with liveness. Searchable against /api/x402/search.
+- https://index.percall.dev/mcp-servers.html — MCP servers with a URL you can actually call,
+  by auth requirement and transport, with liveness.
+- https://index.percall.dev/leaderboard.html — every listed product ranked by agent-readability,
+  re-scored weekly by the same free endpoint anyone can call.
+- https://index.percall.dev/checks/ — the complete 20-check checklist: every weight, why it is
+  weighted that way, and how to pass it. One page per check.
+- https://index.percall.dev/compare.html — how this audit differs from Cloudflare's Agent
+  Readiness and agentswelcome.dev, including where it is the weaker choice.
+
 ## Read the index
 
 - Full registry (JSON): https://index.percall.dev/api/index.json

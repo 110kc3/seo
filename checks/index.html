@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The agent-readability checklist — AI Product Index</title>
+<meta name="description" content="All 20 agent-readability checks, their weights and the reasoning behind each — the complete checklist the free score and the $0.05 audit grade against.">
+<link rel="canonical" href="https://index.percall.dev/checks/">
+<link rel="alternate" type="text/markdown" href="../llms.txt" title="llms.txt (agent-readable index)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The agent-readability checklist — AI Product Index">
+<meta property="og:description" content="All 20 agent-readability checks, their weights and the reasoning behind each — the complete checklist the free score and the $0.05 audit grade against.">
+<meta property="og:url" content="https://index.percall.dev/checks/">
+<meta property="og:image" content="https://index.percall.dev/assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Agent-readability checklist",
+  "url": "https://index.percall.dev/checks/",
+  "numberOfItems": 20,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://index.percall.dev/checks/llms_txt.html",
+      "name": "llms.txt published"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "url": "https://index.percall.dev/checks/llms_txt_summary.html",
+      "name": "llms.txt has a title and summary"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "url": "https://index.percall.dev/checks/llms_full_txt.html",
+      "name": "llms-full.txt published"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "url": "https://index.percall.dev/checks/robots_txt.html",
+      "name": "robots.txt published"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "url": "https://index.percall.dev/checks/ai_crawlers_allowed.html",
+      "name": "AI crawlers not blocked"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "url": "https://index.percall.dev/checks/sitemap.html",
+      "name": "sitemap.xml published"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "url": "https://index.percall.dev/checks/json_ld.html",
+      "name": "schema.org JSON-LD on the page"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "url": "https://index.percall.dev/checks/title_and_description.html",
+      "name": "title and meta description"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "url": "https://index.percall.dev/checks/open_graph.html",
+      "name": "Open Graph tags"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "url": "https://index.percall.dev/checks/canonical.html",
+      "name": "canonical URL declared"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "url": "https://index.percall.dev/checks/machine_alternates.html",
+      "name": "machine-readable alternates advertised"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "url": "https://index.percall.dev/checks/agent_card.html",
+      "name": "agent card at /.well-known/agent-card.json"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "url": "https://index.percall.dev/checks/https.html",
+      "name": "served over HTTPS"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "url": "https://index.percall.dev/checks/content_signals.html",
+      "name": "Content Signals declared in robots.txt"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "url": "https://index.percall.dev/checks/agent_card_current_path.html",
+      "name": "A2A card at the 1.0 path"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "url": "https://index.percall.dev/checks/mcp_server_card.html",
+      "name": "MCP server card published"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "url": "https://index.percall.dev/checks/api_catalog.html",
+      "name": "API catalog (RFC 9727)"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "url": "https://index.percall.dev/checks/agent_skills.html",
+      "name": "Agent Skills index"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "url": "https://index.percall.dev/checks/markdown_negotiation.html",
+      "name": "Serves markdown to callers that ask for it"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "url": "https://index.percall.dev/checks/web_bot_auth.html",
+      "name": "Web Bot Auth key directory"
+    }
+  ]
+}
+</script>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
+  body { margin:0 auto; max-width:52rem; padding:2.5rem 1.25rem 4rem; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  h1 { font-size:1.7rem; line-height:1.2; margin:.2rem 0 .6rem; }
+  h2 { font-size:1.25rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1.05rem; margin:1.6rem 0 .4rem; }
+  a { color:var(--accent); }
+  .crumb, .meta { color:var(--muted); font-size:.9rem; }
+  .lede { font-size:1.05rem; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.94rem; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:.4rem .7rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+  th { color:var(--muted); font-weight:600; }
+  td.wrap, th.wrap { white-space:normal; min-width:18rem; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.8rem; margin:1rem 0; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; }
+  .card .n { font-size:1.5rem; font-weight:600; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .card .k { color:var(--muted); font-size:.85rem; }
+  .bar { background:var(--card); border:1px solid var(--border); border-radius:4px; height:.55rem; overflow:hidden; min-width:6rem; }
+  .bar > i { display:block; height:100%; background:var(--accent); }
+  .grade { font-weight:600; font-variant-numeric:tabular-nums; }
+  code, pre { background:var(--card); border:1px solid var(--border); border-radius:6px; }
+  code { padding:.05rem .35rem; font-size:.9em; }
+  pre { padding:.8rem 1rem; overflow-x:auto; }
+  pre code { background:none; border:none; padding:0; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<p class="crumb"><a href="../index.html">AI Product Index</a> / The agent-readability checklist</p>
+
+<h1>The agent-readability checklist</h1>
+<p class="lede">Twenty checks, 122 points, and the reasoning behind each weight.
+This is the whole checklist the audit scores against — published in full, because
+what is worth paying for is the diagnosis of your site, not secrecy about what
+good looks like.</p>
+<p class="meta">Generated from the same constants the scorer reads, so this page and the
+product cannot disagree. Run it against your own site free:
+<code>https://index.percall.dev/api/score?url=…</code></p>
+
+<h2>The 2025 checks (13, 105 points)</h2>
+<p>Established signals. Every grade this site has ever published was produced by these alone.</p>
+<table>
+<thead><tr><th class="wrap">check</th><th class="num">weight</th><th></th><th class="wrap">why it matters</th></tr></thead>
+<tbody>
+<tr>
+    <td class="wrap"><a href="llms_txt.html">llms.txt published</a></td>
+    <td class="num">15</td>
+    <td><div class="bar"><i style="width:100%"></i></div></td>
+    <td class="wrap">It is the first file an arriving agent fetches after robots.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="json_ld.html">schema.org JSON-LD on the page</a></td>
+    <td class="num">15</td>
+    <td><div class="bar"><i style="width:100%"></i></div></td>
+    <td class="wrap">Structured data is the difference between a model guessing what your page is about and being told.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="ai_crawlers_allowed.html">AI crawlers not blocked</a></td>
+    <td class="num">10</td>
+    <td><div class="bar"><i style="width:67%"></i></div></td>
+    <td class="wrap">A Disallow that names GPTBot or ClaudeBot is a decision to be absent from the answers those models give.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="agent_card.html">agent card at /.well-known/agent-card.json</a></td>
+    <td class="num">10</td>
+    <td><div class="bar"><i style="width:67%"></i></div></td>
+    <td class="wrap">It is what turns a page into a tool: a machine-readable statement of what you can be asked to do.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="sitemap.html">sitemap.xml published</a></td>
+    <td class="num">8</td>
+    <td><div class="bar"><i style="width:53%"></i></div></td>
+    <td class="wrap">It is the only machine-readable statement of what pages exist.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="machine_alternates.html">machine-readable alternates advertised</a></td>
+    <td class="num">8</td>
+    <td><div class="bar"><i style="width:53%"></i></div></td>
+    <td class="wrap">It tells an agent that a JSON or Markdown version of this page exists.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="title_and_description.html">title and meta description</a></td>
+    <td class="num">7</td>
+    <td><div class="bar"><i style="width:47%"></i></div></td>
+    <td class="wrap">The cheapest signal any extractor has, and the one most often left to a CMS default.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="open_graph.html">Open Graph tags</a></td>
+    <td class="num">7</td>
+    <td><div class="bar"><i style="width:47%"></i></div></td>
+    <td class="wrap">Agents reuse OG tags when they surface you in a card, the same way social platforms do.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="llms_txt_summary.html">llms.txt has a title and summary</a></td>
+    <td class="num">5</td>
+    <td><div class="bar"><i style="width:33%"></i></div></td>
+    <td class="wrap">The blockquote is what gets quoted.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="llms_full_txt.html">llms-full.txt published</a></td>
+    <td class="num">5</td>
+    <td><div class="bar"><i style="width:33%"></i></div></td>
+    <td class="wrap">One fetch instead of twenty.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="robots_txt.html">robots.txt published</a></td>
+    <td class="num">5</td>
+    <td><div class="bar"><i style="width:33%"></i></div></td>
+    <td class="wrap">Its absence is ambiguous rather than permissive, and several crawlers resolve ambiguity as &quot;stay out&quot;.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="canonical.html">canonical URL declared</a></td>
+    <td class="num">5</td>
+    <td><div class="bar"><i style="width:33%"></i></div></td>
+    <td class="wrap">Duplicate URLs split whatever reputation a page earns.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="https.html">served over HTTPS</a></td>
+    <td class="num">5</td>
+    <td><div class="bar"><i style="width:33%"></i></div></td>
+    <td class="wrap">Several crawlers will not follow a plain-http origin at all, so this is less a ranking factor than a precondition.</td>
+  </tr>
+</tbody></table>
+
+<h2>The 2026 checks (7, 17 points)</h2>
+<p>Newer surfaces — Content Signals, the A2A 1.0 card path, MCP server cards, API
+catalogs, Agent Skills, markdown negotiation, Web Bot Auth. <strong>Every one is
+weighted below the cheapest 2025 check on purpose</strong>: under 15% of the web
+publishes them, so missing one is normal rather than negligent, and it must never
+cost what missing llms.txt costs.</p>
+<table>
+<thead><tr><th class="wrap">check</th><th class="num">weight</th><th></th><th class="wrap">why it matters</th></tr></thead>
+<tbody>
+<tr>
+    <td class="wrap"><a href="content_signals.html">Content Signals declared in robots.txt</a></td>
+    <td class="num">3</td>
+    <td><div class="bar"><i style="width:20%"></i></div></td>
+    <td class="wrap">It states how your content may be used — search, AI answers, training — in the one place a crawler already looks.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="agent_card_current_path.html">A2A card at the 1.0 path</a></td>
+    <td class="num">3</td>
+    <td><div class="bar"><i style="width:20%"></i></div></td>
+    <td class="wrap">A2A reached 1.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="markdown_negotiation.html">Serves markdown to callers that ask for it</a></td>
+    <td class="num">3</td>
+    <td><div class="bar"><i style="width:20%"></i></div></td>
+    <td class="wrap">An agent parsing your HTML is guessing which parts are content.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="mcp_server_card.html">MCP server card published</a></td>
+    <td class="num">2</td>
+    <td><div class="bar"><i style="width:13%"></i></div></td>
+    <td class="wrap">The discovery route for tool-using agents.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="api_catalog.html">API catalog (RFC 9727)</a></td>
+    <td class="num">2</td>
+    <td><div class="bar"><i style="width:13%"></i></div></td>
+    <td class="wrap">RFC 9727.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="agent_skills.html">Agent Skills index</a></td>
+    <td class="num">2</td>
+    <td><div class="bar"><i style="width:13%"></i></div></td>
+    <td class="wrap">It declares what an agent can accomplish on your site without reading your docs.</td>
+  </tr>
+<tr>
+    <td class="wrap"><a href="web_bot_auth.html">Web Bot Auth key directory</a></td>
+    <td class="num">2</td>
+    <td><div class="bar"><i style="width:13%"></i></div></td>
+    <td class="wrap">It lets you tell a real signed agent from anything that copied its user-agent string, and it lets callers verify your responses.</td>
+  </tr>
+</tbody></table>
+
+<h2>Why the weights are public</h2>
+<p>An audit whose scoring is secret cannot be argued with, and one that cannot be
+argued with is not worth much. These weights are judgements — that structured data
+matters more than Open Graph, that an absent llms.txt costs more than an absent
+Agent Skills index — and publishing them is what makes them reviewable. If one
+looks wrong, it probably is; the repository is <a href="https://github.com/110kc3/seo">open</a>.</p>
+<p>See how sites in this registry actually score: <a href="../leaderboard.html">the leaderboard</a>.</p>
+
+<footer>Generated from the data files this site publishes — nothing here is hand-maintained.
+Machine-readable: <a href="../llms.txt">llms.txt</a> · <a href="../api/index.json">registry JSON</a> · <a href="../openapi.yaml">OpenAPI</a>.
+Humans: <a href="../index.html#for-humans">done-for-you agent readability</a>.</footer>
+</body>
+</html>

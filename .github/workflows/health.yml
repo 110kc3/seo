@@ -31,6 +31,15 @@ jobs:
         continue-on-error: true
         run: node scripts/score-listings.mjs
 
+      # One dated traffic reading appended per run, so /report.html can quote a
+      # figure that stays the same figure when someone checks it later, and so
+      # the trend is readable at all. The script refuses to write when the stats
+      # endpoint is unavailable or unauthenticated rather than overwriting a good
+      # history with a zero, so this loses a data point at worst, never the series.
+      - name: Snapshot the traffic reading
+        continue-on-error: true
+        run: node scripts/snapshot-traffic.mjs
+
       # The x402 catalog is a mirror, so it goes stale on its own. Refreshed
       # here rather than on its own schedule because it commits alongside the
       # other weekly state, and the output is sorted by URL so the diff is the

@@ -254,6 +254,21 @@ export const V2_WEIGHTS = {
   web_bot_auth: 2,
 };
 
+/**
+ * Label and remedy for each 2026 signal, alongside its weight in V2_WEIGHTS.
+ * Same reason as CHECK_META: the checklist pages are generated from this, so
+ * documentation and product cannot drift apart.
+ */
+export const SIGNAL_META = {
+  content_signals: { label: 'Content Signals declared in robots.txt', fix: 'Add a Content-Signal line to robots.txt (contentsignals.org) stating how your content may be used: search, ai-input, ai-train. Roughly 4% of sites declare it, so it is a differentiator rather than a baseline — and pick the values deliberately, because the common default (ai-train=no) suits a publisher protecting an archive and not everyone is one.' },
+  agent_card_current_path: { label: 'A2A card at the 1.0 path', fix: 'A2A 1.0 reads /.well-known/agent-card.json; /.well-known/agent.json is the pre-0.3 path a 1.0 client never looks at. Serve the same document at both while the installed base catches up.' },
+  mcp_server_card: { label: 'MCP server card published', fix: 'If you run an MCP server, publish a server card so clients can find it without being handed a URL. The specs disagree on the path — SEP-2127 says /.well-known/mcp.json, Cloudflare reads /.well-known/mcp/server-card.json — so serve both.' },
+  api_catalog: { label: 'API catalog (RFC 9727)', fix: 'Publish an RFC 9727 API catalog at /.well-known/api-catalog: a linkset pointing at your OpenAPI description and endpoints, served as application/linkset+json. It states nothing new if you already publish OpenAPI — it states it where a machine is specified to look.' },
+  agent_skills: { label: 'Agent Skills index', fix: 'Publish an Agent Skills index at /.well-known/agent-skills/index.json describing what an agent can accomplish here, so it need not read your docs to find out.' },
+  markdown_negotiation: { label: 'Serves markdown to callers that ask for it', fix: 'Answer Accept: text/markdown with a markdown twin of the page. An agent parsing your HTML is guessing at which parts are content; markdown removes the guess, and it costs one content-negotiation branch.' },
+  web_bot_auth: { label: 'Web Bot Auth key directory', fix: 'Publish Ed25519 keys at /.well-known/http-message-signatures-directory (RFC 9421 web-bot-auth) so callers can verify your responses, and so you can tell a signed agent from an anonymous scraper.' },
+};
+
 export const CHECK_SETS = ['v1', 'v2'];
 export const DEFAULT_CHECK_SET = 'v2';
 
@@ -267,6 +282,33 @@ export function contentSignalsIn(robotsBody) {
   if (!line) return null;
   return line.split(':').slice(1).join(':').trim();
 }
+
+/**
+ * Weight and remedy for each scored check, in one table.
+ *
+ * Extracted from the call sites so the published checklist pages and the audit
+ * cannot disagree. They are the same advice sold for $0.05 and the same advice
+ * documented for free, which is deliberate: the paid tier sells the diagnosis
+ * and the per-origin snippet, not secrecy about what good looks like.
+ *
+ * Weights live here too, so the thirteen 2025 weights are as greppable as the
+ * seven 2026 ones in V2_WEIGHTS.
+ */
+export const CHECK_META = {
+  llms_txt: { weight: 15, fix: 'Publish /llms.txt: an H1 with the site name, a > blockquote summary, then linked sections of the pages agents should read.' },
+  llms_txt_summary: { weight: 5, fix: 'Add a one-paragraph "> " blockquote directly under the H1 — it is what agents quote when describing you.' },
+  llms_full_txt: { weight: 5, fix: 'Publish /llms-full.txt with your full content inlined, so an agent can load everything in one fetch.' },
+  robots_txt: { weight: 5, fix: 'Publish /robots.txt — its absence is ambiguous, and some crawlers treat ambiguity as disallow.' },
+  ai_crawlers_allowed: { weight: 10, fix: 'Remove the Disallow: / rules for the AI user-agents you want to be cited by, or name them with Allow: /.' },
+  sitemap: { weight: 8, fix: 'Publish /sitemap.xml and reference it from robots.txt with a Sitemap: line.' },
+  json_ld: { weight: 15, fix: 'Add a <script type="application/ld+json"> block with @context https://schema.org and a concrete @type (Organization, SoftwareApplication, Product...).' },
+  title_and_description: { weight: 7, fix: 'Give every page a <title> and a <meta name="description"> — they are the cheapest signal an extractor has.' },
+  open_graph: { weight: 7, fix: 'Add og:title, og:description and og:image — agents reuse them when they surface you in a card.' },
+  canonical: { weight: 5, fix: 'Add <link rel="canonical"> so duplicate URLs collapse to one citable address.' },
+  machine_alternates: { weight: 8, fix: 'Add <link rel="alternate" type="application/json"> (and text/markdown) pointing at machine-readable versions of the page.' },
+  agent_card: { weight: 10, fix: 'Publish an agent card at /.well-known/agent-card.json describing your callable interfaces (A2A 1.0) — this is what turns a page into a tool. Serve the same document at /.well-known/agent.json too, for clients written before the path moved.' },
+  https: { weight: 5, fix: 'Serve over HTTPS; several crawlers will not follow an http:// origin at all.' },
+};
 
 // Human labels, so the free score can name what failed without shipping the
 // paid `detail`/`fix`/`snippet` fields. Keyed by check id; a missing id falls
@@ -303,7 +345,7 @@ export function letterGrade(score) {
 // The paid deliverable: paste-ready code for each failure, not just advice.
 // `{{ORIGIN}}` is replaced with the audited site's origin so the output is
 // specific to the caller's domain rather than a generic example.
-const SNIPPETS = {
+export const SNIPPETS = {
   llms_txt: `# /llms.txt  — publish at {{ORIGIN}}/llms.txt
 
 # Your Product Name
@@ -515,39 +557,39 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
   const sitemapInRobots = robots.ok && /^\s*sitemap\s*:/im.test(robots.body);
 
   const checks = [
-    check('llms_txt', 15, llms.ok && llmsShape.hasH1,
+    check('llms_txt', CHECK_META.llms_txt.weight, llms.ok && llmsShape.hasH1,
       llms.ok ? `/llms.txt returned HTTP ${llms.status}${llmsShape.hasH1 ? '' : ' but has no H1 title line'}` : `/llms.txt not found (HTTP ${llms.status || home.error})`,
       'Publish /llms.txt: an H1 with the site name, a > blockquote summary, then linked sections of the pages agents should read.'),
-    check('llms_txt_summary', 5, llms.ok && llmsShape.hasSummary,
+    check('llms_txt_summary', CHECK_META.llms_txt_summary.weight, llms.ok && llmsShape.hasSummary,
       llmsShape.hasSummary ? '/llms.txt has a blockquote summary' : '/llms.txt has no "> summary" line',
       'Add a one-paragraph "> " blockquote directly under the H1 — it is what agents quote when describing you.'),
-    check('llms_full_txt', 5, llmsFull.ok,
+    check('llms_full_txt', CHECK_META.llms_full_txt.weight, llmsFull.ok,
       llmsFull.ok ? '/llms-full.txt is available' : '/llms-full.txt not found',
       'Publish /llms-full.txt with your full content inlined, so an agent can load everything in one fetch.'),
-    check('robots_txt', 5, robots.ok,
+    check('robots_txt', CHECK_META.robots_txt.weight, robots.ok,
       robots.ok ? `/robots.txt returned HTTP ${robots.status}` : '/robots.txt not found',
       'Publish /robots.txt — its absence is ambiguous, and some crawlers treat ambiguity as disallow.'),
-    check('ai_crawlers_allowed', 10, robots.ok && blockedAgents.length === 0,
+    check('ai_crawlers_allowed', CHECK_META.ai_crawlers_allowed.weight, robots.ok && blockedAgents.length === 0,
       blockedAgents.length ? `robots.txt blocks: ${blockedAgents.join(', ')}` : 'no AI crawler is blocked by robots.txt',
       'Remove the Disallow: / rules for the AI user-agents you want to be cited by, or name them with Allow: /.'),
-    check('sitemap', 8, sitemap.ok || sitemapInRobots,
+    check('sitemap', CHECK_META.sitemap.weight, sitemap.ok || sitemapInRobots,
       sitemap.ok ? '/sitemap.xml is available' : (sitemapInRobots ? 'sitemap declared in robots.txt' : 'no sitemap found'),
       'Publish /sitemap.xml and reference it from robots.txt with a Sitemap: line.'),
-    check('json_ld', 15, ld.schemaOrg.length > 0,
+    check('json_ld', CHECK_META.json_ld.weight, ld.schemaOrg.length > 0,
       ld.schemaOrg.length
         ? `${ld.schemaOrg.length} schema.org JSON-LD node(s): ${ld.schemaOrg.flatMap((n) => n['@type']).join(', ')}`
         : (ld.errors.length ? `JSON-LD present but failed to parse: ${ld.errors[0]}` : 'no schema.org JSON-LD found'),
       'Add a <script type="application/ld+json"> block with @context https://schema.org and a concrete @type (Organization, SoftwareApplication, Product...).'),
-    check('title_and_description', 7, head.title.length > 0 && head.description.length > 0,
+    check('title_and_description', CHECK_META.title_and_description.weight, head.title.length > 0 && head.description.length > 0,
       `title: ${head.title ? `"${head.title.slice(0, 60)}"` : 'missing'} · meta description: ${head.description ? 'present' : 'missing'}`,
       'Give every page a <title> and a <meta name="description"> — they are the cheapest signal an extractor has.'),
-    check('open_graph', 7, Boolean(head.og.title && head.og.description && head.og.image),
+    check('open_graph', CHECK_META.open_graph.weight, Boolean(head.og.title && head.og.description && head.og.image),
       `og:title ${head.og.title ? 'yes' : 'no'} · og:description ${head.og.description ? 'yes' : 'no'} · og:image ${head.og.image ? 'yes' : 'no'}`,
       'Add og:title, og:description and og:image — agents reuse them when they surface you in a card.'),
-    check('canonical', 5, Boolean(head.canonical),
+    check('canonical', CHECK_META.canonical.weight, Boolean(head.canonical),
       head.canonical ? `canonical: ${head.canonical}` : 'no rel=canonical link',
       'Add <link rel="canonical"> so duplicate URLs collapse to one citable address.'),
-    check('machine_alternates', 8, machineAlternates.length > 0,
+    check('machine_alternates', CHECK_META.machine_alternates.weight, machineAlternates.length > 0,
       machineAlternates.length
         ? `${machineAlternates.length} machine-readable alternate(s): ${machineAlternates.map((a) => a.type || 'untyped').join(', ')}`
         : 'no rel=alternate link to a JSON or Markdown representation',
@@ -557,45 +599,45 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     // evidence says which path answered, and a site on the old one is told so,
     // because "you pass" while a spec-compliant 1.0 client cannot find you is
     // exactly the kind of advice that is worse than none.
-    check('agent_card', 10, agentCard.ok || wellKnown.ok || agentsJson.ok,
+    check('agent_card', CHECK_META.agent_card.weight, agentCard.ok || wellKnown.ok || agentsJson.ok,
       agentCard.ok ? '/.well-known/agent-card.json is available'
         : (wellKnown.ok ? '/.well-known/agent.json is available — the pre-0.3 path; A2A 1.0 clients look at /.well-known/agent-card.json'
           : (agentsJson.ok ? '/agents.json is available' : 'no agent card at /.well-known/agent-card.json, /.well-known/agent.json or /agents.json')),
       'Publish an agent card at /.well-known/agent-card.json describing your callable interfaces (A2A 1.0) — this is what turns a page into a tool. Serve the same document at /.well-known/agent.json too, for clients written before the path moved.'),
-    check('https', 5, new URL(home.url ?? target).protocol === 'https:',
+    check('https', CHECK_META.https.weight, new URL(home.url ?? target).protocol === 'https:',
       `served over ${new URL(home.url ?? target).protocol.replace(':', '')}`,
       'Serve over HTTPS; several crawlers will not follow an http:// origin at all.'),
   ];
 
   const declaredSignals = contentSignalsIn(robots.ok ? robots.body : null);
   const signals = [
-    signal('content_signals', 'Content Signals declared in robots.txt', declaredSignals !== null,
+    signal('content_signals', SIGNAL_META.content_signals.label, declaredSignals !== null,
       declaredSignals !== null ? `robots.txt declares Content-Signal: ${declaredSignals}` : 'robots.txt carries no Content-Signal line',
-      'Add a Content-Signal line to robots.txt (contentsignals.org) stating how your content may be used: search, ai-input, ai-train. Roughly 4% of sites declare it, so it is a differentiator rather than a baseline — and pick the values deliberately, because the common default (ai-train=no) suits a publisher protecting an archive and not everyone is one.'),
-    signal('agent_card_current_path', 'A2A card at the 1.0 path', agentCard.ok,
+      SIGNAL_META.content_signals.fix),
+    signal('agent_card_current_path', SIGNAL_META.agent_card_current_path.label, agentCard.ok,
       agentCard.ok ? '/.well-known/agent-card.json is available'
         : (wellKnown.ok ? 'a card exists at the pre-0.3 /.well-known/agent.json, but not at the 1.0 path' : 'no card at /.well-known/agent-card.json'),
-      'A2A 1.0 reads /.well-known/agent-card.json; /.well-known/agent.json is the pre-0.3 path a 1.0 client never looks at. Serve the same document at both while the installed base catches up.'),
-    signal('mcp_server_card', 'MCP server card published', mcpCard.ok || mcpServerCard.ok,
+      SIGNAL_META.agent_card_current_path.fix),
+    signal('mcp_server_card', SIGNAL_META.mcp_server_card.label, mcpCard.ok || mcpServerCard.ok,
       mcpCard.ok || mcpServerCard.ok
         ? `MCP server card at ${mcpCard.ok ? '/.well-known/mcp.json' : ''}${mcpCard.ok && mcpServerCard.ok ? ' and ' : ''}${mcpServerCard.ok ? '/.well-known/mcp/server-card.json' : ''}`
         : 'no MCP server card at /.well-known/mcp.json or /.well-known/mcp/server-card.json',
-      'If you run an MCP server, publish a server card so clients can find it without being handed a URL. The specs disagree on the path — SEP-2127 says /.well-known/mcp.json, Cloudflare reads /.well-known/mcp/server-card.json — so serve both.'),
-    signal('api_catalog', 'API catalog (RFC 9727)', apiCatalog.ok,
+      SIGNAL_META.mcp_server_card.fix),
+    signal('api_catalog', SIGNAL_META.api_catalog.label, apiCatalog.ok,
       apiCatalog.ok ? '/.well-known/api-catalog is available' : 'no /.well-known/api-catalog',
-      'Publish an RFC 9727 API catalog at /.well-known/api-catalog: a linkset pointing at your OpenAPI description and endpoints, served as application/linkset+json. It states nothing new if you already publish OpenAPI — it states it where a machine is specified to look.'),
-    signal('agent_skills', 'Agent Skills index', agentSkills.ok,
+      SIGNAL_META.api_catalog.fix),
+    signal('agent_skills', SIGNAL_META.agent_skills.label, agentSkills.ok,
       agentSkills.ok ? '/.well-known/agent-skills/index.json is available' : 'no /.well-known/agent-skills/index.json',
-      'Publish an Agent Skills index at /.well-known/agent-skills/index.json describing what an agent can accomplish here, so it need not read your docs to find out.'),
-    signal('markdown_negotiation', 'Serves markdown to callers that ask for it',
+      SIGNAL_META.agent_skills.fix),
+    signal('markdown_negotiation', SIGNAL_META.markdown_negotiation.label,
       markdownAlt.ok && /markdown/i.test(markdownAlt.type ?? ''),
       markdownAlt.ok && /markdown/i.test(markdownAlt.type ?? '')
         ? `Accept: text/markdown returns ${markdownAlt.type}`
         : `Accept: text/markdown returns ${markdownAlt.type ?? 'no content-type'} — the Accept header is ignored`,
-      'Answer Accept: text/markdown with a markdown twin of the page. An agent parsing your HTML is guessing at which parts are content; markdown removes the guess, and it costs one content-negotiation branch.'),
-    signal('web_bot_auth', 'Web Bot Auth key directory', botAuthDir.ok,
+      SIGNAL_META.markdown_negotiation.fix),
+    signal('web_bot_auth', SIGNAL_META.web_bot_auth.label, botAuthDir.ok,
       botAuthDir.ok ? '/.well-known/http-message-signatures-directory is available' : 'no /.well-known/http-message-signatures-directory',
-      'Publish Ed25519 keys at /.well-known/http-message-signatures-directory (RFC 9421 web-bot-auth) so callers can verify your responses, and so you can tell a signed agent from an anonymous scraper.'),
+      SIGNAL_META.web_bot_auth.fix),
   ];
 
   // In v2 the signals are scored, so they become ordinary checks carrying the

@@ -1,0 +1,47 @@
+{
+  "$comment": "Dated snapshots of /api/stats.json, appended weekly. The live endpoint is authoritative for \"right now\"; this file exists so a published figure stays the same figure when someone checks it later, and so the trend is readable at all. Points marked backfilled:true predate this script and are transcribed from the decision-gate reads recorded in TODO.md; they carry only the fields those notes recorded.",
+  "source": "https://index.percall.dev/api/stats.json",
+  "series": [
+    {
+      "date": "2026-07-29",
+      "window": "30d",
+      "total_requests": 1855,
+      "agent_share": 0.032,
+      "ai_crawler": 60,
+      "browser": null,
+      "script": 293,
+      "free_scores": 75,
+      "llms_txt": 22,
+      "audit_hits": 7,
+      "x402_info": null,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-01",
+      "window": "30d",
+      "total_requests": 4672,
+      "agent_share": 0.0719,
+      "ai_crawler": 336,
+      "browser": null,
+      "script": 787,
+      "free_scores": 108,
+      "llms_txt": 71,
+      "audit_hits": 45,
+      "x402_info": 30,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-02",
+      "window": "30d",
+      "total_requests": 7345,
+      "agent_share": 0.1236,
+      "ai_crawler": 908,
+      "browser": 3405,
+      "script": 1296,
+      "free_scores": 178,
+      "llms_txt": 163,
+      "audit_hits": 49,
+      "x402_info": 40
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The state of the agent web — AI Product Index</title>
+<meta name="description" content="Measured: 12.36% of traffic is AI agents and rising, 14,661 machine-payable endpoints of which 97% answer, and zero organic payments.">
+<link rel="canonical" href="https://index.percall.dev/report.html">
+<link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The state of the agent web — AI Product Index">
+<meta property="og:description" content="Measured: 12.36% of traffic is AI agents and rising, 14,661 machine-payable endpoints of which 97% answer, and zero organic payments.">
+<meta property="og:url" content="https://index.percall.dev/report.html">
+<meta property="og:image" content="https://index.percall.dev/assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Report",
+  "name": "The state of the agent web",
+  "url": "https://index.percall.dev/report.html",
+  "dateModified": "2026-08-02",
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Product Index",
+    "url": "https://index.percall.dev/"
+  }
+}
+</script>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
+  body { margin:0 auto; max-width:52rem; padding:2.5rem 1.25rem 4rem; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  h1 { font-size:1.7rem; line-height:1.2; margin:.2rem 0 .6rem; }
+  h2 { font-size:1.25rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1.05rem; margin:1.6rem 0 .4rem; }
+  a { color:var(--accent); }
+  .crumb, .meta { color:var(--muted); font-size:.9rem; }
+  .lede { font-size:1.05rem; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.94rem; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:.4rem .7rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+  th { color:var(--muted); font-weight:600; }
+  td.wrap, th.wrap { white-space:normal; min-width:18rem; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.8rem; margin:1rem 0; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; }
+  .card .n { font-size:1.5rem; font-weight:600; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .card .k { color:var(--muted); font-size:.85rem; }
+  .bar { background:var(--card); border:1px solid var(--border); border-radius:4px; height:.55rem; overflow:hidden; min-width:6rem; }
+  .bar > i { display:block; height:100%; background:var(--accent); }
+  .grade { font-weight:600; font-variant-numeric:tabular-nums; }
+  code, pre { background:var(--card); border:1px solid var(--border); border-radius:6px; }
+  code { padding:.05rem .35rem; font-size:.9em; }
+  pre { padding:.8rem 1rem; overflow-x:auto; }
+  pre code { background:none; border:none; padding:0; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<p class="crumb"><a href="./index.html">AI Product Index</a> / The state of the agent web</p>
+
+<h1>The state of the agent web</h1>
+<p class="lede">Three things this site measures directly: whether AI agents visit,
+whether the machine-payable web actually answers, and whether any of it converts
+into a payment. Every figure below is dated and links to the file it came from.</p>
+<p class="meta">Regenerated whenever the underlying data files change. Traffic
+readings are snapshots of <a href="https://index.percall.dev/api/stats.json">/api/stats.json</a>;
+catalog readings are the weekly probe.</p>
+
+<h2>1. Agents are arriving, and the share is rising</h2>
+<div class="cards"><div class="card"><div class="n">12.36%</div><div class="k">agent share (2026-08-02)</div></div><div class="card"><div class="n">7,345</div><div class="k">requests, 30d</div></div><div class="card"><div class="n">908</div><div class="k">declared AI crawlers</div></div><div class="card"><div class="n">3,405</div><div class="k">browser requests</div></div></div>
+<table>
+<thead><tr><th>reading</th><th class="num">requests/30d</th><th class="num">agent share</th><th class="num">AI crawlers</th><th class="num">free scores</th><th class="num">paid-endpoint hits</th></tr></thead>
+<tbody>
+<tr>
+    <td>2026-07-29 <span class="meta">(from the record)</span></td>
+    <td class="num">1,855</td>
+    <td class="num">3.20%</td>
+    <td class="num">60</td>
+    <td class="num">75</td>
+    <td class="num">7</td>
+  </tr>
+<tr>
+    <td>2026-08-01 <span class="meta">(from the record)</span></td>
+    <td class="num">4,672</td>
+    <td class="num">7.19%</td>
+    <td class="num">336</td>
+    <td class="num">108</td>
+    <td class="num">45</td>
+  </tr>
+<tr>
+    <td>2026-08-02</td>
+    <td class="num">7,345</td>
+    <td class="num">12.36%</td>
+    <td class="num">908</td>
+    <td class="num">178</td>
+    <td class="num">49</td>
+  </tr>
+</tbody></table>
+<p>Agent share went from <strong>3.20%</strong> on 2026-07-29 to
+<strong>12.36%</strong> on 2026-08-02. The site had no inbound
+links for most of that period, so this is agents finding a domain nobody pointed
+them at.</p>
+
+<h2>2. Nobody pays</h2>
+<p class="lede">49 requests have hit the paid endpoint and met its
+HTTP 402 challenge. <strong>Zero of them came back with a payment.</strong> Every
+settlement this rail has ever taken was our own test.</p>
+<p>This is the finding worth more than the rest of the page, because it is the one
+nobody could have guessed from the outside. The audience is real and growing; the
+conversion is not a small number, it is zero. A five-cent price, published in
+machine-readable form at
+<a href="https://index.percall.dev/api/x402/info">/api/x402/info</a>, advertised in the 402 itself,
+payable by the reference client — and no agent in the wild has ever chosen to pay it.</p>
+<p>Two readings are consistent with that, and this page cannot tell them apart:
+almost nothing in the wild carries a funded wallet with authority to spend it, or
+the free tier already answers the question the paid tier charges for. Both are
+more interesting than "the price is wrong".</p>
+
+<h2>3. The machine-payable web is smaller than it counts</h2>
+<div class="cards"><div class="card"><div class="n">14,661</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">1,527</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">27.1%</div><div class="k">held by top 10 hosts</div></div></div>
+<p>14,661 endpoints sounds like an ecosystem. 27.1% of them
+belong to ten operators, and the 1,527 distinct hosts are the honest
+denominator. Prices cluster low — median $0.01, 90th percentile
+$0.15 — which is what a market of machine-to-machine calls
+should look like, and it means a five-cent audit sits above the median rather than below it.</p>
+<table>
+<thead><tr><th>chain</th><th class="num">endpoints</th><th class="num">share</th></tr></thead>
+<tbody>
+<tr><td>base</td><td class="num">14,356</td><td class="num">97.9%</td></tr>
+<tr><td>solana</td><td class="num">161</td><td class="num">1.1%</td></tr>
+<tr><td>base-sepolia</td><td class="num">118</td><td class="num">0.8%</td></tr>
+<tr><td>x-layer</td><td class="num">18</td><td class="num">0.1%</td></tr>
+<tr><td>algorand</td><td class="num">5</td><td class="num">0.0%</td></tr>
+<tr><td>arbitrum</td><td class="num">1</td><td class="num">0.0%</td></tr>
+</tbody></table>
+<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-08-01.
+Full figures: <a href="https://index.percall.dev/api/x402/stats.json">stats.json</a> · browse: <a href="https://index.percall.dev/x402.html">the catalog</a>.</p>
+
+<h2>4. Most of it answers, which was not obvious</h2>
+<div class="cards"><div class="card"><div class="n">97.2%</div><div class="k">x402 endpoints answering</div></div><div class="card"><div class="n">91.9%</div><div class="k">MCP servers answering</div></div><div class="card"><div class="n">10,080</div><div class="k">remotely-callable MCP servers</div></div><div class="card"><div class="n">7,519</div><div class="k">distinct MCP hosts</div></div></div>
+<p>Neither upstream registry checks whether its own entries still answer. The
+Bazaar keeps a resource for 30 days after its last settlement; the MCP registry
+lists whatever a publisher declared. So "how much of this is alive" was a
+question nobody could answer, and the expectation going in was that a lot of it
+would be dead.</p>
+<p>It mostly is not: <strong>97.2%</strong> of a rotating sample of
+the x402 catalog answers, and <strong>91.9%</strong> of the MCP
+catalog. A 402 or a 401 counts as answering here, deliberately — a 402 is the
+<em>correct</em> reply from a paid endpoint, and scoring it as a failure would mark
+the entire point of an x402 catalog as dead.</p>
+<p class="meta">Probed 2026-08-01, a rotating slice per run so a full pass
+covers every entry. Raw: <a href="https://index.percall.dev/api/x402/health.json">x402 health</a> ·
+<a href="https://index.percall.dev/api/mcp/health.json">MCP health</a>.</p>
+
+<h2>5. Sites are not ready for any of it</h2>
+<p>40 sites in this registry are re-graded weekly against the
+20-check agent-readability set. The distribution:</p>
+<table>
+<thead><tr><th>grade</th><th class="num">sites</th><th class="wrap">reading</th></tr></thead>
+<tbody>
+<tr><td class="grade">A</td><td class="num">7</td><td class="wrap">agent-ready</td></tr>
+<tr><td class="grade">B</td><td class="num">8</td><td class="wrap">minor gaps</td></tr>
+<tr><td class="grade">C</td><td class="num">8</td><td class="wrap">partially legible</td></tr>
+<tr><td class="grade">D</td><td class="num">5</td><td class="wrap">weak</td></tr>
+<tr><td class="grade">E</td><td class="num">6</td><td class="wrap">barely legible</td></tr>
+<tr><td class="grade">F</td><td class="num">6</td><td class="wrap">effectively invisible to agents</td></tr>
+</tbody></table>
+<p>Full ranking, with what each site is missing: <a href="https://index.percall.dev/leaderboard.html">the leaderboard</a>.
+What each check means and how to pass it: <a href="https://index.percall.dev/checks/">the checklist</a>.</p>
+
+<h2>Method, and what this page will not do</h2>
+<p>Client type is inferred from the self-reported user-agent. That is a
+traffic-shape signal, not an identity claim: a crawler that lies is counted as
+whatever it claims, and the "script" bucket is honestly named because a generic
+HTTP client could be an agent or a shell loop. No IP addresses are collected.</p>
+<p>Catalog liveness is one probe from one network path, on a rotating sample. It
+is evidence, not proof — an endpoint is only called unreachable after two
+consecutive misses, and a recovery forgives the record outright.</p>
+<p>Everything here describes one site's vantage point on a young ecosystem.
+It is a reading, not a census.</p>
+
+<footer>Generated from the data files this site publishes — nothing here is hand-maintained.
+Machine-readable: <a href="./llms.txt">llms.txt</a> · <a href="./api/index.json">registry JSON</a> · <a href="./openapi.yaml">OpenAPI</a>.
+Humans: <a href="./index.html#for-humans">done-for-you agent readability</a>.</footer>
+</body>
+</html>

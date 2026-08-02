@@ -3,6 +3,32 @@
   <url><loc>https://index.percall.dev/</loc></url>
   <url><loc>https://index.percall.dev/ask</loc></url>
   <url><loc>https://index.percall.dev/api/search</loc></url>
+  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-08-02</lastmod></url>
+  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://index.percall.dev/mcp-servers.html</loc><lastmod>2026-08-01</lastmod></url>
+  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-08-02</lastmod></url>
+  <url><loc>https://index.percall.dev/checks/llms_txt.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/llms_txt_summary.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/llms_full_txt.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/robots_txt.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/ai_crawlers_allowed.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/sitemap.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/json_ld.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/title_and_description.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/open_graph.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/canonical.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/machine_alternates.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/agent_card.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/https.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/content_signals.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/agent_card_current_path.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/mcp_server_card.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/api_catalog.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/agent_skills.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/markdown_negotiation.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/web_bot_auth.html</loc></url>
+  <url><loc>https://index.percall.dev/checks/</loc></url>
+  <url><loc>https://index.percall.dev/compare.html</loc></url>
   <url><loc>https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/3tg-test-generation.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/ai-visibility-checker.html</loc><lastmod>2026-08-01</lastmod></url>
