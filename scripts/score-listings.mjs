@@ -32,7 +32,17 @@ async function score(url) {
     });
     const body = await resp.json();
     if (!body.ok) return { error: body.error ?? body.code ?? `HTTP ${resp.status}` };
-    return { letter: body.letter, score: body.score, passed: body.passed, total: body.total_checks };
+    // `check_set` is stored with every grade. A badge outlives the run that made
+    // it, and 86 under v2 is a different statement from 86 under v1 — without
+    // this, a re-score under a new checklist is indistinguishable from a site
+    // that got worse.
+    return {
+      letter: body.letter,
+      score: body.score,
+      passed: body.passed,
+      total: body.total_checks,
+      check_set: body.check_set ?? 'v1',
+    };
   } catch (e) {
     return { error: e.name === 'AbortError' ? 'timeout' : (e.cause?.code ?? e.name) };
   } finally {

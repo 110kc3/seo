@@ -244,16 +244,27 @@ paths:
       operationId: getFreeScore
       summary: Agent-readability score (free, no payment)
       description: |
-        Returns an A-F letter grade, the numeric score out of 100, and all 13
-        checks with a label and pass/fail — the verdict, free and without signup.
+        Returns an A-F letter grade, the numeric score out of 100, and every
+        check with a label and pass/fail — the verdict, free and without signup.
 
         It deliberately omits what POST /api/audit sells: the per-check reason for
         failure, fixes ranked by weight, and a paste-ready code snippet for each
         failing check.
 
-        Results are cached per URL for an hour and a cached answer is unmetered;
-        uncached audits are limited to 20/hour/IP because each fetches the target.
-        Private, loopback and link-local targets are refused, same as the paid path.
+        The response carries `check_set`, naming the checklist that produced the
+        grade. `v2` (the default) scores 20 checks: the 13 established ones plus
+        seven 2026 agent-readiness surfaces — Content Signals, the A2A 1.0 card
+        path, an MCP server card, an RFC 9727 API catalog, an Agent Skills index,
+        markdown content negotiation and a Web Bot Auth directory. Every one of
+        those carries less weight than the cheapest 2025 check, because adoption
+        is still under 15% and missing one is normal rather than negligent.
+        `v1` scores only the original 13, and is kept so a grade published
+        earlier stays reproducible.
+
+        Results are cached per URL *and check set* for an hour and a cached
+        answer is unmetered; uncached audits are limited to 20/hour/IP because
+        each fetches the target. Private, loopback and link-local targets are
+        refused, same as the paid path.
       parameters:
         - name: url
           in: query
@@ -263,6 +274,16 @@ paths:
             format: uri
             pattern: "^https?://"
           description: Public http(s) URL to score.
+        - name: checks
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [v1, v2]
+            default: v2
+          description: >
+            Which checklist to score against. Omit for the current default. An
+            unrecognised value is normalised to the default rather than refused.
       responses:
         "200":
           description: The score.

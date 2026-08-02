@@ -1,6 +1,13 @@
 # AI Product Index — all crawlers welcome, AI crawlers explicitly invited.
 # Agents: start at https://index.percall.dev/llms.txt
 
+# Content signals — https://contentsignals.org/
+# The usual default is `ai-train=no`, written for a publisher protecting an
+# archive. This is a directory whose entire purpose is to be consumed by models,
+# so being in training data is distribution rather than leakage. All three are
+# yes, decided deliberately rather than copied.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
 User-agent: *
 Allow: /
 # Owner tooling, not content — no agent has any use for these.

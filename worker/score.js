@@ -16,7 +16,7 @@
 //   * results are cached per URL and callers are rate limited per IP, so it
 //     cannot be used as a free fetch proxy or to burn our subrequest budget.
 
-import { auditUrl, parseAuditRequest, CHECK_LABELS } from './audit.js';
+import { auditUrl, parseAuditRequest, CHECK_LABELS, resolveCheckSet } from './audit.js';
 import { botAuthHeaders, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 
 /**
@@ -117,6 +117,7 @@ export function freeView(result, upsell) {
     letter: result.letter,
     score: result.score,
     max_score: result.max_score,
+    check_set: result.check_set,
     grade: result.grade,
     passed: result.passed,
     total_checks: result.total_checks,
@@ -133,9 +134,10 @@ export function freeView(result, upsell) {
     // for the scored checks.
     signals: result.signals
       ? {
+        scored: result.signals.scored,
         detected: result.signals.detected,
         total: result.signals.total,
-        items: result.signals.items.map((s) => ({ id: s.id, label: s.label, present: s.present })),
+        items: result.signals.items.map((s) => ({ id: s.id, label: s.label, present: s.present, weight: s.weight })),
       }
       : undefined,
     tier: 'free',
@@ -198,7 +200,11 @@ export async function handleScore(request, env, cfg, rail) {
   if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
 
   const targetUrl = canonicalTarget(parsed.url, cfg);
-  const cacheKey = `${CACHE_PREFIX}${targetUrl}`;
+  // The check set is part of the cache identity. Without it, whichever set was
+  // asked for first would be served to callers asking for the other one — the
+  // same URL genuinely has two different correct grades.
+  const checkSet = resolveCheckSet(url.searchParams.get('checks') ?? undefined);
+  const cacheKey = `${CACHE_PREFIX}${checkSet}:${targetUrl}`;
   if (env.PAYMENTS) {
     const hit = await env.PAYMENTS.get(cacheKey);
     if (hit) {
@@ -223,7 +229,7 @@ export async function handleScore(request, env, cfg, rail) {
     }, 429, { 'retry-after': '3600' });
   }
 
-  const result = await auditUrl(targetUrl, fetcherFor(request, env, targetUrl), auditSigner(env, cfg));
+  const result = await auditUrl(targetUrl, fetcherFor(request, env, targetUrl), auditSigner(env, cfg), checkSet);
   if (!result.ok) return json({ ok: false, code: 'audit_failed', error: result.error ?? 'could not read that site' }, 502);
 
   const view = freeView(result, upsell);

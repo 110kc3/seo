@@ -209,7 +209,7 @@ async function handleAudit(request, env, cfgObj) {
   if (!gate.paid) return gate.response;
 
   const target = canonicalTarget(parsed.url, cfgObj);
-  const result = await auditUrl(target, fetcherFor(request, env, target), auditSigner(env, cfgObj));
+  const result = await auditUrl(target, fetcherFor(request, env, target), auditSigner(env, cfgObj), parsed.checkSet);
   const status = result.ok ? 200 : 502;
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }

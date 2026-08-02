@@ -1156,10 +1156,13 @@ test('the free score is rate limited per IP, and cache hits are not', async () =
   // Pre-seed the per-IP counter at the limit and the cache for one URL.
   const hour = new Date().toISOString().slice(0, 13);
   store.set(`${score.RATE_PREFIX}9.9.9.9:${hour}`, String(score.RATE_LIMIT_PER_HOUR));
-  store.set(`${score.CACHE_PREFIX}https://cached.example/`, JSON.stringify({ ok: true, letter: 'B', tier: 'free' }));
+  // The check set is part of the cache identity — the same URL has two different
+  // correct grades, and serving one to a caller who asked for the other would be
+  // wrong in a way nothing downstream could detect.
+  store.set(`${score.CACHE_PREFIX}v2:https://cached.example/`, JSON.stringify({ ok: true, letter: 'B', tier: 'free' }));
 
-  const call = (target) => handleScore(
-    new Request(`${BASE}/api/score?url=${encodeURIComponent(target)}`, { headers: { 'cf-connecting-ip': '9.9.9.9' } }),
+  const call = (target, checks) => handleScore(
+    new Request(`${BASE}/api/score?url=${encodeURIComponent(target)}${checks ? `&checks=${checks}` : ''}`, { headers: { 'cf-connecting-ip': '9.9.9.9' } }),
     { PAYMENTS: kv }, cfg, resolveX402(cfg),
   );
 
@@ -1176,6 +1179,13 @@ test('the free score is rate limited per IP, and cache hits are not', async () =
   const cachedBody = await cached.json();
   assert.equal(cachedBody.cached, true);
   assert.equal(cachedBody.letter, 'B');
+
+  // Same URL, other check set: must NOT be served the v2 entry. It falls through
+  // to a fresh audit, which this spent IP is rate limited out of — a 429 here is
+  // proof the cache did not answer, and is the cheapest way to observe it
+  // without a network call.
+  const otherSet = await call('https://cached.example/', 'v1');
+  assert.equal(otherSet.status, 429, 'a v1 request was served the cached v2 grade');
 });
 
 // --- asset redirect absorption ----------------------------------------------
@@ -1258,12 +1268,12 @@ test('a fully passing audit scores exactly 100, whatever the weights are', () =>
   assert.equal(audit.scoreChecks([]).score, 0);
 });
 
-test('the 2026 signals cannot move a grade', async () => {
-  // The whole point of reporting them as `signals` rather than adding weighted
-  // checks. Grades are stamped into scores.json and rendered as badges inside
-  // other people's READMEs; a site that changed nothing must never wake up
-  // graded lower because we learned about a new spec. If someone ever gives a
-  // signal a weight and folds it into `checks`, this fails.
+test('a raw signal is weightless, so promotion is always explicit', async () => {
+  // Under v1 the signals must not move a grade at all, and under v2 they move it
+  // only through the V2_WEIGHTS table. Keeping the `signal()` factory weightless
+  // is what makes that true: a signal cannot acquire weight by being added to
+  // the list, only by being named in the table, so "which checklist scores this"
+  // has exactly one answer and it is greppable.
   const { contentSignalsIn, __testing: a } = await import('../worker/audit.js');
   const weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
   const checks = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: true }));
@@ -1283,6 +1293,68 @@ test('the 2026 signals cannot move a grade', async () => {
   assert.equal(signals[1].fix, undefined);
   assert.equal(signals[0].fix, 'add it');
   void contentSignalsIn;
+});
+
+test('no v2 weight may outrank a 2025 check', async () => {
+  // The rule that keeps the extended checklist honest. Under 15% of the web
+  // publishes an MCP server card or an API catalog, so missing one is normal
+  // rather than negligent — and it must never cost a site more than missing
+  // llms.txt. Encoded as an assertion because it is the kind of judgement that
+  // erodes silently the next time someone feels strongly about a new spec.
+  const { __testing: a } = await import('../worker/audit.js');
+  const LOWEST_V1_WEIGHT = 5; // `https`
+  for (const [id, weight] of Object.entries(a.V2_WEIGHTS)) {
+    assert.ok(weight > 0, `${id} would be promoted to a scored check worth nothing`);
+    assert.ok(weight < LOWEST_V1_WEIGHT, `${id} at ${weight} outranks the cheapest 2025 check`);
+  }
+});
+
+test('v2 costs a 2025-perfect site exactly the weight it did not earn', async () => {
+  // The number this decision turns on, pinned so it cannot drift unnoticed: a
+  // site that passes all thirteen 2025 checks and publishes none of the seven
+  // 2026 surfaces scores 105/122 — an A that becomes a B. If a weight changes,
+  // this test is where the consequence shows up, in grades rather than points.
+  const { __testing: a } = await import('../worker/audit.js');
+  const v1Weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
+  const v1Total = v1Weights.reduce((x, y) => x + y);
+  const v2Extra = Object.values(a.V2_WEIGHTS).reduce((x, y) => x + y);
+
+  assert.equal(v1Total, 105);
+  assert.equal(v2Extra, 17);
+
+  const perfect2025 = [
+    ...v1Weights.map((weight, i) => ({ id: `c${i}`, weight, pass: true })),
+    ...Object.entries(a.V2_WEIGHTS).map(([id, weight]) => ({ id, weight, pass: false })),
+  ];
+  const { score } = a.scoreChecks(perfect2025);
+  assert.equal(score, 86);
+
+  // And everything passing is still exactly 100 under the extended set, so the
+  // denominator is genuinely derived rather than assumed.
+  const perfect2026 = perfect2025.map((c) => ({ ...c, pass: true }));
+  assert.equal(a.scoreChecks(perfect2026).score, 100);
+});
+
+test('an unknown or missing check set resolves to the default, never throws', async () => {
+  // Reached from a query string and from a *paid* request body, so a typo must
+  // not 400 after the money has settled.
+  const { resolveCheckSet, DEFAULT_CHECK_SET, CHECK_SETS } = await import('../worker/audit.js');
+  assert.equal(resolveCheckSet('v1'), 'v1');
+  assert.equal(resolveCheckSet('v2'), 'v2');
+  assert.equal(resolveCheckSet(undefined), DEFAULT_CHECK_SET);
+  assert.equal(resolveCheckSet('v3'), DEFAULT_CHECK_SET);
+  assert.equal(resolveCheckSet(null), DEFAULT_CHECK_SET);
+  assert.equal(resolveCheckSet({}), DEFAULT_CHECK_SET);
+  assert.ok(CHECK_SETS.includes(DEFAULT_CHECK_SET));
+});
+
+test('the paid endpoint accepts an optional check set without loosening its URL boundary', async () => {
+  const { parseAuditRequest, DEFAULT_CHECK_SET } = await import('../worker/audit.js');
+  assert.equal(parseAuditRequest({ url: 'https://example.com' }).checkSet, DEFAULT_CHECK_SET);
+  assert.equal(parseAuditRequest({ url: 'https://example.com', checks: 'v1' }).checkSet, 'v1');
+  // A bad `checks` value is normalised; a bad URL is still refused.
+  assert.equal(parseAuditRequest({ url: 'https://example.com', checks: 'nope' }).checkSet, DEFAULT_CHECK_SET);
+  assert.ok(parseAuditRequest({ url: 'http://127.0.0.1/', checks: 'v1' }).error);
 });
 
 test('Content-Signal is read out of robots.txt, not merely detected', async () => {
@@ -1416,7 +1488,7 @@ test('parseAuditRequest rejects everything that is not a public http(s) URL', ()
 });
 
 test('parseAuditRequest accepts a normal public URL', () => {
-  assert.deepEqual(parseAuditRequest({ url: 'https://example.com/docs' }), { url: 'https://example.com/docs' });
+  assert.deepEqual(parseAuditRequest({ url: 'https://example.com/docs' }), { url: 'https://example.com/docs', checkSet: 'v2' });
 });
 
 test('parseAuditRequest rejects non-object bodies', () => {

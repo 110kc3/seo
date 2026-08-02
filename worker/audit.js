@@ -212,6 +212,46 @@ const check = (id, weight, pass, detail, fix) => ({ id, weight, pass: Boolean(pa
  */
 const signal = (id, label, present, detail, fix) => ({ id, label, present: Boolean(present), detail, ...(present ? {} : { fix }) });
 
+/**
+ * Check sets. `v1` is the thirteen checks every published grade was produced by;
+ * `v2` additionally scores the 2026 signals above.
+ *
+ * Versioning exists because a grade is not private. It is stamped into
+ * `scores.json`, rendered as a badge inside other people's READMEs, and quoted
+ * in our own fleet numbers — so "which checklist produced this letter" has to be
+ * answerable after the fact, or a site that changed nothing looks like it got
+ * worse. Every result carries `check_set`, and anything that stores a grade
+ * stores it alongside.
+ *
+ * **Every v2 weight sits below the lowest v1 weight (5, `https`)**, and that is
+ * deliberate rather than tidy: under 15% of the web publishes an MCP server card
+ * or an API catalog, so missing one is normal rather than negligent, and it must
+ * never cost more than missing `llms.txt`. The three at 3 are the ones with a
+ * concrete consequence — Cloudflare scores Content Signals and markdown
+ * negotiation, and a card on the pre-0.3 path is genuinely invisible to an A2A
+ * 1.0 client. The rest are 2.
+ *
+ * What this costs a site that did everything right in 2025 and nothing since:
+ * 105 of 122, so **100 → 86, A → B**. That drop is the point of promoting them
+ * — the standard moved — but it is also why this needed a decision rather than a
+ * commit, and why the fleet is re-scored before any badge renders it.
+ */
+export const V2_WEIGHTS = {
+  content_signals: 3,
+  agent_card_current_path: 3,
+  markdown_negotiation: 3,
+  mcp_server_card: 2,
+  api_catalog: 2,
+  agent_skills: 2,
+  web_bot_auth: 2,
+};
+
+export const CHECK_SETS = ['v1', 'v2'];
+export const DEFAULT_CHECK_SET = 'v2';
+
+/** Normalises anything a caller passes to a known set, falling back to the default. */
+export const resolveCheckSet = (v) => (CHECK_SETS.includes(v) ? v : DEFAULT_CHECK_SET);
+
 /** Does robots.txt carry a Content-Signal declaration (contentsignals.org)? */
 export function contentSignalsIn(robotsBody) {
   if (typeof robotsBody !== 'string') return null;
@@ -414,7 +454,8 @@ export function scoreChecks(checks) {
  *   outright. No check reads a response header, so serving those sub-requests
  *   from the asset binding scores identically.
  */
-export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
+export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, checkSet = DEFAULT_CHECK_SET) {
+  const set = resolveCheckSet(checkSet);
   const origin = new URL(target).origin;
   const at = (p) => new URL(p, origin).toString();
   const one = (url, opts = {}) => get(url, { ...opts, fetchImpl, signHeaders });
@@ -549,8 +590,25 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
       'Publish Ed25519 keys at /.well-known/http-message-signatures-directory (RFC 9421 web-bot-auth) so callers can verify your responses, and so you can tell a signed agent from an anonymous scraper.'),
   ];
 
-  const { score, grade } = scoreChecks(checks);
-  const failing = checks.filter((c) => !c.pass).sort((a, b) => b.weight - a.weight);
+  // In v2 the signals are scored, so they become ordinary checks carrying the
+  // weight the table above assigns them. They keep their own `label`, which is
+  // written for a reader who has never heard of the spec; CHECK_LABELS covers
+  // only the thirteen. A signal with no weight in the table would score zero, so
+  // the table is the single place a promotion happens.
+  const promoted = set === 'v2'
+    ? signals.map((s) => ({
+      id: s.id,
+      label: s.label,
+      weight: V2_WEIGHTS[s.id] ?? 0,
+      pass: s.present,
+      detail: s.detail,
+      ...(s.present ? {} : { fix: s.fix }),
+    }))
+    : [];
+  const scored = [...checks, ...promoted];
+
+  const { score, grade } = scoreChecks(scored);
+  const failing = scored.filter((c) => !c.pass).sort((a, b) => b.weight - a.weight);
 
   return {
     ok: true,
@@ -558,30 +616,39 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null) {
     audited_at: new Date().toISOString(),
     score,
     max_score: 100,
+    // Which checklist produced this letter. Stored beside every grade, because a
+    // badge outlives the run that made it and "86" means different things under
+    // the two sets.
+    check_set: set,
     letter: letterGrade(score),
     grade,
-    passed: checks.filter((c) => c.pass).length,
-    total_checks: checks.length,
-    checks: checks.map((c) => ({
+    passed: scored.filter((c) => c.pass).length,
+    total_checks: scored.length,
+    checks: scored.map((c) => ({
       ...c,
-      label: CHECK_LABELS[c.id] ?? c.id,
+      label: c.label ?? CHECK_LABELS[c.id] ?? c.id,
       // The paid half: paste-ready code for this specific origin, not advice.
       ...(c.pass ? {} : { snippet: snippetFor(c.id, origin) }),
     })),
     next_steps: failing.map((c) => ({
       check: c.id,
-      label: CHECK_LABELS[c.id] ?? c.id,
+      label: c.label ?? CHECK_LABELS[c.id] ?? c.id,
       weight: c.weight,
       fix: c.fix,
       snippet: snippetFor(c.id, origin),
     })),
-    // Reported, never scored. `score` above is a function of `checks` alone, so
-    // adding to this list can never move anyone's grade or badge.
+    // The same seven surfaces, always reported here whether or not they counted.
+    // Under v1 this block is the only place they appear; under v2 they are also
+    // in `checks`, carrying weight. `scored` says which, so a client never has to
+    // infer it from the check count.
     signals: {
-      $comment: 'Emerging 2026 agent-readiness surfaces. Detected and reported, deliberately not scored: grades here are stamped into badges on other people\'s sites, and a site that changed nothing should never wake up graded lower. Adoption of most of these is still tiny, so absence is normal rather than negligent.',
+      $comment: set === 'v2'
+        ? 'Emerging 2026 agent-readiness surfaces. Under check set v2 these are scored, at weights below every 2025 check — adoption is still tiny, so missing one is normal rather than negligent, and it costs less than missing llms.txt. They also appear in `checks`.'
+        : 'Emerging 2026 agent-readiness surfaces. Under check set v1 these are detected and reported but deliberately not scored, so no grade produced by the 2025 checklist can move.',
+      scored: set === 'v2',
       detected: signals.filter((s) => s.present).length,
       total: signals.length,
-      items: signals,
+      items: signals.map((s) => ({ ...s, weight: set === 'v2' ? (V2_WEIGHTS[s.id] ?? 0) : 0 })),
     },
   };
 }
@@ -595,7 +662,10 @@ export function parseAuditRequest(obj) {
   // only, public hostnames only, no private or loopback literals.
   const err = urlError(obj.url, 'url');
   if (err) return { error: err };
-  return { url: obj.url };
+  // `checks` is optional and normalised rather than rejected: an unknown value
+  // gets the current default, because refusing to audit a paid request over a
+  // typo in an optional field would be charging for a 400.
+  return { url: obj.url, checkSet: resolveCheckSet(obj.checks) };
 }
 
-export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal };
+export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal, V2_WEIGHTS, resolveCheckSet };
