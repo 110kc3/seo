@@ -1,5 +1,14 @@
 # Show HN draft
 
+> **HELD until on or after Tue 25 Aug 2026** — Kamil's call, 2026-08-02: not
+> enough data yet. The post's whole claim is a measured negative result, and at
+> 8 days live with 49 hits on the paid endpoint the base was too thin for it.
+> `/api/stats.json` reports a rolling 30-day window and the site went live
+> 2026-07-25, so 24 Aug is the first day that window is genuinely full.
+> Conditions to post, and the reasoning, are in **`../NEXT.md` §1.1**. Do not
+> refresh the numbers below before the morning of the post — a second set of
+> stale figures is no better than the first.
+
 Rewritten 2026-08-01, for the third time, and this is the version to post. The
 2026-07-25 draft promised numbers it did not have and pitched the payment rail
 as the story. Both have changed:

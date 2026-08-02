@@ -25,23 +25,48 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 
 ## 1. Pending on Kamil
 
-### 1.1 Post the Show HN — the biggest single lever
+### 1.1 Show HN — HELD until ~25 Aug. Kamil's call, 2026-08-02, and it is right
 
-*~30 min to post, then two hours of replies. Next window: **Tue 4 Aug, 14:00–16:00 UTC**.*
+*Was "post Tue 4 Aug". Deliberately deferred: not enough data yet.*
 
-Draft is ready in `docs/show-hn.md`. **Do not post before I have refreshed the
-numbers** (§2.2) — the draft's five figures are now a day and a half stale and
-understate you: it says 4,672 requests / 7.19% agent share, live is **6,659 /
-10.63%**. Stale numbers are the one thing that sinks a "here is what I measured"
-post.
+**The reasoning, so nobody re-litigates it in a week.** The post's entire claim is
+a measured negative result — agents arrive, read the price, and do not buy. At
+the time of the call the site had been live **8 days**, the paid endpoint had
+been met **49 times**, and about 35 of those were plausible payers. That is a
+thin base for "the agentic economy does not pay yet", which is a strong claim
+this audience will check. A Show HN is close to one-shot per project; spending it
+on n=49 to save three weeks is a bad trade.
 
-One claim in the draft needs softening and I will handle it in the same pass:
-"zero inbound links" is no longer true — llms-txt-hub merged today (§3.1).
+**The argument Kamil did not have when he made the call, which supports it.** The
+register path was broken in production until 2026-08-02 (§4.3): every accepted
+listing was committed and never published, so a reader who followed the post's
+"products register themselves, live URLs in about two minutes" claim would have
+been handed a URL that 404s. The draft would have been *demonstrably wrong about
+its own headline feature*. It is fixed now — but the fix has never run for a real
+stranger, and that is exactly the thing to soak before inviting an audience.
 
-Title to use: *"Show HN: I charged AI agents 5 cents a call and logged whether
-any turned up"* or *"Show HN: 7% of my traffic is AI crawlers. None of them will
-pay 5 cents."* (the second needs its number updated to 10.6%). The three comment
-threads to expect and the prepared answers are at the bottom of `docs/show-hn.md`.
+**Re-check on or after Tue 25 Aug 2026** (14:00–16:00 UTC, the usual window).
+That date is not arbitrary: `/api/stats.json` reports a rolling 30-day window,
+and the site went live 2026-07-25, so **24 Aug is the first day the window is
+actually full** rather than a partial period being quoted as a monthly figure.
+
+Post when these hold — if they do not, wait again rather than posting anyway:
+
+1. **A full 30-day window.** No more "live for eleven days" caveats mid-paragraph.
+2. **The register path has run for a real stranger, or been re-verified post-fix.** The claim must be true on the day, not true in principle.
+3. **Some inbound traffic exists.** llms-txt-hub merged 2026-08-02 and the other directories are landing; their referral traffic is itself part of the story, and it changes what "zero inbound links" means.
+4. **Conversion is still zero — or it is not.** Either way it is a stronger post at n≈200 than at n=49. If someone *does* pay in the meantime, the post gets better, not worse.
+
+I will refresh the numbers and the two stale claims the morning of (§2.2). The
+draft, the titles and the three prepared comment threads stay in
+`docs/show-hn.md` and need no further work until then.
+
+**On credentials: don't send them, and I would not use them.** Posting would be
+under your name, on your account, on a one-shot channel — that is yours to press
+send on. HN also expects a Show HN to come from the person who built the thing
+and does not permit automated submission, and a days-old account is already a
+risk factor there without adding that. What I can do instead is have it
+60-seconds-from-posted: numbers refreshed, title picked, body in the clipboard.
 
 ### 1.2 One directory submission left — ~4 minutes
 
@@ -106,10 +131,14 @@ Two edits, batched into one push so a 90k★ repo gets one notification instead 
 *This is the highest-value item on either list — it is the last thing standing
 between a merged 90k★ listing and a maintainer.*
 
-### 2.2 Refresh the Show HN numbers — blocks §1.1
+### 2.2 Refresh the Show HN numbers — deferred with §1.1, to ~25 Aug
 
-Read `/api/stats.json` and update the five figures, then soften "zero inbound
-links" to "one" now that llms-txt-hub has merged. Current drift:
+**Do not do this now.** The post is held (§1.1), and figures refreshed three
+weeks early are just a second set of stale ones. This is a job for the morning of
+the post: re-read `/api/stats.json`, update the five figures, and soften "zero
+inbound links" now that llms-txt-hub has merged.
+
+Recorded here only so the drift is visible — as of 2026-08-02:
 
 | figure | draft says | live, 2026-08-02 |
 |---|---|---|
@@ -120,8 +149,8 @@ links" to "one" now that llms-txt-hub has merged. Current drift:
 | audit-path hits | 45 | **49** |
 
 The finding the post is built on is unchanged and got stronger: **more agents
-are arriving, and still none of them pay.** I will re-read the figures again on
-the morning you post rather than trusting these.
+are arriving, and still none of them pay.** Three more weeks of that is a better
+post, which is the whole argument for holding.
 
 ### 2.3 Correct the llms-txt-hub entry — it merged with the wrong URL
 
@@ -294,8 +323,8 @@ and agent-readiness Phases 1, 3 and 5.
 
 ## 6. If you only do one thing in each column
 
-- **You:** post the Show HN on Tuesday (§1.1). It is the only item left on your list with real upside; the rest is one form and two optionals.
-- **Me:** the Glama badge on PR #11152 (§2.1). It is the last edit between a 90k★ listing and a maintainer, and its blocker cleared this morning.
+- **You:** nothing urgent. The Show HN is held to ~25 Aug (§1.1), which leaves one form (§1.2, four minutes) and two optionals. This is the first day in a while your list has had no deadline on it.
+- **Me:** the Glama badge on PR #11152 (§2.1). With the post deferred, this is now the only thing on either list with a merged 90k★ listing on the other side of it.
 
 ---
 
