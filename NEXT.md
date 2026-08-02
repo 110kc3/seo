@@ -15,12 +15,12 @@ older docs. Where a doc disagrees with this file, this file is right.
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-08-02, third pass.** Every distribution channel is now
+> **Updated 2026-08-02, fourth pass.** Every distribution channel is now
 > submitted, all three of Kamil's decisions are shipped and live, and §2.1, 2.3,
 > 2.5 and 2.6 are done. **Your list is down to three optional items and a Show HN
 > deliberately held until ~25 Aug.** What the approved work turned up — five bugs,
 > two of them serious — is in §4. §2.4 is the one engineering item still open, and
-> it was not in the batch you asked for.
+> it was not in the batch you asked for. §2b records the six pages shipped since.
 
 ---
 
@@ -159,6 +159,51 @@ visible to a self-audit. **Our own site reads A 100, 20/20 under v2**, up from
 
 Worth reading §4.4 before touching this path again: the fix took three attempts,
 and the two failed ones were both plausible and both wrong.
+
+## 2b. Shipped 2026-08-02, third batch — six pages for the human half of the traffic
+
+Kamil picked 3, 1, 2, 5, 6, 7 from the subpage list. All live.
+
+**Why these and not more APIs.** 46% of requests here are browsers and 10–12% are
+AI crawlers, but the only thing a human could *do* was type a URL into the score
+box — and 3 of the first 123 free scores came from a browser. Meanwhile the two
+catalogs, 24,741 endpoints with weekly liveness probing and the most genuinely
+unique thing this site holds, existed only as JSON.
+
+| page | what it is |
+|---|---|
+| [`/report.html`](https://index.percall.dev/report.html) | The state of the agent web. Agent share **3.20% → 7.19% → 12.36%** across three dated readings, catalog liveness (97.2% / 91.9%), price distribution, and the finding that leads: 49 hits on the paid endpoint, **zero organic payments, ever**. |
+| [`/x402.html`](https://index.percall.dev/x402.html) | 14,661 machine-payable endpoints by price, chain and operator, with liveness. Search box wired to the existing JSON API. |
+| [`/mcp-servers.html`](https://index.percall.dev/mcp-servers.html) | 10,080 MCP servers with a URL you can call, by auth and transport. |
+| [`/leaderboard.html`](https://index.percall.dev/leaderboard.html) | All 40 listings ranked by the free endpoint anyone can call. |
+| [`/checks/`](https://index.percall.dev/checks/) | 21 pages: every check, its weight, the argument for that weight, the remedy and the snippet. |
+| [`/compare.html`](https://index.percall.dev/compare.html) | Honest comparison with Cloudflare Agent Readiness and agentswelcome.dev, including three places this one is the weaker choice. |
+
+**The deliberate non-decision:** no per-endpoint pages. 24,741 thin pages would
+read as doorway spam on a site whose pitch is being well-made, and would
+republish other people's endpoints at a scale that makes the removal request
+inevitable. Aggregates plus a live search box get the same utility without either
+problem.
+
+**What it cost structurally.** To make `/checks/` generated rather than
+transcribed, the thirteen weights and remedies moved out of the call sites into
+`CHECK_META`, and the seven signal labels and remedies into `SIGNAL_META` —
+extracted mechanically and verified string-equal to the originals, so the audit's
+behaviour is unchanged and the published checklist now *cannot* drift from the
+thing being sold. Three tests hold it: the scorer and `checks/` must agree on
+which checks exist, the report must quote live figures from the data files, and
+every page must reach the sitemap.
+
+Traffic readings are snapshotted weekly by `scripts/snapshot-traffic.mjs`,
+because the build must stay a pure function of its inputs and a citable number
+has to be the same number tomorrow. Seeded with the day-4 and day-7 gate reads
+from TODO.md, marked `backfilled`.
+
+**Still not done from that list:** item 4, the `percall.dev` apex — it still 308s
+to the index rather than describing the portfolio, and `www.percall.dev` does not
+resolve at all. Not picked, carried forward.
+
+---
 
 ## 3. Waiting on other people — nothing to do
 
