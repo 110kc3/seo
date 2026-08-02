@@ -33,10 +33,18 @@ async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fe
     // `type` is needed to tell content negotiation from a site that ignores
     // Accept and hands back the same HTML whatever you ask for.
     const type = resp.headers?.get?.('content-type') ?? null;
-    if (as === 'status') return { status: resp.status, ok: resp.ok, url: resp.url, type };
+    // `Response.url` is set by fetch and is the EMPTY STRING on any Response
+    // built in-Worker — which is every response a same-host self-audit gets,
+    // because the header layer rebuilds the response to attach its headers. It
+    // is not nullish, so `home.url ?? target` downstream keeps the '' and
+    // `new URL('')` throws "Invalid URL string.", with no stack and nothing
+    // naming the audit. Falling back to the URL we asked for is also just true:
+    // absent a redirect, that is where the body came from.
+    const landed = resp.url || url;
+    if (as === 'status') return { status: resp.status, ok: resp.ok, url: landed, type };
     const buf = await resp.arrayBuffer();
     const body = new TextDecoder().decode(buf.slice(0, maxBytes));
-    return { status: resp.status, ok: resp.ok, url: resp.url, type, body, truncated: buf.byteLength > maxBytes };
+    return { status: resp.status, ok: resp.ok, url: landed, type, body, truncated: buf.byteLength > maxBytes };
   } catch (e) {
     return { status: 0, ok: false, url, error: e.name === 'AbortError' ? 'timeout' : (e.cause?.code ?? e.name) };
   } finally {
@@ -668,4 +676,4 @@ export function parseAuditRequest(obj) {
   return { url: obj.url, checkSet: resolveCheckSet(obj.checks) };
 }
 
-export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal, V2_WEIGHTS, resolveCheckSet };
+export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal, V2_WEIGHTS, resolveCheckSet, get };

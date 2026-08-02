@@ -1120,6 +1120,34 @@ test('a self-audit can see the routes the Worker generates, not just its files',
   assert.equal((await unkeyed(`https://index.percall.dev${DIRECTORY_PATH}`)).status, 404);
 });
 
+test('a response built in-Worker still reports where it came from', async () => {
+  // The bug that made every same-host audit a 500, and that survived two wrong
+  // fixes: `Response.url` is populated by fetch and is the EMPTY STRING on any
+  // Response constructed in-Worker. The header layer rebuilds the response to
+  // attach its headers, so every self-audit sub-response has url ''. Being ''
+  // rather than undefined, `home.url ?? target` downstream keeps it, and
+  // `new URL('')` throws "Invalid URL string." — no stack, nothing naming the
+  // audit, and a fully green suite, because Node's fetch does populate url.
+  //
+  // Pinned at `get()`, the one place the empty string can enter, so the fix
+  // holds for every consumer rather than for the two call sites that crashed.
+  const { __testing: a } = await import('../worker/audit.js');
+  const target = 'https://index.percall.dev/';
+
+  const built = new Response('# hi\n', { status: 200, headers: { 'content-type': 'text/markdown' } });
+  assert.equal(built.url, '', 'precondition: a Response built in-Worker has no url');
+
+  const r = await a.get(target, { fetchImpl: async () => built });
+  assert.equal(r.url, target, 'an empty Response.url must fall back to the URL we asked for');
+  assert.doesNotThrow(() => new URL(r.url), 'the reported url must be parseable');
+
+  // A real redirect still wins: this is a fallback, not an override.
+  const redirected = new Response('x', { status: 200 });
+  Object.defineProperty(redirected, 'url', { value: 'https://index.percall.dev/landed' });
+  const r2 = await a.get(target, { fetchImpl: async () => redirected });
+  assert.equal(r2.url, 'https://index.percall.dev/landed');
+});
+
 test('a self-audit sees content negotiation, not the committed bytes', async () => {
   // The other half of the same blind spot, and the one that survived the first
   // fix. `markdown_negotiation` is decided entirely by the header layer: the
