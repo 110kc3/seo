@@ -101,10 +101,18 @@ export function canonicalTarget(target, cfg) {
   const aliases = cfg.host_aliases ?? [];
   try {
     const url = new URL(target);
-    if (aliases.includes(url.host)) {
-      url.host = new URL(cfg.base).host;
-      return url.href;
-    }
+    if (!aliases.includes(url.host)) return target;
+    const isApexRoot = cfg.apex_host
+      && url.host === cfg.apex_host
+      && (url.pathname === '/' || url.pathname === '/index.html');
+    url.host = new URL(cfg.base).host;
+    // The apex root stopped being an alias the moment it became a page of its
+    // own. Mapping it to `/` would audit the index and report the score under
+    // the apex's name — quietly grading one page and labelling it another, which
+    // is precisely the defect this endpoint is sold to find. Point it at the
+    // bytes that host actually serves instead.
+    if (isApexRoot) url.pathname = '/apex.html';
+    return url.href;
   } catch {
     // target is validated upstream; an unparsable one is returned unchanged.
   }

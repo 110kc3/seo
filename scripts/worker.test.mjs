@@ -2361,3 +2361,28 @@ test('the apex page names the apex as its canonical, not the service host', asyn
   // And it must not claim to be the index.
   assert.ok(!html.includes('<h1>AI Product Index</h1>'), 'the apex is a portfolio page, not a copy of the index');
 });
+
+test('auditing the apex reads the apex page, not the index behind it', async () => {
+  // canonicalTarget exists because a Worker cannot fetch its own hostnames, so
+  // an alias has to be rewritten to the canonical host before the audit runs.
+  // That was exactly right while the apex was an alias. It became wrong when the
+  // apex root turned into its own page: mapping it to `/` would grade the index
+  // and publish the number under the apex's name — the same class of defect this
+  // endpoint is sold to detect, on our own domain.
+  const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const canonicalHost = new URL(REAL.base).host;
+  const apex = REAL.apex_host;
+
+  assert.equal(score.canonicalTarget(`https://${apex}/`, REAL), `https://${canonicalHost}/apex.html`);
+  assert.equal(score.canonicalTarget(`https://${apex}/index.html`, REAL), `https://${canonicalHost}/apex.html`);
+
+  // Any other apex path is ordinary content and maps straight across.
+  assert.equal(score.canonicalTarget(`https://${apex}/llms.txt`, REAL), `https://${canonicalHost}/llms.txt`);
+
+  // A retired alias has no page of its own, so its root maps to the root.
+  const retired = REAL.host_aliases.find((h) => h !== apex);
+  assert.equal(score.canonicalTarget(`https://${retired}/`, REAL), `https://${canonicalHost}/`);
+
+  // And a stranger's URL is never rewritten.
+  assert.equal(score.canonicalTarget('https://example.com/', REAL), 'https://example.com/');
+});
