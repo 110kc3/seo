@@ -299,7 +299,7 @@ export default {
         response = await serveStatic(request, env, url);
       }
     } catch (e) {
-      response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error' }, 500);
+      response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error', stack: e.stack?.slice(0, 900) }, 500);
     }
 
     ctx.waitUntil(Promise.resolve(record(env, request, url, clientType, response.status)));
