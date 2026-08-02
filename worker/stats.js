@@ -11,16 +11,22 @@ const DATASET = 'ai_product_index_requests';
 const CACHE_KEY = 'stats:v1:30d';
 const CACHE_TTL_SECONDS = 300;
 
+// `host` was added 2026-08-02, so rows older than that carry no value for it and
+// are reported as `unrecorded` rather than being attributed to a host they may
+// not have been sent to. The limit went 200 → 1000 in the same change: grouping
+// by a third column multiplies the row count, and a truncated GROUP BY does not
+// fail, it just quietly under-reports the tail.
 const SQL = `
 SELECT
   blob2 AS client_type,
   blob1 AS path_bucket,
+  blob7 AS host,
   SUM(_sample_interval) AS requests
 FROM ${DATASET}
 WHERE timestamp > NOW() - INTERVAL '30' DAY
-GROUP BY client_type, path_bucket
+GROUP BY client_type, path_bucket, host
 ORDER BY requests DESC
-LIMIT 200
+LIMIT 1000
 `;
 
 const json = (body, status = 200, extraHeaders = {}) =>
@@ -50,12 +56,17 @@ async function query(env) {
 function shape(rows) {
   const byClient = {};
   const byPath = {};
+  const byHost = {};
   let total = 0;
   for (const r of rows) {
     const n = Number(r.requests) || 0;
     total += n;
     byClient[r.client_type ?? 'unknown'] = (byClient[r.client_type ?? 'unknown'] ?? 0) + n;
     byPath[r.path_bucket ?? 'other'] = (byPath[r.path_bucket ?? 'other'] ?? 0) + n;
+    // Empty string as well as null: Analytics Engine returns '' for a blob that
+    // was never written, and 'unrecorded' has to mean "before we measured this"
+    // rather than becoming a host with no name.
+    byHost[r.host || 'unrecorded'] = (byHost[r.host || 'unrecorded'] ?? 0) + n;
   }
   const sortDesc = (obj) =>
     Object.fromEntries(Object.entries(obj).sort((a, b) => b[1] - a[1]));
@@ -68,6 +79,10 @@ function shape(rows) {
     agent_share: total ? Number((agentTraffic / total).toFixed(4)) : 0,
     by_client_type: sortDesc(byClient),
     by_path: sortDesc(byPath),
+    // Which hostname was asked. `apex_home` in by_path counts the portfolio
+    // page; this counts everything that arrived on each host, including the
+    // 308s the umbrella answers for every path that is not its root.
+    by_host: sortDesc(byHost),
     note: 'Client type is inferred from the self-reported user-agent and is a traffic-shape signal, not an identity claim. No IP addresses or other personal data are collected.',
   };
 }

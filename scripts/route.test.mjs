@@ -382,6 +382,21 @@ test('the paid routes are advertised everywhere this site advertises routes', as
   for (const e of paid) assert.equal(e.auth, 'x402');
 });
 
+test('the umbrella names every live product, including this one', async () => {
+  // This failed once, silently and for a day: the router shipped on the index's
+  // host, the portfolio page is generated from a hand-written block that nobody
+  // had to touch, and percall.dev went on saying "One service is live". The
+  // domain's entire job is to name what runs under it.
+  const apex = await readFile(new URL('../apex.html', import.meta.url), 'utf8');
+  for (const claim of ['/api/liveness', '/api/route', 'The Router']) {
+    assert.ok(apex.includes(claim), `the umbrella does not mention ${claim}`);
+  }
+  assert.ok(!/One service is live/.test(apex), 'the umbrella still claims a single service');
+  // And it must not promise the non-custodial thing loosely: it is the whole
+  // reason a caller would trust a middleman with their routing question.
+  assert.match(apex, /you pay the endpoint directly/i);
+});
+
 test('the request parsers refuse what they cannot act on', () => {
   assert.match(parseRouteRequest({}).error, /^q:/);
   assert.match(parseRouteRequest({ q: 'x', max_price: 'cheap' }).error, /^max_price:/);

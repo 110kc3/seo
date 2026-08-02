@@ -416,6 +416,41 @@ a list of dead links.
 history (`consecutive_failures` is the field an alert would fire on), and a human
 page — browsers are 46% of traffic and this ships agent-facing only.
 
+## 2f. The umbrella was still saying "one service is live", and the analytics could not see either problem
+
+Kamil looked at percall.dev, could not find the thing that had just shipped, and
+asked why. Three faults, all in the same blind spot: **a service that ships onto
+an existing host touches nothing that would announce it.**
+
+**The portfolio page did not know.** The router shipped as endpoints on
+`index.percall.dev`, so `apexPage()` — a hand-written block nobody had to edit —
+went on claiming one service. The domain's entire job is to name what runs under
+it. Both products are now listed, with the honest note that they share a host
+because the router reads the same catalogs and settles on the same rail, so a
+second deployment would have bought a nicer URL and nothing else. A test now
+fails if the umbrella stops naming a live product.
+
+**The paid endpoints were invisible in analytics.** `/api/liveness` and
+`/api/route` fell into the generic `api` bucket, alongside free registry reads
+that outnumber them by an order of magnitude — so "is anyone buying this" was
+unanswerable. They now have their own buckets, for exactly the reason `audit`
+and `score_free` are separate.
+
+**The umbrella itself was invisible.** `percall.dev/` and `index.percall.dev/`
+share a pathname, so both bucketed as `home`: the portfolio page could have had
+zero visitors since launch and the number would have read identically. The apex
+root is now `apex_home`, and — the more general fix — **the hostname is recorded
+on every request** and reported as `by_host` in `/api/stats.json`. Every host
+attached to this Worker serves the same paths, so a path bucket could never have
+answered "is the umbrella getting traffic" or "is anyone still arriving on the
+retired host". Rows written before today have no host and report as
+`unrecorded` rather than being attributed to a host they may never have been
+sent to.
+
+**241 tests.** The stats SQL limit went 200 → 1000 in the same change: grouping
+by a third column multiplies rows, and a truncated `GROUP BY` does not fail, it
+under-reports the tail.
+
 ## 3. Waiting on other people — nothing to do
 
 | what | state, 2026-08-02 |

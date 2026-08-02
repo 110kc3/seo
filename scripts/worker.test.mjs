@@ -66,6 +66,17 @@ test('classifyPath buckets paths into a stable set', () => {
   assert.equal(classifyPath('/api/audit'), 'audit');
   assert.equal(classifyPath('/api/score'), 'score_free');
   assert.equal(classifyPath('/dashboard'), 'dashboard');
+  // The paid router endpoints are counted separately from the free /api/* reads
+  // that outnumber them by an order of magnitude — same reason `audit` is.
+  assert.equal(classifyPath('/api/liveness'), 'liveness');
+  assert.equal(classifyPath('/api/route'), 'route');
+  // The umbrella's portfolio page and the service's home page share a pathname
+  // and nothing else. Bucketed together, "does anyone visit the umbrella" is
+  // unanswerable — it could have had zero visitors and read identically.
+  assert.equal(classifyPath('/', { apex: true }), 'apex_home');
+  assert.equal(classifyPath('/index.html', { apex: true }), 'apex_home');
+  assert.equal(classifyPath('/report.html', { apex: true }), 'other',
+    'only the root is the portfolio page; every other apex path is a redirect');
   assert.equal(classifyPath('/dashboard.html'), 'dashboard');
   assert.equal(classifyPath('/.well-known/agent.json'), 'agent_card');
   assert.equal(classifyPath('/.well-known/http-message-signatures-directory'), 'sig_directory');
@@ -1848,6 +1859,28 @@ test('stats shaping handles an empty dataset without dividing by zero', () => {
   const body = stats.shape([]);
   assert.equal(body.total_requests, 0);
   assert.equal(body.agent_share, 0);
+});
+
+test('stats report which hostname was asked, and do not invent one for old rows', () => {
+  // Every host attached to this Worker serves the same paths, so a path bucket
+  // can never answer "is the umbrella getting traffic". `host` was added
+  // 2026-08-02; rows written before it carry no value and must not be
+  // attributed to a host they may never have been sent to.
+  const body = stats.shape([
+    { client_type: 'browser', path_bucket: 'apex_home', host: 'percall.dev', requests: '12' },
+    { client_type: 'ai_agent', path_bucket: 'llms_txt', host: 'index.percall.dev', requests: '30' },
+    { client_type: 'ai_agent', path_bucket: 'llms_txt', host: 'index.kc-it.pl', requests: '3' },
+    { client_type: 'browser', path_bucket: 'home', requests: '55' },
+    { client_type: 'browser', path_bucket: 'home', host: '', requests: '5' },
+  ]);
+  assert.deepEqual(body.by_host, {
+    unrecorded: 60,             // null and '' both mean "before we measured this"
+    'index.percall.dev': 30,
+    'percall.dev': 12,
+    'index.kc-it.pl': 3,
+  });
+  assert.equal(body.by_path.apex_home, 12, 'the portfolio page is countable on its own');
+  assert.equal(body.total_requests, 105);
 });
 
 // --- query surfaces: search, NLWeb /ask, remote MCP -------------------------

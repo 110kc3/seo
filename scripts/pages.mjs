@@ -865,6 +865,20 @@ without a human in the loop.</p>
   <a href="${serviceBase}/openapi.yaml">OpenAPI</a> · <a href="${serviceBase}/report.html">what the traffic looks like</a></p>
 </div>
 
+<div class="card" style="padding:1.2rem 1.3rem; margin-top:.9rem">
+  <h3 style="margin-top:0">The Router <span class="meta">on index.percall.dev, for now</span></h3>
+  <p>Which machine-payable endpoint should you call, is it alive right now, and
+  what does it charge? Answered by probing, <strong>never by paying</strong>.</p>
+  <ul>
+    <li><strong>Paid:</strong> <code>GET /api/liveness?url=…</code> probes one endpoint now — answered or not, latency, and the terms it currently quotes, read from its own 402. $0.005.</li>
+    <li><strong>Paid:</strong> <code>POST /api/route</code> takes <code>{"q": "unit conversion", "max_price": 0.01}</code> and returns ranked candidates, each probed live, each with the URL to call. $0.005, and a query that matches nothing is free.</li>
+    <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
+    <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
+  </ul>
+  <p class="meta">Reads the same ${num(x402.endpoints + mcp.remote_endpoints)} catalogued endpoints · terms at
+  <a href="${serviceBase}/api/x402/info">/api/x402/info</a></p>
+</div>
+
 <h2>The rail underneath</h2>
 <p>Every paid endpoint here settles the same way: HTTP 402 with machine-readable
 terms, an EIP-3009 authorization signed by the caller, settlement in USDC on Base
@@ -876,9 +890,11 @@ mainnet, refuses replays, and publishes its terms at
 price without provoking a 402.</p>
 
 <h2>What is honest about the state of this</h2>
-<p><strong>One service is live.</strong> The domain is an umbrella because more are
-intended, not because more exist — additional services get their own subdomain as
-they ship, and this page will list them when they do rather than before.</p>
+<p><strong>Two products are live, and they share one host.</strong> The Router
+ships as endpoints on the index's hostname rather than a subdomain of its own,
+because it reads the same catalogs and settles on the same rail — a second
+deployment would have bought a nicer URL and nothing else. It gets its own
+subdomain when it has its own reason to, not to make this page look busier.</p>
 ${latest ? `<p>The other honest number: agents are arriving — <strong>${pct(latest.agent_share, 2)}</strong> of
 requests to the live service are AI agents and the share is rising — and
 <strong>not one of them has ever paid for anything</strong>. That finding, with the
@@ -902,7 +918,7 @@ operator.</p>
     // Written to fit the 160-char budget whole. The umbrella's snippet is the
     // first thing a search result says about the portfolio, so it gets a
     // complete sentence rather than whatever survives a truncation.
-    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index — agent-readability grades, a $0.05 audit, 24,700 callable endpoints.',
+    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index, and a router that finds endpoints worth paying without ever paying.',
     crumb: '',
     footer: `Machine-readable entry points live on the service host:
 <a href="${serviceBase}/llms.txt">llms.txt</a> ·

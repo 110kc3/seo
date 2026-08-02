@@ -89,12 +89,18 @@ function record(env, request, url, clientType, status) {
     env.ANALYTICS.writeDataPoint({
       // No IP address and no full request URL — only a bucketed path.
       blobs: [
-        classifyPath(url.pathname),
+        classifyPath(url.pathname, { apex: isApexRoot(url) }),
         clientType,
         request.method,
         `${Math.floor(status / 100)}xx`,
         ua.slice(0, 200),
         request.cf?.asOrganization ?? 'unknown',
+        // Which of this Worker's hostnames was asked. A bounded set of four, and
+        // the only way to answer "is the umbrella getting traffic, and is anyone
+        // still arriving on the retired host" — a path bucket cannot, because
+        // every host serves the same paths. Rows written before 2026-08-02 have
+        // no value here and report as `unrecorded` rather than as a real host.
+        url.host,
       ],
       doubles: [1, status, request.cf?.asn ?? 0],
       indexes: [clientType],

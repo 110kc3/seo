@@ -63,9 +63,17 @@ export function classifyUserAgent(userAgent) {
   return 'other';
 }
 
-/** Buckets a path into a small stable set so stats stay readable as listings grow. */
-export function classifyPath(pathname) {
-  if (pathname === '/' || pathname === '/index.html') return 'home';
+/**
+ * Buckets a path into a small stable set so stats stay readable as listings grow.
+ *
+ * `apex` distinguishes the umbrella's portfolio page from the service's home
+ * page. They share a pathname and nothing else: one asks "does anyone visit the
+ * portfolio", the other "does anyone visit the index", and bucketing both as
+ * `home` made the first question unanswerable — the umbrella could have had zero
+ * visitors since launch and the figure would have looked identical.
+ */
+export function classifyPath(pathname, { apex = false } = {}) {
+  if (pathname === '/' || pathname === '/index.html') return apex ? 'apex_home' : 'home';
   if (pathname === '/llms.txt' || pathname === '/llms-full.txt') return 'llms_txt';
   if (pathname === '/robots.txt') return 'robots';
   if (pathname === '/sitemap.xml') return 'sitemap';
@@ -74,6 +82,12 @@ export function classifyPath(pathname) {
   // Separate bucket from 'audit' on purpose: free-score vs paid-audit counts are
   // the conversion rate of the funnel.
   if (pathname === '/api/score') return 'score_free';
+  // The router's two paid endpoints get their own buckets for the same reason
+  // `audit` has one: a paid endpoint's traffic is the only number that says
+  // whether the thing is being bought, and `/api/*` as one bucket buries it
+  // under the free registry reads that dominate it by an order of magnitude.
+  if (pathname === '/api/liveness') return 'liveness';
+  if (pathname === '/api/route') return 'route';
   if (pathname === '/api/stats.json') return 'stats';
   if (pathname === '/api/x402/info') return 'x402_info';
   if (pathname === '/api/revenue.json') return 'revenue';
