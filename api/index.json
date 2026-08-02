@@ -1,22 +1,7 @@
 {
-  "count": 41,
-  "updated": "2026-08-02",
+  "count": 40,
+  "updated": "2026-08-01",
   "listings": [
-    {
-      "slug": "register-path-verification",
-      "name": "Register Path Verification",
-      "url": "https://110kc3.github.io/",
-      "description": "Temporary listing used to verify the autonomous [register] workflow end to end after substantial changes to process-issue.mjs. Scheduled for removal immediately after the run is confirmed.",
-      "category": "other",
-      "pricing": "free",
-      "tags": [
-        "test"
-      ],
-      "created": "2026-08-02",
-      "github_user": "110kc3",
-      "tier": "free",
-      "origin": "self-registered"
-    },
     {
       "slug": "100hires-ai-ats-recruitment-software",
       "name": "100Hires - AI ATS & Recruitment Software",

@@ -7,14 +7,6 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
-    <title>Register Path Verification</title>
-    <link>https://index.percall.dev/l/register-path-verification.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/register-path-verification.html</guid>
-    <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Temporary listing used to verify the autonomous [register] workflow end to end after substantial changes to process-issue.mjs. Scheduled for removal immediately after the run is confirmed.</description>
-  </item>
-  <item>
     <title>100Hires - AI ATS &amp; Recruitment Software</title>
     <link>https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</guid>
