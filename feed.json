@@ -6,6 +6,18 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/register-path-verification.html",
+      "url": "https://index.percall.dev/l/register-path-verification.html",
+      "title": "Register Path Verification",
+      "content_text": "Temporary listing used to verify the autonomous [register] workflow end to end after substantial changes to process-issue.mjs. Scheduled for removal immediately after the run is confirmed.",
+      "date_published": "2026-08-02T00:00:00Z",
+      "tags": [
+        "other",
+        "test"
+      ],
+      "external_url": "https://110kc3.github.io/"
+    },
+    {
       "id": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
       "url": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
       "title": "100Hires - AI ATS & Recruitment Software",

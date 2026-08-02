@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 40 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 41 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -221,7 +221,14 @@ one.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (40)
+## All listings (41)
+
+### Register Path Verification (register-path-verification)
+- url: https://110kc3.github.io/
+- category: other · pricing: free · tags: test
+- Temporary listing used to verify the autonomous [register] workflow end to end after substantial changes to process-issue.mjs. Scheduled for removal immediately after the run is confirmed.
+- listing JSON: https://index.percall.dev/listings/register-path-verification.json
+- listing page: https://index.percall.dev/l/register-path-verification.html
 
 ### 100Hires - AI ATS & Recruitment Software (100hires-ai-ats-recruitment-software)
 - url: https://100hires.com/mcp

@@ -29,7 +29,7 @@
     {
       "id": "search_products",
       "name": "Search the index",
-      "description": "GET /api/search?q=... searches 40 registered AI products by free text, category or tag. Free, no authentication. Also callable as an MCP tool at /mcp.",
+      "description": "GET /api/search?q=... searches 41 registered AI products by free text, category or tag. Free, no authentication. Also callable as an MCP tool at /mcp.",
       "tags": ["discovery", "directory", "search"],
       "examples": ["Find MCP servers for search", "List every agent-category product"],
       "inputModes": ["application/json"],
