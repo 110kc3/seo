@@ -134,6 +134,41 @@ Three decisions inside it:
   by the minute. Records expire after 180 days, so endpoints nobody asks about
   again do not accumulate forever.
 
+### Verified with real money, 2026-08-02
+
+`clients/pay_liveness.mjs both`, paid from the test payer
+`0xC8b3424936Af77D8684fa2f78391Fc7c0f3387D4`. **$0.010000 exactly** left that
+wallet and arrived at the receiving address — two settlements of $0.005, both
+HTTP 200 with a receipt header, on Base mainnet through the CDP facilitator.
+
+This was worth spending, because four things could only be true or false in
+production:
+
+1. **A paid GET settles.** Every prior settlement on this rail bought a POST
+   `/api/audit`. A GET carries its parameters in the resource URL of the
+   challenge, which is a different string through the payment layer, and §4.4 is
+   this repo's standing reminder that green tests and a working deploy can still
+   sit on top of a runtime divergence.
+2. **We can read a 402 we did not write.** Every fixture in the test suite was
+   written by me from our own implementation. Against real endpoints:
+   `2s.io` quoted **four** accepted options in one challenge — more than any
+   fixture — and three independent currency-conversion endpoints each parsed
+   cleanly, with the right `payTo`, `asset_name` and decimals.
+3. **Live quotes agreed with the catalog** where both existed
+   (`x402currencyconvert` catalogued at $0.002, quoted 2000 atomic). The
+   endpoint's value is in showing when they *disagree*, and it can now be
+   believed when they do not.
+4. **History recorded its first real observations**, and correctly withheld the
+   uptime ratio at one probe rather than publishing "1 of 1".
+
+Product note from the same run: all three routed candidates were alive and
+paywalled, so the routing answer was genuinely useful on its first real query
+rather than a list of dead links — which is the outcome the catalog's 97.2%
+liveness figure predicted but had never demonstrated end to end.
+
+Payer gas was zero, and that is not luck: EIP-3009 authorizations are gasless for
+the signer, and the facilitator submits. The payer wallet holds no ETH at all.
+
 ### Still to build
 
 - **The monitoring product on top.** History is the input; the webhook — *your

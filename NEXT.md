@@ -401,6 +401,17 @@ improves the more the service is used.** A cache hit is not an observation, and
 the uptime ratio is withheld below three of them rather than published as
 "1 of 1".
 
+**Paid end to end on mainnet, 2026-08-02, and it cost $0.01.** `clients/pay_liveness.mjs both`
+settled twice through the CDP facilitator; exactly $0.010000 left the test payer
+and arrived at the receiving address. It bought four things no test could:
+a **paid GET** settles (every prior settlement here was a POST), we can parse a
+402 **we did not write** (`2s.io` quoted four options in one challenge — more
+than any fixture), live quotes agreed with the catalog where both existed, and
+the history recorded its first real observations while correctly withholding the
+uptime ratio at one probe. All three routed candidates came back alive and
+paywalled, so the first real routing query returned a useful answer rather than
+a list of dead links.
+
 **239 tests** (was 216). Not yet done: the monitoring product on top of the
 history (`consecutive_failures` is the field an alert would fire on), and a human
 page — browsers are 46% of traffic and this ships agent-facing only.
