@@ -5,7 +5,7 @@ other doc in this repo is a *record* of what happened; this one is the *queue*.
 
 - `TODO.md` — the changelog. 450 lines, almost all of it done work. Do not scan it for pending items.
 - `docs/distribution.md` — the channel research and the paste-ready form answers. Reference material, not a queue.
-- `docs/agent-readiness-2026.md` — the 2026 spec gap analysis. Phases 1, 3, 5 done; Phase 2 and the Phase 4 decision are listed below.
+- `docs/agent-readiness-2026.md` — the 2026 spec gap analysis. **All five phases are now done** (Phase 2 and the Phase 4 decision closed 2026-08-02); kept for the reasoning and the adoption caveats.
 - `docs/show-hn.md` — the draft to post. Reference material.
 - `docs/review-2026-07-29.md` — a point-in-time review, now historical.
 
@@ -14,6 +14,12 @@ older docs. Where a doc disagrees with this file, this file is right.
 
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
+
+> **Updated 2026-08-02, second pass.** Kamil submitted tally.so, llmstxt.site and
+> the Glama connector, and decided §1.4 (Content Signals — all three yes), §1.5
+> (score the 2026 signals) and §1.6 (verify the register path). All three are
+> **shipped and live**; what they turned up is in §4. What is left on your side
+> is now the Show HN, one form, and two optional items.
 
 ---
 
@@ -37,72 +43,43 @@ any turned up"* or *"Show HN: 7% of my traffic is AI crawlers. None of them will
 pay 5 cents."* (the second needs its number updated to 10.6%). The three comment
 threads to expect and the prepared answers are at the bottom of `docs/show-hn.md`.
 
-### 1.2 Three directory submissions — ~10 minutes of pasting
+### 1.2 One directory submission left — ~4 minutes
 
-All three are browser forms with no API. Two of the five channels are now done
-(§3), so this is what is left. **Every answer is prepared in
-`docs/distribution.md` §4b** — field labels were read off the live forms, and
-both constrained dropdowns are already resolved.
+You did tally.so (directory.llmstxt.cloud) and llmstxt.site. **Only
+mcpservers.org remains.** Answers are in `docs/distribution.md` §4b(d).
 
-| # | channel | where | notes |
-|---|---|---|---|
-| a | directory.llmstxt.cloud | Tally form, https://tally.so/r/wAydjB | No account. Adoption-story text is written for you in §4b(b). Say **no** to sponsorship. |
-| b | llmstxt.site | /submit | Only channel that asks for `llms-full.txt`; both URLs are in the §4b table. |
-| c | mcpservers.org | /submit | Category **`Search`**. Link should be the **repo**, not the site. Skip the $39 "premium review". |
+| channel | where | notes |
+|---|---|---|
+| mcpservers.org | /submit | Category **`Search`**. Link should be the **repo** (`https://github.com/110kc3/seo`), not the site — reviewers there look for source. Skip the $39 "premium review"; the free queue is the same directory. |
 
 **Submit `https://index.percall.dev` and nothing else.** Not the apex, not
 `index.kc-it.pl`, not `110kc3.github.io/seo/`. This matters more than it sounds:
-the llms-txt-hub entry that merged today went in as `http://percall.dev/`, and
-now needs a correction PR (§2.3).
+the llms-txt-hub entry that merged went in as `http://percall.dev/`, and now
+needs a correction PR (§2.3).
 
-### 1.3 Optional: Glama connectors — ~2 min
+### ~~1.3 Glama connectors~~ — done
 
-The repo listing is done (§3.2). The *connectors* listing is a separate,
-lower-value channel — https://glama.ai/mcp/connectors → "Add Server", URL
-`https://index.percall.dev/mcp`, transport streamable-http, auth none. It
-produces **no badge and unblocks nothing**, so it is genuinely optional.
+You submitted it. Nothing further; it produces no badge, so it unblocked nothing,
+which is why it was optional.
 
-*If you already did this when you did the repo listing, tell me and I will strike it.*
+### ~~1.4 Content Signals~~ — decided and shipped
 
-### 1.4 Decision: what should Content Signals say?
+`Content-Signal: search=yes, ai-input=yes, ai-train=yes`, live in `robots.txt`.
+The template carries the reasoning next to the value, because it is the opposite
+of the common default and the next person to read it would otherwise assume it
+was copied without thinking.
 
-*One line in `templates/robots.txt`. Five minutes of my time once you answer.*
+### ~~1.5 Score the 2026 signals~~ — decided and shipped, and it moved your badges
 
-Cloudflare's default is `search=yes, ai-train=no`, written for a publisher
-protecting an archive. **That default is wrong for this site** — it is a
-directory whose entire purpose is to be consumed by models, so being in training
-data is distribution, not leakage.
+Live as check set **v2**, now the default. Details and the exact damage in §4.2 —
+**six of your eight previously-graded listings dropped A to B.** That is the
+decision working as intended rather than a fault, but you should see the numbers
+before anyone else does.
 
-My recommendation: `Content-Signal: search=yes, ai-input=yes, ai-train=yes`.
+### ~~1.6 Re-verify the register path~~ — done, and it found two real bugs
 
-It is a call about your content, so it is yours. Only ~4% of sites declare it
-and Cloudflare scores it, so it is cheap differentiation either way.
-
-### 1.5 Decision: should the six 2026 signals count toward the grade?
-
-`/api/score` already **detects** Content Signals, the A2A 1.0 card, the MCP
-server card, the RFC 9727 API catalog, the Agent Skills index and Web Bot Auth —
-and deliberately does not score any of them, so nobody's grade has moved.
-
-Promoting them into the score is the revenue-relevant half, and it is a real
-decision because **it moves badges rendering in other people's READMEs**, and
-several of your own fleet sites would drop from A to B overnight through no
-change of their own. Doing it properly needs a versioned check set (v1 = 13
-checks, v2 = extended) and a fleet re-score *before* announcing.
-
-Say go and I will do it that way. Say no and it stays as reporting, which is
-already useful.
-
-### 1.6 Decision: re-verify the register path?
-
-It has not executed since 2026-07-09 and the code has changed substantially
-since. It now has 25 tests, but tests exercise the *script*, not the
-**workflow** — the issue trigger, token permissions, the commit-and-push retry
-loop and the bot comment are untested by anything but a real run.
-
-Verifying it means opening a real `[register]` issue on the public repo, which
-creates a public artifact and a real listing. That is your call, not mine. Say
-the word and I run it end to end and delete the listing afterwards.
+Ran end to end on the public repo (issues #7 and #8), listing removed afterwards
+as promised. It was worth doing: see §4.3. Both bugs are fixed and verified.
 
 ### 1.7 Optional, low urgency
 
@@ -176,12 +153,7 @@ says "Point the hub at index.kc-it.pl".
 Says `/mcp` offers four tools; it answers six (see §2.1). Trivial, but this repo
 sells the idea that its own machine-readable surfaces do not lie.
 
-### 2.6 Ship the Content Signals line — gated on §1.4
-
-Five minutes once you decide. Listed separately so it is not lost between a
-decision and a task.
-
-### 2.7 Fix the self-audit blind spot properly
+### 2.6 Fix the self-audit blind spot — it now costs real points
 
 When this site audits *itself*, `fetcherFor()` uses the `ASSETS` binding, because
 a Worker cannot fetch its own hostname. `ASSETS` serves committed files only, so
@@ -196,9 +168,14 @@ the MCP tool-list fix removed. **The right fix is general: route same-host audit
 through the Worker's own fetch handler**, which needs a recursion guard first
 (auditing our own `/api/score` would otherwise re-enter).
 
-Impact is bounded and cosmetic — signals are unscored, external audits use real
-fetch and are correct, and only our own informational block understates us, by
-one. So it is real work with low urgency: worth doing, not worth rushing.
+**This stopped being cosmetic when v2 shipped.** While the signals were unscored
+it cost us nothing; now it costs three points, and it is the entire reason our
+own site reads **A 98** rather than 100 in `scores.json`. We are the only site in
+the fleet the audit is wrong about, and we are wrong about ourselves in the
+understating direction — the one nobody would think to check.
+
+External audits still use a real fetch and are correct, so nothing anyone else
+sees is affected. Promoted from "worth doing" to the next engineering item.
 
 ---
 
@@ -212,7 +189,85 @@ one. So it is real work with low urgency: worth doing, not worth rushing.
 
 ---
 
-## 4. Done — stop looking for these
+## 4. Shipped today, and what it turned up
+
+### 4.1 Content Signals
+
+`Content-Signal: search=yes, ai-input=yes, ai-train=yes`, live in `robots.txt`,
+with the reasoning written beside the value. Nothing further.
+
+### 4.2 The 2026 signals are scored — and six of your badges moved
+
+Live as check set **v2**, now the default. `v1` still exists and still scores
+exactly the thirteen, so any grade published before today stays reproducible;
+every result and every row of `scores.json` records which set produced it.
+
+Seven signals promoted, **every one weighted below the cheapest 2025 check**
+(`https`, 5) because under 15% of the web publishes them: Content Signals, the
+A2A 1.0 card path and markdown negotiation at 3; the MCP server card, API
+catalog, Agent Skills index and Web Bot Auth directory at 2. Total 17, so the
+scale is 122 rather than 105.
+
+**The cost, which is the part you should look at:**
+
+| listing | v1 | v2 |
+|---|---|---|
+| bankier-street-bets | A 100 | **B 89** |
+| polish-sweepstakes | A 100 | **B 89** |
+| puzle | A 100 | **B 89** |
+| rentgen-ofert | A 100 | **B 89** |
+| przetargimiejskie | A 100 | **B 86** |
+| stare-aparaty | A 90 | **B 86** |
+| agent-readability-service | A 90 | A 95 |
+| ai-product-index | A 100 | A 98 |
+
+Six of eight drop a letter having changed nothing. The two that hold are the two
+publishing 2026 surfaces, which is exactly what the weights were chosen to do —
+but if that trade looks wrong to you now that it is concrete, the weights are one
+table in `worker/audit.js` and a test pins the resulting grade, so changing my
+mind costs minutes rather than an afternoon.
+
+This was also the **first score run to cover all forty listings**; the other
+thirty-two had never been graded at all. Which surfaced a latent bug: the free
+score's 20/hour/IP limit was set when the registry held eight listings, so the
+next Monday cron would have been refused after the twentieth — and refused
+*quietly*, since the scorer keeps the previous grade on failure and those
+thirty-two had none. Raised to 60.
+
+### 4.3 The register path works — after two real bugs it exposed
+
+Worth having done. Both bugs were invisible to the 25 tests covering
+`process-issue.mjs`, because neither is in the script.
+
+**The account cap counted curated entries.** The first run (#7) was refused:
+`account 110kc3 already has 40 listings (max 10)`. Correct by the old rule and
+wrong by intent — the 40 are 30 curated mirrors and 10 pre-launch seeds, none of
+them submissions. It would have refused every future self-registration you ever
+made. Provenance is now a server-set `origin` field that the cap reads, rather
+than the self-reported `submitted_by` that merely described it. It has to be
+server-set: a cap keyed on `submitted_by` is lifted by typing
+`registry (curated)` into a field nobody can validate.
+
+**Accepted listings have not been publishing since the Cloudflare migration.**
+The second run (#8) accepted, wrote, built, committed, pushed — and the site
+never rebuilt. GitHub does not trigger `on: push` workflows for pushes made with
+the default `GITHUB_TOKEN`, and `deploy.yml` is `on: push`. So every accepted
+registration has been committed and then left unpublished until an unrelated
+human push happened to carry it out, **while the bot told the submitter "the site
+redeploys within about a minute of this comment"**. On GitHub Pages this worked,
+because Pages deploys on push whoever pushed; turning publishing into a workflow
+moved it under the recursion guard and nothing failed loudly enough to notice.
+`register.yml` now dispatches `deploy.yml` explicitly.
+
+Had a real agent registered in the last week, its listing would have 404'd at the
+URL the bot handed it. That is the finding, and no test could have produced it.
+
+The verification listing was removed as promised; the registry is back to 40 and
+the page 404s.
+
+---
+
+## 5. Done — stop looking for these
 
 Verified live 2026-08-02 unless noted.
 
@@ -224,6 +279,9 @@ Verified live 2026-08-02 unless noted.
 | **awesome-mcp-servers** | ✅ Submitted (#11152) — now waiting, see §3. |
 | **Awesome-llms-txt** | ✅ Submitted (#114) — now waiting, see §3. |
 | **wong2/awesome-mcp-servers** | ❌ N/A — no longer accepts PRs, redirects to mcpservers.org (§1.2c). |
+| **directory.llmstxt.cloud** | ✅ Submitted by Kamil 2026-08-02 (Tally). Curation team; no confirmation email. |
+| **llmstxt.site** | ✅ Submitted by Kamil 2026-08-02. The one channel that does confirm by email. |
+| **Glama connectors** | ✅ Submitted by Kamil 2026-08-02. No badge, unblocks nothing — a channel in its own right. |
 | **Domain-root discovery repo** | ✅ Published 2026-07-10. Content is stale (§2.4). |
 
 Also settled and not worth re-opening: the mainnet rail (six real settlements),
@@ -234,7 +292,69 @@ and agent-readiness Phases 1, 3 and 5.
 
 ---
 
-## 5. If you only do one thing in each column
+## 6. If you only do one thing in each column
 
-- **You:** post the Show HN on Tuesday (§1.1). Everything else on your list is minutes of pasting or a decision that can wait a week.
-- **Me:** the Glama badge on PR #11152 (§2.1). It has been the blocker on a 90k★ listing for four days and it cleared this morning.
+- **You:** post the Show HN on Tuesday (§1.1). It is the only item left on your list with real upside; the rest is one form and two optionals.
+- **Me:** the Glama badge on PR #11152 (§2.1). It is the last edit between a 90k★ listing and a maintainer, and its blocker cleared this morning.
+
+---
+
+## 7. Is $0.05 too expensive?
+
+Asked 2026-08-02. Answered against the funnel rather than intuition — the
+crossed client-type × path data that `/api/stats.json` cannot show is now
+readable with `gh workflow run cf-admin -f action=stats-funnel`.
+
+**Who actually meets the 402**, 30-day window, 49 requests to `/api/audit`:
+
+| client type | 4xx (incl. the 402) | other |
+|---|---|---|
+| script | 14 | 1 × 3xx |
+| other (non-browser, unclassified) | 14 | 4 × 2xx, 2 × 5xx |
+| browser | 8 | 5 × 3xx |
+| **ai_crawler** | **1** | — |
+
+I expected this to show a wall of wallet-less crawlers, which would have settled
+the question immediately. **It does not** — exactly one of 49 was a self-declared
+AI crawler. The population meeting the paywall is mostly scripted, non-browser
+clients: the kind of caller that *could* in principle pay.
+
+So the "they physically cannot buy" argument is weaker than I assumed. What still
+points away from price:
+
+- **It is zero, not low.** Price sensitivity normally shows up as a poor
+  conversion rate, not the total absence of one. Zero of ~35 plausible payers
+  reads as a missing capability or a missing reason, not a number set too high.
+- **The free tier may already be enough.** `/api/score` served 123 calls to the
+  same client mix — **2.5× the paid endpoint's traffic** — and returns the grade
+  plus every failing check by name. What the payment buys is *fix snippets*,
+  which is precisely what an LLM-driven caller is best at generating for itself.
+  That is a product-boundary problem, and no price fixes it.
+- **$0.05 is negligible to anything that can pay at all.** For a caller with a
+  funded wallet, five cents versus one is not a decision. The band where price
+  actually bites is narrow and probably empty today.
+
+What points toward it: we are **3.6× the catalog median** of $0.014, and an agent
+with a per-call spending cap would be excluded by a threshold rather than by
+reluctance. That is a real mechanism and I cannot rule it out.
+
+**Recommendation: keep $0.05 until after the Show HN.** The post *is* the
+experiment — it puts humans with agent tooling in front of the endpoint, the only
+population that has ever plausibly been able to buy. Changing the price in the
+same week means learning nothing from either number. If the post brings traffic
+and conversion is still zero, cut to $0.01 then and you have a clean before/after
+instead of two variables moving at once.
+
+There is a rhetorical cost too: *"I charged five cents and nobody paid"* is the
+line the whole post is built on. *"I charged one cent and nobody paid"* is a
+weaker sentence and a weaker finding.
+
+**The more promising lever is the free/paid boundary, not the number.** If the
+free grade already answers the caller's question, the paid tier has no job at any
+price. Worth considering after the post: keep the letter grade free but move the
+per-check failure list behind the paywall, or sell something the free tier cannot
+substitute for — a multi-page crawl, or monitoring over time. Say the word and I
+will write that up properly.
+
+Whatever you decide, it stays cheap to change: `audit_price_atomic` in
+`site.config.json` is a single value.
