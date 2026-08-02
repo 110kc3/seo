@@ -199,9 +199,56 @@ because the build must stay a pure function of its inputs and a citable number
 has to be the same number tomorrow. Seeded with the day-4 and day-7 gate reads
 from TODO.md, marked `backfilled`.
 
-**Still not done from that list:** item 4, the `percall.dev` apex — it still 308s
-to the index rather than describing the portfolio, and `www.percall.dev` does not
-resolve at all. Not picked, carried forward.
+**Item 4 landed too** — see §2c.
+
+## 2c. The umbrella domain now says what it is
+
+`percall.dev` was bought as the umbrella for a portfolio of machine-callable paid
+services and then pointed straight at the first one, so the domain whose whole
+job is to name the portfolio answered a 308 and described nothing.
+`www.percall.dev` did not resolve at all.
+
+| host / path | now |
+|---|---|
+| `percall.dev/` | **200** — the portfolio page |
+| `percall.dev/<anything else>` | 308 → `index.percall.dev/<same>` |
+| `www.percall.dev/` | 308 → `percall.dev/` |
+| `www.percall.dev/<anything else>` | 308 → `index.percall.dev/<same>` |
+| `index.kc-it.pl/` | 308 → `index.percall.dev/` (retired, unchanged) |
+
+**The exception is exactly one path wide, and a test holds it there.** The
+canonical-host discipline is what stops a directory recording
+`percall.dev/llms.txt` as this site's llms.txt, and that discipline has already
+cost one round of corrections upstream. `apex_host` in `site.config.json` is now
+a distinct concept from a retired alias, so `index.kc-it.pl` still redirects at
+its root while the apex does not.
+
+**What the page says is smaller than what the domain implies**, deliberately: one
+service is live, the page says one service is live, and further services are
+described as intent rather than listed as inventory. It leads with the finding
+rather than the pitch — agents are arriving, the share is rising, and not one has
+ever paid.
+
+**Two bugs attaching www would otherwise have introduced, both fixed in the same
+change:**
+
+1. Sending www to the *index* hands whoever typed the umbrella domain a different
+   page than the umbrella serves. Its root now goes to the apex; deeper paths go
+   straight to the canonical host, so neither case costs two hops.
+2. Worse: www is now a hostname this Worker answers on, **and a Worker cannot
+   fetch its own hostnames** — Cloudflare answers 522. An audit of www would have
+   settled the payment and then failed, which is the precise bug `host_aliases`
+   was created for after it happened once with real money. www is in that list,
+   and the test asserts the invariant rather than the instance.
+
+**One more found while verifying:** `canonicalTarget` mapped `percall.dev/` to
+`/`, so auditing the apex graded the *index* and published the score under the
+apex's name — grading one page and labelling it another, which is exactly the
+defect this endpoint is sold to detect. It reported 100 because both pages scored
+100, which is the kind of luck that hides a bug for months. Fixed; the apex now
+audits at **A 98**, and the missing 3 points are honest: `/apex.html` has no
+markdown twin, and inventing one that describes a different service would be
+worse than the two points.
 
 ---
 
