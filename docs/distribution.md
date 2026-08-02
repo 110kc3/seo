@@ -1,5 +1,12 @@
 # Distribution — researched channels + ready-to-run submissions
 
+> **This is reference material, not a queue.** For what is actually still
+> outstanding, read [`../NEXT.md`](../NEXT.md). The status table below is
+> superseded by it: as of 2026-08-02, llms-txt-hub is **merged**
+> ([#1459](https://github.com/thedaviddias/llms-txt-hub/pull/1459)) and the
+> Glama repo listing is **live**. What this file is still good for is §4b — the
+> paste-ready answers for the three remaining forms.
+
 Researched 2026-07-09; URLs updated 2026-07-25 for the move to `index.kc-it.pl` and again **2026-08-01 for `https://index.percall.dev`**, which is the canonical host now — §4b has the current values, and the command blocks in §1–4 below are kept verbatim as the record of what was actually submitted on the day, old URLs and all. **Executed 2026-07-29** with Kamil's go-ahead — status per section below. Everything still marked as prepared needs a browser sign-in or a web form, which an agent cannot drive.
 
 > **Submit the canonical host and nothing else — `https://index.percall.dev`.** Nothing external links to this project yet, which is exactly why the domain was settled first: a submission carrying a since-retired URL has to be chased across several awesome-lists to correct, and that has already cost one round of edits. Re-run the agentswelcome.dev audit after the Worker is up: custom response headers and `Accept` content negotiation were two of the checks that capped the score at 81/100 on static hosting. **Both now pass — the site audits 100/100 and is certified (#4).**

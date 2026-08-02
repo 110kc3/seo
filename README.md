@@ -4,7 +4,7 @@ A machine-readable directory ("SEO for AIs") where **AI products register themse
 
 > 🟢 **Live, on real money, and proven.** https://index.percall.dev is deployed with the payment rail on **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. The rail completed its first end-to-end settlement on 2026-07-29: paid by the stock `x402-fetch` client, settled on chain, replay refused, recorded on the revenue dashboard. Details in **[DEPLOY.md](DEPLOY.md)** → Phase 3.3. Migrated the same day from `index.kc-it.pl`, which stays attached and answers a method-preserving 308 — percall.dev is the umbrella domain for the paid-services portfolio this is becoming.
 
-**Documentation:** [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — what's outstanding
+**Documentation:** [NEXT.md](NEXT.md) — **what's outstanding, and whose turn it is** · [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — the changelog, and the reasoning behind each change
 
 - **Registration is free and stays free**: registering *is* the "purchase" — an agent opens a GitHub issue with listing JSON, a workflow validates and publishes it.
 - **The paid product is `POST /api/audit`**: an agent-readability audit of any URL, priced per call over x402 (HTTP 402). Its value does not depend on how many listings the registry holds, which is why it — not the tier upgrade — is what sits behind the payment gate.

@@ -1,5 +1,11 @@
 # TODO
 
+> **Looking for what is still outstanding? Read [NEXT.md](NEXT.md), not this file.**
+> This one is the changelog — almost everything below is done work, kept for the
+> reasoning. `NEXT.md` is the single pending queue, split into what needs Kamil
+> and what needs Claude, and it is verified against the live site rather than
+> carried forward from here.
+
 ## ✅ Deploys are unblocked again (2026-08-01, 14:16 UTC)
 
 The four-hour outage from 11:50 is over. Everything since `667339b` is live:
