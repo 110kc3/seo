@@ -94,7 +94,17 @@ export function canonicalTarget(target, cfg) {
 const CACHE_PREFIX = 'score:v1:';
 const CACHE_TTL_SECONDS = 3600;
 const RATE_PREFIX = 'score:rl:';
-const RATE_LIMIT_PER_HOUR = 20;
+// 20 was set when the registry held eight listings. It now holds forty, and the
+// weekly scorer audits every one of them from a single runner IP — so the limit
+// had become tight enough to throttle our own cron, which fails *quietly*:
+// score-listings keeps the previous grade on error, and thirty-two of those
+// listings have no previous grade to keep. The badges would have read "not
+// scored yet" indefinitely while every run looked green.
+//
+// 60 covers the fleet with room to grow. What the limit is actually defending
+// is unchanged: an uncached score costs ~14 outbound fetches, cache hits are
+// free and unmetered, and the paid endpoint is not rate limited at all.
+const RATE_LIMIT_PER_HOUR = 60;
 
 const json = (body, status = 200, headers = {}) =>
   new Response(JSON.stringify(body, null, 2) + '\n', {
