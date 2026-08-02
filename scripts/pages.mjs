@@ -53,6 +53,34 @@ const pct = (x, digits = 1) => `${(Number(x) * 100).toFixed(digits)}%`;
 const usd = (n) => (Number(n) < 0.01 ? `$${Number(n).toFixed(4)}` : `$${Number(n).toFixed(2)}`);
 
 /**
+ * A meta description that ends somewhere a human would end one.
+ *
+ * This was a hard `.slice(0, 160)`, which cut `/apex.html` at a comma and
+ * `/x402.html` in the middle of a word — on a site that sells
+ * `title_and_description` as a graded check and ships a snippet telling other
+ * people to keep theirs under 160. The cap is right; cutting mid-token is not.
+ *
+ * Prefer a sentence boundary, fall back to a word boundary, and never leave the
+ * string hanging on punctuation that promised more text was coming. A sentence
+ * is only accepted if it uses most of the budget — otherwise a description that
+ * opens with a short sentence would publish only that opener and drop the part
+ * that actually says what the page is.
+ */
+export function metaDescription(text, max = 160) {
+  const s = String(text).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+
+  // A full sentence needs no ellipsis, so it may use the whole budget; a
+  // truncation has to leave room for the one it does need.
+  const sentence = s.slice(0, max).lastIndexOf('. ');
+  if (sentence >= max * 0.7) return s.slice(0, sentence + 1);
+
+  const budget = s.slice(0, max - 1);
+  const cut = budget.lastIndexOf(' ');
+  return `${(cut > 0 ? budget.slice(0, cut) : budget).replace(/[\s,;:—–-]+$/, '')}…`;
+}
+
+/**
  * The standard page shell. `depth` is how many directories deep the page sits,
  * so relative links resolve from `/checks/foo.html` as well as from `/x402.html`.
  */
@@ -64,12 +92,12 @@ export function page({ base, path, title, description, body, ld = null, depth = 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
-<meta name="description" content="${esc(description.slice(0, 160))}">
+<meta name="description" content="${esc(metaDescription(description))}">
 <link rel="canonical" href="${base}${path}">
 <link rel="alternate" type="text/markdown" href="${up}llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description.slice(0, 160))}">
+<meta property="og:description" content="${esc(metaDescription(description))}">
 <meta property="og:url" content="${base}${path}">
 <meta property="og:image" content="${base}/assets/og.png">
 ${ld ? `<script type="application/ld+json">\n${jsonLd(ld)}\n</script>` : ''}
@@ -350,7 +378,9 @@ no justification needed, and it is removed on the next build.</p>
     base,
     path: `/${kind === 'x402' ? 'x402' : 'mcp-servers'}.html`,
     title: `${title} — AI Product Index`,
-    description: lede.replace(/<[^>]+>/g, '').slice(0, 160),
+    // Unsliced on purpose — `page()` trims to a boundary, and pre-cutting here
+    // would hand it a string already broken mid-word.
+    description: lede.replace(/<[^>]+>/g, ''),
     ld: {
       '@context': 'https://schema.org',
       '@type': 'Dataset',
@@ -632,7 +662,7 @@ snippet with your origin already in it.</p>
       base,
       path: `/checks/${item.id}.html`,
       title: `${item.label} — agent-readability checklist`,
-      description: `${WHY[item.id] ?? item.fix}`.slice(0, 160),
+      description: `${WHY[item.id] ?? item.fix}`,
       depth: 1,
       ld: {
         '@context': 'https://schema.org',
@@ -869,7 +899,10 @@ operator.</p>
     base: apexBase,
     path: '/',
     title: 'percall.dev — paid services for software that buys its own inputs',
-    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index — a free agent-readability grade for any URL, a $0.05 per-check audit, and 24,700 catalogued callable endpoints.',
+    // Written to fit the 160-char budget whole. The umbrella's snippet is the
+    // first thing a search result says about the portfolio, so it gets a
+    // complete sentence rather than whatever survives a truncation.
+    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index — agent-readability grades, a $0.05 audit, 24,700 callable endpoints.',
     crumb: '',
     footer: `Machine-readable entry points live on the service host:
 <a href="${serviceBase}/llms.txt">llms.txt</a> ·

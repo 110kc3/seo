@@ -18,7 +18,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Two commits deep so the IndexNow step can ask git what this push
+      # changed. The default shallow clone has no parent to diff against.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v4
         with:
@@ -68,3 +72,18 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4 deploy
+
+      # Tell Bing/Yandex/Seznam what changed, once it is actually live. Only
+      # pages this push touched are submitted, and only ones the sitemap
+      # publishes — see scripts/indexnow.mjs. `|| true` is belt and braces on
+      # top of the script's own catch: a search-engine ping must never be the
+      # reason a deploy reports failure.
+      - name: Announce changed pages to IndexNow
+        if: steps.creds.outputs.ready == 'true'
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD 2>/dev/null || true)
+          if [ -n "$CHANGED" ]; then
+            node scripts/indexnow.mjs $CHANGED || true
+          else
+            echo "indexnow: no diff against the previous commit — nothing to announce"
+          fi

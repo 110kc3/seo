@@ -7,6 +7,7 @@ other doc in this repo is a *record* of what happened; this one is the *queue*.
 - `docs/distribution.md` — the channel research and the paste-ready form answers. Reference material, not a queue.
 - `docs/agent-readiness-2026.md` — the 2026 spec gap analysis. **All five phases are now done** (Phase 2 and the Phase 4 decision closed 2026-08-02); kept for the reasoning and the adoption caveats.
 - `docs/show-hn.md` — the draft to post. Reference material.
+- `docs/second-service.md` — the three candidates for a second service under the umbrella, and why the broker idea splits into a version worth building and one that needs a lawyer. Feeds the decision in §1.9.
 - `docs/review-2026-07-29.md` — a point-in-time review, now historical.
 
 **Everything below was verified live on 2026-08-02**, not copied forward from the
@@ -15,12 +16,18 @@ older docs. Where a doc disagrees with this file, this file is right.
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-08-02, fourth pass.** Every distribution channel is now
+> **Updated 2026-08-02, fifth pass.** Every distribution channel is now
 > submitted, all three of Kamil's decisions are shipped and live, and §2.1, 2.3,
-> 2.5 and 2.6 are done. **Your list is down to three optional items and a Show HN
-> deliberately held until ~25 Aug.** What the approved work turned up — five bugs,
-> two of them serious — is in §4. §2.4 is the one engineering item still open, and
-> it was not in the batch you asked for. §2b records the six pages shipped since.
+> 2.5 and 2.6 are done. What the approved work turned up — five bugs, two of them
+> serious — is in §4. §2.4 is the one engineering item still open, and it was not
+> in the batch you asked for. §2b records the six pages shipped since, §2c the
+> umbrella, **§2d the indexation pass that made the umbrella findable at all.**
+>
+> **Your list is now: a Show HN held until ~25 Aug, three optional items, and
+> four browser jobs for indexation (§1.8).** §1.9 is decided and §2e is built —
+> the second service is live in code: two paid endpoints that probe and route but
+> never pay, because you said you would not pay from your own wallet and that is
+> now a property of the deployment rather than a promise in a doc.
 
 ---
 
@@ -108,6 +115,66 @@ as promised. It was worth doing: see §4.3. Both bugs are fixed and verified.
 - **Stripe machine-payments access** — request it now because it moves slowly, not because you need it. The existing `pk_test_…` key is the card rail and unlocks nothing for x402.
 - **Cloudflare Monetization Gateway waitlist** — browser form; being on Cloudflare is the only prerequisite. Would let the same 402 metering cover `/api/index.json` and the two catalogs without new code. The catalogs are now the largest thing the site serves and `/api/audit` is the only metered surface, so this is worth more than it was.
 - **Delete `GLAMA_API_KEY`** — settled: nothing needs it. Glama's API is the Gateway (OpenAI-compatible inference); registry submission was a web form. Delete it rather than leave an unread credential lying around.
+
+### 1.8 Indexation — four browser jobs, and nobody else can do them
+
+*Added 2026-08-02. The code half of this is shipped (§2d); these four need a
+logged-in browser.*
+
+The apex went live today into a state where **no search engine had a route to
+it**: no sitemap carried it, nothing linked to it, and the one external link that
+did point at it is being corrected away by our own PR #1460. That part is fixed
+in code. What is left cannot be:
+
+1. **Google Search Console — verify `percall.dev` as a Domain property.** A
+   Domain property covers the apex, `www` and `index.` in one, which is the shape
+   this fleet actually has. Verification is one TXT record in the same Cloudflare
+   DNS zone the Worker already uses. Until this exists there is **no way to know
+   whether any of this is indexed** — `site:` in a browser is a rough proxy and
+   through a search API it is worthless (it returned French PLM consultancies).
+2. **Submit the sitemap in GSC**: `https://index.percall.dev/sitemap.xml`. It now
+   carries 73 URLs including the apex.
+3. **Bing Webmaster Tools — verify, and submit `https://percall.dev/` by hand.**
+   By hand for a reason: IndexNow proves control with a key file at
+   `https://<host>/<key>.txt`, and the apex serves exactly one path, so it cannot
+   host one. The canonical host is automated (§2d); the apex is one URL, once.
+   Bing matters beyond Bing — its index is what ChatGPT search reads.
+4. **Request indexing for `https://percall.dev/` in GSC** once verified. One URL,
+   one click, and it skips the wait for a crawl of a page with two inbound links.
+
+Optional after those: **IndexNow in Cloudflare** (Cache → Configuration) will
+ping on cache purge as well as on deploy. Harmless overlap with §2d, and it
+covers changes that do not come from a push.
+
+### ~~1.9 Pick a second service~~ — decided 2026-08-02: the non-custodial one
+
+*Raised by Kamil 2026-08-02, explored in [docs/second-service.md](docs/second-service.md).*
+
+Three candidates were examined: **liveness as a product**, **402-gating as a
+service**, and Kamil's **broker** idea (verify an endpoint answers, route the
+request, take ~$0.005).
+
+The finding that decides it: **an x402 payment is bound to its payee** — our own
+verifier refuses any authorization whose `to` is not our `payTo`
+(`worker/x402.js:275`), and so does everyone else's. A broker therefore cannot
+forward a caller's signature; it must collect and re-pay as merchant of record,
+which brings float, refund liability on a $0.005 margin, and a custody question
+that is plausibly a MiCA authorization rather than a checkbox. **That needs a
+qualified opinion, not mine.**
+
+The non-custodial version has none of those problems and sells the part that is
+actually scarce — *which endpoint, is it alive, what does it cost* — which is the
+liveness data this site already collects weekly and nobody else publishes.
+
+**Kamil's call, 2026-08-02: the non-custodial one — "I will not pay from my own
+wallet."** The custodial broker is shelved, 402-gating is a pass.
+
+That sentence is now a design invariant rather than a policy, because it can be:
+the Worker reads `X-PAYMENT` as a receiver and holds no key that could sign an
+EVM transaction. **The router probes; it never pays** — and since an unpaid probe
+returns the endpoint's own 402, and a 402 carries its terms, liveness and price
+come back in the same free request. Scope, endpoints and what still has to be
+built are in [docs/second-service.md](docs/second-service.md).
 
 ---
 
@@ -251,6 +318,92 @@ markdown twin, and inventing one that describes a different service would be
 worse than the two points.
 
 ---
+
+## 2d. Shipped 2026-08-02, fourth batch — the umbrella can now be found
+
+The apex page shipped this morning into a state where nothing could reach it.
+Four things were wrong; all four are fixed, and each is pinned by a test so the
+next generated page cannot reintroduce them.
+
+**1. Meta descriptions were cut mid-thought.** `page()` did a hard
+`description.slice(0, 160)`: `/apex.html` ended at a comma, `/x402.html` ended
+mid-word (`— whe`). The homepage was worse in a quieter way — its
+`<meta name="description">` was 166 characters while its `og:description` was a
+different, shorter string, so the two surfaces disagreed about what this site is.
+On a site that grades `title_and_description` for other people and ships a
+snippet telling them to stay under 160, this is the one to be embarrassed about.
+`metaDescription()` now cuts at a sentence boundary, falls back to a word
+boundary, and never leaves the string hanging on punctuation. The apex's own
+description was rewritten to fit whole rather than be trimmed.
+
+**2. The umbrella was in no sitemap.** `sitemap.xml` listed only the canonical
+host, and `percall.dev/sitemap.xml` 308s into that same file — so the one page
+whose job is to name the portfolio appeared in no sitemap anywhere. It is now
+listed. Cross-host entries are legitimate here because the apex's robots.txt
+resolves, via the same 308, to the one declaring this sitemap.
+
+**3. Nothing linked to it.** `index.html` mentioned the canonical host seven
+times and the umbrella zero, and `apex.html` was the only file in the repo
+containing the string `https://percall.dev`. The link only ever went downward.
+The homepage footer and `llms.txt` now link up, which also matters because the
+one external link that pointed at the apex is being corrected away by our own
+PR #1460 — after it merges, these are the only inbound links that exist.
+
+**4. There was no way to announce a change.** `scripts/indexnow.mjs` submits the
+pages a push actually changed to IndexNow (Bing, Yandex, Seznam — one endpoint),
+from `deploy.yml`, after the deploy succeeds. Two filters, both deliberate: a URL
+must be in the sitemap, so the sitemap stays the single list of what this site
+claims to publish; and it must be on the canonical host, because the key file
+proves control of one host and **the apex cannot host one** — it serves exactly
+one path. That is why §1.8 asks for the apex to be submitted by hand, once. The
+ping can never fail a deploy: the script catches, and the step is `|| true`.
+
+Not done, deliberately: **the apex still has no markdown twin**, so it audits at
+A 98 rather than 100 (§2c). Inventing an `apex.md` that described a different
+service to win two points would be the wrong trade, and it still is.
+
+## 2e. Shipped 2026-08-02, fifth batch — the second service exists
+
+`GET /api/liveness?url=…` and `POST /api/route`, $0.005 each, live in
+`worker/route.js` on the existing Worker. Full reasoning and the decisions inside
+it are in [docs/second-service.md](docs/second-service.md); the short version:
+
+**It sells freshness.** The catalogs and their weekly aggregates stay free — what
+nothing else publishes is whether an endpoint answers *right now* at the price it
+quotes *right now*, because the Bazaar keeps an entry for 30 days after its last
+settlement. That is the lesson of §7 applied: the audit's paid tier struggles
+because the free grade already answered the question, so this one sells the thing
+the free tier structurally cannot.
+
+**It never pays, and that is enforced rather than intended.** Three tests hold
+the invariant, and the third is structural: no module under `worker/` may set an
+outbound payment header. The probe is built from scratch with a two-header
+allowlist, because the caller's own request may carry an `X-PAYMENT`
+authorization and forwarding request headers to an arbitrary upstream would hand
+a signed credential to a stranger.
+
+**What it cost nothing to get:** an unpaid probe of a paid endpoint returns that
+endpoint's 402, and a 402 states its terms. Liveness and price arrive in the same
+free request, which is why the expensive-sounding half of this service is free to
+run.
+
+Three things it deliberately does not do: no MCP tools (MCP has no payment
+channel here, and a tool that can only say "pay me over HTTP first" is worse than
+no tool), no per-endpoint pages, and no charge for a query that matches nothing.
+
+**Per-endpoint history shipped with it.** Every answer carries that endpoint's
+record — probes, answered, consecutive failures, and how many of the last 30
+observations answered. The weekly cron could not be the source: it walks a
+rotating slice of 600, so it sees any given endpoint about twice a year and
+stores only the failures. The live probes are the better instrument — free, and
+aimed at exactly the endpoints someone paid to ask about — so **the paid answer
+improves the more the service is used.** A cache hit is not an observation, and
+the uptime ratio is withheld below three of them rather than published as
+"1 of 1".
+
+**239 tests** (was 216). Not yet done: the monitoring product on top of the
+history (`consecutive_failures` is the field an alert would fire on), and a human
+page — browsers are 46% of traffic and this ships agent-facing only.
 
 ## 3. Waiting on other people — nothing to do
 

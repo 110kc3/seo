@@ -28,6 +28,7 @@ import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { handleBadge } from './badge.js';
 import { handleSearch, handleAsk, handleMcp, handleCatalogSearch, CATALOGS } from './discovery.js';
+import { handleLiveness, handleRoute, ROUTE_RESOURCES } from './route.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
@@ -184,6 +185,25 @@ async function handleAudit(request, env, cfgObj) {
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }
 
+/**
+ * The payment gate the router endpoints use, as a closure over one request.
+ *
+ * They need the gate at a different moment than the audit does — /api/route
+ * charges only after the catalog has found something, so a query that matches
+ * nothing is free — so the gate is passed in rather than called inline. The
+ * money path is still `requirePayment` + `attachSettlement`, unchanged: there is
+ * one implementation of taking a payment here and this is not a second.
+ */
+const routeGate = (request, env, cfgObj, resourceUrl, method) => async (resource) => {
+  const gate = await requirePayment(request, env, cfgObj, {
+    amountAtomic: resolveX402(cfgObj)?.route_price_atomic,
+    resource: { url: resourceUrl, method, ...resource },
+  });
+  return gate.paid
+    ? { ok: true, attach: (response) => attachSettlement(response, gate.settlement, gate.version) }
+    : { ok: false, response: gate.response };
+};
+
 // --- public payment terms --------------------------------------------------
 
 // Lets an agent read the price without provoking a 402. Everything here is
@@ -217,6 +237,16 @@ function handleX402Info(cfgObj) {
       method: 'POST',
       amount: rail.audit_price_atomic,
       description: 'Agent-readability audit of one URL.',
+    }, {
+      url: `${BASE}/api/liveness`,
+      method: 'GET',
+      amount: rail.route_price_atomic,
+      description: ROUTE_RESOURCES.liveness.description,
+    }, {
+      url: `${BASE}/api/route`,
+      method: 'POST',
+      amount: rail.route_price_atomic,
+      description: ROUTE_RESOURCES.route.description,
     }],
     explorer: rail.explorer,
     docs: `${BASE}/llms.txt`,
@@ -284,6 +314,16 @@ export default {
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/badge.svg') {
         response = handleBadge(url, registry.listings ?? [], scores);
+      } else if (url.pathname === '/api/liveness') {
+        response = await handleLiveness(request, env, cfg, {
+          gate: routeGate(request, env, cfg, `${BASE}/api/liveness`, 'GET'),
+        });
+      } else if (url.pathname === '/api/route') {
+        response = await handleRoute(request, env, cfg, {
+          gate: routeGate(request, env, cfg, `${BASE}/api/route`, 'POST'),
+          catalogSearch: (key, searchUrl) => handleCatalogSearch(key, searchUrl, env, BASE),
+          base: BASE,
+        });
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));
       } else if (url.pathname === '/api/search') {

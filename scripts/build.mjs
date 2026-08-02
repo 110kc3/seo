@@ -14,6 +14,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
 const BASE = cfg.base.replace(/\/+$/, '');
 const REPO = cfg.repo;
+// The umbrella. Required rather than optional: the templates link up to it, and
+// a portfolio page nothing links to is a page search engines never find — which
+// is exactly the state percall.dev was in on the day it shipped.
+const APEX = cfg.apex_host;
+if (!APEX) throw new Error('site.config.json: apex_host is required — the site templates link up to the umbrella');
 
 // --- load + validate the source of truth ---
 const listingDir = join(ROOT, 'listings');
@@ -48,7 +53,7 @@ const readJson = (rel) => {
   try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
 };
 const fill = (s, extra = {}) =>
-  Object.entries({ BASE, REPO, COUNT: String(listings.length), ...extra })
+  Object.entries({ BASE, REPO, APEX, COUNT: String(listings.length), ...extra })
     .reduce((acc, [k, v]) => acc.replaceAll(`{{${k}}}`, v), s);
 
 const PAGE_CSS = `
@@ -360,6 +365,14 @@ pagePaths.push(['/compare.html', null]);
 
 const smUrls = [
   `  <url><loc>${BASE}/</loc></url>`,
+  // The umbrella, which is on another host and was therefore in no sitemap at
+  // all: this is the only sitemap the fleet publishes, and `percall.dev/
+  // sitemap.xml` 308s straight into it. Cross-host entries are legitimate when
+  // the sitemap is declared by the robots.txt of the host whose URLs it
+  // carries, and the apex's robots.txt resolves — via that same 308 — to the
+  // one declaring this file. Discovery still leans on the links added to
+  // index.html and llms.txt; this is the belt to their braces.
+  `  <url><loc>https://${APEX}/</loc></url>`,
   // The query endpoints belong in the sitemap even though they take
   // parameters: a crawler that reads sitemaps and nothing else would otherwise
   // never learn this site can be asked questions.
@@ -368,6 +381,16 @@ const smUrls = [
   ...pagePaths.map(([p, lastmod]) => `  <url><loc>${BASE}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`),
   ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
+// IndexNow's proof of control: the key, served as plain text at its own name.
+// Bing, Yandex and Seznam share one submission endpoint, and Bing's index is
+// what ChatGPT search reads — so this is the one channel where a push can be
+// announced rather than waited on. Only the canonical host gets one: the apex
+// serves exactly one path and cannot host a key file, which is why its single
+// URL is submitted by hand instead (NEXT.md §1.8).
+if (cfg.indexnow_key) {
+  writeFileSync(join(ROOT, `${cfg.indexnow_key}.txt`), `${cfg.indexnow_key}\n`);
+}
+
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);
 

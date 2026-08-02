@@ -236,6 +236,38 @@ facilitator; while no receiving address is configured it rejects with code
 API will not change shape when prices change — tier has been server-set since day
 one.
 
+## Which paid endpoint should I call? (the router)
+
+The catalogs above say what exists. These two say what is *alive right now* and
+what it charges right now — which is a different question, because the Bazaar
+keeps an entry for 30 days after its last settlement.
+
+- Probe one endpoint: GET {{BASE}}/api/liveness?url=https://example.com/paid
+- Rank candidates for a task: POST {{BASE}}/api/route with `{"q": "unit conversion", "max_price": 0.01}`
+
+Both are paid, per call, at the price quoted in {{BASE}}/api/x402/info. A query
+that matches nothing is not charged for.
+
+Every answer carries that endpoint's `history` — total probes, how many
+answered, consecutive failures, and how many of the last 30 observations
+answered. It is built from live probes rather than a crawl, so it deepens as an
+endpoint is asked about, and the uptime ratio is withheld below three
+observations rather than reported as "1 of 1".
+
+**This service never pays for anything and never holds your money.** It probes
+without paying — an unpaid request to a paid endpoint returns that endpoint's own
+402, and a 402 carries its terms — and it hands you the URL and the terms so that
+**you pay the endpoint directly, from your own wallet**. Nothing is proxied, so
+the operator you end up paying sees you, not us.
+
+## The umbrella
+
+This service is one of the paid, machine-callable services published under
+https://{{APEX}}/ — the portfolio page there names every service that is live
+and is the place a new one appears first. It is a page, not a copy of this one:
+every other path on that host redirects here, so this file stays the single
+llms.txt for the index.
+
 ## For humans
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/{{REPO}}/issues/new?template=hire.yml or email 110kc3@gmail.com.

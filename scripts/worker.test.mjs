@@ -622,8 +622,15 @@ test('no source directory is published as a static asset by accident', async () 
       .map((l) => l.replace(/^\//, '')),
   );
 
+  // The IndexNow key file is named after the key, so the expected name is
+  // computed rather than listed. A rotated key therefore fails this test on the
+  // orphan the old one leaves behind, which is the only moment anyone would
+  // notice a stale proof-of-control file still being served.
+  const cfg = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+
   // Everything here is site content on purpose.
   const published = new Set([
+    ...(cfg.indexnow_key ? [`${cfg.indexnow_key}.txt`] : []),
     '404.html', 'api', 'assets', 'dashboard.html', 'health.json', 'index.html',
     'l', 'listings', 'llms-full.txt', 'llms.txt', 'openapi.yaml', 'robots.txt',
     // Published for the same reason health.json is: the registry's own state
@@ -2026,7 +2033,7 @@ test('every query surface the manifests advertise is actually routed', async () 
   // promising an endpoint the router does not have.
   const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
   const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
-  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search'];
+  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/liveness', '/api/route'];
 
   assert.equal(manifest.interfaces.mcp, `${BASE}/mcp`);
   assert.equal(manifest.interfaces.nlweb, `${BASE}/ask`);
@@ -2317,6 +2324,55 @@ test('generated pages are all in the sitemap', async () => {
   }
   const checkPageCount = (sitemap.match(/\/checks\//g) ?? []).length;
   assert.ok(checkPageCount > 20, `expected a page per check in the sitemap, found ${checkPageCount}`);
+});
+
+test('the umbrella is reachable — sitemap entry plus a link from the pages agents read', async () => {
+  // The apex shipped with no sitemap entry and nothing anywhere linking to it:
+  // the only page whose job is to name the portfolio was the one page search
+  // engines had no route to. A canonical host that never links up is also the
+  // reason the one external link pointing at the apex had to be corrected away.
+  const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const apex = `https://${REAL.apex_host}/`;
+
+  const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
+  assert.ok(sitemap.includes(`<loc>${apex}</loc>`), 'the umbrella is in no sitemap');
+
+  const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  assert.ok(index.includes(`href="${apex}"`), 'index.html does not link to the umbrella');
+
+  const llms = await readFile(new URL('../llms.txt', import.meta.url), 'utf8');
+  assert.ok(llms.includes(apex), 'llms.txt does not name the umbrella');
+
+  // And the link has to survive a config change rather than be a pasted string.
+  assert.ok(!index.includes('{{APEX}}') && !llms.includes('{{APEX}}'), 'unfilled APEX placeholder');
+});
+
+test('no generated page publishes a meta description cut mid-thought', async () => {
+  // `.slice(0, 160)` cut /apex.html at a comma and /x402.html mid-word, on a
+  // site that grades other people on title_and_description and ships a snippet
+  // telling them to keep it under 160. The cap stays; the cut moved to a
+  // boundary. og:description is asserted equal because the two are one string
+  // in the shell and a divergence would mean someone had reintroduced a second.
+  const root = new URL('../', import.meta.url);
+  const files = [
+    ...(await readdir(root)).filter((f) => f.endsWith('.html')),
+    ...(await readdir(new URL('../checks/', import.meta.url))).map((f) => `checks/${f}`),
+  ];
+  assert.ok(files.length > 25, `expected the generated pages, found ${files.length}`);
+
+  for (const f of files) {
+    const html = await readFile(new URL(`../${f}`, import.meta.url), 'utf8');
+    // A page that asks not to be indexed has no snippet to get wrong. 404.html
+    // and the revenue dashboard are both noindex on purpose.
+    if (/<meta name="robots" content="noindex/.test(html)) continue;
+    const meta = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
+    assert.ok(meta, `${f} has no meta description`);
+    assert.ok(meta.length <= 160, `${f}: description is ${meta.length} chars`);
+    assert.doesNotMatch(meta, /[\s,;:—–-]$/, `${f}: description ends mid-thought: …${meta.slice(-40)}`);
+
+    const og = html.match(/<meta property="og:description" content="([^"]*)"/)?.[1];
+    if (og !== undefined) assert.equal(og, meta, `${f}: og:description differs from the meta description`);
+  }
 });
 
 test('the apex root serves the portfolio; every other apex path still redirects', async () => {

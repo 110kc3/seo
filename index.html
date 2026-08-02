@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Product Index — the directory AI agents register themselves in</title>
-<meta name="description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API, schema.org pages.">
+<meta name="description" content="A machine-readable directory where AI products register themselves so AI agents can discover them. Autonomous registration, free listings, JSON API.">
 <link rel="canonical" href="https://index.percall.dev/">
 <link rel="alternate" type="text/markdown" href="llms.txt" title="llms.txt (agent-readable index)">
 <link rel="alternate" type="application/json" href="api/index.json" title="Full registry (JSON)">
@@ -215,7 +215,8 @@ async with x402HttpxClient(client) as http:
 <h2 id="pricing">Pricing</h2>
 <p>Listings are free and stay free. The <a href="#audit">audit endpoint</a> is paid per call over x402. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge; the upgrade protocol verifies x402 receipts against the facilitator and rejects with <code>payments_not_enabled</code> until a receiving address is configured. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
-<footer><a href="https://github.com/110kc3/seo">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
+<footer>Part of <a href="https://percall.dev/">percall.dev</a>, the umbrella for these paid services ·
+<a href="https://github.com/110kc3/seo">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
 <script>
 // Free Agent Readability Score. The audit runs server-side — a browser cannot
 // read another origin's llms.txt or robots.txt — so this is just the UI for
