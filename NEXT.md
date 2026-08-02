@@ -15,11 +15,12 @@ older docs. Where a doc disagrees with this file, this file is right.
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-08-02, second pass.** Kamil submitted tally.so, llmstxt.site and
-> the Glama connector, and decided §1.4 (Content Signals — all three yes), §1.5
-> (score the 2026 signals) and §1.6 (verify the register path). All three are
-> **shipped and live**; what they turned up is in §4. What is left on your side
-> is now the Show HN, one form, and two optional items.
+> **Updated 2026-08-02, third pass.** Every distribution channel is now
+> submitted, all three of Kamil's decisions are shipped and live, and §2.1, 2.3,
+> 2.5 and 2.6 are done. **Your list is down to three optional items and a Show HN
+> deliberately held until ~25 Aug.** What the approved work turned up — five bugs,
+> two of them serious — is in §4. §2.4 is the one engineering item still open, and
+> it was not in the batch you asked for.
 
 ---
 
@@ -68,19 +69,15 @@ and does not permit automated submission, and a days-old account is already a
 risk factor there without adding that. What I can do instead is have it
 60-seconds-from-posted: numbers refreshed, title picked, body in the clipboard.
 
-### 1.2 One directory submission left — ~4 minutes
+### ~~1.2 Directory submissions~~ — all five done
 
-You did tally.so (directory.llmstxt.cloud) and llmstxt.site. **Only
-mcpservers.org remains.** Answers are in `docs/distribution.md` §4b(d).
+mcpservers.org submitted 2026-08-02, which closes the set: llms-txt-hub (merged),
+agentswelcome.dev (certified), directory.llmstxt.cloud, llmstxt.site,
+mcpservers.org, plus both Glama routes. **Nothing left to submit anywhere.**
 
-| channel | where | notes |
-|---|---|---|
-| mcpservers.org | /submit | Category **`Search`**. Link should be the **repo** (`https://github.com/110kc3/seo`), not the site — reviewers there look for source. Skip the $39 "premium review"; the free queue is the same directory. |
-
-**Submit `https://index.percall.dev` and nothing else.** Not the apex, not
-`index.kc-it.pl`, not `110kc3.github.io/seo/`. This matters more than it sounds:
-the llms-txt-hub entry that merged went in as `http://percall.dev/`, and now
-needs a correction PR (§2.3).
+One correction is in flight and it is mine, not yours — the llms-txt-hub entry
+merged carrying `http://percall.dev/`; [PR #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)
+moves it to the canonical https host (§2.3).
 
 ### ~~1.3 Glama connectors~~ — done
 
@@ -116,97 +113,52 @@ as promised. It was worth doing: see §4.3. Both bugs are fixed and verified.
 
 ## 2. Pending on Claude — no input needed, say go
 
-### 2.1 Put the Glama badge on PR #11152, and fix the tool count — **newly unblocked**
+### ~~2.1 Glama badge + tool count on PR #11152~~ — done
 
-This was the blocker on the 90k★ PR and **it cleared today**:
-`https://glama.ai/mcp/servers/110kc3/seo` resolves and the badge SVG renders
-(both verified 200 this morning). The PR entry is the only recent addition in
-its category without a badge.
+Badge added and the tool list corrected to six (`search_x402_endpoints` and
+`search_mcp_servers` shipped with v3.9 and were never reflected upstream).
+Entry and PR body updated in one push, so the 90k★ repo got one notification.
+`check-submission` passes, still MERGEABLE. Now purely maintainer lag (§3).
 
-Two edits, batched into one push so a 90k★ repo gets one notification instead of two:
+### ~~2.2 Refresh the Show HN numbers~~ — deferred with §1.1, to ~25 Aug
 
-1. Add `[![110kc3/seo MCP server](https://glama.ai/mcp/servers/110kc3/seo/badges/score.svg)](https://glama.ai/mcp/servers/110kc3/seo)` to the entry, matching the format every neighbouring line uses.
-2. **Correct the tool list: the entry and body say four tools, the hosted server answers six.** Verified against live `/mcp` today: `search_products`, `get_product`, `score_url`, `search_x402_endpoints`, `search_mcp_servers`, `how_to_register`. The two catalog tools shipped with v3.9 and were never reflected upstream.
+**Do not do this now.** The post is held (§1.1); figures refreshed three weeks
+early are just a second set of stale ones. Job for the morning of the post:
+re-read `/api/stats.json`, update the five figures, soften "zero inbound links".
 
-*This is the highest-value item on either list — it is the last thing standing
-between a merged 90k★ listing and a maintainer.*
+### ~~2.3 llms-txt-hub URL correction~~ — done
 
-### 2.2 Refresh the Show HN numbers — deferred with §1.1, to ~25 Aug
+[PR #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460) opened against
+`thedaviddias/llms-txt-hub`: `website`, `llmsUrl` and `llmsFullUrl` moved from
+`http://percall.dev/` to `https://index.percall.dev`. All three verified 200 with
+no redirect hop. One file, mergeable, waiting on the maintainer.
 
-**Do not do this now.** The post is held (§1.1), and figures refreshed three
-weeks early are just a second set of stale ones. This is a job for the morning of
-the post: re-read `/api/stats.json`, update the five figures, and soften "zero
-inbound links" now that llms-txt-hub has merged.
+### 2.4 The domain-root hub still advertises a retired host — **still open**
 
-Recorded here only so the drift is visible — as of 2026-08-02:
+*Not in the batch Kamil asked for; carried forward deliberately.*
 
-| figure | draft says | live, 2026-08-02 |
-|---|---|---|
-| requests / 30d | 4,672 | **6,659** |
-| agent share | 7.19% (336) | **10.63% (708)** |
-| free scores | 108 | **123** |
-| llms.txt fetches | 71 | **125** |
-| audit-path hits | 45 | **49** |
-
-The finding the post is built on is unchanged and got stronger: **more agents
-are arriving, and still none of them pay.** Three more weeks of that is a better
-post, which is the whole argument for holding.
-
-### 2.3 Correct the llms-txt-hub entry — it merged with the wrong URL
-
-PR #1459 merged at 09:31 UTC today, and the entry it added carries
-`http://percall.dev/` — **http, and the apex rather than the canonical host**.
-It works (one 308 hop to `https://index.percall.dev/`), so nothing is broken
-today. But the hub's dataset now records a non-canonical http URL as this site's
-identity, and that dataset is mirrored by other tools.
-
-One-line frontmatter fix to
-`packages/content/data/websites/ai-product-index-llms-txt.mdx`, three fields
-(`website`, `llmsUrl`, `llmsFullUrl`). Cheap now, annoying to chase later.
-
-### 2.4 The domain-root hub still advertises a retired host
-
-`110kc3.github.io` points at **`index.kc-it.pl` in 47 places across 9 files**,
-and mentions `percall.dev` **zero** times. The affected files are the exact
-surfaces crawlers read: `llms.txt`, `llms-full.txt`, `agents.json`,
+`110kc3.github.io` points at **`index.kc-it.pl` in 47 places across 9 files**, and
+mentions `percall.dev` **zero** times: `llms.txt`, `llms-full.txt`, `agents.json`,
 `.well-known/agents.json`, `.well-known/agent.json`,
 `.well-known/agent-card.json`, `sitemap.xml`, `index.html`, `README.md`.
 
-The old host 308s, so agents get there. But this is the same class of problem as
-§2.3, on a surface built specifically to tell machines where things are — and it
-is the one repo where nobody would think to look, because its own last commit
-says "Point the hub at index.kc-it.pl".
+The old host 308s, so agents arrive. But it is the same class of problem as §2.3
+— a surface built specifically to tell machines where things are, telling them
+somewhere else — on the one repo nobody would think to check, because its own
+last commit says "Point the hub at index.kc-it.pl".
 
-### 2.5 `README.md` understates the MCP server
+### ~~2.5 README understates the MCP server~~ — done
 
-Says `/mcp` offers four tools; it answers six (see §2.1). Trivial, but this repo
-sells the idea that its own machine-readable surfaces do not lie.
+Said four tools, answers six.
 
-### 2.6 Fix the self-audit blind spot — it now costs real points
+### ~~2.6 The self-audit blind spot~~ — done, and it cost three deploys
 
-When this site audits *itself*, `fetcherFor()` uses the `ASSETS` binding, because
-a Worker cannot fetch its own hostname. `ASSETS` serves committed files only, so
-**anything the Worker does at request time is invisible in a self-audit** —
-`markdown_negotiation` reads as absent in our own signal block while
-`curl -H 'accept: text/markdown' https://index.percall.dev/` correctly returns
-`text/markdown` to everyone else.
+Same-host audits now go through the header layer, so `markdown_negotiation` is
+visible to a self-audit. **Our own site reads A 100, 20/20 under v2**, up from
+98 — and the 100 is now earned rather than assumed.
 
-`web_bot_auth` was already patched case-by-case. Doing the same again would mean
-a second copy of the negotiation rules that can drift — the exact anti-pattern
-the MCP tool-list fix removed. **The right fix is general: route same-host audits
-through the Worker's own fetch handler**, which needs a recursion guard first
-(auditing our own `/api/score` would otherwise re-enter).
-
-**This stopped being cosmetic when v2 shipped.** While the signals were unscored
-it cost us nothing; now it costs three points, and it is the entire reason our
-own site reads **A 98** rather than 100 in `scores.json`. We are the only site in
-the fleet the audit is wrong about, and we are wrong about ourselves in the
-understating direction — the one nobody would think to check.
-
-External audits still use a real fetch and are correct, so nothing anyone else
-sees is affected. Promoted from "worth doing" to the next engineering item.
-
----
+Worth reading §4.4 before touching this path again: the fix took three attempts,
+and the two failed ones were both plausible and both wrong.
 
 ## 3. Waiting on other people — nothing to do
 
@@ -296,6 +248,43 @@ the page 404s.
 
 ---
 
+### 4.4 The self-audit fix, and the two wrong answers before it
+
+Recorded because the failure mode will recur, not because the bug is
+interesting. Same-host audits now run through the header layer, and our own site
+reads **A 100, 20/20** — up from 98, with the missing three points being
+`markdown_negotiation`, which we have served correctly to everyone else all
+along.
+
+It took three deploys, and **the suite was fully green for all three**:
+
+1. *"The auditor's `redirect`/AbortSignal upset the runtime."* Plausible, wrong.
+2. *"Passing a Worker-built Request as another Request's init is rejected."* Also
+   plausible, also wrong. Kept the refactor anyway — building sub-requests from a
+   URL and headers is a smaller surface and worth having.
+3. **The actual cause:** `Response.url` is populated by `fetch` and is the *empty
+   string* on any Response constructed in-Worker. The header layer rebuilds every
+   response to attach headers, so once self-audits went through it, every
+   sub-response had `url: ''`. Being `''` and not `undefined`, `home.url ??
+   target` kept it, and `new URL('')` threw `Invalid URL string.` — no stack, no
+   mention of the audit.
+
+Three things worth keeping:
+
+- **Node's fetch populates `Response.url`; workerd's constructed Responses do
+  not.** 202 tests pass against a production 500. The divergence is between
+  runtimes, so no unit test can close it — **auditing our own host after deploy
+  is the check**, and it belongs in any change to this path.
+- **The 500 itself was the clue I ignored.** `get()` wraps every fetch in
+  try/catch, so a throw *inside* the fetcher would have surfaced as a failed
+  check, not a 500. That it 500'd proved the fault was downstream of the fetches
+  — which ruled out the code I had just changed, twice, before I tested it.
+- `e.stack` was `undefined`, so deploying a stack-surfacing build bought nothing.
+  For runtime-internal throws, reasoning about which consumer sees the bad value
+  beats instrumenting the producer.
+
+---
+
 ## 5. Done — stop looking for these
 
 Verified live 2026-08-02 unless noted.
@@ -323,8 +312,8 @@ and agent-readiness Phases 1, 3 and 5.
 
 ## 6. If you only do one thing in each column
 
-- **You:** nothing urgent. The Show HN is held to ~25 Aug (§1.1), which leaves one form (§1.2, four minutes) and two optionals. This is the first day in a while your list has had no deadline on it.
-- **Me:** the Glama badge on PR #11152 (§2.1). With the post deferred, this is now the only thing on either list with a merged 90k★ listing on the other side of it.
+- **You:** nothing. Genuinely — every channel is submitted, every decision is shipped, and the post is held by your own call. The three items in §1.7 are optional and none is urgent.
+- **Me:** §2.4, the domain-root hub still pointing at the retired host. It is the last known-wrong thing in the fleet and you have not asked for it yet; say the word.
 
 ---
 
