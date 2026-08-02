@@ -35,8 +35,8 @@ const CANONICAL_HOST = new URL(BASE).host;
 // its root serves the portfolio page that says what runs under it. Everything
 // else on that host still redirects, so exactly one copy of the content exists.
 const APEX_HOST = cfg.apex_host ?? null;
-const isApexRoot = (url) =>
-  Boolean(APEX_HOST) && url.host === APEX_HOST && (url.pathname === '/' || url.pathname === '/index.html');
+const isRoot = (url) => url.pathname === '/' || url.pathname === '/index.html';
+const isApexRoot = (url) => Boolean(APEX_HOST) && url.host === APEX_HOST && isRoot(url);
 const MAX_AUDIT_BODY = 4 * 1024;
 
 // Derived from the catalog declarations rather than written out, so adding a
@@ -54,6 +54,16 @@ function canonicalRedirect(url) {
   // The apex root is a page, not a redirect. Only the root: a request for any
   // other path on the apex is asking for content that has one canonical home.
   if (isApexRoot(url)) return null;
+  // www belongs to the apex, not to the service. Sending www.percall.dev to the
+  // index would hand someone who typed the umbrella domain a different page than
+  // the umbrella domain serves. Its root goes to the apex; every other path goes
+  // straight to the canonical host, so neither case costs two hops.
+  if (APEX_HOST && url.host === `www.${APEX_HOST}` && isRoot(url)) {
+    return new Response(null, {
+      status: 308,
+      headers: { location: `https://${APEX_HOST}/`, 'cache-control': 'public, max-age=3600' },
+    });
+  }
   return new Response(null, {
     status: 308,
     headers: {

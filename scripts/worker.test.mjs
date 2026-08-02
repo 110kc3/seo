@@ -2386,3 +2386,34 @@ test('auditing the apex reads the apex page, not the index behind it', async () 
   // And a stranger's URL is never rewritten.
   assert.equal(score.canonicalTarget('https://example.com/', REAL), 'https://example.com/');
 });
+
+test('www belongs to the umbrella, and is never fetched by the Worker itself', async () => {
+  // Two bugs attaching www would otherwise have introduced.
+  //
+  // First: sending www.percall.dev to the index hands whoever typed the umbrella
+  // domain a different page than the umbrella domain serves. Its root goes to
+  // the apex; deeper paths go straight to the canonical host, so neither costs
+  // two hops.
+  //
+  // Second and worse: www is now attached to this Worker, and a Worker cannot
+  // fetch its own hostnames — Cloudflare answers 522. Auditing www would have
+  // 502'd *after* taking the payment, which is the exact failure the alias list
+  // was created for. It only stays fixed if www is in that list.
+  const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const apex = REAL.apex_host;
+  const canonicalHost = new URL(REAL.base).host;
+  const www = `www.${apex}`;
+
+  const root = worker.canonicalRedirect(new URL(`https://${www}/`));
+  assert.equal(root.status, 308);
+  assert.equal(root.headers.get('location'), `https://${apex}/`,
+    'www should land on the umbrella, not on the service');
+
+  const deep = worker.canonicalRedirect(new URL(`https://${www}/llms.txt`));
+  assert.equal(deep.headers.get('location'), `${REAL.base.replace(/\/+$/, '')}/llms.txt`,
+    'a deeper www path should reach the canonical host in one hop');
+
+  assert.ok(REAL.host_aliases.includes(www),
+    'www is attached to the Worker but missing from host_aliases — auditing it would 522');
+  assert.equal(score.canonicalTarget(`https://${www}/llms.txt`, REAL), `https://${canonicalHost}/llms.txt`);
+});
