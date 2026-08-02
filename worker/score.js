@@ -18,6 +18,7 @@
 
 import { auditUrl, parseAuditRequest, CHECK_LABELS, resolveCheckSet } from './audit.js';
 import { botAuthHeaders, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
+import { serveStatic } from './assets.js';
 
 /**
  * Signs the auditor's outbound requests under the web-bot-auth profile, and
@@ -42,32 +43,43 @@ export function auditSigner(env, cfg) {
 export function fetcherFor(request, env, target) {
   const sameHost = new URL(target).host === new URL(request.url).host;
   if (!sameHost || !env.ASSETS) return undefined;
-  const assets = env.ASSETS.fetch.bind(env.ASSETS);
 
-  // The ASSETS binding serves committed files and nothing else, so a same-host
-  // audit is blind to every route this Worker generates at request time. That
-  // made us report ourselves as lacking web-bot-auth while the directory
-  // answered 200 to everyone else — a self-audit understating the site it runs
-  // on, which is the one direction of error nobody would think to check.
+  // A Worker cannot fetch its own hostname, so a same-host audit has to be
+  // served from inside. The naive version — hand it the raw ASSETS binding —
+  // serves committed files and nothing else, which makes the audit blind to
+  // every behaviour this Worker adds at request time. Two checks read exactly
+  // that: `web_bot_auth` (the key directory is generated, not a file) and
+  // `markdown_negotiation` (the Accept branch and the content-type relabel both
+  // live in the header layer). Both read as absent while answering correctly to
+  // everyone else — a self-audit understating the site it runs on, which is the
+  // one direction of error nobody thinks to check. Once the 2026 signals became
+  // scored, it also cost us three real points.
   //
-  // Only the routes the audit actually probes need covering, and there is
-  // exactly one: the key directory. It is answered from the same function
-  // index.js serves it with, so this measures the real thing rather than
-  // asserting it exists.
+  // So this routes through `serveStatic()`, the same function the public
+  // fall-through branch uses, rather than reimplementing negotiation here. A
+  // second copy of the negotiation rules is the exact anti-pattern the MCP
+  // tool-list fix removed, and it would drift the same way.
+  //
+  // Recursion is impossible by construction rather than by a guard: the only
+  // dynamic route reachable from here is the key directory, and nothing in this
+  // path can re-enter `/api/score` or `/api/audit`. Auditing our own
+  // `/api/score` URL therefore reads it as a static miss, exactly as before.
   return async (input, init) => {
-    const url = new URL(typeof input === 'string' ? input : input.url);
+    const sub = new Request(input, init);
+    const url = new URL(sub.url);
     if (url.pathname === DIRECTORY_PATH) {
       const directory = await keyDirectory(env);
-      // An unkeyed deployment has no directory. Falling through to the binding
-      // yields its 404, which is the truth; serving the literal "null" with a
-      // 200 would report web-bot-auth as present on a site that cannot sign.
+      // An unkeyed deployment has no directory. Falling through to the asset
+      // layer yields its 404, which is the truth; serving the literal "null"
+      // with a 200 would report web-bot-auth as present on a site that cannot
+      // sign.
       if (directory) {
         return new Response(JSON.stringify(directory, null, 2), {
           headers: { 'content-type': DIRECTORY_CONTENT_TYPE },
         });
       }
     }
-    return assets(input, init);
+    return serveStatic(sub, env, url);
   };
 }
 

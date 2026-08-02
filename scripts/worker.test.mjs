@@ -1109,8 +1109,8 @@ test('a self-audit can see the routes the Worker generates, not just its files',
   assert.equal(directory.status, 200, 'the key directory 404d in a self-audit');
   assert.ok((await directory.json()).keys?.length, 'the directory served no keys');
 
-  // Everything else still goes to the binding — this is a targeted patch over
-  // one known dynamic route, not a general bypass of it.
+  // Everything else goes through the asset layer, so a missing file is still a
+  // 404 rather than being invented.
   assert.equal((await fetcher('https://index.percall.dev/llms.txt')).status, 404);
 
   // An unkeyed deployment genuinely has no directory, and must say so rather
@@ -1118,6 +1118,52 @@ test('a self-audit can see the routes the Worker generates, not just its files',
   // web-bot-auth as present on a site that cannot sign anything.
   const unkeyed = score.fetcherFor(req, { ASSETS: assets }, 'https://index.percall.dev/');
   assert.equal((await unkeyed(`https://index.percall.dev${DIRECTORY_PATH}`)).status, 404);
+});
+
+test('a self-audit sees content negotiation, not the committed bytes', async () => {
+  // The other half of the same blind spot, and the one that survived the first
+  // fix. `markdown_negotiation` is decided entirely by the header layer: the
+  // Accept branch picks a different body and `alternateContentType()` relabels
+  // it, because the asset store types .txt as text/plain. Neither runs in the
+  // ASSETS binding, so a self-audit saw raw HTML and reported the signal absent
+  // while `curl -H 'accept: text/markdown'` returned text/markdown to everyone
+  // else. Unscored that was cosmetic; under v2 it costs three points, and the
+  // only site the audit is wrong about is our own.
+  //
+  // Fixed by routing through the same serveStatic() the public branch uses, so
+  // this asserts against the real negotiation rules rather than a copy.
+  const served = {};
+  const assets = {
+    fetch(req) {
+      const p = new URL(req.url).pathname;
+      served.last = p;
+      const isMd = p.endsWith('.txt');
+      return new Response(isMd ? '# llms\n' : '<html></html>', {
+        status: 200,
+        headers: { 'content-type': isMd ? 'text/plain' : 'text/html' },
+      });
+    },
+  };
+  const req = new Request('https://index.percall.dev/api/score?url=x');
+  const fetcher = score.fetcherFor(req, { ASSETS: assets }, 'https://index.percall.dev/');
+
+  const md = await fetcher('https://index.percall.dev/', { headers: { accept: 'text/markdown' } });
+  // `/` negotiates to /llms-full.txt — asserted against what negotiate() really
+  // does rather than what this test first assumed, which is the point of not
+  // reimplementing the rules here.
+  assert.equal(served.last, '/llms-full.txt', 'Accept: text/markdown did not swap the body');
+  assert.match(md.headers.get('content-type') ?? '', /markdown/,
+    'the negotiated body went out labelled as the asset store typed it');
+
+  // A plain request is untouched: negotiation must not leak into the default.
+  const html = await fetcher('https://index.percall.dev/');
+  assert.equal(served.last, '/');
+  assert.match(html.headers.get('content-type') ?? '', /html/);
+
+  // And the header layer ran at all, which is what makes the Link-based checks
+  // measurable in a self-audit too.
+  assert.ok(html.headers.get('link'), 'no Link header — the header layer did not run');
+  assert.ok(html.headers.get('x-agent-welcome'));
 });
 
 test('the free score refuses the same targets the paid one does', async () => {
