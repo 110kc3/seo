@@ -19,6 +19,7 @@ on:
           - subdomain     # print the account's workers.dev subdomain
           - push-secrets  # copy managed repo secrets to the Worker
           - stats-probe   # can the deploy token read Analytics Engine?
+          - stats-funnel  # who hits the paid endpoint? client type x path bucket
           - verify-cdp    # check the CDP rail using the CDP credentials
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
@@ -95,6 +96,46 @@ jobs:
           echo "::notice::pushed $pushed managed secret(s) plus CF_ACCOUNT_ID"
           echo "--- secrets now on the Worker ---"
           npx --yes wrangler@4 secret list
+
+      # `/api/stats.json` publishes client type and path bucket as two separate
+      # totals, which cannot answer the only question that matters about the
+      # paywall: of the requests that met a 402, how many came from something
+      # that could conceivably pay? A crawler with no wallet and a scripted
+      # client with one are the same row in the public feed. The cross is in the
+      # dataset already — this reads it, and nothing else. Read-only.
+      - name: Who actually reaches the paid endpoint
+        if: inputs.action == 'stats-funnel'
+        env:
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+        run: |
+          set -euo pipefail
+          token="${CF_ANALYTICS_TOKEN:-$CLOUDFLARE_API_TOKEN}"
+          curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/analytics_engine/sql" \
+            -H "Authorization: Bearer $token" \
+            -H 'content-type: text/plain' \
+            --data "SELECT blob1 AS path_bucket, blob2 AS client_type, blob4 AS status_class,
+                      SUM(_sample_interval) AS requests
+                    FROM ai_product_index_requests
+                    WHERE timestamp > NOW() - INTERVAL '30' DAY
+                      AND blob1 IN ('audit', 'score_free', 'x402_info')
+                    GROUP BY path_bucket, client_type, status_class
+                    ORDER BY path_bucket, requests DESC
+                    LIMIT 100" \
+          | node -e '
+              let s = ""; process.stdin.on("data", d => s += d).on("end", () => {
+                const rows = (JSON.parse(s).data) || [];
+                if (!rows.length) return console.log("no rows — check the token has Account Analytics: Read");
+                console.log("path".padEnd(12), "client".padEnd(14), "status".padEnd(8), "requests");
+                for (const r of rows) {
+                  console.log(
+                    String(r.path_bucket).padEnd(12),
+                    String(r.client_type).padEnd(14),
+                    String(r.status_class).padEnd(8),
+                    r.requests,
+                  );
+                }
+              });'
 
       # The CDP facilitator answers 401 to anonymous callers, so verify-rail.mjs
       # cannot check it from a developer machine — the credentials only exist as
