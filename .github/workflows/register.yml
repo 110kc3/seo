@@ -7,6 +7,9 @@ on:
 permissions:
   contents: write
   issues: write
+  # To dispatch deploy.yml — see "Publish the accepted listing" below. A push
+  # made with the default token cannot trigger it, so it has to be asked for.
+  actions: write
 
 jobs:
   register:
@@ -60,6 +63,26 @@ jobs:
           done
           echo "failed to push after 3 attempts" >&2
           exit 1
+
+      # GitHub does not trigger `on: push` workflows for pushes made with the
+      # default GITHUB_TOKEN — its guard against a workflow endlessly
+      # retriggering itself. deploy.yml is `on: push`, so **an accepted listing
+      # was committed and then never published**, waiting for an unrelated human
+      # push to carry it out. On GitHub Pages this worked, because Pages deploys
+      # on push regardless of who pushed; the Cloudflare migration turned
+      # publishing into a workflow and quietly broke it, and the bot has been
+      # telling submitters "the site redeploys within about a minute" ever since.
+      #
+      # Found by running the flow for real (issue #8) rather than by testing the
+      # script, which is the half a subprocess test structurally cannot reach.
+      #
+      # An explicit dispatch is allowed with the same token, which is what the
+      # workflow_dispatch trigger on deploy.yml is for.
+      - name: Publish the accepted listing
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
 
       - name: Reply (accepted)
         if: success()
