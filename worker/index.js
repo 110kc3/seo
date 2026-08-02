@@ -213,14 +213,14 @@ function handleX402Info(cfgObj) {
 async function handleDashboardPage(request, env, url) {
   const auth = authorizeDashboard(request, env);
   if (auth.state !== 'ok') {
-    const notFound = await fetchAsset(env, new Request(url, { headers: request.headers }), new URL('/404.html', url.origin));
+    const notFound = await fetchAsset(env, new URL('/404.html', url.origin), new Headers(request.headers));
     return new Response(notFound.body, {
       status: 404,
       headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex, nofollow' },
     });
   }
 
-  const page = await fetchAsset(env, request, new URL('/dashboard.html', url.origin));
+  const page = await fetchAsset(env, new URL('/dashboard.html', url.origin), new Headers(request.headers));
   const headers = new Headers(page.headers);
   headers.set('cache-control', 'no-store');
   headers.set('x-robots-tag', 'noindex, nofollow');
@@ -296,10 +296,10 @@ export default {
       } else if (url.pathname === '/dashboard.html' || url.pathname === '/dashboard') {
         response = await handleDashboardPage(request, env, url);
       } else {
-        response = await serveStatic(request, env, url);
+        response = await serveStatic(env, url, request.headers);
       }
     } catch (e) {
-      response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error', stack: e.stack?.slice(0, 900) }, 500);
+      response = json({ ok: false, code: 'internal', error: e.message?.slice(0, 200) ?? 'internal error' }, 500);
     }
 
     ctx.waitUntil(Promise.resolve(record(env, request, url, clientType, response.status)));

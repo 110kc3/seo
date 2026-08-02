@@ -65,18 +65,16 @@ export function fetcherFor(request, env, target) {
   // path can re-enter `/api/score` or `/api/audit`. Auditing our own
   // `/api/score` URL therefore reads it as a static miss, exactly as before.
   return async (input, init) => {
-    // Rebuilt from the URL and headers alone rather than forwarded. The auditor
-    // calls its fetcher with `redirect` and an AbortSignal, which the real
-    // runtime rejects when they are carried into a Request used as another
-    // Request's init — it surfaces as a bare "Invalid URL string." with nothing
-    // pointing at the cause. The asset layer has no use for either: it does not
-    // follow redirects (fetchAsset absorbs exactly one hop itself) and its work
-    // is not cancellable. Only the Accept header matters here, because that is
-    // what content negotiation reads.
+    // Reduced to a URL and headers rather than forwarded as a Request. The
+    // auditor calls its fetcher with `redirect` and an AbortSignal, neither of
+    // which the asset layer can use — it does not follow redirects (fetchAsset
+    // absorbs exactly one hop deliberately) and its work is not cancellable.
+    // Passing them on is also what broke this on the real runtime; see the note
+    // on fetchAsset. Only Accept changes the answer, because that is what
+    // content negotiation reads.
     const href = typeof input === 'string' ? input : input.url;
     const url = new URL(href);
     const headers = new Headers(init?.headers ?? (typeof input === 'string' ? undefined : input.headers));
-    const sub = new Request(url.href, { method: 'GET', headers });
     if (url.pathname === DIRECTORY_PATH) {
       const directory = await keyDirectory(env);
       // An unkeyed deployment has no directory. Falling through to the asset
@@ -89,7 +87,7 @@ export function fetcherFor(request, env, target) {
         });
       }
     }
-    return serveStatic(sub, env, url);
+    return serveStatic(env, url, headers);
   };
 }
 

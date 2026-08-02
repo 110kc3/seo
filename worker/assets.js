@@ -29,13 +29,23 @@ const BASE = cfg.base.replace(/\/+$/, '');
 // index.html, keeps the published `.html` URLs canonical, and keeps the build
 // host-agnostic — the same output still works on plain static hosting, where
 // extensionless paths would 404.
-export async function fetchAsset(env, request, target) {
-  const response = await env.ASSETS.fetch(new Request(target, request));
+// Takes headers rather than a Request, and builds each sub-request from an
+// explicit URL string plus those headers.
+//
+// That is not tidiness. Passing a Request as another Request's init works for an
+// inbound request and throws a bare "Invalid URL string." — no stack, nothing
+// naming the cause — when the outer Request was itself constructed in-Worker,
+// which is exactly what a same-host self-audit does. Node's Request accepts both
+// shapes, so no unit test can see the difference; it only reproduces on workerd.
+// Building from primitives makes the shape unrepresentable.
+export async function fetchAsset(env, target, headers) {
+  const at = (u) => new Request(typeof u === 'string' ? u : u.href, { method: 'GET', headers });
+  const response = await env.ASSETS.fetch(at(target));
   if (response.status !== 307 && response.status !== 308) return response;
   const location = response.headers.get('location');
   if (!location) return response;
   // Exactly one hop, so a redirect cycle cannot become a loop here.
-  return env.ASSETS.fetch(new Request(new URL(location, target), request));
+  return env.ASSETS.fetch(at(new URL(location, typeof target === 'string' ? target : target.href)));
 }
 
 // --- header layer ----------------------------------------------------------
@@ -76,8 +86,8 @@ export function decorate(response, url, alternate = null) {
  * reporting markdown negotiation as present and reporting it as absent on a site
  * that serves it correctly to everyone else.
  */
-export async function serveStatic(request, env, url) {
-  const alternate = negotiate(url.pathname, request.headers.get('accept'));
+export async function serveStatic(env, url, headers) {
+  const alternate = negotiate(url.pathname, headers.get('accept'));
   const target = alternate ? new URL(alternate, url.origin) : url;
-  return decorate(await fetchAsset(env, request, target), url, alternate);
+  return decorate(await fetchAsset(env, target, headers), url, alternate);
 }

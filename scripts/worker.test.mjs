@@ -1256,7 +1256,7 @@ test('an ASSETS .html redirect is absorbed, not passed through', async () => {
   };
 
   const req = new Request(`${BASE}/l/my-product.html`);
-  const resp = await worker.fetchAsset(env, req, new URL(`${BASE}/l/my-product.html`));
+  const resp = await worker.fetchAsset(env, new URL(`${BASE}/l/my-product.html`), req.headers);
   assert.equal(resp.status, 200, 'the caller must get content, not a redirect');
   assert.equal(await resp.text(), 'content of /l/my-product');
   assert.deepEqual(seen, ['/l/my-product.html', '/l/my-product']);
@@ -1273,20 +1273,20 @@ test('absorbing a redirect follows exactly one hop', async () => {
       },
     },
   };
-  const resp = await worker.fetchAsset(env, new Request(`${BASE}/loop`), new URL(`${BASE}/loop`));
+  const resp = await worker.fetchAsset(env, new URL(`${BASE}/loop`), new Headers());
   assert.equal(calls, 2, 'one hop only');
   assert.equal(resp.status, 307, 'and the caller sees the unresolved redirect rather than hanging');
 });
 
 test('a non-redirect asset response is returned untouched', async () => {
   const env = { ASSETS: { async fetch() { return new Response('ok', { status: 200 }); } } };
-  const resp = await worker.fetchAsset(env, new Request(`${BASE}/`), new URL(`${BASE}/`));
+  const resp = await worker.fetchAsset(env, new URL(`${BASE}/`), new Headers());
   assert.equal(resp.status, 200);
   assert.equal(await resp.text(), 'ok');
 
   // A redirect with no Location cannot be followed; pass it through.
   const noLoc = { ASSETS: { async fetch() { return new Response(null, { status: 307 }); } } };
-  assert.equal((await worker.fetchAsset(noLoc, new Request(`${BASE}/x`), new URL(`${BASE}/x`))).status, 307);
+  assert.equal((await worker.fetchAsset(noLoc, new URL(`${BASE}/x`), new Headers())).status, 307);
 });
 
 // --- audit scoring ----------------------------------------------------------
