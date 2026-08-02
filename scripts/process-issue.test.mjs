@@ -223,6 +223,82 @@ test('an account cannot exceed the per-user listing cap', async () => {
   assert.equal(rejection(r.result).code, 'account_cap');
 });
 
+test('curated and seed listings do not consume an account cap slot', async () => {
+  // Found by running the real workflow: after 30 curated entries were seeded
+  // under the operator's account, the operator's own [register] was refused at
+  // "40 listings (max 10)" — and so was every future one. The cap is meant to
+  // stop an account flooding the registry *through this flow*; an entry the
+  // registry itself wrote was never a submission.
+  const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
+  const existing = {};
+  for (let i = 0; i < MAX_LISTINGS_PER_USER * 3; i += 1) {
+    existing[`curated-${i}`] = stored({
+      slug: `curated-${i}`,
+      url: `https://curated-${i}.example.com`,
+      github_user: 'submitter',
+      origin: i % 2 === 0 ? 'curated' : 'seed',
+    });
+  }
+  const dir = await sandbox(existing);
+  const r = await run(dir, issue(listing()));
+
+  assert.equal(r.code, 0, 'curated entries should not block a registration');
+  const written = JSON.parse(await readFile(join(dir, 'listings', 'test-product.json'), 'utf8'));
+  assert.equal(written.origin, 'self-registered');
+});
+
+test('a submitter cannot claim to be curated to escape the cap', async () => {
+  // The reason `origin` is server-set rather than read off `submitted_by`.
+  // `submitted_by` is self-reported — if the cap trusted it, this listing would
+  // register and so would the next thousand.
+  const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
+  const existing = {};
+  for (let i = 0; i < MAX_LISTINGS_PER_USER; i += 1) {
+    existing[`filler-${i}`] = stored({
+      slug: `filler-${i}`,
+      url: `https://filler-${i}.example.com`,
+      github_user: 'submitter',
+      origin: 'self-registered',
+    });
+  }
+  const dir = await sandbox(existing);
+  const r = await run(dir, issue(listing({
+    submitted_by: 'registry (curated)',
+    origin: 'curated',
+  })));
+
+  assert.equal(r.code, 1);
+  assert.equal(rejection(r.result).code, 'account_cap');
+});
+
+test('a listing with no origin still counts toward the cap', async () => {
+  // Fail-closed for anything written before the field existed: an unrecognised
+  // entry costs its account a slot rather than being free.
+  const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
+  const existing = {};
+  for (let i = 0; i < MAX_LISTINGS_PER_USER; i += 1) {
+    const row = stored({ slug: `legacy-${i}`, url: `https://legacy-${i}.example.com`, github_user: 'submitter' });
+    delete row.origin;
+    existing[`legacy-${i}`] = row;
+  }
+  const dir = await sandbox(existing);
+  const r = await run(dir, issue(listing()));
+
+  assert.equal(r.code, 1);
+  assert.equal(rejection(r.result).code, 'account_cap');
+});
+
+test('an update cannot launder a curated listing into a self-registered one', async () => {
+  const dir = await sandbox({
+    'test-product': stored({ slug: 'test-product', github_user: 'submitter', origin: 'curated' }),
+  });
+  const r = await run(dir, issue(listing({ origin: 'self-registered' }), { ISSUE_TITLE: '[update] Test Product' }));
+
+  assert.equal(r.code, 0);
+  const written = JSON.parse(await readFile(join(dir, 'listings', 'test-product.json'), 'utf8'));
+  assert.equal(written.origin, 'curated', 'origin survived an update it should not have');
+});
+
 // --- payload handling -------------------------------------------------------
 
 test('a raw json body with no fence is accepted', async () => {

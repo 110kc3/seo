@@ -5,10 +5,19 @@
   "description": "Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner's live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.",
   "category": "app",
   "pricing": "free",
-  "tags": ["poland", "cameras", "analog", "catalog", "shopping"],
-  "machine_endpoints": { "llms_txt": "https://stareaparaty.com/llms.txt" },
+  "tags": [
+    "poland",
+    "cameras",
+    "analog",
+    "catalog",
+    "shopping"
+  ],
+  "machine_endpoints": {
+    "llms_txt": "https://stareaparaty.com/llms.txt"
+  },
   "submitted_by": "registry (seed)",
   "created": "2026-07-28",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

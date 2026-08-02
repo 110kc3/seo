@@ -111,13 +111,17 @@ test('rejects bad tags', () => {
 });
 
 test('reconstruct sets server fields, drops junk, fixes key order', () => {
-  const dirty = JSON.parse('{"pricing":"free","category":"api","slug":"test-product","name":"  Test  ","url":"https://example.com/tool","description":" d ","tier":"featured","created":"1999-01-01","github_user":"spoofed","__proto__":{"polluted":true}}');
+  const dirty = JSON.parse('{"pricing":"free","category":"api","slug":"test-product","name":"  Test  ","url":"https://example.com/tool","description":" d ","tier":"featured","created":"1999-01-01","github_user":"spoofed","origin":"curated","__proto__":{"polluted":true}}');
   const out = reconstruct(dirty, { created: '2026-07-09', github_user: 'realuser' });
-  assert.deepEqual(Object.keys(out), ['slug', 'name', 'url', 'description', 'category', 'pricing', 'created', 'github_user', 'tier']);
+  assert.deepEqual(Object.keys(out), ['slug', 'name', 'url', 'description', 'category', 'pricing', 'created', 'github_user', 'tier', 'origin']);
   assert.equal(out.name, 'Test');
   assert.equal(out.created, '2026-07-09');
   assert.equal(out.github_user, 'realuser');
   assert.equal(out.tier, 'free');
+  // `origin` is server-set like `tier`: a submitted "curated" is dropped, not
+  // honoured. It gates the per-account cap, so trusting the payload here would
+  // make the cap opt-out.
+  assert.equal(out.origin, 'self-registered');
   assert.equal({}.polluted, undefined);
 });
 

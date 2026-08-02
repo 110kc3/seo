@@ -5,9 +5,15 @@
   "description": "Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.",
   "category": "app",
   "pricing": "free",
-  "tags": ["poland", "game", "news", "quiz"],
+  "tags": [
+    "poland",
+    "game",
+    "news",
+    "quiz"
+  ],
   "submitted_by": "registry (seed)",
   "created": "2026-07-28",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

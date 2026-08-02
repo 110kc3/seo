@@ -19,7 +19,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "3tg-test-generation",
@@ -38,7 +39,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "ai-visibility-checker",
@@ -57,7 +59,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "arcadia-finance",
@@ -76,7 +79,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "avo",
@@ -95,7 +99,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "bezbaseina",
@@ -114,7 +119,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "boundr",
@@ -133,7 +139,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "carbone-mcp",
@@ -152,7 +159,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "caudexcatena-mcp",
@@ -171,7 +179,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "changethisfile",
@@ -190,7 +199,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "chiplab",
@@ -209,7 +219,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "default-privacy",
@@ -228,7 +239,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "embers-tabletop-rpg-toolkit",
@@ -247,7 +259,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "environmental-compliance",
@@ -266,7 +279,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "fastcrw",
@@ -285,7 +299,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "food-near-me",
@@ -304,7 +319,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "futia",
@@ -323,7 +339,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "fxmacrodata",
@@ -342,7 +359,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "hlido-agent-reviews",
@@ -361,7 +379,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "jp-bids-mcp",
@@ -380,7 +399,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "llm-optimizer",
@@ -399,7 +419,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "mowgli",
@@ -418,7 +439,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "newzai-mcp-server",
@@ -437,7 +459,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "niche-editorial-intelligence",
@@ -456,7 +479,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "overtimelog",
@@ -478,7 +502,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "protocol-index",
@@ -499,7 +524,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "scite",
@@ -518,7 +544,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "signvoy",
@@ -537,7 +564,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "soma-brewing-company",
@@ -556,7 +584,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "truthifi-connect",
@@ -575,7 +604,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "ultramemory",
@@ -594,7 +624,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "vocab-voyage",
@@ -613,7 +644,8 @@
       "submitted_by": "registry (curated)",
       "created": "2026-08-01",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "curated"
     },
     {
       "slug": "bankier-street-bets",
@@ -631,7 +663,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "polish-sweepstakes",
@@ -648,7 +681,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "przetargimiejskie",
@@ -669,7 +703,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "puzle",
@@ -687,7 +722,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "rentgen-ofert",
@@ -708,7 +744,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "stare-aparaty",
@@ -730,7 +767,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-28",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     },
     {
       "slug": "agent-readability-service",
@@ -749,6 +787,7 @@
       "created": "2026-07-09",
       "github_user": "110kc3",
       "tier": "free",
+      "origin": "seed",
       "updated": "2026-07-29"
     },
     {
@@ -772,7 +811,8 @@
       "submitted_by": "registry (seed)",
       "created": "2026-07-09",
       "github_user": "110kc3",
-      "tier": "free"
+      "tier": "free",
+      "origin": "seed"
     }
   ]
 }

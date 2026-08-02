@@ -8,9 +8,15 @@
   "machine_endpoints": {
     "llms_txt": "https://protocolindex.eu/llms.txt"
   },
-  "tags": ["supplements", "blueprint", "catalog", "multilingual"],
+  "tags": [
+    "supplements",
+    "blueprint",
+    "catalog",
+    "multilingual"
+  ],
   "submitted_by": "registry (seed)",
   "created": "2026-08-01",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

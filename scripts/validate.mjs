@@ -15,7 +15,24 @@ export const AGENT_FIELDS = [
   'slug', 'name', 'url', 'description', 'category', 'pricing',
   'machine_endpoints', 'tags', 'submitted_by',
 ];
-export const SERVER_FIELDS = ['created', 'github_user', 'tier', 'updated'];
+export const SERVER_FIELDS = ['created', 'github_user', 'tier', 'updated', 'origin'];
+
+/**
+ * How a listing got here. Server-set, and the per-account cap counts only
+ * `self-registered`.
+ *
+ * It has to be server-set rather than read off `submitted_by`, which records
+ * the same thing in prose: `submitted_by` is *self-reported by the submitter*,
+ * so a cap keyed on it would be lifted by typing "registry (curated)" into a
+ * field nobody can validate. `origin` is written by the registry at acceptance
+ * and ignored as input, exactly like `tier`.
+ *
+ * A listing with no `origin` counts toward the cap. That is the fail-closed
+ * direction: an unrecognised entry should cost its account a slot rather than
+ * be free.
+ */
+export const ORIGINS = ['self-registered', 'curated', 'seed'];
+export const DEFAULT_ORIGIN = 'self-registered';
 export const TIERS = ['free', 'verified', 'featured'];
 export const PAID_TIERS = ['verified', 'featured'];
 
@@ -114,7 +131,7 @@ export function validate(obj) {
 // Rebuilds the listing field-by-field from the allowlist — never writes the
 // submitted object through (kills __proto__ tricks, drops junk, fixes key
 // order for clean diffs). Server-set fields always come from the caller.
-export function reconstruct(obj, { created, github_user, tier = 'free', updated }) {
+export function reconstruct(obj, { created, github_user, tier = 'free', updated, origin = DEFAULT_ORIGIN }) {
   const out = {
     slug: obj.slug,
     name: obj.name.trim(),
@@ -135,6 +152,7 @@ export function reconstruct(obj, { created, github_user, tier = 'free', updated 
   out.created = created;
   out.github_user = github_user;
   out.tier = tier;
+  out.origin = ORIGINS.includes(origin) ? origin : DEFAULT_ORIGIN;
   if (updated) out.updated = updated;
   return out;
 }
@@ -198,6 +216,7 @@ export function schemaJson(base) {
       updated: { type: 'string', readOnly: true, description: 'Server-set: date of the last accepted [update], YYYY-MM-DD' },
       github_user: { type: 'string', readOnly: true, description: 'Server-set: GitHub login that submitted the listing' },
       tier: { type: 'string', enum: TIERS, readOnly: true, description: 'Server-set: listing tier. Paid tiers (verified, featured) rank above free in the index; payment rails (x402, card) not yet enabled — watch llms.txt.' },
+      origin: { type: 'string', enum: ORIGINS, readOnly: true, description: 'Server-set: how the listing got here. self-registered = submitted through the [register] issue flow; curated = added by the registry from public facts about a public product; seed = an operator listing from before the registry opened. Only self-registered listings count toward the per-account cap.' },
     },
   };
 }

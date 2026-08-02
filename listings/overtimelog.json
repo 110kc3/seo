@@ -8,9 +8,16 @@
   "machine_endpoints": {
     "llms_txt": "https://overtimelog.com/llms.txt"
   },
-  "tags": ["slack", "overtime", "eu-compliance", "privacy", "desktop"],
+  "tags": [
+    "slack",
+    "overtime",
+    "eu-compliance",
+    "privacy",
+    "desktop"
+  ],
   "submitted_by": "registry (seed)",
   "created": "2026-08-01",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

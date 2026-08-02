@@ -10,9 +10,15 @@
     "openapi": "https://index.percall.dev/openapi.yaml",
     "mcp": "https://index.percall.dev/mcp"
   },
-  "tags": ["directory", "discovery", "seo", "registry"],
+  "tags": [
+    "directory",
+    "discovery",
+    "seo",
+    "registry"
+  ],
   "submitted_by": "registry (seed)",
   "created": "2026-07-09",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

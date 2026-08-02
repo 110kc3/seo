@@ -124,6 +124,11 @@ for (const c of candidates) {
     created: TODAY,
     github_user: '110kc3',
     tier: 'free',
+    // Server-set provenance. `submitted_by` above records the same thing, but it
+    // is self-reported and so cannot gate anything; `origin` is what the
+    // per-account cap reads, which is why seeding curated entries under the
+    // operator's account no longer consumes their registration slots.
+    origin: 'curated',
   };
 
   const result = validate(listing);

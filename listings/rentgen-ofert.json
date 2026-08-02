@@ -5,10 +5,18 @@
   "description": "Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.",
   "category": "app",
   "pricing": "free",
-  "tags": ["poland", "property", "real-estate", "open-data"],
-  "machine_endpoints": { "llms_txt": "https://110kc3.github.io/rentgen-ofert/llms.txt" },
+  "tags": [
+    "poland",
+    "property",
+    "real-estate",
+    "open-data"
+  ],
+  "machine_endpoints": {
+    "llms_txt": "https://110kc3.github.io/rentgen-ofert/llms.txt"
+  },
   "submitted_by": "registry (seed)",
   "created": "2026-07-28",
   "github_user": "110kc3",
-  "tier": "free"
+  "tier": "free",
+  "origin": "seed"
 }

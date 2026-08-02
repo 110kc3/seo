@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, appendFileSync } from 'node:fs';
 import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { validate, reconstruct, normalizeUrl, MAX_LISTINGS_PER_USER, SLUG_RE, PAID_TIERS } from './validate.mjs';
+import { validate, reconstruct, normalizeUrl, MAX_LISTINGS_PER_USER, SLUG_RE, PAID_TIERS, DEFAULT_ORIGIN } from './validate.mjs';
 import { verifyReceipt, tierPriceAtomic, TX_RE } from './x402-receipt.mjs';
 import { resolveX402 } from './x402-config.mjs';
 
@@ -199,21 +199,41 @@ if (MODE === 'update') {
   if (!existsSync(target)) reject([`no such listing: ${obj.slug} — use [register] for new listings`], 'not_found');
   const existing = loadListing(obj.slug);
   assertOwnership(existing);
-  // created/github_user/tier survive updates; only content fields change.
-  server = { created: existing.created, github_user: existing.github_user, tier: existing.tier, updated: today };
+  // created/github_user/tier/origin survive updates; only content fields change.
+  // origin especially: an [update] must not be able to launder a curated entry
+  // into a self-registered one, or the reverse.
+  server = {
+    created: existing.created,
+    github_user: existing.github_user,
+    tier: existing.tier,
+    origin: existing.origin ?? DEFAULT_ORIGIN,
+    updated: today,
+  };
 } else {
   if (existsSync(target)) reject([`slug already registered: ${obj.slug}`], 'duplicate');
-  server = { created: today, github_user: user };
+  server = { created: today, github_user: user, origin: 'self-registered' };
 }
 
 // URL uniqueness (excluding the listing being updated) + per-account cap.
+//
+// The cap counts self-registered listings only. It exists to stop one account
+// flooding the registry through this flow, and an entry the registry itself
+// wrote — a curated mirror, or an operator seed — was never a submission. Found
+// the direct way: after 30 curated entries were seeded under the operator's
+// account, the operator's own [register] was refused at "40 listings (max 10)",
+// which would have been every future self-registration too.
+//
+// `origin` is server-set and refused as input, so this cannot be gamed by
+// claiming to be curated. A listing predating the field has no origin and still
+// counts, which is the fail-closed direction.
 const wanted = normalizeUrl(obj.url);
 let mine = 0;
 for (const f of readdirSync(listingDir).filter((n) => n.endsWith('.json'))) {
   const existing = JSON.parse(readFileSync(join(listingDir, f), 'utf8'));
   if (existing.slug === obj.slug && MODE === 'update') continue;
   if (normalizeUrl(existing.url) === wanted) reject([`url already registered under slug: ${existing.slug}`], 'duplicate');
-  if (existing.github_user === user) mine += 1;
+  const origin = existing.origin ?? DEFAULT_ORIGIN;
+  if (existing.github_user === user && origin === 'self-registered') mine += 1;
 }
 if (MODE === 'register' && mine >= MAX_LISTINGS_PER_USER) {
   reject([`account ${user} already has ${mine} listings (max ${MAX_LISTINGS_PER_USER})`], 'account_cap');

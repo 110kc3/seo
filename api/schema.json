@@ -118,6 +118,16 @@
       ],
       "readOnly": true,
       "description": "Server-set: listing tier. Paid tiers (verified, featured) rank above free in the index; payment rails (x402, card) not yet enabled — watch llms.txt."
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "self-registered",
+        "curated",
+        "seed"
+      ],
+      "readOnly": true,
+      "description": "Server-set: how the listing got here. self-registered = submitted through the [register] issue flow; curated = added by the registry from public facts about a public product; seed = an operator listing from before the registry opened. Only self-registered listings count toward the per-account cap."
     }
   }
 }
