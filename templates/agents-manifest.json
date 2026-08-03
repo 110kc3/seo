@@ -121,7 +121,7 @@
     },
     {
       "method": "POST",
-      "url": "{{BASE}}/api/watch",
+      "url": "{{ROUTER}}/api/watch",
       "description": "Watch one endpoint; a webhook fires when it stops or starts answering, and once more when the prepaid sweeps run out. Prepaid rather than a subscription — x402 has no recurring billing and a stored mandate would be custody. The payer address from the settlement owns the watch, so there is no account to create.",
       "auth": "x402",
       "price": "sweeps x the per-sweep amount, quoted at {{BASE}}/api/x402/info",

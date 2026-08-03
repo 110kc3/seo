@@ -276,7 +276,7 @@ it when you want the ranked order to fix things in.
 
 ## Get told when an endpoint stops answering
 
-- POST https://index.percall.dev/api/watch with `{"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}`
+- POST https://router.percall.dev/api/watch with `{"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}`
 
 Prepaid, not a subscription: one payment buys N weekly sweeps and nothing is ever
 charged again without you signing for it — x402 has no recurring billing, and a

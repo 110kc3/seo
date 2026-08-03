@@ -45,7 +45,10 @@ const ROUTER_HOST = cfg.router_host || null;
 // canonical host, for the same reason the apex only serves its root: content
 // with two addresses is content a directory can record at the wrong one, and
 // that discipline has already cost a round of upstream corrections.
-const ROUTER_PATHS = new Set(['/api/liveness', '/api/route']);
+// Monitoring belongs here too: a watch is the same probe on a schedule, and
+// having it answer on the index while its two siblings answer on the Router
+// reads as an accident to anyone looking at the price list.
+const ROUTER_PATHS = new Set(['/api/liveness', '/api/route', '/api/watch', '/api/watch/sweep']);
 const isRoot = (url) => url.pathname === '/' || url.pathname === '/index.html';
 const isApexRoot = (url) => Boolean(APEX_HOST) && url.host === APEX_HOST && isRoot(url);
 // Where the Router's endpoints live, for anything that has to print the URL
@@ -369,7 +372,7 @@ function handleX402Info(cfgObj) {
       amount: rail.check_price_atomic,
       description: 'One agent-readability check for one URL: pass/fail, why, and a paste-ready fix for that origin. The free grade at /api/score names which checks failed, so you know which one to buy.',
     }, {
-      url: `${BASE}/api/watch`,
+      url: `${ROUTER_BASE}/api/watch`,
       method: 'POST',
       amount_per_sweep: rail.watch_sweep_price_atomic,
       max_sweeps: MAX_SWEEPS,
@@ -465,7 +468,7 @@ export default {
             const g = await requirePayment(request, env, cfg, {
               amountAtomic: unit ? String(unit * sweeps) : undefined,
               resource: {
-                url: `${BASE}/api/watch`,
+                url: `${url.origin}${url.pathname}`,
                 method: 'POST',
                 description: `Watch one endpoint and POST a webhook when it stops (or starts) answering. Prepaid: one payment buys N weekly sweeps, ${sweeps} here. No subscription and no stored mandate — nothing is charged again without you signing for it.`,
                 mimeType: 'application/json',

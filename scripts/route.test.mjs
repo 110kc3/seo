@@ -394,6 +394,11 @@ test('the canonical host hands the Router its endpoints, and keeps everything el
   for (const [path, expected] of [
     ['/api/liveness?url=https://example.com/paid', 'https://router.percall.dev/api/liveness?url=https://example.com/paid'],
     ['/api/route', 'https://router.percall.dev/api/route'],
+    // Monitoring moved here 2026-08-03: a watch is the same probe on a
+    // schedule, and it had been answering on the index while its two siblings
+    // answered on the Router.
+    ['/api/watch', 'https://router.percall.dev/api/watch'],
+    ['/api/watch/sweep', 'https://router.percall.dev/api/watch/sweep'],
   ]) {
     const r = worker.canonicalRedirect(new URL(`${BASE}${path}`));
     assert.ok(r, `${path} should be handed to the Router host`);
@@ -409,7 +414,7 @@ test('the canonical host hands the Router its endpoints, and keeps everything el
     assert.equal(worker.canonicalRedirect(new URL(`${BASE}${path}`)), null, `${path} should still be served here`);
   }
   // And the Router host answers for its own three paths rather than bouncing.
-  for (const path of ['/', '/api/liveness', '/api/route']) {
+  for (const path of ['/', '/api/liveness', '/api/route', '/api/watch', '/api/watch/sweep']) {
     assert.equal(worker.canonicalRedirect(new URL(`https://router.percall.dev${path}`)), null);
   }
   // But nothing else on it: one copy of everything, which is the discipline the
