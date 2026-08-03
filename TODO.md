@@ -131,7 +131,21 @@ Three findings worth keeping:
 
 The file's header claims it wins when docs disagree with it. It only earns that by being re-read against reality.
 
-**244 tests** (was 216).
+**265 tests** (was 216).
+
+**Shipped after that entry was written, same session:**
+
+- [x] **Unbundled the audit** — `GET /api/check?url=…&check=<id>`, $0.005 for one check, because competitors sell a single signal for half a cent while this sold twenty for five cents or nothing. A test pins both directions: one check must cost less than the report, and buying all twenty singly must cost more, or the bundle is the worse deal.
+- [x] **MCP routing** — `/api/route` takes `catalog: "mcp"` and probes by *starting a session* rather than knocking. A GET returns 405 from a healthy MCP server, which would have graded the whole registry alive; `initialize` asks the real question, and 401/403 is kept as its own verdict because credentials-required proves a server is there.
+- [x] **The avoid-list**, free, per catalog. Building it exposed that the sweep re-probes any endpoint about **twice a year**, so two consecutive misses take a year — `confirmed` and `suspected` are separate lists rather than one that is empty or overclaiming.
+- [x] **The signature advertised**, with the claim corrected before publishing: the draft said "nothing else does this" and 83 of 14,734 endpoints do. The shipped line is 0.6%, and that they sell signing as a product while here it is a property of every response.
+- [x] **Monitoring** — `POST /api/watch` (on the Router host) buys N prepaid sweeps and webhooks on a state change. Prepaid rather than a subscription, because a stored mandate to charge later is custody; the payer address from the settlement owns the watch, so there is no account; alerts are edges, not levels.
+- [x] **Proven end to end with real money.** $0.04 on watch purchases, and a deliberate outage on `kc-it.pl` fired both edges — outage and recovery — with delivery confirmed by a webhook sink rather than inferred.
+
+**Two defects found by asking the obvious question:**
+
+- **The watch called a 500 "answering".** `probe().alive` is true for any HTTP response — correct for the Router, where a 402 is the successful outcome — and monitoring inherited it. An endpoint erroring for a week would never have alerted. `probe-catalogs.mjs` had the right rule written down since the catalogs shipped; the one product sold on knowing was the one place not following it.
+- **A catch-all bought 11 free points** (#10). The five 2026 signal checks tested `resp.ok` alone, so a site whose unmatched paths answer 200 with the homepage passed all five on documents it did not have. `kc-it.pl` scored **A 95** with eleven points for files that do not exist; the honest grade is 84. That is the default configuration for SPAs and for Pages without a 404.html, so it inflated grades for customers too — always upward, which is the direction nobody reports.
 
 ## Done (v3.13 — the audit reports 2026, and the site publishes skills, 2026-08-01)
 

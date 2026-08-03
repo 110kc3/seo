@@ -530,6 +530,47 @@ bug one host later.
 the Router shipped agent-facing only on a site where 46% of requests are
 browsers. **243 tests.**
 
+## 2h. The auditor was buying grades from a misconfigured 404 (#10)
+
+Kamil asked for two site findings to be filed as issues. Checking them properly
+turned one into a defect in the product itself.
+
+**The five 2026 signal checks tested `resp.ok` and nothing else.** A site with no
+404 page — every unmatched path answering 200 with the homepage — passed all
+five on documents it did not have. `kc-it.pl`, one of our own listings, scored
+**A 95 with eleven of those points for files that do not exist.** The honest
+grade is 84.
+
+That configuration is the default for SPAs and for Cloudflare Pages without a
+`404.html`, so this was not one site's quirk: it inflated grades for anyone
+audited, **always upward**, which is the direction nobody reports.
+
+Fixed by requiring the body to parse as a JSON object — every one of these
+artifacts is JSON, so parsing is the whole test and no allowlist is needed. A
+body truncated at the fetch ceiling falls back to the declared content-type, so
+a genuinely large manifest is not failed for its size. **Soft 404s are now their
+own finding**, because "no agent card" would send someone off to publish a file
+they already appear to have.
+
+**What made this findable:** reading the repo's own history first. The catch-all
+was known and deliberate (`110kc3/personal-page@3c9cf81` documents it and fixed
+the four paths the audit checked *then*). The seven 2026 signals landed
+2026-08-02, after that commit, and moved the goalposts underneath the decision.
+Filing "your site has a catch-all" would have told Kamil something he wrote down
+himself a week earlier; the new part was that our own auditor could not tell a
+JSON document from a page of HTML.
+
+Also fixed this session: **the watch called a 500 "answering"**. `probe().alive`
+is true for any HTTP response — correct for the Router, where a 402 is the
+successful outcome — and monitoring inherited it, so an endpoint erroring for a
+week would never have alerted. `probe-catalogs.mjs` has had the right rule since
+the catalogs shipped; the one product sold on knowing was the one place not
+following it.
+
+**Monitoring is proven end to end.** A deliberate 503 on `kc-it.pl` fired the
+outage edge and the recovery edge, with delivery confirmed by a webhook sink
+rather than inferred. **265 tests.**
+
 ## 3. Waiting on other people — nothing to do
 
 | what | state, 2026-08-02 |
