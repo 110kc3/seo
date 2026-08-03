@@ -128,12 +128,18 @@ function record(env, request, url, clientType, status) {
         `${Math.floor(status / 100)}xx`,
         ua.slice(0, 200),
         request.cf?.asOrganization ?? 'unknown',
-        // Which of this Worker's hostnames was asked. A bounded set of four, and
+        // Which of this Worker's hostnames was asked. A bounded set of five, and
         // the only way to answer "is the umbrella getting traffic, and is anyone
         // still arriving on the retired host" — a path bucket cannot, because
         // every host serves the same paths. Rows written before 2026-08-02 have
         // no value here and report as `unrecorded` rather than as a real host.
-        url.host,
+        //
+        // `hostname`, not `host`: host carries the port, and Cloudflare answers
+        // on 8443/8080 as well as 443. Port scanners duly produced
+        // `router.percall.dev:8443` and `www.percall.dev:8080` as separate rows,
+        // which splits a host's real traffic across entries and invents hosts
+        // that do not exist. The port is not a dimension anyone asks about here.
+        url.hostname,
       ],
       doubles: [1, status, request.cf?.asn ?? 0],
       indexes: [clientType],
