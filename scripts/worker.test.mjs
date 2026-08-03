@@ -2622,3 +2622,42 @@ test('the avoid-lists separate what is confirmed from what is merely suspected',
     assert.equal(j.counts.suspected, j.suspected.length);
   }
 });
+
+// --- soft 404s: fetching a URL is not the check ------------------------------
+
+test('a page of HTML is not a JSON document, however cheerfully it answers 200', async () => {
+  // seo#10. Every one of the 2026 signal checks tested `resp.ok` alone, so a
+  // site with no 404 page — every unmatched path answering 200 with the
+  // homepage — passed all five on documents it did not have. kc-it.pl scored
+  // A 95 that way, 11 of its points for files that do not exist, and that
+  // configuration is the default for SPAs and for Cloudflare Pages without a
+  // 404.html. Grades inflated in the direction that flatters the customer are
+  // the ones nobody reports.
+  const { __testing: audit } = await import('../worker/audit.js');
+  const { jsonDoc, missing } = audit;
+
+  const page = { ok: true, body: '<!doctype html><html><body>hello</body></html>', type: 'text/html' };
+  assert.deepEqual(jsonDoc(page), { ok: false, soft404: true });
+
+  // A genuine document still passes.
+  assert.equal(jsonDoc({ ok: true, body: '{"name":"Example"}', type: 'application/json' }).ok, true);
+  // RFC 9727 serves a linkset; content-type is not the test, parsing is.
+  assert.equal(jsonDoc({ ok: true, body: '{"linkset":[]}', type: 'application/linkset+json' }).ok, true);
+
+  // A real 404 is absence, not a soft 404 — different finding, different fix.
+  assert.deepEqual(jsonDoc({ ok: false, body: 'Not Found', type: 'text/plain' }), { ok: false, soft404: false });
+
+  // A bare JSON scalar is not a document either.
+  assert.equal(jsonDoc({ ok: true, body: '"hello"', type: 'application/json' }).ok, false);
+  assert.equal(jsonDoc({ ok: true, body: 'null', type: 'application/json' }).ok, false);
+
+  // Truncated at the ceiling: unparseable, so fall back to the declared type
+  // rather than failing a real manifest for being large.
+  assert.equal(jsonDoc({ ok: true, body: '{"a":1', truncated: true, type: 'application/json' }).ok, true);
+  assert.equal(jsonDoc({ ok: true, body: '<!doctype ht', truncated: true, type: 'text/html' }).ok, false);
+
+  // The advice has to name the cause: "no card" sends someone off to publish a
+  // file they already appear to have.
+  assert.match(missing({ ok: false, soft404: true }, '/x'), /answers 200 but is not JSON/);
+  assert.equal(missing({ ok: false, soft404: false }, '/x'), 'no /x');
+});

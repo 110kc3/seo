@@ -504,6 +504,45 @@ export function scoreChecks(checks) {
  *   outright. No check reads a response header, so serving those sub-requests
  *   from the asset binding scores identically.
  */
+/**
+ * Is this response actually the JSON document the path promised?
+ *
+ * Fetching a URL is not the check; the URL being what it claims is. A site with
+ * a catch-all — no 404 page, every unmatched path answering 200 with the
+ * homepage — used to pass every one of the 2026 signals on documents it did not
+ * have. `kc-it.pl` scored A 95 that way, 11 of its points for files that do not
+ * exist, and the same configuration is the default for SPAs and for Cloudflare
+ * Pages without a 404.html. Grades inflated in the direction that flatters the
+ * customer are the ones nobody reports.
+ *
+ * Every artifact here is a JSON document, so parsing is the whole test and no
+ * allowlist or heuristic is needed. `soft404` is kept separate from plain
+ * absence because they are different findings with different fixes: one site is
+ * missing a file, the other is misreporting every URL it does not have.
+ */
+function jsonDoc(res) {
+  if (!res?.ok) return { ok: false, soft404: false };
+  // A body cut off at the ceiling cannot be parsed, so fall back to the declared
+  // type — still enough to tell a manifest from a page of HTML, and a real
+  // manifest large enough to truncate should not be failed for its size.
+  if (res.truncated) {
+    const isJson = /json/i.test(res.type ?? '');
+    return { ok: isJson, soft404: !isJson };
+  }
+  try {
+    const parsed = JSON.parse(res.body ?? '');
+    const ok = parsed !== null && typeof parsed === 'object';
+    return { ok, soft404: !ok };
+  } catch {
+    return { ok: false, soft404: true };
+  }
+}
+
+/** "absent" and "answered with a page" are different things to tell a reader. */
+const missing = (doc, path) => (doc.soft404
+  ? `${path} answers 200 but is not JSON — a catch-all is serving a page there, not a document`
+  : `no ${path}`);
+
 export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, checkSet = DEFAULT_CHECK_SET) {
   const set = resolveCheckSet(checkSet);
   const origin = new URL(target).origin;
@@ -537,6 +576,18 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     // proves nothing here, since ignoring the header also returns 200.
     one(target, { accept: 'text/markdown', maxBytes: 1024 }),
   ]);
+
+  // Validated forms of the JSON artifacts. `.ok` from get() means only that the
+  // server answered 200; these mean the answer was the document.
+  const cardDoc = jsonDoc(agentCard);
+  const legacyCardDoc = jsonDoc(wellKnown);
+  const agentsJsonDoc = jsonDoc(agentsJson);
+  const apiCatalogDoc = jsonDoc(apiCatalog);
+  const mcpCardDoc = jsonDoc(mcpCard);
+  const mcpServerCardDoc = jsonDoc(mcpServerCard);
+  const agentSkillsDoc = jsonDoc(agentSkills);
+  const botAuthDoc = jsonDoc(botAuthDir);
+
 
   if (!home.ok) {
     return {
@@ -599,10 +650,13 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     // evidence says which path answered, and a site on the old one is told so,
     // because "you pass" while a spec-compliant 1.0 client cannot find you is
     // exactly the kind of advice that is worse than none.
-    check('agent_card', CHECK_META.agent_card.weight, agentCard.ok || wellKnown.ok || agentsJson.ok,
-      agentCard.ok ? '/.well-known/agent-card.json is available'
-        : (wellKnown.ok ? '/.well-known/agent.json is available — the pre-0.3 path; A2A 1.0 clients look at /.well-known/agent-card.json'
-          : (agentsJson.ok ? '/agents.json is available' : 'no agent card at /.well-known/agent-card.json, /.well-known/agent.json or /agents.json')),
+    check('agent_card', CHECK_META.agent_card.weight, cardDoc.ok || legacyCardDoc.ok || agentsJsonDoc.ok,
+      cardDoc.ok ? '/.well-known/agent-card.json is available'
+        : (legacyCardDoc.ok ? '/.well-known/agent.json is available — the pre-0.3 path; A2A 1.0 clients look at /.well-known/agent-card.json'
+          : (agentsJsonDoc.ok ? '/agents.json is available'
+            : (cardDoc.soft404 || legacyCardDoc.soft404 || agentsJsonDoc.soft404
+              ? 'the agent card paths answer 200 but return a page, not JSON — a catch-all is serving them'
+              : 'no agent card at /.well-known/agent-card.json, /.well-known/agent.json or /agents.json'))),
       'Publish an agent card at /.well-known/agent-card.json describing your callable interfaces (A2A 1.0) — this is what turns a page into a tool. Serve the same document at /.well-known/agent.json too, for clients written before the path moved.'),
     check('https', CHECK_META.https.weight, new URL(home.url ?? target).protocol === 'https:',
       `served over ${new URL(home.url ?? target).protocol.replace(':', '')}`,
@@ -614,20 +668,23 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     signal('content_signals', SIGNAL_META.content_signals.label, declaredSignals !== null,
       declaredSignals !== null ? `robots.txt declares Content-Signal: ${declaredSignals}` : 'robots.txt carries no Content-Signal line',
       SIGNAL_META.content_signals.fix),
-    signal('agent_card_current_path', SIGNAL_META.agent_card_current_path.label, agentCard.ok,
-      agentCard.ok ? '/.well-known/agent-card.json is available'
-        : (wellKnown.ok ? 'a card exists at the pre-0.3 /.well-known/agent.json, but not at the 1.0 path' : 'no card at /.well-known/agent-card.json'),
+    signal('agent_card_current_path', SIGNAL_META.agent_card_current_path.label, cardDoc.ok,
+      cardDoc.ok ? '/.well-known/agent-card.json is available'
+        : (legacyCardDoc.ok ? 'a card exists at the pre-0.3 /.well-known/agent.json, but not at the 1.0 path'
+          : missing(cardDoc, '/.well-known/agent-card.json')),
       SIGNAL_META.agent_card_current_path.fix),
-    signal('mcp_server_card', SIGNAL_META.mcp_server_card.label, mcpCard.ok || mcpServerCard.ok,
-      mcpCard.ok || mcpServerCard.ok
-        ? `MCP server card at ${mcpCard.ok ? '/.well-known/mcp.json' : ''}${mcpCard.ok && mcpServerCard.ok ? ' and ' : ''}${mcpServerCard.ok ? '/.well-known/mcp/server-card.json' : ''}`
-        : 'no MCP server card at /.well-known/mcp.json or /.well-known/mcp/server-card.json',
+    signal('mcp_server_card', SIGNAL_META.mcp_server_card.label, mcpCardDoc.ok || mcpServerCardDoc.ok,
+      mcpCardDoc.ok || mcpServerCardDoc.ok
+        ? `MCP server card at ${mcpCardDoc.ok ? '/.well-known/mcp.json' : ''}${mcpCardDoc.ok && mcpServerCardDoc.ok ? ' and ' : ''}${mcpServerCardDoc.ok ? '/.well-known/mcp/server-card.json' : ''}`
+        : (mcpCardDoc.soft404 || mcpServerCardDoc.soft404
+          ? 'the MCP card paths answer 200 but return a page, not JSON — a catch-all is serving them'
+          : 'no MCP server card at /.well-known/mcp.json or /.well-known/mcp/server-card.json'),
       SIGNAL_META.mcp_server_card.fix),
-    signal('api_catalog', SIGNAL_META.api_catalog.label, apiCatalog.ok,
-      apiCatalog.ok ? '/.well-known/api-catalog is available' : 'no /.well-known/api-catalog',
+    signal('api_catalog', SIGNAL_META.api_catalog.label, apiCatalogDoc.ok,
+      apiCatalogDoc.ok ? '/.well-known/api-catalog is available' : missing(apiCatalogDoc, '/.well-known/api-catalog'),
       SIGNAL_META.api_catalog.fix),
-    signal('agent_skills', SIGNAL_META.agent_skills.label, agentSkills.ok,
-      agentSkills.ok ? '/.well-known/agent-skills/index.json is available' : 'no /.well-known/agent-skills/index.json',
+    signal('agent_skills', SIGNAL_META.agent_skills.label, agentSkillsDoc.ok,
+      agentSkillsDoc.ok ? '/.well-known/agent-skills/index.json is available' : missing(agentSkillsDoc, '/.well-known/agent-skills/index.json'),
       SIGNAL_META.agent_skills.fix),
     signal('markdown_negotiation', SIGNAL_META.markdown_negotiation.label,
       markdownAlt.ok && /markdown/i.test(markdownAlt.type ?? ''),
@@ -635,8 +692,8 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
         ? `Accept: text/markdown returns ${markdownAlt.type}`
         : `Accept: text/markdown returns ${markdownAlt.type ?? 'no content-type'} — the Accept header is ignored`,
       SIGNAL_META.markdown_negotiation.fix),
-    signal('web_bot_auth', SIGNAL_META.web_bot_auth.label, botAuthDir.ok,
-      botAuthDir.ok ? '/.well-known/http-message-signatures-directory is available' : 'no /.well-known/http-message-signatures-directory',
+    signal('web_bot_auth', SIGNAL_META.web_bot_auth.label, botAuthDoc.ok,
+      botAuthDoc.ok ? '/.well-known/http-message-signatures-directory is available' : missing(botAuthDoc, '/.well-known/http-message-signatures-directory'),
       SIGNAL_META.web_bot_auth.fix),
   ];
 
@@ -718,4 +775,4 @@ export function parseAuditRequest(obj) {
   return { url: obj.url, checkSet: resolveCheckSet(obj.checks) };
 }
 
-export const __testing = { robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal, V2_WEIGHTS, resolveCheckSet, get };
+export const __testing = { jsonDoc, missing, robotsBlocksAgent, llmsTxtShape, parseJsonLd, AI_CRAWLER_AGENTS, scoreChecks, signal, V2_WEIGHTS, resolveCheckSet, get };
