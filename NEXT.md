@@ -23,10 +23,9 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 > wrong and what that says about trusting this file without re-reading the repo.
 > **Nothing on my side is open and unblocked.**
 >
-> **Your list: a Show HN held until ~25 Aug, three optional items, four browser
-> jobs for indexation (§1.8), and one command to attach a hostname (§1.10).**
-> That last one is the only thing standing between the Router and its own
-> subdomain — everything else for it is built, deployed and inert (§2g).
+> **Your list: a Show HN held until ~25 Aug, three optional items, and four
+> browser jobs for indexation (§1.8).** §1.10 is done — you ran the attach and
+> the Router is live on `router.percall.dev`.
 >
 > The second service is live and paid for: two endpoints that probe and route but
 > never pay, because you said you would not pay from your own wallet and that is
@@ -150,37 +149,26 @@ Optional after those: **IndexNow in Cloudflare** (Cache → Configuration) will
 ping on cache purge as well as on deploy. Harmless overlap with §2d, and it
 covers changes that do not come from a push.
 
-### 1.10 Attach `router.percall.dev`, then tell me
+### ~~1.10 Attach `router.percall.dev`~~ — done 2026-08-03, and the Router is on it
 
-*The code is done and inert (§2g). Two ways to do this; the first is one command.*
+Kamil ran `gh workflow run cf-admin -f action=attach-domain -f hostname=router.percall.dev`;
+it succeeded at 06:02, and `router_host` was set and deployed straight after. The
+`attach-domain` action turned out to have zone rights after all — the code 10000
+fallback to the dashboard was never needed.
 
-**a. The workflow, which already exists.** `cf-admin` has an `attach-domain`
-action — it finds the owning zone and PUTs `/workers/domains`, idempotent, token
-never leaving GitHub:
+**The order held**, which was the whole reason this shipped inert: attach first,
+config second. Reversed, `index.percall.dev/api/{liveness,route}` would have
+redirected to NXDOMAIN and taken two live paid endpoints down.
 
-```
-gh workflow run cf-admin -f action=attach-domain -f hostname=router.percall.dev
-```
+Verified live: `router.percall.dev/` serves the landing page (200),
+`router.percall.dev/api/route` answers 402 on its own host, and both old paths
+answer **308** with the query string intact. 308 not 301, so a caller retrying a
+paid POST with a payment header keeps its method and body.
 
-I could not run this myself: dispatching a workflow that mutates cloud
-infrastructure is blocked for me by a permission classifier, which is the correct
-place for that boundary to sit. Run it yourself, or grant the permission and say
-so and I will.
-
-If it fails with **code 10000** the token lacks zone-level rights for this zone,
-which is the documented state in `wrangler.toml` — fall back to (b) rather than
-widening the token. One missing zone grant took the whole deploy down once
-already (TODO.md).
-
-**b. The dashboard.** `ai-product-index` Worker → **Settings → Domains & Routes →
-Add → Custom Domain** → `router.percall.dev`. Cloudflare creates the DNS record.
-
-Then say the word: I set `router_host` in `site.config.json`, and one deploy moves
-the endpoints, the canonical, the sitemap, `llms.txt`, the manifest, the OpenAPI
-servers and the apex card together.
-
-**Order matters.** Attach first, set the config second. Reversed, the canonical
-host starts 308-ing two live paid endpoints at a hostname that does not resolve.
+One thing did not follow automatically and never can: `110kc3.github.io` is not
+generated from this repo's config, so its four references were edited by hand
+(`110kc3.github.io@10a77c2`). Anything that moves a hostname again has to touch
+that repo too.
 
 ### ~~1.9 Pick a second service~~ — decided 2026-08-02: the non-custodial one
 
@@ -547,7 +535,7 @@ browsers. **243 tests.**
 | what | state, 2026-08-02 |
 |---|---|
 | **awesome-mcp-servers #11152** | OPEN, MERGEABLE. Waits on a maintainer — but only sensibly *after* §2.1 lands the badge. |
-| **Awesome-llms-txt #114** | OPEN. One-line diff, Socket checks green. Purely maintainer lag. |
+| **Awesome-llms-txt #114** | OPEN, and it was **never maintainer lag** — this row said so for days while a `CHANGES_REQUESTED` review sat unanswered since 2026-07-29. The maintainer was right on both counts: the description named `index.kc-it.pl` while the diff added `index.percall.dev` (written pre-migration, prose not updated with the diff — on a PR to a *directory*, which is the worst place to look unsure of your own canonical host), and the branch was 19 commits behind with a conflict. Fixed 2026-08-03: rebased onto `master`, squashed to one commit, `normalize_lists.py --check` exits 0, description rewritten to state the canonical host and why it changed, and the review answered. **Now** it is maintainer lag. |
 | **x402 Bazaar listing** | Still absent. Re-checked today across **14,794 catalog entries** — nothing pays our address or lives on our host. Everything on our side is done: rail is CDP, the 402 carries discovery metadata, and a settlement has carried it. Upstream `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, unanswered. Check with `node scripts/bazaar-check.mjs`. **Do not spend more time on this** — the next move is theirs. |
 
 ---
