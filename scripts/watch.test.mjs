@@ -184,3 +184,54 @@ test('a watch costs sweeps x the published per-sweep price, and the cap is real'
   assert.equal(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: MAX_SWEEPS }, urlError).sweeps, MAX_SWEEPS);
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: MAX_SWEEPS + 1 }, urlError).error, /^sweeps:/);
 });
+
+// --- what counts as an outage -----------------------------------------------
+
+test('a 500 is an outage, not "answering" — the bug this product could least afford', async () => {
+  // `probe().alive` answers the Router's question: did the host answer at all,
+  // where a 402 is the successful outcome. The watch inherited it, so an
+  // endpoint erroring for a week reported as healthy the entire time — on the
+  // one product whose whole promise is telling you it stopped.
+  const { healthyForWatch } = await import('../worker/watch.js');
+  for (const status of [500, 502, 503, 504]) {
+    assert.equal(healthyForWatch({ alive: true, status }), false, `HTTP ${status} must be an outage`);
+  }
+  // 4xx too: if the URL you depend on starts 404ing, your integration is broken
+  // even though their server is fine.
+  assert.equal(healthyForWatch({ alive: true, status: 404 }), false);
+  assert.equal(healthyForWatch({ alive: true, status: 410 }), false);
+
+  // But the codes that are a *correct* answer must never alert. A paid endpoint
+  // answering 402 to an unpaid probe is working exactly as designed, and 405 is
+  // our own doing — the probe sends GET.
+  for (const status of [200, 204, 301, 401, 402, 403, 405]) {
+    assert.equal(healthyForWatch({ alive: true, status }), true, `HTTP ${status} must not alert`);
+  }
+  assert.equal(healthyForWatch({ alive: false, status: 0 }), false);
+});
+
+test('the alert says whether the server errored or vanished', async () => {
+  // Different fix, different urgency: a subscriber must be able to tell "your
+  // server is returning 500" from "your host is gone".
+  const env = { PAYMENTS: fakeKv() };
+  await env.PAYMENTS.put(watchKey(PAYER, 'https://a.example/x'), JSON.stringify({
+    url: 'https://a.example/x', webhook: 'https://you.example/h', payer: PAYER, credits: 3, last_state: 'answering',
+  }));
+  const sent = [];
+  await handleSweep(new Request(`${BASE}/api/watch/sweep`, { method: 'POST' }), env, {
+    authorized: true, cfg,
+    probe: async () => ({ alive: true, status: 503 }),
+    fetchImpl: async (url, init) => { sent.push(JSON.parse(init.body)); return { ok: true }; },
+  });
+  assert.equal(sent.length, 1, 'a 503 must fire the alert');
+  assert.equal(sent[0].state, 'failing');
+  assert.equal(sent[0].reason, 'HTTP 503');
+
+  await handleSweep(new Request(`${BASE}/api/watch/sweep`, { method: 'POST' }), env, {
+    authorized: true, cfg,
+    probe: async () => ({ alive: false, status: 0, error: 'timeout' }),
+    fetchImpl: async (url, init) => { sent.push(JSON.parse(init.body)); return { ok: true }; },
+  });
+  // Still failing, so no new edge — but when it does fire, the reason differs.
+  assert.equal(sent.length, 1, 'failing -> failing is not an edge');
+});

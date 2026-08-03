@@ -38,6 +38,38 @@ const json = (body, status = 200, headers = {}) =>
     headers: { 'content-type': 'application/json; charset=utf-8', ...headers },
   });
 
+/**
+ * Status codes that are a correct answer rather than an outage.
+ *
+ * 401/402/403 are what a paid or authenticated endpoint is *supposed* to say to
+ * an unpaid, unauthenticated probe — treating them as failure would alert every
+ * subscriber that their working paywall is broken. 405 is our own doing: the
+ * probe sends GET, so a POST-only endpoint answers 405 while being healthy.
+ */
+const EXPECTED_STATUS = new Set([401, 402, 403, 405]);
+
+/**
+ * Is a watched endpoint healthy?
+ *
+ * Deliberately NOT `result.alive`. That field answers the Router's question —
+ * did the host answer at all, where a 402 is the successful outcome — and
+ * inheriting it here made this product unable to report the commonest outage
+ * there is: **an endpoint returning 500 was reported as "answering"**, so a
+ * subscriber whose API had been erroring for a week would never have been told.
+ *
+ * `scripts/probe-catalogs.mjs` has had the correct rule written down since the
+ * catalogs shipped — "only transport failures and 5xx count against an
+ * endpoint" — and this, the one product sold on knowing, was the place not
+ * following it. 4xx is added on top because this is a *watch*: if the URL you
+ * depend on starts 404ing, your integration is broken even though the server is
+ * fine.
+ */
+export function healthyForWatch(result) {
+  if (!result.alive) return false;
+  if (EXPECTED_STATUS.has(result.status)) return true;
+  return result.status < 400;
+}
+
 /** One watch is one URL for one payer, so a top-up is idempotent by construction. */
 export const watchKey = (payer, url) => `${WATCH_PREFIX}${String(payer).toLowerCase()}:${url}`;
 
@@ -171,7 +203,7 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
     if ((watch.credits ?? 0) <= 0) { results.exhausted++; continue; }
 
     const result = await probe(watch.url, { cfg, fetchImpl });
-    const state = result.alive ? 'answering' : 'failing';
+    const state = healthyForWatch(result) ? 'answering' : 'failing';
     const changed = watch.last_state !== null && watch.last_state !== state;
     const credits = watch.credits - 1;
 
@@ -191,6 +223,11 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
       changed,
       status: result.status,
       consecutive_failures: state === 'failing' ? 1 : 0,
+      // A subscriber has to tell "your server is erroring" from "your server is
+      // gone" — different fix, different urgency.
+      reason: state === 'failing'
+        ? (result.alive ? `HTTP ${result.status}` : `no response (${result.error ?? 'transport failure'})`)
+        : null,
       checked_at: at,
       credits_left: credits,
       ...(credits <= 0 ? { exhausted: true, note: 'This was the last paid sweep. Top up at /api/watch from the same wallet to continue.' } : {}),
