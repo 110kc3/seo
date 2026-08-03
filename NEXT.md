@@ -146,19 +146,34 @@ Optional after those: **IndexNow in Cloudflare** (Cache → Configuration) will
 ping on cache purge as well as on deploy. Harmless overlap with §2d, and it
 covers changes that do not come from a push.
 
-### 1.10 Attach `router.percall.dev`, then tell me — one dashboard action
+### 1.10 Attach `router.percall.dev`, then tell me
 
-*The code is done and inert (§2g). This is the only step I cannot take.*
+*The code is done and inert (§2g). Two ways to do this; the first is one command.*
 
-Cloudflare dashboard → the `ai-product-index` Worker → **Settings → Domains &
-Routes → Add → Custom Domain** → `router.percall.dev`. Cloudflare creates the DNS
-record itself. It has to be you because the deploy token is deliberately
-account-scoped with no zone permissions — the alternative is granting CI zone
-access, and the four-hour outage in TODO.md is what that trade already cost once.
+**a. The workflow, which already exists.** `cf-admin` has an `attach-domain`
+action — it finds the owning zone and PUTs `/workers/domains`, idempotent, token
+never leaving GitHub:
 
-Then say the word: I set `router_host` in `site.config.json`, and one deploy
-moves the endpoints, the canonical, the sitemap, `llms.txt`, the manifest, the
-OpenAPI servers and the apex card together.
+```
+gh workflow run cf-admin -f action=attach-domain -f hostname=router.percall.dev
+```
+
+I could not run this myself: dispatching a workflow that mutates cloud
+infrastructure is blocked for me by a permission classifier, which is the correct
+place for that boundary to sit. Run it yourself, or grant the permission and say
+so and I will.
+
+If it fails with **code 10000** the token lacks zone-level rights for this zone,
+which is the documented state in `wrangler.toml` — fall back to (b) rather than
+widening the token. One missing zone grant took the whole deploy down once
+already (TODO.md).
+
+**b. The dashboard.** `ai-product-index` Worker → **Settings → Domains & Routes →
+Add → Custom Domain** → `router.percall.dev`. Cloudflare creates the DNS record.
+
+Then say the word: I set `router_host` in `site.config.json`, and one deploy moves
+the endpoints, the canonical, the sitemap, `llms.txt`, the manifest, the OpenAPI
+servers and the apex card together.
 
 **Order matters.** Attach first, set the config second. Reversed, the canonical
 host starts 308-ing two live paid endpoints at a hostname that does not resolve.
