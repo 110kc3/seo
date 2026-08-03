@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The state of the agent web — AI Product Index</title>
-<meta name="description" content="Measured: 12.36% of traffic is AI agents and rising, 14,661 machine-payable endpoints of which 97% answer, and zero organic payments.">
+<meta name="description" content="Measured: 10.52% of traffic is AI agents and rising, 14,734 machine-payable endpoints of which 98% answer, and zero organic payments.">
 <link rel="canonical" href="https://index.percall.dev/report.html">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The state of the agent web — AI Product Index">
-<meta property="og:description" content="Measured: 12.36% of traffic is AI agents and rising, 14,661 machine-payable endpoints of which 97% answer, and zero organic payments.">
+<meta property="og:description" content="Measured: 10.52% of traffic is AI agents and rising, 14,734 machine-payable endpoints of which 98% answer, and zero organic payments.">
 <meta property="og:url" content="https://index.percall.dev/report.html">
 <meta property="og:image" content="https://index.percall.dev/assets/og.png">
 <script type="application/ld+json">
@@ -18,7 +18,7 @@
   "@type": "Report",
   "name": "The state of the agent web",
   "url": "https://index.percall.dev/report.html",
-  "dateModified": "2026-08-02",
+  "dateModified": "2026-08-03",
   "publisher": {
     "@type": "Organization",
     "name": "AI Product Index",
@@ -67,7 +67,7 @@ readings are snapshots of <a href="https://index.percall.dev/api/stats.json">/ap
 catalog readings are the weekly probe.</p>
 
 <h2>1. Agents are arriving, and the share is rising</h2>
-<div class="cards"><div class="card"><div class="n">12.36%</div><div class="k">agent share (2026-08-02)</div></div><div class="card"><div class="n">7,345</div><div class="k">requests, 30d</div></div><div class="card"><div class="n">908</div><div class="k">declared AI crawlers</div></div><div class="card"><div class="n">3,405</div><div class="k">browser requests</div></div></div>
+<div class="cards"><div class="card"><div class="n">10.52%</div><div class="k">agent share (2026-08-03)</div></div><div class="card"><div class="n">9,742</div><div class="k">requests, 30d</div></div><div class="card"><div class="n">1,025</div><div class="k">declared AI crawlers</div></div><div class="card"><div class="n">4,810</div><div class="k">browser requests</div></div></div>
 <table>
 <thead><tr><th>reading</th><th class="num">requests/30d</th><th class="num">agent share</th><th class="num">AI crawlers</th><th class="num">free scores</th><th class="num">paid-endpoint hits</th></tr></thead>
 <tbody>
@@ -95,9 +95,17 @@ catalog readings are the weekly probe.</p>
     <td class="num">178</td>
     <td class="num">49</td>
   </tr>
+<tr>
+    <td>2026-08-03</td>
+    <td class="num">9,742</td>
+    <td class="num">10.52%</td>
+    <td class="num">1,025</td>
+    <td class="num">196</td>
+    <td class="num">49</td>
+  </tr>
 </tbody></table>
 <p>Agent share went from <strong>3.20%</strong> on 2026-07-29 to
-<strong>12.36%</strong> on 2026-08-02. The site had no inbound
+<strong>10.52%</strong> on 2026-08-03. The site had no inbound
 links for most of that period, so this is agents finding a domain nobody pointed
 them at.</p>
 
@@ -117,38 +125,38 @@ the free tier already answers the question the paid tier charges for. Both are
 more interesting than "the price is wrong".</p>
 
 <h2>3. The machine-payable web is smaller than it counts</h2>
-<div class="cards"><div class="card"><div class="n">14,661</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">1,527</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">27.1%</div><div class="k">held by top 10 hosts</div></div></div>
-<p>14,661 endpoints sounds like an ecosystem. 27.1% of them
-belong to ten operators, and the 1,527 distinct hosts are the honest
+<div class="cards"><div class="card"><div class="n">14,734</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">1,519</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">27.9%</div><div class="k">held by top 10 hosts</div></div></div>
+<p>14,734 endpoints sounds like an ecosystem. 27.9% of them
+belong to ten operators, and the 1,519 distinct hosts are the honest
 denominator. Prices cluster low — median $0.01, 90th percentile
 $0.15 — which is what a market of machine-to-machine calls
 should look like, and it means a five-cent audit sits above the median rather than below it.</p>
 <table>
 <thead><tr><th>chain</th><th class="num">endpoints</th><th class="num">share</th></tr></thead>
 <tbody>
-<tr><td>base</td><td class="num">14,356</td><td class="num">97.9%</td></tr>
-<tr><td>solana</td><td class="num">161</td><td class="num">1.1%</td></tr>
-<tr><td>base-sepolia</td><td class="num">118</td><td class="num">0.8%</td></tr>
+<tr><td>base</td><td class="num">14,423</td><td class="num">97.9%</td></tr>
+<tr><td>solana</td><td class="num">169</td><td class="num">1.1%</td></tr>
+<tr><td>base-sepolia</td><td class="num">116</td><td class="num">0.8%</td></tr>
 <tr><td>x-layer</td><td class="num">18</td><td class="num">0.1%</td></tr>
 <tr><td>algorand</td><td class="num">5</td><td class="num">0.0%</td></tr>
 <tr><td>arbitrum</td><td class="num">1</td><td class="num">0.0%</td></tr>
 </tbody></table>
-<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-08-01.
+<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-08-03.
 Full figures: <a href="https://index.percall.dev/api/x402/stats.json">stats.json</a> · browse: <a href="https://index.percall.dev/x402.html">the catalog</a>.</p>
 
 <h2>4. Most of it answers, which was not obvious</h2>
-<div class="cards"><div class="card"><div class="n">97.2%</div><div class="k">x402 endpoints answering</div></div><div class="card"><div class="n">91.9%</div><div class="k">MCP servers answering</div></div><div class="card"><div class="n">10,080</div><div class="k">remotely-callable MCP servers</div></div><div class="card"><div class="n">7,519</div><div class="k">distinct MCP hosts</div></div></div>
+<div class="cards"><div class="card"><div class="n">98.2%</div><div class="k">x402 endpoints answering</div></div><div class="card"><div class="n">89.8%</div><div class="k">MCP servers answering</div></div><div class="card"><div class="n">10,248</div><div class="k">remotely-callable MCP servers</div></div><div class="card"><div class="n">7,670</div><div class="k">distinct MCP hosts</div></div></div>
 <p>Neither upstream registry checks whether its own entries still answer. The
 Bazaar keeps a resource for 30 days after its last settlement; the MCP registry
 lists whatever a publisher declared. So "how much of this is alive" was a
 question nobody could answer, and the expectation going in was that a lot of it
 would be dead.</p>
-<p>It mostly is not: <strong>97.2%</strong> of a rotating sample of
-the x402 catalog answers, and <strong>91.9%</strong> of the MCP
+<p>It mostly is not: <strong>98.2%</strong> of a rotating sample of
+the x402 catalog answers, and <strong>89.8%</strong> of the MCP
 catalog. A 402 or a 401 counts as answering here, deliberately — a 402 is the
 <em>correct</em> reply from a paid endpoint, and scoring it as a failure would mark
 the entire point of an x402 catalog as dead.</p>
-<p class="meta">Probed 2026-08-01, a rotating slice per run so a full pass
+<p class="meta">Probed 2026-08-03, a rotating slice per run so a full pass
 covers every entry. Raw: <a href="https://index.percall.dev/api/x402/health.json">x402 health</a> ·
 <a href="https://index.percall.dev/api/mcp/health.json">MCP health</a>.</p>
 

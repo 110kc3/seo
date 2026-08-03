@@ -1,29 +1,29 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-01",
-  "remote_endpoints": 10080,
-  "hosts": 7519,
+  "fetched": "2026-08-03",
+  "remote_endpoints": 10248,
+  "hosts": 7670,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 63360,
-    "excluded_superseded": 43839,
-    "excluded_inactive": 205,
-    "excluded_packages_only": 9569,
+    "registry_records_seen": 64531,
+    "excluded_superseded": 44742,
+    "excluded_inactive": 207,
+    "excluded_packages_only": 9668,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 9341,
-    "sse": 739
+    "streamable-http": 9508,
+    "sse": 740
   },
   "by_auth": {
-    "none": 8106,
-    "required": 1974
+    "none": 8246,
+    "required": 2002
   },
   "top_hosts": [
     {
       "host": "gateway.pipeworx.io",
-      "endpoints": 1305
+      "endpoints": 1311
     },
     {
       "host": "server.smithery.ai",
@@ -106,6 +106,10 @@
       "endpoints": 12
     },
     {
+      "host": "gateway.ansvar.eu",
+      "endpoints": 11
+    },
+    {
       "host": "stagenth.com",
       "endpoints": 11
     },
@@ -116,10 +120,6 @@
     {
       "host": "agent365.svc.cloud.microsoft",
       "endpoints": 9
-    },
-    {
-      "host": "feedoracle.io",
-      "endpoints": 8
     }
   ]
 }

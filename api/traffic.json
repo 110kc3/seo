@@ -1,5 +1,5 @@
 {
-  "$comment": "Dated snapshots of /api/stats.json, appended weekly. The live endpoint is authoritative for \"right now\"; this file exists so a published figure stays the same figure when someone checks it later, and so the trend is readable at all. Points marked backfilled:true predate this script and are transcribed from the decision-gate reads recorded in TODO.md; they carry only the fields those notes recorded.",
+  "$comment": "Dated snapshots of /api/stats.json, appended weekly. The live endpoint is authoritative for \"right now\"; this file exists so a published figure stays the same figure when someone checks it later, and so the trend is readable at all.",
   "source": "https://index.percall.dev/api/stats.json",
   "series": [
     {
@@ -42,6 +42,19 @@
       "llms_txt": 163,
       "audit_hits": 49,
       "x402_info": 40
+    },
+    {
+      "date": "2026-08-03",
+      "window": "30d",
+      "total_requests": 9742,
+      "agent_share": 0.1052,
+      "ai_crawler": 1025,
+      "browser": 4810,
+      "script": 1519,
+      "free_scores": 196,
+      "llms_txt": 215,
+      "audit_hits": 49,
+      "x402_info": 51
     }
   ]
 }

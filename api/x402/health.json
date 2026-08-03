@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-01",
-  "catalog_size": 14661,
-  "cursor": 1,
+  "probed_at": "2026-08-03",
+  "catalog_size": 14734,
+  "cursor": 2,
   "slice": 600,
   "stride": 24,
   "runs_per_full_pass": 24,
   "window": {
     "probed": 600,
-    "ok": 583,
-    "unreachable": 17,
+    "ok": 589,
+    "unreachable": 11,
     "untestable": 0
   },
-  "answered_share": 0.9717,
+  "answered_share": 0.9817,
   "confirmed_unreachable": 0,
-  "tracked_unreachable": 17,
+  "tracked_unreachable": 25,
   "unreachable": [
     {
       "url": "https://api.socialfetch.dev/v1/github/profiles/:handle/contributions",
@@ -81,27 +81,6 @@
       "last_checked": "2026-08-01"
     },
     {
-      "url": "https://proxy.suverse.io/v1/data/suverse-geocode-place",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-openalex-works",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-rxnorm-drugs",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
       "url": "https://proxy.suverse.io/v1/data/suverse-tor-relay-summary",
       "reason": "ECONNREFUSED",
       "misses": 1,
@@ -135,6 +114,83 @@
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/commodities/clima",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/jobs/job_d9a59944e86347a2",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/postings/post_e658a0b270a748fd/bids",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/services/svc_a844123f03b8401a/purchase",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.vaults.fyi/v2/portfolio/total-returns/:userAddress/:network/:vaultId",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.x402node.dev/web/og",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://brmarket.thomenz.me/v1/search",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://gateway.apiosk.com/mapbox/static-image",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://skim402.com/api/v2/signal/entity-formations/latest",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://x402.professorsausages.com/pokemon/species",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
     }
   ]
 }

@@ -1,22 +1,36 @@
 {
   "$comment": "Liveness of a rotating sample of the mcp catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Official MCP Registry",
-  "probed_at": "2026-08-01",
-  "catalog_size": 10080,
-  "cursor": 1,
+  "probed_at": "2026-08-03",
+  "catalog_size": 10248,
+  "cursor": 2,
   "slice": 600,
-  "stride": 16,
-  "runs_per_full_pass": 16,
+  "stride": 17,
+  "runs_per_full_pass": 17,
   "window": {
     "probed": 600,
-    "ok": 542,
-    "unreachable": 48,
-    "untestable": 10
+    "ok": 534,
+    "unreachable": 61,
+    "untestable": 5
   },
-  "answered_share": 0.9186,
-  "confirmed_unreachable": 0,
-  "tracked_unreachable": 48,
+  "answered_share": 0.8975,
+  "confirmed_unreachable": 2,
+  "tracked_unreachable": 107,
   "unreachable": [
+    {
+      "url": "https://lahend.ee/api/lahend-mcp/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://slacking.biz/mcp",
+      "reason": "HTTP 502",
+      "misses": 2,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-03"
+    },
     {
       "url": "https://4bots.net/api/mcp",
       "reason": "HTTP 502",
@@ -146,13 +160,6 @@
     {
       "url": "https://kulybaba.weather.com/mcp/v4.0.0/",
       "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://lahend.ee/api/lahend-mcp/mcp",
-      "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
@@ -305,13 +312,6 @@
       "last_checked": "2026-08-01"
     },
     {
-      "url": "https://slacking.biz/mcp",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
       "url": "https://social.ezbizservices.com/mcp",
       "reason": "HTTP 502",
       "misses": 1,
@@ -352,6 +352,419 @@
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://79.137.184.124.nip.io:8421/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://agentreputation.dev/api/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://antibody-package-occasional-floppy.trycloudflare.com/mcp/report-style-guidance/downstream",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.meok.ai/v1/a2a/agent-commerce-protocol",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.meok.ai/v1/a2a/orchestrator",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.obaron.ai/aeo/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.phos.nz/mcp",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.swarmhaul.defited.com/mcp",
+      "reason": "ERR_SSL_TLSV1_ALERT_ACCESS_DENIED",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://birdfury.com/api/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://curve.mcp.junct.dev/mcp",
+      "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://databr.api.br/mcp",
+      "reason": "ECONNRESET",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://deprecated.ml.ink/mcp",
+      "reason": "HTTP 521",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://dns-lookup-mcp.mcpize.run/mcp",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://echomindr.com/mcp/",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://edinet-mcp.plus-synergy.workers.dev/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://fivecoins.app.tipdata.es/mcp",
+      "reason": "DEPTH_ZERO_SELF_SIGNED_CERT",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://gigaverse.ai/api/mcp",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://heronapp.io/mcp",
+      "reason": "HTTP 526",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://inv-lu.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://kultur.dev/api/mcp-sse/sse",
+      "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://logi-au.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://managers-backup-dolls-seasons.trycloudflare.com/sse",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-ci.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-gt.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-kz.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-nz.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-server.thrivee.ai/mcp",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp-tr.wishpool.app/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.ansvar.eu/uk-land-woodland/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.arkforge.tech/mcp",
+      "reason": "HTTP 521",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.brickpulse.ai/sse",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.conjure.ing/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.cualbet.com",
+      "reason": "ECONNRESET",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.deepbluebase.xyz/mcp",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.eruditepay.com/sse",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.revensi.com/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.skillssafe.com/sse",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.supertours.ru/sse",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.tanjiren.app/mcp",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.virtualsms.io/mcp",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://mcp.wikiprompt.org/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://me.phos.nz/mcp/",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://nimistu.ee/api/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://oracle.whaber.ai/mcp/v1",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://orionlabsone.cc/mcp",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://pi.phos.nz/mcp/",
+      "reason": "TypeError",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://pyth-hermes.mcp.junct.dev/mcp",
+      "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://qsearch.pro/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://real_estate_mcp.mcpize.run/mcp",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://sakina-mcp.fly.dev/sse",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://sftunes.com/api/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://signal.pathin.me/mcp",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://solapursoftwaredevelopers.dominal.in/api/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://troops-submission-what-stays.trycloudflare.com/mcp",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://ua_e_commerce_price_tracker_mcp.mcpize.run/mcp",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://waitlist.rjctdlabs.xyz/sse",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://weather.rjctdlabs.xyz/sse",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://whycantwehaveanagentforthis.com/api/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://www.pickanagency.com/api/mcp/mcp",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
     }
   ]
 }
