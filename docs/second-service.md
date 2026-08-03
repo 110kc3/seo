@@ -169,6 +169,34 @@ liveness figure predicted but had never demonstrated end to end.
 Payer gas was zero, and that is not luck: EIP-3009 authorizations are gasless for
 the signer, and the facilitator submits. The payer wallet holds no ETH at all.
 
+### The watch, verified with real money 2026-08-03
+
+`clients/pay_liveness.mjs watch`, twice, from the test payer. **$0.040000 exactly**
+left the wallet: 4 sweeps at $0.005, then 4 more. Between the two purchases the
+sweep endpoint was run twice by hand with the health cron's bearer.
+
+What that sequence proves, and unit tests could not:
+
+1. **A paid POST settles on the Router host** — the endpoint moved there the same
+   day, and the challenge names the origin the caller reached rather than a
+   hardcoded host.
+2. **The payer address comes out of the settlement.** The response named
+   `0xC8b3…87D4` as owner without the request body claiming anything.
+3. **Sweeps spend credits.** Two sweeps took 4 → 2, each reporting
+   `alerted: 0` — the first set the baseline, the second saw no change. Silence
+   was the correct output both times, which is the hardest thing to test by
+   assertion.
+4. **A top-up adds to the remainder rather than replacing it.** Buying 4 more
+   with 2 left returned **6**, not 4. That is the difference between a top-up and
+   quietly confiscating what a subscriber had already paid for.
+
+Not covered, and worth saying: **webhook delivery has never fired in
+production.** An alert needs a state change, and the watched endpoint stayed up
+throughout. The delivery path is unit-tested — including a subscriber whose
+webhook refuses the connection, which must not stop the sweep for everyone else
+— but it has not run against a real HTTP endpoint. First real state change will
+be the proof.
+
 ### Still to build
 
 - ~~**The monitoring product on top.**~~ **Built 2026-08-03** — `POST /api/watch`
