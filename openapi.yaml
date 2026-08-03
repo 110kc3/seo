@@ -370,7 +370,7 @@ paths:
     # attached, and the canonical host 308s here. While unattached this equals
     # the top-level server, so the document is correct in both states.
     servers:
-      - url: https://index.percall.dev
+      - url: https://router.percall.dev
     get:
       operationId: probeEndpoint
       summary: Is this machine-payable endpoint alive, and what does it charge? (paid, x402)
@@ -489,7 +489,7 @@ paths:
 
   /api/route:
     servers:
-      - url: https://index.percall.dev
+      - url: https://router.percall.dev
     post:
       operationId: routeToEndpoint
       summary: Which machine-payable endpoint should I call for this? (paid, x402)

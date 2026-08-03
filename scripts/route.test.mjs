@@ -384,16 +384,38 @@ test('the paid routes are advertised everywhere this site advertises routes', as
 
 // --- the Router's own hostname ----------------------------------------------
 
-test('an unattached router host changes nothing', async () => {
-  // The whole point of gating this on config: setting `router_host` makes the
-  // canonical host redirect two live *paid* endpoints, so it must not take
-  // effect until the custom domain actually resolves. Empty is today.
+test('the canonical host hands the Router its endpoints, and keeps everything else', async () => {
+  // The domain was attached 2026-08-03 and `router_host` set in the same day,
+  // in that order — reversed, these two paths would have redirected to NXDOMAIN
+  // and taken two live paid endpoints down.
   const { __testing: worker } = await import('../worker/index.js');
-  assert.equal(cfg.router_host, '', 'router_host must ship empty until the domain is attached');
-  for (const path of ['/api/liveness?url=x', '/api/route']) {
-    assert.equal(worker.canonicalRedirect(new URL(`${BASE}${path}`)), null,
-      `${path} must still be served here while the router host is unattached`);
+  assert.equal(cfg.router_host, 'router.percall.dev');
+
+  for (const [path, expected] of [
+    ['/api/liveness?url=https://example.com/paid', 'https://router.percall.dev/api/liveness?url=https://example.com/paid'],
+    ['/api/route', 'https://router.percall.dev/api/route'],
+  ]) {
+    const r = worker.canonicalRedirect(new URL(`${BASE}${path}`));
+    assert.ok(r, `${path} should be handed to the Router host`);
+    // 308, never 301: a caller retrying a paid POST with a payment header must
+    // arrive with its method and body intact rather than degraded to a GET.
+    assert.equal(r.status, 308);
+    assert.equal(r.headers.get('location'), expected, 'the query string has to survive the hop');
   }
+
+  // Everything else on the canonical host is untouched — this moved two paths,
+  // not the site.
+  for (const path of ['/api/score?url=x', '/api/audit', '/llms.txt', '/']) {
+    assert.equal(worker.canonicalRedirect(new URL(`${BASE}${path}`)), null, `${path} should still be served here`);
+  }
+  // And the Router host answers for its own three paths rather than bouncing.
+  for (const path of ['/', '/api/liveness', '/api/route']) {
+    assert.equal(worker.canonicalRedirect(new URL(`https://router.percall.dev${path}`)), null);
+  }
+  // But nothing else on it: one copy of everything, which is the discipline the
+  // apex is held to as well.
+  const bounced = worker.canonicalRedirect(new URL('https://router.percall.dev/llms.txt'));
+  assert.equal(bounced.headers.get('location'), `${BASE}/llms.txt`);
 });
 
 test('the self-fetch guard covers the router host the moment it is configured', async () => {
@@ -402,18 +424,20 @@ test('the self-fetch guard covers the router host the moment it is configured', 
   // time. The alias list is derived from config rather than hand-copied, so
   // attaching a host cannot leave the guard behind.
   const { canonicalTarget } = await import('../worker/score.js');
-  const attached = { ...cfg, router_host: 'router.percall.dev' };
 
   // Its root is a page of its own. Mapping it to `/` would grade the index and
   // publish the score under the Router's name — the apex's bug, one host later.
-  assert.equal(canonicalTarget('https://router.percall.dev/', attached), `${BASE}/router.html`);
-  assert.equal(canonicalTarget('https://router.percall.dev/index.html', attached), `${BASE}/router.html`);
+  assert.equal(canonicalTarget('https://router.percall.dev/', cfg), `${BASE}/router.html`);
+  assert.equal(canonicalTarget('https://router.percall.dev/index.html', cfg), `${BASE}/router.html`);
   // Everything else on it resolves to the canonical host, never fetched remotely.
-  assert.equal(canonicalTarget('https://router.percall.dev/llms.txt', attached), `${BASE}/llms.txt`);
+  assert.equal(canonicalTarget('https://router.percall.dev/llms.txt', cfg), `${BASE}/llms.txt`);
   // And a probe of our own host is answered from config rather than sent.
-  assert.ok(selfTerms('https://router.percall.dev/api/route', attached), 'router host not recognised as ours');
-  assert.equal(selfTerms('https://router.percall.dev/api/route', cfg), null,
-    'an unconfigured router host is just another site');
+  assert.ok(selfTerms('https://router.percall.dev/api/route', cfg), 'router host not recognised as ours');
+  // The negative case still has to hold, or the guard is just matching any host:
+  // with no router configured, that hostname is a stranger's site like any other.
+  const unconfigured = { ...cfg, router_host: '' };
+  assert.equal(selfTerms('https://router.percall.dev/api/route', unconfigured), null);
+  assert.equal(canonicalTarget('https://router.percall.dev/', unconfigured), 'https://router.percall.dev/');
 });
 
 test('the umbrella names every live product, including this one', async () => {
