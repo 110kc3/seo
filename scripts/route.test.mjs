@@ -382,6 +382,40 @@ test('the paid routes are advertised everywhere this site advertises routes', as
   for (const e of paid) assert.equal(e.auth, 'x402');
 });
 
+// --- the Router's own hostname ----------------------------------------------
+
+test('an unattached router host changes nothing', async () => {
+  // The whole point of gating this on config: setting `router_host` makes the
+  // canonical host redirect two live *paid* endpoints, so it must not take
+  // effect until the custom domain actually resolves. Empty is today.
+  const { __testing: worker } = await import('../worker/index.js');
+  assert.equal(cfg.router_host, '', 'router_host must ship empty until the domain is attached');
+  for (const path of ['/api/liveness?url=x', '/api/route']) {
+    assert.equal(worker.canonicalRedirect(new URL(`${BASE}${path}`)), null,
+      `${path} must still be served here while the router host is unattached`);
+  }
+});
+
+test('the self-fetch guard covers the router host the moment it is configured', async () => {
+  // A Worker cannot fetch its own hostnames — Cloudflare answers 522, and a
+  // *paid* audit that settles and then 502s is how this was learned the first
+  // time. The alias list is derived from config rather than hand-copied, so
+  // attaching a host cannot leave the guard behind.
+  const { canonicalTarget } = await import('../worker/score.js');
+  const attached = { ...cfg, router_host: 'router.percall.dev' };
+
+  // Its root is a page of its own. Mapping it to `/` would grade the index and
+  // publish the score under the Router's name — the apex's bug, one host later.
+  assert.equal(canonicalTarget('https://router.percall.dev/', attached), `${BASE}/router.html`);
+  assert.equal(canonicalTarget('https://router.percall.dev/index.html', attached), `${BASE}/router.html`);
+  // Everything else on it resolves to the canonical host, never fetched remotely.
+  assert.equal(canonicalTarget('https://router.percall.dev/llms.txt', attached), `${BASE}/llms.txt`);
+  // And a probe of our own host is answered from config rather than sent.
+  assert.ok(selfTerms('https://router.percall.dev/api/route', attached), 'router host not recognised as ours');
+  assert.equal(selfTerms('https://router.percall.dev/api/route', cfg), null,
+    'an unconfigured router host is just another site');
+});
+
 test('the umbrella names every live product, including this one', async () => {
   // This failed once, silently and for a day: the router shipped on the index's
   // host, the portfolio page is generated from a hand-written block that nobody

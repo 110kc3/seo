@@ -3,6 +3,8 @@
   "host_aliases": ["percall.dev", "www.percall.dev", "index.kc-it.pl"],
   "_apex_host": "The umbrella domain. Unlike the other aliases it is not retired: its root serves a portfolio page naming the services underneath, while every other path still 308s to the canonical host so there stays exactly one copy of everything else.",
   "apex_host": "percall.dev",
+  "_router_host": "The Router's own hostname. EMPTY UNTIL THE CUSTOM DOMAIN IS ATTACHED — setting it makes index.percall.dev/api/{liveness,route} redirect here, and redirecting a working paid endpoint at a hostname that does not resolve yet would break it. Attach it in the Cloudflare dashboard first (Worker → Settings → Domains & Routes; the deploy token is account-scoped and cannot do zone operations — see wrangler.toml), then set this and deploy. Empty is exactly today's behaviour.",
+  "router_host": "",
   "repo": "110kc3/seo",
   "_indexnow_key": "IndexNow shared key. Public by design — it is verified by being served at https://<host>/<key>.txt, so it is a proof of control rather than a credential. The build writes that file; rotating the key here rotates the file, and the published-assets test fails on the orphan left behind.",
   "indexnow_key": "d2083fd38bb1f6bacbde8c783df3ec28",

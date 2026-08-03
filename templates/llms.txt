@@ -242,8 +242,8 @@ The catalogs above say what exists. These two say what is *alive right now* and
 what it charges right now — which is a different question, because the Bazaar
 keeps an entry for 30 days after its last settlement.
 
-- Probe one endpoint: GET {{BASE}}/api/liveness?url=https://example.com/paid
-- Rank candidates for a task: POST {{BASE}}/api/route with `{"q": "unit conversion", "max_price": 0.01}`
+- Probe one endpoint: GET {{ROUTER}}/api/liveness?url=https://example.com/paid
+- Rank candidates for a task: POST {{ROUTER}}/api/route with `{"q": "unit conversion", "max_price": 0.01}`
 
 Both are paid, per call, at the price quoted in {{BASE}}/api/x402/info. A query
 that matches nothing is not charged for.

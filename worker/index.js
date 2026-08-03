@@ -36,8 +36,23 @@ const CANONICAL_HOST = new URL(BASE).host;
 // its root serves the portfolio page that says what runs under it. Everything
 // else on that host still redirects, so exactly one copy of the content exists.
 const APEX_HOST = cfg.apex_host ?? null;
+// The Router's own hostname. Empty until the custom domain is attached, and
+// empty means precisely today's behaviour — see the note in site.config.json.
+const ROUTER_HOST = cfg.router_host || null;
+// The three paths the Router host owns. Everything else on it redirects to the
+// canonical host, for the same reason the apex only serves its root: content
+// with two addresses is content a directory can record at the wrong one, and
+// that discipline has already cost a round of upstream corrections.
+const ROUTER_PATHS = new Set(['/api/liveness', '/api/route']);
 const isRoot = (url) => url.pathname === '/' || url.pathname === '/index.html';
 const isApexRoot = (url) => Boolean(APEX_HOST) && url.host === APEX_HOST && isRoot(url);
+// Where the Router's endpoints live, for anything that has to print the URL
+// rather than answer at it. Falls back to the canonical host while unattached.
+const ROUTER_BASE = ROUTER_HOST ? `https://${ROUTER_HOST}` : BASE;
+const isRouterHost = (url) => Boolean(ROUTER_HOST) && url.host === ROUTER_HOST;
+const isRouterRoot = (url) => isRouterHost(url) && isRoot(url);
+/** True for a request the Router host answers itself rather than redirecting. */
+const isRouterOwned = (url) => isRouterHost(url) && (isRoot(url) || ROUTER_PATHS.has(url.pathname));
 const MAX_AUDIT_BODY = 4 * 1024;
 
 // Derived from the catalog declarations rather than written out, so adding a
@@ -51,7 +66,25 @@ const CATALOG_SEARCH = Object.fromEntries(
 // rather than 301 because it preserves the method and body, so an in-flight
 // x402 POST survives the hop instead of being degraded to a GET.
 function canonicalRedirect(url) {
-  if (url.host === CANONICAL_HOST) return null;
+  if (url.host === CANONICAL_HOST) {
+    // The Router's endpoints have exactly one home too, and once it exists it
+    // is not this host. 308 preserves method and body, so a caller that POSTs
+    // /api/route here — or retries one with a payment header — arrives intact
+    // rather than being degraded to a GET and charged for nothing.
+    if (ROUTER_HOST && ROUTER_PATHS.has(url.pathname)) {
+      return new Response(null, {
+        status: 308,
+        headers: {
+          location: `https://${ROUTER_HOST}${url.pathname}${url.search}`,
+          'cache-control': 'public, max-age=3600',
+        },
+      });
+    }
+    return null;
+  }
+  // The Router host answers for its root and its two endpoints; every other
+  // path on it belongs to the canonical host and says so.
+  if (isRouterOwned(url)) return null;
   // The apex root is a page, not a redirect. Only the root: a request for any
   // other path on the apex is asking for content that has one canonical home.
   if (isApexRoot(url)) return null;
@@ -244,12 +277,12 @@ function handleX402Info(cfgObj) {
       amount: rail.audit_price_atomic,
       description: 'Agent-readability audit of one URL.',
     }, {
-      url: `${BASE}/api/liveness`,
+      url: `${ROUTER_BASE}/api/liveness`,
       method: 'GET',
       amount: rail.route_price_atomic,
       description: ROUTE_RESOURCES.liveness.description,
     }, {
-      url: `${BASE}/api/route`,
+      url: `${ROUTER_BASE}/api/route`,
       method: 'POST',
       amount: rail.route_price_atomic,
       description: ROUTE_RESOURCES.route.description,
@@ -321,12 +354,16 @@ export default {
       } else if (url.pathname === '/badge.svg') {
         response = handleBadge(url, registry.listings ?? [], scores);
       } else if (url.pathname === '/api/liveness') {
+        // The challenge names the URL the caller actually asked for, not a
+        // hardcoded host: once the Router has its own hostname the resource in
+        // the 402 must be that one, or the terms describe a different endpoint
+        // than the one being bought.
         response = await handleLiveness(request, env, cfg, {
-          gate: routeGate(request, env, cfg, `${BASE}/api/liveness`, 'GET'),
+          gate: routeGate(request, env, cfg, `${url.origin}${url.pathname}`, 'GET'),
         });
       } else if (url.pathname === '/api/route') {
         response = await handleRoute(request, env, cfg, {
-          gate: routeGate(request, env, cfg, `${BASE}/api/route`, 'POST'),
+          gate: routeGate(request, env, cfg, `${url.origin}${url.pathname}`, 'POST'),
           catalogSearch: (key, searchUrl) => handleCatalogSearch(key, searchUrl, env, BASE),
           base: BASE,
         });
@@ -360,6 +397,11 @@ export default {
         response = await handleRevenue(request, env, resolveX402(cfg));
       } else if (url.pathname === '/dashboard.html' || url.pathname === '/dashboard') {
         response = await handleDashboardPage(request, env, url);
+      } else if (isRouterRoot(url)) {
+        // Same shared-asset trick as the apex: the Router needs no deploy of its
+        // own, and the page's canonical names the Router host, so the same asset
+        // being reachable at /router.html here is not a second copy.
+        response = await serveStatic(env, new URL('/router.html', url.origin), request.headers);
       } else if (isApexRoot(url)) {
         // Served from the shared asset store, so the apex needs no deploy of its
         // own. The page declares its canonical as the apex, which is why the

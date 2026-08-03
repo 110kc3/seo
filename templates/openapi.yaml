@@ -366,6 +366,11 @@ paths:
           description: Payment rails not configured (code payments_not_enabled).
 
   /api/liveness:
+    # Path-level override: the Router answers on its own hostname once one is
+    # attached, and the canonical host 308s here. While unattached this equals
+    # the top-level server, so the document is correct in both states.
+    servers:
+      - url: {{ROUTER}}
     get:
       operationId: probeEndpoint
       summary: Is this machine-payable endpoint alive, and what does it charge? (paid, x402)
@@ -483,6 +488,8 @@ paths:
           description: Payment rails not configured (code payments_not_enabled).
 
   /api/route:
+    servers:
+      - url: {{ROUTER}}
     post:
       operationId: routeToEndpoint
       summary: Which machine-payable endpoint should I call for this? (paid, x402)

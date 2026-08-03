@@ -98,14 +98,25 @@ export function fetcherFor(request, env, target) {
 // Found the expensive way: without this, a *paid* audit of the old domain
 // settles the payment and then answers 502.
 export function canonicalTarget(target, cfg) {
-  const aliases = cfg.host_aliases ?? [];
+  // Derived, not duplicated. Every host this Worker answers on has to be in
+  // here or a paid audit of it settles and then 502s, and the way that keeps
+  // happening is a new hostname being added in one place and not the other.
+  // `router_host` is therefore read straight from config rather than copied
+  // into host_aliases by hand.
+  const aliases = [...(cfg.host_aliases ?? []), cfg.router_host].filter(Boolean);
   try {
     const url = new URL(target);
     if (!aliases.includes(url.host)) return target;
-    const isApexRoot = cfg.apex_host
-      && url.host === cfg.apex_host
+    const isHostRoot = (host) => host && url.host === host
       && (url.pathname === '/' || url.pathname === '/index.html');
+    const isApexRoot = isHostRoot(cfg.apex_host);
+    // Same defect, same fix, one host later: the Router's root is a page of its
+    // own, so mapping it to `/` would grade the index and publish the score
+    // under the Router's name. The apex taught this once; a second host is
+    // exactly when a one-off special case has to become the general rule.
+    const isRouterRoot = isHostRoot(cfg.router_host);
     url.host = new URL(cfg.base).host;
+    if (isRouterRoot) url.pathname = '/router.html';
     // The apex root stopped being an alias the moment it became a page of its
     // own. Mapping it to `/` would audit the index and report the score under
     // the apex's name — quietly grading one page and labelling it another, which

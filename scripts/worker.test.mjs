@@ -659,6 +659,11 @@ test('no source directory is published as a static asset by accident', async () 
     // the apex root, so the apex needs no deploy of its own; its canonical names
     // the apex, so being reachable here too is not a duplicate.
     'apex.html',
+    // The Router's front door. Served at its own hostname's root once the
+    // custom domain is attached, and reachable here as /router.html either way
+    // — its canonical names whichever of those is current, so the asset being
+    // present on this host is not a second copy.
+    'router.html',
   ]);
 
   const unclassified = entries.filter((e) => !ignored.has(e) && !published.has(e));

@@ -3,12 +3,13 @@
 // of those inputs (no timestamps): running the build twice yields zero diff.
 // Fails hard on any invalid listing so a bad manual edit can't reach the site.
 import { readFileSync, writeFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
-import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage, apexPage } from './pages.mjs';
+import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage, apexPage, routerPage } from './pages.mjs';
 import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../worker/audit.js';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { validate, esc, jsonLd, normalizeUrl, schemaJson } from './validate.mjs';
+import { resolveX402 } from './x402-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
@@ -19,6 +20,16 @@ const REPO = cfg.repo;
 // is exactly the state percall.dev was in on the day it shipped.
 const APEX = cfg.apex_host;
 if (!APEX) throw new Error('site.config.json: apex_host is required — the site templates link up to the umbrella');
+
+// The Router's hostname, empty until its custom domain is attached. Empty has to
+// produce exactly today's output, so both the endpoint base and the page's own
+// canonical address are derived here rather than guessed at each use site.
+const ROUTER_HOST = cfg.router_host || '';
+const ROUTER_BASE = ROUTER_HOST ? `https://${ROUTER_HOST}` : BASE;
+const ROUTER_PAGE = ROUTER_HOST
+  ? { base: ROUTER_BASE, path: '/' }
+  : { base: BASE, path: '/router.html' };
+const ROUTER_URL = `${ROUTER_PAGE.base}${ROUTER_PAGE.path}`;
 
 // --- load + validate the source of truth ---
 const listingDir = join(ROOT, 'listings');
@@ -53,7 +64,7 @@ const readJson = (rel) => {
   try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
 };
 const fill = (s, extra = {}) =>
-  Object.entries({ BASE, REPO, APEX, COUNT: String(listings.length), ...extra })
+  Object.entries({ BASE, REPO, APEX, ROUTER: ROUTER_BASE, COUNT: String(listings.length), ...extra })
     .reduce((acc, [k, v]) => acc.replaceAll(`{{${k}}}`, v), s);
 
 const PAGE_CSS = `
@@ -344,6 +355,29 @@ for (const [name, html] of checkHtml) {
   pagePaths.push([name === 'index.html' ? '/checks/' : `/checks/${name}`, null]);
 }
 
+// The Router's front door, at the root of its own hostname once one is
+// attached. Built unconditionally: the page has to exist before the domain can
+// serve it, and while `router_host` is empty it renders against the service host
+// so nothing here advertises a name that does not resolve.
+if (x402Stats && mcpStats) {
+  const rail = resolveX402(cfg);
+  writeFileSync(join(ROOT, 'router.html'), routerPage({
+    // Where the endpoints actually answer, for the copy-pasteable examples.
+    routerBase: ROUTER_BASE,
+    // Where this page's one canonical address is, which is NOT the same thing
+    // while the domain is unattached: `${BASE}/` is the index's home page, and
+    // canonicalising to it would tell every crawler that the Router's page and
+    // the index's are one document.
+    canonicalBase: ROUTER_PAGE.base,
+    canonicalPath: ROUTER_PAGE.path,
+    serviceBase: BASE,
+    apexBase: `https://${APEX}`,
+    x402: x402Stats,
+    mcp: mcpStats,
+    priceUsd: Number(rail?.route_price_atomic ?? 0) / 10 ** (rail?.asset_decimals ?? 6),
+  }));
+}
+
 // The umbrella apex. Served only at the apex host's root — every other path
 // there still 308s here, so this is a page the portfolio needed rather than a
 // second copy of the index. Its canonical points at the apex, so serving the
@@ -352,6 +386,8 @@ if (cfg.apex_host && x402Stats && mcpStats) {
   writeFileSync(join(ROOT, 'apex.html'), apexPage({
     apexBase: `https://${cfg.apex_host}`,
     serviceBase: BASE,
+    routerUrl: ROUTER_URL,
+    routerHost: ROUTER_HOST,
     x402: x402Stats,
     mcp: mcpStats,
     traffic,
@@ -373,6 +409,10 @@ const smUrls = [
   // one declaring this file. Discovery still leans on the links added to
   // index.html and llms.txt; this is the belt to their braces.
   `  <url><loc>https://${APEX}/</loc></url>`,
+  // The Router's front door, at whichever address is currently its canonical
+  // one — its own host once attached, `/router.html` here until then. Listed
+  // once either way, never both.
+  `  <url><loc>${ROUTER_URL}</loc></url>`,
   // The query endpoints belong in the sitemap even though they take
   // parameters: a crawler that reads sitemaps and nothing else would otherwise
   // never learn this site can be asked questions.

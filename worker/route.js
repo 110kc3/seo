@@ -210,7 +210,10 @@ export async function probe(target, { fetchImpl = fetch, cfg = {}, method = 'GET
  * discover, so a probe of them is a lookup.
  */
 export function selfTerms(target, cfg) {
-  const aliases = [new URL(cfg.base).host, ...(cfg.host_aliases ?? [])];
+  // Same derived list as score.js canonicalTarget, and for the same reason: a
+  // probe of our own hostname is a 522, and the Router's own host is the one
+  // most likely to be probed by someone testing what the Router does.
+  const aliases = [new URL(cfg.base).host, ...(cfg.host_aliases ?? []), cfg.router_host].filter(Boolean);
   let url;
   try { url = new URL(target); } catch { return null; }
   if (!aliases.includes(url.host)) return null;

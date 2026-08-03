@@ -146,6 +146,23 @@ Optional after those: **IndexNow in Cloudflare** (Cache → Configuration) will
 ping on cache purge as well as on deploy. Harmless overlap with §2d, and it
 covers changes that do not come from a push.
 
+### 1.10 Attach `router.percall.dev`, then tell me — one dashboard action
+
+*The code is done and inert (§2g). This is the only step I cannot take.*
+
+Cloudflare dashboard → the `ai-product-index` Worker → **Settings → Domains &
+Routes → Add → Custom Domain** → `router.percall.dev`. Cloudflare creates the DNS
+record itself. It has to be you because the deploy token is deliberately
+account-scoped with no zone permissions — the alternative is granting CI zone
+access, and the four-hour outage in TODO.md is what that trade already cost once.
+
+Then say the word: I set `router_host` in `site.config.json`, and one deploy
+moves the endpoints, the canonical, the sitemap, `llms.txt`, the manifest, the
+OpenAPI servers and the apex card together.
+
+**Order matters.** Attach first, set the config second. Reversed, the canonical
+host starts 308-ing two live paid endpoints at a hostname that does not resolve.
+
 ### ~~1.9 Pick a second service~~ — decided 2026-08-02: the non-custodial one
 
 *Raised by Kamil 2026-08-02, explored in [docs/second-service.md](docs/second-service.md).*
@@ -450,6 +467,43 @@ sent to.
 **241 tests.** The stats SQL limit went 200 → 1000 in the same change: grouping
 by a third column multiplies rows, and a truncated `GROUP BY` does not fail, it
 under-reports the tail.
+
+## 2g. The Router gets its own hostname — code done, one dashboard action left
+
+Kamil's call, reversing the earlier recommendation once he saw it: the Router
+gets `router.percall.dev`. Same Worker, same repo — a subdomain never needed
+either of those forked, only a hostname the Worker stops treating as an alias.
+
+**It ships switched off, and that is the important part.** Setting `router_host`
+makes `index.percall.dev/api/{liveness,route}` **308** to the new host. Doing that
+before the domain resolves would break two live *paid* endpoints. So the value is
+empty in `site.config.json`, empty renders byte-identical to today, and the whole
+thing turns on by setting one string — see §1.10.
+
+What flips together when it does: the 308s, the canonical on `/router.html`, the
+sitemap entry, `llms.txt`, the agents manifest, the OpenAPI path-level `servers`
+override, the apex card's link and label, and the resource URL inside the 402
+challenge — which now comes from the request's own origin rather than a
+hardcoded host, because terms naming a different endpoint than the one being
+bought is a defect this project sells audits to catch. All eight verified in both
+states by building against a temporary config.
+
+**The Router host owns exactly three paths** — `/`, `/api/liveness`,
+`/api/route` — and everything else on it 308s to the canonical host, the same
+one-copy discipline that keeps the apex one path wide.
+
+**The self-fetch guard is now derived rather than copied.** A Worker cannot fetch
+its own hostnames; Cloudflare answers 522, and a *paid* audit that settles and
+then 502s is how that was learned. `canonicalTarget` and `selfTerms` both read
+`router_host` straight from config, so attaching a host cannot leave the guard
+behind — which is exactly how this bug arrived the last two times. The Router's
+root also maps to `/router.html`, not `/`: mapping it to the index would grade
+the wrong page and publish the score under the Router's name, which is the apex's
+bug one host later.
+
+**A human page came with it** (`/router.html`), closing the gap §2e left open:
+the Router shipped agent-facing only on a site where 46% of requests are
+browsers. **243 tests.**
 
 ## 3. Waiting on other people — nothing to do
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Router — find a live machine-payable endpoint, without paying to look</title>
+<meta name="description" content="Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.">
+<link rel="canonical" href="https://index.percall.dev/router.html">
+<link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Router — find a live machine-payable endpoint, without paying to look">
+<meta property="og:description" content="Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.">
+<meta property="og:url" content="https://index.percall.dev/router.html">
+<meta property="og:image" content="https://index.percall.dev/assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "name": "The Router",
+  "description": "Probes machine-payable endpoints for liveness and current terms, and ranks candidates for a task. Non-custodial: the caller pays the endpoint directly.",
+  "url": "https://index.percall.dev/router.html",
+  "documentation": "https://index.percall.dev/openapi.yaml",
+  "provider": {
+    "@type": "Organization",
+    "name": "percall.dev",
+    "url": "https://percall.dev/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.005",
+    "priceCurrency": "USDC",
+    "description": "Per call, settled in USDC on Base over HTTP 402."
+  }
+}
+</script>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
+  body { margin:0 auto; max-width:52rem; padding:2.5rem 1.25rem 4rem; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  h1 { font-size:1.7rem; line-height:1.2; margin:.2rem 0 .6rem; }
+  h2 { font-size:1.25rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1.05rem; margin:1.6rem 0 .4rem; }
+  a { color:var(--accent); }
+  .crumb, .meta { color:var(--muted); font-size:.9rem; }
+  .lede { font-size:1.05rem; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.94rem; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:.4rem .7rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+  th { color:var(--muted); font-weight:600; }
+  td.wrap, th.wrap { white-space:normal; min-width:18rem; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.8rem; margin:1rem 0; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:.9rem 1rem; }
+  .card .n { font-size:1.5rem; font-weight:600; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .card .k { color:var(--muted); font-size:.85rem; }
+  .bar { background:var(--card); border:1px solid var(--border); border-radius:4px; height:.55rem; overflow:hidden; min-width:6rem; }
+  .bar > i { display:block; height:100%; background:var(--accent); }
+  .grade { font-weight:600; font-variant-numeric:tabular-nums; }
+  code, pre { background:var(--card); border:1px solid var(--border); border-radius:6px; }
+  code { padding:.05rem .35rem; font-size:.9em; }
+  pre { padding:.8rem 1rem; overflow-x:auto; }
+  pre code { background:none; border:none; padding:0; }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<p class="crumb"><a href="https://percall.dev/">percall.dev</a> / The Router</p>
+undefined
+<footer>A service of <a href="https://percall.dev/">percall.dev</a>, alongside the
+<a href="https://index.percall.dev/">AI Product Index</a> whose catalogs it reads.
+Machine-readable: <a href="https://index.percall.dev/llms.txt">llms.txt</a> ·
+<a href="https://index.percall.dev/openapi.yaml">OpenAPI</a>.</footer>
+</body>
+</html>

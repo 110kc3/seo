@@ -826,7 +826,116 @@ which is why the check set here is versioned in public.</p>
   });
 }
 
-// --- (4) the umbrella apex --------------------------------------------------
+// --- (4) the Router's own front door ----------------------------------------
+
+/**
+ * The human page for the Router, served at the root of its own hostname.
+ *
+ * Two gaps closed by one page. The Router shipped agent-facing only — announced
+ * in llms.txt, the OpenAPI document and the agents manifest — on a site where
+ * 46% of requests are browsers and the only thing a browser could do about it
+ * was read JSON. And a product on its own subdomain whose root redirects
+ * elsewhere is a product that looks abandoned to anyone who types the domain.
+ *
+ * `routerBase` falls back to the service host while the custom domain is
+ * unattached, so this page is correct in both states rather than advertising a
+ * hostname that does not resolve yet.
+ */
+export function routerPage({ routerBase, canonicalBase, canonicalPath, serviceBase, apexBase, x402, mcp, priceUsd }) {
+  const price = `$${Number(priceUsd).toFixed(3)}`;
+  const body = `
+<h1>The Router</h1>
+<p class="lede">Which machine-payable endpoint should you call, is it alive right
+now, and what does it charge? Answered by probing — <strong>never by paying</strong>.</p>
+
+<h2>Why this is not obvious</h2>
+<p>The x402 Bazaar keeps an entry for 30 days after its last settlement, and the
+MCP registry lists whatever a publisher declared. So <em>listed</em> and
+<em>answers</em> are different facts about
+${num(x402.endpoints + mcp.remote_endpoints)} catalogued endpoints, and only one
+of them was published anywhere.</p>
+<p>The trick that makes this cheap: <strong>an unpaid request to a paid endpoint
+returns its own 402, and a 402 states its terms.</strong> Liveness and price come
+back in the same free request. Nobody has to pay to find out what something
+costs.</p>
+
+<h2>Two endpoints</h2>
+<h3><code>GET /api/liveness?url=…</code> <span class="meta">${price}</span></h3>
+<p>Probes one endpoint now: whether it answered, how fast, and the terms it
+currently quotes — parsed from its own 402, in either x402 version.</p>
+<pre><code>curl "${routerBase}/api/liveness?url=https://example.com/paid"</code></pre>
+
+<h3><code>POST /api/route</code> <span class="meta">${price}</span></h3>
+<p>Ranked candidates for a task, each probed live, each with the URL to call and
+what it quotes. Endpoints that did not answer are reported, not hidden — you
+asked what exists. <strong>A query that matches nothing is free.</strong></p>
+<pre><code>curl -X POST ${routerBase}/api/route \\
+  -H 'content-type: application/json' \\
+  -d '{"q": "unit conversion", "max_price": 0.01}'</code></pre>
+
+<h2>History, and why it gets better</h2>
+<p>Every answer carries that endpoint's record: total probes, how many answered,
+consecutive failures, and how many of the last 30 observations answered. It is
+built from live probes rather than a crawl, so it deepens on exactly the
+endpoints people ask about — <strong>the answer improves the more the service is
+used</strong>.</p>
+<p>The uptime ratio is withheld below three observations. "Answered 1 of 1" is
+technically true and practically a lie, and you would compare it against another
+endpoint's number anyway.</p>
+
+<h2>It never pays, and that is structural</h2>
+<p>This service holds no key that could sign a transfer. It hands you the URL and
+the terms; <strong>you pay the endpoint directly, from your own wallet</strong>.
+Nothing is proxied, so the operator you pay sees you rather than us — your
+per-caller pricing and rate limits keep working.</p>
+<p>The probe sends two headers and nothing else. Your request may carry a payment
+authorization made out to us, and forwarding request headers to a third party
+would hand a signed credential to a stranger, so the probe is built from scratch
+every time. A test forbids any module here from setting an outbound payment
+header at all.</p>
+
+<h2>Paying for it</h2>
+<p>Both endpoints are ${price} in USDC on Base over HTTP 402 — no account, no
+dashboard, no human step. Read the terms without provoking a 402 at
+<a href="${serviceBase}/api/x402/info">/api/x402/info</a>.</p>
+
+<h2>Being kind to the endpoints</h2>
+<p>Probes are shared for 60 seconds, so a popular endpoint is probed once a
+minute however many callers ask, and the candidate fan-out is capped. These are
+other people's servers. If you operate one of the catalogued endpoints and want
+it gone, open an issue on <a href="https://github.com/110kc3/seo">the repo</a> —
+no justification needed.</p>
+`;
+
+  return page({
+    base: canonicalBase,
+    path: canonicalPath,
+    title: 'The Router — find a live machine-payable endpoint, without paying to look',
+    description: 'Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.',
+    crumb: `<p class="crumb"><a href="${apexBase}/">percall.dev</a> / The Router</p>`,
+    footer: `A service of <a href="${apexBase}/">percall.dev</a>, alongside the
+<a href="${serviceBase}/">AI Product Index</a> whose catalogs it reads.
+Machine-readable: <a href="${serviceBase}/llms.txt">llms.txt</a> ·
+<a href="${serviceBase}/openapi.yaml">OpenAPI</a>.`,
+    ld: {
+      '@context': 'https://schema.org',
+      '@type': 'WebAPI',
+      name: 'The Router',
+      description: 'Probes machine-payable endpoints for liveness and current terms, and ranks candidates for a task. Non-custodial: the caller pays the endpoint directly.',
+      url: `${canonicalBase}${canonicalPath}`,
+      documentation: `${serviceBase}/openapi.yaml`,
+      provider: { '@type': 'Organization', name: 'percall.dev', url: `${apexBase}/` },
+      offers: {
+        '@type': 'Offer',
+        price: Number(priceUsd).toFixed(3),
+        priceCurrency: 'USDC',
+        description: 'Per call, settled in USDC on Base over HTTP 402.',
+      },
+    },
+  });
+}
+
+// --- (5) the umbrella apex --------------------------------------------------
 
 /**
  * The portfolio page at the apex.
@@ -842,8 +951,12 @@ which is why the check set here is versioned in public.</p>
  * there is one service live, the page says one service is live, and the roadmap
  * is described as intent rather than as inventory.
  */
-export function apexPage({ apexBase, serviceBase, x402, mcp, traffic, listingCount }) {
+export function apexPage({ apexBase, serviceBase, routerUrl, routerHost, x402, mcp, traffic, listingCount }) {
   const latest = traffic?.series?.at(-1);
+  // Says where the Router actually is, which is not the same before and after
+  // its custom domain is attached. A portfolio page naming a hostname that does
+  // not resolve is worse than one admitting the two products share a host.
+  const routerLabel = routerHost || 'on index.percall.dev until its domain is attached';
   const body = `
 <h1>percall.dev</h1>
 <p class="lede">Paid services built to be called by software rather than clicked
@@ -866,7 +979,7 @@ without a human in the loop.</p>
 </div>
 
 <div class="card" style="padding:1.2rem 1.3rem; margin-top:.9rem">
-  <h3 style="margin-top:0">The Router <span class="meta">on index.percall.dev, for now</span></h3>
+  <h3 style="margin-top:0"><a href="${routerUrl}">The Router</a> <span class="meta">${routerLabel}</span></h3>
   <p>Which machine-payable endpoint should you call, is it alive right now, and
   what does it charge? Answered by probing, <strong>never by paying</strong>.</p>
   <ul>
