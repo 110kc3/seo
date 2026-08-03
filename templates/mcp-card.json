@@ -40,7 +40,7 @@
     },
     {
       "name": "score_url",
-      "description": "Grade any public URL A-F across 13 agent-readability checks."
+      "description": "Grade any public URL A-F across {{CHECKS}} agent-readability checks."
     },
     {
       "name": "search_x402_endpoints",

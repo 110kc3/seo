@@ -100,14 +100,14 @@
     {
       "method": "GET",
       "url": "https://index.percall.dev/api/score?url=https://example.com",
-      "description": "Agent-readability grade for any URL: an A-F letter, the numeric score, and all 13 checks with pass/fail.",
+      "description": "Agent-readability grade for any URL: an A-F letter, the numeric score, and all 20 checks with pass/fail.",
       "auth": "none",
       "price": "free"
     },
     {
       "method": "POST",
       "url": "https://index.percall.dev/api/audit",
-      "description": "The full agent-readability audit of one URL: the same 13 checks plus, per failure, why it failed, a fix ranked by weight, and a paste-ready snippet for that origin.",
+      "description": "The full agent-readability audit of one URL: the same 20 checks plus, per failure, why it failed, a fix ranked by weight, and a paste-ready snippet for that origin.",
       "auth": "x402",
       "price": "per call, quoted at https://index.percall.dev/api/x402/info",
       "request": {"url": "https://example.com"}

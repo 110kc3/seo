@@ -1,6 +1,6 @@
 ---
 name: grade-a-site
-description: Grade any public URL for agent-readability across 13 checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.
+description: Grade any public URL for agent-readability across {{CHECKS}} checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.
 ---
 
 # Grade a site for agent-readability
@@ -14,7 +14,7 @@ the paid one tells you why and hands you the fix.
 GET {{BASE}}/api/score?url=https://example.com
 ```
 
-Returns a letter A–F, a score out of 100, and all 13 checks with pass/fail:
+Returns a letter A–F, a score out of 100, and all {{CHECKS}} checks with pass/fail:
 llms.txt (published, has a title and summary, llms-full.txt), robots.txt
 (published, AI crawlers not blocked), sitemap.xml, schema.org JSON-LD, title and
 meta description, Open Graph, canonical URL, machine-readable alternates, an A2A
@@ -37,7 +37,7 @@ Content-Type: application/json
 {"url": "https://example.com"}
 ```
 
-Answers HTTP 402 with x402 payment terms. Pay it and the same 13 checks come
+Answers HTTP 402 with x402 payment terms. Pay it and the same {{CHECKS}} checks come
 back with, for each failure, why it failed, a fix ranked by how much it is worth,
 and a paste-ready snippet with the caller's own origin already substituted in.
 Read the terms without provoking a 402 at `{{BASE}}/api/x402/info`.

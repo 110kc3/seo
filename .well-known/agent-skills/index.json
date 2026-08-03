@@ -18,9 +18,9 @@
     {
       "name": "grade-a-site",
       "type": "skill-md",
-      "description": "Grade any public URL for agent-readability across 13 checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.",
+      "description": "Grade any public URL for agent-readability across 20 checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.",
       "url": "/.well-known/agent-skills/grade-a-site/SKILL.md",
-      "digest": "sha256:cc12aae6cd0dbe42856f8947cde887ee2444c9543aa2cca292d7345e21b584a1"
+      "digest": "sha256:1150607f104865f046ef09c8e12a473ece11b326579636917bd944dbd4e35ab7"
     },
     {
       "name": "list-a-product",

@@ -172,7 +172,7 @@ Install: git clone https://github.com/110kc3/seo && claude mcp add ai-product-in
 ## Free endpoint: agent-readability score
 
 GET https://index.percall.dev/api/score?url=https://your-site.example — no payment, no signup.
-Returns an A-F letter grade, the numeric score out of 100, and every one of the 13
+Returns an A-F letter grade, the numeric score out of 100, and every one of the 20
 checks with a label and pass/fail. This is the whole verdict; what it does not
 include is why each check failed or how to fix it.
 

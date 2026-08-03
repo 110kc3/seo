@@ -2385,6 +2385,37 @@ test('the umbrella is reachable — sitemap entry plus a link from the pages age
   assert.ok(!index.includes('{{APEX}}') && !llms.includes('{{APEX}}'), 'unfilled APEX placeholder');
 });
 
+test('no published surface claims a check count the scorer does not run', async () => {
+  // Ten surfaces said "13 checks" for a day after v2 became the default and
+  // started running 20 — the agent card, both manifests, the MCP card, the
+  // plugin manifest, the Agent Skill, the homepage. Every one of them is a
+  // document written *for agents*, telling them a number the audit had stopped
+  // using. The templates now interpolate {{CHECKS}} from the scorer; this
+  // asserts nobody has typed a literal back in.
+  const { CHECK_META, V2_WEIGHTS } = await import('../worker/audit.js');
+  const expected = Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length;
+  const root = new URL('../', import.meta.url);
+  const surfaces = [
+    'index.html', 'llms.txt', '.well-known/agent-card.json', '.well-known/agents.json',
+    '.well-known/agent.json', '.well-known/mcp.json', '.well-known/ai-plugin.json',
+    '.well-known/agent-skills/grade-a-site/SKILL.md',
+  ];
+
+  for (const f of surfaces) {
+    let text;
+    try {
+      text = await readFile(new URL(f, root), 'utf8');
+    } catch {
+      continue; // not every surface exists in every build
+    }
+    // Any "<n> checks" claim in a published document must be the real number.
+    for (const [, n] of text.matchAll(/\b(\d+)\s+(?:weighted\s+|agent-readability\s+)?checks\b/g)) {
+      assert.equal(Number(n), expected,
+        `${f} claims ${n} checks; the default set runs ${expected}`);
+    }
+  }
+});
+
 test('every generated page actually says something', async () => {
   // /router.html shipped to production as a correct header, the literal string
   // "undefined", and a correct footer — `const body` computed in routerPage()

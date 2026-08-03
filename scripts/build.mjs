@@ -31,6 +31,15 @@ const ROUTER_PAGE = ROUTER_HOST
   : { base: BASE, path: '/router.html' };
 const ROUTER_URL = `${ROUTER_PAGE.base}${ROUTER_PAGE.path}`;
 
+// How many checks the default set actually runs, derived from the scorer rather
+// than typed. Ten published surfaces said "13 checks" for a day after v2 became
+// the default and started running 20 — the manifests, the agent card, the MCP
+// card, the plugin manifest, the Agent Skill and the homepage all told agents a
+// number the audit had stopped using. Same discipline that moved the weights and
+// remedies into CHECK_META: the thing being sold cannot drift from its
+// description if the description is generated from it.
+const CHECKS = String(Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length);
+
 // --- load + validate the source of truth ---
 const listingDir = join(ROOT, 'listings');
 mkdirSync(listingDir, { recursive: true });
@@ -64,7 +73,7 @@ const readJson = (rel) => {
   try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
 };
 const fill = (s, extra = {}) =>
-  Object.entries({ BASE, REPO, APEX, ROUTER: ROUTER_BASE, COUNT: String(listings.length), ...extra })
+  Object.entries({ BASE, REPO, APEX, ROUTER: ROUTER_BASE, CHECKS, COUNT: String(listings.length), ...extra })
     .reduce((acc, [k, v]) => acc.replaceAll(`{{${k}}}`, v), s);
 
 const PAGE_CSS = `

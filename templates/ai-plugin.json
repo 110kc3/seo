@@ -3,7 +3,7 @@
   "name_for_human": "AI Product Index",
   "name_for_model": "ai_product_index",
   "description_for_human": "Search a directory of AI products, and grade any website for how readable it is to AI agents.",
-  "description_for_model": "Use this to search a curated directory of AI products, APIs, agents and MCP servers, and to grade any public URL for agent-readability across 13 checks (llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, canonical, HTTPS). Products can also register themselves autonomously. Full protocol in llms.txt.",
+  "description_for_model": "Use this to search a curated directory of AI products, APIs, agents and MCP servers, and to grade any public URL for agent-readability across {{CHECKS}} checks (llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, canonical, HTTPS). Products can also register themselves autonomously. Full protocol in llms.txt.",
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",

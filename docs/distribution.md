@@ -144,7 +144,7 @@ labels below were read off the live forms on 2026-08-01, not guessed.
 | llms.txt URL | `https://index.percall.dev/llms.txt` |
 | llms-full.txt URL | `https://index.percall.dev/llms-full.txt` |
 | short description (≤160 chars) | `Machine-readable directory of AI products, with a free agent-readability score and a paid audit an agent can buy over x402.` |
-| longer description | `A directory AI agents can read, register in, and buy from. GET /api/score grades any URL across 13 agent-readability checks for free; POST /api/audit returns per-check fixes and paste-ready snippets for $0.05, settled in USDC on Base via HTTP 402. Products self-register by opening a GitHub issue against a published schema — no human step. Zero dependencies, 171 tests, traffic published at /api/stats.json.` |
+| longer description | `A directory AI agents can read, register in, and buy from. GET /api/score grades any URL across 20 agent-readability checks for free; POST /api/audit returns per-check fixes and paste-ready snippets for $0.05, settled in USDC on Base via HTTP 402. Products self-register by opening a GitHub issue against a published schema — no human step. Zero dependencies, 245 tests, traffic published at /api/stats.json.` |
 | contact | `110kc3@gmail.com` |
 | your name | `Kamil` |
 

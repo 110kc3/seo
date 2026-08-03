@@ -21,7 +21,7 @@
     {
       "id": "agent-readability-score",
       "name": "Agent readability score (free)",
-      "description": "GET /api/score?url=... returns an A-F grade for how readable a site is to AI agents, plus all 13 checks with pass/fail. No payment, no signup.",
+      "description": "GET /api/score?url=... returns an A-F grade for how readable a site is to AI agents, plus all 20 checks with pass/fail. No payment, no signup.",
       "tags": ["audit", "geo", "llms-txt", "free"],
       "inputModes": ["application/json"],
       "outputModes": ["application/json"]
@@ -56,7 +56,7 @@
     {
       "id": "audit_url",
       "name": "Agent-readability audit",
-      "description": "POST /api/audit with {\"url\": \"...\"} for the full audit: 13 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet for that origin. Paid per call via x402 (HTTP 402). For the free A-F grade with no payment, GET /api/score?url=... instead.",
+      "description": "POST /api/audit with {\"url\": \"...\"} for the full audit: 20 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet for that origin. Paid per call via x402 (HTTP 402). For the free A-F grade with no payment, GET /api/score?url=... instead.",
       "tags": ["audit", "geo", "llms-txt", "json-ld", "paid", "x402"],
       "examples": ["Audit https://example.com for agent readability"],
       "inputModes": ["application/json"],

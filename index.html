@@ -79,7 +79,7 @@
 
 <section class="try" id="try">
 <h2 style="margin-top:.2rem">Is your site readable to AI agents?</h2>
-<p>Type a domain. You get an <strong>Agent Readability Score</strong> from A to F across 13 weighted checks — free, no signup, one request.</p>
+<p>Type a domain. You get an <strong>Agent Readability Score</strong> from A to F across 20 weighted checks — free, no signup, one request.</p>
 <form id="score-form">
   <input id="score-url" name="url" type="url" inputmode="url" autocomplete="url"
          aria-label="Site to check for agent readability"
@@ -101,8 +101,8 @@
 <p>Or use the <a href="https://github.com/110kc3/seo/issues/new?template=register.yml">issue form</a>.</p>
 
 <h2 id="audit">Agent-readability audit — free score, paid fixes</h2>
-<p><code>GET /api/score?url=…</code> is free and unmetered for cached URLs: it returns the A–F grade and which of the 13 checks failed, by name. That is what the box at the top of this page calls.</p>
-<p><code>POST /api/audit</code> is the paid half — the same 13 checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across 13 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
+<p><code>GET /api/score?url=…</code> is free and unmetered for cached URLs: it returns the A–F grade and which of the 20 checks failed, by name. That is what the box at the top of this page calls.</p>
+<p><code>POST /api/audit</code> is the paid half — the same 20 checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across 20 weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
 <pre><code>curl -X POST https://index.percall.dev/api/audit \
   -H 'content-type: application/json' \
   -d '{"url": "https://example.com"}'   # 402 + the terms</code></pre>
