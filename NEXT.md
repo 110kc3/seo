@@ -16,18 +16,22 @@ older docs. Where a doc disagrees with this file, this file is right.
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-08-02, fifth pass.** Every distribution channel is now
-> submitted, all three of Kamil's decisions are shipped and live, and §2.1, 2.3,
-> 2.5 and 2.6 are done. What the approved work turned up — five bugs, two of them
-> serious — is in §4. §2.4 is the one engineering item still open, and it was not
-> in the batch you asked for. §2b records the six pages shipped since, §2c the
-> umbrella, **§2d the indexation pass that made the umbrella findable at all.**
+> **Updated 2026-08-03, sixth pass.** Every distribution channel is submitted and
+> every one of Kamil's decisions is shipped. §2.4 — carried here for days as "the
+> last known-wrong thing in the fleet" — turned out to have been fixed already,
+> and **the entry describing it was simply false**; see it for what was actually
+> wrong and what that says about trusting this file without re-reading the repo.
+> **Nothing on my side is open and unblocked.**
 >
-> **Your list is now: a Show HN held until ~25 Aug, three optional items, and
-> four browser jobs for indexation (§1.8).** §1.9 is decided and §2e is built —
-> the second service is live in code: two paid endpoints that probe and route but
+> **Your list: a Show HN held until ~25 Aug, three optional items, four browser
+> jobs for indexation (§1.8), and one command to attach a hostname (§1.10).**
+> That last one is the only thing standing between the Router and its own
+> subdomain — everything else for it is built, deployed and inert (§2g).
+>
+> The second service is live and paid for: two endpoints that probe and route but
 > never pay, because you said you would not pay from your own wallet and that is
-> now a property of the deployment rather than a promise in a doc.
+> now a property of the deployment rather than a promise in a doc. It has settled
+> real money on mainnet (§2e).
 
 ---
 
@@ -232,19 +236,37 @@ re-read `/api/stats.json`, update the five figures, soften "zero inbound links".
 `http://percall.dev/` to `https://index.percall.dev`. All three verified 200 with
 no redirect hop. One file, mergeable, waiting on the maintainer.
 
-### 2.4 The domain-root hub still advertises a retired host — **still open**
+### ~~2.4 The domain-root hub advertises a retired host~~ — was already fixed, and this entry was wrong
 
-*Not in the batch Kamil asked for; carried forward deliberately.*
+**Read the repo before believing this file.** §2.4 claimed
+`110kc3.github.io` pointed at `index.kc-it.pl` in 47 places and mentioned
+`percall.dev` zero times. Both halves were false by the time anyone acted on it:
+commit `0fabb0f`, *"Point the discovery hub at the host it is supposed to
+advertise"*, had already moved it. `percall.dev` now appears across nine files.
 
-`110kc3.github.io` points at **`index.kc-it.pl` in 47 places across 9 files**, and
-mentions `percall.dev` **zero** times: `llms.txt`, `llms-full.txt`, `agents.json`,
-`.well-known/agents.json`, `.well-known/agent.json`,
-`.well-known/agent-card.json`, `sitemap.xml`, `index.html`, `README.md`.
+**The two surviving `index.kc-it.pl` mentions are correct and are staying.** They
+are one sentence — *"the older `index.kc-it.pl` still answers but 308s here, so
+quote this one"* — which is a surface telling an agent which of two working hosts
+to cite. That is the opposite of the defect this entry described, and deleting it
+would make the hub worse.
 
-The old host 308s, so agents arrive. But it is the same class of problem as §2.3
-— a surface built specifically to tell machines where things are, telling them
-somewhere else — on the one repo nobody would think to check, because its own
-last commit says "Point the hub at index.kc-it.pl".
+This is the second time a doc in this repo has disagreed with reality in the
+direction of alarm, and this file's own header says it wins over the others when
+they disagree. It only earns that by being re-verified rather than carried
+forward — which is exactly what "**everything below was verified live**" at the
+top is supposed to mean.
+
+**What was actually wrong, and is now fixed** (`110kc3.github.io@a78b900`): the
+hub had never heard of the Router. It described the free score and the paid
+audit and stopped there — the same failure the umbrella page had in §2f, in the
+one repo nobody thinks to check, and for the same reason: *a service that ships
+onto an existing host touches nothing that would announce it.* Both llms files
+and both copies of `agents.json` now carry `/api/liveness` and `/api/route`,
+their price, and the non-custodial promise.
+
+**Carries a dependency:** those URLs name `index.percall.dev`. When
+`router_host` is set (§1.10), the hub needs the same one-line update — it is not
+generated from this repo's config and cannot follow on its own.
 
 ### ~~2.5 README understates the MCP server~~ — done
 
@@ -673,7 +695,7 @@ and agent-readiness Phases 1, 3 and 5.
 ## 6. If you only do one thing in each column
 
 - **You:** nothing. Genuinely — every channel is submitted, every decision is shipped, and the post is held by your own call. The three items in §1.7 are optional and none is urgent.
-- **Me:** §2.4, the domain-root hub still pointing at the retired host. It is the last known-wrong thing in the fleet and you have not asked for it yet; say the word.
+- **Me:** nothing unblocked. §2.4 turned out to be already fixed and its entry wrong (the hub now names the Router too, `110kc3.github.io@a78b900`). Everything else on my side is shipped; §2g waits on the one action in §1.10 that only you can take.
 
 ---
 
