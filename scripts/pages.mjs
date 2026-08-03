@@ -85,6 +85,18 @@ export function metaDescription(text, max = 160) {
  * so relative links resolve from `/checks/foo.html` as well as from `/x402.html`.
  */
 export function page({ base, path, title, description, body, ld = null, depth = 0, crumb = null, footer = null }) {
+  // A page whose body is missing used to render the literal string "undefined"
+  // between a correct header and a correct footer, and ship: valid HTML, right
+  // title, right canonical, no content. That is exactly what happened to
+  // /router.html — a `const body` computed and then not passed — and it reached
+  // production because every check around it passed. The asset existed, it was
+  // in the sitemap, its meta description was fine, the tests asserted the URL
+  // answered 200. Nothing asserted the page said anything.
+  //
+  // Failing the build is the only place this is cheap to catch.
+  if (typeof body !== 'string' || body.trim().length < 50) {
+    throw new Error(`page(${base}${path}): body is missing or trivially short — a page shell must never render "undefined" as its content`);
+  }
   const up = '../'.repeat(depth) || './';
   return `<!DOCTYPE html>
 <html lang="en">
@@ -910,6 +922,7 @@ no justification needed.</p>
   return page({
     base: canonicalBase,
     path: canonicalPath,
+    body,
     title: 'The Router — find a live machine-payable endpoint, without paying to look',
     description: 'Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.',
     crumb: `<p class="crumb"><a href="${apexBase}/">percall.dev</a> / The Router</p>`,

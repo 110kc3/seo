@@ -2385,6 +2385,38 @@ test('the umbrella is reachable — sitemap entry plus a link from the pages age
   assert.ok(!index.includes('{{APEX}}') && !llms.includes('{{APEX}}'), 'unfilled APEX placeholder');
 });
 
+test('every generated page actually says something', async () => {
+  // /router.html shipped to production as a correct header, the literal string
+  // "undefined", and a correct footer — `const body` computed in routerPage()
+  // and never passed to page(). Everything around it passed: the asset existed,
+  // it was in the sitemap, its meta description was well-formed, the route
+  // answered 200. Nothing asserted the page had content.
+  //
+  // `page()` now throws on a missing body, so this is the second line of
+  // defence: it catches a body that is present but degenerate, and it covers
+  // the hand-written pages that never go through page() at all.
+  const root = new URL('../', import.meta.url);
+  const files = [
+    ...(await readdir(root)).filter((f) => f.endsWith('.html')),
+    ...(await readdir(new URL('../checks/', import.meta.url))).map((f) => `checks/${f}`),
+  ];
+
+  for (const f of files) {
+    const html = await readFile(new URL(`../${f}`, import.meta.url), 'utf8');
+    const body = html.slice(html.indexOf('<body>'));
+    assert.doesNotMatch(body, /^\s*undefined\s*$/m, `${f}: renders a bare "undefined" as content`);
+    assert.ok(!body.includes('[object Object]'), `${f}: renders "[object Object]"`);
+    assert.match(body, /<h1[^>]*>[^<]/, `${f}: has no h1`);
+    // The size floor is for content pages only. 404.html and the revenue
+    // dashboard are deliberately terse and both declare noindex, which is the
+    // same signal the description test keys off.
+    if (/<meta name="robots" content="noindex/.test(html)) continue;
+    // Header + footer alone is roughly 700 bytes; anything near that has no
+    // middle. The real pages here are 5-30 KB.
+    assert.ok(body.length > 1200, `${f}: body is ${body.length} bytes — too short to be a page`);
+  }
+});
+
 test('no generated page publishes a meta description cut mid-thought', async () => {
   // `.slice(0, 160)` cut /apex.html at a comma and /x402.html mid-word, on a
   // site that grades other people on title_and_description and ships a snippet
