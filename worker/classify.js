@@ -89,6 +89,11 @@ export function classifyPath(pathname, { apex = false } = {}) {
   // Bought one at a time; counted separately from the whole-report `audit`,
   // because "did unbundling work" is a question about the ratio between them.
   if (pathname === '/api/check') return 'check_single';
+  // The recurring product, counted apart from the per-call ones — whether
+  // anyone buys a standing watch is a different question from whether they
+  // buy one answer, and §7 says it is the more important of the two.
+  if (pathname === '/api/watch') return 'watch';
+  if (pathname === '/api/watch/sweep') return 'watch_sweep';
   if (pathname === '/api/liveness') return 'liveness';
   if (pathname === '/api/route') return 'route';
   if (pathname === '/api/stats.json') return 'stats';

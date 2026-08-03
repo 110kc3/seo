@@ -120,6 +120,14 @@
       "price": "per call, quoted at https://index.percall.dev/api/x402/info"
     },
     {
+      "method": "POST",
+      "url": "https://index.percall.dev/api/watch",
+      "description": "Watch one endpoint; a webhook fires when it stops or starts answering, and once more when the prepaid sweeps run out. Prepaid rather than a subscription — x402 has no recurring billing and a stored mandate would be custody. The payer address from the settlement owns the watch, so there is no account to create.",
+      "auth": "x402",
+      "price": "sweeps x the per-sweep amount, quoted at https://index.percall.dev/api/x402/info",
+      "request": {"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}
+    },
+    {
       "method": "GET",
       "url": "https://index.percall.dev/api/x402/avoid.json",
       "description": "Endpoints that failed a liveness probe, free. Split into confirmed (two or more consecutive misses) and suspected (one). Evidence, not proof — the sweep is a rotating sample. Also at /api/mcp/avoid.json for the MCP catalog.",

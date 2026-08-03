@@ -22,6 +22,8 @@
       "route_price_atomic": "5000",
       "_check_price_atomic": "One check from the audit, bought on its own. $0.005 — a tenth of the whole report, and the price the rest of this market charges for a single signal. It exists because the free grade already names which checks failed, so the only thing left to sell at that moment is the fix for one of them.",
       "check_price_atomic": "5000",
+      "_watch_sweep_price_atomic": "One weekly sweep of one watched endpoint, prepaid. $0.005 — a sweep is a probe plus an alert, so it is priced as a probe. x402 has no recurring billing and inventing one would mean holding a mandate to charge later, which is custody by another name; so a watch is N prepaid sweeps and stops when they run out.",
+      "watch_sweep_price_atomic": "5000",
       "verified_tier_price_atomic": "5000000",
       "featured_tier_price_atomic": "25000000",
       "profiles": {

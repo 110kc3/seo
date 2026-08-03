@@ -2071,7 +2071,7 @@ test('every query surface the manifests advertise is actually routed', async () 
   // promising an endpoint the router does not have.
   const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
   const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
-  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/liveness', '/api/route', '/api/check'];
+  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/liveness', '/api/route', '/api/check', '/api/watch'];
 
   assert.equal(manifest.interfaces.mcp, `${BASE}/mcp`);
   assert.equal(manifest.interfaces.nlweb, `${BASE}/ask`);

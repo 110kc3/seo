@@ -274,6 +274,22 @@ is refused before you are charged, and the 400 lists the valid ids.
 The whole report is still POST {{BASE}}/api/audit — cheaper per check, and worth
 it when you want the ranked order to fix things in.
 
+## Get told when an endpoint stops answering
+
+- POST {{BASE}}/api/watch with `{"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}`
+
+Prepaid, not a subscription: one payment buys N weekly sweeps and nothing is ever
+charged again without you signing for it — x402 has no recurring billing, and a
+stored mandate to charge you later would be custody by another name.
+
+The **payer address owns the watch**, taken from the settlement rather than from
+your request body, so there is no account to create and nothing to log in to.
+Paying again for the same URL from the same wallet tops up the credits.
+
+The webhook fires on a **state change** — answering→failing or failing→answering
+— and once more when the credits run out. A webhook on every failing sweep is a
+mailing list nobody reads. Price per sweep at {{BASE}}/api/x402/info.
+
 ## Endpoints not worth calling (free)
 
 The half of liveness that is more useful to publish than to sell:

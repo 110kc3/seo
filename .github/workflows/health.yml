@@ -40,6 +40,30 @@ jobs:
         continue-on-error: true
         run: node scripts/snapshot-traffic.mjs
 
+      # Sweep the paid watches: probe each watched endpoint, spend a credit, and
+      # POST the subscriber's webhook when the state *changed*. Deliberately not
+      # a Cloudflare cron trigger — `wrangler deploy` applies triggers as one
+      # phase and a trigger it cannot apply takes the whole deployment down,
+      # which has happened here once. This job already runs at the cadence the
+      # product promises, so reusing it costs nothing and cannot break a deploy.
+      #
+      # continue-on-error: a missed sweep delays an alert by a week. A failed
+      # health run would stop the catalog refresh and the liveness probe too,
+      # which is a worse outcome than a late webhook.
+      - name: Sweep monitored endpoints
+        continue-on-error: true
+        env:
+          DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
+        run: |
+          if [ -z "${DASHBOARD_TOKEN:-}" ]; then
+            echo "::notice::DASHBOARD_TOKEN not set — skipping the watch sweep"
+            exit 0
+          fi
+          code=$(curl -sS -o /tmp/sweep.json -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $DASHBOARD_TOKEN" \
+            https://index.percall.dev/api/watch/sweep)
+          echo "HTTP $code"; cat /tmp/sweep.json
+
       # The x402 catalog is a mirror, so it goes stale on its own. Refreshed
       # here rather than on its own schedule because it commits alongside the
       # other weekly state, and the output is sorted by URL so the diff is the

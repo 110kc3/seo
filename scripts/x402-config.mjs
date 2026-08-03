@@ -62,6 +62,7 @@ export function resolveX402(cfg) {
     audit_price_atomic: x402.audit_price_atomic,
     route_price_atomic: x402.route_price_atomic,
     check_price_atomic: x402.check_price_atomic,
+    watch_sweep_price_atomic: x402.watch_sweep_price_atomic,
     verified_tier_price_atomic: x402.verified_tier_price_atomic,
     featured_tier_price_atomic: x402.featured_tier_price_atomic,
   };

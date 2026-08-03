@@ -28,7 +28,9 @@ import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { handleBadge } from './badge.js';
 import { handleSearch, handleAsk, handleMcp, handleCatalogSearch, CATALOGS } from './discovery.js';
-import { handleLiveness, handleRoute, ROUTE_RESOURCES } from './route.js';
+import { handleLiveness, handleRoute, ROUTE_RESOURCES, probe } from './route.js';
+import { handleWatch, handleSweep, MAX_SWEEPS } from './watch.js';
+import { urlError } from '../scripts/validate.mjs';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
@@ -367,6 +369,12 @@ function handleX402Info(cfgObj) {
       amount: rail.check_price_atomic,
       description: 'One agent-readability check for one URL: pass/fail, why, and a paste-ready fix for that origin. The free grade at /api/score names which checks failed, so you know which one to buy.',
     }, {
+      url: `${BASE}/api/watch`,
+      method: 'POST',
+      amount_per_sweep: rail.watch_sweep_price_atomic,
+      max_sweeps: MAX_SWEEPS,
+      description: 'Watch one endpoint; a webhook fires when it stops or starts answering. Prepaid sweeps rather than a subscription — x402 has no recurring billing and a stored mandate would be custody. Total = sweeps x amount_per_sweep.',
+    }, {
       url: `${ROUTER_BASE}/api/liveness`,
       method: 'GET',
       amount: rail.route_price_atomic,
@@ -443,6 +451,39 @@ export default {
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/badge.svg') {
         response = handleBadge(url, registry.listings ?? [], scores);
+      } else if (url.pathname === '/api/watch') {
+        response = await handleWatch(request, env, cfg, {
+          base: BASE,
+          urlError,
+          // The amount depends on how many sweeps were bought, so the gate is
+          // handed the count rather than a fixed price — and it hands back the
+          // payer address, which is what makes the watch have an owner without
+          // anyone signing up for anything.
+          gate: async (sweeps) => {
+            const rail = resolveX402(cfg);
+            const unit = Number(rail?.watch_sweep_price_atomic ?? 0);
+            const g = await requirePayment(request, env, cfg, {
+              amountAtomic: unit ? String(unit * sweeps) : undefined,
+              resource: {
+                url: `${BASE}/api/watch`,
+                method: 'POST',
+                description: `Watch one endpoint and POST a webhook when it stops (or starts) answering. Prepaid: one payment buys N weekly sweeps, ${sweeps} here. No subscription and no stored mandate — nothing is charged again without you signing for it.`,
+                mimeType: 'application/json',
+              },
+            });
+            return g.paid
+              ? { ok: true, payer: g.settlement?.payer ?? null, attach: (r) => attachSettlement(r, g.settlement, g.version) }
+              : { ok: false, response: g.response };
+          },
+        });
+      } else if (url.pathname === '/api/watch/sweep') {
+        response = await handleSweep(request, env, {
+          probe,
+          cfg,
+          // Same bearer as the revenue dashboard, and the same 404-not-401
+          // posture: an unauthorized caller learns nothing about what exists.
+          authorized: authorizeDashboard(request, env).state === 'ok',
+        });
       } else if (url.pathname === '/api/check') {
         response = await handleCheck(request, env, cfg, url);
       } else if (url.pathname === '/api/liveness') {

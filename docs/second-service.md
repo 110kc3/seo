@@ -171,14 +171,20 @@ the signer, and the facilitator submits. The payer wallet holds no ETH at all.
 
 ### Still to build
 
-- **The monitoring product on top.** History is the input; the webhook — *your
-  endpoint stopped answering* — is the version of this with a recurring price
-  rather than a per-call one, and NEXT.md §7 argues it is the strongest answer
-  to the paid tier's real problem. `consecutive_failures` is deliberately the
-  field an alert would trigger on.
-- **A human page.** The two endpoints are announced in `llms.txt`, `openapi.yaml`
-  and the agents manifest, which covers the agent half of the traffic. Browsers
-  are ~46% of requests here and currently have nothing to read about this.
+- ~~**The monitoring product on top.**~~ **Built 2026-08-03** — `POST /api/watch`
+  buys N weekly sweeps of one endpoint and POSTs a webhook when the state
+  changes. Three decisions in `worker/watch.js` worth knowing: it is **prepaid
+  credits, not a subscription**, because x402 has no recurring billing and a
+  stored mandate to charge later is custody by another name; **the payer address
+  from the settlement owns the watch**, so there is no account to create and a
+  body claiming a different owner is ignored; and **alerts are edges, not
+  levels** — a webhook on every failing sweep is a mailing list nobody reads.
+  The sweep runs from the weekly health workflow rather than a Cloudflare cron
+  trigger, because `wrangler deploy` applies triggers as one phase and a trigger
+  it cannot apply takes the whole deployment down, which has happened here once.
+- ~~**A human page.**~~ Shipped as `/router.html`, and since 2026-08-03 linked
+  from the index homepage too — it had been reachable only from the apex and the
+  discovery hub, which are not where the traffic is.
 - **Per-host probe concurrency.** The fan-out is capped at 5 candidates and
   cached for 60s, which is enough while the catalog search rarely returns five
   URLs on one host. It stops being enough if routing gets popular.
