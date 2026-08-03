@@ -158,7 +158,44 @@ export function parseTerms(headers, body, cfg) {
  * endpoint with GET. It is deliberately not "returned 200": for a paid endpoint
  * a 200 to an unpaid request would mean the paywall is broken.
  */
-export async function probe(target, { fetchImpl = fetch, cfg = {}, method = 'GET' } = {}) {
+/**
+ * The MCP handshake, sent as the probe body for MCP candidates.
+ *
+ * A GET to an MCP endpoint proves only that a host answered — usually 405. The
+ * question worth selling is "does an MCP client get a session", and the honest
+ * way to ask it is to perform the first half of one. `initialize` is the
+ * protocol's opening call, it is free, and a server that answers it with a
+ * result is genuinely usable rather than merely reachable.
+ */
+/**
+ * Did the server complete the opening half of an MCP session?
+ *
+ * Three outcomes, kept apart because they mean different things to a caller:
+ * `ok` — a JSON-RPC result came back, so a client would get a session;
+ * `auth` — it wants credentials (401/403), which proves a real server is there
+ * and is a *pass* for liveness even though this caller cannot use it; and
+ * `no` with the reason, for everything else. A registry entry that 404s and one
+ * that demands a token are both "not usable by me" and only one is abandoned.
+ */
+export function mcpVerdict(status, parsed) {
+  if (parsed?.result) return { session: 'ok', protocol: parsed.result.protocolVersion ?? null, server: parsed.result.serverInfo?.name ?? null };
+  if (status === 401 || status === 403) return { session: 'auth', reason: `HTTP ${status} — credentials required` };
+  if (parsed?.error) return { session: 'no', reason: `JSON-RPC error ${parsed.error.code ?? ''}: ${String(parsed.error.message ?? '').slice(0, 80)}`.trim() };
+  return { session: 'no', reason: `HTTP ${status}, no JSON-RPC result` };
+}
+
+export const MCP_INITIALIZE = JSON.stringify({
+  jsonrpc: '2.0',
+  id: 1,
+  method: 'initialize',
+  params: {
+    protocolVersion: '2025-06-18',
+    capabilities: {},
+    clientInfo: { name: 'AIProductIndexRouter', version: '1.0' },
+  },
+});
+
+export async function probe(target, { fetchImpl = fetch, cfg = {}, method = 'GET', body = null } = {}) {
   const started = Date.now();
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), PROBE_TIMEOUT_MS);
@@ -168,13 +205,16 @@ export async function probe(target, { fetchImpl = fetch, cfg = {}, method = 'GET
       redirect: 'follow',
       signal: ctl.signal,
       // Built here, never derived from the caller's request. See the file header.
-      headers: probeHeaders(),
+      headers: body
+        ? { ...probeHeaders('application/json, text/event-stream'), 'content-type': 'application/json' }
+        : probeHeaders(),
+      ...(body ? { body } : {}),
     });
     const latency = Date.now() - started;
     const buf = await resp.arrayBuffer?.() ?? new ArrayBuffer(0);
-    let body = null;
+    let parsed = null;
     try {
-      body = JSON.parse(new TextDecoder().decode(buf.slice(0, MAX_PROBE_BODY)));
+      parsed = JSON.parse(new TextDecoder().decode(buf.slice(0, MAX_PROBE_BODY)));
     } catch { /* a non-JSON body is normal and is not an error */ }
 
     return {
@@ -183,7 +223,11 @@ export async function probe(target, { fetchImpl = fetch, cfg = {}, method = 'GET
       status: resp.status,
       latency_ms: latency,
       paywalled: resp.status === 402,
-      terms: resp.status === 402 ? parseTerms(resp.headers, body, cfg) : null,
+      terms: resp.status === 402 ? parseTerms(resp.headers, parsed, cfg) : null,
+      // Present only for an MCP probe. `alive` says a host answered; this says
+      // the server completed the opening half of a session, which is the thing
+      // an MCP client actually needs and the registry never checks.
+      ...(body ? { mcp: mcpVerdict(resp.status, parsed) } : {}),
       error: null,
     };
   } catch (e) {
@@ -287,7 +331,14 @@ export function parseRouteRequest(body) {
   const maxPrice = body.max_price === undefined ? null : Number(body.max_price);
   if (maxPrice !== null && !Number.isFinite(maxPrice)) return { error: 'max_price: must be a number of USDC, e.g. 0.01' };
   const chain = typeof body.chain === 'string' ? body.chain.trim().slice(0, 40) : '';
-  return { q, limit, maxPrice, chain };
+  // Which corpus to route into. The MCP registry is worse than the Bazaar at
+  // pruning dead entries, so "which of these 10,080 servers still answers" is
+  // the more valuable question of the two and was going unasked.
+  const catalog = body.catalog === 'mcp' ? 'mcp' : 'x402';
+  if (catalog === 'mcp' && maxPrice !== null) {
+    return { error: 'max_price: MCP servers are not priced per call; drop it or set catalog to "x402"' };
+  }
+  return { q, limit, maxPrice, chain, catalog };
 }
 
 /**
@@ -347,7 +398,7 @@ export async function handleRoute(request, env, cfg, { gate, catalogSearch, base
   // Candidates come from the real catalog search handler rather than a second
   // ranking implementation, for the same reason score_url proxies /api/score:
   // two rankings that can disagree is a bug waiting for a support ticket.
-  const searchUrl = new URL(`${base}/api/x402/search`);
+  const searchUrl = new URL(`${base}/api/${parsed.catalog}/search`);
   searchUrl.searchParams.set('q', parsed.q);
   searchUrl.searchParams.set('limit', String(parsed.limit));
   if (parsed.maxPrice !== null) searchUrl.searchParams.set('max_price', String(parsed.maxPrice));
@@ -355,7 +406,7 @@ export async function handleRoute(request, env, cfg, { gate, catalogSearch, base
 
   let found;
   try {
-    found = await (await catalogSearch('x402', searchUrl)).json();
+    found = await (await catalogSearch(parsed.catalog, searchUrl)).json();
   } catch (e) {
     return json({ ok: false, code: 'catalog_unavailable', error: e.message?.slice(0, 200) ?? 'catalog unavailable' }, 503);
   }
@@ -381,12 +432,23 @@ export async function handleRoute(request, env, cfg, { gate, catalogSearch, base
       // current one, and it is the catalog's last recorded value. The two
       // disagreeing is the most useful thing this endpoint can show a caller.
       catalog_price: price ?? null,
-      probe: mine ?? await cachedProbe(env, candidate.url, { fetchImpl, cfg, method: candidate.method || 'GET' }),
+      probe: mine ?? await cachedProbe(env, candidate.url, parsed.catalog === 'mcp'
+        // An MCP server is probed by starting a session, not by knocking: a GET
+        // returns 405 from a perfectly healthy one, which would grade the whole
+        // registry "alive" and tell a caller nothing it did not already know.
+        ? { fetchImpl, cfg, method: 'POST', body: MCP_INITIALIZE }
+        : { fetchImpl, cfg, method: candidate.method || 'GET' }),
     };
   }));
 
   // Alive first, then the live quote if there is one, then catalog order.
-  const rank = (c) => (c.probe.alive ? 0 : 1);
+  const rank = (c) => {
+    if (!c.probe.alive) return 2;
+    // An MCP server that answered but refused the handshake is reachable and
+    // unusable; it ranks below one that gave a session and above a dead host.
+    if (c.probe.mcp && c.probe.mcp.session === 'no') return 1;
+    return 0;
+  };
   const quote = (c) => c.probe.terms?.[0]?.price ?? c.catalog_price ?? Infinity;
   probes.sort((a, b) => rank(a) - rank(b) || quote(a) - quote(b));
 

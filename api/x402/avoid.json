@@ -1,0 +1,196 @@
+{
+  "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
+  "source": "Coinbase CDP x402 Bazaar",
+  "probed_at": "2026-08-03",
+  "catalog_size": 14734,
+  "confidence": {
+    "confirmed": "failed at least two consecutive probes",
+    "suspected": "failed its most recent probe, once",
+    "caveat": "the sweep is a rotating sample; an endpoint is re-probed about twice a year, so `confirmed` accumulates slowly by design",
+    "fresh_answer": "https://router.percall.dev/api/liveness?url=…"
+  },
+  "free": true,
+  "counts": {
+    "confirmed": 0,
+    "suspected": 25,
+    "tracked": 25
+  },
+  "endpoints": [],
+  "suspected": [
+    {
+      "url": "https://api.socialfetch.dev/v1/github/profiles/:handle/contributions",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://api.vaults.fyi/v2/portfolio/positions/:userAddress/:network/:vaultId",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://api.x402node.dev/web/headers",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://clonecho.builda.company/x402/s/open5e-magic-items",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://cryptyx.ai/api/taker-flow",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://gateway.apiosk.com/weatherapi/forecast",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://proxy.suverse.io/v1/data/bitcoin-mempool-stats",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://proxy.suverse.io/v1/data/road-conditions",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://proxy.suverse.io/v1/data/suverse-dailymed-drug-labels",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://proxy.suverse.io/v1/data/suverse-tor-relay-summary",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://proxy.suverse.io/v1/data/suverse-weather-historical",
+      "reason": "ECONNREFUSED",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://solidus-x402.fly.dev/v1/sol/mint/:solana_address",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://staging.miven.dev/p/:slug/:var1",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://vape-x402.vapex402.workers.dev/data/protocol",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-01"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/commodities/clima",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/jobs/job_d9a59944e86347a2",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/postings/post_e658a0b270a748fd/bids",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.the402.ai/v1/services/svc_a844123f03b8401a/purchase",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.vaults.fyi/v2/portfolio/total-returns/:userAddress/:network/:vaultId",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.x402node.dev/web/og",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://brmarket.thomenz.me/v1/search",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://gateway.apiosk.com/mapbox/static-image",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://skim402.com/api/v2/signal/entity-formations/latest",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://x402.professorsausages.com/pokemon/species",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
+      "misses": 1,
+      "since": "2026-08-03",
+      "last_checked": "2026-08-03"
+    }
+  ]
+}

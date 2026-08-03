@@ -61,6 +61,7 @@ export function resolveX402(cfg) {
     max_timeout_seconds: x402.max_timeout_seconds ?? DEFAULTS.max_timeout_seconds,
     audit_price_atomic: x402.audit_price_atomic,
     route_price_atomic: x402.route_price_atomic,
+    check_price_atomic: x402.check_price_atomic,
     verified_tier_price_atomic: x402.verified_tier_price_atomic,
     featured_tier_price_atomic: x402.featured_tier_price_atomic,
   };

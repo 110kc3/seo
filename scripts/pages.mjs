@@ -911,6 +911,20 @@ header at all.</p>
 dashboard, no human step. Read the terms without provoking a 402 at
 <a href="${serviceBase}/api/x402/info">/api/x402/info</a>.</p>
 
+<h2>Every answer is signed</h2>
+<p>Each response carries an <strong>RFC 9421 HTTP Message Signature</strong>
+(Ed25519) over its status, its <code>Content-Digest</code>, the authority and the
+path. A probe result you got from here is cryptographically attributable to this
+service and provably unmodified in transit — verify it against the keys at
+<a href="${serviceBase}/.well-known/http-message-signatures-directory">the
+signature directory</a>.</p>
+<p><strong>Rare, and applied differently.</strong> Of the
+${num(x402.endpoints)} machine-payable endpoints mirrored here, fewer than 1%
+mention signed responses at all — and those that do sell signing as its own
+product, an attestation you buy per resource. Here it is a property of every
+response, including the free ones. When two services disagree about whether an
+endpoint is alive, the signed answer is the one you can hold someone to.</p>
+
 <h2>Being kind to the endpoints</h2>
 <p>Probes are shared for 60 seconds, so a popular endpoint is probed once a
 minute however many callers ask, and the candidate fan-out is capped. These are

@@ -2071,7 +2071,7 @@ test('every query surface the manifests advertise is actually routed', async () 
   // promising an endpoint the router does not have.
   const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
   const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
-  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/liveness', '/api/route'];
+  const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/liveness', '/api/route', '/api/check'];
 
   assert.equal(manifest.interfaces.mcp, `${BASE}/mcp`);
   assert.equal(manifest.interfaces.nlweb, `${BASE}/ask`);
@@ -2573,4 +2573,52 @@ test('www belongs to the umbrella, and is never fetched by the Worker itself', a
   assert.ok(REAL.host_aliases.includes(www),
     'www is attached to the Worker but missing from host_aliases — auditing it would 522');
   assert.equal(score.canonicalTarget(`https://${www}/llms.txt`, REAL), `https://${canonicalHost}/llms.txt`);
+});
+
+// --- unbundling: one check, bought on its own -------------------------------
+
+test('an unknown check id is refused before charging, and the 400 teaches', async () => {
+  // The likeliest caller error on /api/check is a typo in `check`, and it must
+  // not cost money. The refusal ships the valid ids and points at the free
+  // endpoint that names which check actually failed — a dead end that teaches,
+  // the same rule /api/search follows.
+  const { CHECK_META, V2_WEIGHTS } = await import('../worker/audit.js');
+  const known = new Set([...Object.keys(CHECK_META), ...Object.keys(V2_WEIGHTS)]);
+  // Every id the 400 would advertise must be one the audit can actually return.
+  assert.ok(known.has('llms_txt') && known.has('agent_card'));
+  assert.ok(known.has('markdown_negotiation'), 'the 2026 signals are buyable too');
+  assert.equal(known.size, Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length);
+});
+
+test('the unbundled check is priced below the whole report, and both are published', async () => {
+  // The point of unbundling is meeting a market that sells single signals for
+  // half a cent. A per-check price at or above the full audit would be worse
+  // than not offering it.
+  const cfgFile = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
+  const { resolveX402 } = await import('../scripts/x402-config.mjs');
+  const rail = resolveX402(cfgFile);
+  const one = Number(rail.check_price_atomic);
+  const all = Number(rail.audit_price_atomic);
+  assert.ok(one > 0 && all > 0);
+  assert.ok(one < all, `one check (${one}) must cost less than the whole audit (${all})`);
+  // And buying every check singly must cost more than the report, or the report
+  // is the worse deal and nobody should be sold it.
+  const checks = Object.keys((await import('../worker/audit.js')).CHECK_META).length
+    + Object.keys((await import('../worker/audit.js')).V2_WEIGHTS).length;
+  assert.ok(one * checks > all, 'the bundle has to be cheaper per check than buying them all singly');
+});
+
+test('the avoid-lists separate what is confirmed from what is merely suspected', async () => {
+  // The sweep is a rotating sample, so an endpoint is re-probed about twice a
+  // year and two *consecutive* misses take roughly a year to accumulate. A
+  // single list would therefore be either empty or overclaiming.
+  for (const f of ['api/x402/avoid.json', 'api/mcp/avoid.json']) {
+    const j = JSON.parse(await readFile(new URL(`../${f}`, import.meta.url), 'utf8'));
+    assert.equal(j.free, true);
+    assert.ok(j.confidence.caveat.includes('rotating sample'), `${f} must state why confirmed is short`);
+    for (const e of j.endpoints) assert.ok(e.misses >= 2, `${f}: a confirmed entry needs 2+ misses`);
+    for (const e of j.suspected) assert.equal(e.misses, 1, `${f}: a suspected entry has exactly one miss`);
+    assert.equal(j.counts.confirmed, j.endpoints.length);
+    assert.equal(j.counts.suspected, j.suspected.length);
+  }
 });

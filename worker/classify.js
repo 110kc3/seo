@@ -86,6 +86,9 @@ export function classifyPath(pathname, { apex = false } = {}) {
   // `audit` has one: a paid endpoint's traffic is the only number that says
   // whether the thing is being bought, and `/api/*` as one bucket buries it
   // under the free registry reads that dominate it by an order of magnitude.
+  // Bought one at a time; counted separately from the whole-report `audit`,
+  // because "did unbundling work" is a question about the ratio between them.
+  if (pathname === '/api/check') return 'check_single';
   if (pathname === '/api/liveness') return 'liveness';
   if (pathname === '/api/route') return 'route';
   if (pathname === '/api/stats.json') return 'stats';

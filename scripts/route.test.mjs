@@ -461,3 +461,67 @@ test('the request parsers refuse what they cannot act on', () => {
   assert.equal(parseRouteRequest({ q: 'x', limit: 99 }).limit, 5, 'the probe fan-out must stay capped');
   assert.match(parseLivenessRequest(new URL(`${BASE}/api/liveness?url=https://a.example/&method=DELETE`)).error, /^method:/);
 });
+
+// --- routing into the MCP catalog -------------------------------------------
+
+test('an MCP candidate is probed by starting a session, not by knocking', async () => {
+  // A GET to a healthy MCP server returns 405, which would grade the whole
+  // registry "alive" and tell a caller nothing it did not already know. The
+  // question worth selling is whether a client gets a session.
+  let sent = null;
+  const r = await handleRoute(
+    new Request(`${BASE}/api/route`, { method: 'POST', body: JSON.stringify({ q: 'github', catalog: 'mcp' }) }),
+    {}, cfg,
+    {
+      gate: async () => ({ ok: true, attach: (x) => x }),
+      base: BASE,
+      catalogSearch: async (key, url) => {
+        assert.equal(key, 'mcp', 'should have searched the MCP catalog');
+        assert.ok(url.href.includes('/api/mcp/search'));
+        return new Response(JSON.stringify({ ok: true, results: [{ url: 'https://mcp.example/mcp', transport: 'streamable-http' }], catalog: {} }));
+      },
+      fetchImpl: async (url, init) => {
+        sent = init;
+        return new Response(JSON.stringify({
+          jsonrpc: '2.0', id: 1,
+          result: { protocolVersion: '2025-06-18', serverInfo: { name: 'example-server' } },
+        }), { status: 200, headers: { 'content-type': 'application/json' } });
+      },
+    },
+  );
+  assert.equal(sent.method, 'POST');
+  assert.match(sent.body, /"method":"initialize"/);
+  // Still no payment header, on a code path that now sends a body.
+  assert.deepEqual(Object.keys(sent.headers).map((h) => h.toLowerCase()).sort(), ['accept', 'content-type', 'user-agent']);
+
+  const body = await r.json();
+  assert.deepEqual(body.candidates[0].probe.mcp, { session: 'ok', protocol: '2025-06-18', server: 'example-server' });
+});
+
+test('an MCP server wanting credentials is alive, and says so distinctly', async () => {
+  // 401 proves a real server is there. It is a pass for liveness and a fail for
+  // "can I use it", and collapsing those two would abandon working servers.
+  const { probe, MCP_INITIALIZE } = await import('../worker/route.js');
+  const auth = await probe('https://mcp.example/mcp', {
+    cfg, method: 'POST', body: MCP_INITIALIZE,
+    fetchImpl: async () => new Response('nope', { status: 401 }),
+  });
+  assert.equal(auth.alive, true);
+  assert.equal(auth.mcp.session, 'auth');
+
+  const broken = await probe('https://mcp.example/mcp', {
+    cfg, method: 'POST', body: MCP_INITIALIZE,
+    fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: 1, error: { code: -32601, message: 'Method not found' } }), { status: 200 }),
+  });
+  assert.equal(broken.alive, true);
+  assert.equal(broken.mcp.session, 'no');
+  assert.match(broken.mcp.reason, /Method not found/);
+});
+
+test('a price filter is refused for MCP rather than silently ignored', () => {
+  // MCP servers are not priced per call. Accepting max_price and dropping it
+  // would return results that quietly do not honour the constraint asked for.
+  assert.match(parseRouteRequest({ q: 'x', catalog: 'mcp', max_price: 0.01 }).error, /^max_price:/);
+  assert.equal(parseRouteRequest({ q: 'x', catalog: 'mcp' }).catalog, 'mcp');
+  assert.equal(parseRouteRequest({ q: 'x' }).catalog, 'x402', 'x402 stays the default');
+});

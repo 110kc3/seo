@@ -260,6 +260,53 @@ without paying — an unpaid request to a paid endpoint returns that endpoint's 
 **you pay the endpoint directly, from your own wallet**. Nothing is proxied, so
 the operator you end up paying sees you, not us.
 
+## Buy one check instead of the whole audit
+
+The free grade at {{BASE}}/api/score already names every check that failed. When
+you only want the fix for one of them, buy that one:
+
+- GET {{BASE}}/api/check?url=https://example.com&check=agent_card
+
+Returns that check's pass/fail, why it failed and a paste-ready snippet written
+for your origin. Priced per check at {{BASE}}/api/x402/info. An unknown `check`
+is refused before you are charged, and the 400 lists the valid ids.
+
+The whole report is still POST {{BASE}}/api/audit — cheaper per check, and worth
+it when you want the ranked order to fix things in.
+
+## Endpoints not worth calling (free)
+
+The half of liveness that is more useful to publish than to sell:
+
+- {{BASE}}/api/x402/avoid.json — x402 endpoints that failed a probe
+- {{BASE}}/api/mcp/avoid.json — MCP servers that failed a probe
+
+Each entry carries its failure reason, how many consecutive misses, and when it
+was first and last seen failing. Split into `endpoints` (two or more consecutive
+misses) and `suspected` (failed its most recent probe once), because the sweep is
+a rotating sample and confidence differs. Evidence, not proof — nothing is
+removed from the catalog on the strength of it.
+
+## Every answer here is signed, and you can check it
+
+Each response carries an **RFC 9421 HTTP Message Signature** (Ed25519) over its
+status, its `Content-Digest`, the authority and the path — so a grade, a probe
+result or a set of payment terms is cryptographically attributable to this
+service and provably unmodified in transit.
+
+Verify with the public keys at {{BASE}}/.well-known/http-message-signatures-directory
+(the web-bot-auth profile discovers them there).
+
+It is rare rather than unique, and the difference is where it applies:
+**83 of the 14,734 x402 endpoints we mirror mention signed responses at all**
+(0.6%), and the ones that do sell signing *as a product* — a paid attestation
+you buy per resource. Here it is a property of every response, including the
+free ones and including this file.
+
+Why that is worth a paragraph rather than a footnote: when two paid audits of
+the same URL disagree, the one whose answer is signed is the one you can hold
+someone to.
+
 ## The umbrella
 
 This service is one of the paid, machine-callable services published under

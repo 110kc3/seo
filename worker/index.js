@@ -17,7 +17,7 @@ import registry from '../api/index.json' with { type: 'json' };
 // stays an O(1) lookup rather than an audit per README view.
 import scores from '../scores.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
-import { auditUrl, parseAuditRequest } from './audit.js';
+import { auditUrl, parseAuditRequest, CHECK_META, V2_WEIGHTS } from './audit.js';
 import { handleStats } from './stats.js';
 import { handleScore, fetcherFor, auditSigner, canonicalTarget } from './score.js';
 import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
@@ -249,6 +249,85 @@ const routeGate = (request, env, cfgObj, resourceUrl, method) => async (resource
     : { ok: false, response: gate.response };
 };
 
+/**
+ * GET /api/check?url=…&check=<id> — one check, bought on its own.
+ *
+ * The unbundling the market was already doing and we were not. Competitors sell
+ * a single signal — robots.txt posture, llms.txt validity — for half a cent,
+ * while this site sold twenty checks for five cents or nothing. That is the
+ * wrong shape against a caller who has *already been told by the free grade
+ * which check failed*: at that moment the only thing left to sell is the fix
+ * for that one check, and $0.05 for nineteen they did not ask about is a bad
+ * trade they decline.
+ *
+ * The audit runs whole regardless — the checks share fetches, so running one in
+ * isolation would cost the same and tell us less. What is sold is the answer,
+ * not the work.
+ */
+async function handleCheck(request, env, cfgObj, url) {
+  if (request.method !== 'GET') {
+    return json({ ok: false, code: 'method_not_allowed', error: 'GET /api/check?url=https://example.com&check=llms_txt' }, 405, { allow: 'GET' });
+  }
+  const target = url.searchParams.get('url');
+  const id = (url.searchParams.get('check') ?? '').trim();
+
+  // Both validated before charging. A typo in `check` is the likeliest caller
+  // error here and it must not cost money — so the valid ids ship in the 400.
+  const parsed = parseAuditRequest({ url: target, checks: url.searchParams.get('set') ?? url.searchParams.get('checks') });
+  if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
+
+  const known = new Set([...Object.keys(CHECK_META), ...Object.keys(V2_WEIGHTS)]);
+  if (!known.has(id)) {
+    return json({
+      ok: false,
+      code: 'unknown_check',
+      error: id ? `no check "${id.slice(0, 40)}"` : 'the `check` parameter is required',
+      valid: [...known].sort(),
+      free_alternative: `${BASE}/api/score?url=…  — names every failing check, at no cost, so you know which one to buy`,
+    }, 400);
+  }
+
+  const gate = await requirePayment(request, env, cfgObj, {
+    amountAtomic: resolveX402(cfgObj)?.check_price_atomic,
+    resource: {
+      url: `${BASE}/api/check`,
+      method: 'GET',
+      description: 'One agent-readability check for one URL: whether it passes, why it fails, and a paste-ready fix written for that origin. The full 20-check audit is POST /api/audit.',
+      mimeType: 'application/json',
+    },
+  });
+  if (!gate.paid) return gate.response;
+
+  const target2 = canonicalTarget(parsed.url, cfgObj);
+  const result = await auditUrl(target2, fetcherFor(request, env, target2), auditSigner(env, cfgObj), parsed.checkSet);
+  if (!result.ok) return attachSettlement(json(result, 502), gate.settlement, gate.version);
+
+  const check = result.checks.find((c) => c.id === id);
+  if (!check) {
+    // The id is known but this check set does not score it — v1 does not score
+    // the 2026 signals. Say which set was used rather than reporting "missing".
+    return attachSettlement(json({
+      ok: false,
+      code: 'not_in_check_set',
+      error: `"${id}" is not scored by check set ${result.check_set}`,
+      check_set: result.check_set,
+    }, 409), gate.settlement, gate.version);
+  }
+
+  return attachSettlement(json({
+    ok: true,
+    url: result.url,
+    audited_at: result.audited_at,
+    check_set: result.check_set,
+    check,
+    // The context that makes one check purchasable rather than a fragment: what
+    // it is worth, and what the whole grade was, so a caller can decide whether
+    // to buy another.
+    grade: { letter: result.letter, score: result.score, max_score: result.max_score },
+    full_audit: `${BASE}/api/audit`,
+  }), gate.settlement, gate.version);
+}
+
 // --- public payment terms --------------------------------------------------
 
 // Lets an agent read the price without provoking a 402. Everything here is
@@ -282,6 +361,11 @@ function handleX402Info(cfgObj) {
       method: 'POST',
       amount: rail.audit_price_atomic,
       description: 'Agent-readability audit of one URL.',
+    }, {
+      url: `${BASE}/api/check`,
+      method: 'GET',
+      amount: rail.check_price_atomic,
+      description: 'One agent-readability check for one URL: pass/fail, why, and a paste-ready fix for that origin. The free grade at /api/score names which checks failed, so you know which one to buy.',
     }, {
       url: `${ROUTER_BASE}/api/liveness`,
       method: 'GET',
@@ -359,6 +443,8 @@ export default {
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/badge.svg') {
         response = handleBadge(url, registry.listings ?? [], scores);
+      } else if (url.pathname === '/api/check') {
+        response = await handleCheck(request, env, cfg, url);
       } else if (url.pathname === '/api/liveness') {
         // The challenge names the URL the caller actually asked for, not a
         // hardcoded host: once the Router has its own hostname the resource in

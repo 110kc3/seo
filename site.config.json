@@ -20,6 +20,8 @@
       "audit_price_atomic": "50000",
       "_route_price_atomic": "Shared by /api/liveness and /api/route. $0.005 — a tenth of the audit, because what it sells is one fresh probe rather than a full report, and because it has to sit under the $0.014 median of the catalog it routes into. One value for both until there is a reason for two.",
       "route_price_atomic": "5000",
+      "_check_price_atomic": "One check from the audit, bought on its own. $0.005 — a tenth of the whole report, and the price the rest of this market charges for a single signal. It exists because the free grade already names which checks failed, so the only thing left to sell at that moment is the fix for one of them.",
+      "check_price_atomic": "5000",
       "verified_tier_price_atomic": "5000000",
       "featured_tier_price_atomic": "25000000",
       "profiles": {

@@ -430,6 +430,54 @@ const smUrls = [
   ...pagePaths.map(([p, lastmod]) => `  <url><loc>${BASE}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`),
   ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
+// --- the avoid-list ---------------------------------------------------------
+//
+// The endpoints that have failed their last two or more probes, published free,
+// per catalog. Everything here already existed inside `health.json`; what was
+// missing was saying it as its own artifact.
+//
+// Free on purpose, and it is the one thing in this repo where "free" is the
+// commercial decision rather than the default: a list of things *not* to call is
+// the most linkable object this data can produce, it is the half of liveness a
+// competitor sells as a paid "avoid-list", and giving it away is cheaper than
+// the distribution it buys. The paid product remains the *fresh* probe.
+//
+// A miss is not a verdict. Two consecutive failures on a weekly rotating sample
+// from one network path is evidence, and the file says so in its own `$comment`
+// rather than leaving a reader to assume a dead host.
+for (const [key, dir] of [['x402', 'api/x402'], ['mcp', 'api/mcp']]) {
+  const health = readJson(`${dir}/health.json`);
+  if (!health) continue;
+  const tracked = health.unreachable ?? [];
+  const confirmed = tracked.filter((e) => (e.misses ?? 0) >= 2);
+  const suspected = tracked.filter((e) => (e.misses ?? 0) === 1);
+  const view = (e) => ({ url: e.url, reason: e.reason, misses: e.misses, since: e.since, last_checked: e.last_checked });
+
+  writeFileSync(join(ROOT, dir, 'avoid.json'), `${JSON.stringify({
+    $comment: 'Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.',
+    source: health.source,
+    probed_at: health.probed_at,
+    catalog_size: health.catalog_size,
+    // Why the confirmed list is short and will stay short, stated here so a
+    // reader does not mistake it for a healthy catalog. The sweep walks a
+    // rotating slice, so any one endpoint is re-probed roughly twice a year —
+    // which means two *consecutive* misses take about a year to accumulate.
+    // `suspected` is therefore the more informative list today, and the honest
+    // way to publish it is under a name that does not overclaim.
+    confidence: {
+      confirmed: 'failed at least two consecutive probes',
+      suspected: 'failed its most recent probe, once',
+      caveat: 'the sweep is a rotating sample; an endpoint is re-probed about twice a year, so `confirmed` accumulates slowly by design',
+      fresh_answer: `${ROUTER_BASE}/api/liveness?url=…`,
+    },
+    free: true,
+    counts: { confirmed: confirmed.length, suspected: suspected.length, tracked: tracked.length },
+    endpoints: confirmed.map(view),
+    suspected: suspected.map(view),
+  }, null, 2)}\n`);
+  console.log(`avoid-list ${key}: ${confirmed.length} confirmed, ${suspected.length} suspected`);
+}
+
 // IndexNow's proof of control: the key, served as plain text at its own name.
 // Bing, Yandex and Seznam share one submission endpoint, and Bing's index is
 // what ChatGPT search reads — so this is the one channel where a push can be
