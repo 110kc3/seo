@@ -150,8 +150,29 @@ One KV namespace (`PAYMENTS`), three prefixes, chosen so each read is cheap:
 | `x402:nonce:` | spent/reserved payment authorizations | reserve-before-settle beats a concurrent replay |
 | `revenue:` | settlement records **in KV metadata** | one `list()` returns every record — no N gets, and no read-modify-write to lose writes to a race |
 | `stats:` | cached analytics rollup | keeps the SQL API off the hot path |
+| `probe:v1:` | one endpoint's last probe, 60s | courtesy to the endpoint being probed, not speed for us — a burst of callers becomes one request |
+| `probe:hist:v1:` | per-endpoint probe history, 180d | the Worker cannot commit, and a 24,741-entry file rewritten weekly is a megabyte of git churn for data that changes by the minute |
 
-Analytics Engine holds per-request telemetry: bucketed path, classified client type, method, status class, truncated user-agent, ASN. **No IP addresses.** Client type is inferred from a self-reported user-agent, so it is a traffic-shape signal, not an identity claim — `/api/stats.json` says so in its own payload.
+Analytics Engine holds per-request telemetry: bucketed path, classified client type, method, status class, truncated user-agent, ASN, and **hostname**. **No IP addresses.** Client type is inferred from a self-reported user-agent, so it is a traffic-shape signal, not an identity claim — `/api/stats.json` says so in its own payload.
+
+Hostname is recorded because every host attached to this Worker serves the same paths, so a path bucket can never answer "is the umbrella getting traffic" or "is anyone still arriving on the retired host". It is `url.hostname`, not `url.host`: Cloudflare answers on 8443/8080 too, and the port turned three port-scanner targets into phantom hosts holding real traffic.
+
+## Hosts
+
+One Worker, four hostnames, and each owns a disjoint set of paths so every document has exactly one address:
+
+| host | owns | everything else |
+|---|---|---|
+| `index.percall.dev` | canonical — the index, its APIs, all static assets | — |
+| `router.percall.dev` | `/`, `/api/liveness`, `/api/route` | 308 → canonical |
+| `percall.dev` | `/` (the portfolio page) | 308 → canonical |
+| `www.percall.dev` | `/` → 308 to the apex | 308 → canonical |
+| `index.kc-it.pl` | nothing (retired) | 308 → canonical |
+
+Two rules keep this from breaking, both learned by breaking it:
+
+- **A Worker cannot fetch its own hostnames** — Cloudflare answers 522, and a *paid* audit that settles and then 502s is how that was found. Every attached host must therefore be recognised by `canonicalTarget()` and `selfTerms()`, which read `host_aliases` **plus `router_host`** from config rather than a hand-copied list, because copying it is how the bug arrived twice.
+- **A host whose root is a page must map to that page, not to `/`.** `percall.dev/` resolves to `/apex.html` and `router.percall.dev/` to `/router.html`. Mapping either to `/` audits the *index* and publishes the score under the other host's name — grading one page and labelling it another, which is precisely the defect this service is sold to detect.
 
 ## Failure posture
 
