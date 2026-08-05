@@ -4,3 +4,10 @@ health-report.md
 
 # wrangler dev writes local state (its own KV contents, build cache) in here.
 .wrangler/
+
+# The Clustly agent's ledger of which orders it has handled. Machine-local state
+# about one deployment's work, not a fact about the repo — and committing it
+# would let a checkout on another host believe it had already delivered an order
+# it has never seen.
+.clustly-state.json
+.clustly-state.json.tmp

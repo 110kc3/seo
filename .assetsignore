@@ -23,6 +23,11 @@ node_modules
 /docs
 /mcp
 /clients
+# The Clustly listing: the text of a service sold on someone else's marketplace,
+# plus the pricing reasoning behind it (what the comparable listings charge, and
+# why this one opens below them). Entered into their console by hand — nothing
+# here is served, and the commercial reasoning is not for publication.
+/clustly
 /wrangler.toml
 /package.json
 /package-lock.json

@@ -1,0 +1,31 @@
+{
+  "_": "The service published on Clustly (clustly.ai), a USDC-escrow agent marketplace on Solana. This file is the source of truth for what the listing says; the console is where it is entered. Fields match the `draftListing` input in @clustly/agent so it can also be POSTed to /v1/operator/listings verbatim.",
+
+  "title": "AI agent-readability audit of one website, with paste-ready fixes",
+
+  "description": "Twenty checks on whether AI agents — crawlers, assistants answering questions about you, and other software acting for a user — can read your site and describe it correctly. You get a letter grade, every failing check ordered by what fixing it is worth, and paste-ready code already written for your own domain: llms.txt, schema.org JSON-LD, robots.txt posture toward AI crawlers, agent cards, machine-readable alternates, and the 2026 signals (Content Signals, A2A 1.0, MCP server card, RFC 9727 API catalog, Agent Skills, Web Bot Auth). Delivered as a markdown report, usually within a minute. The grade itself is free at index.percall.dev/api/score — what you are buying is the diagnosis, the ordering, and the code.",
+
+  "_price": "Micro-USDC — whole dollars x 1e6, so this is $15. This repo is public; the pricing reasoning, the comparable listings and when to move the number are in the vault at 40-projects/x402-scale-up/clustly.md.",
+  "price_usdc": 15000000,
+
+  "_sla_secs": "24h, not the ~40s the delivery actually takes. The SLA is the abandonment threshold: enrolling and then missing it is scored against the agent on chain, and the agent runs on a home Raspberry Pi. The margin is for a reboot or a dead uplink, not for the work. 'Usually within a minute' belongs in the description, where an unmet expectation costs nothing.",
+  "sla_secs": 86400,
+
+  "_category": "The console's own dropdown is authoritative — this is the closest of the categories the marketplace advertises (research & analysis, code & automation, writing, design, data extraction, translation, outreach, verification). Correct it there if it does not match.",
+  "category": "research",
+
+  "_default_criteria": "What the buyer confirms at hire, and what is sha256'd into the on-chain criteria_hash. Neither side can move it afterwards, so it states exactly what the generator produces and nothing beyond it — every line here maps to a section the report actually renders. Promising a re-audit after fixes, or any human review, would be a promise this agent cannot keep unattended.",
+  "default_criteria": "The deliverable is a markdown report on the single URL supplied, containing:\n\n- [ ] A letter grade (A–F) and a numeric score out of 100, with the number of checks passed out of 20.\n- [ ] Every failing check listed and ordered by its weight, each with what it is, why it matters, and how to fix it.\n- [ ] For each failing check that can be templated, a paste-ready code block written for the supplied domain rather than a generic example.\n- [ ] The projected score after applying the fixes, cumulative down the list.\n- [ ] The checks that already pass, so the report is a complete picture.\n- [ ] A free URL the buyer can call themselves to re-check the grade after applying fixes.\n\nOut of scope: keyword research, backlinks, Core Web Vitals, page speed, and anything about human search-engine ranking. This audits machine readability for AI agents only. One URL per order; the audit reads that page and the site's well-known files, not a full crawl.",
+
+  "_input_schema": "One field. A bare host is accepted — the agent promotes 'example.com' to https:// before validating — because that is what a human types into a field labelled 'your website'. `type` is 'text' rather than 'url' only because the console's accepted type list could not be verified from outside; switch it if the console offers a URL type.",
+  "input_schema": {
+    "fields": [
+      {
+        "key": "url",
+        "label": "Your website URL (e.g. https://example.com)",
+        "type": "text",
+        "required": true
+      }
+    ]
+  }
+}
