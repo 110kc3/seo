@@ -3,12 +3,22 @@
 **This is the only file you need to read to know what is outstanding.** Every
 other doc in this repo is a *record* of what happened; this one is the *queue*.
 
-- `TODO.md` — the changelog. 450 lines, almost all of it done work. Do not scan it for pending items.
+**In this repo** — technical and operational, and public, because the repo is:
+
+- `TODO.md` — **Kamil's action list at the top**, then the changelog behind a fold. Almost all of it is done work; do not scan the fold for pending items.
 - `docs/distribution.md` — the channel research and the paste-ready form answers. Reference material, not a queue.
 - `docs/agent-readiness-2026.md` — the 2026 spec gap analysis. **All five phases are now done** (Phase 2 and the Phase 4 decision closed 2026-08-02); kept for the reasoning and the adoption caveats.
-- `docs/show-hn.md` — the draft to post. Reference material.
-- `docs/second-service.md` — the three candidates for a second service under the umbrella, and why the broker idea splits into a version worth building and one that needs a lawyer. Feeds the decision in §1.9.
-- `docs/review-2026-07-29.md` — a point-in-time review, now historical.
+- `docs/clustly.md` — the runbook for the Clustly seller agent (§1.11).
+
+**In the vault**, under `40-projects/x402-scale-up/` — the commercial half, moved
+out of this repo on 2026-08-05 because `github.com/110kc3/seo` is public and
+pricing, sizing and product strategy are not for it:
+
+- `clustly.md` — why that channel, the market sizing, the pricing call, the custody trade-off, and the four options Kamil did not pick.
+- `second-service.md` — the three candidates for a second service, and why the broker idea splits into a version worth building and one that needs a lawyer. Fed the decision in §1.9.
+- `show-hn-draft.md` — the draft to post, its titles, and the prepared comment threads.
+- `2026-07-29-project-review.md` — a point-in-time review, now historical.
+- `competitors.md`, `service-ideas.md`, `page-ideas.md`, `README.md` — pre-existing portfolio notes.
 
 **Everything below was verified live on 2026-08-02**, not copied forward from the
 older docs. Where a doc disagrees with this file, this file is right.
@@ -31,6 +41,15 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 > never pay, because you said you would not pay from your own wallet and that is
 > now a property of the deployment rather than a promise in a doc. It has settled
 > real money on mainnet (§2e).
+>
+> **Added 2026-08-05, seventh pass.** A third sales channel is built and needs
+> three browser steps from you: **§1.11, Clustly** — a USDC-escrow marketplace
+> where the buyer funds *before* the agent is pinned, which is the exact
+> condition §7 found missing at the x402 paywall. Same deliverable, priced as a
+> $15 job rather than a $0.05 call. Read the custody caveat in §1.11 before
+> registering: their agents are managed wallets and self-custody is not offered.
+> **§1.12 records the four options you did not pick**, including the one this
+> repo's own changelog has recommended twice — put the hours into Track A.
 
 ---
 
@@ -70,7 +89,7 @@ Post when these hold — if they do not, wait again rather than posting anyway:
 
 I will refresh the numbers and the two stale claims the morning of (§2.2). The
 draft, the titles and the three prepared comment threads stay in
-`docs/show-hn.md` and need no further work until then.
+`vault 40-projects/x402-scale-up/show-hn-draft.md` and need no further work until then.
 
 **On credentials: don't send them, and I would not use them.** Posting would be
 under your name, on your account, on a one-shot channel — that is yours to press
@@ -172,7 +191,7 @@ that repo too.
 
 ### ~~1.9 Pick a second service~~ — decided 2026-08-02: the non-custodial one
 
-*Raised by Kamil 2026-08-02, explored in [docs/second-service.md](docs/second-service.md).*
+*Raised by Kamil 2026-08-02, explored in `vault 40-projects/x402-scale-up/second-service.md`.*
 
 Three candidates were examined: **liveness as a product**, **402-gating as a
 service**, and Kamil's **broker** idea (verify an endpoint answers, route the
@@ -198,7 +217,78 @@ the Worker reads `X-PAYMENT` as a receiver and holds no key that could sign an
 EVM transaction. **The router probes; it never pays** — and since an unpaid probe
 returns the endpoint's own 402, and a 402 carries its terms, liveness and price
 come back in the same free request. Scope, endpoints and what still has to be
-built are in [docs/second-service.md](docs/second-service.md).
+built are in `vault 40-projects/x402-scale-up/second-service.md`.
+
+### 1.11 Clustly — the code is done, the browser half is yours
+
+*Added 2026-08-05, after Kamil asked whether to pivot off x402 and whether we
+could be listed on clustly.ai. The answer to the second is yes and it is built.
+Full runbook: [docs/clustly.md](docs/clustly.md).*
+
+**What this is.** [Clustly](https://www.clustly.ai) is a USDC-escrow agent
+marketplace on Solana: a buyer funds an escrow, an agent enrolls and submits, the
+buyer's signature releases the money. This repo now sells the agent-readability
+audit there as a job, alongside selling it per call over x402.
+
+> **Why this channel, the market sizing, the pricing call and the custody
+> trade-off are in the vault** — `40-projects/x402-scale-up/clustly.md`. This
+> repo is public; that reasoning is not for it.
+
+**Shipped (2026-08-05).**
+
+- `scripts/clustly-report.mjs` — the deliverable. Built from the **free**
+  `/api/score` plus the fix/snippet tables imported from `worker/audit.js`, so it
+  needs no payment, no spending key, and no HTMLRewriter (which is why the paid
+  `auditUrl()` cannot run outside the Worker). The snippets are the same
+  constants the paid endpoint serves, so the two cannot drift.
+- `scripts/clustly-agent.mjs` — the loop. Deliberately **not**
+  `npx @clustly/agent run --exec`: their daemon polls `awaiting_acceptance` only,
+  so it never sees a revision request, and `npx -y` would execute an unpinned
+  third-party package on every run in a repo with no runtime dependencies. The
+  REST surface is four calls. The criteria hash was verified byte-for-byte
+  against their SDK on nine cases.
+- `clustly/listing.json` — the listing text and its price. Excluded from the
+  asset upload via `.assetsignore`, so it is never served by the site.
+- 26 tests across `scripts/clustly-{report,agent}.test.mjs`, including one that
+  asserts the report still delivers every line the listing commits to — those
+  criteria are sha256'd on chain at hire and cannot be edited afterwards.
+
+**Your three browser steps** (all of §1 of the runbook, one sitting):
+
+1. Register at <https://www.clustly.ai/operator> → copy the `clk_…` key into
+   `/etc/clustly-agent.env` on the Pi. **It is shown once.**
+2. Publish `clustly/listing.json` through the console. Two fields need your eyes
+   because they could not be verified from outside: `category` and the input
+   field's `type`.
+3. Enable the systemd unit in §2.4 of the runbook.
+
+**Read this before step 1.** Every Clustly agent is *managed* — Clustly holds the
+signing wallet under a no-theft policy pinned to your treasury, and **self-custody
+is not offered**. That is a step away from the self-custodial Base address the
+x402 rail pays into. Receive-side only, and no key in this repo is involved, so
+"the router probes; it never pays" still holds — but earnings sit with a third
+party until you sweep them. Your call, and it should be a decision rather than a
+discovery.
+
+**Before publishing, look at what you are selling:**
+
+```
+node scripts/clustly-agent.mjs --dry-run --url https://example.com
+```
+
+No key, no marketplace — it prints the exact markdown a buyer receives.
+
+### 1.12 The other four options from 2026-08-05, unpicked
+
+Kamil picked Clustly (§1.11) from a list of five. **The other four, and the
+reasoning behind all five, are in the vault** —
+`40-projects/x402-scale-up/clustly.md`. They are portfolio decisions about what
+to build and what to charge, which is the half of this project that does not
+belong in a public repo.
+
+Headlines only, so this file still says what is open: go hard on Track A; a
+non-custodial `market.percall.dev`; a full escrow marketplace (recommended
+against); freeze x402 spend. None is started.
 
 ---
 
@@ -408,7 +498,7 @@ service to win two points would be the wrong trade, and it still is.
 
 `GET /api/liveness?url=…` and `POST /api/route`, $0.005 each, live in
 `worker/route.js` on the existing Worker. Full reasoning and the decisions inside
-it are in [docs/second-service.md](docs/second-service.md); the short version:
+it are in `vault 40-projects/x402-scale-up/second-service.md`; the short version:
 
 **It sells freshness.** The catalogs and their weekly aggregates stay free — what
 nothing else publishes is whether an endpoint answers *right now* at the price it

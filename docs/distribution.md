@@ -329,4 +329,4 @@ than a gateway key, delete it rather than leave an unread credential around.
 
 ## Passive channels already live
 
-GitHub repo topics (`ai-agents`, `mcp`, `mcp-server`, `llms-txt`, `agentic-commerce`, `directory`, `seo`) + tuned description — GitHub search is itself an agent discovery channel. Show HN draft: `docs/show-hn.md`.
+GitHub repo topics (`ai-agents`, `mcp`, `mcp-server`, `llms-txt`, `agentic-commerce`, `directory`, `seo`) + tuned description — GitHub search is itself an agent discovery channel. Show HN draft: `vault 40-projects/x402-scale-up/show-hn-draft.md`.

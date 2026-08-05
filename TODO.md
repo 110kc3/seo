@@ -1,10 +1,62 @@
 # TODO
 
-> **Looking for what is still outstanding? Read [NEXT.md](NEXT.md), not this file.**
-> This one is the changelog — almost everything below is done work, kept for the
-> reasoning. `NEXT.md` is the single pending queue, split into what needs Kamil
-> and what needs Claude, and it is verified against the live site rather than
-> carried forward from here.
+## ⚡ Needs Kamil — read this, skip the rest
+
+*Everything here needs a browser, a public action, or a decision only you can
+make. Nothing else in this file does. Synced from [NEXT.md](NEXT.md) §1 —
+the verified queue — on **2026-08-05**; where the changelog below disagrees with
+this list, this list is right.*
+
+### Do now
+
+1. **Clustly — three steps, one sitting.** The code is built and tested; the
+   marketplace half is yours. Register at
+   <https://www.clustly.ai/operator> → copy the `clk_…` key (**shown once**) into
+   `/etc/clustly-agent.env`, publish `clustly/listing.json` through their
+   console, enable the systemd unit. Runbook: **[docs/clustly.md](docs/clustly.md)**.
+   Detail: [NEXT.md](NEXT.md) §1.11.
+   *Look at what you are selling first:* `node scripts/clustly-agent.mjs --dry-run --url https://example.com`
+2. **Indexation — four browser jobs, and nobody else can do them.**
+   [NEXT.md](NEXT.md) §1.8. Until the first one exists there is no way to know
+   whether any of this is indexed.
+   1. Google Search Console — verify `percall.dev` as a **Domain** property (one TXT record).
+   2. Submit `https://index.percall.dev/sitemap.xml` in GSC (73 URLs).
+   3. Bing Webmaster Tools — verify, and submit `https://percall.dev/` **by hand**
+      (the apex serves one path, so it cannot host an IndexNow key file). Bing is
+      what ChatGPT search reads.
+   4. Request indexing for `https://percall.dev/` in GSC once verified.
+
+### Held — do not do these yet
+
+- **Show HN — held until ~25 Aug.** Your call on 2026-08-02, and it was right:
+  the post's whole claim is a measured negative result, and 24 Aug is the first
+  day the 30-day stats window is actually full. Reasoning and the four conditions
+  to check before posting: [NEXT.md](NEXT.md) §1.1. Draft: `vault 40-projects/x402-scale-up/show-hn-draft.md`.
+
+### Decide when you get to it
+
+- **Clustly custody.** Their agents are *managed* wallets — Clustly holds the
+  signing key under a no-theft policy pinned to your treasury, and self-custody
+  is not offered. Receive-side only and no key in this repo is involved, but
+  earnings sit with a third party until swept. Read before registering.
+- **The four unpicked options** from 2026-08-05 (Track A, `market.percall.dev`,
+  a full escrow marketplace, freezing x402 spend). Reasoning is in the vault —
+  `40-projects/x402-scale-up/clustly.md` — because it is commercial, and this
+  repo is public.
+
+### Optional, low urgency
+
+- **Stripe machine-payments access** — request it now because it moves slowly,
+  not because you need it.
+- **Cloudflare Monetization Gateway waitlist** — browser form; being on
+  Cloudflare is the only prerequisite.
+- **Delete `GLAMA_API_KEY`** — settled: nothing needs it. Don't leave an unread
+  credential lying around.
+
+---
+
+<details>
+<summary><b>Changelog</b> — ~480 lines of done work, kept for the reasoning. Nothing below needs you.</summary>
 
 ## ✅ Deploys are unblocked again (2026-08-01, 14:16 UTC)
 
@@ -113,7 +165,7 @@ Three findings worth keeping:
 
 ## Done (v3.14 — a second product, its own hostname, and three stale claims in this repo's own docs, 2026-08-02/03)
 
-- [x] **The Router — a second paid service, chosen for what it refuses to do.** Kamil's brief was a broker: verify an endpoint answers, route the request, take a commission. The finding that reshaped it is that **an x402 payment is bound to its payee** — our own verifier refuses any authorization whose `to` is not our `payTo` (`worker/x402.js:275`), and so does everyone else's — so a broker cannot forward a caller's signature. It must collect and re-pay as merchant of record, which brings float, refund liability on a $0.005 margin, and a custody question that is plausibly a MiCA authorization. His call: the non-custodial version, *"I will not pay from my own wallet."* Full analysis in `docs/second-service.md`.
+- [x] **The Router — a second paid service, chosen for what it refuses to do.** Kamil's brief was a broker: verify an endpoint answers, route the request, take a commission. The finding that reshaped it is that **an x402 payment is bound to its payee** — our own verifier refuses any authorization whose `to` is not our `payTo` (`worker/x402.js:275`), and so does everyone else's — so a broker cannot forward a caller's signature. It must collect and re-pay as merchant of record, which brings float, refund liability on a $0.005 margin, and a custody question that is plausibly a MiCA authorization. His call: the non-custodial version, *"I will not pay from my own wallet."* Full analysis in `vault 40-projects/x402-scale-up/second-service.md`.
 - [x] **`GET /api/liveness` and `POST /api/route`, $0.005 each.** Probe an endpoint now; or rank candidates for a task, each probed live, each with the terms it quotes and the URL to call. A query matching nothing is free. What is sold is freshness: the Bazaar keeps entries 30 days past last settlement, so *listed* and *answers* are different facts and only one was published anywhere.
 - [x] **"Never pays" is enforced, not intended.** The probe sends a two-header allowlist; the caller's headers are never an input to it, because their request may carry an `X-PAYMENT` made out to us and forwarding it would hand a signed credential to a stranger; and a structural test forbids any module under `worker/` from setting an outbound payment header. The whole product works *because* it does not pay — an unpaid probe returns the endpoint's 402, and a 402 states its terms, so liveness and price arrive in the same free request.
 - [x] **Per-endpoint history**, fed by live probes rather than the weekly cron. The cron walks a rotating slice of 600, so it sees any endpoint about twice a year and stores only failures — right for "what share of the catalog is dead", useless for "is this endpoint reliable". A cache hit is not an observation, and the uptime ratio is withheld below three of them rather than published as "1 of 1".
@@ -316,7 +368,7 @@ Everything that could be done without you is done, and re-verified on
 of these five channels has an API; all were checked, not assumed.
 
 0. **Submit to Glama — do this first, it blocks the 90k★ PR.** ~2 min, browser + GitHub OAuth. See item 7 below for why; the paste-ready values are in §4b(e).
-1. **Post the Show HN.** Draft rewritten and ready in `docs/show-hn.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post — they are already slightly stale (draft says 4,672 requests / 7.19%; live was 4,950 / 7.09% on 2026-08-01). Tue–Thu, 14:00–16:00 UTC, so the next window is **Tue 4 Aug**. *~30 min, then two hours of replies.*
+1. **Post the Show HN.** Draft rewritten and ready in `vault 40-projects/x402-scale-up/show-hn-draft.md`; the day-7 gate opened it. Refresh the five traffic figures the morning you post — they are already slightly stale (draft says 4,672 requests / 7.19%; live was 4,950 / 7.09% on 2026-08-01). Tue–Thu, 14:00–16:00 UTC, so the next window is **Tue 4 Aug**. *~30 min, then two hours of replies.*
 2. **Four directory submissions.** §4b(a–d) — field labels read off the live forms, both constrained dropdowns already resolved. *~10 min of pasting.*
 3. **Decide: re-verify the register path?** It has not executed since 2026-07-09, and the code has changed substantially since — its last run failed, though two of the three failures that day were intentional negative tests and the logs are past retention. It now has 25 tests covering ownership, dedup, caps and the payment ledger, but tests exercise the script, not the *workflow*: issue trigger, token permissions, the commit-and-push retry loop and the bot comment are all untested by anything but a real run. Verifying it means opening a real `[register]` issue on the public repo, which creates a public artifact and a real listing — your call, not mine. Say the word and I will run it end to end and delete the listing afterwards.
 4. ~~Restore the deploy token, then create a separate analytics one~~ — **done 2026-08-01, 14:16 UTC.** A fresh Workers token replaced the narrowed one and `CF_ANALYTICS_TOKEN` is a genuinely separate credential on the Worker. Both old credentials have been deleted. See the block at the top of this file for what it actually was.
@@ -349,7 +401,7 @@ revenue now is distribution.
 - [x] **CDP API key, and the rail switched onto it** — done 2026-08-01. Kamil created a **Secret API Key** (Ed25519) at `portal.cdp.coinbase.com/access/api` — the portal's x402 page is metrics-only and "Custodial Wallet" wants a US business account, so neither is the right door. Both halves are repo secrets, pushed to the Worker by `cf-admin -f action=push-secrets` and never in `site.config.json`. `verify-rail.mjs` used to be unable to check this rail because CDP's `/supported` answers 401; it now signs the request with the Worker's own auth code, so `cf-admin -f action=verify-cdp` verifies it on the runner where the secrets live — **key accepted, 24 kinds advertised, both v2 `eip155:8453` and v1 `base` settled**. `"active": "cdp"` since, proven by a real $0.05 payment (tx `0x28f4…8292`, block 49327142) with the replay refused. Buys a free tier of 1,000 tx/month and — the actual point — Bazaar cataloging.
 - [ ] **Get the endpoint into the x402 Bazaar.** Everything on our side is done; the listing has not appeared. Not lag alone: CDP builds a listing from discovery metadata attached to a **settlement**, and we attached none for the first four. Read off the live catalog (the docs are vague), 1,698 of its 1,795 v1 resources carry `discoverable: true` inside the v1 `outputSchema`, and their published `extensions.bazaar.info` is visibly derived from it. `/api/audit` now publishes exactly that (plus `extensions.bazaar` for v2) and has settled a payment carrying it — and is still not listed minutes later. Check with `node scripts/bazaar-check.mjs`, which scans all ~14.7k entries by receiving address and prints what to rule out. If it stays absent for a few days, the likely answer is CDP-side: `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, no maintainer reply. **Re-checked 2026-08-01 evening: still absent, now across 14,815 catalog entries** (the catalog grew by ~150 in a few hours, so their indexer is running — it is simply not indexing us).
 - [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
-- [ ] **Post Show HN — draft rewritten 2026-08-01 and ready to go; only the posting is left, and that is Kamil's.** The day-7 gate opened it (see below), so it no longer waits on organic listings. The draft leads with the measured numbers and the zero-conversion finding rather than the directory, and carries three new "did not expect" items worth more than the old ones: the Bazaar's undocumented wire format, the Worker-cannot-fetch-itself 502-after-charging bug, and the spec-vs-installed-base split. Titles, the three comment threads to expect and prepared answers are all in `docs/show-hn.md`. Re-read `/api/stats.json` the morning you post and refresh the five figures — stale numbers are the one thing that would sink it.
+- [ ] **Post Show HN — draft rewritten 2026-08-01 and ready to go; only the posting is left, and that is Kamil's.** The day-7 gate opened it (see below), so it no longer waits on organic listings. The draft leads with the measured numbers and the zero-conversion finding rather than the directory, and carries three new "did not expect" items worth more than the old ones: the Bazaar's undocumented wire format, the Worker-cannot-fetch-itself 502-after-charging bug, and the spec-vs-installed-base split. Titles, the three comment threads to expect and prepared answers are all in `vault 40-projects/x402-scale-up/show-hn-draft.md`. Re-read `/api/stats.json` the morning you post and refresh the five figures — stale numbers are the one thing that would sink it.
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
 - [x] **Managed AI-crawler block cleared on every zone** — done 2026-07-29, after Kamil's second token update finally carried Zone → Bot Management → Edit. `robots-report` read all five zones (four had `managed=true, ai_bots=block`; percall.dev was clean); `robots-allow` updated all four — every zone's plan refused the `policy_only` variant, so the fallback `is_robots_txt_managed: false` applied. Verified live: the managed stanza is gone from all three affected origins, and fresh audits score `stareaparaty.com`, `protocolindex.eu` and `overtimelog.com` at **A 100** — the whole 12-site fleet now sits at 100/100. Two footnotes: the Amazonbot-on-an-affiliate-site question resolved itself (the block was Cloudflare's wholesale default, not curation, and Amazonbot crawling an affiliate site costs nothing); and dropping the managed file exposed that `overtimelog.com` serves its SPA HTML at `/robots.txt` — the audit forgives it, but a real robots.txt in `overtime-guard-slack` would be the honest fix. **Fixed 2026-08-01** (`overtime-guard-slack@089225e`): a real robots.txt and sitemap.xml, both live. Cloudflare Pages' index.html fallback was the cause, so the same trap applies to every Pages site in the fleet that has no explicit robots.txt.
 
@@ -378,7 +430,7 @@ Once the Worker has been live for a week, read `/api/stats.json`:
 Early readout, 2026-07-29 (day 4): `agent_share` **3.2%** — 60 ai_crawler +
 293 script hits/30d, 75 free scores, 22 llms.txt fetches, 7 audit-path hits
 (all 402 bounces, none paid). Non-trivial for a site with zero inbound links;
-leaning **keep + Show HN**. Full pass in `docs/review-2026-07-29.md`.
+leaning **keep + Show HN**. Full pass in `vault 40-projects/x402-scale-up/2026-07-29-project-review.md`.
 
 **Gate read, 2026-08-01 (day 7) — verdict: KEEP, and run the Show HN.**
 `agent_share` **7.19%**, more than double the day-4 figure: 336 ai_crawler hits
@@ -479,7 +531,7 @@ survived deployment and cost real money or real payments.
 - [x] Weekly health cron — 3-strike auto-delist, committed `health.json`, report issues.
 - [x] MCP server — `mcp/server.mjs`, zero-dep stdio: search_products / get_product / register_product.
 - [x] Repo topics + description tuned for GitHub search.
-- [x] Show HN draft (`docs/show-hn.md`).
+- [x] Show HN draft (`vault 40-projects/x402-scale-up/show-hn-draft.md`).
 
 ## Later / nice-to-have
 
@@ -491,3 +543,5 @@ survived deployment and cost real money or real payments.
 - [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
 - [x] ~~Score badge variant~~ — done 2026-07-25 as `/badge.svg?slug=…&show=score`, fed by `scores.json` from the weekly cron.
 - [x] ~~Retire the old `110kc3.github.io/seo/` Pages deploy~~ — done 2026-07-25.
+
+</details>
