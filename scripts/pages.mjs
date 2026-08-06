@@ -853,8 +853,11 @@ which is why the check set here is versioned in public.</p>
  * unattached, so this page is correct in both states rather than advertising a
  * hostname that does not resolve yet.
  */
-export function routerPage({ routerBase, canonicalBase, canonicalPath, serviceBase, apexBase, x402, mcp, priceUsd }) {
+export function routerPage({
+  routerBase, canonicalBase, canonicalPath, serviceBase, apexBase, x402, mcp, priceUsd, watchPriceUsd,
+}) {
   const price = `$${Number(priceUsd).toFixed(3)}`;
+  const watchPrice = `$${Number(watchPriceUsd).toFixed(3)}`;
   const body = `
 <h1>The Router</h1>
 <p class="lede">Which machine-payable endpoint should you call, is it alive right
@@ -871,7 +874,7 @@ returns its own 402, and a 402 states its terms.</strong> Liveness and price com
 back in the same free request. Nobody has to pay to find out what something
 costs.</p>
 
-<h2>Two endpoints</h2>
+<h2>Three paid endpoints</h2>
 <h3><code>GET /api/liveness?url=…</code> <span class="meta">${price}</span></h3>
 <p>Probes one endpoint now: whether it answered, how fast, and the terms it
 currently quotes — parsed from its own 402, in either x402 version.</p>
@@ -884,6 +887,15 @@ asked what exists. <strong>A query that matches nothing is free.</strong></p>
 <pre><code>curl -X POST ${routerBase}/api/route \\
   -H 'content-type: application/json' \\
   -d '{"q": "unit conversion", "max_price": 0.01}'</code></pre>
+
+<h3><code>POST /api/watch</code> <span class="meta">${watchPrice} per weekly sweep</span></h3>
+<p>Prepay 4–52 weekly checks of one endpoint. The first establishes a baseline;
+after that, your HTTPS webhook fires only when it changes from answering to
+failing or back again, and once when credits run out. The payer address owns the
+watch, so there is no account and no recurring mandate.</p>
+<pre><code>curl -X POST ${routerBase}/api/watch \\
+  -H 'content-type: application/json' \\
+  -d '{"url":"https://example.com/paid","webhook":"https://you.example/hook","sweeps":12}'</code></pre>
 
 <h2>History, and why it gets better</h2>
 <p>Every answer carries that endpoint's record: total probes, how many answered,
@@ -907,8 +919,9 @@ every time. A test forbids any module here from setting an outbound payment
 header at all.</p>
 
 <h2>Paying for it</h2>
-<p>Both endpoints are ${price} in USDC on Base over HTTP 402 — no account, no
-dashboard, no human step. Read the terms without provoking a 402 at
+<p>Live probes and route queries are ${price} each; monitoring is ${watchPrice}
+per prepaid weekly sweep. All settle in USDC on Base over HTTP 402 — no account,
+dashboard, subscription mandate, or human step. Read the terms without provoking a 402 at
 <a href="${serviceBase}/api/x402/info">/api/x402/info</a>.</p>
 
 <h2>Every answer is signed</h2>
@@ -1012,6 +1025,7 @@ without a human in the loop.</p>
   <ul>
     <li><strong>Paid:</strong> <code>GET /api/liveness?url=…</code> probes one endpoint now — answered or not, latency, and the terms it currently quotes, read from its own 402. $0.005.</li>
     <li><strong>Paid:</strong> <code>POST /api/route</code> takes <code>{"q": "unit conversion", "max_price": 0.01}</code> and returns ranked candidates, each probed live, each with the URL to call. $0.005, and a query that matches nothing is free.</li>
+    <li><strong>Monitored:</strong> <code>POST /api/watch</code> prepays 4–52 weekly sweeps at $0.005 each. A webhook fires on outage, recovery, and credit exhaustion; nothing is charged again without another signed payment.</li>
     <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
     <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
   </ul>
@@ -1030,17 +1044,19 @@ mainnet, refuses replays, and publishes its terms at
 price without provoking a 402.</p>
 
 <h2>What is honest about the state of this</h2>
-<p><strong>Two products are live, and they share one host.</strong> The Router
-ships as endpoints on the index's hostname rather than a subdomain of its own,
-because it reads the same catalogs and settles on the same rail — a second
-deployment would have bought a nicer URL and nothing else. It gets its own
-subdomain when it has its own reason to, not to make this page look busier.</p>
-${latest ? `<p>The other honest number: agents are arriving — <strong>${pct(latest.agent_share, 2)}</strong> of
-requests to the live service are AI agents and the share is rising — and
-<strong>not one of them has ever paid for anything</strong>. That finding, with the
-measurements behind it, is published in full at
+<p><strong>Two products are live on one Worker and three hostnames.</strong>
+The index owns <code>index.percall.dev</code>, the Router owns
+<code>${routerHost || 'its Router paths on the service host'}</code>, and this
+umbrella page owns <code>percall.dev</code>. Sharing code and data keeps the
+operation small; host routing keeps one canonical address per document.</p>
+${latest ? `<p>The other honest number: in the last verified snapshot
+(${latest.date}), agents were <strong>${pct(latest.agent_share, 2)}</strong> of requests,
+and <strong>not one organic agent payment had cleared</strong>. That measurement is
+published in full at
 <a href="${serviceBase}/report.html">the state of the agent web</a>. It is the most
-useful thing here and it is free.</p>` : ''}
+useful thing here and it is free. If analytics cannot produce a fresh snapshot,
+the weekly workflow now opens an incident instead of silently leaving this
+number looking current.</p>` : ''}
 
 <h2>Humans</h2>
 <p>The machine-callable services live here. Consulting for people — cloud

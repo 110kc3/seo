@@ -80,7 +80,7 @@ returns its own 402, and a 402 states its terms.</strong> Liveness and price com
 back in the same free request. Nobody has to pay to find out what something
 costs.</p>
 
-<h2>Two endpoints</h2>
+<h2>Three paid endpoints</h2>
 <h3><code>GET /api/liveness?url=…</code> <span class="meta">$0.005</span></h3>
 <p>Probes one endpoint now: whether it answered, how fast, and the terms it
 currently quotes — parsed from its own 402, in either x402 version.</p>
@@ -93,6 +93,15 @@ asked what exists. <strong>A query that matches nothing is free.</strong></p>
 <pre><code>curl -X POST https://router.percall.dev/api/route \
   -H 'content-type: application/json' \
   -d '{"q": "unit conversion", "max_price": 0.01}'</code></pre>
+
+<h3><code>POST /api/watch</code> <span class="meta">$0.005 per weekly sweep</span></h3>
+<p>Prepay 4–52 weekly checks of one endpoint. The first establishes a baseline;
+after that, your HTTPS webhook fires only when it changes from answering to
+failing or back again, and once when credits run out. The payer address owns the
+watch, so there is no account and no recurring mandate.</p>
+<pre><code>curl -X POST https://router.percall.dev/api/watch \
+  -H 'content-type: application/json' \
+  -d '{"url":"https://example.com/paid","webhook":"https://you.example/hook","sweeps":12}'</code></pre>
 
 <h2>History, and why it gets better</h2>
 <p>Every answer carries that endpoint's record: total probes, how many answered,
@@ -116,8 +125,9 @@ every time. A test forbids any module here from setting an outbound payment
 header at all.</p>
 
 <h2>Paying for it</h2>
-<p>Both endpoints are $0.005 in USDC on Base over HTTP 402 — no account, no
-dashboard, no human step. Read the terms without provoking a 402 at
+<p>Live probes and route queries are $0.005 each; monitoring is $0.005
+per prepaid weekly sweep. All settle in USDC on Base over HTTP 402 — no account,
+dashboard, subscription mandate, or human step. Read the terms without provoking a 402 at
 <a href="https://index.percall.dev/api/x402/info">/api/x402/info</a>.</p>
 
 <h2>Every answer is signed</h2>

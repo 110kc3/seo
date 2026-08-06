@@ -92,6 +92,7 @@ without a human in the loop.</p>
   <ul>
     <li><strong>Paid:</strong> <code>GET /api/liveness?url=…</code> probes one endpoint now — answered or not, latency, and the terms it currently quotes, read from its own 402. $0.005.</li>
     <li><strong>Paid:</strong> <code>POST /api/route</code> takes <code>{"q": "unit conversion", "max_price": 0.01}</code> and returns ranked candidates, each probed live, each with the URL to call. $0.005, and a query that matches nothing is free.</li>
+    <li><strong>Monitored:</strong> <code>POST /api/watch</code> prepays 4–52 weekly sweeps at $0.005 each. A webhook fires on outage, recovery, and credit exhaustion; nothing is charged again without another signed payment.</li>
     <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
     <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
   </ul>
@@ -110,17 +111,19 @@ mainnet, refuses replays, and publishes its terms at
 price without provoking a 402.</p>
 
 <h2>What is honest about the state of this</h2>
-<p><strong>Two products are live, and they share one host.</strong> The Router
-ships as endpoints on the index's hostname rather than a subdomain of its own,
-because it reads the same catalogs and settles on the same rail — a second
-deployment would have bought a nicer URL and nothing else. It gets its own
-subdomain when it has its own reason to, not to make this page look busier.</p>
-<p>The other honest number: agents are arriving — <strong>10.52%</strong> of
-requests to the live service are AI agents and the share is rising — and
-<strong>not one of them has ever paid for anything</strong>. That finding, with the
-measurements behind it, is published in full at
+<p><strong>Two products are live on one Worker and three hostnames.</strong>
+The index owns <code>index.percall.dev</code>, the Router owns
+<code>router.percall.dev</code>, and this
+umbrella page owns <code>percall.dev</code>. Sharing code and data keeps the
+operation small; host routing keeps one canonical address per document.</p>
+<p>The other honest number: in the last verified snapshot
+(2026-08-03), agents were <strong>10.52%</strong> of requests,
+and <strong>not one organic agent payment had cleared</strong>. That measurement is
+published in full at
 <a href="https://index.percall.dev/report.html">the state of the agent web</a>. It is the most
-useful thing here and it is free.</p>
+useful thing here and it is free. If analytics cannot produce a fresh snapshot,
+the weekly workflow now opens an incident instead of silently leaving this
+number looking current.</p>
 
 <h2>Humans</h2>
 <p>The machine-callable services live here. Consulting for people — cloud

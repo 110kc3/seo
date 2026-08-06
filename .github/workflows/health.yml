@@ -37,8 +37,45 @@ jobs:
       # endpoint is unavailable or unauthenticated rather than overwriting a good
       # history with a zero, so this loses a data point at worst, never the series.
       - name: Snapshot the traffic reading
+        id: traffic
         continue-on-error: true
         run: node scripts/snapshot-traffic.mjs
+
+      # A missing snapshot used to be silent because the last good series was
+      # deliberately preserved. Preserve it still, but make the outage visible:
+      # one durable issue while stats are down, closed automatically on recovery.
+      - name: Open traffic-stats incident
+        if: steps.traffic.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title='Traffic stats unavailable'
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,title --jq "map(select(.title == \"$title\")) | length")
+          if [ "$open" -eq 0 ]; then
+            {
+              echo "The weekly traffic snapshot could not read https://index.percall.dev/api/stats.json."
+              echo
+              echo "No zero was written: api/traffic.json still contains the last verified reading."
+              echo "Repair the Cloudflare Analytics Read token, push the Worker secret, then re-run this workflow."
+              echo
+              echo "Workflow run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            } > /tmp/traffic-stats-incident.md
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$title" --body-file /tmp/traffic-stats-incident.md
+          fi
+
+      - name: Close recovered traffic-stats incident
+        if: steps.traffic.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,title --jq '.[] | select(.title == "Traffic stats unavailable") | .number' |
+          while read -r issue; do
+            [ -n "$issue" ] && gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
+              --comment "The traffic snapshot succeeded in workflow run $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+          done
 
       # Sweep the paid watches: probe each watched endpoint, spend a credit, and
       # POST the subscriber's webhook when the state *changed*. Deliberately not

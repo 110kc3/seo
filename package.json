@@ -1,0 +1,12 @@
+{
+  "name": "ai-product-index",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/*.test.mjs"
+  }
+}

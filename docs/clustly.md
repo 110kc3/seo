@@ -116,7 +116,9 @@ User=borg
 WorkingDirectory=/home/borg/repos/seo
 EnvironmentFile=/etc/clustly-agent.env
 Environment=CLUSTLY_STATE=/home/borg/repos/seo/.clustly-state.json
-ExecStart=/usr/bin/node scripts/clustly-agent.mjs
+# The Pi's /usr/bin/node is Node 18. The repo builds and tests on Node 22, and
+# pnpm keeps this stable symlink pointed at the active Node 22 installation.
+ExecStart=/home/borg/.local/share/pnpm/node scripts/clustly-agent.mjs
 Restart=always
 RestartSec=30
 

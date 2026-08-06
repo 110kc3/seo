@@ -641,7 +641,7 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 ### Agent Readability Service (agent-readability-service)
 - url: https://kc-it.pl/services/agent-readability
 - category: other · pricing: paid · tags: geo, llms-txt, json-ld, audit
-- Done-for-you agent readability: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture and a 13-check agent-readability audit delivered for your own domain, so AI agents can find, parse and cite your product. Case study: 12 sites, average score 68.6 to 97.5. Open a [hire] issue on the repo or email 110kc3@gmail.com.
+- Fixed-scope technical agent-readability for small B2B SaaS, API and MCP sites: a $149 evidence-backed report or $499 implementation in one repository across up to five core page templates. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.
 - listing JSON: https://index.percall.dev/listings/agent-readability-service.json
 - listing page: https://index.percall.dev/l/agent-readability-service.html
 

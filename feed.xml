@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Agent Readability Service</title>
+    <link>https://index.percall.dev/l/agent-readability-service.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/agent-readability-service.html</guid>
+    <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Fixed-scope technical agent-readability for small B2B SaaS, API and MCP sites: a $149 evidence-backed report or $499 implementation in one repository across up to five core page templates. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.</description>
+  </item>
+  <item>
     <title>100Hires - AI ATS &amp; Recruitment Software</title>
     <link>https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</guid>
@@ -261,14 +269,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>20 MCP tools + 17 widgets for SAT/ISEE/SSAT/GRE/GMAT/LSAT prep. Flashcards, quizzes &amp; games. Hosted.</description>
-  </item>
-  <item>
-    <title>Agent Readability Service</title>
-    <link>https://index.percall.dev/l/agent-readability-service.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agent-readability-service.html</guid>
-    <pubDate>Wed, 29 Jul 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Done-for-you agent readability: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture and a 13-check agent-readability audit delivered for your own domain, so AI agents can find, parse and cite your product. Case study: 12 sites, average score 68.6 to 97.5. Open a [hire] issue on the repo or email 110kc3@gmail.com.</description>
   </item>
   <item>
     <title>Gieldowy Express</title>

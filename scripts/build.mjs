@@ -384,6 +384,7 @@ if (x402Stats && mcpStats) {
     x402: x402Stats,
     mcp: mcpStats,
     priceUsd: Number(rail?.route_price_atomic ?? 0) / 10 ** (rail?.asset_decimals ?? 6),
+    watchPriceUsd: Number(rail?.watch_sweep_price_atomic ?? 0) / 10 ** (rail?.asset_decimals ?? 6),
   }));
 }
 

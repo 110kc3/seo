@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-readability-service.html",
+      "url": "https://index.percall.dev/l/agent-readability-service.html",
+      "title": "Agent Readability Service",
+      "content_text": "Fixed-scope technical agent-readability for small B2B SaaS, API and MCP sites: a $149 evidence-backed report or $499 implementation in one repository across up to five core page templates. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.",
+      "date_published": "2026-08-06T00:00:00Z",
+      "tags": [
+        "other",
+        "geo",
+        "llms-txt",
+        "json-ld",
+        "audit"
+      ],
+      "external_url": "https://kc-it.pl/services/agent-readability"
+    },
+    {
       "id": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
       "url": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
       "title": "100Hires - AI ATS & Recruitment Software",
@@ -425,21 +440,6 @@
         "remote"
       ],
       "external_url": "https://vocab.voyage/mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-readability-service.html",
-      "url": "https://index.percall.dev/l/agent-readability-service.html",
-      "title": "Agent Readability Service",
-      "content_text": "Done-for-you agent readability: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture and a 13-check agent-readability audit delivered for your own domain, so AI agents can find, parse and cite your product. Case study: 12 sites, average score 68.6 to 97.5. Open a [hire] issue on the repo or email 110kc3@gmail.com.",
-      "date_published": "2026-07-29T00:00:00Z",
-      "tags": [
-        "other",
-        "geo",
-        "llms-txt",
-        "json-ld",
-        "audit"
-      ],
-      "external_url": "https://kc-it.pl/services/agent-readability"
     },
     {
       "id": "https://index.percall.dev/l/bankier-street-bets.html",

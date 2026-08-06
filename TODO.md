@@ -2,56 +2,110 @@
 
 ## ⚡ Needs Kamil — read this, skip the rest
 
-*Everything here needs a browser, a public action, or a decision only you can
-make. Nothing else in this file does. Synced from [NEXT.md](NEXT.md) §1 —
-the verified queue — on **2026-08-05**; where the changelog below disagrees with
-this list, this list is right.*
+*Everything here needs your credentials, a browser, or an external/public
+action. The implementation that does not need you continues elsewhere. Updated
+2026-08-06; where the changelog below disagrees with this list, this list wins.*
 
-### Do now
+### Urgent — restore measurement
 
-1. **Clustly — three steps, one sitting.** The code is built and tested; the
-   marketplace half is yours. Register at
-   <https://www.clustly.ai/operator> → copy the `clk_…` key (**shown once**) into
-   `/etc/clustly-agent.env`, publish `clustly/listing.json` through their
-   console, enable the systemd unit. Runbook: **[docs/clustly.md](docs/clustly.md)**.
-   Detail: [NEXT.md](NEXT.md) §1.11.
-   *Look at what you are selling first:* `node scripts/clustly-agent.mjs --dry-run --url https://example.com`
-2. **Indexation — four browser jobs, and nobody else can do them.**
-   [NEXT.md](NEXT.md) §1.8. Until the first one exists there is no way to know
-   whether any of this is indexed.
-   1. Google Search Console — verify `percall.dev` as a **Domain** property (one TXT record).
-   2. Submit `https://index.percall.dev/sitemap.xml` in GSC (73 URLs).
-   3. Bing Webmaster Tools — verify, and submit `https://percall.dev/` **by hand**
-      (the apex serves one path, so it cannot host an IndexNow key file). Bing is
-      what ChatGPT search reads.
-   4. Request indexing for `https://percall.dev/` in GSC once verified.
+1. **Replace the broken Analytics token.** In Cloudflare → My Profile → API
+   Tokens, create a token limited to **Account / Account Analytics / Read** for
+   the account that owns `ai-product-index`. Put its value in the GitHub
+   repository secret `CF_ANALYTICS_TOKEN`; do not paste it into an issue or this
+   file.
+2. Push and verify it:
+
+   ```bash
+   gh workflow run cf-admin -f action=push-secrets
+   gh run watch
+   gh workflow run cf-admin -f action=stats-probe
+   gh run watch
+   curl -fsS https://index.percall.dev/api/stats.json
+   gh workflow run health
+   ```
+
+   Success means the curl returns `"ok": true` and the health run closes the
+   exact-title issue **Traffic stats unavailable**. The workflow now opens that
+   incident automatically whenever a snapshot fails, while preserving the last
+   verified series instead of writing a false zero.
+
+### Make the human offer buyable
+
+3. **Create two Stripe Payment Links** in the KC-IT Stripe account:
+
+   - `Agent-readability report` — **$149 USD**, one-time, quantity fixed at 1.
+     Collect buyer email and a required `Website URL` custom field.
+   - `Done-for-you agent-readability implementation` — **$499 USD**, one-time,
+     quantity fixed at 1. Collect buyer email plus required `Website URL` and
+     `Repository or platform` fields.
+
+   Do not promise automatic fulfilment or recurring service. Set the
+   confirmation message to say Kamil will confirm scope and delivery date by
+   email; refund rather than silently expanding a site that does not fit.
+
+   Send the two `https://buy.stripe.com/...` URLs back here. They must replace
+   the temporary `mailto:` order links in the `personal-page` repo:
+   `services/agent-readability.html`, `.json`, `.md`, and the Agent Skill.
+   The public prices and exact scopes are already live in those files.
+
+4. **Configure honest response signing on the kc-it.pl Pages project.** Confirm
+   the Pages project name, then run this from a terminal authenticated to the
+   correct Cloudflare account:
+
+   ```bash
+   node --input-type=module -e 'const k=await crypto.subtle.generateKey("Ed25519",true,["sign","verify"]);const j=await crypto.subtle.exportKey("jwk",k.privateKey);process.stdout.write(Buffer.concat([Buffer.from(j.d,"base64url"),Buffer.from(j.x,"base64url")]).toString("base64"))' |
+     npx wrangler pages secret put SIGNING_KEY --project-name PERSONAL_PAGE_PROJECT
+   ```
+
+   Replace `PERSONAL_PAGE_PROJECT` first. Re-deploy the Pages project, then
+   verify that
+   `https://kc-it.pl/.well-known/http-message-signatures-directory` returns 200
+   and that `curl -I https://kc-it.pl/services/agent-readability` shows
+   `content-digest`, `signature-input`, and `signature`. Until the secret exists,
+   the directory deliberately returns 404 instead of pretending unsigned
+   content is verifiable.
+
+### Distribution — do in this order
+
+5. **Indexation:**
+
+   1. Google Search Console — verify `percall.dev` and `kc-it.pl` as Domain
+      properties.
+   2. Submit `https://index.percall.dev/sitemap.xml` and
+      `https://kc-it.pl/sitemap.xml`.
+   3. Bing Webmaster Tools — verify both; submit `https://percall.dev/` and
+      `https://kc-it.pl/services/agent-readability` manually.
+   4. Request indexing for both sales/front-door URLs in GSC.
+
+6. **Personal outreach is the 30-day sales test.** Use the ICP, tracker fields,
+   two-message sequence and stop gates in
+   `vault 40-projects/x402-scale-up/2026-08-06-commercial-reset.md`. Send 10
+   genuinely personalized messages per weekday until 50 qualified founders have
+   been contacted. Do not buy a list or automate the sending. Record replies,
+   calls and payments, not opens.
+
+7. **Clustly — one small channel experiment.** Register at
+   <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
+   `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
+   Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
+   their managed wallet holds earnings until swept. Stop the unit and listing
+   after 30 days if it produces no qualified order.
 
 ### Held — do not do these yet
 
-- **Show HN — held until ~25 Aug.** Your call on 2026-08-02, and it was right:
-  the post's whole claim is a measured negative result, and 24 Aug is the first
-  day the 30-day stats window is actually full. Reasoning and the four conditions
-  to check before posting: [NEXT.md](NEXT.md) §1.1. Draft: `vault 40-projects/x402-scale-up/show-hn-draft.md`.
-
-### Decide when you get to it
-
-- **Clustly custody.** Their agents are *managed* wallets — Clustly holds the
-  signing key under a no-theft policy pinned to your treasury, and self-custody
-  is not offered. Receive-side only and no key in this repo is involved, but
-  earnings sit with a third party until swept. Read before registering.
-- **The four unpicked options** from 2026-08-05 (Track A, `market.percall.dev`,
-  a full escrow marketplace, freezing x402 spend). Reasoning is in the vault —
-  `40-projects/x402-scale-up/clustly.md` — because it is commercial, and this
-  repo is public.
+- **Show HN — held until 25 Aug or later, and only after analytics is healthy.**
+  The post is a measured negative result; it needs a complete 30-day window.
+  Draft: `vault 40-projects/x402-scale-up/show-hn-draft.md`.
+- **No new x402 endpoint, directory feature, paid listing work, or marketplace
+  build for 30 days.** The gate is commercial evidence, not another deploy.
+- **No paid acquisition.** First require at least 5 positive replies, 2 sales
+  calls and 1 paid human order from the 50-lead outreach test.
 
 ### Optional, low urgency
 
-- **Stripe machine-payments access** — request it now because it moves slowly,
-  not because you need it.
-- **Cloudflare Monetization Gateway waitlist** — browser form; being on
-  Cloudflare is the only prerequisite.
-- **Delete `GLAMA_API_KEY`** — settled: nothing needs it. Don't leave an unread
-  credential lying around.
+- Stripe machine-payments access and the Cloudflare Monetization Gateway
+  waitlist can remain applications; neither is needed for the two card offers.
+- Delete `GLAMA_API_KEY`; nothing uses it.
 
 ---
 

@@ -9,9 +9,8 @@ info:
 
     WRITE PATHS (autonomous, via GitHub issues on https://github.com/110kc3/seo):
     "[register] ..." = new listing, "[update] ..." = full replacement by the
-    original submitter, "[upgrade] ..." = paid tier change (live up to payment
-    verification, which rejects with code payments_not_enabled until rails are
-    configured). Bodies are JSON conforming to https://index.percall.dev/api/schema.json.
+    original submitter, "[upgrade] ..." = paid tier change with on-chain receipt
+    verification. Bodies are JSON conforming to https://index.percall.dev/api/schema.json.
     Full protocol: https://index.percall.dev/llms.txt · MCP server: mcp/server.mjs in the repo.
 
     HEALTH: listing URLs are re-checked weekly; 3 consecutive failures delist
@@ -26,8 +25,7 @@ info:
 
     TIERS: verified and featured exist in the schema and index ranking; the tier
     field is server-set, so the read API does not change shape when prices
-    change. While no receiving address is configured, paid paths reject with code
-    payments_not_enabled.
+    change. Current machine-payment terms are published at /api/x402/info.
   contact:
     url: https://github.com/110kc3/seo
 servers:
@@ -300,11 +298,9 @@ paths:
       operationId: auditUrl
       summary: Agent-readability audit of one URL (paid, x402)
       description: |
-        Scores how readable a site is to AI agents across 13 weighted checks
-        (llms.txt presence and shape, llms-full.txt, robots.txt, AI-crawler
-        posture, sitemap, schema.org JSON-LD, title/description, Open Graph,
-        canonical, machine-readable alternates, agent card, HTTPS) and returns
-        ranked next_steps.
+        Scores how readable a site is to AI agents across the current 20-check
+        set: 13 established web signals plus seven lower-weight 2026 discovery
+        surfaces. Returns per-check detail and ranked next_steps.
 
         Payment is x402 over HTTP, in either protocol version — one 402 answers
         both. v2 clients read the base64 PAYMENT-REQUIRED header, retry with
@@ -569,3 +565,75 @@ paths:
           description: Body too large.
         "503":
           description: Catalog unavailable, or payment rails not configured.
+
+  /api/watch:
+    servers:
+      - url: https://router.percall.dev
+    post:
+      operationId: watchEndpoint
+      summary: Prepay weekly endpoint monitoring with state-change webhooks (paid, x402)
+      description: |
+        Buys 4–52 weekly sweeps of one public endpoint. Each sweep spends one
+        prepaid credit; nothing is charged later without a new signed payment.
+        The payer address from settlement owns the watch, so there is no account.
+
+        The first sweep establishes a baseline. Later webhooks fire only when the
+        endpoint changes from answering to failing or back again, and once when
+        credits are exhausted. Paying again for the same URL from the same wallet
+        adds credits and may update the webhook.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url, webhook, sweeps]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  pattern: "^https?://"
+                  description: Public endpoint to monitor; private and local hosts are rejected before charging.
+                webhook:
+                  type: string
+                  format: uri
+                  pattern: "^https://"
+                  description: Public HTTPS destination for state-change alerts.
+                sweeps:
+                  type: integer
+                  minimum: 4
+                  maximum: 52
+                  default: 12
+                  description: Weekly sweeps to prepay.
+      responses:
+        "200":
+          description: Watch created or topped up; PAYMENT-RESPONSE carries the settlement receipt.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, watching, webhook, credits, owner, cadence]
+                properties:
+                  ok: { type: boolean }
+                  watching: { type: string, format: uri }
+                  webhook: { type: string, format: uri }
+                  credits: { type: integer }
+                  topped_up: { type: boolean }
+                  owner: { type: string, description: Payer address derived from settlement. }
+                  cadence: { type: string, enum: [weekly] }
+                  alerts_on: { type: string }
+                  payload: { type: object, description: Example webhook payload shape. }
+                  note: { type: string }
+                  terms: { type: string, format: uri }
+        "400":
+          description: Invalid JSON, URL, webhook, or sweep count. Refused before charging.
+        "402":
+          description: Payment required, terms mismatched, authorization replayed, or settlement failed.
+        "405":
+          description: Method not allowed — this endpoint is POST.
+        "413":
+          description: Body too large.
+        "502":
+          description: Settlement did not identify a payer.
+        "503":
+          description: Payment rail unavailable, or payment settled but the watch could not be stored.

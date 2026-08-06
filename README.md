@@ -4,7 +4,7 @@ A machine-readable directory ("SEO for AIs") where **AI products register themse
 
 > 🟢 **Live, on real money, and proven.** https://index.percall.dev is deployed with the payment rail on **mainnet** — `POST /api/audit` quotes $0.05 in USDC on Base and settles it to the receiving address. The rail completed its first end-to-end settlement on 2026-07-29: paid by the stock `x402-fetch` client, settled on chain, replay refused, recorded on the revenue dashboard. Details in **[DEPLOY.md](DEPLOY.md)** → Phase 3.3. Migrated the same day from `index.kc-it.pl`, which stays attached and answers a method-preserving 308 — percall.dev is the umbrella domain for the paid-services portfolio this is becoming.
 >
-> 🟢 **Two products, one Worker, three hostnames** (since 2026-08-03). `percall.dev` serves the portfolio page; `index.percall.dev` is the AI Product Index; `router.percall.dev` is **The Router** — `GET /api/liveness` and `POST /api/route`, $0.005 each, which find machine-payable endpoints worth calling *without ever paying for anything*. Both settled real money on Base mainnet on 2026-08-03. Each host owns its own paths and 308s everything else, so there is exactly one address per document.
+> 🟢 **Two products, one Worker, three hostnames** (since 2026-08-03). `percall.dev` serves the portfolio page; `index.percall.dev` is the AI Product Index; `router.percall.dev` is **The Router** — live probing and routing at $0.005 per call, plus prepaid weekly watches at $0.005 per sweep. The one-shot Router endpoints settled real money on Base mainnet on 2026-08-03; watch delivery was subsequently proven through outage and recovery. Each host owns its own paths and 308s everything else, so there is exactly one address per document.
 
 **Documentation:** [NEXT.md](NEXT.md) — **what's outstanding, and whose turn it is** · [DEPLOY.md](DEPLOY.md) — how to get it live, phase by phase · [ARCHITECTURE.md](ARCHITECTURE.md) — how it works and why · [TODO.md](TODO.md) — the changelog, and the reasoning behind each change
 
@@ -21,7 +21,7 @@ What a listed product gets: a crawlable HTML page with schema.org JSON-LD (`/l/<
 
 ## How it works
 
-Static build in the repo root, served by a **Cloudflare Worker with static assets** (`wrangler.toml` → `worker/index.js`). Zero runtime dependencies; plain-Node scripts. Node ≥ 18.
+Static build in the repo root, served by a **Cloudflare Worker with static assets** (`wrangler.toml` → `worker/index.js`). Zero runtime dependencies; plain-Node scripts. Build and test with Node ≥ 22 (the same version CI uses).
 
 The Worker exists for the three things GitHub Pages structurally could not do:
 
@@ -43,6 +43,7 @@ That last row is the point: before the migration there was no way to tell whethe
 - `POST /api/audit` — **paid**. The same 20 checks plus, for each failure, why it failed, a fix ranked by weight, and a paste-ready code snippet with the caller's own origin substituted in. Validates the target with `urlError()` **before** charging, then gates on x402. `audit.js`.
 - `GET /api/liveness?url=…` — **paid, on `router.percall.dev`.** Probes one machine-payable endpoint right now: whether it answered, how fast, and the payment terms it currently quotes, parsed from its own 402 in either x402 version. What is sold is *freshness* — the catalogs and their weekly aggregates stay free, but the x402 Bazaar keeps an entry for 30 days after its last settlement, so "listed" and "answers" are different facts and only one was published anywhere. `route.js`.
 - `POST /api/route` — **paid, on `router.percall.dev`.** `{"q": "unit conversion", "max_price": 0.01}` → candidates ranked by the catalog's own search, each probed live, each with the terms it quotes now and the URL to call. Endpoints that did not answer are reported rather than dropped, and a query that matches nothing is not charged for. `route.js`.
+- `POST /api/watch` — **paid, on `router.percall.dev`.** Prepay 4–52 weekly sweeps of one endpoint at $0.005 each. The payer address owns the watch; the webhook fires only on an answering→failing or failing→answering edge, and once when credits run out. There is no account, subscription mandate, or later charge. `watch.js`.
 - Both carry the endpoint's **history** — probes, answered, consecutive failures, and how many of the last 30 observations answered — accumulated from live probes rather than a crawl, so the answer improves the more the service is used. Neither ever pays: an unpaid probe of a paid endpoint returns its 402, and a 402 states its terms, so **the caller pays the endpoint directly from its own wallet**. This deployment holds no key that could sign a transfer, and a test forbids any module under `worker/` from setting an outbound payment header.
 - `GET /api/stats.json` — 30-day request counters by inferred client type, path bucket and **hostname**, plus `agent_share`. Reads the Analytics Engine dataset over the SQL API; reports `stats_not_enabled` without credentials. `stats.js`.
 - `GET /api/x402/info` — the active rail's payment terms and the protocol versions accepted, so an agent can read the price without provoking a 402.
@@ -142,7 +143,7 @@ Going live on mainnet was exactly that: the check above, the asset eyeballed on 
 
 Bazaar cataloging is not automatic just because the facilitator is CDP: the listing is built from discovery metadata attached to a **settlement**, so an endpoint can take real money indefinitely and never be listed. `/api/audit` therefore publishes an `outputSchema` with `discoverable: true` (v1) and the same object under `extensions.bazaar` (v2) — a shape read off the live catalog rather than the docs. `node scripts/bazaar-check.mjs` answers whether it worked.
 
-**Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. `audit_price_atomic` covers `/api/audit`; `verified_tier_price_atomic` and `featured_tier_price_atomic` cover `[upgrade]`. Agents can read the live terms at `/api/x402/info` without provoking a 402.
+**Prices** are atomic units — USDC has 6 decimals, so `50000` = $0.05. The full audit is $0.05; one check, one live probe, one route query, and one weekly watch sweep are each $0.005; verified and featured listing tiers are $5 and $25. Agents can read the live terms at `/api/x402/info` without provoking a 402.
 
 **Card (humans)** — a Stripe payment link in `payments.stripe_payment_link`; `rail: "card"` upgrades answer `manual_reconciliation` and are flipped with `scripts/set-tier.mjs`. Stripe's own x402 product settles to a Stripe balance in fiat but is private preview behind an access request; adopting it later is a `facilitator_url` change, not a rewrite.
 

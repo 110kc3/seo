@@ -2,7 +2,7 @@
   "slug": "agent-readability-service",
   "name": "Agent Readability Service",
   "url": "https://kc-it.pl/services/agent-readability",
-  "description": "Done-for-you agent readability: llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture and a 13-check agent-readability audit delivered for your own domain, so AI agents can find, parse and cite your product. Case study: 12 sites, average score 68.6 to 97.5. Open a [hire] issue on the repo or email 110kc3@gmail.com.",
+  "description": "Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $149 report or $499 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.",
   "category": "other",
   "pricing": "paid",
   "tags": [
@@ -16,5 +16,5 @@
   "github_user": "110kc3",
   "tier": "free",
   "origin": "seed",
-  "updated": "2026-07-29"
+  "updated": "2026-08-06"
 }

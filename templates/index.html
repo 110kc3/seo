@@ -183,6 +183,7 @@ settlement, so "listed" and "answers" are not the same fact.</p>
 <ul>
   <li><code>GET {{ROUTER}}/api/liveness?url=…</code> — probe one endpoint now: whether it answered, how fast, and the terms it currently quotes, read from its own 402.</li>
   <li><code>POST {{ROUTER}}/api/route</code> — ranked candidates for a task, each probed live, each with the URL to call. Works over the x402 catalogue or the MCP one.</li>
+  <li><code>POST {{ROUTER}}/api/watch</code> — prepay 4–52 weekly sweeps of one endpoint; a webhook fires on an outage, recovery, and credit exhaustion. $0.005 per sweep, with no subscription mandate.</li>
   <li><a href="api/x402/avoid.json">Endpoints that failed a probe</a> — free, per catalogue. <a href="api/mcp/avoid.json">MCP list</a>.</li>
 </ul>
 <p><strong>It never pays and never proxies.</strong> It hands you the URL and the
@@ -190,10 +191,10 @@ terms; you pay the endpoint directly from your own wallet, so the operator you
 pay sees you rather than us.</p>
 
 <h2 id="for-humans">For humans — make your product agent-readable</h2>
-<p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? I deliver <strong>llms.txt + schema.org JSON-LD + an agent-readability audit</strong> for your site, done for you. The <a href="https://kc-it.pl/services/agent-readability">service page</a> has the offer and the case study — 12 sites swept, average score 68.6 → 97.5, nine at 100/100. Open a <a href="https://github.com/{{REPO}}/issues/new?template=hire.yml">[hire] issue</a> or email <a href="mailto:110kc3@gmail.com">110kc3@gmail.com</a>.</p>
+<p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? The human service has two fixed-scope offers: a <strong>$149 report</strong> and a <strong>$499 done-for-you implementation</strong>. The <a href="https://kc-it.pl/services/agent-readability">service page</a> states exactly what is and is not included; the historical case study is labelled against the 13-check v1 audit rather than presented as a current 20-check result.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Listings are free and stay free. The <a href="#audit">audit endpoint</a> is paid per call over x402. Paid tiers (<code>verified</code>, <code>featured</code>) rank above free and get a badge; the upgrade protocol verifies x402 receipts against the facilitator and rejects with <code>payments_not_enabled</code> until a receiving address is configured. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
+<p>Listings and the A–F score stay free. The full <a href="#audit">20-check audit</a> is $0.05; a single check, live probe, route query, or weekly watch sweep is $0.005. Watches are prepaid in bundles of 4–52 sweeps. Paid listing tiers are $5 (<code>verified</code>) and $25 (<code>featured</code>), rank above free, and get a badge. All machine prices settle in USDC on Base over x402; live terms are at <a href="api/x402/info">/api/x402/info</a>. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
 
 <footer>Part of <a href="https://{{APEX}}/">{{APEX}}</a>, the umbrella for these paid services ·
 <a href="https://github.com/{{REPO}}">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>

@@ -31,6 +31,8 @@ node_modules
 /wrangler.toml
 /package.json
 /package-lock.json
+/AGENTS.md
+/CLAUDE.md
 /site.config.json
 # Registry metadata and the stdio server's build spec — read by Glama off the
 # GitHub repo, never served by the site.
@@ -48,4 +50,3 @@ node_modules
 # KV namespace. The asset directory is the repo root, so without this line a
 # deploy from a machine that has ever run `wrangler dev` publishes it.
 /.wrangler
-
