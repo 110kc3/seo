@@ -33,9 +33,9 @@ action. The implementation that does not need you continues elsewhere. Updated
 
 3. **Create two Stripe Payment Links** in the KC-IT Stripe account:
 
-   - `Agent-readability report` — **$149 USD**, one-time, quantity fixed at 1.
+   - `Agent-readability report` — **$49 USD**, one-time, quantity fixed at 1.
      Collect buyer email and a required `Website URL` custom field.
-   - `Done-for-you agent-readability implementation` — **$499 USD**, one-time,
+   - `Done-for-you agent-readability implementation` — **$199 USD**, one-time,
      quantity fixed at 1. Collect buyer email plus required `Website URL` and
      `Repository or platform` fields.
 

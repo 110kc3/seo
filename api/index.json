@@ -1,6 +1,6 @@
 {
   "count": 40,
-  "updated": "2026-08-06",
+  "updated": "2026-08-07",
   "listings": [
     {
       "slug": "100hires-ai-ats-recruitment-software",
@@ -774,7 +774,7 @@
       "slug": "agent-readability-service",
       "name": "Agent Readability Service",
       "url": "https://kc-it.pl/services/agent-readability",
-      "description": "Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $149 report or $499 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.",
+      "description": "Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $49 report or $199 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.",
       "category": "other",
       "pricing": "paid",
       "tags": [
@@ -788,7 +788,7 @@
       "github_user": "110kc3",
       "tier": "free",
       "origin": "seed",
-      "updated": "2026-08-06"
+      "updated": "2026-08-07"
     },
     {
       "slug": "ai-product-index",
