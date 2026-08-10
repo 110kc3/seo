@@ -1,24 +1,24 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-03",
-  "remote_endpoints": 10248,
-  "hosts": 7670,
+  "fetched": "2026-08-10",
+  "remote_endpoints": 10865,
+  "hosts": 8246,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 64531,
-    "excluded_superseded": 44742,
-    "excluded_inactive": 207,
-    "excluded_packages_only": 9668,
+    "registry_records_seen": 69263,
+    "excluded_superseded": 48420,
+    "excluded_inactive": 241,
+    "excluded_packages_only": 10076,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 9508,
+    "streamable-http": 10125,
     "sse": 740
   },
   "by_auth": {
-    "none": 8246,
-    "required": 2002
+    "none": 8740,
+    "required": 2125
   },
   "top_hosts": [
     {
@@ -43,7 +43,7 @@
     },
     {
       "host": "mcp.apify.com",
-      "endpoints": 43
+      "endpoints": 47
     },
     {
       "host": "mcp.olyport.com",

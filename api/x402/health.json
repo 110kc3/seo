@@ -1,22 +1,29 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-03",
-  "catalog_size": 14734,
-  "cursor": 2,
+  "probed_at": "2026-08-10",
+  "catalog_size": 14403,
+  "cursor": 3,
   "slice": 600,
   "stride": 24,
   "runs_per_full_pass": 24,
   "window": {
     "probed": 600,
-    "ok": 589,
-    "unreachable": 11,
+    "ok": 588,
+    "unreachable": 12,
     "untestable": 0
   },
-  "answered_share": 0.9817,
-  "confirmed_unreachable": 0,
-  "tracked_unreachable": 25,
+  "answered_share": 0.98,
+  "confirmed_unreachable": 1,
+  "tracked_unreachable": 30,
   "unreachable": [
+    {
+      "url": "https://staging.miven.dev/p/:slug/:var1",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-08-01",
+      "last_checked": "2026-08-10"
+    },
     {
       "url": "https://api.socialfetch.dev/v1/github/profiles/:handle/contributions",
       "reason": "HTTP 500",
@@ -39,22 +46,8 @@
       "last_checked": "2026-08-01"
     },
     {
-      "url": "https://clonecho.builda.company/x402/s/open5e-magic-items",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
       "url": "https://cryptyx.ai/api/taker-flow",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://gateway.apiosk.com/weatherapi/forecast",
-      "reason": "HTTP 503",
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
@@ -102,13 +95,6 @@
       "last_checked": "2026-08-01"
     },
     {
-      "url": "https://staging.miven.dev/p/:slug/:var1",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
       "url": "https://vape-x402.vapex402.workers.dev/data/protocol",
       "reason": "HTTP 502",
       "misses": 1,
@@ -125,27 +111,6 @@
     {
       "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.the402.ai/v1/jobs/job_d9a59944e86347a2",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.the402.ai/v1/postings/post_e658a0b270a748fd/bids",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.the402.ai/v1/services/svc_a844123f03b8401a/purchase",
-      "reason": "HTTP 503",
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
@@ -172,13 +137,6 @@
       "last_checked": "2026-08-03"
     },
     {
-      "url": "https://gateway.apiosk.com/mapbox/static-image",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
       "url": "https://skim402.com/api/v2/signal/entity-formations/latest",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -191,6 +149,83 @@
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/cnpj/empresa/:cnpj/socios",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://coingecko.use.x402atlas.com/price",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://defillama.use.x402atlas.com/fee-summary",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://hyperliquid-predict.use.x402atlas.com/settled",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://instagram.use.x402atlas.com/profile/:username",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://marketdata.use.x402atlas.com/ema",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://organiccryptoyyc.com:8443/v1/peaq/machine-verify/:idOrAddress",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://places.use.x402atlas.com/place",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://recoup-api.vercel.app/api/x402/image/generate",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://straits.live/api/premium/brief",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://twitter.use.x402atlas.com/community-tweets",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-10",
+      "last_checked": "2026-08-10"
     }
   ]
 }
