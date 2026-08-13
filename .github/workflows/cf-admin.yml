@@ -24,8 +24,24 @@ on:
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
           - attach-domain # attach `hostname` to the Worker as a custom domain
+          - pages-setup   # create a Git-backed Pages project and attach `hostname`
       hostname:
-        description: Hostname for attach-domain (e.g. index.percall.dev)
+        description: Hostname for attach-domain or pages-setup
+        required: false
+        default: ""
+        type: string
+      project_name:
+        description: New Pages project name for pages-setup
+        required: false
+        default: ""
+        type: string
+      source_project:
+        description: Existing Pages project whose Git connection should be reused
+        required: false
+        default: ""
+        type: string
+      root_dir:
+        description: Repository directory to publish as the Pages site root
         required: false
         default: ""
         type: string
@@ -264,6 +280,145 @@ jobs:
             exit 1
           fi
           echo "::notice::attached $host to ai-product-index"
+
+      # A repository can back multiple Cloudflare Pages projects. This creates a
+      # focused static site from one directory while reusing an existing
+      # project's private-GitHub connection. The operation is intentionally
+      # create-only: an existing project must already match the requested source
+      # and build configuration, so a typo cannot silently repoint a live site.
+      - name: Create a Git-backed Pages project and attach its domain
+        if: inputs.action == 'pages-setup'
+        env:
+          PAGES_HOSTNAME: ${{ inputs.hostname }}
+          PAGES_PROJECT: ${{ inputs.project_name }}
+          PAGES_SOURCE_PROJECT: ${{ inputs.source_project }}
+          PAGES_ROOT_DIR: ${{ inputs.root_dir }}
+        run: |
+          set -euo pipefail
+          base=https://api.cloudflare.com/client/v4
+          api() { curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+                       -H "Content-Type: application/json" "$@"; }
+
+          project="${PAGES_PROJECT:?project_name is required for pages-setup}"
+          source_project="${PAGES_SOURCE_PROJECT:?source_project is required for pages-setup}"
+          root_dir="${PAGES_ROOT_DIR:?root_dir is required for pages-setup}"
+          hostname="${PAGES_HOSTNAME:?hostname is required for pages-setup}"
+
+          api "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$source_project" \
+            > /tmp/source-project.json
+          SOURCE_PROJECT="$source_project" node <<'NODE'
+          const fs = require("node:fs");
+          const envelope = JSON.parse(fs.readFileSync("/tmp/source-project.json", "utf8"));
+          if (!envelope.success || !envelope.result?.source) {
+            console.error(`Could not read Git source from ${process.env.SOURCE_PROJECT}: ${JSON.stringify(envelope.errors || [])}`);
+            process.exit(1);
+          }
+          NODE
+
+          api "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$project" \
+            > /tmp/target-project.json
+          exists=$(node -e '
+            const j=JSON.parse(require("fs").readFileSync("/tmp/target-project.json","utf8"));
+            process.stdout.write(j.success && j.result ? "true" : "false");')
+
+          if [ "$exists" != "true" ]; then
+            PAGES_PROJECT="$project" PAGES_ROOT_DIR="$root_dir" \
+              node > /tmp/create-pages-project.json <<'NODE'
+          const fs = require("node:fs");
+          const sourceEnvelope = JSON.parse(fs.readFileSync("/tmp/source-project.json", "utf8"));
+          const source = structuredClone(sourceEnvelope.result.source);
+          source.config = {
+            ...source.config,
+            deployments_enabled: true,
+            path_excludes: [],
+            path_includes: [`${process.env.PAGES_ROOT_DIR}/*`],
+            pr_comments_enabled: false,
+            preview_branch_excludes: [],
+            preview_branch_includes: [],
+            preview_deployment_setting: "none",
+            production_branch: "main",
+            production_deployments_enabled: true,
+          };
+          const body = {
+            name: process.env.PAGES_PROJECT,
+            production_branch: "main",
+            build_config: {
+              build_caching: false,
+              build_command: "exit 0",
+              destination_dir: ".",
+              root_dir: process.env.PAGES_ROOT_DIR,
+            },
+            source,
+          };
+          process.stdout.write(JSON.stringify(body));
+          NODE
+            api -X POST "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects" \
+              --data-binary @/tmp/create-pages-project.json > /tmp/target-project.json
+          fi
+
+          PAGES_PROJECT="$project" PAGES_SOURCE_PROJECT="$source_project" \
+            PAGES_ROOT_DIR="$root_dir" node <<'NODE'
+          const fs = require("node:fs");
+          const envelope = JSON.parse(fs.readFileSync("/tmp/target-project.json", "utf8"));
+          const sourceEnvelope = JSON.parse(fs.readFileSync("/tmp/source-project.json", "utf8"));
+          if (!envelope.success || !envelope.result) {
+            console.error(`Pages project setup failed: ${JSON.stringify(envelope.errors || [])}`);
+            process.exit(1);
+          }
+          const project = envelope.result;
+          const expectedSource = sourceEnvelope.result.source;
+          const failures = [];
+          if (project.name !== process.env.PAGES_PROJECT) failures.push("project name");
+          if (project.source?.type !== expectedSource.type || project.source?.config?.repo_id !== expectedSource.config?.repo_id) failures.push("source repository");
+          if (project.source?.config?.production_branch !== "main") failures.push("production branch");
+          if (project.source?.config?.production_deployments_enabled !== true) failures.push("automatic production deployments");
+          if (!project.source?.config?.path_includes?.includes(`${process.env.PAGES_ROOT_DIR}/*`)) failures.push("build watch path");
+          if (project.build_config?.root_dir !== process.env.PAGES_ROOT_DIR) failures.push("root directory");
+          if (project.build_config?.destination_dir !== ".") failures.push("destination directory");
+          if (failures.length) {
+            console.error(`Existing Pages project does not match: ${failures.join(", ")}`);
+            process.exit(1);
+          }
+          console.log(`Pages project ready: ${project.name} (${project.subdomain})`);
+          NODE
+
+          api "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$project/domains/$hostname" \
+            > /tmp/pages-domain.json
+          domain_exists=$(node -e '
+            const j=JSON.parse(require("fs").readFileSync("/tmp/pages-domain.json","utf8"));
+            process.stdout.write(j.success && j.result ? "true" : "false");')
+          if [ "$domain_exists" != "true" ]; then
+            HOSTNAME="$hostname" node -e '
+              process.stdout.write(JSON.stringify({name: process.env.HOSTNAME}));' \
+              > /tmp/create-pages-domain.json
+            api -X POST \
+              "$base/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$project/domains" \
+              --data-binary @/tmp/create-pages-domain.json > /tmp/pages-domain.json
+          fi
+
+          PAGES_HOSTNAME="$hostname" node <<'NODE'
+          const fs = require("node:fs");
+          const envelope = JSON.parse(fs.readFileSync("/tmp/pages-domain.json", "utf8"));
+          if (!envelope.success || !envelope.result) {
+            console.error(`Pages domain setup failed: ${JSON.stringify(envelope.errors || [])}`);
+            process.exit(1);
+          }
+          if (envelope.result.name !== process.env.PAGES_HOSTNAME) {
+            console.error(`Cloudflare returned unexpected domain ${envelope.result.name}`);
+            process.exit(1);
+          }
+          console.log(`Pages domain ${envelope.result.name}: ${envelope.result.status}`);
+          NODE
+
+          {
+            echo "### Cloudflare Pages project"
+            echo
+            echo "- Project: \`$project\`"
+            echo "- Git source: \`$source_project\`"
+            echo "- Published root: \`$root_dir\`"
+            echo "- Build watch path: \`$root_dir/*\`"
+            echo "- Domain: \`$hostname\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # ---------------------------------------------------------------------
       # Managed robots.txt / AI-crawler blocking.
