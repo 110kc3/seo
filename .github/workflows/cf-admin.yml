@@ -428,14 +428,21 @@ jobs:
 
           api "$base/zones/$zone/dns_records?type=CNAME&name=$hostname" \
             > /tmp/pages-dns.json
-          dns_state=$(
-            DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node <<'NODE'
+          dns_access=$(node -e '
+            const j=JSON.parse(require("fs").readFileSync("/tmp/pages-dns.json","utf8"));
+            if(j.success) process.stdout.write("available");
+            else if((j.errors||[]).some(e=>e.code===10000)) process.stdout.write("manual");
+            else {
+              console.error(`Could not read Pages DNS: ${JSON.stringify(j.errors||[])}`);
+              process.exit(1);
+            }')
+          if [ "$dns_access" = "manual" ]; then
+            echo "::warning::The token has no DNS permission. Add proxied CNAME $hostname -> $pages_target in the Cloudflare dashboard."
+          else
+            dns_state=$(
+              DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node <<'NODE'
           const fs = require("node:fs");
           const envelope = JSON.parse(fs.readFileSync("/tmp/pages-dns.json", "utf8"));
-          if (!envelope.success) {
-            console.error(`Could not read the Pages DNS record: ${JSON.stringify(envelope.errors || [])}`);
-            process.exit(1);
-          }
           const records = envelope.result || [];
           if (records.length > 1 || (records[0] && records[0].content !== process.env.DNS_TARGET)) {
             console.error(`Refusing to replace a conflicting DNS record for ${process.env.DNS_HOSTNAME}`);
@@ -443,19 +450,19 @@ jobs:
           }
           process.stdout.write(records.length === 1 ? "exists" : "missing");
           NODE
-          )
-          if [ "$dns_state" = "missing" ]; then
-            DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node -e '
-              process.stdout.write(JSON.stringify({
-                type: "CNAME",
-                name: process.env.DNS_HOSTNAME,
-                content: process.env.DNS_TARGET,
-                proxied: true,
-                ttl: 1,
-              }));' > /tmp/create-pages-dns.json
-            api -X POST "$base/zones/$zone/dns_records" \
-              --data-binary @/tmp/create-pages-dns.json > /tmp/pages-dns.json
-            DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node <<'NODE'
+            )
+            if [ "$dns_state" = "missing" ]; then
+              DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node -e '
+                process.stdout.write(JSON.stringify({
+                  type: "CNAME",
+                  name: process.env.DNS_HOSTNAME,
+                  content: process.env.DNS_TARGET,
+                  proxied: true,
+                  ttl: 1,
+                }));' > /tmp/create-pages-dns.json
+              api -X POST "$base/zones/$zone/dns_records" \
+                --data-binary @/tmp/create-pages-dns.json > /tmp/pages-dns.json
+              DNS_HOSTNAME="$hostname" DNS_TARGET="$pages_target" node <<'NODE'
           const fs = require("node:fs");
           const envelope = JSON.parse(fs.readFileSync("/tmp/pages-dns.json", "utf8"));
           if (!envelope.success || envelope.result?.type !== "CNAME" || envelope.result?.name !== process.env.DNS_HOSTNAME || envelope.result?.content !== process.env.DNS_TARGET) {
@@ -463,8 +470,9 @@ jobs:
             process.exit(1);
           }
           NODE
+            fi
+            echo "Pages DNS ready: $hostname -> $pages_target"
           fi
-          echo "Pages DNS ready: $hostname -> $pages_target"
 
           {
             echo "### Cloudflare Pages project"
@@ -475,6 +483,7 @@ jobs:
             echo "- Build watch path: \`$root_dir/*\`"
             echo "- Domain: \`$hostname\`"
             echo "- DNS target: \`$pages_target\`"
+            echo "- DNS management: \`$dns_access\`"
           } >> "$GITHUB_STEP_SUMMARY"
 
       # ---------------------------------------------------------------------
