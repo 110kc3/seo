@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/cap.html",
+      "url": "https://index.percall.dev/l/cap.html",
+      "title": "Cap",
+      "content_text": "Add a spend cap to your AI route. One consume() call before a model request. Default 20 units per user per day. Denied requests return HTTP 402. No Stripe, no dashboard, no plan builder.",
+      "date_published": "2026-08-16T00:00:00Z",
+      "tags": [
+        "api",
+        "spend-cap",
+        "credits",
+        "rate-limit",
+        "agents",
+        "llm"
+      ],
+      "external_url": "https://cap-alpha-one.vercel.app"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-readability-service.html",
       "url": "https://index.percall.dev/l/agent-readability-service.html",
       "title": "Agent Readability Service",

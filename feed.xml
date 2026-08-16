@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Cap</title>
+    <link>https://index.percall.dev/l/cap.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cap.html</guid>
+    <pubDate>Sun, 16 Aug 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Add a spend cap to your AI route. One consume() call before a model request. Default 20 units per user per day. Denied requests return HTTP 402. No Stripe, no dashboard, no plan builder.</description>
+  </item>
+  <item>
     <title>Agent Readability Service</title>
     <link>https://index.percall.dev/l/agent-readability-service.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-readability-service.html</guid>

@@ -1,7 +1,31 @@
 {
-  "count": 40,
-  "updated": "2026-08-07",
+  "count": 41,
+  "updated": "2026-08-16",
   "listings": [
+    {
+      "slug": "cap",
+      "name": "Cap",
+      "url": "https://cap-alpha-one.vercel.app",
+      "description": "Add a spend cap to your AI route. One consume() call before a model request. Default 20 units per user per day. Denied requests return HTTP 402. No Stripe, no dashboard, no plan builder.",
+      "category": "api",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://cap-alpha-one.vercel.app/llms.txt",
+        "mcp": "https://cap-alpha-one.vercel.app/mcp.json"
+      },
+      "tags": [
+        "spend-cap",
+        "credits",
+        "rate-limit",
+        "agents",
+        "llm"
+      ],
+      "submitted_by": "jaanolev",
+      "created": "2026-08-16",
+      "github_user": "jaanolev",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "100hires-ai-ats-recruitment-software",
       "name": "100Hires - AI ATS & Recruitment Software",
