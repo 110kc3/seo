@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-10",
-  "catalog_size": 14403,
+  "probed_at": "2026-08-17",
+  "catalog_size": 14915,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -12,8 +12,8 @@
   "free": true,
   "counts": {
     "confirmed": 1,
-    "suspected": 29,
-    "tracked": 30
+    "suspected": 36,
+    "tracked": 37
   },
   "endpoints": [
     {
@@ -208,13 +208,6 @@
       "last_checked": "2026-08-10"
     },
     {
-      "url": "https://recoup-api.vercel.app/api/x402/image/generate",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
       "url": "https://straits.live/api/premium/brief",
       "reason": "HTTP 500",
       "misses": 1,
@@ -227,6 +220,62 @@
       "misses": 1,
       "since": "2026-08-10",
       "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://api.craigmbrown.com/v1/services/oracle.cross-chain-prices",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.nexismvp.com/market/funding",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/bluesky/profiles/:handle",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/following",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.x402node.dev/domain/check",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://bykaranteli.com/api/x402/listings-history",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://evm-canon-base.onrender.com/encode/swap",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://japan-evidence-feed.jp-evidence.workers.dev/api/v1/evidence/:eventId",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 41 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 39 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -335,7 +335,7 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (41)
+## All listings (39)
 
 ### Cap (cap)
 - url: https://cap-alpha-one.vercel.app
@@ -537,22 +537,6 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 - mcp: https://api.nicheangle.com/mcp
 - listing JSON: https://index.percall.dev/listings/niche-editorial-intelligence.json
 - listing page: https://index.percall.dev/l/niche-editorial-intelligence.html
-
-### OvertimeLog (overtimelog)
-- url: https://overtimelog.com/
-- category: app · pricing: paid · tags: slack, overtime, eu-compliance, privacy, desktop
-- A local-only desktop app that detects after-hours Slack activity and turns it into billable, evidence-backed overtime records. Built for the EU Right to Disconnect era: analysis runs entirely on the user's own machine, the activity data never leaves it, and there is no server to send it to. Exports to PDF, Excel and CSV.
-- llms_txt: https://overtimelog.com/llms.txt
-- listing JSON: https://index.percall.dev/listings/overtimelog.json
-- listing page: https://index.percall.dev/l/overtimelog.html
-
-### Protocol Index (protocol-index)
-- url: https://protocolindex.eu/
-- category: app · pricing: free · tags: supplements, blueprint, catalog, multilingual
-- An index mapping Bryan Johnson's publicly-documented Blueprint supplement stack (54 entries) to localized Amazon links across seven marketplaces, with a six-language UI, a build-by-goal flow over benefit tags, per-supplement dosage, timing and source rationale, and a printable daily checklist. An index, not medical advice, and not affiliated with anyone it references.
-- llms_txt: https://protocolindex.eu/llms.txt
-- listing JSON: https://index.percall.dev/listings/protocol-index.json
-- listing page: https://index.percall.dev/l/protocol-index.html
 
 ### Scite (scite)
 - url: https://scite.ai/mcp

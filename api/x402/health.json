@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-10",
-  "catalog_size": 14403,
-  "cursor": 3,
+  "probed_at": "2026-08-17",
+  "catalog_size": 14915,
+  "cursor": 4,
   "slice": 600,
   "stride": 24,
   "runs_per_full_pass": 24,
   "window": {
     "probed": 600,
-    "ok": 588,
-    "unreachable": 12,
+    "ok": 592,
+    "unreachable": 8,
     "untestable": 0
   },
-  "answered_share": 0.98,
+  "answered_share": 0.9867,
   "confirmed_unreachable": 1,
-  "tracked_unreachable": 30,
+  "tracked_unreachable": 37,
   "unreachable": [
     {
       "url": "https://staging.miven.dev/p/:slug/:var1",
@@ -207,13 +207,6 @@
       "last_checked": "2026-08-10"
     },
     {
-      "url": "https://recoup-api.vercel.app/api/x402/image/generate",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
       "url": "https://straits.live/api/premium/brief",
       "reason": "HTTP 500",
       "misses": 1,
@@ -226,6 +219,62 @@
       "misses": 1,
       "since": "2026-08-10",
       "last_checked": "2026-08-10"
+    },
+    {
+      "url": "https://api.craigmbrown.com/v1/services/oracle.cross-chain-prices",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.nexismvp.com/market/funding",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/bluesky/profiles/:handle",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/following",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.x402node.dev/domain/check",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://bykaranteli.com/api/x402/listings-history",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://evm-canon-base.onrender.com/encode/swap",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://japan-evidence-feed.jp-evidence.workers.dev/api/v1/evidence/:eventId",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-17",
+      "last_checked": "2026-08-17"
     }
   ]
 }

@@ -1,37 +1,37 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-10",
-  "remote_endpoints": 10865,
-  "hosts": 8246,
+  "fetched": "2026-08-17",
+  "remote_endpoints": 11727,
+  "hosts": 8883,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 69263,
-    "excluded_superseded": 48420,
-    "excluded_inactive": 241,
-    "excluded_packages_only": 10076,
+    "registry_records_seen": 74153,
+    "excluded_superseded": 52050,
+    "excluded_inactive": 250,
+    "excluded_packages_only": 10474,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 10125,
-    "sse": 740
+    "streamable-http": 10974,
+    "sse": 753
   },
   "by_auth": {
-    "none": 8740,
-    "required": 2125
+    "none": 9486,
+    "required": 2241
   },
   "top_hosts": [
     {
       "host": "gateway.pipeworx.io",
-      "endpoints": 1311
+      "endpoints": 1312
+    },
+    {
+      "host": "api.mcp.ai",
+      "endpoints": 238
     },
     {
       "host": "server.smithery.ai",
       "endpoints": 216
-    },
-    {
-      "host": "api.mcp.ai",
-      "endpoints": 99
     },
     {
       "host": "tooloracle.io",
@@ -43,7 +43,7 @@
     },
     {
       "host": "mcp.apify.com",
-      "endpoints": 47
+      "endpoints": 51
     },
     {
       "host": "mcp.olyport.com",
@@ -78,8 +78,16 @@
       "endpoints": 19
     },
     {
+      "host": "mcp.boykaf.com",
+      "endpoints": 18
+    },
+    {
       "host": "mcp.infobip.com",
       "endpoints": 18
+    },
+    {
+      "host": "{host}",
+      "endpoints": 17
     },
     {
       "host": "app.daedalmap.com",
@@ -90,36 +98,28 @@
       "endpoints": 17
     },
     {
-      "host": "{host}",
-      "endpoints": 16
-    },
-    {
       "host": "doc2mcp.site",
       "endpoints": 15
+    },
+    {
+      "host": "ainetcafe.com",
+      "endpoints": 13
     },
     {
       "host": "roxyapi.com",
       "endpoints": 13
     },
     {
+      "host": "api.timzinin.com",
+      "endpoints": 12
+    },
+    {
       "host": "mcp.ansvar.eu",
       "endpoints": 12
     },
     {
-      "host": "gateway.ansvar.eu",
+      "host": "checkmycontractorquote.com",
       "endpoints": 11
-    },
-    {
-      "host": "stagenth.com",
-      "endpoints": 11
-    },
-    {
-      "host": "whensport.com",
-      "endpoints": 11
-    },
-    {
-      "host": "agent365.svc.cloud.microsoft",
-      "endpoints": 9
     }
   ]
 }

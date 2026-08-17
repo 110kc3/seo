@@ -215,22 +215,6 @@
     <description>Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.</description>
   </item>
   <item>
-    <title>OvertimeLog</title>
-    <link>https://index.percall.dev/l/overtimelog.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/overtimelog.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>A local-only desktop app that detects after-hours Slack activity and turns it into billable, evidence-backed overtime records. Built for the EU Right to Disconnect era: analysis runs entirely on the user&#39;s own machine, the activity data never leaves it, and there is no server to send it to. Exports to PDF, Excel and CSV.</description>
-  </item>
-  <item>
-    <title>Protocol Index</title>
-    <link>https://index.percall.dev/l/protocol-index.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/protocol-index.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>An index mapping Bryan Johnson&#39;s publicly-documented Blueprint supplement stack (54 entries) to localized Amazon links across seven marketplaces, with a six-language UI, a build-by-goal flow over benefit tags, per-supplement dosage, timing and source rationale, and a printable daily checklist. An index, not medical advice, and not affiliated with anyone it references.</description>
-  </item>
-  <item>
     <title>Scite</title>
     <link>https://index.percall.dev/l/scite.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/scite.html</guid>

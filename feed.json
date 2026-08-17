@@ -349,37 +349,6 @@
       "external_url": "https://nicheangle.com"
     },
     {
-      "id": "https://index.percall.dev/l/overtimelog.html",
-      "url": "https://index.percall.dev/l/overtimelog.html",
-      "title": "OvertimeLog",
-      "content_text": "A local-only desktop app that detects after-hours Slack activity and turns it into billable, evidence-backed overtime records. Built for the EU Right to Disconnect era: analysis runs entirely on the user's own machine, the activity data never leaves it, and there is no server to send it to. Exports to PDF, Excel and CSV.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "app",
-        "slack",
-        "overtime",
-        "eu-compliance",
-        "privacy",
-        "desktop"
-      ],
-      "external_url": "https://overtimelog.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/protocol-index.html",
-      "url": "https://index.percall.dev/l/protocol-index.html",
-      "title": "Protocol Index",
-      "content_text": "An index mapping Bryan Johnson's publicly-documented Blueprint supplement stack (54 entries) to localized Amazon links across seven marketplaces, with a six-language UI, a build-by-goal flow over benefit tags, per-supplement dosage, timing and source rationale, and a printable daily checklist. An index, not medical advice, and not affiliated with anyone it references.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "app",
-        "supplements",
-        "blueprint",
-        "catalog",
-        "multilingual"
-      ],
-      "external_url": "https://protocolindex.eu/"
-    },
-    {
       "id": "https://index.percall.dev/l/scite.html",
       "url": "https://index.percall.dev/l/scite.html",
       "title": "Scite",
