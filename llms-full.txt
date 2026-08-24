@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 39 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 40 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -335,7 +335,15 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (39)
+## All listings (40)
+
+### Penroll App (penroll)
+- url: https://penroll.app
+- category: app · pricing: freemium · tags: hiring, recruiting, hr, ai, productivity
+- Penroll is an AI hiring copilot for growing teams. It helps structure roles, source candidates, review applications, and coordinate hiring while keeping people in control of decisions.
+- llms_txt: https://penroll.app/llms.txt
+- listing JSON: https://index.percall.dev/listings/penroll.json
+- listing page: https://index.percall.dev/l/penroll.html
 
 ### Cap (cap)
 - url: https://cap-alpha-one.vercel.app

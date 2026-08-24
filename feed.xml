@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Penroll App</title>
+    <link>https://index.percall.dev/l/penroll.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/penroll.html</guid>
+    <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Penroll is an AI hiring copilot for growing teams. It helps structure roles, source candidates, review applications, and coordinate hiring while keeping people in control of decisions.</description>
+  </item>
+  <item>
     <title>Cap</title>
     <link>https://index.percall.dev/l/cap.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cap.html</guid>

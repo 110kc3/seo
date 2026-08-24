@@ -1,0 +1,22 @@
+{
+  "slug": "penroll",
+  "name": "Penroll App",
+  "url": "https://penroll.app",
+  "description": "Penroll is an AI hiring copilot for growing teams. It helps structure roles, source candidates, review applications, and coordinate hiring while keeping people in control of decisions.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://penroll.app/llms.txt"
+  },
+  "tags": [
+    "hiring",
+    "recruiting",
+    "hr",
+    "ai",
+    "productivity"
+  ],
+  "created": "2026-08-24",
+  "github_user": "penroll-dev",
+  "tier": "free",
+  "origin": "self-registered"
+}

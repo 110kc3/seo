@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/penroll.html",
+      "url": "https://index.percall.dev/l/penroll.html",
+      "title": "Penroll App",
+      "content_text": "Penroll is an AI hiring copilot for growing teams. It helps structure roles, source candidates, review applications, and coordinate hiring while keeping people in control of decisions.",
+      "date_published": "2026-08-24T00:00:00Z",
+      "tags": [
+        "app",
+        "hiring",
+        "recruiting",
+        "hr",
+        "ai",
+        "productivity"
+      ],
+      "external_url": "https://penroll.app"
+    },
+    {
       "id": "https://index.percall.dev/l/cap.html",
       "url": "https://index.percall.dev/l/cap.html",
       "title": "Cap",
