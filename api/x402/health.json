@@ -1,12 +1,12 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-17",
-  "catalog_size": 14915,
-  "cursor": 4,
+  "probed_at": "2026-08-24",
+  "catalog_size": 15252,
+  "cursor": 5,
   "slice": 600,
-  "stride": 24,
-  "runs_per_full_pass": 24,
+  "stride": 25,
+  "runs_per_full_pass": 25,
   "window": {
     "probed": 600,
     "ok": 592,
@@ -15,28 +15,14 @@
   },
   "answered_share": 0.9867,
   "confirmed_unreachable": 1,
-  "tracked_unreachable": 37,
+  "tracked_unreachable": 30,
   "unreachable": [
     {
-      "url": "https://staging.miven.dev/p/:slug/:var1",
-      "reason": "timeout after 8000ms",
+      "url": "https://api.x402node.dev/domain/check",
+      "reason": "HTTP 500",
       "misses": 2,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-10"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/github/profiles/:handle/contributions",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://api.vaults.fyi/v2/portfolio/positions/:userAddress/:network/:vaultId",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
+      "since": "2026-08-17",
+      "last_checked": "2026-08-24"
     },
     {
       "url": "https://api.x402node.dev/web/headers",
@@ -48,13 +34,6 @@
     {
       "url": "https://cryptyx.ai/api/taker-flow",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/bitcoin-mempool-stats",
-      "reason": "ECONNREFUSED",
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
@@ -81,20 +60,6 @@
       "last_checked": "2026-08-01"
     },
     {
-      "url": "https://proxy.suverse.io/v1/data/suverse-weather-historical",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://solidus-x402.fly.dev/v1/sol/mint/:solana_address",
-      "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
       "url": "https://vape-x402.vapex402.workers.dev/data/protocol",
       "reason": "HTTP 502",
       "misses": 1,
@@ -110,13 +75,6 @@
     },
     {
       "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.vaults.fyi/v2/portfolio/total-returns/:userAddress/:network/:vaultId",
       "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-08-03",
@@ -139,13 +97,6 @@
     {
       "url": "https://skim402.com/api/v2/signal/entity-formations/latest",
       "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://x402.professorsausages.com/pokemon/species",
-      "reason": "UND_ERR_HEADERS_OVERFLOW",
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
@@ -200,13 +151,6 @@
       "last_checked": "2026-08-10"
     },
     {
-      "url": "https://places.use.x402atlas.com/place",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
       "url": "https://straits.live/api/premium/brief",
       "reason": "HTTP 500",
       "misses": 1,
@@ -228,53 +172,60 @@
       "last_checked": "2026-08-17"
     },
     {
-      "url": "https://api.nexismvp.com/market/funding",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/bluesky/profiles/:handle",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/following",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://api.x402node.dev/domain/check",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://bykaranteli.com/api/x402/listings-history",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://evm-canon-base.onrender.com/encode/swap",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
       "url": "https://japan-evidence-feed.jp-evidence.workers.dev/api/v1/evidence/:eventId",
       "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-08-17",
       "last_checked": "2026-08-17"
+    },
+    {
+      "url": "https://api.m2mcent.com/alibaba-supplier-intel-mcp/api/process",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://etherealgoodsco.store/enrich/domain",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://news.apitoll.cloud/v1/cointelegraph/news",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://soldefi.thomenz.me/v1/solana/lp-status/:mint",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://vibesprings.net/api/exchange",
+      "reason": "ETIMEDOUT",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://vibesprings.net/api/risk-report",
+      "reason": "ETIMEDOUT",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://x402.devvizion.com/v0/sql-search",
+      "reason": "ETIMEDOUT",
+      "misses": 1,
+      "since": "2026-08-24",
+      "last_checked": "2026-08-24"
     }
   ]
 }

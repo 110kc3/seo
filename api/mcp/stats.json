@@ -1,24 +1,24 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-17",
-  "remote_endpoints": 11727,
-  "hosts": 8883,
+  "fetched": "2026-08-24",
+  "remote_endpoints": 13763,
+  "hosts": 9560,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 74153,
-    "excluded_superseded": 52050,
-    "excluded_inactive": 250,
-    "excluded_packages_only": 10474,
+    "registry_records_seen": 80231,
+    "excluded_superseded": 55753,
+    "excluded_inactive": 258,
+    "excluded_packages_only": 10825,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 10974,
-    "sse": 753
+    "streamable-http": 12720,
+    "sse": 1043
   },
   "by_auth": {
-    "none": 9486,
-    "required": 2241
+    "none": 11113,
+    "required": 2650
   },
   "top_hosts": [
     {
@@ -27,31 +27,43 @@
     },
     {
       "host": "api.mcp.ai",
-      "endpoints": 238
+      "endpoints": 1097
+    },
+    {
+      "host": "api.m2mcent.com",
+      "endpoints": 276
     },
     {
       "host": "server.smithery.ai",
       "endpoints": 216
     },
     {
+      "host": "openings-vote-drilling-initially.trycloudflare.com",
+      "endpoints": 90
+    },
+    {
       "host": "tooloracle.io",
       "endpoints": 57
+    },
+    {
+      "host": "mcp.apify.com",
+      "endpoints": 56
     },
     {
       "host": "api.lazy-mac.com",
       "endpoints": 54
     },
     {
-      "host": "mcp.apify.com",
-      "endpoints": 51
+      "host": "mcp.jojapi.com",
+      "endpoints": 49
+    },
+    {
+      "host": "api.meok.ai",
+      "endpoints": 39
     },
     {
       "host": "mcp.olyport.com",
       "endpoints": 38
-    },
-    {
-      "host": "api.meok.ai",
-      "endpoints": 34
     },
     {
       "host": "nexgendata-mcp-proxy.steve-corbeil.workers.dev",
@@ -75,6 +87,10 @@
     },
     {
       "host": "hive-mcp-gateway.onrender.com",
+      "endpoints": 19
+    },
+    {
+      "host": "mcp.moltlinestudio.com",
       "endpoints": 19
     },
     {
@@ -104,22 +120,6 @@
     {
       "host": "ainetcafe.com",
       "endpoints": 13
-    },
-    {
-      "host": "roxyapi.com",
-      "endpoints": 13
-    },
-    {
-      "host": "api.timzinin.com",
-      "endpoints": 12
-    },
-    {
-      "host": "mcp.ansvar.eu",
-      "endpoints": 12
-    },
-    {
-      "host": "checkmycontractorquote.com",
-      "endpoints": 11
     }
   ]
 }
