@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 40 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 41 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -335,7 +335,14 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (40)
+## All listings (41)
+
+### FluentEDI (fluentedi)
+- url: https://fluentedi.com
+- category: api · pricing: free
+- 42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.
+- listing JSON: https://index.percall.dev/listings/fluentedi.json
+- listing page: https://index.percall.dev/l/fluentedi.html
 
 ### Penroll App (penroll)
 - url: https://penroll.app

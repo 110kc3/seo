@@ -1,7 +1,19 @@
 {
-  "count": 40,
+  "count": 41,
   "updated": "2026-08-24",
   "listings": [
+    {
+      "slug": "fluentedi",
+      "name": "FluentEDI",
+      "url": "https://fluentedi.com",
+      "description": "42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.",
+      "category": "api",
+      "pricing": "free",
+      "created": "2026-08-24",
+      "github_user": "mastermanas805",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "penroll",
       "name": "Penroll App",

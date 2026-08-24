@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>FluentEDI</title>
+    <link>https://index.percall.dev/l/fluentedi.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/fluentedi.html</guid>
+    <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.</description>
+  </item>
+  <item>
     <title>Penroll App</title>
     <link>https://index.percall.dev/l/penroll.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/penroll.html</guid>

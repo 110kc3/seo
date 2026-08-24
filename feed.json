@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/fluentedi.html",
+      "url": "https://index.percall.dev/l/fluentedi.html",
+      "title": "FluentEDI",
+      "content_text": "42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.",
+      "date_published": "2026-08-24T00:00:00Z",
+      "tags": [
+        "api"
+      ],
+      "external_url": "https://fluentedi.com"
+    },
+    {
       "id": "https://index.percall.dev/l/penroll.html",
       "url": "https://index.percall.dev/l/penroll.html",
       "title": "Penroll App",

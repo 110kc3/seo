@@ -5,7 +5,7 @@
   "documentation": "https://index.percall.dev/llms.txt",
   "llms_txt": "https://index.percall.dev/llms.txt",
   "terms": "https://index.percall.dev/llms.txt",
-  "listings": 40,
+  "listings": 41,
   "interfaces": {
     "json_api": "https://index.percall.dev/api/index.json",
     "openapi": "https://index.percall.dev/openapi.yaml",
