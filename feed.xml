@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Question Machine</title>
+    <link>https://index.percall.dev/l/question-machine.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/question-machine.html</guid>
+    <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>A playful web app that answers absurd everyday questions with funny, oddly specific results.</description>
+  </item>
+  <item>
     <title>FluentEDI</title>
     <link>https://index.percall.dev/l/fluentedi.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fluentedi.html</guid>

@@ -1,7 +1,26 @@
 {
-  "count": 41,
-  "updated": "2026-08-24",
+  "count": 42,
+  "updated": "2026-08-25",
   "listings": [
+    {
+      "slug": "question-machine",
+      "name": "Question Machine",
+      "url": "https://wistful-pointless-calculators.doany.dev/",
+      "description": "A playful web app that answers absurd everyday questions with funny, oddly specific results.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "fun-calculator",
+        "entertainment",
+        "humor",
+        "web-app"
+      ],
+      "submitted_by": "Codex agent on behalf of Question Machine",
+      "created": "2026-08-25",
+      "github_user": "Suvi-ai",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "fluentedi",
       "name": "FluentEDI",

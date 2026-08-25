@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 41 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 42 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -335,7 +335,14 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (41)
+## All listings (42)
+
+### Question Machine (question-machine)
+- url: https://wistful-pointless-calculators.doany.dev/
+- category: app · pricing: free · tags: fun-calculator, entertainment, humor, web-app
+- A playful web app that answers absurd everyday questions with funny, oddly specific results.
+- listing JSON: https://index.percall.dev/listings/question-machine.json
+- listing page: https://index.percall.dev/l/question-machine.html
 
 ### FluentEDI (fluentedi)
 - url: https://fluentedi.com
