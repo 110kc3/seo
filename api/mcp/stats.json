@@ -1,24 +1,24 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-24",
-  "remote_endpoints": 13763,
-  "hosts": 9560,
+  "fetched": "2026-08-26",
+  "remote_endpoints": 14138,
+  "hosts": 9898,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 80231,
-    "excluded_superseded": 55753,
-    "excluded_inactive": 258,
-    "excluded_packages_only": 10825,
+    "registry_records_seen": 82663,
+    "excluded_superseded": 57611,
+    "excluded_inactive": 261,
+    "excluded_packages_only": 11033,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 12720,
-    "sse": 1043
+    "streamable-http": 13088,
+    "sse": 1050
   },
   "by_auth": {
-    "none": 11113,
-    "required": 2650
+    "none": 11410,
+    "required": 2728
   },
   "top_hosts": [
     {
@@ -27,7 +27,7 @@
     },
     {
       "host": "api.mcp.ai",
-      "endpoints": 1097
+      "endpoints": 1100
     },
     {
       "host": "api.m2mcent.com",
@@ -42,12 +42,12 @@
       "endpoints": 90
     },
     {
-      "host": "tooloracle.io",
-      "endpoints": 57
+      "host": "mcp.apify.com",
+      "endpoints": 58
     },
     {
-      "host": "mcp.apify.com",
-      "endpoints": 56
+      "host": "tooloracle.io",
+      "endpoints": 57
     },
     {
       "host": "api.lazy-mac.com",
@@ -118,8 +118,8 @@
       "endpoints": 15
     },
     {
-      "host": "ainetcafe.com",
-      "endpoints": 13
+      "host": "roxyapi.com",
+      "endpoints": 15
     }
   ]
 }

@@ -1,19 +1,19 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-24",
-  "catalog_size": 15252,
-  "cursor": 5,
+  "probed_at": "2026-08-26",
+  "catalog_size": 15127,
+  "cursor": 6,
   "slice": 600,
   "stride": 25,
   "runs_per_full_pass": 25,
   "window": {
     "probed": 600,
-    "ok": 592,
-    "unreachable": 8,
+    "ok": 597,
+    "unreachable": 3,
     "untestable": 0
   },
-  "answered_share": 0.9867,
+  "answered_share": 0.995,
   "confirmed_unreachable": 1,
   "tracked_unreachable": 30,
   "unreachable": [
@@ -81,13 +81,6 @@
       "last_checked": "2026-08-03"
     },
     {
-      "url": "https://api.x402node.dev/web/og",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
       "url": "https://brmarket.thomenz.me/v1/search",
       "reason": "HTTP 500",
       "misses": 1,
@@ -100,13 +93,6 @@
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.brazilayer.com/v1/cnpj/empresa/:cnpj/socios",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
     },
     {
       "url": "https://coingecko.use.x402atlas.com/price",
@@ -221,11 +207,25 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://x402.devvizion.com/v0/sql-search",
-      "reason": "ETIMEDOUT",
+      "url": "https://api.osf-master-server.com/x402/legal/cases/:query",
+      "reason": "timeout after 8000ms",
       "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/videos",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.wallettriage.com/scan",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
     }
   ]
 }

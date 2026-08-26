@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-24",
-  "catalog_size": 15252,
+  "probed_at": "2026-08-26",
+  "catalog_size": 15127,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -82,13 +82,6 @@
       "last_checked": "2026-08-03"
     },
     {
-      "url": "https://api.x402node.dev/web/og",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
       "url": "https://brmarket.thomenz.me/v1/search",
       "reason": "HTTP 500",
       "misses": 1,
@@ -101,13 +94,6 @@
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.brazilayer.com/v1/cnpj/empresa/:cnpj/socios",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
     },
     {
       "url": "https://coingecko.use.x402atlas.com/price",
@@ -222,11 +208,25 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://x402.devvizion.com/v0/sql-search",
-      "reason": "ETIMEDOUT",
+      "url": "https://api.osf-master-server.com/x402/legal/cases/:query",
+      "reason": "timeout after 8000ms",
       "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/videos",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.wallettriage.com/scan",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-08-26",
+      "last_checked": "2026-08-26"
     }
   ]
 }
