@@ -1,7 +1,7 @@
 name: deploy
 
 # Publishes the committed static build plus the Worker to Cloudflare.
-# Runs after register.yml pushes an accepted listing, and on manual dispatch.
+# Runs after normal pushes, explicit health-workflow dispatches, and manual runs.
 on:
   push:
     branches: [main]

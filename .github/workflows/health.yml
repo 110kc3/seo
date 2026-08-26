@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   issues: write
 
@@ -141,7 +142,9 @@ jobs:
       # now "did anything actually change on disk", asked of git rather than
       # inferred from step outputs.
       - name: Commit health state / delistings / catalog
+        id: commit
         run: |
+          echo "pushed=false" >> "$GITHUB_OUTPUT"
           git config user.name "registry-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3; do
@@ -153,6 +156,7 @@ jobs:
             fi
             git commit -m "Weekly check: liveness, agent-readability scores, x402 catalog"
             if git push origin main; then
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             git fetch origin main
@@ -164,6 +168,15 @@ jobs:
             sleep $(( (RANDOM % 5) + 2 ))
           done
           exit 1
+
+      # Pushes made with GITHUB_TOKEN do not trigger push-based workflows.
+      # Explicitly dispatch the deploy after this job has refreshed main so the
+      # newly committed report, scores, and catalogs reach production.
+      - name: Deploy refreshed health state
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
 
       - name: Open report issue
         if: steps.check.outputs.report == 'true'
