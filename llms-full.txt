@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 43 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 44 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -338,7 +338,16 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (43)
+## All listings (44)
+
+### PZERO (pzero)
+- url: https://pzero.studio
+- category: mcp · pricing: paid · tags: mcp, inference, agents, cursor, ai
+- Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.
+- llms_txt: https://pzero.studio/llms.txt
+- mcp: https://mcp.pzero.studio/mcp
+- listing JSON: https://index.percall.dev/listings/pzero.json
+- listing page: https://index.percall.dev/l/pzero.html
 
 ### XiuRouter (xiurouter)
 - url: https://router.xiu.ai/

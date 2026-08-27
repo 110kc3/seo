@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/pzero.html",
+      "url": "https://index.percall.dev/l/pzero.html",
+      "title": "PZERO",
+      "content_text": "Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.",
+      "date_published": "2026-08-27T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "inference",
+        "agents",
+        "cursor",
+        "ai"
+      ],
+      "external_url": "https://pzero.studio"
+    },
+    {
       "id": "https://index.percall.dev/l/xiurouter.html",
       "url": "https://index.percall.dev/l/xiurouter.html",
       "title": "XiuRouter",

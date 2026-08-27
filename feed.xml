@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>PZERO</title>
+    <link>https://index.percall.dev/l/pzero.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/pzero.html</guid>
+    <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.</description>
+  </item>
+  <item>
     <title>XiuRouter</title>
     <link>https://index.percall.dev/l/xiurouter.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/xiurouter.html</guid>

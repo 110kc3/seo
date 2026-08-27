@@ -1,7 +1,31 @@
 {
-  "count": 43,
+  "count": 44,
   "updated": "2026-08-27",
   "listings": [
+    {
+      "slug": "pzero",
+      "name": "PZERO",
+      "url": "https://pzero.studio",
+      "description": "Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://pzero.studio/llms.txt",
+        "mcp": "https://mcp.pzero.studio/mcp"
+      },
+      "tags": [
+        "mcp",
+        "inference",
+        "agents",
+        "cursor",
+        "ai"
+      ],
+      "submitted_by": "pzero-listing",
+      "created": "2026-08-27",
+      "github_user": "pzero-listing",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "xiurouter",
       "name": "XiuRouter",
