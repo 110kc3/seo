@@ -340,7 +340,7 @@ Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-re
 ### XiuRouter (xiurouter)
 - url: https://router.xiu.ai/
 - category: api · pricing: paid · tags: llm-api, model-routing, agent-infrastructure, developer-tools, api-gateway
-- Developer-facing model API service that connects applications, AI agents, and developer tools to leading models through one usage-based API. Supports OpenAI Responses, OpenAI Chat Completions, Anthropic Messages, and Gemini GenerateContent, with scoped API keys and usage and cost records.
+- XiuRouter is a usage-based model API service that connects applications, AI agents, and developer tools to leading models through one API. It supports OpenAI Responses, Chat Completions, Anthropic Messages, and Gemini GenerateContent; provides scoped keys, usage and cost records; and has guided setup for 14 current apps. Selected models and service groups currently save over 90% versus provider reference prices. XiuAI and its products are operated by XiuLab Inc, a U.S. corporation.
 - llms_txt: https://router.xiu.ai/llms.txt
 - listing JSON: https://index.percall.dev/listings/xiurouter.json
 - listing page: https://index.percall.dev/l/xiurouter.html

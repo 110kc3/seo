@@ -2,7 +2,7 @@
   "slug": "xiurouter",
   "name": "XiuRouter",
   "url": "https://router.xiu.ai/",
-  "description": "Developer-facing model API service that connects applications, AI agents, and developer tools to leading models through one usage-based API. Supports OpenAI Responses, OpenAI Chat Completions, Anthropic Messages, and Gemini GenerateContent, with scoped API keys and usage and cost records.",
+  "description": "XiuRouter is a usage-based model API service that connects applications, AI agents, and developer tools to leading models through one API. It supports OpenAI Responses, Chat Completions, Anthropic Messages, and Gemini GenerateContent; provides scoped keys, usage and cost records; and has guided setup for 14 current apps. Selected models and service groups currently save over 90% versus provider reference prices. XiuAI and its products are operated by XiuLab Inc, a U.S. corporation.",
   "category": "api",
   "pricing": "paid",
   "machine_endpoints": {
@@ -19,5 +19,6 @@
   "created": "2026-08-27",
   "github_user": "MuduiClaw",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-08-27"
 }
