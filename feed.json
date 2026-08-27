@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/xiurouter.html",
+      "url": "https://index.percall.dev/l/xiurouter.html",
+      "title": "XiuRouter",
+      "content_text": "Developer-facing model API service that connects applications, AI agents, and developer tools to leading models through one usage-based API. Supports OpenAI Responses, OpenAI Chat Completions, Anthropic Messages, and Gemini GenerateContent, with scoped API keys and usage and cost records.",
+      "date_published": "2026-08-27T00:00:00Z",
+      "tags": [
+        "api",
+        "llm-api",
+        "model-routing",
+        "agent-infrastructure",
+        "developer-tools",
+        "api-gateway"
+      ],
+      "external_url": "https://router.xiu.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/question-machine.html",
       "url": "https://index.percall.dev/l/question-machine.html",
       "title": "Question Machine",

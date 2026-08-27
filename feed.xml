@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>XiuRouter</title>
+    <link>https://index.percall.dev/l/xiurouter.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/xiurouter.html</guid>
+    <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Developer-facing model API service that connects applications, AI agents, and developer tools to leading models through one usage-based API. Supports OpenAI Responses, OpenAI Chat Completions, Anthropic Messages, and Gemini GenerateContent, with scoped API keys and usage and cost records.</description>
+  </item>
+  <item>
     <title>Question Machine</title>
     <link>https://index.percall.dev/l/question-machine.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/question-machine.html</guid>

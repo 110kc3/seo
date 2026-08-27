@@ -1,7 +1,30 @@
 {
-  "count": 42,
-  "updated": "2026-08-25",
+  "count": 43,
+  "updated": "2026-08-27",
   "listings": [
+    {
+      "slug": "xiurouter",
+      "name": "XiuRouter",
+      "url": "https://router.xiu.ai/",
+      "description": "Developer-facing model API service that connects applications, AI agents, and developer tools to leading models through one usage-based API. Supports OpenAI Responses, OpenAI Chat Completions, Anthropic Messages, and Gemini GenerateContent, with scoped API keys and usage and cost records.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://router.xiu.ai/llms.txt"
+      },
+      "tags": [
+        "llm-api",
+        "model-routing",
+        "agent-infrastructure",
+        "developer-tools",
+        "api-gateway"
+      ],
+      "submitted_by": "Codex for XiuAI",
+      "created": "2026-08-27",
+      "github_user": "MuduiClaw",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "question-machine",
       "name": "Question Machine",
