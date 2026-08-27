@@ -38,10 +38,10 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 > reset is evaluated after 50 qualified contacts or 30 days, whichever is later.
 >
 > The code-side review found and corrected four stale agent-facing claims in
-> `llms.txt` and the runtime MCP metadata (§2.2). The patch and generated files
-> are deterministic and fully tested locally; the only code-side follow-up is a
-> normal reviewed deploy and one live-file read before the HN post. All three
-> upstream PRs were also refreshed on 2026-08-27 (§3).
+> `llms.txt` and the runtime MCP metadata (§2.2). The deterministic patch passed
+> all 291 tests, deployed from `38bd15b`, and the canonical live file now matches
+> the generated file byte for byte. All three upstream PRs were also refreshed
+> on 2026-08-27 (§3).
 
 ---
 
@@ -265,7 +265,7 @@ against); freeze x402 spend. None is started.
 
 ---
 
-## 2. Pending on Codex — one production verification after deploy
+## 2. Pending on Codex — cleared by the 2026-08-27 deploy
 
 ### ~~2.1 Glama badge + tool count on PR #11152~~ — refreshed 2026-08-27
 
@@ -276,7 +276,7 @@ the PR body was re-verified and the Glama listing and badge both return 200.
 `check-submission` passes and GitHub reports the PR cleanly mergeable. A dated
 maintainer update is posted; nothing else is useful until review (§3).
 
-### 2.2 `llms.txt` corrections — verified locally; deploy and re-read live
+### ~~2.2 `llms.txt` corrections~~ — deployed and verified live 2026-08-27
 
 The private draft now uses the full 30-day snapshot, the one-payer revenue
 ledger, five real third-party registrations, 20 checks and 291 tests. The same
@@ -287,8 +287,9 @@ longer says 13 checks. A regression assertion now covers runtime tool
 descriptions as well as generated files. Two clean builds produced the same
 tree hash and all 291 tests pass under local Node 18 with
 `--experimental-global-webcrypto`, the compatibility flag required because this
-project targets Node 22. These changes are in the worktree, not production; after
-the reviewed commit/deploy, read the live `llms.txt` once before posting.
+project targets Node 22. Commit `38bd15b` deployed successfully. The canonical
+live `llms.txt` now matches the generated file byte for byte, the server card has
+the exact catalog counts and runtime MCP `tools/list` says 20 weighted checks.
 
 ### ~~2.3 llms-txt-hub URL correction~~ — done
 
@@ -800,9 +801,8 @@ and agent-readiness Phases 1, 3 and 5.
 - **You:** post the prepared Show HN in the next clean window, then run the
   50-founder outreach test and the logged-in indexation jobs. Clustly, Stripe and
   signing remain useful but are not launch blockers.
-- **Me:** the source corrections and upstream PR maintenance are complete. The
-  only remaining code-side action is to carry the reviewed worktree through the
-  normal deploy and re-read live `llms.txt` before the HN post (§2.2).
+- **Me:** nothing unblocked. The source corrections are deployed and verified;
+  all three upstream PRs have current review notes and now wait on maintainers.
 
 ---
 
