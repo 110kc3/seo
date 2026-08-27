@@ -20,76 +20,54 @@ pricing, sizing and product strategy are not for it:
 - `2026-07-29-project-review.md` — a point-in-time review, now historical.
 - `competitors.md`, `service-ideas.md`, `page-ideas.md`, `README.md` — pre-existing portfolio notes.
 
-**Everything below was verified live on 2026-08-02**, not copied forward from the
-older docs. Where a doc disagrees with this file, this file is right.
+**The live queue in §§1–3 was re-verified on 2026-08-27.** Sections 4 onward are
+dated records of what shipped. Where an older record disagrees with the queue,
+the queue is right.
 
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-08-03, sixth pass.** Every distribution channel is submitted and
-> every one of Kamil's decisions is shipped. §2.4 — carried here for days as "the
-> last known-wrong thing in the fleet" — turned out to have been fixed already,
-> and **the entry describing it was simply false**; see it for what was actually
-> wrong and what that says about trusting this file without re-reading the repo.
-> **Nothing on my side is open and unblocked.**
+> **Updated 2026-08-27, eighth pass.** Analytics is restored and the Show HN
+> hold has expired. The full-window result is now 59,672 requests, 7.77% AI
+> crawler/action-agent share, five third-party registrations and zero organic
+> payments. The private draft has been rewritten around that contrast (§1.1).
 >
-> **Your list: a Show HN held until ~25 Aug, three optional items, and four
-> browser jobs for indexation (§1.8).** §1.10 is done — you ran the attach and
-> the Router is live on `router.percall.dev`.
+> **Your next action is the Show HN, then the commercial evidence work:** the
+> 50-founder outreach test, logged-in indexation, and the optional Clustly and
+> Stripe setup. The no-new-product gate remains in force until the commercial
+> reset is evaluated after 50 qualified contacts or 30 days, whichever is later.
 >
-> The second service is live and paid for: two endpoints that probe and route but
-> never pay, because you said you would not pay from your own wallet and that is
-> now a property of the deployment rather than a promise in a doc. It has settled
-> real money on mainnet (§2e).
->
-> **Added 2026-08-05, seventh pass.** A third sales channel is built and needs
-> three browser steps from you: **§1.11, Clustly** — a USDC-escrow marketplace
-> where the buyer funds *before* the agent is pinned, which is the exact
-> condition §7 found missing at the x402 paywall. Same deliverable, priced as a
-> $15 job rather than a $0.05 call. Read the custody caveat in §1.11 before
-> registering: their agents are managed wallets and self-custody is not offered.
-> **§1.12 records the four options you did not pick**, including the one this
-> repo's own changelog has recommended twice — put the hours into Track A.
+> The code-side review found and corrected four stale agent-facing claims in
+> `llms.txt` and the runtime MCP metadata (§2.2). The patch and generated files
+> are deterministic and fully tested locally; the only code-side follow-up is a
+> normal reviewed deploy and one live-file read before the HN post. All three
+> upstream PRs were also refreshed on 2026-08-27 (§3).
 
 ---
 
 ## 1. Pending on Kamil
 
-### 1.1 Show HN — HELD until ~25 Aug. Kamil's call, 2026-08-02, and it is right
+### 1.1 Show HN — READY; next clean window Tue 1 Sep 2026
 
-*Was "post Tue 4 Aug". Deliberately deferred: not enough data yet.*
+The 25 Aug hold did its job. All four gates now pass:
 
-**The reasoning, so nobody re-litigates it in a week.** The post's entire claim is
-a measured negative result — agents arrive, read the price, and do not buy. At
-the time of the call the site had been live **8 days**, the paid endpoint had
-been met **49 times**, and about 35 of those were plausible payers. That is a
-thin base for "the agentic economy does not pay yet", which is a strong claim
-this audience will check. A Show HN is close to one-shot per project; spending it
-on n=49 to save three weeks is a bad trade.
+1. **Full 30-day window:** 59,672 requests in the live 2026-08-27 snapshot.
+2. **Real registration path:** five third-party `self-registered` listings are
+   live — Cap, FluentEDI, Penroll, Question Machine and XiuRouter.
+3. **Inbound activity:** 4,638 requests identified as an AI crawler or action
+   agent (7.77%), with 479 free scores and 632 `llms.txt` reads. This is a
+   self-reported User-Agent classification, not an identity claim.
+4. **Conversion result:** six audit settlements and eleven settlements across
+   all paid surfaces, all from one known test wallet; no organic payer and no
+   payment since 3 Aug.
 
-**The argument Kamil did not have when he made the call, which supports it.** The
-register path was broken in production until 2026-08-02 (§4.3): every accepted
-listing was committed and never published, so a reader who followed the post's
-"products register themselves, live URLs in about two minutes" claim would have
-been handed a URL that 404s. The draft would have been *demonstrably wrong about
-its own headline feature*. It is fixed now — but the fix has never run for a real
-stranger, and that is exactly the thing to soak before inviting an audience.
+The result is more useful than the one held on 2 Aug: third parties will use the
+free write workflow, while nobody has crossed the paid boundary. The private
+draft now leads with that contrast and no longer claims zero registrations:
+`vault 40-projects/x402-scale-up/show-hn-draft.md`.
 
-**Re-check on or after Tue 25 Aug 2026** (14:00–16:00 UTC, the usual window).
-That date is not arbitrary: `/api/stats.json` reports a rolling 30-day window,
-and the site went live 2026-07-25, so **24 Aug is the first day the window is
-actually full** rather than a partial period being quoted as a monthly figure.
-
-Post when these hold — if they do not, wait again rather than posting anyway:
-
-1. **A full 30-day window.** No more "live for eleven days" caveats mid-paragraph.
-2. **The register path has run for a real stranger, or been re-verified post-fix.** The claim must be true on the day, not true in principle.
-3. **Some inbound traffic exists.** llms-txt-hub merged 2026-08-02 and the other directories are landing; their referral traffic is itself part of the story, and it changes what "zero inbound links" means.
-4. **Conversion is still zero — or it is not.** Either way it is a stronger post at n≈200 than at n=49. If someone *does* pay in the meantime, the post gets better, not worse.
-
-I will refresh the numbers and the two stale claims the morning of (§2.2). The
-draft, the titles and the three prepared comment threads stay in
-`vault 40-projects/x402-scale-up/show-hn-draft.md` and need no further work until then.
+Refresh the figures immediately before posting if it is not submitted on the
+snapshot date. The next normal HN slot is Tue 1 Sep, 14:00–16:00 UTC.
 
 **On credentials: don't send them, and I would not use them.** Posting would be
 under your name, on your account, on a one-shot channel — that is yours to press
@@ -138,31 +116,23 @@ as promised. It was worth doing: see §4.3. Both bugs are fixed and verified.
 - **Cloudflare Monetization Gateway waitlist** — browser form; being on Cloudflare is the only prerequisite. Would let the same 402 metering cover `/api/index.json` and the two catalogs without new code. The catalogs are now the largest thing the site serves and `/api/audit` is the only metered surface, so this is worth more than it was.
 - **Delete `GLAMA_API_KEY`** — settled: nothing needs it. Glama's API is the Gateway (OpenAI-compatible inference); registry submission was a web form. Delete it rather than leave an unread credential lying around.
 
-### 1.8 Indexation — four browser jobs, and nobody else can do them
+### 1.8 Indexation — logged-in browser jobs, and nobody else can do them
 
 *Added 2026-08-02. The code half of this is shipped (§2d); these four need a
 logged-in browser.*
 
-The apex went live today into a state where **no search engine had a route to
-it**: no sitemap carried it, nothing linked to it, and the one external link that
-did point at it is being corrected away by our own PR #1460. That part is fixed
-in code. What is left cannot be:
+The code half is shipped: both sitemaps exist, the index has IndexNow deployment
+pings, and both sales/front-door pages are linked. What remains needs the
+authenticated consoles:
 
-1. **Google Search Console — verify `percall.dev` as a Domain property.** A
-   Domain property covers the apex, `www` and `index.` in one, which is the shape
-   this fleet actually has. Verification is one TXT record in the same Cloudflare
-   DNS zone the Worker already uses. Until this exists there is **no way to know
-   whether any of this is indexed** — `site:` in a browser is a rough proxy and
-   through a search API it is worthless (it returned French PLM consultancies).
-2. **Submit the sitemap in GSC**: `https://index.percall.dev/sitemap.xml`. It now
-   carries 73 URLs including the apex.
-3. **Bing Webmaster Tools — verify, and submit `https://percall.dev/` by hand.**
-   By hand for a reason: IndexNow proves control with a key file at
-   `https://<host>/<key>.txt`, and the apex serves exactly one path, so it cannot
-   host one. The canonical host is automated (§2d); the apex is one URL, once.
-   Bing matters beyond Bing — its index is what ChatGPT search reads.
-4. **Request indexing for `https://percall.dev/` in GSC** once verified. One URL,
-   one click, and it skips the wait for a crawl of a page with two inbound links.
+1. Verify `percall.dev` and `kc-it.pl` as Google Search Console Domain
+   properties.
+2. Submit `https://index.percall.dev/sitemap.xml` and
+   `https://kc-it.pl/sitemap.xml`.
+3. Verify both properties in Bing Webmaster Tools; submit
+   `https://percall.dev/` and `https://kc-it.pl/services/agent-readability` by
+   hand.
+4. Request indexing for those same two front-door URLs in GSC.
 
 Optional after those: **IndexNow in Cloudflare** (Cache → Configuration) will
 ping on cache purge as well as on deploy. Harmless overlap with §2d, and it
@@ -220,6 +190,9 @@ come back in the same free request. Scope, endpoints and what still has to be
 built are in `vault 40-projects/x402-scale-up/second-service.md`.
 
 ### 1.11 Clustly — the code is done, the browser half is yours
+
+**Status re-checked 2026-08-27:** `/etc/clustly-agent.env` is absent and the
+service is inactive, so none of the three browser/operator steps has happened.
 
 *Added 2026-08-05, after Kamil asked whether to pivot off x402 and whether we
 could be listed on clustly.ai. The answer to the second is yes and it is built.
@@ -292,20 +265,30 @@ against); freeze x402 spend. None is started.
 
 ---
 
-## 2. Pending on Claude — no input needed, say go
+## 2. Pending on Codex — one production verification after deploy
 
-### ~~2.1 Glama badge + tool count on PR #11152~~ — done
+### ~~2.1 Glama badge + tool count on PR #11152~~ — refreshed 2026-08-27
 
 Badge added and the tool list corrected to six (`search_x402_endpoints` and
 `search_mcp_servers` shipped with v3.9 and were never reflected upstream).
-Entry and PR body updated in one push, so the 90k★ repo got one notification.
-`check-submission` passes, still MERGEABLE. Now purely maintainer lag (§3).
+The branch was rebased onto current `main`, the catalog counts were refreshed,
+the PR body was re-verified and the Glama listing and badge both return 200.
+`check-submission` passes and GitHub reports the PR cleanly mergeable. A dated
+maintainer update is posted; nothing else is useful until review (§3).
 
-### ~~2.2 Refresh the Show HN numbers~~ — deferred with §1.1, to ~25 Aug
+### 2.2 `llms.txt` corrections — verified locally; deploy and re-read live
 
-**Do not do this now.** The post is held (§1.1); figures refreshed three weeks
-early are just a second set of stale ones. Job for the morning of the post:
-re-read `/api/stats.json`, update the five figures, soften "zero inbound links".
+The private draft now uses the full 30-day snapshot, the one-payer revenue
+ledger, five real third-party registrations, 20 checks and 291 tests. The same
+pass re-read `llms.txt` end to end and fixed four stale claims at their sources:
+catalog sizes now derive from the committed stats, the free-score limit is 60
+rather than 20, provenance uses server-set `origin`, and runtime MCP metadata no
+longer says 13 checks. A regression assertion now covers runtime tool
+descriptions as well as generated files. Two clean builds produced the same
+tree hash and all 291 tests pass under local Node 18 with
+`--experimental-global-webcrypto`, the compatibility flag required because this
+project targets Node 22. These changes are in the worktree, not production; after
+the reviewed commit/deploy, read the live `llms.txt` once before posting.
 
 ### ~~2.3 llms-txt-hub URL correction~~ — done
 
@@ -661,13 +644,14 @@ following it.
 outage edge and the recovery edge, with delivery confirmed by a webhook sink
 rather than inferred. **265 tests.**
 
-## 3. Waiting on other people — nothing to do
+## 3. Waiting on maintainers — refreshed 2026-08-27
 
-| what | state, 2026-08-02 |
+| what | current state |
 |---|---|
-| **awesome-mcp-servers #11152** | OPEN, MERGEABLE. Waits on a maintainer — but only sensibly *after* §2.1 lands the badge. |
-| **Awesome-llms-txt #114** | OPEN, and it was **never maintainer lag** — this row said so for days while a `CHANGES_REQUESTED` review sat unanswered since 2026-07-29. The maintainer was right on both counts: the description named `index.kc-it.pl` while the diff added `index.percall.dev` (written pre-migration, prose not updated with the diff — on a PR to a *directory*, which is the worst place to look unsure of your own canonical host), and the branch was 19 commits behind with a conflict. Fixed 2026-08-03: rebased onto `master`, squashed to one commit, `normalize_lists.py --check` exits 0, description rewritten to state the canonical host and why it changed, and the review answered. **Now** it is maintainer lag. |
-| **x402 Bazaar listing** | Still absent. Re-checked today across **14,794 catalog entries** — nothing pays our address or lives on our host. Everything on our side is done: rail is CDP, the 402 carries discovery metadata, and a settlement has carried it. Upstream `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, unanswered. Check with `node scripts/bazaar-check.mjs`. **Do not spend more time on this** — the next move is theirs. |
+| **[awesome-mcp-servers #11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** | OPEN, CLEAN and MERGEABLE after a rebase onto current `main`. Six tools, 15k x402 endpoints and 14k MCP endpoints are reflected upstream; the Glama listing/badge return 200 and `check-submission` is green. A dated review note is posted. Wait for the maintainer. |
+| **[Awesome-llms-txt #114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)** | OPEN and MERGEABLE. The branch is current with `master`, the diff is one line, the canonical URL returns 200 without a redirect and `normalize_lists.py --check` passes. GitHub still carries the 2 Aug `CHANGES_REQUESTED` state even though both requested changes were addressed on 3 Aug; a dated re-review request is posted. Wait for the maintainer. |
+| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN and MERGEABLE, waiting on required review. All three canonical URLs return 200 without redirects, the diff remains one file with three URL corrections and the refreshed Auto-merge check is green. A clean local rebase could not be pushed because the current GitHub token lacks `workflow` scope for a workflow added upstream; this is not a conflict or merge blocker. Wait for the maintainer. |
+| **x402 Bazaar listing** | Still absent. A live posting-day check read **14,809 resources**; the 26 Aug catalog snapshot contains **15,127 endpoints**. Nothing pays our address or lives on our host. Everything on our side is done: the rail is CDP, the 402 carries discovery metadata and a settlement carried it. Upstream `x402-foundation/x402#2112` is now closed and documents several indexing/re-indexing causes, so it does not identify ours. Check with `node scripts/bazaar-check.mjs`; do not spend more time on this unless the upstream state changes. |
 
 ---
 
@@ -792,7 +776,7 @@ Verified live 2026-08-02 unless noted.
 
 | channel | state |
 |---|---|
-| **llms-txt-hub** | ✅ **PR [#1459](https://github.com/thedaviddias/llms-txt-hub/pull/1459) MERGED today, 09:31 UTC** — the first real inbound link this project has ever had. URL needs correcting (§2.3). |
+| **llms-txt-hub** | ✅ **PR [#1459](https://github.com/thedaviddias/llms-txt-hub/pull/1459) merged 2026-08-02 at 09:31 UTC** — the first real inbound link this project received. Canonical URL correction [#1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460) is still waiting on review (§3). |
 | **Glama repo listing** | ✅ **Live** — `glama.ai/mcp/servers/110kc3/seo` resolves, badge renders. Unblocks §2.1. |
 | **agentswelcome.dev** | ✅ Certified 100/100 "exemplary", all 18 checks. Entry `ae21017ab44f`, one of 3 sites in the directory. |
 | **awesome-mcp-servers** | ✅ Submitted (#11152) — now waiting, see §3. |
@@ -801,20 +785,24 @@ Verified live 2026-08-02 unless noted.
 | **directory.llmstxt.cloud** | ✅ Submitted by Kamil 2026-08-02 (Tally). Curation team; no confirmation email. |
 | **llmstxt.site** | ✅ Submitted by Kamil 2026-08-02. The one channel that does confirm by email. |
 | **Glama connectors** | ✅ Submitted by Kamil 2026-08-02. No badge, unblocks nothing — a channel in its own right. |
-| **Domain-root discovery repo** | ✅ Published 2026-07-10. Content is stale (§2.4). |
+| **Domain-root discovery repo** | ✅ Published 2026-07-10 and current; it names the Router too (§2.4). |
 
 Also settled and not worth re-opening: the mainnet rail (six real settlements),
 the CDP key and rail switch, the deploy/analytics token split, the managed
 AI-crawler block across all five zones, the corpus question (decided as b+c —
-40 listings plus 24,741 catalogued endpoints), the shopfront listing re-home,
+43 listings plus 29,265 catalogued endpoints in the 26 Aug snapshots), the shopfront listing re-home,
 and agent-readiness Phases 1, 3 and 5.
 
 ---
 
 ## 6. If you only do one thing in each column
 
-- **You:** nothing. Genuinely — every channel is submitted, every decision is shipped, and the post is held by your own call. The three items in §1.7 are optional and none is urgent.
-- **Me:** nothing unblocked. §2.4 turned out to be already fixed and its entry wrong (the hub now names the Router too, `110kc3.github.io@a78b900`). Everything else on my side is shipped; §2g waits on the one action in §1.10 that only you can take.
+- **You:** post the prepared Show HN in the next clean window, then run the
+  50-founder outreach test and the logged-in indexation jobs. Clustly, Stripe and
+  signing remain useful but are not launch blockers.
+- **Me:** the source corrections and upstream PR maintenance are complete. The
+  only remaining code-side action is to carry the reviewed worktree through the
+  normal deploy and re-read live `llms.txt` before the HN post (§2.2).
 
 ---
 

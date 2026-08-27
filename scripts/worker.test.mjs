@@ -2414,6 +2414,16 @@ test('no published surface claims a check count the scorer does not run', async 
         `${f} claims ${n} checks; the default set runs ${expected}`);
     }
   }
+
+  // tools/list is generated at request time rather than from a file. It was
+  // therefore the one published agent surface the guard above did not read,
+  // and it kept saying 13 after every generated document moved to 20.
+  for (const tool of mcpTools(BASE)) {
+    for (const [, n] of tool.description.matchAll(/\b(\d+)\s+(?:weighted\s+|agent-readability\s+)?checks\b/g)) {
+      assert.equal(Number(n), expected,
+        `MCP tool ${tool.name} claims ${n} checks; the default set runs ${expected}`);
+    }
+  }
 });
 
 test('every generated page actually says something', async () => {

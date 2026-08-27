@@ -14,7 +14,7 @@ Three ways to query this index, in ascending order of how little you have to kno
 
 ## Find an MCP server you can connect to (the MCP catalog)
 
-~10,000 remotely-callable MCP servers, normalized from the official MCP registry.
+14,138 remotely-callable MCP servers, normalized from the official MCP registry.
 Every entry has a URL, so it can be added without installing anything. Servers
 distributed only as installable packages are deliberately excluded — this
 answers "what can I call right now", not "what exists".
@@ -27,11 +27,11 @@ answers "what can I call right now", not "what exists".
 
 ## Find a paid API you can call (the x402 catalog)
 
-~14,700 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+15,127 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, ~15k entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 15,127 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
@@ -114,13 +114,17 @@ Same protocol as registration, but the issue title starts with "[update]" and th
 
 ## Where entries come from, and how to be removed
 
-Three kinds of entry, and every one says which it is:
+Three kinds of entry, identified by the server-set `origin` field rather than
+the submitter's optional prose:
 
-- `submitted_by` other than "registry (...)" — the product registered itself.
-- `submitted_by: "registry (curated)"` — added from public facts about a public
-  product, under the rules in scripts/seed-curated.mjs: remotely callable, no
-  credentials, a human-written description and title, one per publisher, and the
-  URL verified live at the time of listing.
+- `origin: "self-registered"` — submitted through the public issue workflow;
+  `github_user` records the GitHub account that owns future updates.
+- `origin: "curated"` — added from public facts about a public product, under
+  the rules in scripts/seed-curated.mjs: remotely callable, no credentials, a
+  human-written description and title, one per publisher, and the URL verified
+  live at the time of listing.
+- `origin: "seed"` — one of the operator's launch entries, kept distinct from
+  both third-party registrations and the curated catalog sample.
 - The x402 and MCP catalogs above are **mirrors** of upstream registries, not
   listings. Source, upstream URL and fetch date travel with the data.
 
@@ -177,7 +181,7 @@ checks with a label and pass/fail. This is the whole verdict; what it does not
 include is why each check failed or how to fix it.
 
 Results are cached per URL for an hour (a cached answer is free and unmetered);
-uncached audits are limited to 20 per hour per IP, because each one fetches the
+uncached audits are limited to 60 per hour per IP, because each one fetches the
 target site. The paid endpoint is not rate limited.
 
 ## Paid endpoint: agent-readability audit + fixes (x402)
@@ -313,11 +317,10 @@ service and provably unmodified in transit.
 Verify with the public keys at https://index.percall.dev/.well-known/http-message-signatures-directory
 (the web-bot-auth profile discovers them there).
 
-It is rare rather than unique, and the difference is where it applies:
-**83 of the 14,734 x402 endpoints we mirror mention signed responses at all**
-(0.6%), and the ones that do sell signing *as a product* — a paid attestation
-you buy per resource. Here it is a property of every response, including the
-free ones and including this file.
+It is not unique: the x402 catalog contains many products that sell a signed
+attestation or oracle answer. The difference is where signing applies. Here it
+is a property of every response, including the free ones and including this
+file, rather than a separate attestation product bought per resource.
 
 Why that is worth a paragraph rather than a footnote: when two paid audits of
 the same URL disagree, the one whose answer is signed is the one you can hold

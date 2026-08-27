@@ -72,8 +72,22 @@ const tpl = (name) => readFileSync(join(ROOT, 'templates', name), 'utf8');
 const readJson = (rel) => {
   try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
 };
+// Catalog sizes move every week, so any generated surface that quotes them
+// must read the same committed snapshots as the catalog pages. The previous
+// hand-written approximations drifted by thousands while every build stayed
+// green, which is exactly what these generated documents are meant to prevent.
+const x402Stats = readJson('api/x402/stats.json');
+const mcpStats = readJson('api/mcp/stats.json');
+const catalogCount = (value, fallback) => Number.isInteger(value)
+  ? value.toLocaleString('en-US')
+  : fallback;
+const X402_COUNT = catalogCount(x402Stats?.endpoints, 'thousands of');
+const MCP_COUNT = catalogCount(mcpStats?.remote_endpoints, 'thousands of');
 const fill = (s, extra = {}) =>
-  Object.entries({ BASE, REPO, APEX, ROUTER: ROUTER_BASE, CHECKS, COUNT: String(listings.length), ...extra })
+  Object.entries({
+    BASE, REPO, APEX, ROUTER: ROUTER_BASE, CHECKS,
+    COUNT: String(listings.length), X402_COUNT, MCP_COUNT, ...extra,
+  })
     .reduce((acc, [k, v]) => acc.replaceAll(`{{${k}}}`, v), s);
 
 const PAGE_CSS = `
@@ -326,8 +340,6 @@ writeFileSync(join(ROOT, 'llms-full.txt'),
 // them yet. `pagePaths` feeds the sitemap, so a skipped page is also absent
 // from the sitemap rather than advertised as a 404.
 const pagePaths = [];
-const x402Stats = readJson('api/x402/stats.json');
-const mcpStats = readJson('api/mcp/stats.json');
 const x402Health = readJson('api/x402/health.json');
 const mcpHealth = readJson('api/mcp/health.json');
 const traffic = readJson('api/traffic.json');

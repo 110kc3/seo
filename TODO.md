@@ -4,34 +4,49 @@
 
 *Everything here needs your credentials, a browser, or an external/public
 action. The implementation that does not need you continues elsewhere. Updated
-2026-08-06; where the changelog below disagrees with this list, this list wins.*
+2026-08-27; where the changelog below disagrees with this list, this list wins.*
 
-### Urgent — restore measurement
+### Ready now
 
-1. **Replace the broken Analytics token.** In Cloudflare → My Profile → API
-   Tokens, create a token limited to **Account / Account Analytics / Read** for
-   the account that owns `ai-product-index`. Put its value in the GitHub
-   repository secret `CF_ANALYTICS_TOKEN`; do not paste it into an issue or this
-   file.
-2. Push and verify it:
+1. **Post Show HN in the next Tue–Thu, 14:00–16:00 UTC window.** The 25 Aug
+   hold has expired and every gate now passes: analytics is healthy, the rolling
+   window is a full 30 days, five third-party products have exercised the real
+   registration workflow, and organic payment conversion remains zero. The
+   draft and posting checklist were refreshed from the 2026-08-27 live snapshot:
+   `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean slot is
+   Tue 1 Sep. Refresh its figures immediately before submitting; posting under
+   your HN account remains your action.
 
-   ```bash
-   gh workflow run cf-admin -f action=push-secrets
-   gh run watch
-   gh workflow run cf-admin -f action=stats-probe
-   gh run watch
-   curl -fsS https://index.percall.dev/api/stats.json
-   gh workflow run health
-   ```
+### Commercial evidence — do not replace this with more engineering
 
-   Success means the curl returns `"ok": true` and the health run closes the
-   exact-title issue **Traffic stats unavailable**. The workflow now opens that
-   incident automatically whenever a snapshot fails, while preserving the last
-   verified series instead of writing a false zero.
+2. **Personal outreach is the 30-day sales test.** Use the ICP, tracker fields,
+   two-message sequence and stop gates in
+   `vault 40-projects/x402-scale-up/2026-08-06-commercial-reset.md`. Send 10
+   genuinely personalized messages per weekday until 50 qualified founders have
+   been contacted. Do not buy a list or automate the sending. Record replies,
+   calls and payments, not opens.
 
-### Make the human offer buyable
+3. **Indexation:**
 
-3. **Create two Stripe Payment Links** in the KC-IT Stripe account:
+   1. Google Search Console — verify `percall.dev` and `kc-it.pl` as Domain
+      properties.
+   2. Submit `https://index.percall.dev/sitemap.xml` and
+      `https://kc-it.pl/sitemap.xml`.
+   3. Bing Webmaster Tools — verify both; submit `https://percall.dev/` and
+      `https://kc-it.pl/services/agent-readability` manually.
+   4. Request indexing for both sales/front-door URLs in GSC.
+
+4. **Clustly — one small channel experiment.** It was still unconfigured on
+   2026-08-27 (`/etc/clustly-agent.env` absent; unit inactive). Register at
+   <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
+   `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
+   Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
+   their managed wallet holds earnings until swept. Stop the unit and listing
+   after 30 days if it produces no qualified order.
+
+### Useful, but not launch blockers
+
+5. **Create two optional Stripe Payment Links** in the KC-IT Stripe account:
 
    - `Agent-readability report` — **$49 USD**, one-time, quantity fixed at 1.
      Collect buyer email and a required `Website URL` custom field.
@@ -48,9 +63,13 @@ action. The implementation that does not need you continues elsewhere. Updated
    `services/agent-readability.html`, `.json`, `.md`, and the Agent Skill.
    The public prices and exact scopes are already live in those files.
 
-4. **Configure honest response signing on the kc-it.pl Pages project.** Confirm
-   the Pages project name, then run this from a terminal authenticated to the
-   correct Cloudflare account:
+   The service remains buyable by email while these are absent; the live page
+   still used the temporary `mailto:` links on 2026-08-27.
+
+6. **Configure honest response signing on the kc-it.pl Pages project.** The key
+   directory still returned 404 on 2026-08-27. Confirm the Pages project name,
+   then run this from a terminal authenticated to the correct Cloudflare
+   account:
 
    ```bash
    node --input-type=module -e 'const k=await crypto.subtle.generateKey("Ed25519",true,["sign","verify"]);const j=await crypto.subtle.exportKey("jwk",k.privateKey);process.stdout.write(Buffer.concat([Buffer.from(j.d,"base64url"),Buffer.from(j.x,"base64url")]).toString("base64"))' |
@@ -65,39 +84,20 @@ action. The implementation that does not need you continues elsewhere. Updated
    the directory deliberately returns 404 instead of pretending unsigned
    content is verifiable.
 
-### Distribution — do in this order
+### Confirmed complete
 
-5. **Indexation:**
-
-   1. Google Search Console — verify `percall.dev` and `kc-it.pl` as Domain
-      properties.
-   2. Submit `https://index.percall.dev/sitemap.xml` and
-      `https://kc-it.pl/sitemap.xml`.
-   3. Bing Webmaster Tools — verify both; submit `https://percall.dev/` and
-      `https://kc-it.pl/services/agent-readability` manually.
-   4. Request indexing for both sales/front-door URLs in GSC.
-
-6. **Personal outreach is the 30-day sales test.** Use the ICP, tracker fields,
-   two-message sequence and stop gates in
-   `vault 40-projects/x402-scale-up/2026-08-06-commercial-reset.md`. Send 10
-   genuinely personalized messages per weekday until 50 qualified founders have
-   been contacted. Do not buy a list or automate the sending. Record replies,
-   calls and payments, not opens.
-
-7. **Clustly — one small channel experiment.** Register at
-   <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
-   `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
-   Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
-   their managed wallet holds earnings until swept. Stop the unit and listing
-   after 30 days if it produces no qualified order.
+- **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
+  2026-08-27 and the 2026-08-26 health run committed a fresh traffic snapshot.
+  The live 30-day reading was 59,672 requests with 7.77% classified as an AI
+  crawler or action agent. The incident workflow remains in place and will open
+  one exact-title issue without overwriting the last good series if this fails
+  again.
 
 ### Held — do not do these yet
 
-- **Show HN — held until 25 Aug or later, and only after analytics is healthy.**
-  The post is a measured negative result; it needs a complete 30-day window.
-  Draft: `vault 40-projects/x402-scale-up/show-hn-draft.md`.
 - **No new x402 endpoint, directory feature, paid listing work, or marketplace
-  build for 30 days.** The gate is commercial evidence, not another deploy.
+  build until the commercial reset is evaluated after 50 qualified contacts or
+  30 days, whichever is later.** The gate is evidence, not another deploy.
 - **No paid acquisition.** First require at least 5 positive replies, 2 sales
   calls and 1 paid human order from the 50-lead outreach test.
 

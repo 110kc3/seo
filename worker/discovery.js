@@ -12,9 +12,15 @@
 // cost one CPU slice and no network — the same data `/api/index.json` serves,
 // never a second copy that can drift.
 
+import x402Stats from '../api/x402/stats.json' with { type: 'json' };
+import mcpStats from '../api/mcp/stats.json' with { type: 'json' };
+
 const MAX_QUERY = 512;
 const MAX_LIMIT = 50;
 const DEFAULT_LIMIT = 10;
+const count = (value) => Number(value).toLocaleString('en-US');
+const X402_ENDPOINTS = count(x402Stats.endpoints);
+const MCP_ENDPOINTS = count(mcpStats.remote_endpoints);
 
 const json = (body, status = 200, headers = {}) =>
   new Response(JSON.stringify(body, null, 2) + '\n', {
@@ -459,7 +465,7 @@ export function mcpTools(base) {
     {
       name: 'score_url',
       title: 'Score a site for agent-readability',
-      description: 'Grade any public URL A–F across 13 agent-readability checks (llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, canonical, HTTPS). Free; returns which checks failed. The paid endpoint at /api/audit adds the reason and a paste-ready fix for each.',
+      description: 'Grade any public URL A–F across 20 weighted agent-readability checks, including llms.txt, schema.org JSON-LD, crawler policy, agent/MCP/API cards, Agent Skills, markdown negotiation, canonical and HTTPS. Free; returns which checks failed. The paid endpoint at /api/audit adds the reason and a paste-ready fix for each.',
       inputSchema: {
         type: 'object',
         properties: { url: { type: 'string', description: 'Absolute http(s) URL to grade.' } },
@@ -469,7 +475,7 @@ export function mcpTools(base) {
     {
       name: 'search_x402_endpoints',
       title: 'Find a paid API you can call with x402',
-      description: 'Search ~14,700 x402-payable HTTP endpoints — the machine-payable web, normalized from the Coinbase CDP Bazaar. Use this to find an API an agent can pay for per call (USDC on Base and other chains) and to see what it costs before calling it. Filter by chain, HTTP method, host or maximum price; results are ranked by relevance then cheapest first.',
+      description: `Search ${X402_ENDPOINTS} x402-payable HTTP endpoints — the machine-payable web, normalized from the Coinbase CDP Bazaar. Use this to find an API an agent can pay for per call (USDC on Base and other chains) and to see what it costs before calling it. Filter by chain, HTTP method, host or maximum price; results are ranked by relevance then cheapest first.`,
       inputSchema: {
         type: 'object',
         properties: {
@@ -485,7 +491,7 @@ export function mcpTools(base) {
     {
       name: 'search_mcp_servers',
       title: 'Find an MCP server you can connect to right now',
-      description: 'Search ~10,000 remotely-callable MCP servers from the official MCP registry — every one has a URL, so it can be added without installing anything. Filter by transport, host, or whether it needs credentials. Servers distributed only as installable packages are deliberately excluded: this answers "what can I call now", not "what exists".',
+      description: `Search ${MCP_ENDPOINTS} remotely-callable MCP servers from the official MCP registry — every one has a URL, so it can be added without installing anything. Filter by transport, host, or whether it needs credentials. Servers distributed only as installable packages are deliberately excluded: this answers "what can I call now", not "what exists".`,
       inputSchema: {
         type: 'object',
         properties: {

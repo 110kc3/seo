@@ -44,11 +44,11 @@
     },
     {
       "name": "search_x402_endpoints",
-      "description": "Search ~14,700 x402-payable HTTP endpoints by what they do, what they cost and which chain they settle on."
+      "description": "Search 15,127 x402-payable HTTP endpoints by what they do, what they cost and which chain they settle on."
     },
     {
       "name": "search_mcp_servers",
-      "description": "Search ~10,000 remotely-callable MCP servers from the official registry — every result has a URL you can connect to."
+      "description": "Search 14,138 remotely-callable MCP servers from the official registry — every result has a URL you can connect to."
     },
     {
       "name": "how_to_register",
