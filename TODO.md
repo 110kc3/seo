@@ -4,15 +4,15 @@
 
 *Everything here needs your credentials, a browser, or an external/public
 action. The implementation that does not need you continues elsewhere. Updated
-2026-08-27; where the changelog below disagrees with this list, this list wins.*
+2026-08-28; where the changelog below disagrees with this list, this list wins.*
 
 ### Ready now
 
 1. **Post Show HN in the next Tue–Thu, 14:00–16:00 UTC window.** The 25 Aug
    hold has expired and every gate now passes: analytics is healthy, the rolling
-   window is a full 30 days, five third-party products have exercised the real
+   window is a full 30 days, six third-party products have exercised the real
    registration workflow, and organic payment conversion remains zero. The
-   draft and posting checklist were refreshed from the 2026-08-27 live snapshot:
+   draft and posting checklist were refreshed from the 2026-08-28 live snapshot:
    `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean slot is
    Tue 1 Sep. Refresh its figures immediately before submitting; posting under
    your HN account remains your action.
@@ -37,7 +37,7 @@ action. The implementation that does not need you continues elsewhere. Updated
    4. Request indexing for both sales/front-door URLs in GSC.
 
 4. **Clustly — one small channel experiment.** It was still unconfigured on
-   2026-08-27 (`/etc/clustly-agent.env` absent; unit inactive). Register at
+   2026-08-28 (`/etc/clustly-agent.env` absent; unit inactive). Register at
    <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
    `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
    Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
@@ -64,10 +64,10 @@ action. The implementation that does not need you continues elsewhere. Updated
    The public prices and exact scopes are already live in those files.
 
    The service remains buyable by email while these are absent; the live page
-   still used the temporary `mailto:` links on 2026-08-27.
+   still used the temporary `mailto:` links on 2026-08-28.
 
 6. **Configure honest response signing on the kc-it.pl Pages project.** The key
-   directory still returned 404 on 2026-08-27. Confirm the Pages project name,
+   directory still returned 404 on 2026-08-28. Confirm the Pages project name,
    then run this from a terminal authenticated to the correct Cloudflare
    account:
 
@@ -87,8 +87,8 @@ action. The implementation that does not need you continues elsewhere. Updated
 ### Confirmed complete
 
 - **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
-  2026-08-27 and the 2026-08-26 health run committed a fresh traffic snapshot.
-  The live 30-day reading was 59,672 requests with 7.77% classified as an AI
+  2026-08-28 and the 2026-08-26 health run committed a fresh traffic snapshot.
+  The live 30-day reading was 60,019 requests with 7.76% classified as an AI
   crawler or action agent. The incident workflow remains in place and will open
   one exact-title issue without overwriting the last good series if this fails
   again.
