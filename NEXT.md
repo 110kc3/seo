@@ -28,7 +28,7 @@ The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
 > **Updated 2026-08-28, ninth pass.** Analytics is restored and the Show HN
-> hold has expired. The full-window result is now 60,019 requests, 7.76% AI
+> hold has expired. The full-window result is now 60,965 requests, 7.82% AI
 > crawler/action-agent share, six third-party registrations and zero organic
 > payments. The private draft has been rewritten around that contrast (§1.1).
 >
@@ -42,6 +42,12 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 > all 291 tests, deployed from `38bd15b`, and the canonical live file now matches
 > the generated file byte for byte. All three upstream PRs were also refreshed
 > on 2026-08-28 (§3).
+>
+> **Repository health, checked 2026-08-28:** there are no open issues or pull
+> requests in this repo, the latest workflows are green, production is healthy,
+> and the live `llms.txt` still matches the generated artifact byte for byte.
+> The three external PRs are all zero commits behind their upstream bases, have
+> no failing checks and now wait only on maintainer review or merge.
 
 ---
 
@@ -51,11 +57,11 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 
 The 25 Aug hold did its job. All four gates now pass:
 
-1. **Full 30-day window:** 60,019 requests in the live 2026-08-28 snapshot.
+1. **Full 30-day window:** 60,965 requests in the live 2026-08-28 snapshot.
 2. **Real registration path:** six third-party `self-registered` listings are
    live — Cap, FluentEDI, Penroll, PZERO, Question Machine and XiuRouter.
-3. **Inbound activity:** 4,655 requests identified as an AI crawler or action
-   agent (7.76%), with 483 free scores and 678 `llms.txt` reads. This is a
+3. **Inbound activity:** 4,765 requests identified as an AI crawler or action
+   agent (7.82%), with 452 free scores and 669 `llms.txt` reads. This is a
    self-reported User-Agent classification, not an identity claim.
 4. **Conversion result:** six audit settlements and eleven settlements across
    all paid surfaces, all from one known test wallet; no organic payer and no

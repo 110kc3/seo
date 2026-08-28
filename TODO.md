@@ -88,10 +88,15 @@ action. The implementation that does not need you continues elsewhere. Updated
 
 - **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
   2026-08-28 and the 2026-08-26 health run committed a fresh traffic snapshot.
-  The live 30-day reading was 60,019 requests with 7.76% classified as an AI
+  The live 30-day reading was 60,965 requests with 7.82% classified as an AI
   crawler or action agent. The incident workflow remains in place and will open
   one exact-title issue without overwriting the last good series if this fails
   again.
+- **Repository health confirmed.** On 2026-08-28 there were no open issues or
+  pull requests, the latest workflows were green, production endpoints returned
+  200, and live `llms.txt` matched the generated artifact byte for byte. All
+  three external directory PRs were zero commits behind with no failing checks;
+  each now waits on a maintainer.
 
 ### Held — do not do these yet
 
