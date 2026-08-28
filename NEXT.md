@@ -46,6 +46,9 @@ you can make. §2 is code and PRs, and needs nothing from you.**
 > **Repository health, checked 2026-08-28:** there are no open issues or pull
 > requests in this repo, the latest workflows are green, production is healthy,
 > and the live `llms.txt` still matches the generated artifact byte for byte.
+> The deprecated action-runtime warning found on the verification deploy was
+> cleared by moving all workflows to the Node 24-based `checkout@v7` and
+> `setup-node@v7` actions while keeping the project test runtime on Node 22.
 > The three external PRs are all zero commits behind their upstream bases, have
 > no failing checks and now wait only on maintainer review or merge.
 

@@ -96,7 +96,10 @@ action. The implementation that does not need you continues elsewhere. Updated
   pull requests, the latest workflows were green, production endpoints returned
   200, and live `llms.txt` matched the generated artifact byte for byte. All
   three external directory PRs were zero commits behind with no failing checks;
-  each now waits on a maintainer.
+  each now waits on a maintainer. The deprecated action-runtime warning exposed
+  by the verification deploy was cleared by upgrading all workflows to the
+  Node 24-based `checkout@v7` and `setup-node@v7` actions; project tests still
+  run on the required Node 22 runtime.
 
 ### Held — do not do these yet
 
