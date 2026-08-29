@@ -3,8 +3,8 @@
 ## ⚡ Needs Kamil — read this, skip the rest
 
 *Everything here needs your credentials, a browser, or an external/public
-action. The implementation that does not need you continues elsewhere. Updated
-2026-08-28; where the changelog below disagrees with this list, this list wins.*
+action. There is currently no open repository-side implementation. Updated
+2026-08-29; where the changelog below disagrees with this list, this list wins.*
 
 ### Ready now
 
@@ -12,7 +12,7 @@ action. The implementation that does not need you continues elsewhere. Updated
    hold has expired and every gate now passes: analytics is healthy, the rolling
    window is a full 30 days, six third-party products have exercised the real
    registration workflow, and organic payment conversion remains zero. The
-   draft and posting checklist were refreshed from the 2026-08-28 live snapshot:
+   draft and posting checklist were refreshed from the 2026-08-29 live snapshot:
    `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean slot is
    Tue 1 Sep. Refresh its figures immediately before submitting; posting under
    your HN account remains your action.
@@ -36,9 +36,9 @@ action. The implementation that does not need you continues elsewhere. Updated
       `https://kc-it.pl/services/agent-readability` manually.
    4. Request indexing for both sales/front-door URLs in GSC.
 
-4. **Clustly — one small channel experiment.** It was still unconfigured on
-   2026-08-28 (`/etc/clustly-agent.env` absent; unit inactive). Register at
-   <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
+4. **Optional: Clustly — one small channel experiment.** It was still
+   unconfigured on 2026-08-29 (`/etc/clustly-agent.env` absent; unit inactive).
+   Register at <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
    `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
    Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
    their managed wallet holds earnings until swept. Stop the unit and listing
@@ -64,10 +64,10 @@ action. The implementation that does not need you continues elsewhere. Updated
    The public prices and exact scopes are already live in those files.
 
    The service remains buyable by email while these are absent; the live page
-   still used the temporary `mailto:` links on 2026-08-28.
+   still used the temporary `mailto:` links on 2026-08-29.
 
 6. **Configure honest response signing on the kc-it.pl Pages project.** The key
-   directory still returned 404 on 2026-08-28. Confirm the Pages project name,
+   directory still returned 404 on 2026-08-29. Confirm the Pages project name,
    then run this from a terminal authenticated to the correct Cloudflare
    account:
 
@@ -84,15 +84,15 @@ action. The implementation that does not need you continues elsewhere. Updated
    the directory deliberately returns 404 instead of pretending unsigned
    content is verifiable.
 
-### Confirmed complete
+### Current health — not tasks
 
 - **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
-  2026-08-28 and the 2026-08-26 health run committed a fresh traffic snapshot.
-  The live 30-day reading was 60,965 requests with 7.82% classified as an AI
+  2026-08-29 and the 2026-08-26 health run committed a fresh traffic snapshot.
+  The live 30-day reading was 61,221 requests with 7.58% classified as an AI
   crawler or action agent. The incident workflow remains in place and will open
   one exact-title issue without overwriting the last good series if this fails
   again.
-- **Repository health confirmed.** On 2026-08-28 there were no open issues or
+- **Repository health confirmed.** On 2026-08-29 there were no open issues or
   pull requests, the latest workflows were green, production endpoints returned
   200, and live `llms.txt` matched the generated artifact byte for byte. All
   three external directory PRs were zero commits behind with no failing checks;
@@ -313,10 +313,13 @@ old locations only.
 - [x] `agents.json` now advertises the 1.0 card path, which three agent-readiness checks read.
 - 188 tests (was 186).
 
-### Still open from that plan — two need a decision, one is a project
+### Decisions from that plan — all closed
 
-- [ ] **Phase 2 — Content Signals in `robots.txt`.** One line, and **the usual default is wrong for us**. Cloudflare's default is `search=yes, ai-train=no`, written for a publisher protecting an archive. This site is a directory whose entire purpose is to be consumed by models, so `ai-train=yes` is very likely right — being in training data is distribution, not leakage. That is a call about your content, so it is yours: say the word and it ships in five minutes. Only 4% of sites declare it, and Cloudflare scores it.
-- [x] ~~**Phase 4** — extend `/api/score`~~ — **done as detection, not scoring** (v3.13). All six signals are detected and reported; none is weighted. That was the safe half and it required no decision. **What is still open is the decision itself: should any of them count toward the grade?** Doing so needs a versioned check set and a fleet re-score first, because it moves badges on other people's sites.
+- [x] ~~**Phase 2 — Content Signals in `robots.txt`.**~~ Decided and shipped
+  2026-08-02 as `search=yes, ai-input=yes, ai-train=yes`; see `NEXT.md` §4.1.
+- [x] ~~**Phase 4** — extend `/api/score`.~~ Detection shipped in v3.13; the
+  scoring decision closed 2026-08-02 with seven low-adoption signals promoted
+  into versioned check set v2 and the fleet re-scored. See `NEXT.md` §4.2.
 - [x] ~~**Phase 5** — Agent Skills~~ — **done** (v3.13), four skills, digests generated.
 
 **The caveat worth keeping:** adoption of most of these is tiny — fewer than 15
@@ -461,14 +464,21 @@ revenue now is distribution.
 - [x] **Payment rail proven end to end** — done 2026-07-25. The official `x402-fetch@1.2.0` client was driven against a local `wrangler dev`: it parsed the 402, signed an EIP-3009 authorization, paid, and the **live** `x402.org` facilitator verified the signature and failed only on `invalid_exact_evm_insufficient_balance` (unfunded throwaway wallet). The same signature was also accepted through the v2 path. Nothing is left to prove but funding.
 - [x] **Swap the analytics token for a scoped one** — done 2026-08-01. `CF_ANALYTICS_TOKEN` is now its own credential rather than a mirror of the deploy token, so the Worker's env no longer carries Workers Scripts: Edit. `push-secrets` pushed it and logged no mirror warning, which is how the mirror reports that it stopped; `/api/stats.json` went 403 → 200 on the same run. The old over-privileged deploy token has been deleted account-side.
 - [x] **CDP API key, and the rail switched onto it** — done 2026-08-01. Kamil created a **Secret API Key** (Ed25519) at `portal.cdp.coinbase.com/access/api` — the portal's x402 page is metrics-only and "Custodial Wallet" wants a US business account, so neither is the right door. Both halves are repo secrets, pushed to the Worker by `cf-admin -f action=push-secrets` and never in `site.config.json`. `verify-rail.mjs` used to be unable to check this rail because CDP's `/supported` answers 401; it now signs the request with the Worker's own auth code, so `cf-admin -f action=verify-cdp` verifies it on the runner where the secrets live — **key accepted, 24 kinds advertised, both v2 `eip155:8453` and v1 `base` settled**. `"active": "cdp"` since, proven by a real $0.05 payment (tx `0x28f4…8292`, block 49327142) with the replay refused. Buys a free tier of 1,000 tx/month and — the actual point — Bazaar cataloging.
-- [ ] **Get the endpoint into the x402 Bazaar.** Everything on our side is done; the listing has not appeared. Not lag alone: CDP builds a listing from discovery metadata attached to a **settlement**, and we attached none for the first four. Read off the live catalog (the docs are vague), 1,698 of its 1,795 v1 resources carry `discoverable: true` inside the v1 `outputSchema`, and their published `extensions.bazaar.info` is visibly derived from it. `/api/audit` now publishes exactly that (plus `extensions.bazaar` for v2) and has settled a payment carrying it — and is still not listed minutes later. Check with `node scripts/bazaar-check.mjs`, which scans all ~14.7k entries by receiving address and prints what to rule out. If it stays absent for a few days, the likely answer is CDP-side: `x402-foundation/x402#2112` reports the identical symptom after 8 settlements with the official SDK, no maintainer reply. **Re-checked 2026-08-01 evening: still absent, now across 14,815 catalog entries** (the catalog grew by ~150 in a few hours, so their indexer is running — it is simply not indexing us).
-- [ ] **Optional: Stripe machine-payments access** — request it so the fiat rail (settles to the Stripe balance in USD, no crypto handling) becomes available later. The existing `pk_test_…` key belongs to the card rail and unlocks nothing for x402.
-- [ ] **Post Show HN — draft rewritten 2026-08-01 and ready to go; only the posting is left, and that is Kamil's.** The day-7 gate opened it (see below), so it no longer waits on organic listings. The draft leads with the measured numbers and the zero-conversion finding rather than the directory, and carries three new "did not expect" items worth more than the old ones: the Bazaar's undocumented wire format, the Worker-cannot-fetch-itself 502-after-charging bug, and the spec-vs-installed-base split. Titles, the three comment threads to expect and prepared answers are all in `vault 40-projects/x402-scale-up/show-hn-draft.md`. Re-read `/api/stats.json` the morning you post and refresh the five figures — stale numbers are the one thing that would sink it.
+- **External state, no current action — x402 Bazaar.** Still absent from all
+  14,500 resources on 2026-08-29. The CDP rail, discovery metadata and a
+  metadata-carrying settlement are all verified; only recheck if upstream state
+  changes. Current status lives in `NEXT.md` §3.
+- **Optional owner action — Stripe machine-payments access.** Kept once in the
+  live queue above; it is not a repository task.
+- **Owner action — Show HN.** Kept once at the top of this file. The current
+  draft, figures and posting checklist live in the private vault.
 - [x] **Publish the domain-root discovery repo** — done 2026-07-10: `110kc3/110kc3.github.io` live. Note this is now partly superseded — `index.kc-it.pl` is itself a domain root, so it serves its own `/llms.txt`, `/robots.txt`, `/sitemap.xml` and `/.well-known/agent.json`.
 - [x] **Managed AI-crawler block cleared on every zone** — done 2026-07-29, after Kamil's second token update finally carried Zone → Bot Management → Edit. `robots-report` read all five zones (four had `managed=true, ai_bots=block`; percall.dev was clean); `robots-allow` updated all four — every zone's plan refused the `policy_only` variant, so the fallback `is_robots_txt_managed: false` applied. Verified live: the managed stanza is gone from all three affected origins, and fresh audits score `stareaparaty.com`, `protocolindex.eu` and `overtimelog.com` at **A 100** — the whole 12-site fleet now sits at 100/100. Two footnotes: the Amazonbot-on-an-affiliate-site question resolved itself (the block was Cloudflare's wholesale default, not curation, and Amazonbot crawling an affiliate site costs nothing); and dropping the managed file exposed that `overtimelog.com` serves its SPA HTML at `/robots.txt` — the audit forgives it, but a real robots.txt in `overtime-guard-slack` would be the honest fix. **Fixed 2026-08-01** (`overtime-guard-slack@089225e`): a real robots.txt and sitemap.xml, both live. Cloudflare Pages' index.html fallback was the cause, so the same trap applies to every Pages site in the fleet that has no explicit robots.txt.
 
 - [x] **Re-home the `agent-readability-service` listing onto an origin we control** — done 2026-07-29. The listing now points at **https://kc-it.pl/services/agent-readability**, which scores **A 100/100 (13/13)** against `/api/score`; it used to point at `https://github.com/110kc3/seo` and read **E 51** — the Track A shopfront failing its own audit (found in the 2026-07-29 review). The page is the sales page the review asked for: the offer, the 2026-07-28 fleet-sweep case study as before/after evidence, and the three entry points (free score, $0.05 x402 audit, `[hire]`). It lives in `personal-page` (`services/agent-readability.html`, plus a JSON twin and an OG card), is listed in that site's `llms.txt`, and is linked from the "For humans" section here. `scores.json` was refreshed by hand rather than waiting for the weekly cron.
-- [ ] **Directory submissions — the two PR-shaped ones are out; the rest need a browser.** Executed 2026-07-29 with your go: **PR [punkpeye/awesome-mcp-servers#11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** (90k★, the big one, agent-PR fast-track title, upstream CI green) and **PR [SecretiveShell/Awesome-llms-txt#114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)**. Both are one-line diffs and both now wait on their maintainers; on the 2026-07-29 domain migration both PRs were updated in place to carry `https://index.percall.dev` (branch push for #114, body PATCH for #11152). **agentswelcome.dev is done — certified and listed 2026-07-29 at 100/100, "exemplary", all 18 checks passing** (entry `6cd7585c82eb`; re-certified after the domain migration as `https://index.percall.dev`, entry `ae21017ab44f`, again 100/100 — the old-URL entry 308s and will age out on their side). It first refused the submit with HTTP 422 at 54–60/100 against a 70 gate; the four failing checks were closed in `6a2cc70` (the plural `/.well-known/agents.json` generated from a template, RFC 9116 `security.txt`, the negotiated markdown twin relabelled `text/markdown` instead of `text/plain`, and an `X-Agent-Welcome` header beside the existing `X-Agent-Protocol`) and `4ca744a` (flattening the web-bot-auth advertisement — these auditors read shallow, and a capability nested one level too deep reads as absent). Full write-up, including the 3-audits/hour free tier and why the first submission recorded a stale 78, in `docs/distribution.md` §4. **wong2/awesome-mcp-servers no longer takes PRs** — its README redirects submissions to a web form at mcpservers.org/submit. Still manual, all browser sign-ins or forms: llms-txt-hub (llmstxthub.com/submit, GitHub OAuth), directory.llmstxt.cloud (Tally form), llmstxt.site, mcpservers.org. **Every answer for all four is prepared in `docs/distribution.md` §4b** — field labels read off the live forms 2026-08-01, including the two constrained dropdowns (llms-txt-hub takes one of exactly five categories → `ai-ml`; mcpservers.org → `Search`), so it is ten minutes of pasting. Never submit the old `110kc3.github.io/seo/` URL, `index.kc-it.pl`, or the workers.dev fallback.
+- [x] ~~**Directory submissions.**~~ All browser-form channels were submitted
+  by 2026-08-02. The three remaining PRs are current and now wait only on
+  maintainers; see `NEXT.md` §3.
 
 ## Revenue dashboard — live at https://revenue.local.kc-it.pl
 
@@ -597,12 +607,16 @@ survived deployment and cost real money or real payments.
 
 ## Later / nice-to-have
 
-- [ ] ~~Join the Cloudflare Monetization Gateway waitlist~~ — promoted into the pending-on-Kamil list above as 6b.
-- [ ] Automate Stripe reconciliation (webhook → repository_dispatch → set-tier) once there's a first paying customer.
-- [ ] x402 Bazaar listing — promoted out of "later": it is now the open item under Distribution above. Re-checked 2026-08-01 ~2h after the metadata-carrying settlement: still absent from all 14,658 catalog entries.
+- **Optional owner action:** Cloudflare Monetization Gateway waitlist; kept in
+  the live queue above.
+- **Future trigger:** automate Stripe reconciliation only after the first paying
+  customer. It is deliberately not a current task.
+- **External state:** the x402 Bazaar omission is recorded in `NEXT.md` §3; no
+  seller-side action remains.
 - [x] ~~Once the corpus question is decided, revisit whether `/ask` should summarize by default~~ — done 2026-08-01, and it does. `mode=list` opts out; a miss now names the two catalogs. See v3.10.
 - [x] ~~RFC 9421 web-bot-auth response signing~~ — done 2026-07-25, both directions.
-- [ ] Publish the `clients/` wrappers as real packages (PyPI + npm) — only once there is traffic that justifies a release pipeline.
+- **Future trigger:** publish the `clients/` wrappers only when traffic justifies
+  a release pipeline. It is deliberately not a current task.
 - [x] ~~Score badge variant~~ — done 2026-07-25 as `/badge.svg?slug=…&show=score`, fed by `scores.json` from the weekly cron.
 - [x] ~~Retire the old `110kc3.github.io/seo/` Pages deploy~~ — done 2026-07-25.
 
