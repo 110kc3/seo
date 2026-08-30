@@ -1,0 +1,24 @@
+{
+  "slug": "dash",
+  "name": "Dash",
+  "url": "https://dashpup.ai",
+  "description": "Dash is an AI teammate in Slack and Microsoft Teams that connects to 3,000+ tools, learns how a team works, and ships reports, research, follow-ups, and automated work with approval controls.",
+  "category": "agent",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://dashpup.ai/llms.txt",
+    "mcp": "https://dashpup.ai/help/use-dash-as-an-mcp-server/"
+  },
+  "tags": [
+    "workflow-automation",
+    "slack",
+    "microsoft-teams",
+    "mcp",
+    "approval-controls"
+  ],
+  "submitted_by": "Process Street",
+  "created": "2026-08-30",
+  "github_user": "vpatankar",
+  "tier": "free",
+  "origin": "self-registered"
+}

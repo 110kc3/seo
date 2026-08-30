@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Dash</title>
+    <link>https://index.percall.dev/l/dash.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/dash.html</guid>
+    <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Dash is an AI teammate in Slack and Microsoft Teams that connects to 3,000+ tools, learns how a team works, and ships reports, research, follow-ups, and automated work with approval controls.</description>
+  </item>
+  <item>
     <title>PZERO</title>
     <link>https://index.percall.dev/l/pzero.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/pzero.html</guid>
