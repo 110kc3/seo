@@ -1,12 +1,12 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-26",
-  "catalog_size": 15127,
-  "cursor": 6,
+  "probed_at": "2026-08-31",
+  "catalog_size": 14793,
+  "cursor": 7,
   "slice": 600,
-  "stride": 25,
-  "runs_per_full_pass": 25,
+  "stride": 24,
+  "runs_per_full_pass": 24,
   "window": {
     "probed": 600,
     "ok": 597,
@@ -15,7 +15,7 @@
   },
   "answered_share": 0.995,
   "confirmed_unreachable": 1,
-  "tracked_unreachable": 30,
+  "tracked_unreachable": 29,
   "unreachable": [
     {
       "url": "https://api.x402node.dev/domain/check",
@@ -34,27 +34,6 @@
     {
       "url": "https://cryptyx.ai/api/taker-flow",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/road-conditions",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-dailymed-drug-labels",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-tor-relay-summary",
-      "reason": "ECONNREFUSED",
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
@@ -172,13 +151,6 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://etherealgoodsco.store/enrich/domain",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
-    },
-    {
       "url": "https://news.apitoll.cloud/v1/cointelegraph/news",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -226,6 +198,27 @@
       "misses": 1,
       "since": "2026-08-26",
       "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.osf-master-server.com/x402/screen/sanctions/:name",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
+    },
+    {
+      "url": "https://app.r3p.xyz/mcp/x402",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
+    },
+    {
+      "url": "https://x402-factory.com/v1/movers",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
     }
   ]
 }

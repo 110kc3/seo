@@ -5,7 +5,7 @@
     "passed": 9,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "3tg-test-generation": {
     "letter": "C",
@@ -13,7 +13,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "agent-readability-service": {
     "letter": "A",
@@ -21,7 +21,7 @@
     "passed": 19,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "ai-product-index": {
     "letter": "A",
@@ -29,7 +29,7 @@
     "passed": 20,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "ai-visibility-checker": {
     "letter": "A",
@@ -37,7 +37,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "arcadia-finance": {
     "letter": "D",
@@ -45,7 +45,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "avo": {
     "letter": "E",
@@ -53,7 +53,7 @@
     "passed": 9,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "bankier-street-bets": {
     "letter": "A",
@@ -61,7 +61,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "bezbaseina": {
     "letter": "D",
@@ -69,7 +69,7 @@
     "passed": 10,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "boundr": {
     "letter": "F",
@@ -77,7 +77,7 @@
     "passed": 3,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "cap": {
     "letter": "B",
@@ -85,7 +85,7 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "carbone-mcp": {
     "letter": "C",
@@ -93,7 +93,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "caudexcatena-mcp": {
     "letter": "E",
@@ -101,7 +101,7 @@
     "passed": 9,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "changethisfile": {
     "letter": "C",
@@ -109,7 +109,7 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "chiplab": {
     "letter": "B",
@@ -117,7 +117,15 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
+  },
+  "dash": {
+    "letter": "D",
+    "score": 67,
+    "passed": 10,
+    "total": 20,
+    "check_set": "v2",
+    "checked": "2026-08-31"
   },
   "default-privacy": {
     "letter": "C",
@@ -125,7 +133,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "embers-tabletop-rpg-toolkit": {
     "letter": "F",
@@ -133,7 +141,7 @@
     "passed": 7,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "environmental-compliance": {
     "letter": "E",
@@ -141,7 +149,7 @@
     "passed": 8,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "fastcrw": {
     "letter": "C",
@@ -149,7 +157,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "fluentedi": {
     "letter": "C",
@@ -157,7 +165,7 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "food-near-me": {
     "letter": "B",
@@ -165,7 +173,7 @@
     "passed": 13,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "futia": {
     "letter": "D",
@@ -173,7 +181,7 @@
     "passed": 10,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "fxmacrodata": {
     "letter": "A",
@@ -181,7 +189,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "hlido-agent-reviews": {
     "letter": "C",
@@ -189,7 +197,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "jp-bids-mcp": {
     "letter": "E",
@@ -197,7 +205,7 @@
     "passed": 8,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "llm-optimizer": {
     "letter": "E",
@@ -205,7 +213,7 @@
     "passed": 8,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "mowgli": {
     "letter": "E",
@@ -213,7 +221,7 @@
     "passed": 8,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "newzai-mcp-server": {
     "letter": "E",
@@ -221,7 +229,7 @@
     "passed": 8,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "niche-editorial-intelligence": {
     "letter": "D",
@@ -229,7 +237,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "penroll": {
     "letter": "C",
@@ -237,7 +245,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "polish-sweepstakes": {
     "letter": "A",
@@ -245,7 +253,7 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "przetargimiejskie": {
     "letter": "B",
@@ -253,7 +261,7 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "puzle": {
     "letter": "A",
@@ -261,7 +269,15 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
+  },
+  "pzero": {
+    "letter": "D",
+    "score": 69,
+    "passed": 11,
+    "total": 20,
+    "check_set": "v2",
+    "checked": "2026-08-31"
   },
   "question-machine": {
     "letter": "F",
@@ -269,7 +285,7 @@
     "passed": 1,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "rentgen-ofert": {
     "letter": "A",
@@ -277,15 +293,15 @@
     "passed": 15,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "scite": {
     "letter": "F",
-    "score": 16,
-    "passed": 3,
+    "score": 43,
+    "passed": 7,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "signvoy": {
     "letter": "D",
@@ -293,7 +309,7 @@
     "passed": 10,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "soma-brewing-company": {
     "letter": "C",
@@ -301,7 +317,7 @@
     "passed": 12,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "stare-aparaty": {
     "letter": "B",
@@ -309,7 +325,7 @@
     "passed": 14,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "truthifi-connect": {
     "letter": "E",
@@ -317,7 +333,7 @@
     "passed": 9,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "ultramemory": {
     "letter": "C",
@@ -325,7 +341,7 @@
     "passed": 11,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
   },
   "vocab-voyage": {
     "letter": "A",
@@ -333,6 +349,14 @@
     "passed": 19,
     "total": 20,
     "check_set": "v2",
-    "checked": "2026-08-26"
+    "checked": "2026-08-31"
+  },
+  "xiurouter": {
+    "letter": "E",
+    "score": 55,
+    "passed": 8,
+    "total": 20,
+    "check_set": "v2",
+    "checked": "2026-08-31"
   }
 }

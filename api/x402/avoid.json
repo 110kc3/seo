@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-26",
-  "catalog_size": 15127,
+  "probed_at": "2026-08-31",
+  "catalog_size": 14793,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -12,8 +12,8 @@
   "free": true,
   "counts": {
     "confirmed": 1,
-    "suspected": 29,
-    "tracked": 30
+    "suspected": 28,
+    "tracked": 29
   },
   "endpoints": [
     {
@@ -35,27 +35,6 @@
     {
       "url": "https://cryptyx.ai/api/taker-flow",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/road-conditions",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-dailymed-drug-labels",
-      "reason": "ECONNREFUSED",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://proxy.suverse.io/v1/data/suverse-tor-relay-summary",
-      "reason": "ECONNREFUSED",
       "misses": 1,
       "since": "2026-08-01",
       "last_checked": "2026-08-01"
@@ -173,13 +152,6 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://etherealgoodsco.store/enrich/domain",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
-    },
-    {
       "url": "https://news.apitoll.cloud/v1/cointelegraph/news",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -227,6 +199,27 @@
       "misses": 1,
       "since": "2026-08-26",
       "last_checked": "2026-08-26"
+    },
+    {
+      "url": "https://api.osf-master-server.com/x402/screen/sanctions/:name",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
+    },
+    {
+      "url": "https://app.r3p.xyz/mcp/x402",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
+    },
+    {
+      "url": "https://x402-factory.com/v1/movers",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-08-31",
+      "last_checked": "2026-08-31"
     }
   ]
 }

@@ -14,7 +14,7 @@ Three ways to query this index, in ascending order of how little you have to kno
 
 ## Find an MCP server you can connect to (the MCP catalog)
 
-14,138 remotely-callable MCP servers, normalized from the official MCP registry.
+14,704 remotely-callable MCP servers, normalized from the official MCP registry.
 Every entry has a URL, so it can be added without installing anything. Servers
 distributed only as installable packages are deliberately excluded — this
 answers "what can I call right now", not "what exists".
@@ -27,11 +27,11 @@ answers "what can I call right now", not "what exists".
 
 ## Find a paid API you can call (the x402 catalog)
 
-15,127 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+14,793 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, 15,127 entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 14,793 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 

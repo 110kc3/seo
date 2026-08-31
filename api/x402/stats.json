@@ -1,36 +1,37 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-08-26",
-  "endpoints": 15127,
-  "hosts": 1616,
+  "fetched": "2026-08-31",
+  "endpoints": 14793,
+  "hosts": 1642,
   "concentration": {
-    "top_10_hosts_share": 0.279,
+    "top_10_hosts_share": 0.315,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 14742,
-    "solana": 218,
-    "base-sepolia": 159,
-    "x-layer": 5,
+    "base": 14387,
+    "solana": 222,
+    "base-sepolia": 151,
+    "solana-devnet": 26,
+    "x-layer": 4,
     "eip155:56": 1,
     "arbitrum": 1,
     "algorand": 1
   },
   "by_version": {
-    "1": 304,
-    "2": 14823
+    "1": 250,
+    "2": 14543
   },
   "by_method": {
-    "GET": 8025,
-    "POST": 7096,
+    "GET": 7610,
+    "POST": 7177,
     "PATCH": 1,
     "DELETE": 1,
     "HEAD": 1
   },
   "price_usd": {
-    "priced": 15118,
-    "unpriced": 9,
+    "priced": 14759,
+    "unpriced": 34,
     "min": 0.001,
     "p50": 0.01,
     "p90": 0.15,
@@ -38,44 +39,36 @@
   },
   "top_hosts": [
     {
-      "host": "api.m2mcent.com",
-      "endpoints": 964
+      "host": "api.delx.ai",
+      "endpoints": 995
     },
     {
-      "host": "api.delx.ai",
-      "endpoints": 941
+      "host": "api.m2mcent.com",
+      "endpoints": 965
+    },
+    {
+      "host": "api.magentlab.com",
+      "endpoints": 523
+    },
+    {
+      "host": "agent402.tools",
+      "endpoints": 451
     },
     {
       "host": "x402.orthogonal.com",
       "endpoints": 431
     },
     {
-      "host": "api.x402node.dev",
-      "endpoints": 350
-    },
-    {
       "host": "api.agentstools.dev",
       "endpoints": 347
     },
     {
+      "host": "api.x402node.dev",
+      "endpoints": 345
+    },
+    {
       "host": "library.forgemesh.io",
       "endpoints": 317
-    },
-    {
-      "host": "api.magentlab.com",
-      "endpoints": 289
-    },
-    {
-      "host": "api.24klabs.ai",
-      "endpoints": 252
-    },
-    {
-      "host": "k2so.wrong.systems",
-      "endpoints": 177
-    },
-    {
-      "host": "k2so-8080.on.ascii.dev",
-      "endpoints": 157
     },
     {
       "host": "fittings.sh",
@@ -86,44 +79,36 @@
       "endpoints": 138
     },
     {
+      "host": "api.strale.io",
+      "endpoints": 138
+    },
+    {
       "host": "402.com.tr",
-      "endpoints": 135
+      "endpoints": 136
     },
     {
       "host": "blockrun.ai",
-      "endpoints": 132
+      "endpoints": 119
     },
     {
       "host": "x402-factory.com",
       "endpoints": 117
     },
     {
-      "host": "www.stratalize.com",
-      "endpoints": 114
-    },
-    {
       "host": "api.myceliasignal.com",
-      "endpoints": 113
-    },
-    {
-      "host": "agent402.tools",
-      "endpoints": 111
+      "endpoints": 112
     },
     {
       "host": "netintel.dev",
-      "endpoints": 110
+      "endpoints": 111
     },
     {
       "host": "x402.forgemesh.io",
       "endpoints": 97
     },
     {
-      "host": "proxy.suverse.io",
-      "endpoints": 91
-    },
-    {
-      "host": "stableestate.dev",
-      "endpoints": 91
+      "host": "agentpaystore.com",
+      "endpoints": 90
     },
     {
       "host": "data.greeneris.io",
@@ -131,11 +116,27 @@
     },
     {
       "host": "api.hergertsynthora.com",
-      "endpoints": 85
+      "endpoints": 81
     },
     {
       "host": "api.sirenic.eu",
       "endpoints": 80
+    },
+    {
+      "host": "ai-data-marketplace-1042299154756.us-central1.run.app",
+      "endpoints": 78
+    },
+    {
+      "host": "apiacre.com",
+      "endpoints": 74
+    },
+    {
+      "host": "x402.ottoai.services",
+      "endpoints": 74
+    },
+    {
+      "host": "api.relaystation.ai",
+      "endpoints": 73
     }
   ]
 }

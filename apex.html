@@ -78,7 +78,7 @@ without a human in the loop.</p>
   <ul>
     <li><strong>Free:</strong> <a href="https://index.percall.dev/api/score?url=https://example.com"><code>GET /api/score</code></a> grades any site A–F across 20 published checks.</li>
     <li><strong>Paid:</strong> <code>POST /api/audit</code> returns why each check failed and a paste-ready fix for your own origin — $0.05, settled in USDC on Base over HTTP 402.</li>
-    <li><strong>Catalogued:</strong> <a href="https://index.percall.dev/x402.html">15,127 machine-payable endpoints</a> and <a href="https://index.percall.dev/mcp-servers.html">14,138 callable MCP servers</a>, both probed weekly for whether they still answer.</li>
+    <li><strong>Catalogued:</strong> <a href="https://index.percall.dev/x402.html">14,793 machine-payable endpoints</a> and <a href="https://index.percall.dev/mcp-servers.html">14,704 callable MCP servers</a>, both probed weekly for whether they still answer.</li>
     <li><strong>Callable as a tool:</strong> <code>claude mcp add --transport http ai-product-index https://index.percall.dev/mcp</code></li>
   </ul>
   <p class="meta">45 products listed · <a href="https://index.percall.dev/llms.txt">llms.txt</a> ·
@@ -96,7 +96,7 @@ without a human in the loop.</p>
     <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
     <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
   </ul>
-  <p class="meta">Reads the same 29,265 catalogued endpoints · terms at
+  <p class="meta">Reads the same 29,497 catalogued endpoints · terms at
   <a href="https://index.percall.dev/api/x402/info">/api/x402/info</a></p>
 </div>
 
@@ -117,7 +117,7 @@ The index owns <code>index.percall.dev</code>, the Router owns
 umbrella page owns <code>percall.dev</code>. Sharing code and data keeps the
 operation small; host routing keeps one canonical address per document.</p>
 <p>The other honest number: in the last verified snapshot
-(2026-08-26), agents were <strong>8.99%</strong> of requests,
+(2026-08-31), agents were <strong>6.29%</strong> of requests,
 and <strong>not one organic agent payment had cleared</strong>. That measurement is
 published in full at
 <a href="https://index.percall.dev/report.html">the state of the agent web</a>. It is the most

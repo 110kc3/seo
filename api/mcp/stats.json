@@ -1,33 +1,33 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-26",
-  "remote_endpoints": 14138,
-  "hosts": 9898,
+  "fetched": "2026-08-31",
+  "remote_endpoints": 14704,
+  "hosts": 10419,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 82663,
-    "excluded_superseded": 57611,
-    "excluded_inactive": 261,
-    "excluded_packages_only": 11033,
+    "registry_records_seen": 86330,
+    "excluded_superseded": 60430,
+    "excluded_inactive": 289,
+    "excluded_packages_only": 11306,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 13088,
-    "sse": 1050
+    "streamable-http": 13645,
+    "sse": 1059
   },
   "by_auth": {
-    "none": 11410,
-    "required": 2728
+    "none": 11891,
+    "required": 2813
   },
   "top_hosts": [
     {
       "host": "gateway.pipeworx.io",
-      "endpoints": 1312
+      "endpoints": 1313
     },
     {
       "host": "api.mcp.ai",
-      "endpoints": 1100
+      "endpoints": 1103
     },
     {
       "host": "api.m2mcent.com",
@@ -43,7 +43,7 @@
     },
     {
       "host": "mcp.apify.com",
-      "endpoints": 58
+      "endpoints": 65
     },
     {
       "host": "tooloracle.io",
@@ -94,16 +94,16 @@
       "endpoints": 19
     },
     {
+      "host": "{host}",
+      "endpoints": 18
+    },
+    {
       "host": "mcp.boykaf.com",
       "endpoints": 18
     },
     {
       "host": "mcp.infobip.com",
       "endpoints": 18
-    },
-    {
-      "host": "{host}",
-      "endpoints": 17
     },
     {
       "host": "app.daedalmap.com",

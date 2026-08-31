@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The state of the agent web — AI Product Index</title>
-<meta name="description" content="Measured: 8.99% of traffic is AI agents and rising, 15,127 machine-payable endpoints of which 100% answer, and zero organic payments.">
+<meta name="description" content="Measured: 6.29% of traffic is AI agents and rising, 14,793 machine-payable endpoints of which 100% answer, and zero organic payments.">
 <link rel="canonical" href="https://index.percall.dev/report.html">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The state of the agent web — AI Product Index">
-<meta property="og:description" content="Measured: 8.99% of traffic is AI agents and rising, 15,127 machine-payable endpoints of which 100% answer, and zero organic payments.">
+<meta property="og:description" content="Measured: 6.29% of traffic is AI agents and rising, 14,793 machine-payable endpoints of which 100% answer, and zero organic payments.">
 <meta property="og:url" content="https://index.percall.dev/report.html">
 <meta property="og:image" content="https://index.percall.dev/assets/og.png">
 <script type="application/ld+json">
@@ -18,7 +18,7 @@
   "@type": "Report",
   "name": "The state of the agent web",
   "url": "https://index.percall.dev/report.html",
-  "dateModified": "2026-08-26",
+  "dateModified": "2026-08-31",
   "publisher": {
     "@type": "Organization",
     "name": "AI Product Index",
@@ -67,7 +67,7 @@ readings are snapshots of <a href="https://index.percall.dev/api/stats.json">/ap
 catalog readings are the weekly probe.</p>
 
 <h2>1. Agents are arriving, and the share is rising</h2>
-<div class="cards"><div class="card"><div class="n">8.99%</div><div class="k">agent share (2026-08-26)</div></div><div class="card"><div class="n">51,427</div><div class="k">requests, 30d</div></div><div class="card"><div class="n">4,550</div><div class="k">declared AI crawlers</div></div><div class="card"><div class="n">22,322</div><div class="k">browser requests</div></div></div>
+<div class="cards"><div class="card"><div class="n">6.29%</div><div class="k">agent share (2026-08-31)</div></div><div class="card"><div class="n">72,066</div><div class="k">requests, 30d</div></div><div class="card"><div class="n">4,458</div><div class="k">declared AI crawlers</div></div><div class="card"><div class="n">24,810</div><div class="k">browser requests</div></div></div>
 <table>
 <thead><tr><th>reading</th><th class="num">requests/30d</th><th class="num">agent share</th><th class="num">AI crawlers</th><th class="num">free scores</th><th class="num">paid-endpoint hits</th></tr></thead>
 <tbody>
@@ -111,14 +111,22 @@ catalog readings are the weekly probe.</p>
     <td class="num">486</td>
     <td class="num">62</td>
   </tr>
+<tr>
+    <td>2026-08-31</td>
+    <td class="num">72,066</td>
+    <td class="num">6.29%</td>
+    <td class="num">4,458</td>
+    <td class="num">482</td>
+    <td class="num">27</td>
+  </tr>
 </tbody></table>
 <p>Agent share went from <strong>3.20%</strong> on 2026-07-29 to
-<strong>8.99%</strong> on 2026-08-26. The site had no inbound
+<strong>6.29%</strong> on 2026-08-31. The site had no inbound
 links for most of that period, so this is agents finding a domain nobody pointed
 them at.</p>
 
 <h2>2. Nobody pays</h2>
-<p class="lede">62 requests have hit the paid endpoint and met its
+<p class="lede">27 requests have hit the paid endpoint and met its
 HTTP 402 challenge. <strong>Zero of them came back with a payment.</strong> Every
 settlement this rail has ever taken was our own test.</p>
 <p>This is the finding worth more than the rest of the page, because it is the one
@@ -133,43 +141,43 @@ the free tier already answers the question the paid tier charges for. Both are
 more interesting than "the price is wrong".</p>
 
 <h2>3. The machine-payable web is smaller than it counts</h2>
-<div class="cards"><div class="card"><div class="n">15,127</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">1,616</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">27.9%</div><div class="k">held by top 10 hosts</div></div></div>
-<p>15,127 endpoints sounds like an ecosystem. 27.9% of them
-belong to ten operators, and the 1,616 distinct hosts are the honest
+<div class="cards"><div class="card"><div class="n">14,793</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">1,642</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">31.5%</div><div class="k">held by top 10 hosts</div></div></div>
+<p>14,793 endpoints sounds like an ecosystem. 31.5% of them
+belong to ten operators, and the 1,642 distinct hosts are the honest
 denominator. Prices cluster low — median $0.01, 90th percentile
 $0.15 — which is what a market of machine-to-machine calls
 should look like, and it means a five-cent audit sits above the median rather than below it.</p>
 <table>
 <thead><tr><th>chain</th><th class="num">endpoints</th><th class="num">share</th></tr></thead>
 <tbody>
-<tr><td>base</td><td class="num">14,742</td><td class="num">97.5%</td></tr>
-<tr><td>solana</td><td class="num">218</td><td class="num">1.4%</td></tr>
-<tr><td>base-sepolia</td><td class="num">159</td><td class="num">1.1%</td></tr>
-<tr><td>x-layer</td><td class="num">5</td><td class="num">0.0%</td></tr>
+<tr><td>base</td><td class="num">14,387</td><td class="num">97.3%</td></tr>
+<tr><td>solana</td><td class="num">222</td><td class="num">1.5%</td></tr>
+<tr><td>base-sepolia</td><td class="num">151</td><td class="num">1.0%</td></tr>
+<tr><td>solana-devnet</td><td class="num">26</td><td class="num">0.2%</td></tr>
+<tr><td>x-layer</td><td class="num">4</td><td class="num">0.0%</td></tr>
 <tr><td>eip155:56</td><td class="num">1</td><td class="num">0.0%</td></tr>
-<tr><td>arbitrum</td><td class="num">1</td><td class="num">0.0%</td></tr>
 </tbody></table>
-<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-08-26.
+<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-08-31.
 Full figures: <a href="https://index.percall.dev/api/x402/stats.json">stats.json</a> · browse: <a href="https://index.percall.dev/x402.html">the catalog</a>.</p>
 
 <h2>4. Most of it answers, which was not obvious</h2>
-<div class="cards"><div class="card"><div class="n">99.5%</div><div class="k">x402 endpoints answering</div></div><div class="card"><div class="n">92.2%</div><div class="k">MCP servers answering</div></div><div class="card"><div class="n">14,138</div><div class="k">remotely-callable MCP servers</div></div><div class="card"><div class="n">9,898</div><div class="k">distinct MCP hosts</div></div></div>
+<div class="cards"><div class="card"><div class="n">99.5%</div><div class="k">x402 endpoints answering</div></div><div class="card"><div class="n">91.5%</div><div class="k">MCP servers answering</div></div><div class="card"><div class="n">14,704</div><div class="k">remotely-callable MCP servers</div></div><div class="card"><div class="n">10,419</div><div class="k">distinct MCP hosts</div></div></div>
 <p>Neither upstream registry checks whether its own entries still answer. The
 Bazaar keeps a resource for 30 days after its last settlement; the MCP registry
 lists whatever a publisher declared. So "how much of this is alive" was a
 question nobody could answer, and the expectation going in was that a lot of it
 would be dead.</p>
 <p>It mostly is not: <strong>99.5%</strong> of a rotating sample of
-the x402 catalog answers, and <strong>92.2%</strong> of the MCP
+the x402 catalog answers, and <strong>91.5%</strong> of the MCP
 catalog. A 402 or a 401 counts as answering here, deliberately — a 402 is the
 <em>correct</em> reply from a paid endpoint, and scoring it as a failure would mark
 the entire point of an x402 catalog as dead.</p>
-<p class="meta">Probed 2026-08-26, a rotating slice per run so a full pass
+<p class="meta">Probed 2026-08-31, a rotating slice per run so a full pass
 covers every entry. Raw: <a href="https://index.percall.dev/api/x402/health.json">x402 health</a> ·
 <a href="https://index.percall.dev/api/mcp/health.json">MCP health</a>.</p>
 
 <h2>5. Sites are not ready for any of it</h2>
-<p>42 sites in this registry are re-graded weekly against the
+<p>45 sites in this registry are re-graded weekly against the
 20-check agent-readability set. The distribution:</p>
 <table>
 <thead><tr><th>grade</th><th class="num">sites</th><th class="wrap">reading</th></tr></thead>
@@ -177,8 +185,8 @@ covers every entry. Raw: <a href="https://index.percall.dev/api/x402/health.json
 <tr><td class="grade">A</td><td class="num">9</td><td class="wrap">agent-ready</td></tr>
 <tr><td class="grade">B</td><td class="num">5</td><td class="wrap">minor gaps</td></tr>
 <tr><td class="grade">C</td><td class="num">10</td><td class="wrap">partially legible</td></tr>
-<tr><td class="grade">D</td><td class="num">5</td><td class="wrap">weak</td></tr>
-<tr><td class="grade">E</td><td class="num">9</td><td class="wrap">barely legible</td></tr>
+<tr><td class="grade">D</td><td class="num">7</td><td class="wrap">weak</td></tr>
+<tr><td class="grade">E</td><td class="num">10</td><td class="wrap">barely legible</td></tr>
 <tr><td class="grade">F</td><td class="num">4</td><td class="wrap">effectively invisible to agents</td></tr>
 </tbody></table>
 <p>Full ranking, with what each site is missing: <a href="https://index.percall.dev/leaderboard.html">the leaderboard</a>.
