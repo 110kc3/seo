@@ -117,6 +117,29 @@ gh workflow run cf-admin -f action=whoami       # what the token may do
 gh workflow run cf-admin -f action=subdomain    # the workers.dev hostname
 ```
 
+The same workflow can inspect another hostname on the account without copying
+the Cloudflare token onto a laptop:
+
+```bash
+gh workflow run cf-admin -f action=traffic-report -f hostname=overtimelog.com -f days=7
+```
+
+`traffic-report` combines browser-side Web Analytics with zone HTTP analytics.
+It separates likely-human and likely-bot page views, then reports aggregate top
+page paths, referrer hosts, countries, devices, browsers, edge paths, response
+statuses and cache statuses. It never requests IP addresses, raw user agents,
+query strings or individual events. The report appears in the Actions job
+summary and log, and as JSON plus Markdown in a 14-day artifact. `days` must be
+1-7; the script splits the range into 24-hour UTC slices so it also works with
+the shorter adaptive-analytics window on lower Cloudflare plans.
+
+`CF_ANALYTICS_TOKEN` should have **Account Analytics: Read** for Web Analytics.
+The existing deploy token is tried for zone analytics and as a fallback, but a
+missing permission disables only that half of the report. Web Analytics can
+show which page brought a browser and the referring host, but Cloudflare does
+not support custom action events; calculator submits, saves and exports need
+separate first-party aggregate telemetry if that distinction becomes useful.
+
 ### 1.2 Cloudflare credentials as GitHub repo secrets — done
 
 Both set 2026-07-25. For reference, or to rotate — Settings → Secrets and

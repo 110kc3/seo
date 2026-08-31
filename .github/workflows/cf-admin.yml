@@ -20,15 +20,21 @@ on:
           - push-secrets  # copy managed repo secrets to the Worker
           - stats-probe   # can the deploy token read Analytics Engine?
           - stats-funnel  # who hits the paid endpoint? client type x path bucket
+          - traffic-report # aggregate RUM + edge traffic for one hostname
           - verify-cdp    # check the CDP rail using the CDP credentials
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
           - attach-domain # attach `hostname` to the Worker as a custom domain
           - pages-setup   # create a Git-backed Pages project and attach `hostname`
       hostname:
-        description: Hostname for attach-domain or pages-setup
+        description: Hostname for traffic-report, attach-domain or pages-setup
         required: false
         default: ""
+        type: string
+      days:
+        description: UTC lookback in whole days (1-7) for traffic-report
+        required: false
+        default: "7"
         type: string
       project_name:
         description: New Pages project name for pages-setup
@@ -152,6 +158,29 @@ jobs:
                   );
                 }
               });'
+
+      # Web Analytics counts browser page loads; zone HTTP analytics counts all
+      # requests reaching the edge. Reading both is the difference between
+      # "traffic exists" and "people are landing on this tool page". The script
+      # requests grouped rows only: never IPs, raw user agents, query strings or
+      # individual events. Its JSON/Markdown artifact expires after 14 days.
+      - name: Report aggregate traffic for one hostname
+        if: inputs.action == 'traffic-report'
+        env:
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          TRAFFIC_HOSTNAME: ${{ inputs.hostname }}
+          TRAFFIC_DAYS: ${{ inputs.days }}
+          TRAFFIC_REPORT_DIR: ${{ runner.temp }}/traffic-report
+        run: node scripts/cloudflare-traffic-report.mjs
+
+      - name: Upload aggregate traffic report
+        if: inputs.action == 'traffic-report'
+        uses: actions/upload-artifact@v7
+        with:
+          name: traffic-report-${{ inputs.hostname }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/traffic-report
+          if-no-files-found: error
+          retention-days: 14
 
       # The CDP facilitator answers 401 to anonymous callers, so verify-rail.mjs
       # cannot check it from a developer machine — the credentials only exist as
