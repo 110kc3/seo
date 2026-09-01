@@ -4,18 +4,18 @@
 
 *Everything here needs your credentials, a browser, or an external/public
 action. There is currently no open repository-side implementation. Updated
-2026-08-29; where the changelog below disagrees with this list, this list wins.*
+2026-09-01; where the changelog below disagrees with this list, this list wins.*
 
 ### Ready now
 
 1. **Post Show HN in the next Tue–Thu, 14:00–16:00 UTC window.** The 25 Aug
    hold has expired and every gate now passes: analytics is healthy, the rolling
-   window is a full 30 days, six third-party products have exercised the real
+   window is a full 30 days, seven third-party products have exercised the real
    registration workflow, and organic payment conversion remains zero. The
-   draft and posting checklist were refreshed from the 2026-08-29 live snapshot:
-   `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean slot is
-   Tue 1 Sep. Refresh its figures immediately before submitting; posting under
-   your HN account remains your action.
+   draft and posting checklist were refreshed from the 2026-09-01 16:13 UTC live
+   snapshot: `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean
+   slot is Wed 2 Sep, 14:00–16:00 UTC. Refresh once immediately before posting;
+   submission under your HN account remains your action.
 
 ### Commercial evidence — do not replace this with more engineering
 
@@ -37,7 +37,7 @@ action. There is currently no open repository-side implementation. Updated
    4. Request indexing for both sales/front-door URLs in GSC.
 
 4. **Optional: Clustly — one small channel experiment.** It was still
-   unconfigured on 2026-08-29 (`/etc/clustly-agent.env` absent; unit inactive).
+   unconfigured on 2026-09-01 (`/etc/clustly-agent.env` absent; unit inactive).
    Register at <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
    `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
    Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
@@ -64,10 +64,10 @@ action. There is currently no open repository-side implementation. Updated
    The public prices and exact scopes are already live in those files.
 
    The service remains buyable by email while these are absent; the live page
-   still used the temporary `mailto:` links on 2026-08-29.
+   still used the temporary `mailto:` links on 2026-09-01.
 
 6. **Configure honest response signing on the kc-it.pl Pages project.** The key
-   directory still returned 404 on 2026-08-29. Confirm the Pages project name,
+   directory still returned 404 on 2026-09-01. Confirm the Pages project name,
    then run this from a terminal authenticated to the correct Cloudflare
    account:
 
@@ -87,12 +87,12 @@ action. There is currently no open repository-side implementation. Updated
 ### Current health — not tasks
 
 - **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
-  2026-08-29 and the 2026-08-26 health run committed a fresh traffic snapshot.
-  The live 30-day reading was 61,221 requests with 7.58% classified as an AI
+  2026-09-01 and the 2026-08-26 health run committed a fresh traffic snapshot.
+  The live 30-day reading was 71,814 requests with 5.75% classified as an AI
   crawler or action agent. The incident workflow remains in place and will open
   one exact-title issue without overwriting the last good series if this fails
   again.
-- **Repository health confirmed.** On 2026-08-29 there were no open issues or
+- **Repository health confirmed.** On 2026-09-01 there were no open issues or
   pull requests, the latest workflows were green, production endpoints returned
   200, and live `llms.txt` matched the generated artifact byte for byte. All
   three external directory PRs were zero commits behind with no failing checks;
@@ -465,7 +465,7 @@ revenue now is distribution.
 - [x] **Swap the analytics token for a scoped one** — done 2026-08-01. `CF_ANALYTICS_TOKEN` is now its own credential rather than a mirror of the deploy token, so the Worker's env no longer carries Workers Scripts: Edit. `push-secrets` pushed it and logged no mirror warning, which is how the mirror reports that it stopped; `/api/stats.json` went 403 → 200 on the same run. The old over-privileged deploy token has been deleted account-side.
 - [x] **CDP API key, and the rail switched onto it** — done 2026-08-01. Kamil created a **Secret API Key** (Ed25519) at `portal.cdp.coinbase.com/access/api` — the portal's x402 page is metrics-only and "Custodial Wallet" wants a US business account, so neither is the right door. Both halves are repo secrets, pushed to the Worker by `cf-admin -f action=push-secrets` and never in `site.config.json`. `verify-rail.mjs` used to be unable to check this rail because CDP's `/supported` answers 401; it now signs the request with the Worker's own auth code, so `cf-admin -f action=verify-cdp` verifies it on the runner where the secrets live — **key accepted, 24 kinds advertised, both v2 `eip155:8453` and v1 `base` settled**. `"active": "cdp"` since, proven by a real $0.05 payment (tx `0x28f4…8292`, block 49327142) with the replay refused. Buys a free tier of 1,000 tx/month and — the actual point — Bazaar cataloging.
 - **External state, no current action — x402 Bazaar.** Still absent from all
-  14,500 resources on 2026-08-29. The CDP rail, discovery metadata and a
+  14,819 resources on 2026-09-01. The CDP rail, discovery metadata and a
   metadata-carrying settlement are all verified; only recheck if upstream state
   changes. Current status lives in `NEXT.md` §3.
 - **Optional owner action — Stripe machine-payments access.** Kept once in the
