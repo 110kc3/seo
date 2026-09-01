@@ -140,6 +140,29 @@ show which page brought a browser and the referring host, but Cloudflare does
 not support custom action events; calculator submits, saves and exports need
 separate first-party aggregate telemetry if that distinction becomes useful.
 
+OvertimeLog now has that narrower first-party counter. One idempotent setup
+action resolves the Pages project from the exact `overtimelog.com` custom
+domain, binds Production variable `USAGE_ANALYTICS` to dataset
+`overtimelog_usage`, leaves Preview unbound, and installs a 308
+`www.overtimelog.com` → apex redirect that preserves path and query:
+
+```bash
+gh workflow run cf-admin -f action=overtime-setup
+```
+
+After the site deployment containing `/api/usage`, request a grouped report:
+
+```bash
+gh workflow run cf-admin -f action=overtime-usage-report -f days=30
+```
+
+The report has one row per allowlisted tool/action pair and is written to the
+job summary plus a 14-day JSON/Markdown artifact. It is deliberately incapable
+of reporting people, sessions, entered work values, URLs, referrers, IPs, raw
+user agents or individual events. Use it with the Web Analytics report: the
+latter answers where browser page views came from; this counter answers only
+which local-tool actions occurred.
+
 ### 1.2 Cloudflare credentials as GitHub repo secrets — done
 
 Both set 2026-07-25. For reference, or to rotate — Settings → Secrets and

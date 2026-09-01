@@ -21,6 +21,8 @@ on:
           - stats-probe   # can the deploy token read Analytics Engine?
           - stats-funnel  # who hits the paid endpoint? client type x path bucket
           - traffic-report # aggregate RUM + edge traffic for one hostname
+          - overtime-setup # bind aggregate events + canonicalize www to apex
+          - overtime-usage-report # grouped OvertimeLog tool/action counts
           - verify-cdp    # check the CDP rail using the CDP credentials
           - robots-report # read the managed-robots.txt setting on every zone
           - robots-allow  # stop Cloudflare injecting AI-crawler Disallow rules
@@ -32,7 +34,7 @@ on:
         default: ""
         type: string
       days:
-        description: UTC lookback in whole days (1-7) for traffic-report
+        description: Lookback days (traffic-report 1-7; overtime report 1-90)
         required: false
         default: "7"
         type: string
@@ -179,6 +181,36 @@ jobs:
         with:
           name: traffic-report-${{ inputs.hostname }}-${{ github.run_id }}
           path: ${{ runner.temp }}/traffic-report
+          if-no-files-found: error
+          retention-days: 14
+
+      # This action is the infrastructure half of OvertimeLog's measurement
+      # phase. The Pages project is resolved by its exact custom domain, then a
+      # Production-only Analytics Engine binding and one idempotent Single
+      # Redirect are configured. Preview traffic is deliberately not counted.
+      - name: Configure OvertimeLog usage counts and canonical host
+        if: inputs.action == 'overtime-setup'
+        env:
+          OVERTIMELOG_CF_ACTION: setup
+        run: node scripts/overtimelog-cloudflare.mjs
+
+      # Read grouped tool/action totals only. The resulting artifact has no raw
+      # events, visitor IDs, IPs, user agents, URLs, referrers or entered values.
+      - name: Report aggregate OvertimeLog tool actions
+        if: inputs.action == 'overtime-usage-report'
+        env:
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          OVERTIMELOG_CF_ACTION: report
+          OVERTIMELOG_USAGE_DAYS: ${{ inputs.days }}
+          USAGE_REPORT_DIR: ${{ runner.temp }}/overtimelog-usage-report
+        run: node scripts/overtimelog-cloudflare.mjs
+
+      - name: Upload aggregate OvertimeLog usage report
+        if: inputs.action == 'overtime-usage-report'
+        uses: actions/upload-artifact@v7
+        with:
+          name: overtimelog-usage-${{ inputs.days }}d-${{ github.run_id }}
+          path: ${{ runner.temp }}/overtimelog-usage-report
           if-no-files-found: error
           retention-days: 14
 
