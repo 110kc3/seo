@@ -9,8 +9,8 @@ import {
 } from './cloudflare-traffic-report.mjs';
 
 test('hostname and report window inputs are narrowly validated', () => {
-  assert.equal(normalizeHostname(' OvertimeLog.COM. '), 'overtimelog.com');
-  assert.throws(() => normalizeHostname('https://overtimelog.com'), /valid DNS hostname/);
+  assert.equal(normalizeHostname(' INDEX.KC-IT.PL. '), 'index.kc-it.pl');
+  assert.throws(() => normalizeHostname('https://index.kc-it.pl'), /valid DNS hostname/);
   assert.throws(() => normalizeHostname('example.com/path'), /valid DNS hostname/);
   assert.equal(parseDays('7'), 7);
   assert.throws(() => parseDays('0'), /1 through 7/);
@@ -50,11 +50,11 @@ test('daily aggregates are merged without retaining individual events', () => {
   });
 
   const report = summarizeTraffic({
-    hostname: 'overtimelog.com',
+    hostname: 'index.kc-it.pl',
     start: '2026-08-29T12:00:00.000Z',
     end: '2026-08-31T12:00:00.000Z',
-    rumPayloads: [rum(8, 2, '/', ''), rum(5, 1, '/weekend-rate-calculator', 'google.com')],
-    edgePayloads: [edge(60, '/'), edge(40, '/weekend-rate-calculator')],
+    rumPayloads: [rum(8, 2, '/', ''), rum(5, 1, '/catalog', 'google.com')],
+    edgePayloads: [edge(60, '/'), edge(40, '/catalog')],
   });
 
   assert.equal(report.web_analytics.page_views, 16);
@@ -63,7 +63,7 @@ test('daily aggregates are merged without retaining individual events', () => {
   assert.equal(report.web_analytics.likely_human_visits, 11);
   assert.deepEqual(report.web_analytics.top_pages.map(({ value, count }) => ({ value, count })), [
     { value: '/', count: 8 },
-    { value: '/weekend-rate-calculator', count: 5 },
+    { value: '/catalog', count: 5 },
   ]);
   assert.equal(report.edge_analytics.requests, 100);
   assert.equal(report.edge_analytics.response_bytes, 10000);
@@ -71,7 +71,7 @@ test('daily aggregates are merged without retaining individual events', () => {
 
   const markdown = renderMarkdown(report);
   assert.match(markdown, /Likely-human page views \| 13/);
-  assert.match(markdown, /weekend-rate-calculator/);
+  assert.match(markdown, /catalog/);
   assert.match(markdown, /direct \/ none/);
   assert.match(markdown, /9\.8 KiB/);
 });

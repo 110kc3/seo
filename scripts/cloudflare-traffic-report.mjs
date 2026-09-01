@@ -123,7 +123,7 @@ export function normalizeHostname(value) {
   const hostname = String(value ?? '').trim().toLowerCase().replace(/\.$/, '');
   if (hostname.length > 253
     || !/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(hostname)) {
-    throw new Error('hostname must be a valid DNS hostname, for example overtimelog.com');
+    throw new Error('hostname must be a valid DNS hostname, for example index.kc-it.pl');
   }
   return hostname;
 }

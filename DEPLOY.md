@@ -121,7 +121,7 @@ The same workflow can inspect another hostname on the account without copying
 the Cloudflare token onto a laptop:
 
 ```bash
-gh workflow run cf-admin -f action=traffic-report -f hostname=overtimelog.com -f days=7
+gh workflow run cf-admin -f action=traffic-report -f hostname=index.kc-it.pl -f days=7
 ```
 
 `traffic-report` combines browser-side Web Analytics with zone HTTP analytics.
@@ -137,38 +137,8 @@ the shorter adaptive-analytics window on lower Cloudflare plans.
 The existing deploy token is tried for zone analytics and as a fallback, but a
 missing permission disables only that half of the report. Web Analytics can
 show which page brought a browser and the referring host, but Cloudflare does
-not support custom action events; calculator submits, saves and exports need
-separate first-party aggregate telemetry if that distinction becomes useful.
-
-OvertimeLog now has that narrower first-party counter. One idempotent setup
-action resolves the Pages project from the exact `overtimelog.com` custom
-domain, binds Production variable `USAGE_ANALYTICS` to dataset
-`overtimelog_usage`, leaves Preview unbound, and installs a 308
-`www.overtimelog.com` → apex redirect that preserves path and query:
-
-```bash
-gh workflow run cf-admin -f action=overtime-setup
-```
-
-This action needs **Account → Cloudflare Pages → Edit** and
-**Zone → Single Redirect → Edit** for the `overtimelog.com` zone. On
-2026-09-01 the Pages binding was written and read back successfully, but the
-redirect entrypoint returned `Authentication error`; grant the second
-permission and rerun the same idempotent action. Until its summary confirms the
-308 and a live `curl` verifies it, the HTTP redirect is not active.
-
-After the site deployment containing `/api/usage`, request a grouped report:
-
-```bash
-gh workflow run cf-admin -f action=overtime-usage-report -f days=30
-```
-
-The report has one row per allowlisted tool/action pair and is written to the
-job summary plus a 14-day JSON/Markdown artifact. It is deliberately incapable
-of reporting people, sessions, entered work values, URLs, referrers, IPs, raw
-user agents or individual events. Use it with the Web Analytics report: the
-latter answers where browser page views came from; this counter answers only
-which local-tool actions occurred.
+not support custom action events. Product-specific telemetry belongs in the
+repository that owns that product.
 
 ### 1.2 Cloudflare credentials as GitHub repo secrets — done
 
