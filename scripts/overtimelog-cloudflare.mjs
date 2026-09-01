@@ -185,12 +185,17 @@ async function resolveZone({ fetchImpl, token, accountId }) {
 
 async function configureRedirect({ fetchImpl, token, zoneId }) {
   const entrypointPath = `/zones/${encodeURIComponent(zoneId)}/rulesets/phases/${REDIRECT_PHASE}/entrypoint`;
-  let entrypoint = (await apiRequest({
-    fetchImpl,
-    token,
-    path: entrypointPath,
-    allowNotFound: true,
-  }))?.result || null;
+  let entrypoint;
+  try {
+    entrypoint = (await apiRequest({
+      fetchImpl,
+      token,
+      path: entrypointPath,
+      allowNotFound: true,
+    }))?.result || null;
+  } catch (error) {
+    throw new Error(`Single Redirect setup failed; ensure Zone > Single Redirect > Edit is granted: ${safeError(error)}`);
+  }
   const desired = desiredRedirectRule();
 
   if (!entrypoint) {

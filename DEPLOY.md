@@ -150,6 +150,13 @@ domain, binds Production variable `USAGE_ANALYTICS` to dataset
 gh workflow run cf-admin -f action=overtime-setup
 ```
 
+This action needs **Account → Cloudflare Pages → Edit** and
+**Zone → Single Redirect → Edit** for the `overtimelog.com` zone. On
+2026-09-01 the Pages binding was written and read back successfully, but the
+redirect entrypoint returned `Authentication error`; grant the second
+permission and rerun the same idempotent action. Until its summary confirms the
+308 and a live `curl` verifies it, the HTTP redirect is not active.
+
 After the site deployment containing `/api/usage`, request a grouped report:
 
 ```bash
