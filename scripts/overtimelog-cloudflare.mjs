@@ -115,19 +115,20 @@ export function redirectMatches(rule) {
 }
 
 async function listPagesProjects({ fetchImpl, token, accountId }) {
-  const projects = [];
-  let page = 1;
-  while (true) {
-    const payload = await apiRequest({
-      fetchImpl,
-      token,
-      path: `/accounts/${encodeURIComponent(accountId)}/pages/projects?per_page=20&page=${page}`,
-    });
-    projects.push(...(payload.result || []));
-    const totalPages = Number(payload.result_info?.total_pages || 1);
-    if (page >= totalPages) return projects;
-    page += 1;
+  // The live Pages endpoint currently rejects its documented page/per_page
+  // parameters for this account, while the documented parameter-free request
+  // returns the normal first page. Fail safely if the account ever exceeds it:
+  // resolving from an incomplete list would violate the exact-domain guard.
+  const payload = await apiRequest({
+    fetchImpl,
+    token,
+    path: `/accounts/${encodeURIComponent(accountId)}/pages/projects`,
+  });
+  const totalPages = Number(payload.result_info?.total_pages || 1);
+  if (totalPages > 1) {
+    throw new Error(`Pages returned ${totalPages} project pages but rejected pagination; refusing an incomplete lookup`);
   }
+  return payload.result || [];
 }
 
 async function configureAnalyticsBinding({

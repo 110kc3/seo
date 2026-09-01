@@ -60,6 +60,7 @@ test('setup changes only the exact Pages project and managed redirect', async ()
     const body = options.body ? JSON.parse(options.body) : undefined;
     calls.push({method, path: `${url.pathname}${url.search}`, body});
     if (url.pathname === '/client/v4/accounts/account/pages/projects' && method === 'GET') {
+      assert.equal(url.search, '');
       return envelope([
         {name: 'unrelated', domains: ['example.com']},
         project(),
