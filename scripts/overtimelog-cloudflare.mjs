@@ -121,7 +121,7 @@ async function listPagesProjects({ fetchImpl, token, accountId }) {
     const payload = await apiRequest({
       fetchImpl,
       token,
-      path: `/accounts/${encodeURIComponent(accountId)}/pages/projects?per_page=100&page=${page}`,
+      path: `/accounts/${encodeURIComponent(accountId)}/pages/projects?per_page=20&page=${page}`,
     });
     projects.push(...(payload.result || []));
     const totalPages = Number(payload.result_info?.total_pages || 1);
