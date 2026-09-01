@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 45 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 46 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -338,7 +338,17 @@ llms.txt for the index.
 
 Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
 
-## All listings (45)
+## All listings (46)
+
+### Magic Hour MCP (magic-hour-mcp)
+- url: https://magichour.ai/mcp
+- category: mcp · pricing: freemium · tags: mcp, media-generation, image-generation, video-generation, audio-generation
+- Hosted Model Context Protocol server for Magic Hour’s AI media platform, giving compatible AI clients authenticated access to image, video, and audio generation and editing tools over Streamable HTTP. Developers can also use Magic Hour’s REST API and SDKs.
+- llms_txt: https://magichour.ai/llms.txt
+- openapi: https://magichour.ai/openapi.json
+- mcp: https://mcp.magichour.ai/
+- listing JSON: https://index.percall.dev/listings/magic-hour-mcp.json
+- listing page: https://index.percall.dev/l/magic-hour-mcp.html
 
 ### Dash (dash)
 - url: https://dashpup.ai

@@ -1,7 +1,32 @@
 {
-  "count": 45,
-  "updated": "2026-08-30",
+  "count": 46,
+  "updated": "2026-09-01",
   "listings": [
+    {
+      "slug": "magic-hour-mcp",
+      "name": "Magic Hour MCP",
+      "url": "https://magichour.ai/mcp",
+      "description": "Hosted Model Context Protocol server for Magic Hour’s AI media platform, giving compatible AI clients authenticated access to image, video, and audio generation and editing tools over Streamable HTTP. Developers can also use Magic Hour’s REST API and SDKs.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://magichour.ai/llms.txt",
+        "openapi": "https://magichour.ai/openapi.json",
+        "mcp": "https://mcp.magichour.ai/"
+      },
+      "tags": [
+        "mcp",
+        "media-generation",
+        "image-generation",
+        "video-generation",
+        "audio-generation"
+      ],
+      "submitted_by": "Magic Hour / Runbo Li (authorized representative)",
+      "created": "2026-09-01",
+      "github_user": "runshouse",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "dash",
       "name": "Dash",

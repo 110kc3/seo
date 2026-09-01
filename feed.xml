@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Magic Hour MCP</title>
+    <link>https://index.percall.dev/l/magic-hour-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/magic-hour-mcp.html</guid>
+    <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Hosted Model Context Protocol server for Magic Hour’s AI media platform, giving compatible AI clients authenticated access to image, video, and audio generation and editing tools over Streamable HTTP. Developers can also use Magic Hour’s REST API and SDKs.</description>
+  </item>
+  <item>
     <title>Dash</title>
     <link>https://index.percall.dev/l/dash.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/dash.html</guid>

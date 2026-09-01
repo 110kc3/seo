@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/magic-hour-mcp.html",
+      "url": "https://index.percall.dev/l/magic-hour-mcp.html",
+      "title": "Magic Hour MCP",
+      "content_text": "Hosted Model Context Protocol server for Magic Hour’s AI media platform, giving compatible AI clients authenticated access to image, video, and audio generation and editing tools over Streamable HTTP. Developers can also use Magic Hour’s REST API and SDKs.",
+      "date_published": "2026-09-01T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "media-generation",
+        "image-generation",
+        "video-generation",
+        "audio-generation"
+      ],
+      "external_url": "https://magichour.ai/mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/dash.html",
       "url": "https://index.percall.dev/l/dash.html",
       "title": "Dash",
