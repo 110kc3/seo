@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/send21.html",
+      "url": "https://index.percall.dev/l/send21.html",
+      "title": "send21",
+      "content_text": "Non-custodial payment drafts and pay links for BTC, USDC, USDT, and EURC. Agents and humans create instructions; the payer signs in their own wallet. Never holds keys or funds.",
+      "date_published": "2026-09-04T00:00:00Z",
+      "tags": [
+        "api",
+        "payments",
+        "bitcoin",
+        "mcp",
+        "non-custodial",
+        "agents"
+      ],
+      "external_url": "https://send21.io"
+    },
+    {
       "id": "https://index.percall.dev/l/magic-hour-mcp.html",
       "url": "https://index.percall.dev/l/magic-hour-mcp.html",
       "title": "Magic Hour MCP",

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>send21</title>
+    <link>https://index.percall.dev/l/send21.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/send21.html</guid>
+    <pubDate>Fri, 04 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Non-custodial payment drafts and pay links for BTC, USDC, USDT, and EURC. Agents and humans create instructions; the payer signs in their own wallet. Never holds keys or funds.</description>
+  </item>
+  <item>
     <title>Magic Hour MCP</title>
     <link>https://index.percall.dev/l/magic-hour-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/magic-hour-mcp.html</guid>

@@ -1,7 +1,32 @@
 {
-  "count": 46,
-  "updated": "2026-09-01",
+  "count": 47,
+  "updated": "2026-09-04",
   "listings": [
+    {
+      "slug": "send21",
+      "name": "send21",
+      "url": "https://send21.io",
+      "description": "Non-custodial payment drafts and pay links for BTC, USDC, USDT, and EURC. Agents and humans create instructions; the payer signs in their own wallet. Never holds keys or funds.",
+      "category": "api",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://send21.io/llms.txt",
+        "openapi": "https://send21.io/swagger/v1/swagger.json",
+        "mcp": "https://send21.io/mcp"
+      },
+      "tags": [
+        "payments",
+        "bitcoin",
+        "mcp",
+        "non-custodial",
+        "agents"
+      ],
+      "submitted_by": "send21io",
+      "created": "2026-09-04",
+      "github_user": "send21io",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "magic-hour-mcp",
       "name": "Magic Hour MCP",
