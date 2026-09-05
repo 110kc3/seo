@@ -71,6 +71,24 @@ Everything that reaches disk or generated HTML goes through `scripts/validate.mj
 
 ## Payments
 
+### Current HTTP surface — 2026-09-05
+
+`POST /api/audit` is the only paid HTTP endpoint, at $0.05 USDC.
+`worker/retired.js` declares the four closed purchase paths:
+`/api/check`, `/api/liveness`, `/api/route` and `/api/watch`.
+They return `410 endpoint_retired` before redirects, body parsing, payment
+verification or storage access, including requests carrying payment headers.
+The payment manifest and agent discovery documents advertise only the audit.
+
+Existing `watch:v1:` records are retained. The authenticated
+`POST /api/watch/sweep` on the Router host still fulfils their remaining
+weekly credits; the final webhook says monitoring is complete and top-ups are
+closed. The weekly health job calls that host directly and requires HTTP 200.
+The retired Router homepage is a noindex notice, excluded from the sitemap.
+Probe, history and legacy watch helpers remain available internally; they do
+not expose another purchase route. The GitHub listing-upgrade receipt workflow
+is separate from these HTTP endpoints.
+
 ### Rails as profiles
 
 Rails differ only in where they settle and who they answer to, so they are named profiles under `payments.x402.profiles` with an `active` selector. `scripts/x402-config.mjs → resolveX402()` is the single resolver, read by **both** the Worker and the `[upgrade]` issue flow — so the HTTP path and the issue path can never disagree about which chain and asset are accepted.
@@ -164,12 +182,15 @@ One Worker, four hostnames, and each owns a disjoint set of paths so every docum
 | host | owns | everything else |
 |---|---|---|
 | `index.percall.dev` | canonical — the index, its APIs, all static assets | — |
-| `router.percall.dev` | `/`, `/api/liveness`, `/api/route` | 308 → canonical |
+| `router.percall.dev` | `/` (retirement notice), `/api/watch/sweep` (private fulfilment) | 308 → canonical |
 | `percall.dev` | `/` (the portfolio page) | 308 → canonical |
 | `www.percall.dev` | `/` → 308 to the apex | 308 → canonical |
 | `index.kc-it.pl` | nothing (retired) | 308 → canonical |
 
 Two rules keep this from breaking, both learned by breaking it:
+
+The four retired purchase paths bypass host redirects and answer 410 at the
+requested URL on every attached host.
 
 - **A Worker cannot fetch its own hostnames** — Cloudflare answers 522, and a *paid* audit that settles and then 502s is how that was found. Every attached host must therefore be recognised by `canonicalTarget()` and `selfTerms()`, which read `host_aliases` **plus `router_host`** from config rather than a hand-copied list, because copying it is how the bug arrived twice.
 - **A host whose root is a page must map to that page, not to `/`.** `percall.dev/` resolves to `/apex.html` and `router.percall.dev/` to `/router.html`. Mapping either to `/` audits the *index* and publishes the score under the other host's name — grading one page and labelling it another, which is precisely the defect this service is sold to detect.
@@ -204,7 +225,7 @@ The page asset is still uploaded (the Worker must be able to fetch it from the `
 
 ## Testing
 
-`node --test scripts/*.test.mjs` — 293 tests, no framework, no dependencies.
+`node --test scripts/*.test.mjs` — no framework, no dependencies.
 
 Use the explicit glob, **not** `node --test scripts/`: Node 22 resolves a bare directory argument as a module and fails before running anything.
 

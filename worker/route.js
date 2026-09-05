@@ -27,6 +27,7 @@
 // Forwarding request headers to an arbitrary third-party host would hand that
 // credential to a stranger. The probe sends exactly the headers written below.
 
+import { RETIRED_API_PATHS } from './retired.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { urlError } from '../scripts/validate.mjs';
 
@@ -268,7 +269,7 @@ export function selfTerms(target, cfg) {
   return {
     url: target,
     alive: true,
-    status: paid ? 402 : 200,
+    status: RETIRED_API_PATHS.has(url.pathname) ? 410 : paid ? 402 : 200,
     latency_ms: 0,
     paywalled: Boolean(paid),
     terms: paid

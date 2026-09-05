@@ -100,44 +100,14 @@
 }</code></pre>
 <p>Or use the <a href="https://github.com/{{REPO}}/issues/new?template=register.yml">issue form</a>.</p>
 
-<h2 id="audit">Agent-readability audit — free score, paid fixes</h2>
-<p><code>GET /api/score?url=…</code> is free and unmetered for cached URLs: it returns the A–F grade and which of the {{CHECKS}} checks failed, by name. That is what the box at the top of this page calls.</p>
-<p><code>POST /api/audit</code> is the paid half — the same {{CHECKS}} checks plus, for each failure, the reason it failed, a fix ranked by weight, and a <strong>paste-ready code snippet written for your own domain</strong>. It scores any URL across {{CHECKS}} weighted checks — llms.txt, schema.org JSON-LD, robots.txt AI-crawler posture, sitemap, agent card, machine-readable alternates, Open Graph, canonical, HTTPS — and returns ranked fixes. Payment is <a href="https://docs.x402.org">x402</a>: an unpaid request answers <code>402</code> with the terms, you retry with a <code>PAYMENT-SIGNATURE</code> header (x402 v2) or <code>X-PAYMENT</code> (v1) — both versions are accepted, so clients on either spec can pay.</p>
-<pre><code>curl -X POST {{BASE}}/api/audit \
-  -H 'content-type: application/json' \
-  -d '{"url": "https://example.com"}'   # 402 + the terms</code></pre>
-
-<h3 id="pay">Paying it, in five lines</h3>
-<p>Both x402 protocol versions are accepted, so every current client works. These were each run against this endpoint on 2026-07-25 — they reach settlement and stop only at the wallet's balance.</p>
-<p class="badges"><strong>Node</strong> — <code>npm i @x402/fetch @x402/core @x402/evm viem</code></p>
-<pre><code>import { wrapFetchWithPayment } from '@x402/fetch';
-import { x402Client } from '@x402/core/client';
-import { ExactEvmScheme } from '@x402/evm/exact/client';
-import { privateKeyToAccount } from 'viem/accounts';
-
-const client = new x402Client();
-client.register('eip155:*', new ExactEvmScheme(privateKeyToAccount(process.env.EVM_PRIVATE_KEY)));
-const res = await wrapFetchWithPayment(fetch, client)('{{BASE}}/api/audit', {
-  method: 'POST', headers: { 'content-type': 'application/json' },
-  body: JSON.stringify({ url: 'https://your-site.com' }),
-});</code></pre>
-<p class="badges"><strong>Python</strong> — <code>pip install "x402[evm,httpx]"</code> (the <code>evm</code> extra matters; <code>x402[httpx]</code> alone cannot sign)</p>
-<pre><code>from eth_account import Account
-from x402 import x402Client
-from x402.http.clients import x402HttpxClient
-from x402.mechanisms.evm import EthAccountSigner
-from x402.mechanisms.evm.exact.register import register_exact_evm_client
-
-client = x402Client()
-register_exact_evm_client(client, EthAccountSigner(Account.from_key(KEY)))
-async with x402HttpxClient(client) as http:
-    r = await http.post("{{BASE}}/api/audit", json={"url": "https://your-site.com"})</code></pre>
-<p class="badges">Runnable versions of both, plus LangChain / LlamaIndex / CrewAI tool wrappers: <a href="https://github.com/{{REPO}}/tree/main/clients">clients/</a> in the repo. Terms without provoking a 402: <a href="api/x402/info">api/x402/info</a>.</p>
-
-<p>Only want one thing fixed? <code>GET /api/check?url=…&amp;check=agent_card</code>
-buys a single check — its verdict, why it failed and the paste-ready snippet —
-for a tenth of the full report. The free score above already names which checks
-failed, so you know which one to buy.</p>
+<h2 id="audit">Check your website and get fix guidance</h2>
+<p>The free score shows the A–F grade and the result of all {{CHECKS}} checks.
+Use <a href="checks/">the published checklist</a> to understand each finding and its remedy.</p>
+<p>For developers, <code>POST /api/audit</code> returns the full report with
+ranked fixes and snippets for your domain. It is the only paid API endpoint,
+at $0.05 USDC per call. See the <a href="openapi.yaml">API documentation</a>,
+<a href="llms.txt">payment instructions</a>
+and <a href="https://github.com/{{REPO}}/tree/main/clients">runnable clients</a>.</p>
 
 <h2 id="explore">Try the API</h2>
 <p>Every read endpoint, in the browser. No key, no signup — these are the same URLs an agent calls.</p>
@@ -175,28 +145,17 @@ failed, so you know which one to buy.</p>
   <li><a href="compare.html">How the checkers differ</a> — this audit vs Cloudflare and agentswelcome.dev, honestly.</li>
 </ul>
 
-<h2 id="router">The Router — find an endpoint worth calling</h2>
-<p>The catalogues above say what <em>exists</em>. <a href="{{ROUTER}}/">The Router</a>
-answers what is <strong>alive right now and what it charges</strong>, which is a
-different question: the x402 Bazaar keeps an entry for 30 days after its last
-settlement, so "listed" and "answers" are not the same fact.</p>
-<ul>
-  <li><code>GET {{ROUTER}}/api/liveness?url=…</code> — probe one endpoint now: whether it answered, how fast, and the terms it currently quotes, read from its own 402.</li>
-  <li><code>POST {{ROUTER}}/api/route</code> — ranked candidates for a task, each probed live, each with the URL to call. Works over the x402 catalogue or the MCP one.</li>
-  <li><code>POST {{ROUTER}}/api/watch</code> — prepay 4–52 weekly sweeps of one endpoint; a webhook fires on an outage, recovery, and credit exhaustion. $0.005 per sweep, with no subscription mandate.</li>
-  <li><a href="api/x402/avoid.json">Endpoints that failed a probe</a> — free, per catalogue. <a href="api/mcp/avoid.json">MCP list</a>.</li>
-</ul>
-<p><strong>It never pays and never proxies.</strong> It hands you the URL and the
-terms; you pay the endpoint directly from your own wallet, so the operator you
-pay sees you rather than us.</p>
-
-<h2 id="for-humans">For humans — make your product agent-readable</h2>
-<p>Every listing page here is what "agent-readable" looks like. Want it on your own domain? The human service has two validation-priced, fixed-scope offers: a <strong>$49 report</strong> and a <strong>$199 done-for-you implementation</strong>. The <a href="https://kc-it.pl/services/agent-readability">service page</a> states exactly what is and is not included; the historical case study is labelled against the 13-check v1 audit rather than presented as a current 20-check result.</p>
+<h2 id="catalog-health">Catalog health</h2>
+<p>Browse the free <a href="x402.html">x402 catalog</a> and
+<a href="mcp-servers.html">MCP catalog</a>, or inspect the endpoints that failed
+a sampled probe: <a href="api/x402/avoid.json">x402</a> and
+<a href="api/mcp/avoid.json">MCP</a>. These are dated observations, not live
+availability guarantees.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Listings and the A–F score stay free. The full <a href="#audit">20-check audit</a> is $0.05; a single check, live probe, route query, or weekly watch sweep is $0.005. Watches are prepaid in bundles of 4–52 sweeps. Paid listing tiers are $5 (<code>verified</code>) and $25 (<code>featured</code>), rank above free, and get a badge. All machine prices settle in USDC on Base over x402; live terms are at <a href="api/x402/info">/api/x402/info</a>. Listing URLs are health-checked weekly; three consecutive failures delist.</p>
+<p>Listings, search, catalogs and the A–F score are free. The optional <a href="#audit">full audit API</a> costs $0.05 USDC per call; <a href="api/x402/info">payment terms</a> are published for developers. Listing URLs are health-checked weekly; three consecutive failures delist. Existing listing-tier information remains in the <a href="llms.txt">registration documentation</a>.</p>
 
-<footer>Part of <a href="https://{{APEX}}/">{{APEX}}</a>, the umbrella for these paid services ·
+<footer>Part of <a href="https://{{APEX}}/">{{APEX}}</a>, free product discovery and website checks ·
 <a href="https://github.com/{{REPO}}">GitHub</a> · <a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">sitemap</a> · static site, zero dependencies — listings land via GitHub-issue registration.</footer>
 <script>
 // Free Agent Readability Score. The audit runs server-side — a browser cannot
@@ -259,24 +218,16 @@ pay sees you rather than us.</p>
     if (failed > 0 && data.unlock) {
       var box = el('div', null, 'locked');
       box.appendChild(el('h3', 'Fix ' + failed + (failed === 1 ? ' failing check' : ' failing checks')));
-      box.appendChild(el('p', data.unlock.what + '.'));
-      var pre = el('pre');
-      pre.appendChild(el('code', 'curl -X POST ' + data.unlock.endpoint + " \\\n"
-        + "  -H 'content-type: application/json' \\\n"
-        + "  -d '{\"url\": \"" + data.url + '"}\''));
-      box.appendChild(pre);
-      var price = el('p', null, 'note');
-      price.appendChild(document.createTextNode(
-        (data.unlock.price ? data.unlock.price + ' per call · ' : '') + data.unlock.protocol + ' · '));
-      var terms = el('a', 'payment terms');
-      terms.href = 'api/x402/info';
-      price.appendChild(terms);
-      price.appendChild(document.createTextNode(' · or have it '));
-      var hire = el('a', 'done for you');
-      hire.href = '#for-humans';
-      price.appendChild(hire);
-      price.appendChild(document.createTextNode('.'));
-      box.appendChild(price);
+      box.appendChild(el('p', 'The checklist explains each finding. Developers can also request a full audit with ranked fixes and domain-specific snippets.'));
+      var links = el('p', null, 'note');
+      var checklist = el('a', 'Read the free checklist and remedies');
+      checklist.href = 'checks/';
+      links.appendChild(checklist);
+      links.appendChild(document.createTextNode(' · '));
+      var docs = el('a', 'Optional full audit API ($0.05 USDC)');
+      docs.href = 'openapi.yaml';
+      links.appendChild(docs);
+      box.appendChild(links);
       out.appendChild(box);
     } else if (failed === 0) {
       out.appendChild(el('p', 'Every check passes. Consider registering it in the index below.', 'note'));

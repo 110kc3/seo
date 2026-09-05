@@ -3,36 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Router — find a live machine-payable endpoint, without paying to look</title>
-<meta name="description" content="Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.">
+<title>The Router — retired</title>
+<meta name="description" content="Paid routing, liveness probes and new watches have been retired. Free catalog search remains available.">
+<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://router.percall.dev/">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The Router — find a live machine-payable endpoint, without paying to look">
-<meta property="og:description" content="Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.">
+<meta property="og:title" content="The Router — retired">
+<meta property="og:description" content="Paid routing, liveness probes and new watches have been retired. Free catalog search remains available.">
 <meta property="og:url" content="https://router.percall.dev/">
 <meta property="og:image" content="https://router.percall.dev/assets/og.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebAPI",
-  "name": "The Router",
-  "description": "Probes machine-payable endpoints for liveness and current terms, and ranks candidates for a task. Non-custodial: the caller pays the endpoint directly.",
-  "url": "https://router.percall.dev/",
-  "documentation": "https://index.percall.dev/openapi.yaml",
-  "provider": {
-    "@type": "Organization",
-    "name": "percall.dev",
-    "url": "https://percall.dev/"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "0.005",
-    "priceCurrency": "USDC",
-    "description": "Per call, settled in USDC on Base over HTTP 402."
-  }
-}
-</script>
+
 <style>
   :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
   @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e8e6; --muted:#999; --accent:#4dc79a; --card:#1c1c1b; --border:#2c2c2a; } }
@@ -65,95 +46,16 @@
 <body>
 <p class="crumb"><a href="https://percall.dev/">percall.dev</a> / The Router</p>
 
-<h1>The Router</h1>
-<p class="lede">Which machine-payable endpoint should you call, is it alive right
-now, and what does it charge? Answered by probing — <strong>never by paying</strong>.</p>
-
-<h2>Why this is not obvious</h2>
-<p>The x402 Bazaar keeps an entry for 30 days after its last settlement, and the
-MCP registry lists whatever a publisher declared. So <em>listed</em> and
-<em>answers</em> are different facts about
-29,497 catalogued endpoints, and only one
-of them was published anywhere.</p>
-<p>The trick that makes this cheap: <strong>an unpaid request to a paid endpoint
-returns its own 402, and a 402 states its terms.</strong> Liveness and price come
-back in the same free request. Nobody has to pay to find out what something
-costs.</p>
-
-<h2>Three paid endpoints</h2>
-<h3><code>GET /api/liveness?url=…</code> <span class="meta">$0.005</span></h3>
-<p>Probes one endpoint now: whether it answered, how fast, and the terms it
-currently quotes — parsed from its own 402, in either x402 version.</p>
-<pre><code>curl "https://router.percall.dev/api/liveness?url=https://example.com/paid"</code></pre>
-
-<h3><code>POST /api/route</code> <span class="meta">$0.005</span></h3>
-<p>Ranked candidates for a task, each probed live, each with the URL to call and
-what it quotes. Endpoints that did not answer are reported, not hidden — you
-asked what exists. <strong>A query that matches nothing is free.</strong></p>
-<pre><code>curl -X POST https://router.percall.dev/api/route \
-  -H 'content-type: application/json' \
-  -d '{"q": "unit conversion", "max_price": 0.01}'</code></pre>
-
-<h3><code>POST /api/watch</code> <span class="meta">$0.005 per weekly sweep</span></h3>
-<p>Prepay 4–52 weekly checks of one endpoint. The first establishes a baseline;
-after that, your HTTPS webhook fires only when it changes from answering to
-failing or back again, and once when credits run out. The payer address owns the
-watch, so there is no account and no recurring mandate.</p>
-<pre><code>curl -X POST https://router.percall.dev/api/watch \
-  -H 'content-type: application/json' \
-  -d '{"url":"https://example.com/paid","webhook":"https://you.example/hook","sweeps":12}'</code></pre>
-
-<h2>History, and why it gets better</h2>
-<p>Every answer carries that endpoint's record: total probes, how many answered,
-consecutive failures, and how many of the last 30 observations answered. It is
-built from live probes rather than a crawl, so it deepens on exactly the
-endpoints people ask about — <strong>the answer improves the more the service is
-used</strong>.</p>
-<p>The uptime ratio is withheld below three observations. "Answered 1 of 1" is
-technically true and practically a lie, and you would compare it against another
-endpoint's number anyway.</p>
-
-<h2>It never pays, and that is structural</h2>
-<p>This service holds no key that could sign a transfer. It hands you the URL and
-the terms; <strong>you pay the endpoint directly, from your own wallet</strong>.
-Nothing is proxied, so the operator you pay sees you rather than us — your
-per-caller pricing and rate limits keep working.</p>
-<p>The probe sends two headers and nothing else. Your request may carry a payment
-authorization made out to us, and forwarding request headers to a third party
-would hand a signed credential to a stranger, so the probe is built from scratch
-every time. A test forbids any module here from setting an outbound payment
-header at all.</p>
-
-<h2>Paying for it</h2>
-<p>Live probes and route queries are $0.005 each; monitoring is $0.005
-per prepaid weekly sweep. All settle in USDC on Base over HTTP 402 — no account,
-dashboard, subscription mandate, or human step. Read the terms without provoking a 402 at
-<a href="https://index.percall.dev/api/x402/info">/api/x402/info</a>.</p>
-
-<h2>Every answer is signed</h2>
-<p>Each response carries an <strong>RFC 9421 HTTP Message Signature</strong>
-(Ed25519) over its status, its <code>Content-Digest</code>, the authority and the
-path. A probe result you got from here is cryptographically attributable to this
-service and provably unmodified in transit — verify it against the keys at
-<a href="https://index.percall.dev/.well-known/http-message-signatures-directory">the
-signature directory</a>.</p>
-<p><strong>Rare, and applied differently.</strong> Of the
-14,793 machine-payable endpoints mirrored here, fewer than 1%
-mention signed responses at all — and those that do sell signing as its own
-product, an attestation you buy per resource. Here it is a property of every
-response, including the free ones. When two services disagree about whether an
-endpoint is alive, the signed answer is the one you can hold someone to.</p>
-
-<h2>Being kind to the endpoints</h2>
-<p>Probes are shared for 60 seconds, so a popular endpoint is probed once a
-minute however many callers ask, and the candidate fan-out is capped. These are
-other people's servers. If you operate one of the catalogued endpoints and want
-it gone, open an issue on <a href="https://github.com/110kc3/seo">the repo</a> —
-no justification needed.</p>
-
-<footer>A service of <a href="https://percall.dev/">percall.dev</a>, alongside the
-<a href="https://index.percall.dev/">AI Product Index</a> whose catalogs it reads.
-Machine-readable: <a href="https://index.percall.dev/llms.txt">llms.txt</a> ·
-<a href="https://index.percall.dev/openapi.yaml">OpenAPI</a>.</footer>
+<h1>The Router has been retired</h1>
+<p class="lede">Paid routing, live probes and new watch purchases closed on
+5 September 2026. These API endpoints return HTTP 410 and accept no payment.</p>
+<p>Existing prepaid weekly watches continue until their credits are exhausted.
+Top-ups are closed.</p>
+<p>Use the free <a href="https://index.percall.dev/x402.html">x402 catalog</a>,
+<a href="https://index.percall.dev/mcp-servers.html">MCP catalog</a> and their search APIs
+to discover endpoints. Catalog health is sampled, not a live guarantee.</p>
+<p>The <a href="https://index.percall.dev/">AI Product Index</a> still provides free website
+scores and an optional full audit API. See <a href="https://index.percall.dev/openapi.yaml">the API documentation</a>.</p>
+<footer><a href="https://index.percall.dev/">AI Product Index</a> · <a href="https://percall.dev/">percall.dev</a></footer>
 </body>
 </html>

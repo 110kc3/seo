@@ -151,6 +151,8 @@ test('an exhausted watch stops costing probes, and the last alert says why', asy
   assert.equal(first.swept, 1);
   assert.equal(sent.at(-1).exhausted, true);
   assert.equal(sent.at(-1).credits_left, 0);
+  assert.match(sent.at(-1).note, /new watches and top-ups are closed/);
+  assert.doesNotMatch(sent.at(-1).note, /Top up at/);
 
   const second = await (await handleSweep(new Request(`${BASE}/api/watch/sweep`, { method: 'POST' }), env, {
     authorized: true, cfg,
@@ -177,10 +179,7 @@ test("one subscriber's dead webhook does not stop the sweep for everyone else", 
   assert.equal(body.failed_delivery, 1);
 });
 
-test('a watch costs sweeps x the published per-sweep price, and the cap is real', async () => {
-  const { resolveX402 } = await import('../scripts/x402-config.mjs');
-  const rail = resolveX402(cfg);
-  assert.ok(Number(rail.watch_sweep_price_atomic) > 0, 'a sweep must have a published price');
+test('the legacy watch parser enforces the original prepaid sweep cap', () => {
   assert.equal(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: MAX_SWEEPS }, urlError).sweeps, MAX_SWEEPS);
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: MAX_SWEEPS + 1 }, urlError).error, /^sweeps:/);
 });

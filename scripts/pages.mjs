@@ -84,7 +84,7 @@ export function metaDescription(text, max = 160) {
  * The standard page shell. `depth` is how many directories deep the page sits,
  * so relative links resolve from `/checks/foo.html` as well as from `/x402.html`.
  */
-export function page({ base, path, title, description, body, ld = null, depth = 0, crumb = null, footer = null }) {
+export function page({ base, path, title, description, body, ld = null, depth = 0, crumb = null, footer = null, noindex = false }) {
   // A page whose body is missing used to render the literal string "undefined"
   // between a correct header and a correct footer, and ship: valid HTML, right
   // title, right canonical, no content. That is exactly what happened to
@@ -105,6 +105,7 @@ export function page({ base, path, title, description, body, ld = null, depth = 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(metaDescription(description))}">
+${noindex ? '<meta name="robots" content="noindex, follow">' : ''}
 <link rel="canonical" href="${base}${path}">
 <link rel="alternate" type="text/markdown" href="${up}llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
@@ -120,7 +121,7 @@ ${crumb ?? `<p class="crumb"><a href="${up}index.html">AI Product Index</a>${pat
 ${body}
 <footer>${footer ?? `Generated from the data files this site publishes — nothing here is hand-maintained.
 Machine-readable: <a href="${up}llms.txt">llms.txt</a> · <a href="${up}api/index.json">registry JSON</a> · <a href="${up}openapi.yaml">OpenAPI</a>.
-Humans: <a href="${up}index.html#for-humans">done-for-you agent readability</a>.`}</footer>
+Website checks: <a href="${up}checks/">published checklist and remedies</a>.`}</footer>
 </body>
 </html>
 `;
@@ -853,125 +854,26 @@ which is why the check set here is versioned in public.</p>
  * unattached, so this page is correct in both states rather than advertising a
  * hostname that does not resolve yet.
  */
-export function routerPage({
-  routerBase, canonicalBase, canonicalPath, serviceBase, apexBase, x402, mcp, priceUsd, watchPriceUsd,
-}) {
-  const price = `$${Number(priceUsd).toFixed(3)}`;
-  const watchPrice = `$${Number(watchPriceUsd).toFixed(3)}`;
-  const body = `
-<h1>The Router</h1>
-<p class="lede">Which machine-payable endpoint should you call, is it alive right
-now, and what does it charge? Answered by probing — <strong>never by paying</strong>.</p>
-
-<h2>Why this is not obvious</h2>
-<p>The x402 Bazaar keeps an entry for 30 days after its last settlement, and the
-MCP registry lists whatever a publisher declared. So <em>listed</em> and
-<em>answers</em> are different facts about
-${num(x402.endpoints + mcp.remote_endpoints)} catalogued endpoints, and only one
-of them was published anywhere.</p>
-<p>The trick that makes this cheap: <strong>an unpaid request to a paid endpoint
-returns its own 402, and a 402 states its terms.</strong> Liveness and price come
-back in the same free request. Nobody has to pay to find out what something
-costs.</p>
-
-<h2>Three paid endpoints</h2>
-<h3><code>GET /api/liveness?url=…</code> <span class="meta">${price}</span></h3>
-<p>Probes one endpoint now: whether it answered, how fast, and the terms it
-currently quotes — parsed from its own 402, in either x402 version.</p>
-<pre><code>curl "${routerBase}/api/liveness?url=https://example.com/paid"</code></pre>
-
-<h3><code>POST /api/route</code> <span class="meta">${price}</span></h3>
-<p>Ranked candidates for a task, each probed live, each with the URL to call and
-what it quotes. Endpoints that did not answer are reported, not hidden — you
-asked what exists. <strong>A query that matches nothing is free.</strong></p>
-<pre><code>curl -X POST ${routerBase}/api/route \\
-  -H 'content-type: application/json' \\
-  -d '{"q": "unit conversion", "max_price": 0.01}'</code></pre>
-
-<h3><code>POST /api/watch</code> <span class="meta">${watchPrice} per weekly sweep</span></h3>
-<p>Prepay 4–52 weekly checks of one endpoint. The first establishes a baseline;
-after that, your HTTPS webhook fires only when it changes from answering to
-failing or back again, and once when credits run out. The payer address owns the
-watch, so there is no account and no recurring mandate.</p>
-<pre><code>curl -X POST ${routerBase}/api/watch \\
-  -H 'content-type: application/json' \\
-  -d '{"url":"https://example.com/paid","webhook":"https://you.example/hook","sweeps":12}'</code></pre>
-
-<h2>History, and why it gets better</h2>
-<p>Every answer carries that endpoint's record: total probes, how many answered,
-consecutive failures, and how many of the last 30 observations answered. It is
-built from live probes rather than a crawl, so it deepens on exactly the
-endpoints people ask about — <strong>the answer improves the more the service is
-used</strong>.</p>
-<p>The uptime ratio is withheld below three observations. "Answered 1 of 1" is
-technically true and practically a lie, and you would compare it against another
-endpoint's number anyway.</p>
-
-<h2>It never pays, and that is structural</h2>
-<p>This service holds no key that could sign a transfer. It hands you the URL and
-the terms; <strong>you pay the endpoint directly, from your own wallet</strong>.
-Nothing is proxied, so the operator you pay sees you rather than us — your
-per-caller pricing and rate limits keep working.</p>
-<p>The probe sends two headers and nothing else. Your request may carry a payment
-authorization made out to us, and forwarding request headers to a third party
-would hand a signed credential to a stranger, so the probe is built from scratch
-every time. A test forbids any module here from setting an outbound payment
-header at all.</p>
-
-<h2>Paying for it</h2>
-<p>Live probes and route queries are ${price} each; monitoring is ${watchPrice}
-per prepaid weekly sweep. All settle in USDC on Base over HTTP 402 — no account,
-dashboard, subscription mandate, or human step. Read the terms without provoking a 402 at
-<a href="${serviceBase}/api/x402/info">/api/x402/info</a>.</p>
-
-<h2>Every answer is signed</h2>
-<p>Each response carries an <strong>RFC 9421 HTTP Message Signature</strong>
-(Ed25519) over its status, its <code>Content-Digest</code>, the authority and the
-path. A probe result you got from here is cryptographically attributable to this
-service and provably unmodified in transit — verify it against the keys at
-<a href="${serviceBase}/.well-known/http-message-signatures-directory">the
-signature directory</a>.</p>
-<p><strong>Rare, and applied differently.</strong> Of the
-${num(x402.endpoints)} machine-payable endpoints mirrored here, fewer than 1%
-mention signed responses at all — and those that do sell signing as its own
-product, an attestation you buy per resource. Here it is a property of every
-response, including the free ones. When two services disagree about whether an
-endpoint is alive, the signed answer is the one you can hold someone to.</p>
-
-<h2>Being kind to the endpoints</h2>
-<p>Probes are shared for 60 seconds, so a popular endpoint is probed once a
-minute however many callers ask, and the candidate fan-out is capped. These are
-other people's servers. If you operate one of the catalogued endpoints and want
-it gone, open an issue on <a href="https://github.com/110kc3/seo">the repo</a> —
-no justification needed.</p>
-`;
-
+export function routerPage({ canonicalBase, canonicalPath, serviceBase, apexBase }) {
   return page({
     base: canonicalBase,
     path: canonicalPath,
-    body,
-    title: 'The Router — find a live machine-payable endpoint, without paying to look',
-    description: 'Which machine-payable endpoint should you call, is it alive now, and what does it charge? Probed live, never paid. You pay the endpoint directly.',
+    title: 'The Router — retired',
+    noindex: true,
+    description: 'Paid routing, liveness probes and new watches have been retired. Free catalog search remains available.',
     crumb: `<p class="crumb"><a href="${apexBase}/">percall.dev</a> / The Router</p>`,
-    footer: `A service of <a href="${apexBase}/">percall.dev</a>, alongside the
-<a href="${serviceBase}/">AI Product Index</a> whose catalogs it reads.
-Machine-readable: <a href="${serviceBase}/llms.txt">llms.txt</a> ·
-<a href="${serviceBase}/openapi.yaml">OpenAPI</a>.`,
-    ld: {
-      '@context': 'https://schema.org',
-      '@type': 'WebAPI',
-      name: 'The Router',
-      description: 'Probes machine-payable endpoints for liveness and current terms, and ranks candidates for a task. Non-custodial: the caller pays the endpoint directly.',
-      url: `${canonicalBase}${canonicalPath}`,
-      documentation: `${serviceBase}/openapi.yaml`,
-      provider: { '@type': 'Organization', name: 'percall.dev', url: `${apexBase}/` },
-      offers: {
-        '@type': 'Offer',
-        price: Number(priceUsd).toFixed(3),
-        priceCurrency: 'USDC',
-        description: 'Per call, settled in USDC on Base over HTTP 402.',
-      },
-    },
+    body: `
+<h1>The Router has been retired</h1>
+<p class="lede">Paid routing, live probes and new watch purchases closed on
+5 September 2026. These API endpoints return HTTP 410 and accept no payment.</p>
+<p>Existing prepaid weekly watches continue until their credits are exhausted.
+Top-ups are closed.</p>
+<p>Use the free <a href="${serviceBase}/x402.html">x402 catalog</a>,
+<a href="${serviceBase}/mcp-servers.html">MCP catalog</a> and their search APIs
+to discover endpoints. Catalog health is sampled, not a live guarantee.</p>
+<p>The <a href="${serviceBase}/">AI Product Index</a> still provides free website
+scores and an optional full audit API. See <a href="${serviceBase}/openapi.yaml">the API documentation</a>.</p>`,
+    footer: `<a href="${serviceBase}/">AI Product Index</a> · <a href="${apexBase}/">percall.dev</a>`,
   });
 }
 
@@ -991,105 +893,51 @@ Machine-readable: <a href="${serviceBase}/llms.txt">llms.txt</a> ·
  * there is one service live, the page says one service is live, and the roadmap
  * is described as intent rather than as inventory.
  */
-export function apexPage({ apexBase, serviceBase, routerUrl, routerHost, x402, mcp, traffic, listingCount }) {
-  const latest = traffic?.series?.at(-1);
-  // Says where the Router actually is, which is not the same before and after
-  // its custom domain is attached. A portfolio page naming a hostname that does
-  // not resolve is worse than one admitting the two products share a host.
-  const routerLabel = routerHost || 'on index.percall.dev until its domain is attached';
-  const body = `
-<h1>percall.dev</h1>
-<p class="lede">Paid services built to be called by software rather than clicked
-by people. Machine-readable in, machine-readable out, priced per call and payable
-without a human in the loop.</p>
-
-<h2>Live now</h2>
-<div class="card" style="padding:1.2rem 1.3rem">
-  <h3 style="margin-top:0"><a href="${serviceBase}/">AI Product Index</a> <span class="meta">index.percall.dev</span></h3>
-  <p>A directory AI agents can read, register in and buy from — and an
-  agent-readability grader for any URL on the web.</p>
-  <ul>
-    <li><strong>Free:</strong> <a href="${serviceBase}/api/score?url=https://example.com"><code>GET /api/score</code></a> grades any site A–F across 20 published checks.</li>
-    <li><strong>Paid:</strong> <code>POST /api/audit</code> returns why each check failed and a paste-ready fix for your own origin — $0.05, settled in USDC on Base over HTTP 402.</li>
-    <li><strong>Catalogued:</strong> <a href="${serviceBase}/x402.html">${num(x402.endpoints)} machine-payable endpoints</a> and <a href="${serviceBase}/mcp-servers.html">${num(mcp.remote_endpoints)} callable MCP servers</a>, both probed weekly for whether they still answer.</li>
-    <li><strong>Callable as a tool:</strong> <code>claude mcp add --transport http ai-product-index ${serviceBase}/mcp</code></li>
-  </ul>
-  <p class="meta">${num(listingCount)} products listed · <a href="${serviceBase}/llms.txt">llms.txt</a> ·
-  <a href="${serviceBase}/openapi.yaml">OpenAPI</a> · <a href="${serviceBase}/report.html">what the traffic looks like</a></p>
-</div>
-
-<div class="card" style="padding:1.2rem 1.3rem; margin-top:.9rem">
-  <h3 style="margin-top:0"><a href="${routerUrl}">The Router</a> <span class="meta">${routerLabel}</span></h3>
-  <p>Which machine-payable endpoint should you call, is it alive right now, and
-  what does it charge? Answered by probing, <strong>never by paying</strong>.</p>
-  <ul>
-    <li><strong>Paid:</strong> <code>GET /api/liveness?url=…</code> probes one endpoint now — answered or not, latency, and the terms it currently quotes, read from its own 402. $0.005.</li>
-    <li><strong>Paid:</strong> <code>POST /api/route</code> takes <code>{"q": "unit conversion", "max_price": 0.01}</code> and returns ranked candidates, each probed live, each with the URL to call. $0.005, and a query that matches nothing is free.</li>
-    <li><strong>Monitored:</strong> <code>POST /api/watch</code> prepays 4–52 weekly sweeps at $0.005 each. A webhook fires on outage, recovery, and credit exhaustion; nothing is charged again without another signed payment.</li>
-    <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
-    <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
-  </ul>
-  <p class="meta">Reads the same ${num(x402.endpoints + mcp.remote_endpoints)} catalogued endpoints · terms at
-  <a href="${serviceBase}/api/x402/info">/api/x402/info</a></p>
-</div>
-
-<h2>The rail underneath</h2>
-<p>Every paid endpoint here settles the same way: HTTP 402 with machine-readable
-terms, an EIP-3009 authorization signed by the caller, settlement in USDC on Base
-through the Coinbase CDP facilitator. No account, no dashboard, no human step —
-an agent that can sign a transaction can buy from any of it in one session.</p>
-<p>That rail is proven rather than intended: it has taken real settlements on
-mainnet, refuses replays, and publishes its terms at
-<a href="${serviceBase}/api/x402/info">/api/x402/info</a> so a caller can read the
-price without provoking a 402.</p>
-
-<h2>What is honest about the state of this</h2>
-<p><strong>Two products are live on one Worker and three hostnames.</strong>
-The index owns <code>index.percall.dev</code>, the Router owns
-<code>${routerHost || 'its Router paths on the service host'}</code>, and this
-umbrella page owns <code>percall.dev</code>. Sharing code and data keeps the
-operation small; host routing keeps one canonical address per document.</p>
-${latest ? `<p>The other honest number: in the last verified snapshot
-(${latest.date}), agents were <strong>${pct(latest.agent_share, 2)}</strong> of requests,
-and <strong>not one organic agent payment had cleared</strong>. That measurement is
-published in full at
-<a href="${serviceBase}/report.html">the state of the agent web</a>. It is the most
-useful thing here and it is free. If analytics cannot produce a fresh snapshot,
-the weekly workflow now opens an incident instead of silently leaving this
-number looking current.</p>` : ''}
-
-<h2>Humans</h2>
-<p>The machine-callable services live here. Consulting for people — cloud
-infrastructure, Kubernetes, and done-for-you agent readability on your own domain
-— is at <a href="https://kc-it.pl/">kc-it.pl</a>. Two audiences, two brands, one
-operator.</p>
-<p class="meta">Built by Kamil Choiński. Source for the live service:
-<a href="https://github.com/110kc3/seo">github.com/110kc3/seo</a>.</p>
-`;
-
+export function apexPage({ apexBase, serviceBase, x402, mcp, listingCount }) {
   return page({
     base: apexBase,
     path: '/',
-    title: 'percall.dev — paid services for software that buys its own inputs',
-    // Written to fit the 160-char budget whole. The umbrella's snippet is the
-    // first thing a search result says about the portfolio, so it gets a
-    // complete sentence rather than whatever survives a truncation.
-    description: 'Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index, and a router that finds endpoints worth paying without ever paying.',
+    title: 'percall.dev — discover tools and check your website',
+    description: 'Find AI products, search MCP and x402 catalogs, and check how clearly your website publishes information for software.',
     crumb: '',
-    footer: `Machine-readable entry points live on the service host:
+    body: `
+<h1>percall.dev</h1>
+<p class="lede">Discover AI products and tools, and check how clearly your
+website publishes information for software.</p>
+
+<h2><a href="${serviceBase}/">AI Product Index</a></h2>
+<p>Search ${num(listingCount)} listed products, get a free website score,
+or register your own product.</p>
+<ul>
+  <li><a href="${serviceBase}/#try">Check a website</a> — an A–F score with the results of 20 published checks.</li>
+  <li><a href="${serviceBase}/mcp-servers.html">Find an MCP server</a> — ${num(mcp.remote_endpoints)} catalogued remote endpoints.</li>
+  <li><a href="${serviceBase}/x402.html">Explore x402 APIs</a> — ${num(x402.endpoints)} catalogued endpoints with published payment terms.</li>
+  <li><a href="${serviceBase}/checks/">Understand the checks</a> — what each check measures and how to address a finding.</li>
+</ul>
+<p>Registration, search, catalogs and website scores are free. Catalog health
+comes from rotating samples and is not a live availability guarantee.</p>
+
+<h2>For developers</h2>
+<p>Connect through <a href="${serviceBase}/.well-known/mcp.json">MCP</a> or use
+the <a href="${serviceBase}/openapi.yaml">HTTP API</a>. One optional paid
+endpoint, <code>POST /api/audit</code>, returns the full report with ranked fixes
+and snippets for $0.05 USDC per call. Payment instructions and examples are in
+<a href="${serviceBase}/llms.txt">the developer documentation</a>.</p>
+
+<p class="meta">Built by Kamil Choiński.
+<a href="https://github.com/110kc3/seo">Source code</a> ·
+<a href="${serviceBase}/report.html">Traffic and catalog report</a>.</p>`,
+    footer: `<a href="${serviceBase}/">AI Product Index</a> ·
 <a href="${serviceBase}/llms.txt">llms.txt</a> ·
-<a href="${serviceBase}/openapi.yaml">OpenAPI</a> ·
-<a href="${serviceBase}/.well-known/agent-card.json">agent card</a>.
-Everything on this domain except this page redirects there, so there is exactly one copy of it.`,
+<a href="${serviceBase}/openapi.yaml">OpenAPI</a>`,
     ld: {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'percall.dev',
       url: `${apexBase}/`,
-      description: 'Paid services built to be called by software rather than by people, settled per call in USDC over HTTP 402.',
+      description: 'Free product discovery, tool catalogs and website readiness checks, with an optional paid audit API.',
       founder: { '@type': 'Person', name: 'Kamil Choiński', url: 'https://kc-it.pl/' },
       subOrganization: [{ '@type': 'Organization', name: 'AI Product Index', url: `${serviceBase}/` }],
     },
-    body,
   });
 }

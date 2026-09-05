@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>percall.dev — paid services for software that buys its own inputs</title>
-<meta name="description" content="Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index, and a router that finds endpoints worth paying without ever paying.">
+<title>percall.dev — discover tools and check your website</title>
+<meta name="description" content="Find AI products, search MCP and x402 catalogs, and check how clearly your website publishes information for software.">
+
 <link rel="canonical" href="https://percall.dev/">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="percall.dev — paid services for software that buys its own inputs">
-<meta property="og:description" content="Machine-callable paid services settled in USDC over HTTP 402. Live: the AI Product Index, and a router that finds endpoints worth paying without ever paying.">
+<meta property="og:title" content="percall.dev — discover tools and check your website">
+<meta property="og:description" content="Find AI products, search MCP and x402 catalogs, and check how clearly your website publishes information for software.">
 <meta property="og:url" content="https://percall.dev/">
 <meta property="og:image" content="https://percall.dev/assets/og.png">
 <script type="application/ld+json">
@@ -18,7 +19,7 @@
   "@type": "Organization",
   "name": "percall.dev",
   "url": "https://percall.dev/",
-  "description": "Paid services built to be called by software rather than by people, settled per call in USDC over HTTP 402.",
+  "description": "Free product discovery, tool catalogs and website readiness checks, with an optional paid audit API.",
   "founder": {
     "@type": "Person",
     "name": "Kamil Choiński",
@@ -66,77 +67,33 @@
 
 
 <h1>percall.dev</h1>
-<p class="lede">Paid services built to be called by software rather than clicked
-by people. Machine-readable in, machine-readable out, priced per call and payable
-without a human in the loop.</p>
+<p class="lede">Discover AI products and tools, and check how clearly your
+website publishes information for software.</p>
 
-<h2>Live now</h2>
-<div class="card" style="padding:1.2rem 1.3rem">
-  <h3 style="margin-top:0"><a href="https://index.percall.dev/">AI Product Index</a> <span class="meta">index.percall.dev</span></h3>
-  <p>A directory AI agents can read, register in and buy from — and an
-  agent-readability grader for any URL on the web.</p>
-  <ul>
-    <li><strong>Free:</strong> <a href="https://index.percall.dev/api/score?url=https://example.com"><code>GET /api/score</code></a> grades any site A–F across 20 published checks.</li>
-    <li><strong>Paid:</strong> <code>POST /api/audit</code> returns why each check failed and a paste-ready fix for your own origin — $0.05, settled in USDC on Base over HTTP 402.</li>
-    <li><strong>Catalogued:</strong> <a href="https://index.percall.dev/x402.html">14,793 machine-payable endpoints</a> and <a href="https://index.percall.dev/mcp-servers.html">14,704 callable MCP servers</a>, both probed weekly for whether they still answer.</li>
-    <li><strong>Callable as a tool:</strong> <code>claude mcp add --transport http ai-product-index https://index.percall.dev/mcp</code></li>
-  </ul>
-  <p class="meta">47 products listed · <a href="https://index.percall.dev/llms.txt">llms.txt</a> ·
-  <a href="https://index.percall.dev/openapi.yaml">OpenAPI</a> · <a href="https://index.percall.dev/report.html">what the traffic looks like</a></p>
-</div>
+<h2><a href="https://index.percall.dev/">AI Product Index</a></h2>
+<p>Search 47 listed products, get a free website score,
+or register your own product.</p>
+<ul>
+  <li><a href="https://index.percall.dev/#try">Check a website</a> — an A–F score with the results of 20 published checks.</li>
+  <li><a href="https://index.percall.dev/mcp-servers.html">Find an MCP server</a> — 14,704 catalogued remote endpoints.</li>
+  <li><a href="https://index.percall.dev/x402.html">Explore x402 APIs</a> — 14,793 catalogued endpoints with published payment terms.</li>
+  <li><a href="https://index.percall.dev/checks/">Understand the checks</a> — what each check measures and how to address a finding.</li>
+</ul>
+<p>Registration, search, catalogs and website scores are free. Catalog health
+comes from rotating samples and is not a live availability guarantee.</p>
 
-<div class="card" style="padding:1.2rem 1.3rem; margin-top:.9rem">
-  <h3 style="margin-top:0"><a href="https://router.percall.dev/">The Router</a> <span class="meta">router.percall.dev</span></h3>
-  <p>Which machine-payable endpoint should you call, is it alive right now, and
-  what does it charge? Answered by probing, <strong>never by paying</strong>.</p>
-  <ul>
-    <li><strong>Paid:</strong> <code>GET /api/liveness?url=…</code> probes one endpoint now — answered or not, latency, and the terms it currently quotes, read from its own 402. $0.005.</li>
-    <li><strong>Paid:</strong> <code>POST /api/route</code> takes <code>{"q": "unit conversion", "max_price": 0.01}</code> and returns ranked candidates, each probed live, each with the URL to call. $0.005, and a query that matches nothing is free.</li>
-    <li><strong>Monitored:</strong> <code>POST /api/watch</code> prepays 4–52 weekly sweeps at $0.005 each. A webhook fires on outage, recovery, and credit exhaustion; nothing is charged again without another signed payment.</li>
-    <li><strong>History:</strong> every answer carries that endpoint's record — probes, answered, consecutive failures, and how many of the last 30 observations answered.</li>
-    <li><strong>Non-custodial, structurally:</strong> this service holds no key that could sign a transfer. It hands you the URL and the terms; <strong>you pay the endpoint directly, from your own wallet</strong>. Nothing is proxied, so the operator you pay sees you rather than us.</li>
-  </ul>
-  <p class="meta">Reads the same 29,497 catalogued endpoints · terms at
-  <a href="https://index.percall.dev/api/x402/info">/api/x402/info</a></p>
-</div>
+<h2>For developers</h2>
+<p>Connect through <a href="https://index.percall.dev/.well-known/mcp.json">MCP</a> or use
+the <a href="https://index.percall.dev/openapi.yaml">HTTP API</a>. One optional paid
+endpoint, <code>POST /api/audit</code>, returns the full report with ranked fixes
+and snippets for $0.05 USDC per call. Payment instructions and examples are in
+<a href="https://index.percall.dev/llms.txt">the developer documentation</a>.</p>
 
-<h2>The rail underneath</h2>
-<p>Every paid endpoint here settles the same way: HTTP 402 with machine-readable
-terms, an EIP-3009 authorization signed by the caller, settlement in USDC on Base
-through the Coinbase CDP facilitator. No account, no dashboard, no human step —
-an agent that can sign a transaction can buy from any of it in one session.</p>
-<p>That rail is proven rather than intended: it has taken real settlements on
-mainnet, refuses replays, and publishes its terms at
-<a href="https://index.percall.dev/api/x402/info">/api/x402/info</a> so a caller can read the
-price without provoking a 402.</p>
-
-<h2>What is honest about the state of this</h2>
-<p><strong>Two products are live on one Worker and three hostnames.</strong>
-The index owns <code>index.percall.dev</code>, the Router owns
-<code>router.percall.dev</code>, and this
-umbrella page owns <code>percall.dev</code>. Sharing code and data keeps the
-operation small; host routing keeps one canonical address per document.</p>
-<p>The other honest number: in the last verified snapshot
-(2026-08-31), agents were <strong>6.29%</strong> of requests,
-and <strong>not one organic agent payment had cleared</strong>. That measurement is
-published in full at
-<a href="https://index.percall.dev/report.html">the state of the agent web</a>. It is the most
-useful thing here and it is free. If analytics cannot produce a fresh snapshot,
-the weekly workflow now opens an incident instead of silently leaving this
-number looking current.</p>
-
-<h2>Humans</h2>
-<p>The machine-callable services live here. Consulting for people — cloud
-infrastructure, Kubernetes, and done-for-you agent readability on your own domain
-— is at <a href="https://kc-it.pl/">kc-it.pl</a>. Two audiences, two brands, one
-operator.</p>
-<p class="meta">Built by Kamil Choiński. Source for the live service:
-<a href="https://github.com/110kc3/seo">github.com/110kc3/seo</a>.</p>
-
-<footer>Machine-readable entry points live on the service host:
+<p class="meta">Built by Kamil Choiński.
+<a href="https://github.com/110kc3/seo">Source code</a> ·
+<a href="https://index.percall.dev/report.html">Traffic and catalog report</a>.</p>
+<footer><a href="https://index.percall.dev/">AI Product Index</a> ·
 <a href="https://index.percall.dev/llms.txt">llms.txt</a> ·
-<a href="https://index.percall.dev/openapi.yaml">OpenAPI</a> ·
-<a href="https://index.percall.dev/.well-known/agent-card.json">agent card</a>.
-Everything on this domain except this page redirects there, so there is exactly one copy of it.</footer>
+<a href="https://index.percall.dev/openapi.yaml">OpenAPI</a></footer>
 </body>
 </html>

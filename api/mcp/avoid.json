@@ -7,7 +7,7 @@
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
     "caveat": "the sweep is a rotating sample; an endpoint is re-probed about twice a year, so `confirmed` accumulates slowly by design",
-    "fresh_answer": "https://router.percall.dev/api/liveness?url=…"
+    "fresh_answer": null
   },
   "free": true,
   "counts": {

@@ -29,7 +29,6 @@ const ROUTER_BASE = ROUTER_HOST ? `https://${ROUTER_HOST}` : BASE;
 const ROUTER_PAGE = ROUTER_HOST
   ? { base: ROUTER_BASE, path: '/' }
   : { base: BASE, path: '/router.html' };
-const ROUTER_URL = `${ROUTER_PAGE.base}${ROUTER_PAGE.path}`;
 
 // How many checks the default set actually runs, derived from the scorer rather
 // than typed. Ten published surfaces said "13 checks" for a day after v2 became
@@ -162,7 +161,7 @@ ${jsonLd(ld)}
 <pre><code>[![AI Agent Ready](${BASE}/badge.svg?slug=${esc(l.slug)})](${BASE}/l/${esc(l.slug)}.html)
 [![Agent Readability](${BASE}/badge.svg?slug=${esc(l.slug)}&amp;show=score)](${BASE}/l/${esc(l.slug)}.html)</code></pre>
 <p class="meta">The grade is re-checked weekly by the same cron that verifies your URL is still up.</p>
-<footer>Get your product listed — free and autonomous: <a href="../llms.txt">protocol</a>. Humans: <a href="../index.html#for-humans">done-for-you agent-readability service</a>.</footer>
+<footer>Get your product listed — free and autonomous: <a href="../llms.txt">protocol</a>. Website checks: <a href="../checks/">checklist and remedies</a>.</footer>
 </body>
 </html>
 `;
@@ -381,10 +380,7 @@ for (const [name, html] of checkHtml) {
 // serve it, and while `router_host` is empty it renders against the service host
 // so nothing here advertises a name that does not resolve.
 if (x402Stats && mcpStats) {
-  const rail = resolveX402(cfg);
   writeFileSync(join(ROOT, 'router.html'), routerPage({
-    // Where the endpoints actually answer, for the copy-pasteable examples.
-    routerBase: ROUTER_BASE,
     // Where this page's one canonical address is, which is NOT the same thing
     // while the domain is unattached: `${BASE}/` is the index's home page, and
     // canonicalising to it would tell every crawler that the Router's page and
@@ -393,10 +389,6 @@ if (x402Stats && mcpStats) {
     canonicalPath: ROUTER_PAGE.path,
     serviceBase: BASE,
     apexBase: `https://${APEX}`,
-    x402: x402Stats,
-    mcp: mcpStats,
-    priceUsd: Number(rail?.route_price_atomic ?? 0) / 10 ** (rail?.asset_decimals ?? 6),
-    watchPriceUsd: Number(rail?.watch_sweep_price_atomic ?? 0) / 10 ** (rail?.asset_decimals ?? 6),
   }));
 }
 
@@ -408,11 +400,8 @@ if (cfg.apex_host && x402Stats && mcpStats) {
   writeFileSync(join(ROOT, 'apex.html'), apexPage({
     apexBase: `https://${cfg.apex_host}`,
     serviceBase: BASE,
-    routerUrl: ROUTER_URL,
-    routerHost: ROUTER_HOST,
     x402: x402Stats,
     mcp: mcpStats,
-    traffic,
     listingCount: listings.length,
   }));
 }
@@ -431,10 +420,6 @@ const smUrls = [
   // one declaring this file. Discovery still leans on the links added to
   // index.html and llms.txt; this is the belt to their braces.
   `  <url><loc>https://${APEX}/</loc></url>`,
-  // The Router's front door, at whichever address is currently its canonical
-  // one — its own host once attached, `/router.html` here until then. Listed
-  // once either way, never both.
-  `  <url><loc>${ROUTER_URL}</loc></url>`,
   // The query endpoints belong in the sitemap even though they take
   // parameters: a crawler that reads sitemaps and nothing else would otherwise
   // never learn this site can be asked questions.
@@ -453,7 +438,7 @@ const smUrls = [
 // commercial decision rather than the default: a list of things *not* to call is
 // the most linkable object this data can produce, it is the half of liveness a
 // competitor sells as a paid "avoid-list", and giving it away is cheaper than
-// the distribution it buys. The paid product remains the *fresh* probe.
+// the distribution it buys. Fresh paid probes have been retired.
 //
 // A miss is not a verdict. Two consecutive failures on a weekly rotating sample
 // from one network path is evidence, and the file says so in its own `$comment`
@@ -481,7 +466,7 @@ for (const [key, dir] of [['x402', 'api/x402'], ['mcp', 'api/mcp']]) {
       confirmed: 'failed at least two consecutive probes',
       suspected: 'failed its most recent probe, once',
       caveat: 'the sweep is a rotating sample; an endpoint is re-probed about twice a year, so `confirmed` accumulates slowly by design',
-      fresh_answer: `${ROUTER_BASE}/api/liveness?url=…`,
+      fresh_answer: null,
     },
     free: true,
     counts: { confirmed: confirmed.length, suspected: suspected.length, tracked: tracked.length },

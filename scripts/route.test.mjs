@@ -353,33 +353,20 @@ test('our own endpoints report a null history rather than dropping the field', a
   assert.equal(self.history, null);
 });
 
-test('the paid routes are advertised everywhere this site advertises routes', async () => {
-  // The house rule is that a route nothing announces is a route nothing finds —
-  // and these two are the whole second service, so they are announced in the
-  // agent-facing surfaces as well as the human ones.
+test('only the audit is advertised as a paid API', async () => {
   const read = async (f) => readFile(new URL(`../${f}`, import.meta.url), 'utf8');
-
-  const openapi = await read('openapi.yaml');
-  for (const path of ['/api/liveness:', '/api/route:']) {
-    assert.ok(openapi.includes(`\n  ${path}`), `${path} missing from openapi.yaml`);
-  }
-  // Cheap structural check in place of a YAML parse (this repo has no
-  // dependencies): a path whose operation block failed to indent would not
-  // carry its own operationId.
-  for (const id of ['probeEndpoint', 'routeToEndpoint']) {
-    assert.ok(openapi.includes(`operationId: ${id}`), `${id} missing from openapi.yaml`);
-  }
-
-  const llms = await read('llms.txt');
-  assert.ok(llms.includes('/api/liveness?url='), 'llms.txt does not name the probe endpoint');
-  assert.ok(llms.includes('/api/route'), 'llms.txt does not name the routing endpoint');
-  assert.match(llms, /never pays for anything and never holds your money/i,
-    'llms.txt must state the non-custodial promise where an agent will actually read it');
-
   const manifest = JSON.parse(await read('.well-known/agents.json'));
-  const paid = manifest.endpoints.filter((e) => new URL(e.url).pathname.match(/^\/api\/(liveness|route)$/));
-  assert.equal(paid.length, 2, 'both routes should be in the agents manifest');
-  for (const e of paid) assert.equal(e.auth, 'x402');
+  assert.deepEqual(manifest.endpoints.filter((e) => e.auth === 'x402')
+    .map((e) => new URL(e.url).pathname), ['/api/audit']);
+  const openapi = await read('openapi.yaml');
+  assert.ok(openapi.includes('\n  /api/audit:'));
+  for (const path of ['/api/check', '/api/liveness', '/api/route', '/api/watch']) {
+    assert.ok(!openapi.includes(`\n  ${path}:`), `${path} must not be an offered operation`);
+    assert.ok(!manifest.endpoints.some((e) => new URL(e.url).pathname === path));
+  }
+  const llms = await read('llms.txt');
+  assert.match(llms, /only paid HTTP API endpoint/);
+  assert.match(llms, /HTTP 410/);
 });
 
 // --- the Router's own hostname ----------------------------------------------
@@ -391,22 +378,15 @@ test('the canonical host hands the Router its endpoints, and keeps everything el
   const { __testing: worker } = await import('../worker/index.js');
   assert.equal(cfg.router_host, 'router.percall.dev');
 
-  for (const [path, expected] of [
-    ['/api/liveness?url=https://example.com/paid', 'https://router.percall.dev/api/liveness?url=https://example.com/paid'],
-    ['/api/route', 'https://router.percall.dev/api/route'],
-    // Monitoring moved here 2026-08-03: a watch is the same probe on a
-    // schedule, and it had been answering on the index while its two siblings
-    // answered on the Router.
-    ['/api/watch', 'https://router.percall.dev/api/watch'],
-    ['/api/watch/sweep', 'https://router.percall.dev/api/watch/sweep'],
-  ]) {
-    const r = worker.canonicalRedirect(new URL(`${BASE}${path}`));
-    assert.ok(r, `${path} should be handed to the Router host`);
-    // 308, never 301: a caller retrying a paid POST with a payment header must
-    // arrive with its method and body intact rather than degraded to a GET.
-    assert.equal(r.status, 308);
-    assert.equal(r.headers.get('location'), expected, 'the query string has to survive the hop');
+  for (const path of ['/api/liveness', '/api/route', '/api/watch', '/api/check']) {
+    for (const host of [BASE, 'https://router.percall.dev', 'https://index.kc-it.pl']) {
+      assert.equal(worker.canonicalRedirect(new URL(`${host}${path}?url=https://example.com`)), null,
+        'retirement must answer at the original URL without redirecting payment headers');
+    }
   }
+  const sweep = worker.canonicalRedirect(new URL(`${BASE}/api/watch/sweep`));
+  assert.equal(sweep.status, 308);
+  assert.equal(sweep.headers.get('location'), 'https://router.percall.dev/api/watch/sweep');
 
   // Everything else on the canonical host is untouched — this moved two paths,
   // not the site.
@@ -445,19 +425,16 @@ test('the self-fetch guard covers the router host the moment it is configured', 
   assert.equal(canonicalTarget('https://router.percall.dev/', unconfigured), 'https://router.percall.dev/');
 });
 
-test('the umbrella names every live product, including this one', async () => {
-  // This failed once, silently and for a day: the router shipped on the index's
-  // host, the portfolio page is generated from a hand-written block that nobody
-  // had to touch, and percall.dev went on saying "One service is live". The
-  // domain's entire job is to name what runs under it.
+test('the umbrella leads with free discovery and the optional audit', async () => {
   const apex = await readFile(new URL('../apex.html', import.meta.url), 'utf8');
-  for (const claim of ['/api/liveness', '/api/route', 'The Router']) {
-    assert.ok(apex.includes(claim), `the umbrella does not mention ${claim}`);
-  }
-  assert.ok(!/One service is live/.test(apex), 'the umbrella still claims a single service');
-  // And it must not promise the non-custodial thing loosely: it is the whole
-  // reason a caller would trust a middleman with their routing question.
-  assert.match(apex, /you pay the endpoint directly/i);
+  assert.match(apex, /AI Product Index/);
+  assert.match(apex, /POST \/api\/audit/);
+  assert.match(apex, /free/i);
+  assert.doesNotMatch(apex, /\/api\/(liveness|route|watch|check)\b|done-for-you|consulting/i);
+  const router = await readFile(new URL('../router.html', import.meta.url), 'utf8');
+  assert.match(router, /has been retired/);
+  assert.match(router, /noindex/);
+  assert.doesNotMatch(router, /"@type": "Offer"/);
 });
 
 test('the request parsers refuse what they cannot act on', () => {

@@ -240,59 +240,16 @@ facilitator; while no receiving address is configured it rejects with code
 API will not change shape when prices change — tier has been server-set since day
 one.
 
-## Which paid endpoint should I call? (the router)
+## Retired API endpoints
 
-The catalogs above say what exists. These two say what is *alive right now* and
-what it charges right now — which is a different question, because the Bazaar
-keeps an entry for 30 days after its last settlement.
+POST https://index.percall.dev/api/audit is the only paid HTTP API endpoint.
+As of 2026-09-05, /api/check, /api/liveness, /api/route and /api/watch
+return HTTP 410 with code "endpoint_retired". They do not accept payments.
+Do not send payment authorizations to those routes.
 
-- Probe one endpoint: GET https://router.percall.dev/api/liveness?url=https://example.com/paid
-- Rank candidates for a task: POST https://router.percall.dev/api/route with `{"q": "unit conversion", "max_price": 0.01}`
-
-Both are paid, per call, at the price quoted in https://index.percall.dev/api/x402/info. A query
-that matches nothing is not charged for.
-
-Every answer carries that endpoint's `history` — total probes, how many
-answered, consecutive failures, and how many of the last 30 observations
-answered. It is built from live probes rather than a crawl, so it deepens as an
-endpoint is asked about, and the uptime ratio is withheld below three
-observations rather than reported as "1 of 1".
-
-**This service never pays for anything and never holds your money.** It probes
-without paying — an unpaid request to a paid endpoint returns that endpoint's own
-402, and a 402 carries its terms — and it hands you the URL and the terms so that
-**you pay the endpoint directly, from your own wallet**. Nothing is proxied, so
-the operator you end up paying sees you, not us.
-
-## Buy one check instead of the whole audit
-
-The free grade at https://index.percall.dev/api/score already names every check that failed. When
-you only want the fix for one of them, buy that one:
-
-- GET https://index.percall.dev/api/check?url=https://example.com&check=agent_card
-
-Returns that check's pass/fail, why it failed and a paste-ready snippet written
-for your origin. Priced per check at https://index.percall.dev/api/x402/info. An unknown `check`
-is refused before you are charged, and the 400 lists the valid ids.
-
-The whole report is still POST https://index.percall.dev/api/audit — cheaper per check, and worth
-it when you want the ranked order to fix things in.
-
-## Get told when an endpoint stops answering
-
-- POST https://router.percall.dev/api/watch with `{"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}`
-
-Prepaid, not a subscription: one payment buys N weekly sweeps and nothing is ever
-charged again without you signing for it — x402 has no recurring billing, and a
-stored mandate to charge you later would be custody by another name.
-
-The **payer address owns the watch**, taken from the settlement rather than from
-your request body, so there is no account to create and nothing to log in to.
-Paying again for the same URL from the same wallet tops up the credits.
-
-The webhook fires on a **state change** — answering→failing or failing→answering
-— and once more when the credits run out. A webhook on every failing sweep is a
-mailing list nobody reads. Price per sweep at https://index.percall.dev/api/x402/info.
+New watches and top-ups are closed. Previously prepaid weekly sweeps and
+state-change webhooks continue until the remaining credits are exhausted.
+The free score, registry, catalog search and avoid-lists remain available.
 
 ## Endpoints not worth calling (free)
 
@@ -328,12 +285,6 @@ someone to.
 
 ## The umbrella
 
-This service is one of the paid, machine-callable services published under
-https://percall.dev/ — the portfolio page there names every service that is live
-and is the place a new one appears first. It is a page, not a copy of this one:
-every other path on that host redirects here, so this file stays the single
-llms.txt for the index.
-
-## For humans
-
-Done-for-you agent-readability service (llms.txt + schema.org JSON-LD + agent-readability audit for your own site): https://kc-it.pl/services/agent-readability — offer, pricing and the 2026-07-28 fleet-sweep case study (12 sites, average score 68.6 to 97.5, nine at 100/100). To hire: open an issue titled "[hire]" at https://github.com/110kc3/seo/issues/new?template=hire.yml or email 110kc3@gmail.com.
+https://percall.dev/ introduces the free index, catalogs and website checks, with
+the optional paid audit API documented here. Every other path on that host
+redirects to the index so this remains its canonical machine-readable guide.

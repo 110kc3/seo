@@ -78,7 +78,7 @@ jobs:
               --comment "The traffic snapshot succeeded in workflow run $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
           done
 
-      # Sweep the paid watches: probe each watched endpoint, spend a credit, and
+      # Honour existing prepaid watches after purchase retirement: probe, spend a credit, and
       # POST the subscriber's webhook when the state *changed*. Deliberately not
       # a Cloudflare cron trigger — `wrangler deploy` applies triggers as one
       # phase and a trigger it cannot apply takes the whole deployment down,
@@ -88,7 +88,7 @@ jobs:
       # continue-on-error: a missed sweep delays an alert by a week. A failed
       # health run would stop the catalog refresh and the liveness probe too,
       # which is a worse outcome than a late webhook.
-      - name: Sweep monitored endpoints
+      - name: Finish existing prepaid watches
         continue-on-error: true
         env:
           DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
@@ -99,8 +99,10 @@ jobs:
           fi
           code=$(curl -sS -o /tmp/sweep.json -w '%{http_code}' -X POST \
             -H "Authorization: Bearer $DASHBOARD_TOKEN" \
-            https://index.percall.dev/api/watch/sweep)
-          echo "HTTP $code"; cat /tmp/sweep.json
+            https://router.percall.dev/api/watch/sweep)
+          echo "HTTP $code"
+          cat /tmp/sweep.json
+          test "$code" = 200
 
       # The x402 catalog is a mirror, so it goes stale on its own. Refreshed
       # here rather than on its own schedule because it commits alongside the

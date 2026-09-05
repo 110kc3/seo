@@ -114,21 +114,6 @@
     },
     {
       "method": "GET",
-      "url": "https://index.percall.dev/api/check?url=https://example.com&check=agent_card",
-      "description": "One agent-readability check, bought on its own: pass/fail, why it failed, and a paste-ready fix for that origin. The free grade at /api/score names which checks failed, so you know which one to buy. An unknown check id is refused before you are charged and the 400 lists the valid ones.",
-      "auth": "x402",
-      "price": "per call, quoted at https://index.percall.dev/api/x402/info"
-    },
-    {
-      "method": "POST",
-      "url": "https://router.percall.dev/api/watch",
-      "description": "Watch one endpoint; a webhook fires when it stops or starts answering, and once more when the prepaid sweeps run out. Prepaid rather than a subscription — x402 has no recurring billing and a stored mandate would be custody. The payer address from the settlement owns the watch, so there is no account to create.",
-      "auth": "x402",
-      "price": "sweeps x the per-sweep amount, quoted at https://index.percall.dev/api/x402/info",
-      "request": {"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}
-    },
-    {
-      "method": "GET",
       "url": "https://index.percall.dev/api/x402/avoid.json",
       "description": "Endpoints that failed a liveness probe, free. Split into confirmed (two or more consecutive misses) and suspected (one). Evidence, not proof — the sweep is a rotating sample. Also at /api/mcp/avoid.json for the MCP catalog.",
       "auth": "none",
@@ -136,23 +121,8 @@
     },
     {
       "method": "GET",
-      "url": "https://router.percall.dev/api/liveness?url=https://example.com/paid",
-      "description": "Probe one machine-payable endpoint right now: whether it answers, how fast, and the payment terms it currently quotes. This service never pays and never proxies — you pay the endpoint directly, from your own wallet, against the terms it returns.",
-      "auth": "x402",
-      "price": "per call, quoted at https://index.percall.dev/api/x402/info"
-    },
-    {
-      "method": "POST",
-      "url": "https://router.percall.dev/api/route",
-      "description": "Which machine-payable endpoint should I call for this? Ranked candidates from the catalog, each probed live, each with the terms it quotes now and the URL to call. Endpoints that did not answer are reported, not hidden. You pay the endpoint directly.",
-      "auth": "x402",
-      "price": "per call, quoted at https://index.percall.dev/api/x402/info",
-      "request": {"q": "unit conversion", "max_price": 0.01, "catalog": "x402 | mcp"}
-    },
-    {
-      "method": "GET",
       "url": "https://index.percall.dev/api/x402/info",
-      "description": "Live payment terms for every paid endpoint: chain, asset, recipient, amount and accepted protocol versions. Readable without provoking a 402.",
+      "description": "Live payment terms for the audit endpoint: chain, asset, recipient, amount and accepted protocol versions. Readable without provoking a 402.",
       "auth": "none",
       "price": "free"
     },

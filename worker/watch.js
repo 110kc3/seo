@@ -230,7 +230,7 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
         : null,
       checked_at: at,
       credits_left: credits,
-      ...(credits <= 0 ? { exhausted: true, note: 'This was the last paid sweep. Top up at /api/watch from the same wallet to continue.' } : {}),
+      ...(credits <= 0 ? { exhausted: true, note: 'This was the last prepaid sweep. Monitoring is complete; new watches and top-ups are closed.' } : {}),
     };
     try {
       const resp = await fetchImpl(watch.webhook, {

@@ -17,10 +17,10 @@ import registry from '../api/index.json' with { type: 'json' };
 // stays an O(1) lookup rather than an audit per README view.
 import scores from '../scores.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
-import { auditUrl, parseAuditRequest, CHECK_META, V2_WEIGHTS } from './audit.js';
+import { auditUrl, parseAuditRequest } from './audit.js';
 import { handleStats } from './stats.js';
 import { handleScore, fetcherFor, auditSigner, canonicalTarget } from './score.js';
-import { requirePayment, attachSettlement, paymentRequirements } from './x402.js';
+import { requirePayment, attachSettlement } from './x402.js';
 import { alternatesFor, negotiate, alternateContentType } from './negotiate.js';
 import { fetchAsset, decorate, serveStatic } from './assets.js';
 import { resolveX402 } from '../scripts/x402-config.mjs';
@@ -28,9 +28,9 @@ import { handleRevenue, authorizeDashboard, sessionCookie } from './revenue.js';
 import { signResponse, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { handleBadge } from './badge.js';
 import { handleSearch, handleAsk, handleMcp, handleCatalogSearch, CATALOGS } from './discovery.js';
-import { handleLiveness, handleRoute, ROUTE_RESOURCES, probe } from './route.js';
-import { handleWatch, handleSweep, MAX_SWEEPS } from './watch.js';
-import { urlError } from '../scripts/validate.mjs';
+import { probe } from './route.js';
+import { RETIRED_API_PATHS } from './retired.js';
+import { handleSweep } from './watch.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
@@ -38,22 +38,12 @@ const CANONICAL_HOST = new URL(BASE).host;
 // its root serves the portfolio page that says what runs under it. Everything
 // else on that host still redirects, so exactly one copy of the content exists.
 const APEX_HOST = cfg.apex_host ?? null;
-// The Router's own hostname. Empty until the custom domain is attached, and
-// empty means precisely today's behaviour — see the note in site.config.json.
+// Retained for the retirement notice and fulfilment of prepaid watches.
 const ROUTER_HOST = cfg.router_host || null;
-// The three paths the Router host owns. Everything else on it redirects to the
-// canonical host, for the same reason the apex only serves its root: content
-// with two addresses is content a directory can record at the wrong one, and
-// that discipline has already cost a round of upstream corrections.
-// Monitoring belongs here too: a watch is the same probe on a schedule, and
-// having it answer on the index while its two siblings answer on the Router
-// reads as an accident to anyone looking at the price list.
-const ROUTER_PATHS = new Set(['/api/liveness', '/api/route', '/api/watch', '/api/watch/sweep']);
+// Retired purchases answer 410 before canonicalisation.
+const ROUTER_PATHS = new Set(['/api/watch/sweep']);
 const isRoot = (url) => url.pathname === '/' || url.pathname === '/index.html';
 const isApexRoot = (url) => Boolean(APEX_HOST) && url.host === APEX_HOST && isRoot(url);
-// Where the Router's endpoints live, for anything that has to print the URL
-// rather than answer at it. Falls back to the canonical host while unattached.
-const ROUTER_BASE = ROUTER_HOST ? `https://${ROUTER_HOST}` : BASE;
 const isRouterHost = (url) => Boolean(ROUTER_HOST) && url.host === ROUTER_HOST;
 const isRouterRoot = (url) => isRouterHost(url) && isRoot(url);
 /** True for a request the Router host answers itself rather than redirecting. */
@@ -71,11 +61,11 @@ const CATALOG_SEARCH = Object.fromEntries(
 // rather than 301 because it preserves the method and body, so an in-flight
 // x402 POST survives the hop instead of being degraded to a GET.
 function canonicalRedirect(url) {
+  // Retire at the requested URL, including old aliases; never redirect a
+  // payment-bearing retry to a different product.
+  if (RETIRED_API_PATHS.has(url.pathname)) return null;
   if (url.host === CANONICAL_HOST) {
-    // The Router's endpoints have exactly one home too, and once it exists it
-    // is not this host. 308 preserves method and body, so a caller that POSTs
-    // /api/route here — or retries one with a payment header — arrives intact
-    // rather than being degraded to a GET and charged for nothing.
+    // Preserve the old private sweep URL; the scheduled job calls the Router directly.
     if (ROUTER_HOST && ROUTER_PATHS.has(url.pathname)) {
       return new Response(null, {
         status: 308,
@@ -87,7 +77,7 @@ function canonicalRedirect(url) {
     }
     return null;
   }
-  // The Router host answers for its root and its two endpoints; every other
+  // The Router host answers for its notice and private sweep; every other
   // path on it belongs to the canonical host and says so.
   if (isRouterOwned(url)) return null;
   // The apex root is a page, not a redirect. Only the root: a request for any
@@ -235,104 +225,6 @@ async function handleAudit(request, env, cfgObj) {
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }
 
-/**
- * The payment gate the router endpoints use, as a closure over one request.
- *
- * They need the gate at a different moment than the audit does — /api/route
- * charges only after the catalog has found something, so a query that matches
- * nothing is free — so the gate is passed in rather than called inline. The
- * money path is still `requirePayment` + `attachSettlement`, unchanged: there is
- * one implementation of taking a payment here and this is not a second.
- */
-const routeGate = (request, env, cfgObj, resourceUrl, method) => async (resource) => {
-  const gate = await requirePayment(request, env, cfgObj, {
-    amountAtomic: resolveX402(cfgObj)?.route_price_atomic,
-    resource: { url: resourceUrl, method, ...resource },
-  });
-  return gate.paid
-    ? { ok: true, attach: (response) => attachSettlement(response, gate.settlement, gate.version) }
-    : { ok: false, response: gate.response };
-};
-
-/**
- * GET /api/check?url=…&check=<id> — one check, bought on its own.
- *
- * The unbundling the market was already doing and we were not. Competitors sell
- * a single signal — robots.txt posture, llms.txt validity — for half a cent,
- * while this site sold twenty checks for five cents or nothing. That is the
- * wrong shape against a caller who has *already been told by the free grade
- * which check failed*: at that moment the only thing left to sell is the fix
- * for that one check, and $0.05 for nineteen they did not ask about is a bad
- * trade they decline.
- *
- * The audit runs whole regardless — the checks share fetches, so running one in
- * isolation would cost the same and tell us less. What is sold is the answer,
- * not the work.
- */
-async function handleCheck(request, env, cfgObj, url) {
-  if (request.method !== 'GET') {
-    return json({ ok: false, code: 'method_not_allowed', error: 'GET /api/check?url=https://example.com&check=llms_txt' }, 405, { allow: 'GET' });
-  }
-  const target = url.searchParams.get('url');
-  const id = (url.searchParams.get('check') ?? '').trim();
-
-  // Both validated before charging. A typo in `check` is the likeliest caller
-  // error here and it must not cost money — so the valid ids ship in the 400.
-  const parsed = parseAuditRequest({ url: target, checks: url.searchParams.get('set') ?? url.searchParams.get('checks') });
-  if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
-
-  const known = new Set([...Object.keys(CHECK_META), ...Object.keys(V2_WEIGHTS)]);
-  if (!known.has(id)) {
-    return json({
-      ok: false,
-      code: 'unknown_check',
-      error: id ? `no check "${id.slice(0, 40)}"` : 'the `check` parameter is required',
-      valid: [...known].sort(),
-      free_alternative: `${BASE}/api/score?url=…  — names every failing check, at no cost, so you know which one to buy`,
-    }, 400);
-  }
-
-  const gate = await requirePayment(request, env, cfgObj, {
-    amountAtomic: resolveX402(cfgObj)?.check_price_atomic,
-    resource: {
-      url: `${BASE}/api/check`,
-      method: 'GET',
-      description: 'One agent-readability check for one URL: whether it passes, why it fails, and a paste-ready fix written for that origin. The full 20-check audit is POST /api/audit.',
-      mimeType: 'application/json',
-    },
-  });
-  if (!gate.paid) return gate.response;
-
-  const target2 = canonicalTarget(parsed.url, cfgObj);
-  const result = await auditUrl(target2, fetcherFor(request, env, target2), auditSigner(env, cfgObj), parsed.checkSet);
-  if (!result.ok) return attachSettlement(json(result, 502), gate.settlement, gate.version);
-
-  const check = result.checks.find((c) => c.id === id);
-  if (!check) {
-    // The id is known but this check set does not score it — v1 does not score
-    // the 2026 signals. Say which set was used rather than reporting "missing".
-    return attachSettlement(json({
-      ok: false,
-      code: 'not_in_check_set',
-      error: `"${id}" is not scored by check set ${result.check_set}`,
-      check_set: result.check_set,
-    }, 409), gate.settlement, gate.version);
-  }
-
-  return attachSettlement(json({
-    ok: true,
-    url: result.url,
-    audited_at: result.audited_at,
-    check_set: result.check_set,
-    check,
-    // The context that makes one check purchasable rather than a fragment: what
-    // it is worth, and what the whole grade was, so a caller can decide whether
-    // to buy another.
-    grade: { letter: result.letter, score: result.score, max_score: result.max_score },
-    full_audit: `${BASE}/api/audit`,
-  }), gate.settlement, gate.version);
-}
-
 // --- public payment terms --------------------------------------------------
 
 // Lets an agent read the price without provoking a 402. Everything here is
@@ -366,27 +258,6 @@ function handleX402Info(cfgObj) {
       method: 'POST',
       amount: rail.audit_price_atomic,
       description: 'Agent-readability audit of one URL.',
-    }, {
-      url: `${BASE}/api/check`,
-      method: 'GET',
-      amount: rail.check_price_atomic,
-      description: 'One agent-readability check for one URL: pass/fail, why, and a paste-ready fix for that origin. The free grade at /api/score names which checks failed, so you know which one to buy.',
-    }, {
-      url: `${ROUTER_BASE}/api/watch`,
-      method: 'POST',
-      amount_per_sweep: rail.watch_sweep_price_atomic,
-      max_sweeps: MAX_SWEEPS,
-      description: 'Watch one endpoint; a webhook fires when it stops or starts answering. Prepaid sweeps rather than a subscription — x402 has no recurring billing and a stored mandate would be custody. Total = sweeps x amount_per_sweep.',
-    }, {
-      url: `${ROUTER_BASE}/api/liveness`,
-      method: 'GET',
-      amount: rail.route_price_atomic,
-      description: ROUTE_RESOURCES.liveness.description,
-    }, {
-      url: `${ROUTER_BASE}/api/route`,
-      method: 'POST',
-      amount: rail.route_price_atomic,
-      description: ROUTE_RESOURCES.route.description,
     }],
     explorer: rail.explorer,
     docs: `${BASE}/llms.txt`,
@@ -436,7 +307,19 @@ export default {
 
     let response;
     try {
-      if (url.pathname === '/api/audit') {
+      if (RETIRED_API_PATHS.has(url.pathname)) {
+        response = json({
+          ok: false,
+          code: 'endpoint_retired',
+          error: 'This endpoint has been retired. No payment is accepted.',
+          retired_at: '2026-09-05',
+          docs: `${BASE}/openapi.yaml`,
+          free_score: `${BASE}/api/score`,
+          ...(url.pathname === '/api/watch'
+            ? { note: 'New watches and top-ups are closed. Existing prepaid weekly sweeps continue until their credits are exhausted.' }
+            : {}),
+        }, 410);
+      } else if (url.pathname === '/api/audit') {
         response = await handleAudit(request, env, cfg);
       } else if (url.pathname === DIRECTORY_PATH) {
         // Discovery for RFC 9421 verifiers. 404 rather than an empty key set when
@@ -454,31 +337,6 @@ export default {
           : json({ ok: false, code: 'signing_not_enabled', error: 'no response-signing key is configured' }, 404);
       } else if (url.pathname === '/badge.svg') {
         response = handleBadge(url, registry.listings ?? [], scores);
-      } else if (url.pathname === '/api/watch') {
-        response = await handleWatch(request, env, cfg, {
-          base: BASE,
-          urlError,
-          // The amount depends on how many sweeps were bought, so the gate is
-          // handed the count rather than a fixed price — and it hands back the
-          // payer address, which is what makes the watch have an owner without
-          // anyone signing up for anything.
-          gate: async (sweeps) => {
-            const rail = resolveX402(cfg);
-            const unit = Number(rail?.watch_sweep_price_atomic ?? 0);
-            const g = await requirePayment(request, env, cfg, {
-              amountAtomic: unit ? String(unit * sweeps) : undefined,
-              resource: {
-                url: `${url.origin}${url.pathname}`,
-                method: 'POST',
-                description: `Watch one endpoint and POST a webhook when it stops (or starts) answering. Prepaid: one payment buys N weekly sweeps, ${sweeps} here. No subscription and no stored mandate — nothing is charged again without you signing for it.`,
-                mimeType: 'application/json',
-              },
-            });
-            return g.paid
-              ? { ok: true, payer: g.settlement?.payer ?? null, attach: (r) => attachSettlement(r, g.settlement, g.version) }
-              : { ok: false, response: g.response };
-          },
-        });
       } else if (url.pathname === '/api/watch/sweep') {
         response = await handleSweep(request, env, {
           probe,
@@ -486,22 +344,6 @@ export default {
           // Same bearer as the revenue dashboard, and the same 404-not-401
           // posture: an unauthorized caller learns nothing about what exists.
           authorized: authorizeDashboard(request, env).state === 'ok',
-        });
-      } else if (url.pathname === '/api/check') {
-        response = await handleCheck(request, env, cfg, url);
-      } else if (url.pathname === '/api/liveness') {
-        // The challenge names the URL the caller actually asked for, not a
-        // hardcoded host: once the Router has its own hostname the resource in
-        // the 402 must be that one, or the terms describe a different endpoint
-        // than the one being bought.
-        response = await handleLiveness(request, env, cfg, {
-          gate: routeGate(request, env, cfg, `${url.origin}${url.pathname}`, 'GET'),
-        });
-      } else if (url.pathname === '/api/route') {
-        response = await handleRoute(request, env, cfg, {
-          gate: routeGate(request, env, cfg, `${url.origin}${url.pathname}`, 'POST'),
-          catalogSearch: (key, searchUrl) => handleCatalogSearch(key, searchUrl, env, BASE),
-          base: BASE,
         });
       } else if (url.pathname === '/api/score') {
         response = await handleScore(request, env, cfg, resolveX402(cfg));

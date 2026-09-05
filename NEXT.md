@@ -1,5 +1,13 @@
 # NEXT — the one pending list
 
+> **2026-09-05 API simplification:** only `POST /api/audit` remains paid
+> ($0.05 USDC). `/api/check`, `/api/liveness`, `/api/route` and new
+> `/api/watch` purchases return 410 without accepting payment. Existing
+> prepaid watch credits and their weekly fulfilment are retained. The
+> Router homepage is a retirement notice; discovery, scoring and catalogs
+> remain free. This supersedes older descriptions of active Router products.
+> The product-work gate below remains in force.
+
 **This is the only file you need to read to know what is outstanding.** Every
 other doc in this repo is a *record* of what happened; this one is the *queue*.
 

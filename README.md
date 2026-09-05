@@ -94,6 +94,7 @@ The complete machine-oriented registration protocol is available in [`llms.txt`]
 | `/ask` | NLWeb-compatible natural-language queries |
 | `/mcp` | Model Context Protocol over HTTP |
 | `/api/score` | Free agent-readability score for a public URL |
+| `POST /api/audit` | Optional full audit with ranked fixes; $0.05 USDC over x402 |
 | `/api/mcp/search` | Search the MCP-server catalog |
 | `/api/x402/search` | Search the x402-endpoint catalog |
 | `/badge.svg` | Listing tier or readability-grade badge |
@@ -101,6 +102,12 @@ The complete machine-oriented registration protocol is available in [`llms.txt`]
 | `/openapi.yaml` | Complete HTTP API description |
 
 See the [OpenAPI document](https://index.percall.dev/openapi.yaml) for request and response schemas. Implementation and protocol details live in [ARCHITECTURE.md](ARCHITECTURE.md).
+
+Since 2026-09-05, the audit is the only paid HTTP API endpoint.
+`/api/check`, `/api/liveness`, `/api/route` and `/api/watch` return
+`410 endpoint_retired` without accepting payment. New watches and top-ups
+are closed; existing prepaid weekly sweeps continue until credits are exhausted.
+The free registry, scoring, search and catalogs remain available.
 
 ## How it works
 
