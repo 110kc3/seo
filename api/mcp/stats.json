@@ -1,33 +1,33 @@
 {
   "source": "Official MCP Registry",
   "source_url": "https://registry.modelcontextprotocol.io/v0/servers",
-  "fetched": "2026-08-31",
-  "remote_endpoints": 14704,
-  "hosts": 10419,
+  "fetched": "2026-09-07",
+  "remote_endpoints": 16526,
+  "hosts": 11899,
   "scope": {
     "rule": "active + latest + remotely callable",
-    "registry_records_seen": 86330,
-    "excluded_superseded": 60430,
-    "excluded_inactive": 289,
-    "excluded_packages_only": 11306,
+    "registry_records_seen": 94665,
+    "excluded_superseded": 66430,
+    "excluded_inactive": 317,
+    "excluded_packages_only": 11801,
     "note": "Servers distributed only as installable packages are excluded: this catalog answers \"what can an agent call right now\", not \"what exists\"."
   },
   "by_transport": {
-    "streamable-http": 13645,
-    "sse": 1059
+    "streamable-http": 15460,
+    "sse": 1066
   },
   "by_auth": {
-    "none": 11891,
-    "required": 2813
+    "none": 13469,
+    "required": 3057
   },
   "top_hosts": [
     {
       "host": "gateway.pipeworx.io",
-      "endpoints": 1313
+      "endpoints": 1314
     },
     {
       "host": "api.mcp.ai",
-      "endpoints": 1103
+      "endpoints": 1115
     },
     {
       "host": "api.m2mcent.com",
@@ -38,12 +38,16 @@
       "endpoints": 216
     },
     {
-      "host": "openings-vote-drilling-initially.trycloudflare.com",
-      "endpoints": 90
+      "host": "mcp.apify.com",
+      "endpoints": 107
     },
     {
-      "host": "mcp.apify.com",
-      "endpoints": 65
+      "host": "agent-observatory-sensor.nolimit-observatory.workers.dev",
+      "endpoints": 103
+    },
+    {
+      "host": "openings-vote-drilling-initially.trycloudflare.com",
+      "endpoints": 90
     },
     {
       "host": "tooloracle.io",
@@ -56,6 +60,10 @@
     {
       "host": "mcp.jojapi.com",
       "endpoints": 49
+    },
+    {
+      "host": "a2awire.com",
+      "endpoints": 44
     },
     {
       "host": "api.meok.ai",
@@ -74,12 +82,24 @@
       "endpoints": 30
     },
     {
-      "host": "mcp.viridisconservation.com",
+      "host": "mcp.zovo.one",
       "endpoints": 30
+    },
+    {
+      "host": "mcp.viridisconservation.com",
+      "endpoints": 29
+    },
+    {
+      "host": "mcp.nexlab.net",
+      "endpoints": 24
     },
     {
       "host": "waystation.ai",
       "endpoints": 24
+    },
+    {
+      "host": "mcp.moltlinestudio.com",
+      "endpoints": 22
     },
     {
       "host": "lab.flashalpha.com",
@@ -90,7 +110,7 @@
       "endpoints": 19
     },
     {
-      "host": "mcp.moltlinestudio.com",
+      "host": "roxyapi.com",
       "endpoints": 19
     },
     {
@@ -100,26 +120,6 @@
     {
       "host": "mcp.boykaf.com",
       "endpoints": 18
-    },
-    {
-      "host": "mcp.infobip.com",
-      "endpoints": 18
-    },
-    {
-      "host": "app.daedalmap.com",
-      "endpoints": 17
-    },
-    {
-      "host": "mcp.mcpbundles.com",
-      "endpoints": 17
-    },
-    {
-      "host": "doc2mcp.site",
-      "endpoints": 15
-    },
-    {
-      "host": "roxyapi.com",
-      "endpoints": 15
     }
   ]
 }

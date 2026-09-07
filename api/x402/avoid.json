@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-08-31",
-  "catalog_size": 14793,
+  "probed_at": "2026-09-07",
+  "catalog_size": 14689,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,11 +11,18 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 1,
-    "suspected": 28,
-    "tracked": 29
+    "confirmed": 2,
+    "suspected": 25,
+    "tracked": 27
   },
   "endpoints": [
+    {
+      "url": "https://cryptyx.ai/api/taker-flow",
+      "reason": "HTTP 500",
+      "misses": 2,
+      "since": "2026-08-01",
+      "last_checked": "2026-09-07"
+    },
     {
       "url": "https://api.x402node.dev/domain/check",
       "reason": "HTTP 500",
@@ -27,13 +34,6 @@
   "suspected": [
     {
       "url": "https://api.x402node.dev/web/headers",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://cryptyx.ai/api/taker-flow",
       "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-08-01",
@@ -56,20 +56,6 @@
     {
       "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://brmarket.thomenz.me/v1/search",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://skim402.com/api/v2/signal/entity-formations/latest",
-      "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
@@ -110,13 +96,6 @@
       "last_checked": "2026-08-10"
     },
     {
-      "url": "https://organiccryptoyyc.com:8443/v1/peaq/machine-verify/:idOrAddress",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
       "url": "https://straits.live/api/premium/brief",
       "reason": "HTTP 500",
       "misses": 1,
@@ -138,20 +117,6 @@
       "last_checked": "2026-08-17"
     },
     {
-      "url": "https://japan-evidence-feed.jp-evidence.workers.dev/api/v1/evidence/:eventId",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-17"
-    },
-    {
-      "url": "https://api.m2mcent.com/alibaba-supplier-intel-mcp/api/process",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
-    },
-    {
       "url": "https://news.apitoll.cloud/v1/cointelegraph/news",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -159,21 +124,7 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://soldefi.thomenz.me/v1/solana/lp-status/:mint",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
-    },
-    {
       "url": "https://vibesprings.net/api/exchange",
-      "reason": "ETIMEDOUT",
-      "misses": 1,
-      "since": "2026-08-24",
-      "last_checked": "2026-08-24"
-    },
-    {
-      "url": "https://vibesprings.net/api/risk-report",
       "reason": "ETIMEDOUT",
       "misses": 1,
       "since": "2026-08-24",
@@ -220,6 +171,41 @@
       "misses": 1,
       "since": "2026-08-31",
       "last_checked": "2026-08-31"
+    },
+    {
+      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://gpt55.558686.xyz/v1/tools/x402-opportunity-finder",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://techforce-agents.onrender.com/api/all-jobs",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://vape-x402.vapex402.workers.dev/data/protocol_fees",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://x402-factory.com/v1/evergreen/fed-next-meeting-hike",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-07"
     }
   ]
 }
