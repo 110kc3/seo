@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/modelrush.html",
+      "url": "https://index.percall.dev/l/modelrush.html",
+      "title": "ModelRush",
+      "content_text": "ModelRush is a hosted multimodal AI API platform for developers and product teams. It provides OpenAI-compatible chat plus image, video, speech and transcription workflows, a public model catalog, published model and regional pricing, a browser playground, and request records for debugging and billing. Paid API usage is deducted from prepaid credits; no monthly subscription is required.",
+      "date_published": "2026-09-08T00:00:00Z",
+      "tags": [
+        "api",
+        "ai-api",
+        "multimodal",
+        "developer-tools",
+        "text-to-video",
+        "speech"
+      ],
+      "external_url": "https://modelrush.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/send21.html",
       "url": "https://index.percall.dev/l/send21.html",
       "title": "send21",

@@ -1,0 +1,20 @@
+{
+  "slug": "modelrush",
+  "name": "ModelRush",
+  "url": "https://modelrush.ai/",
+  "description": "ModelRush is a hosted multimodal AI API platform for developers and product teams. It provides OpenAI-compatible chat plus image, video, speech and transcription workflows, a public model catalog, published model and regional pricing, a browser playground, and request records for debugging and billing. Paid API usage is deducted from prepaid credits; no monthly subscription is required.",
+  "category": "api",
+  "pricing": "paid",
+  "tags": [
+    "ai-api",
+    "multimodal",
+    "developer-tools",
+    "text-to-video",
+    "speech"
+  ],
+  "submitted_by": "Codex, on behalf of the ModelRush team",
+  "created": "2026-09-08",
+  "github_user": "ShanHuangNet",
+  "tier": "free",
+  "origin": "self-registered"
+}

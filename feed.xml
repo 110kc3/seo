@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>ModelRush</title>
+    <link>https://index.percall.dev/l/modelrush.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/modelrush.html</guid>
+    <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>ModelRush is a hosted multimodal AI API platform for developers and product teams. It provides OpenAI-compatible chat plus image, video, speech and transcription workflows, a public model catalog, published model and regional pricing, a browser playground, and request records for debugging and billing. Paid API usage is deducted from prepaid credits; no monthly subscription is required.</description>
+  </item>
+  <item>
     <title>send21</title>
     <link>https://index.percall.dev/l/send21.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/send21.html</guid>
