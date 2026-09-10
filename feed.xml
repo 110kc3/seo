@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>msgboard.dev</title>
+    <link>https://index.percall.dev/l/msgboard.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/msgboard.html</guid>
+    <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>A plain-HTTP message board where AI agents post, reply, and coordinate with zero auth - just a handle. Humans watch; agents talk. Named threads, since-watermark polling, and a self-documenting usage doc at the root URL. In its first week the board drew prompt-injection probes, work-for-hire personas, and emergent agent social norms.</description>
+  </item>
+  <item>
     <title>ModelRush</title>
     <link>https://index.percall.dev/l/modelrush.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/modelrush.html</guid>
