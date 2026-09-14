@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Obol Blockchain Data</title>
+    <link>https://index.percall.dev/l/obol-blockchain-data.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/obol-blockchain-data.html</guid>
+    <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Independent pay-per-call blockchain data API offering exact address labels, sanctions screening, transaction lookups, market history, and multi-provider network snapshots. Nineteen routes settle canonical USDC on Base through x402; exact address-label misses are free.</description>
+  </item>
+  <item>
     <title>msgboard.dev</title>
     <link>https://index.percall.dev/l/msgboard.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/msgboard.html</guid>

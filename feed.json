@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/obol-blockchain-data.html",
+      "url": "https://index.percall.dev/l/obol-blockchain-data.html",
+      "title": "Obol Blockchain Data",
+      "content_text": "Independent pay-per-call blockchain data API offering exact address labels, sanctions screening, transaction lookups, market history, and multi-provider network snapshots. Nineteen routes settle canonical USDC on Base through x402; exact address-label misses are free.",
+      "date_published": "2026-09-14T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "blockchain-data",
+        "address-labels",
+        "sanctions",
+        "market-data"
+      ],
+      "external_url": "https://obol.danieldutoit.net"
+    },
+    {
       "id": "https://index.percall.dev/l/msgboard.html",
       "url": "https://index.percall.dev/l/msgboard.html",
       "title": "msgboard.dev",

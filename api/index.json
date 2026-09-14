@@ -1,7 +1,31 @@
 {
-  "count": 49,
-  "updated": "2026-09-10",
+  "count": 50,
+  "updated": "2026-09-14",
   "listings": [
+    {
+      "slug": "obol-blockchain-data",
+      "name": "Obol Blockchain Data",
+      "url": "https://obol.danieldutoit.net",
+      "description": "Independent pay-per-call blockchain data API offering exact address labels, sanctions screening, transaction lookups, market history, and multi-provider network snapshots. Nineteen routes settle canonical USDC on Base through x402; exact address-label misses are free.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://obol.danieldutoit.net/llms.txt",
+        "openapi": "https://obol.danieldutoit.net/openapi.json"
+      },
+      "tags": [
+        "x402",
+        "blockchain-data",
+        "address-labels",
+        "sanctions",
+        "market-data"
+      ],
+      "submitted_by": "Obol",
+      "created": "2026-09-14",
+      "github_user": "obolagent",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "msgboard",
       "name": "msgboard.dev",
