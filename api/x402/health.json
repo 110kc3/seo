@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-07",
-  "catalog_size": 14689,
-  "cursor": 8,
+  "probed_at": "2026-09-14",
+  "catalog_size": 15392,
+  "cursor": 9,
   "slice": 600,
-  "stride": 24,
-  "runs_per_full_pass": 24,
+  "stride": 25,
+  "runs_per_full_pass": 25,
   "window": {
     "probed": 600,
-    "ok": 594,
-    "unreachable": 6,
+    "ok": 596,
+    "unreachable": 4,
     "untestable": 0
   },
-  "answered_share": 0.99,
-  "confirmed_unreachable": 2,
-  "tracked_unreachable": 27,
+  "answered_share": 0.9933,
+  "confirmed_unreachable": 3,
+  "tracked_unreachable": 28,
   "unreachable": [
     {
       "url": "https://cryptyx.ai/api/taker-flow",
@@ -30,6 +30,13 @@
       "misses": 2,
       "since": "2026-08-17",
       "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-14"
     },
     {
       "url": "https://api.x402node.dev/web/headers",
@@ -48,13 +55,6 @@
     {
       "url": "https://api.brazilayer.com/v1/commodities/clima",
       "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
-      "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
@@ -172,13 +172,6 @@
       "last_checked": "2026-08-31"
     },
     {
-      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
       "url": "https://gpt55.558686.xyz/v1/tools/x402-opportunity-finder",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -193,18 +186,32 @@
       "last_checked": "2026-09-07"
     },
     {
-      "url": "https://vape-x402.vapex402.workers.dev/data/protocol_fees",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
       "url": "https://x402-factory.com/v1/evergreen/fed-next-meeting-hike",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-07",
       "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/desmatamento/municipio/:ibge",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
+    },
+    {
+      "url": "https://toll402.dev/v1/t/mst_vn_validate",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
+    },
+    {
+      "url": "https://x402.agentutility.ai/video-to-subtitles",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
     }
   ]
 }

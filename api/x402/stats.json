@@ -1,34 +1,35 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-09-07",
-  "endpoints": 14689,
-  "hosts": 1897,
+  "fetched": "2026-09-14",
+  "endpoints": 15392,
+  "hosts": 1993,
   "concentration": {
-    "top_10_hosts_share": 0.2,
+    "top_10_hosts_share": 0.204,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 14210,
-    "solana": 235,
-    "base-sepolia": 204,
+    "base": 14940,
+    "solana": 236,
+    "base-sepolia": 176,
     "solana-devnet": 33,
-    "x-layer": 5,
+    "x-layer": 4,
     "eip155:56": 1,
-    "algorand": 1
+    "arbitrum": 1,
+    "xrpl:0": 1
   },
   "by_version": {
-    "1": 222,
-    "2": 14467
+    "1": 210,
+    "2": 15182
   },
   "by_method": {
-    "GET": 7776,
-    "POST": 6906,
+    "GET": 8391,
+    "POST": 6994,
     "DELETE": 2
   },
   "price_usd": {
-    "priced": 14648,
-    "unpriced": 41,
+    "priced": 15352,
+    "unpriced": 40,
     "min": 0.001,
     "p50": 0.01,
     "p90": 0.1,
@@ -36,36 +37,40 @@
   },
   "top_hosts": [
     {
-      "host": "api.delx.ai",
-      "endpoints": 567
+      "host": "intel.rallylive.ca",
+      "endpoints": 820
     },
     {
       "host": "agent402.tools",
-      "endpoints": 541
-    },
-    {
-      "host": "x402.orthogonal.com",
-      "endpoints": 449
+      "endpoints": 599
     },
     {
       "host": "api.x402node.dev",
-      "endpoints": 345
+      "endpoints": 356
     },
     {
       "host": "api.agentstools.dev",
       "endpoints": 342
     },
     {
-      "host": "api.strale.io",
-      "endpoints": 147
+      "host": "api.delx.ai",
+      "endpoints": 240
+    },
+    {
+      "host": "x402-factory.com",
+      "endpoints": 202
+    },
+    {
+      "host": "402.com.tr",
+      "endpoints": 161
     },
     {
       "host": "fittings.sh",
       "endpoints": 145
     },
     {
-      "host": "402.com.tr",
-      "endpoints": 143
+      "host": "api.strale.io",
+      "endpoints": 144
     },
     {
       "host": "agents.x402stock.xyz",
@@ -100,40 +105,36 @@
       "endpoints": 124
     },
     {
-      "host": "x402-factory.com",
-      "endpoints": 117
-    },
-    {
-      "host": "api.myceliasignal.com",
-      "endpoints": 112
+      "host": "x402.orthogonal.com",
+      "endpoints": 123
     },
     {
       "host": "api.particle.pro",
-      "endpoints": 110
+      "endpoints": 100
     },
     {
-      "host": "blockrun.ai",
-      "endpoints": 105
+      "host": "crawlspur.halowerk.com",
+      "endpoints": 100
+    },
+    {
+      "host": "minia2a.uk",
+      "endpoints": 100
+    },
+    {
+      "host": "tempo.halowerk.com",
+      "endpoints": 100
     },
     {
       "host": "agentpaystore.com",
-      "endpoints": 93
+      "endpoints": 94
     },
     {
       "host": "data.greeneris.io",
       "endpoints": 91
     },
     {
-      "host": "x402.ottoai.services",
-      "endpoints": 85
-    },
-    {
-      "host": "api.sirenic.eu",
-      "endpoints": 83
-    },
-    {
-      "host": "api.hergertsynthora.com",
-      "endpoints": 81
+      "host": "api.locus.report",
+      "endpoints": 90
     }
   ]
 }

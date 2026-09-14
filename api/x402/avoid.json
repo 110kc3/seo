@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-07",
-  "catalog_size": 14689,
+  "probed_at": "2026-09-14",
+  "catalog_size": 15392,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,9 +11,9 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 2,
+    "confirmed": 3,
     "suspected": 25,
-    "tracked": 27
+    "tracked": 28
   },
   "endpoints": [
     {
@@ -29,6 +29,13 @@
       "misses": 2,
       "since": "2026-08-17",
       "last_checked": "2026-08-24"
+    },
+    {
+      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-09-07",
+      "last_checked": "2026-09-14"
     }
   ],
   "suspected": [
@@ -49,13 +56,6 @@
     {
       "url": "https://api.brazilayer.com/v1/commodities/clima",
       "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/threads/profiles/:handle",
-      "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-08-03",
       "last_checked": "2026-08-03"
@@ -173,13 +173,6 @@
       "last_checked": "2026-08-31"
     },
     {
-      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
       "url": "https://gpt55.558686.xyz/v1/tools/x402-opportunity-finder",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -194,18 +187,32 @@
       "last_checked": "2026-09-07"
     },
     {
-      "url": "https://vape-x402.vapex402.workers.dev/data/protocol_fees",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
       "url": "https://x402-factory.com/v1/evergreen/fed-next-meeting-hike",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-07",
       "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/desmatamento/municipio/:ibge",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
+    },
+    {
+      "url": "https://toll402.dev/v1/t/mst_vn_validate",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
+    },
+    {
+      "url": "https://x402.agentutility.ai/video-to-subtitles",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-14",
+      "last_checked": "2026-09-14"
     }
   ]
 }
