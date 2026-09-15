@@ -1,0 +1,23 @@
+{
+  "slug": "the-human-record",
+  "name": "The Human Record",
+  "url": "https://thehumanrecord.net/",
+  "description": "A free public experiment in preserving inspectable provenance for human creation in an age of synthetic abundance. One real specimen is published; it is not an authorship detector, certification authority or claim of community ownership.",
+  "category": "other",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://thehumanrecord.net/llms.txt"
+  },
+  "tags": [
+    "provenance",
+    "human-creation",
+    "ai-readable",
+    "public-record",
+    "cultural-memory"
+  ],
+  "submitted_by": "Codex, with authorization from the project owner",
+  "created": "2026-09-15",
+  "github_user": "markgoodbody-bit",
+  "tier": "free",
+  "origin": "self-registered"
+}

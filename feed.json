@@ -38,6 +38,22 @@
       "external_url": "https://pleasestartfromhere.com/"
     },
     {
+      "id": "https://index.percall.dev/l/the-human-record.html",
+      "url": "https://index.percall.dev/l/the-human-record.html",
+      "title": "The Human Record",
+      "content_text": "A free public experiment in preserving inspectable provenance for human creation in an age of synthetic abundance. One real specimen is published; it is not an authorship detector, certification authority or claim of community ownership.",
+      "date_published": "2026-09-15T00:00:00Z",
+      "tags": [
+        "other",
+        "provenance",
+        "human-creation",
+        "ai-readable",
+        "public-record",
+        "cultural-memory"
+      ],
+      "external_url": "https://thehumanrecord.net/"
+    },
+    {
       "id": "https://index.percall.dev/l/obol-blockchain-data.html",
       "url": "https://index.percall.dev/l/obol-blockchain-data.html",
       "title": "Obol Blockchain Data",
@@ -681,21 +697,6 @@
         "quiz"
       ],
       "external_url": "https://110kc3.github.io/puzle/"
-    },
-    {
-      "id": "https://index.percall.dev/l/rentgen-ofert.html",
-      "url": "https://index.percall.dev/l/rentgen-ofert.html",
-      "title": "Rentgen Ofert",
-      "content_text": "Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "property",
-        "real-estate",
-        "open-data"
-      ],
-      "external_url": "https://110kc3.github.io/rentgen-ofert/"
     }
   ]
 }
