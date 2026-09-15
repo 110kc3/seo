@@ -15,6 +15,14 @@
     <description>Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.</description>
   </item>
   <item>
+    <title>Please Start From Here</title>
+    <link>https://index.percall.dev/l/please-start-from-here.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/please-start-from-here.html</guid>
+    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.</description>
+  </item>
+  <item>
     <title>Obol Blockchain Data</title>
     <link>https://index.percall.dev/l/obol-blockchain-data.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/obol-blockchain-data.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Every house and flat sale listing in the Polish Slaskie voivodeship, aggregated twice daily from five portals (Otodom, OLX, Gratka, Morizon, n-online), de-duplicated, with price history and cross-referenced notarial-deed (RCN) transaction prices. Published as a schema.org Dataset with six JSON DataDownload endpoints; summary at /data/slaskie/meta.json.</description>
-  </item>
-  <item>
-    <title>Stare Aparaty</title>
-    <link>https://index.percall.dev/l/stare-aparaty.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/stare-aparaty.html</guid>
-    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner&#39;s live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.</description>
   </item>
 </channel>
 </rss>

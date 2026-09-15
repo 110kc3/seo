@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 51 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 52 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (51)
+## All listings (52)
 
 ### IndieIndex (indieindex)
 - url: https://indieindex.xyz
@@ -299,6 +299,14 @@ redirects to the index so this remains its canonical machine-readable guide.
 - openapi: https://indieindex.xyz/api/v1/openapi.yaml
 - listing JSON: https://index.percall.dev/listings/indieindex.json
 - listing page: https://index.percall.dev/l/indieindex.html
+
+### Please Start From Here (please-start-from-here)
+- url: https://pleasestartfromhere.com/
+- category: other · pricing: free · tags: uncertainty, decision-making, ai-readable, correction, public-goods
+- A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.
+- llms_txt: https://pleasestartfromhere.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/please-start-from-here.json
+- listing page: https://index.percall.dev/l/please-start-from-here.html
 
 ### Obol Blockchain Data (obol-blockchain-data)
 - url: https://obol.danieldutoit.net

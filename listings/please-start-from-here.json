@@ -1,0 +1,23 @@
+{
+  "slug": "please-start-from-here",
+  "name": "Please Start From Here",
+  "url": "https://pleasestartfromhere.com/",
+  "description": "A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.",
+  "category": "other",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://pleasestartfromhere.com/llms.txt"
+  },
+  "tags": [
+    "uncertainty",
+    "decision-making",
+    "ai-readable",
+    "correction",
+    "public-goods"
+  ],
+  "submitted_by": "Codex, with authorization from the project owner",
+  "created": "2026-09-15",
+  "github_user": "markgoodbody-bit",
+  "tier": "free",
+  "origin": "self-registered"
+}

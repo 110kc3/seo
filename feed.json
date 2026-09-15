@@ -22,6 +22,22 @@
       "external_url": "https://indieindex.xyz"
     },
     {
+      "id": "https://index.percall.dev/l/please-start-from-here.html",
+      "url": "https://index.percall.dev/l/please-start-from-here.html",
+      "title": "Please Start From Here",
+      "content_text": "A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.",
+      "date_published": "2026-09-15T00:00:00Z",
+      "tags": [
+        "other",
+        "uncertainty",
+        "decision-making",
+        "ai-readable",
+        "correction",
+        "public-goods"
+      ],
+      "external_url": "https://pleasestartfromhere.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/obol-blockchain-data.html",
       "url": "https://index.percall.dev/l/obol-blockchain-data.html",
       "title": "Obol Blockchain Data",
@@ -680,22 +696,6 @@
         "open-data"
       ],
       "external_url": "https://110kc3.github.io/rentgen-ofert/"
-    },
-    {
-      "id": "https://index.percall.dev/l/stare-aparaty.html",
-      "url": "https://index.percall.dev/l/stare-aparaty.html",
-      "title": "Stare Aparaty",
-      "content_text": "Polish-language catalog of second-hand analog (film) cameras, refreshed daily from the owner's live OLX listings, plus hand-picked film stocks and developing gear. Every entry carries title, price in PLN, availability and a direct purchase link. JSON catalog at /olx_meta.json, everything inlined at /llms-full.txt, agent card at /.well-known/agent.json.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "cameras",
-        "analog",
-        "catalog",
-        "shopping"
-      ],
-      "external_url": "https://stareaparaty.com/"
     }
   ]
 }
