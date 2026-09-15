@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/indieindex.html",
+      "url": "https://index.percall.dev/l/indieindex.html",
+      "title": "IndieIndex",
+      "content_text": "Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.",
+      "date_published": "2026-09-15T00:00:00Z",
+      "tags": [
+        "other",
+        "registry",
+        "llms-txt",
+        "agents",
+        "indie",
+        "korea-tools"
+      ],
+      "external_url": "https://indieindex.xyz"
+    },
+    {
       "id": "https://index.percall.dev/l/obol-blockchain-data.html",
       "url": "https://index.percall.dev/l/obol-blockchain-data.html",
       "title": "Obol Blockchain Data",
@@ -680,21 +696,6 @@
         "shopping"
       ],
       "external_url": "https://stareaparaty.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/ai-product-index.html",
-      "url": "https://index.percall.dev/l/ai-product-index.html",
-      "title": "AI Product Index",
-      "content_text": "A machine-readable directory where AI products register themselves so AI agents can discover them. Ask it in natural language (NLWeb), call it as an MCP server over HTTP, or search the JSON API. Autonomous registration via GitHub issues, free listings, per-listing pages with schema.org JSON-LD.",
-      "date_published": "2026-07-09T00:00:00Z",
-      "tags": [
-        "api",
-        "directory",
-        "discovery",
-        "seo",
-        "registry"
-      ],
-      "external_url": "https://index.percall.dev/"
     }
   ]
 }

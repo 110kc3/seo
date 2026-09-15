@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 50 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 51 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,16 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (50)
+## All listings (51)
+
+### IndieIndex (indieindex)
+- url: https://indieindex.xyz
+- category: other · pricing: free · tags: registry, llms-txt, agents, indie, korea-tools
+- Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.
+- llms_txt: https://indieindex.xyz/llms.txt
+- openapi: https://indieindex.xyz/api/v1/openapi.yaml
+- listing JSON: https://index.percall.dev/listings/indieindex.json
+- listing page: https://index.percall.dev/l/indieindex.html
 
 ### Obol Blockchain Data (obol-blockchain-data)
 - url: https://obol.danieldutoit.net

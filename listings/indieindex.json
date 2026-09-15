@@ -1,0 +1,23 @@
+{
+  "slug": "indieindex",
+  "name": "IndieIndex",
+  "url": "https://indieindex.xyz",
+  "description": "Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.",
+  "category": "other",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://indieindex.xyz/llms.txt",
+    "openapi": "https://indieindex.xyz/api/v1/openapi.yaml"
+  },
+  "tags": [
+    "registry",
+    "llms-txt",
+    "agents",
+    "indie",
+    "korea-tools"
+  ],
+  "created": "2026-09-15",
+  "github_user": "yayaja11",
+  "tier": "free",
+  "origin": "self-registered"
+}
