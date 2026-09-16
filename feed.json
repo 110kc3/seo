@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-service-surface-audit.html",
+      "url": "https://index.percall.dev/l/agent-service-surface-audit.html",
+      "title": "Agent Service Surface Audit",
+      "content_text": "Machine-readable comparative audits of agent-service discovery, readiness, and OpenAPI contract drift.",
+      "date_published": "2026-09-16T00:00:00Z",
+      "tags": [
+        "other"
+      ],
+      "external_url": "https://agent-surface-audit.pages.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/indieindex.html",
       "url": "https://index.percall.dev/l/indieindex.html",
       "title": "IndieIndex",
@@ -682,21 +693,6 @@
         "open-data"
       ],
       "external_url": "https://przetargimiejskie.pl/"
-    },
-    {
-      "id": "https://index.percall.dev/l/puzle.html",
-      "url": "https://index.percall.dev/l/puzle.html",
-      "title": "Wykop czy Wyborcza?",
-      "content_text": "Daily Polish-language guessing game: a real newspaper headline is shown and the player guesses which outlet published it. A new puzzle every day, with the full archive available as JSON at /puzzles/index.json and /puzzles/pool.json.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "game",
-        "news",
-        "quiz"
-      ],
-      "external_url": "https://110kc3.github.io/puzle/"
     }
   ]
 }

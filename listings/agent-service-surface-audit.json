@@ -1,0 +1,12 @@
+{
+  "slug": "agent-service-surface-audit",
+  "name": "Agent Service Surface Audit",
+  "url": "https://agent-surface-audit.pages.dev",
+  "description": "Machine-readable comparative audits of agent-service discovery, readiness, and OpenAPI contract drift.",
+  "category": "other",
+  "pricing": "free",
+  "created": "2026-09-16",
+  "github_user": "pipemarino",
+  "tier": "free",
+  "origin": "self-registered"
+}
