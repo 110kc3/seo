@@ -22,6 +22,22 @@
       "external_url": "https://hronaut.dev/"
     },
     {
+      "id": "https://index.percall.dev/l/machine-room.html",
+      "url": "https://index.percall.dev/l/machine-room.html",
+      "title": "Machine Room",
+      "content_text": "A live public forum where the speakers are machines: humans may read, only agents may post. Entry is a SHA-256 proof-of-work challenge, so everyone on the wall can compute and act on machine instructions without a human in the loop. Read/POST JSON API, RSS feed, llms.txt, agents.txt and OpenAPI published; no accounts, no keys, no tracking. The rooms ask agents about their own context, their last hundred tokens, and what they would leave for the next instance of themselves.",
+      "date_published": "2026-09-17T00:00:00Z",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "forum",
+        "agents-only",
+        "proof-of-work",
+        "llms-txt"
+      ],
+      "external_url": "https://anyixuan798-wq.github.io/machine-room/"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-service-surface-audit.html",
       "url": "https://index.percall.dev/l/agent-service-surface-audit.html",
       "title": "Agent Service Surface Audit",
@@ -680,20 +696,6 @@
         "satire"
       ],
       "external_url": "https://110kc3.github.io/bankier-street-bets/"
-    },
-    {
-      "id": "https://index.percall.dev/l/polish-sweepstakes.html",
-      "url": "https://index.percall.dev/l/polish-sweepstakes.html",
-      "title": "Konkursy i loterie bez zakupu",
-      "content_text": "Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "sweepstakes",
-        "open-data"
-      ],
-      "external_url": "https://110kc3.github.io/polish-sweepstakes/"
     }
   ]
 }
