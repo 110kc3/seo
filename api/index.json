@@ -1,7 +1,30 @@
 {
-  "count": 54,
-  "updated": "2026-09-16",
+  "count": 55,
+  "updated": "2026-09-17",
   "listings": [
+    {
+      "slug": "hronaut",
+      "name": "Hronaut",
+      "url": "https://hronaut.dev/",
+      "description": "Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.",
+      "category": "app",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://hronaut.dev/llms.txt"
+      },
+      "tags": [
+        "browser-automation",
+        "mcp",
+        "coding-agents",
+        "local-first",
+        "web3-qa"
+      ],
+      "submitted_by": "Yevhen Tienkaiev, Hronaut maintainer (AI-assisted submission)",
+      "created": "2026-09-17",
+      "github_user": "Hronom",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "agent-service-surface-audit",
       "name": "Agent Service Surface Audit",

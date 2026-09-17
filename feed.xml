@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Hronaut</title>
+    <link>https://index.percall.dev/l/hronaut.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/hronaut.html</guid>
+    <pubDate>Thu, 17 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.</description>
+  </item>
+  <item>
     <title>Agent Service Surface Audit</title>
     <link>https://index.percall.dev/l/agent-service-surface-audit.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-service-surface-audit.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Polish sweepstakes and prize competitions that require no purchase, or that offer a free method of entry, scraped daily from several sources and liveness-checked. Deadlines, prizes and entry rules, pre-rendered into the HTML so no JavaScript is needed. JSON at /data/lotteries.json. Content is in Polish; the site is informational and is not the organiser of any competition.</description>
-  </item>
-  <item>
-    <title>Przetargi Miejskie</title>
-    <link>https://index.percall.dev/l/przetargimiejskie.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/przetargimiejskie.html</guid>
-    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/&lt;city&gt;/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office&#39;s own documents are binding.</description>
   </item>
 </channel>
 </rss>

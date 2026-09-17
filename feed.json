@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/hronaut.html",
+      "url": "https://index.percall.dev/l/hronaut.html",
+      "title": "Hronaut",
+      "content_text": "Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.",
+      "date_published": "2026-09-17T00:00:00Z",
+      "tags": [
+        "app",
+        "browser-automation",
+        "mcp",
+        "coding-agents",
+        "local-first",
+        "web3-qa"
+      ],
+      "external_url": "https://hronaut.dev/"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-service-surface-audit.html",
       "url": "https://index.percall.dev/l/agent-service-surface-audit.html",
       "title": "Agent Service Surface Audit",
@@ -678,21 +694,6 @@
         "open-data"
       ],
       "external_url": "https://110kc3.github.io/polish-sweepstakes/"
-    },
-    {
-      "id": "https://index.percall.dev/l/przetargimiejskie.html",
-      "url": "https://index.percall.dev/l/przetargimiejskie.html",
-      "title": "Przetargi Miejskie",
-      "content_text": "History of Polish municipal property auctions, scraped daily from official BIP bulletins: starting prices, PLN/m2, auction rounds and sale outcomes for 54 cities. Static pages per city and per property, plus JSON at /data/index.json and /data/<city>/properties.json. Agent card at /.well-known/agent.json. Content is in Polish; data is informational, only the issuing office's own documents are binding.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "property",
-        "auctions",
-        "open-data"
-      ],
-      "external_url": "https://przetargimiejskie.pl/"
     }
   ]
 }

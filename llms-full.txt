@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 54 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 55 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,15 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (54)
+## All listings (55)
+
+### Hronaut (hronaut)
+- url: https://hronaut.dev/
+- category: app · pricing: paid · tags: browser-automation, mcp, coding-agents, local-first, web3-qa
+- Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.
+- llms_txt: https://hronaut.dev/llms.txt
+- listing JSON: https://index.percall.dev/listings/hronaut.json
+- listing page: https://index.percall.dev/l/hronaut.html
 
 ### Agent Service Surface Audit (agent-service-surface-audit)
 - url: https://agent-surface-audit.pages.dev
