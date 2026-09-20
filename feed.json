@@ -81,6 +81,21 @@
       "external_url": "https://mcp.zovo.one/s/resume"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-time-tracker.html",
+      "url": "https://index.percall.dev/l/zovo-time-tracker.html",
+      "title": "Zovo Time Tracker MCP Server",
+      "content_text": "Log projects, tasks and billable hours; generate timesheet summaries over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "time-tracker"
+      ],
+      "external_url": "https://mcp.zovo.one/s/time-tracker"
+    },
+    {
       "id": "https://index.percall.dev/l/hronaut.html",
       "url": "https://index.percall.dev/l/hronaut.html",
       "title": "Hronaut",
@@ -691,19 +706,6 @@
         "remote"
       ],
       "external_url": "https://scite.ai/mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/signvoy.html",
-      "url": "https://index.percall.dev/l/signvoy.html",
-      "title": "Signvoy",
-      "content_text": "Send documents for e-signature, track signing status, and download signed PDFs. No API key required.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://signvoy.com/developers/mcp"
     }
   ]
 }

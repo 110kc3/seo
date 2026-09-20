@@ -47,6 +47,14 @@
     <description>Build and export structured resumes and cover letters over MCP. Local-first, free tier.</description>
   </item>
   <item>
+    <title>Zovo Time Tracker MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-time-tracker.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-time-tracker.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Log projects, tasks and billable hours; generate timesheet summaries over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Hronaut</title>
     <link>https://index.percall.dev/l/hronaut.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/hronaut.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Ground answers in scientific literature. Search full text, evaluate trust, access full-text articles</description>
-  </item>
-  <item>
-    <title>Signvoy</title>
-    <link>https://index.percall.dev/l/signvoy.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/signvoy.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Send documents for e-signature, track signing status, and download signed PDFs. No API key required.</description>
   </item>
 </channel>
 </rss>
