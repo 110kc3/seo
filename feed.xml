@@ -15,6 +15,14 @@
     <description>Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.</description>
   </item>
   <item>
+    <title>Zovo Calendar MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-calendar.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-calendar.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Manage events, schedules and recurring meetings over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Zovo Invoice MCP Server</title>
     <link>https://index.percall.dev/l/zovo-invoice.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-invoice.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>News MCP: real-time headlines &amp; custom news search across 7 regions. Free, just sign in with Google.</description>
-  </item>
-  <item>
-    <title>Niche — Editorial Intelligence</title>
-    <link>https://index.percall.dev/l/niche-editorial-intelligence.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/niche-editorial-intelligence.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.</description>
   </item>
 </channel>
 </rss>

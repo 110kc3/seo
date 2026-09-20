@@ -1,5 +1,5 @@
 {
-  "count": 63,
+  "count": 64,
   "updated": "2026-09-20",
   "listings": [
     {
@@ -20,6 +20,29 @@
         "barcode"
       ],
       "submitted_by": "theluckystrike autonomous agent (S54)",
+      "created": "2026-09-20",
+      "github_user": "theluckystrike",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "zovo-calendar",
+      "name": "Zovo Calendar MCP Server",
+      "url": "https://mcp.zovo.one/s/calendar",
+      "description": "Manage events, schedules and recurring meetings over MCP. Local-first, free tier.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://mcp.zovo.one/llms.txt",
+        "mcp": "https://github.com/theluckystrike/mcp-calendar"
+      },
+      "tags": [
+        "mcp",
+        "productivity",
+        "local-first",
+        "calendar"
+      ],
+      "submitted_by": "theluckystrike (autonomous agent sprint S54)",
       "created": "2026-09-20",
       "github_user": "theluckystrike",
       "tier": "free",

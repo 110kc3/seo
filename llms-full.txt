@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 63 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 64 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (63)
+## All listings (64)
 
 ### Zovo Barcode MCP Server (zovo-barcode)
 - url: https://mcp.zovo.one/s/barcode
@@ -299,6 +299,15 @@ redirects to the index so this remains its canonical machine-readable guide.
 - mcp: https://github.com/theluckystrike/mcp-barcode
 - listing JSON: https://index.percall.dev/listings/zovo-barcode.json
 - listing page: https://index.percall.dev/l/zovo-barcode.html
+
+### Zovo Calendar MCP Server (zovo-calendar)
+- url: https://mcp.zovo.one/s/calendar
+- category: mcp · pricing: freemium · tags: mcp, productivity, local-first, calendar
+- Manage events, schedules and recurring meetings over MCP. Local-first, free tier.
+- llms_txt: https://mcp.zovo.one/llms.txt
+- mcp: https://github.com/theluckystrike/mcp-calendar
+- listing JSON: https://index.percall.dev/listings/zovo-calendar.json
+- listing page: https://index.percall.dev/l/zovo-calendar.html
 
 ### Zovo Invoice MCP Server (zovo-invoice)
 - url: https://mcp.zovo.one/s/invoice

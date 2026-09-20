@@ -21,6 +21,21 @@
       "external_url": "https://mcp.zovo.one/s/barcode"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-calendar.html",
+      "url": "https://index.percall.dev/l/zovo-calendar.html",
+      "title": "Zovo Calendar MCP Server",
+      "content_text": "Manage events, schedules and recurring meetings over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "calendar"
+      ],
+      "external_url": "https://mcp.zovo.one/s/calendar"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-invoice.html",
       "url": "https://index.percall.dev/l/zovo-invoice.html",
       "title": "Zovo Invoice MCP Server",
@@ -695,19 +710,6 @@
         "remote"
       ],
       "external_url": "https://github.com/Gauraviitkgp/news-mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/niche-editorial-intelligence.html",
-      "url": "https://index.percall.dev/l/niche-editorial-intelligence.html",
-      "title": "Niche — Editorial Intelligence",
-      "content_text": "Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://nicheangle.com"
     }
   ]
 }
