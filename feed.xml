@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>LFCarry Guide Evidence Smoke Tests</title>
+    <link>https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>24 synthetic claim/evidence cases and a deterministic Node.js scorer for testing AI-written gaming guides. The 8 scenario groups cover dates, game versions, prerequisites, denominators, and conflicting sources. Missing predictions stay in the scoring denominator. MIT licensed, with 0 external dependencies and 0 network calls. Independent human review and production model measurements are pending. Maintained by LFCarry.</description>
+  </item>
+  <item>
     <title>YYLO</title>
     <link>https://index.percall.dev/l/yylo.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/yylo.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Independent AI-agent reviews: trust checks, evidence scorecards, incident registry, recommendations.</description>
-  </item>
-  <item>
-    <title>JP Bids MCP</title>
-    <link>https://index.percall.dev/l/jp-bids-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/jp-bids-mcp.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.</description>
   </item>
 </channel>
 </rss>

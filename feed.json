@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html",
+      "url": "https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html",
+      "title": "LFCarry Guide Evidence Smoke Tests",
+      "content_text": "24 synthetic claim/evidence cases and a deterministic Node.js scorer for testing AI-written gaming guides. The 8 scenario groups cover dates, game versions, prerequisites, denominators, and conflicting sources. Missing predictions stay in the scoring denominator. MIT licensed, with 0 external dependencies and 0 network calls. Independent human review and production model measurements are pending. Maintained by LFCarry.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "other",
+        "llm-evaluation",
+        "synthetic-data",
+        "gaming",
+        "nodejs",
+        "open-source"
+      ],
+      "external_url": "https://huggingface.co/datasets/lfcarry/guide-evidence-smoke-tests"
+    },
+    {
       "id": "https://index.percall.dev/l/yylo.html",
       "url": "https://index.percall.dev/l/yylo.html",
       "title": "YYLO",
@@ -704,19 +720,6 @@
         "remote"
       ],
       "external_url": "https://hlido.eu"
-    },
-    {
-      "id": "https://index.percall.dev/l/jp-bids-mcp.html",
-      "url": "https://index.percall.dev/l/jp-bids-mcp.html",
-      "title": "JP Bids MCP",
-      "content_text": "Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://github.com/sugukurukabe/koko-call-mcp"
     }
   ]
 }

@@ -1,7 +1,27 @@
 {
-  "count": 67,
+  "count": 68,
   "updated": "2026-09-20",
   "listings": [
+    {
+      "slug": "lfcarry-guide-evidence-smoke-tests",
+      "name": "LFCarry Guide Evidence Smoke Tests",
+      "url": "https://huggingface.co/datasets/lfcarry/guide-evidence-smoke-tests",
+      "description": "24 synthetic claim/evidence cases and a deterministic Node.js scorer for testing AI-written gaming guides. The 8 scenario groups cover dates, game versions, prerequisites, denominators, and conflicting sources. Missing predictions stay in the scoring denominator. MIT licensed, with 0 external dependencies and 0 network calls. Independent human review and production model measurements are pending. Maintained by LFCarry.",
+      "category": "other",
+      "pricing": "free",
+      "tags": [
+        "llm-evaluation",
+        "synthetic-data",
+        "gaming",
+        "nodejs",
+        "open-source"
+      ],
+      "submitted_by": "LFCarry / Beacon-SEO (AI-assisted)",
+      "created": "2026-09-20",
+      "github_user": "alebauer07-collab",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "yylo",
       "name": "YYLO",
