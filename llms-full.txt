@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 58 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 59 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (58)
+## All listings (59)
 
 ### Zovo Invoice MCP Server (zovo-invoice)
 - url: https://mcp.zovo.one/s/invoice
@@ -308,6 +308,15 @@ redirects to the index so this remains its canonical machine-readable guide.
 - mcp: https://github.com/theluckystrike/mcp-quotes
 - listing JSON: https://index.percall.dev/listings/zovo-quotes.json
 - listing page: https://index.percall.dev/l/zovo-quotes.html
+
+### Zovo Resume MCP Server (zovo-resume)
+- url: https://mcp.zovo.one/s/resume
+- category: mcp · pricing: freemium · tags: mcp, productivity, local-first, resume
+- Build and export structured resumes and cover letters over MCP. Local-first, free tier.
+- llms_txt: https://mcp.zovo.one/llms.txt
+- mcp: https://github.com/theluckystrike/mcp-resume
+- listing JSON: https://index.percall.dev/listings/zovo-resume.json
+- listing page: https://index.percall.dev/l/zovo-resume.html
 
 ### Hronaut (hronaut)
 - url: https://hronaut.dev/

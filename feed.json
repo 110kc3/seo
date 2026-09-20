@@ -36,6 +36,21 @@
       "external_url": "https://mcp.zovo.one/s/quotes"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-resume.html",
+      "url": "https://index.percall.dev/l/zovo-resume.html",
+      "title": "Zovo Resume MCP Server",
+      "content_text": "Build and export structured resumes and cover letters over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "resume"
+      ],
+      "external_url": "https://mcp.zovo.one/s/resume"
+    },
+    {
       "id": "https://index.percall.dev/l/hronaut.html",
       "url": "https://index.percall.dev/l/hronaut.html",
       "title": "Hronaut",
@@ -685,19 +700,6 @@
         "remote"
       ],
       "external_url": "https://truthifi-connect.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/ultramemory.html",
-      "url": "https://index.percall.dev/l/ultramemory.html",
-      "title": "UltraMemory",
-      "content_text": "One memory, every AI: Claude, ChatGPT, Perplexity, Gemini, Cursor, OpenClaw, Hermes, any MCP client.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://ultramemory.io"
     }
   ]
 }
