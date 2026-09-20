@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 62 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 63 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (62)
+## All listings (63)
 
 ### Zovo Barcode MCP Server (zovo-barcode)
 - url: https://mcp.zovo.one/s/barcode
@@ -335,6 +335,15 @@ redirects to the index so this remains its canonical machine-readable guide.
 - mcp: https://github.com/theluckystrike/mcp-resume
 - listing JSON: https://index.percall.dev/listings/zovo-resume.json
 - listing page: https://index.percall.dev/l/zovo-resume.html
+
+### Zovo Spreadsheet MCP Server (zovo-spreadsheet)
+- url: https://mcp.zovo.one/s/spreadsheet
+- category: mcp · pricing: freemium · tags: mcp, productivity, local-first, spreadsheet
+- Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.
+- llms_txt: https://mcp.zovo.one/llms.txt
+- mcp: https://github.com/theluckystrike/mcp-spreadsheet
+- listing JSON: https://index.percall.dev/listings/zovo-spreadsheet.json
+- listing page: https://index.percall.dev/l/zovo-spreadsheet.html
 
 ### Zovo Time Tracker MCP Server (zovo-time-tracker)
 - url: https://mcp.zovo.one/s/time-tracker

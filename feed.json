@@ -81,6 +81,21 @@
       "external_url": "https://mcp.zovo.one/s/resume"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-spreadsheet.html",
+      "url": "https://index.percall.dev/l/zovo-spreadsheet.html",
+      "title": "Zovo Spreadsheet MCP Server",
+      "content_text": "Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "spreadsheet"
+      ],
+      "external_url": "https://mcp.zovo.one/s/spreadsheet"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-time-tracker.html",
       "url": "https://index.percall.dev/l/zovo-time-tracker.html",
       "title": "Zovo Time Tracker MCP Server",
@@ -693,19 +708,6 @@
         "remote"
       ],
       "external_url": "https://nicheangle.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/scite.html",
-      "url": "https://index.percall.dev/l/scite.html",
-      "title": "Scite",
-      "content_text": "Ground answers in scientific literature. Search full text, evaluate trust, access full-text articles",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://scite.ai/mcp"
     }
   ]
 }

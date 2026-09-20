@@ -47,6 +47,14 @@
     <description>Build and export structured resumes and cover letters over MCP. Local-first, free tier.</description>
   </item>
   <item>
+    <title>Zovo Spreadsheet MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-spreadsheet.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-spreadsheet.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Zovo Time Tracker MCP Server</title>
     <link>https://index.percall.dev/l/zovo-time-tracker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-time-tracker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Find the stories worth writing about: discover emerging stories, rank the angle, draft from sources.</description>
-  </item>
-  <item>
-    <title>Scite</title>
-    <link>https://index.percall.dev/l/scite.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/scite.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Ground answers in scientific literature. Search full text, evaluate trust, access full-text articles</description>
   </item>
 </channel>
 </rss>

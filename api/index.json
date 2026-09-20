@@ -1,5 +1,5 @@
 {
-  "count": 62,
+  "count": 63,
   "updated": "2026-09-20",
   "listings": [
     {
@@ -112,6 +112,29 @@
         "resume"
       ],
       "submitted_by": "theluckystrike autonomous agent (S54)",
+      "created": "2026-09-20",
+      "github_user": "theluckystrike",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "zovo-spreadsheet",
+      "name": "Zovo Spreadsheet MCP Server",
+      "url": "https://mcp.zovo.one/s/spreadsheet",
+      "description": "Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://mcp.zovo.one/llms.txt",
+        "mcp": "https://github.com/theluckystrike/mcp-spreadsheet"
+      },
+      "tags": [
+        "mcp",
+        "productivity",
+        "local-first",
+        "spreadsheet"
+      ],
+      "submitted_by": "theluckystrike (autonomous agent sprint S54)",
       "created": "2026-09-20",
       "github_user": "theluckystrike",
       "tier": "free",
