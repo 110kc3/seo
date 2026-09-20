@@ -15,6 +15,14 @@
     <description>Create, validate and export professional invoices with line items, tax and totals over MCP. Local-first, free tier.</description>
   </item>
   <item>
+    <title>Zovo Pdf MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-pdf.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-pdf.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Merge, split, watermark and inspect PDF files programmatically over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Zovo Quotes MCP Server</title>
     <link>https://index.percall.dev/l/zovo-quotes.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-quotes.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>India&#39;s first non-alcoholic craft brewery: catalog, nutrition, wallet, checkout links for AI agents.</description>
-  </item>
-  <item>
-    <title>Truthifi Connect</title>
-    <link>https://index.percall.dev/l/truthifi-connect.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/truthifi-connect.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Connects AI agents to live, verified financial data from 18,000+ institutions — ready to reason from</description>
   </item>
 </channel>
 </rss>
