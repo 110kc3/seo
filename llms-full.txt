@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 60 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 61 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,16 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (60)
+## All listings (61)
+
+### Zovo Barcode MCP Server (zovo-barcode)
+- url: https://mcp.zovo.one/s/barcode
+- category: mcp · pricing: freemium · tags: mcp, productivity, local-first, barcode
+- Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.
+- llms_txt: https://mcp.zovo.one/llms.txt
+- mcp: https://github.com/theluckystrike/mcp-barcode
+- listing JSON: https://index.percall.dev/listings/zovo-barcode.json
+- listing page: https://index.percall.dev/l/zovo-barcode.html
 
 ### Zovo Invoice MCP Server (zovo-invoice)
 - url: https://mcp.zovo.one/s/invoice

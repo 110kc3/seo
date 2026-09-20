@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/zovo-barcode.html",
+      "url": "https://index.percall.dev/l/zovo-barcode.html",
+      "title": "Zovo Barcode MCP Server",
+      "content_text": "Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "barcode"
+      ],
+      "external_url": "https://mcp.zovo.one/s/barcode"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-invoice.html",
       "url": "https://index.percall.dev/l/zovo-invoice.html",
       "title": "Zovo Invoice MCP Server",
@@ -689,19 +704,6 @@
         "remote"
       ],
       "external_url": "https://signvoy.com/developers/mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/soma-brewing-company.html",
-      "url": "https://index.percall.dev/l/soma-brewing-company.html",
-      "title": "SOMA Brewing Company",
-      "content_text": "India's first non-alcoholic craft brewery: catalog, nutrition, wallet, checkout links for AI agents.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://getsoma.store/agents"
     }
   ]
 }

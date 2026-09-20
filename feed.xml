@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Zovo Barcode MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-barcode.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-barcode.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Zovo Invoice MCP Server</title>
     <link>https://index.percall.dev/l/zovo-invoice.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-invoice.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Send documents for e-signature, track signing status, and download signed PDFs. No API key required.</description>
-  </item>
-  <item>
-    <title>SOMA Brewing Company</title>
-    <link>https://index.percall.dev/l/soma-brewing-company.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/soma-brewing-company.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>India&#39;s first non-alcoholic craft brewery: catalog, nutrition, wallet, checkout links for AI agents.</description>
   </item>
 </channel>
 </rss>
