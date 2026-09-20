@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/yylo.html",
+      "url": "https://index.percall.dev/l/yylo.html",
+      "title": "YYLO",
+      "content_text": "Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "agent",
+        "cli",
+        "coding-agents",
+        "orchestration",
+        "developer-tools",
+        "open-source"
+      ],
+      "external_url": "https://yylo.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-barcode.html",
       "url": "https://index.percall.dev/l/zovo-barcode.html",
       "title": "Zovo Barcode MCP Server",
@@ -701,19 +717,6 @@
         "remote"
       ],
       "external_url": "https://github.com/sugukurukabe/koko-call-mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/llm-optimizer.html",
-      "url": "https://index.percall.dev/l/llm-optimizer.html",
-      "title": "LLM Optimizer",
-      "content_text": "AI brand visibility analytics: visibility scores, optimizations, video, Reddit, and search rankings.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://github.com/jonradoff/llmopt"
     }
   ]
 }

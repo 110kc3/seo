@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 66 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 67 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,14 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (66)
+## All listings (67)
+
+### YYLO (yylo)
+- url: https://yylo.dev
+- category: agent · pricing: free · tags: cli, coding-agents, orchestration, developer-tools, open-source
+- Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.
+- listing JSON: https://index.percall.dev/listings/yylo.json
+- listing page: https://index.percall.dev/l/yylo.html
 
 ### Zovo Barcode MCP Server (zovo-barcode)
 - url: https://mcp.zovo.one/s/barcode

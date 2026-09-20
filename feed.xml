@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>YYLO</title>
+    <link>https://index.percall.dev/l/yylo.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/yylo.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.</description>
+  </item>
+  <item>
     <title>Zovo Barcode MCP Server</title>
     <link>https://index.percall.dev/l/zovo-barcode.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-barcode.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.</description>
-  </item>
-  <item>
-    <title>LLM Optimizer</title>
-    <link>https://index.percall.dev/l/llm-optimizer.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/llm-optimizer.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>AI brand visibility analytics: visibility scores, optimizations, video, Reddit, and search rankings.</description>
   </item>
 </channel>
 </rss>

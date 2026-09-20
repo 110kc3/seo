@@ -1,7 +1,27 @@
 {
-  "count": 66,
+  "count": 67,
   "updated": "2026-09-20",
   "listings": [
+    {
+      "slug": "yylo",
+      "name": "YYLO",
+      "url": "https://yylo.dev",
+      "description": "Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.",
+      "category": "agent",
+      "pricing": "free",
+      "tags": [
+        "cli",
+        "coding-agents",
+        "orchestration",
+        "developer-tools",
+        "open-source"
+      ],
+      "submitted_by": "InsightFactoryAPP (YYLO team member; AI-assisted submission)",
+      "created": "2026-09-20",
+      "github_user": "InsightFactoryAPP",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "zovo-barcode",
       "name": "Zovo Barcode MCP Server",
