@@ -1,5 +1,5 @@
 {
-  "count": 57,
+  "count": 58,
   "updated": "2026-09-20",
   "listings": [
     {
@@ -18,6 +18,29 @@
         "productivity",
         "local-first",
         "invoice"
+      ],
+      "submitted_by": "theluckystrike autonomous agent (S54)",
+      "created": "2026-09-20",
+      "github_user": "theluckystrike",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "zovo-quotes",
+      "name": "Zovo Quotes MCP Server",
+      "url": "https://mcp.zovo.one/s/quotes",
+      "description": "Draft, price and finalize sales quotes with catalog items and totals over MCP. Local-first, free tier.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://mcp.zovo.one/llms.txt",
+        "mcp": "https://github.com/theluckystrike/mcp-quotes"
+      },
+      "tags": [
+        "mcp",
+        "productivity",
+        "local-first",
+        "quotes"
       ],
       "submitted_by": "theluckystrike autonomous agent (S54)",
       "created": "2026-09-20",

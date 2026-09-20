@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 57 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 58 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (57)
+## All listings (58)
 
 ### Zovo Invoice MCP Server (zovo-invoice)
 - url: https://mcp.zovo.one/s/invoice
@@ -299,6 +299,15 @@ redirects to the index so this remains its canonical machine-readable guide.
 - mcp: https://github.com/theluckystrike/zovo-invoice-mcp
 - listing JSON: https://index.percall.dev/listings/zovo-invoice.json
 - listing page: https://index.percall.dev/l/zovo-invoice.html
+
+### Zovo Quotes MCP Server (zovo-quotes)
+- url: https://mcp.zovo.one/s/quotes
+- category: mcp · pricing: freemium · tags: mcp, productivity, local-first, quotes
+- Draft, price and finalize sales quotes with catalog items and totals over MCP. Local-first, free tier.
+- llms_txt: https://mcp.zovo.one/llms.txt
+- mcp: https://github.com/theluckystrike/mcp-quotes
+- listing JSON: https://index.percall.dev/listings/zovo-quotes.json
+- listing page: https://index.percall.dev/l/zovo-quotes.html
 
 ### Hronaut (hronaut)
 - url: https://hronaut.dev/

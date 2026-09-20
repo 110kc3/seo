@@ -21,6 +21,21 @@
       "external_url": "https://mcp.zovo.one/s/invoice"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-quotes.html",
+      "url": "https://index.percall.dev/l/zovo-quotes.html",
+      "title": "Zovo Quotes MCP Server",
+      "content_text": "Draft, price and finalize sales quotes with catalog items and totals over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "quotes"
+      ],
+      "external_url": "https://mcp.zovo.one/s/quotes"
+    },
+    {
       "id": "https://index.percall.dev/l/hronaut.html",
       "url": "https://index.percall.dev/l/hronaut.html",
       "title": "Hronaut",
@@ -683,19 +698,6 @@
         "remote"
       ],
       "external_url": "https://ultramemory.io"
-    },
-    {
-      "id": "https://index.percall.dev/l/vocab-voyage.html",
-      "url": "https://index.percall.dev/l/vocab-voyage.html",
-      "title": "Vocab Voyage",
-      "content_text": "20 MCP tools + 17 widgets for SAT/ISEE/SSAT/GRE/GMAT/LSAT prep. Flashcards, quizzes & games. Hosted.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://vocab.voyage/mcp"
     }
   ]
 }
