@@ -31,6 +31,14 @@
     <description>Fetch and convert exchange rates with historical lookups over MCP. Local-first, free tier.</description>
   </item>
   <item>
+    <title>Zovo Image MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-image.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-image.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Resize, convert, compress and inspect images over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Zovo Invoice MCP Server</title>
     <link>https://index.percall.dev/l/zovo-invoice.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zovo-invoice.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>AI brand visibility analytics: visibility scores, optimizations, video, Reddit, and search rankings.</description>
-  </item>
-  <item>
-    <title>Mowgli</title>
-    <link>https://index.percall.dev/l/mowgli.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/mowgli.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Intelligent product canvas: iterate on your product&#39;s design with your coding agent, synced to code.</description>
   </item>
 </channel>
 </rss>

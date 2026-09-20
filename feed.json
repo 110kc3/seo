@@ -51,6 +51,21 @@
       "external_url": "https://mcp.zovo.one/s/currency"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-image.html",
+      "url": "https://index.percall.dev/l/zovo-image.html",
+      "title": "Zovo Image MCP Server",
+      "content_text": "Resize, convert, compress and inspect images over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "image"
+      ],
+      "external_url": "https://mcp.zovo.one/s/image"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-invoice.html",
       "url": "https://index.percall.dev/l/zovo-invoice.html",
       "title": "Zovo Invoice MCP Server",
@@ -699,19 +714,6 @@
         "remote"
       ],
       "external_url": "https://github.com/jonradoff/llmopt"
-    },
-    {
-      "id": "https://index.percall.dev/l/mowgli.html",
-      "url": "https://index.percall.dev/l/mowgli.html",
-      "title": "Mowgli",
-      "content_text": "Intelligent product canvas: iterate on your product's design with your coding agent, synced to code.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://mowgli.ai/agent"
     }
   ]
 }
