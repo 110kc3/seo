@@ -36,6 +36,21 @@
       "external_url": "https://mcp.zovo.one/s/calendar"
     },
     {
+      "id": "https://index.percall.dev/l/zovo-currency.html",
+      "url": "https://index.percall.dev/l/zovo-currency.html",
+      "title": "Zovo Currency MCP Server",
+      "content_text": "Fetch and convert exchange rates with historical lookups over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "currency"
+      ],
+      "external_url": "https://mcp.zovo.one/s/currency"
+    },
+    {
       "id": "https://index.percall.dev/l/zovo-invoice.html",
       "url": "https://index.percall.dev/l/zovo-invoice.html",
       "title": "Zovo Invoice MCP Server",
@@ -697,19 +712,6 @@
         "remote"
       ],
       "external_url": "https://mowgli.ai/agent"
-    },
-    {
-      "id": "https://index.percall.dev/l/newzai-mcp-server.html",
-      "url": "https://index.percall.dev/l/newzai-mcp-server.html",
-      "title": "NewzAI MCP Server",
-      "content_text": "News MCP: real-time headlines & custom news search across 7 regions. Free, just sign in with Google.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://github.com/Gauraviitkgp/news-mcp"
     }
   ]
 }
