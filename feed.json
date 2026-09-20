@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/zovo-invoice.html",
+      "url": "https://index.percall.dev/l/zovo-invoice.html",
+      "title": "Zovo Invoice MCP Server",
+      "content_text": "Create, validate and export professional invoices with line items, tax and totals over MCP. Local-first, free tier.",
+      "date_published": "2026-09-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "productivity",
+        "local-first",
+        "invoice"
+      ],
+      "external_url": "https://mcp.zovo.one/s/invoice"
+    },
+    {
       "id": "https://index.percall.dev/l/hronaut.html",
       "url": "https://index.percall.dev/l/hronaut.html",
       "title": "Hronaut",
@@ -681,21 +696,6 @@
         "remote"
       ],
       "external_url": "https://vocab.voyage/mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/bankier-street-bets.html",
-      "url": "https://index.percall.dev/l/bankier-street-bets.html",
-      "title": "Gieldowy Express",
-      "content_text": "Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.",
-      "date_published": "2026-07-28T00:00:00Z",
-      "tags": [
-        "app",
-        "poland",
-        "stocks",
-        "sentiment",
-        "satire"
-      ],
-      "external_url": "https://110kc3.github.io/bankier-street-bets/"
     }
   ]
 }

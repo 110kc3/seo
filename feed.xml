@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Zovo Invoice MCP Server</title>
+    <link>https://index.percall.dev/l/zovo-invoice.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zovo-invoice.html</guid>
+    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Create, validate and export professional invoices with line items, tax and totals over MCP. Local-first, free tier.</description>
+  </item>
+  <item>
     <title>Hronaut</title>
     <link>https://index.percall.dev/l/hronaut.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/hronaut.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>20 MCP tools + 17 widgets for SAT/ISEE/SSAT/GRE/GMAT/LSAT prep. Flashcards, quizzes &amp; games. Hosted.</description>
-  </item>
-  <item>
-    <title>Gieldowy Express</title>
-    <link>https://index.percall.dev/l/bankier-street-bets.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/bankier-street-bets.html</guid>
-    <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Satirical stock tabloid: Buy/Hold/Sell sentiment signals for Warsaw Stock Exchange (GPW) companies, scored heuristically from Bankier.pl forum chatter and refreshed daily. Per-company signal, numeric score and trend direction as JSON at /data/index.json. Content is in Polish. Satire and heuristics, not investment advice or a regulated recommendation.</description>
   </item>
 </channel>
 </rss>
