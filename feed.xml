@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Nolizi Calendar</title>
+    <link>https://index.percall.dev/l/nolizi-calendar.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/nolizi-calendar.html</guid>
+    <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Free appointment scheduling with shareable booking pages and an owner-authenticated REST API for finding availability, creating and verifying bookings, and cancellation. Currently in beta; Google calendar OAuth verification is ongoing.</description>
+  </item>
+  <item>
     <title>LFCarry Guide Evidence Smoke Tests</title>
     <link>https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Macroeconomic and FX time-series data for AI agents: indicators, calendars, COT, forex, commodities.</description>
-  </item>
-  <item>
-    <title>Hlido Agent Reviews</title>
-    <link>https://index.percall.dev/l/hlido-agent-reviews.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/hlido-agent-reviews.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Independent AI-agent reviews: trust checks, evidence scorecards, incident registry, recommendations.</description>
   </item>
 </channel>
 </rss>

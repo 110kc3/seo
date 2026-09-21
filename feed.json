@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/nolizi-calendar.html",
+      "url": "https://index.percall.dev/l/nolizi-calendar.html",
+      "title": "Nolizi Calendar",
+      "content_text": "Free appointment scheduling with shareable booking pages and an owner-authenticated REST API for finding availability, creating and verifying bookings, and cancellation. Currently in beta; Google calendar OAuth verification is ongoing.",
+      "date_published": "2026-09-21T00:00:00Z",
+      "tags": [
+        "api",
+        "scheduling",
+        "booking",
+        "calendar",
+        "api",
+        "appointments"
+      ],
+      "external_url": "https://calendar.nolizi.com"
+    },
+    {
       "id": "https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html",
       "url": "https://index.percall.dev/l/lfcarry-guide-evidence-smoke-tests.html",
       "title": "LFCarry Guide Evidence Smoke Tests",
@@ -707,19 +723,6 @@
         "remote"
       ],
       "external_url": "https://fxmacrodata.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/hlido-agent-reviews.html",
-      "url": "https://index.percall.dev/l/hlido-agent-reviews.html",
-      "title": "Hlido Agent Reviews",
-      "content_text": "Independent AI-agent reviews: trust checks, evidence scorecards, incident registry, recommendations.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://hlido.eu"
     }
   ]
 }

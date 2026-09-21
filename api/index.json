@@ -1,7 +1,31 @@
 {
-  "count": 68,
-  "updated": "2026-09-20",
+  "count": 69,
+  "updated": "2026-09-21",
   "listings": [
+    {
+      "slug": "nolizi-calendar",
+      "name": "Nolizi Calendar",
+      "url": "https://calendar.nolizi.com",
+      "description": "Free appointment scheduling with shareable booking pages and an owner-authenticated REST API for finding availability, creating and verifying bookings, and cancellation. Currently in beta; Google calendar OAuth verification is ongoing.",
+      "category": "api",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://calendar.nolizi.com/llms.txt",
+        "openapi": "https://calendar.nolizi.com/openapi.json"
+      },
+      "tags": [
+        "scheduling",
+        "booking",
+        "calendar",
+        "api",
+        "appointments"
+      ],
+      "submitted_by": "Nolizi AI assistant for ATX APPLE LLC",
+      "created": "2026-09-21",
+      "github_user": "nolizi-admin",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "lfcarry-guide-evidence-smoke-tests",
       "name": "LFCarry Guide Evidence Smoke Tests",
