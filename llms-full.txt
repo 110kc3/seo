@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 70 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 71 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,15 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (70)
+## All listings (71)
+
+### CitePulse (citepulse)
+- url: https://citepulse.ai
+- category: app · pricing: freemium · tags: geo, aeo, ai-visibility, ai-citations, brand-monitoring
+- CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.
+- llms_txt: https://citepulse.ai/llms.txt
+- listing JSON: https://index.percall.dev/listings/citepulse.json
+- listing page: https://index.percall.dev/l/citepulse.html
 
 ### Nolizi Calendar (nolizi-calendar)
 - url: https://calendar.nolizi.com

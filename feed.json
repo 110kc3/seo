@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/citepulse.html",
+      "url": "https://index.percall.dev/l/citepulse.html",
+      "title": "CitePulse",
+      "content_text": "CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.",
+      "date_published": "2026-09-21T00:00:00Z",
+      "tags": [
+        "app",
+        "geo",
+        "aeo",
+        "ai-visibility",
+        "ai-citations",
+        "brand-monitoring"
+      ],
+      "external_url": "https://citepulse.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/nolizi-calendar.html",
       "url": "https://index.percall.dev/l/nolizi-calendar.html",
       "title": "Nolizi Calendar",
@@ -713,19 +729,6 @@
         "remote"
       ],
       "external_url": "https://foodnear.me"
-    },
-    {
-      "id": "https://index.percall.dev/l/futia.html",
-      "url": "https://index.percall.dev/l/futia.html",
-      "title": "FUTIA",
-      "content_text": "SEO answers for AI agents: Search Console reads free, plus competitor, keyword, backlink, SERP data.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://futia.io"
     }
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "slug": "citepulse",
+  "name": "CitePulse",
+  "url": "https://citepulse.ai",
+  "description": "CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://citepulse.ai/llms.txt"
+  },
+  "tags": [
+    "geo",
+    "aeo",
+    "ai-visibility",
+    "ai-citations",
+    "brand-monitoring"
+  ],
+  "created": "2026-09-21",
+  "github_user": "solutionsgeoflow-bit",
+  "tier": "free",
+  "origin": "self-registered"
+}

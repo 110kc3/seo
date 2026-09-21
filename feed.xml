@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>CitePulse</title>
+    <link>https://index.percall.dev/l/citepulse.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/citepulse.html</guid>
+    <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.</description>
+  </item>
+  <item>
     <title>Nolizi Calendar</title>
     <link>https://index.percall.dev/l/nolizi-calendar.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/nolizi-calendar.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>AI-native restaurant discovery: verified/menu-indexed/discovered tiers + signed allergy-safety data.</description>
-  </item>
-  <item>
-    <title>FUTIA</title>
-    <link>https://index.percall.dev/l/futia.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/futia.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>SEO answers for AI agents: Search Console reads free, plus competitor, keyword, backlink, SERP data.</description>
   </item>
 </channel>
 </rss>
