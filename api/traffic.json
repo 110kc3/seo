@@ -107,6 +107,19 @@
       "llms_txt": 583,
       "audit_hits": 13,
       "x402_info": 82
+    },
+    {
+      "date": "2026-09-21",
+      "window": "30d",
+      "total_requests": 99142,
+      "agent_share": 0.033,
+      "ai_crawler": 3262,
+      "browser": 51601,
+      "script": 25369,
+      "free_scores": 435,
+      "llms_txt": 720,
+      "audit_hits": 15,
+      "x402_info": 86
     }
   ]
 }

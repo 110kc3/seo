@@ -1,80 +1,92 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-09-14",
-  "endpoints": 15392,
-  "hosts": 1993,
+  "fetched": "2026-09-21",
+  "endpoints": 15133,
+  "hosts": 2000,
   "concentration": {
-    "top_10_hosts_share": 0.204,
+    "top_10_hosts_share": 0.219,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 14940,
-    "solana": 236,
-    "base-sepolia": 176,
-    "solana-devnet": 33,
+    "base": 14680,
+    "solana": 257,
+    "base-sepolia": 152,
+    "solana-devnet": 34,
     "x-layer": 4,
+    "eip155:4663": 1,
+    "algorand": 1,
     "eip155:56": 1,
     "arbitrum": 1,
+    "eip155:5042": 1,
     "xrpl:0": 1
   },
   "by_version": {
-    "1": 210,
-    "2": 15182
+    "1": 216,
+    "2": 14917
   },
   "by_method": {
-    "GET": 8391,
-    "POST": 6994,
-    "DELETE": 2
+    "GET": 8078,
+    "POST": 7051,
+    "DELETE": 2,
+    "HEAD": 1
   },
   "price_usd": {
-    "priced": 15352,
-    "unpriced": 40,
-    "min": 0.001,
+    "priced": 15090,
+    "unpriced": 43,
+    "min": 0.0002,
     "p50": 0.01,
-    "p90": 0.1,
+    "p90": 0.08,
     "max": 1000
   },
   "top_hosts": [
     {
       "host": "intel.rallylive.ca",
-      "endpoints": 820
+      "endpoints": 822
     },
     {
       "host": "agent402.tools",
-      "endpoints": 599
+      "endpoints": 593
+    },
+    {
+      "host": "pay.edge-agents.ai",
+      "endpoints": 563
     },
     {
       "host": "api.x402node.dev",
-      "endpoints": 356
-    },
-    {
-      "host": "api.agentstools.dev",
-      "endpoints": 342
-    },
-    {
-      "host": "api.delx.ai",
-      "endpoints": 240
+      "endpoints": 348
     },
     {
       "host": "x402-factory.com",
       "endpoints": 202
     },
     {
+      "host": "twin.unykorn.org",
+      "endpoints": 169
+    },
+    {
       "host": "402.com.tr",
       "endpoints": 161
     },
     {
-      "host": "fittings.sh",
-      "endpoints": 145
+      "host": "api.strale.io",
+      "endpoints": 158
     },
     {
-      "host": "api.strale.io",
-      "endpoints": 144
+      "host": "minia2a.uk",
+      "endpoints": 151
+    },
+    {
+      "host": "api.agentstools.dev",
+      "endpoints": 147
     },
     {
       "host": "agents.x402stock.xyz",
       "endpoints": 138
+    },
+    {
+      "host": "api.delx.ai",
+      "endpoints": 129
     },
     {
       "host": "atlantikland.halowerk.com",
@@ -106,18 +118,18 @@
     },
     {
       "host": "x402.orthogonal.com",
-      "endpoints": 123
+      "endpoints": 120
+    },
+    {
+      "host": "api.sirenic.eu",
+      "endpoints": 109
     },
     {
       "host": "api.particle.pro",
-      "endpoints": 100
+      "endpoints": 101
     },
     {
       "host": "crawlspur.halowerk.com",
-      "endpoints": 100
-    },
-    {
-      "host": "minia2a.uk",
       "endpoints": 100
     },
     {
@@ -127,14 +139,6 @@
     {
       "host": "agentpaystore.com",
       "endpoints": 94
-    },
-    {
-      "host": "data.greeneris.io",
-      "endpoints": 91
-    },
-    {
-      "host": "api.locus.report",
-      "endpoints": 90
     }
   ]
 }

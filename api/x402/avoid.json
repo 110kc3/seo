@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-14",
-  "catalog_size": 15392,
+  "probed_at": "2026-09-21",
+  "catalog_size": 15133,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,9 +11,9 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 3,
-    "suspected": 25,
-    "tracked": 28
+    "confirmed": 1,
+    "suspected": 36,
+    "tracked": 37
   },
   "endpoints": [
     {
@@ -22,20 +22,6 @@
       "misses": 2,
       "since": "2026-08-01",
       "last_checked": "2026-09-07"
-    },
-    {
-      "url": "https://api.x402node.dev/domain/check",
-      "reason": "HTTP 500",
-      "misses": 2,
-      "since": "2026-08-17",
-      "last_checked": "2026-08-24"
-    },
-    {
-      "url": "https://api.osf-master-server.com/x402/economic/indicators/:query",
-      "reason": "timeout after 8000ms",
-      "misses": 2,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-14"
     }
   ],
   "suspected": [
@@ -69,13 +55,6 @@
     },
     {
       "url": "https://defillama.use.x402atlas.com/fee-summary",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
-      "url": "https://hyperliquid-predict.use.x402atlas.com/settled",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-08-10",
@@ -129,20 +108,6 @@
       "misses": 1,
       "since": "2026-08-24",
       "last_checked": "2026-08-24"
-    },
-    {
-      "url": "https://api.osf-master-server.com/x402/legal/cases/:query",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-26",
-      "last_checked": "2026-08-26"
-    },
-    {
-      "url": "https://api.socialfetch.dev/v1/tiktok/profiles/:handle/videos",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-26",
-      "last_checked": "2026-08-26"
     },
     {
       "url": "https://api.wallettriage.com/scan",
@@ -213,6 +178,104 @@
       "misses": 1,
       "since": "2026-09-14",
       "last_checked": "2026-09-14"
+    },
+    {
+      "url": "https://agentstack-research-3bnlllaboa-ts.a.run.app/v1/us/announcements/:ticker",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/fundos/carteira/:cnpj",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://api.gocreativeai.com/v1/shopify/leads/contacts/:var1",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://api.x402node.dev/domain/dns",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://api.x402node.dev/web/sitemap",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://bryan-hermes.lenok-gorgon.ts.net:8443/v1/company",
+      "reason": "ECONNRESET",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://i3p3mgbsn54dvlivnk6wbumal40eqtsn.lambda-url.us-east-1.on.aws/v1/url-to-agent-markdown",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://imagegen.coinopai.com/generate/clean",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://pay.edge-agents.ai/v1/services/fx-margin-pressure",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://pay.edge-agents.ai/v1/services/narrative-evidence-divergence",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://pay.edge-agents.ai/v1/services/refinancing-window-intelligence",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://polynews.news/api/v1/feed",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://toll402.dev/v1/t/siren_validate",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://x402.sniperx.fun/api/v1/token/activities/smarttraders_kol",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-21",
+      "last_checked": "2026-09-21"
     }
   ]
 }

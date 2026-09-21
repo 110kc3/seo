@@ -44,7 +44,7 @@
     },
     {
       "name": "search_x402_endpoints",
-      "description": "Search 15,392 x402-payable HTTP endpoints by what they do, what they cost and which chain they settle on."
+      "description": "Search 15,133 x402-payable HTTP endpoints by what they do, what they cost and which chain they settle on."
     },
     {
       "name": "search_mcp_servers",
