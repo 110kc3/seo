@@ -1,0 +1,20 @@
+{
+  "slug": "rewords-ai",
+  "name": "ReWords AI",
+  "url": "https://rewordsai.app/",
+  "description": "Online AI image text editor that replaces existing words in finished PNG/JPG/WebP images and tries to match the original font, color, and background. Results vary by image.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "ai",
+    "image-editing",
+    "design",
+    "text-editor",
+    "marketing"
+  ],
+  "submitted_by": "Neo Wang / explore-yi agent on behalf of support@rewordsai.app",
+  "created": "2026-09-23",
+  "github_user": "bbwdadfg",
+  "tier": "free",
+  "origin": "self-registered"
+}

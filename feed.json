@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/rewords-ai.html",
+      "url": "https://index.percall.dev/l/rewords-ai.html",
+      "title": "ReWords AI",
+      "content_text": "Online AI image text editor that replaces existing words in finished PNG/JPG/WebP images and tries to match the original font, color, and background. Results vary by image.",
+      "date_published": "2026-09-23T00:00:00Z",
+      "tags": [
+        "app",
+        "ai",
+        "image-editing",
+        "design",
+        "text-editor",
+        "marketing"
+      ],
+      "external_url": "https://rewordsai.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/citepulse.html",
       "url": "https://index.percall.dev/l/citepulse.html",
       "title": "CitePulse",
@@ -716,19 +732,6 @@
         "remote"
       ],
       "external_url": "https://fastcrw.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/food-near-me.html",
-      "url": "https://index.percall.dev/l/food-near-me.html",
-      "title": "Food Near Me",
-      "content_text": "AI-native restaurant discovery: verified/menu-indexed/discovered tiers + signed allergy-safety data.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://foodnear.me"
     }
   ]
 }

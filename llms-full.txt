@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 71 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 72 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,14 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (71)
+## All listings (72)
+
+### ReWords AI (rewords-ai)
+- url: https://rewordsai.app/
+- category: app · pricing: freemium · tags: ai, image-editing, design, text-editor, marketing
+- Online AI image text editor that replaces existing words in finished PNG/JPG/WebP images and tries to match the original font, color, and background. Results vary by image.
+- listing JSON: https://index.percall.dev/listings/rewords-ai.json
+- listing page: https://index.percall.dev/l/rewords-ai.html
 
 ### CitePulse (citepulse)
 - url: https://citepulse.ai
