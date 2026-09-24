@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/feeless402.html",
+      "url": "https://index.percall.dev/l/feeless402.html",
+      "title": "Feeless402",
+      "content_text": "Feeless x402 micropayments for AI agents — self-custodied XNO wallet, pay-per-call pricing, live A2A agent card on the Nano (XNO) feeless settlement rail.",
+      "date_published": "2026-09-24T00:00:00Z",
+      "tags": [
+        "agent"
+      ],
+      "external_url": "https://feeless402.com"
+    },
+    {
       "id": "https://index.percall.dev/l/rewords-ai.html",
       "url": "https://index.percall.dev/l/rewords-ai.html",
       "title": "ReWords AI",
@@ -719,19 +730,6 @@
         "remote"
       ],
       "external_url": "https://github.com/martc03/gov-mcp-servers"
-    },
-    {
-      "id": "https://index.percall.dev/l/fastcrw.html",
-      "url": "https://index.percall.dev/l/fastcrw.html",
-      "title": "fastCRW",
-      "content_text": "Scrape, crawl, map & search the web. Open-source, self-hostable Rust crawler & search for AI agents.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://fastcrw.com"
     }
   ]
 }

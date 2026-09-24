@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Feeless402</title>
+    <link>https://index.percall.dev/l/feeless402.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/feeless402.html</guid>
+    <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Feeless x402 micropayments for AI agents — self-custodied XNO wallet, pay-per-call pricing, live A2A agent card on the Nano (XNO) feeless settlement rail.</description>
+  </item>
+  <item>
     <title>ReWords AI</title>
     <link>https://index.percall.dev/l/rewords-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/rewords-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>EPA air quality monitoring and HUD foreclosure data. 3 MCP tools for environmental and housing data.</description>
-  </item>
-  <item>
-    <title>fastCRW</title>
-    <link>https://index.percall.dev/l/fastcrw.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/fastcrw.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Scrape, crawl, map &amp; search the web. Open-source, self-hostable Rust crawler &amp; search for AI agents.</description>
   </item>
 </channel>
 </rss>

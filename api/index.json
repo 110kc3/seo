@@ -1,7 +1,23 @@
 {
-  "count": 72,
-  "updated": "2026-09-23",
+  "count": 73,
+  "updated": "2026-09-24",
   "listings": [
+    {
+      "slug": "feeless402",
+      "name": "Feeless402",
+      "url": "https://feeless402.com",
+      "description": "Feeless x402 micropayments for AI agents — self-custodied XNO wallet, pay-per-call pricing, live A2A agent card on the Nano (XNO) feeless settlement rail.",
+      "category": "agent",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://feeless402.com/llms.txt",
+        "mcp": "https://feeless402.com/mcp"
+      },
+      "created": "2026-09-24",
+      "github_user": "dhyabi2",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "rewords-ai",
       "name": "ReWords AI",
