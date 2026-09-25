@@ -1,5 +1,5 @@
 {
-  "count": 77,
+  "count": 78,
   "updated": "2026-09-25",
   "listings": [
     {
@@ -42,6 +42,26 @@
       "submitted_by": "Project maintainer; independent open-source project",
       "created": "2026-09-25",
       "github_user": "cpys",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "the-face-report",
+      "name": "The Face Report",
+      "url": "https://thefacereport.com/",
+      "description": "The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "face-analysis",
+        "face-shape",
+        "personal-styling",
+        "color-analysis",
+        "computer-vision"
+      ],
+      "submitted_by": "Taro Schenker (The Face Report)",
+      "created": "2026-09-25",
+      "github_user": "TaroSchenker",
       "tier": "free",
       "origin": "self-registered"
     },

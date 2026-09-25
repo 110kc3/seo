@@ -23,6 +23,14 @@
     <description>Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.</description>
   </item>
   <item>
+    <title>The Face Report</title>
+    <link>https://index.percall.dev/l/the-face-report.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/the-face-report.html</guid>
+    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.</description>
+  </item>
+  <item>
     <title>Vend API Merchant (Nano x402)</title>
     <link>https://index.percall.dev/l/vend-api-merchant.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/vend-api-merchant.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Blockchain intelligence for tracing funds, screening addresses, and investigating on-chain activity.</description>
-  </item>
-  <item>
-    <title>ChangeThisFile</title>
-    <link>https://index.percall.dev/l/changethisfile.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/changethisfile.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Convert files between 690+ formats: image, video, audio, documents, ebooks, archives. Free, no auth.</description>
   </item>
 </channel>
 </rss>

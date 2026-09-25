@@ -38,6 +38,22 @@
       "external_url": "https://github.com/cpys/codex-quota-overlay"
     },
     {
+      "id": "https://index.percall.dev/l/the-face-report.html",
+      "url": "https://index.percall.dev/l/the-face-report.html",
+      "title": "The Face Report",
+      "content_text": "The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.",
+      "date_published": "2026-09-25T00:00:00Z",
+      "tags": [
+        "app",
+        "face-analysis",
+        "face-shape",
+        "personal-styling",
+        "color-analysis",
+        "computer-vision"
+      ],
+      "external_url": "https://thefacereport.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/vend-api-merchant.html",
       "url": "https://index.percall.dev/l/vend-api-merchant.html",
       "title": "Vend API Merchant (Nano x402)",
@@ -729,19 +745,6 @@
         "remote"
       ],
       "external_url": "https://mcp.caudexcatena.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/changethisfile.html",
-      "url": "https://index.percall.dev/l/changethisfile.html",
-      "title": "ChangeThisFile",
-      "content_text": "Convert files between 690+ formats: image, video, audio, documents, ebooks, archives. Free, no auth.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://changethisfile.com"
     }
   ]
 }
