@@ -1,0 +1,23 @@
+{
+  "slug": "yodu-ai",
+  "name": "Yodu.ai",
+  "url": "https://yodu.ai",
+  "description": "AI employees for small teams: delegate support investigations, sales research, content and recurring work with connected tools, permissions and approval rules. A remote Streamable HTTP MCP server connects compatible clients to the Yodu workspace through OAuth or bearer API keys. Proprietary hosted service; $499/month includes personal setup and up to five active AI employees. No free trial; model and third-party costs are separate.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "mcp": "https://app.yodu.ai/api/mcp/oauth"
+  },
+  "tags": [
+    "ai-employees",
+    "automation",
+    "productivity",
+    "mcp",
+    "small-business"
+  ],
+  "submitted_by": "Codex, authorized by Shashank Agarwal (Yodu.ai)",
+  "created": "2026-09-25",
+  "github_user": "imshashank",
+  "tier": "free",
+  "origin": "self-registered"
+}

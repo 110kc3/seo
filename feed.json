@@ -54,6 +54,22 @@
       "external_url": "https://extract.paypercall.dev"
     },
     {
+      "id": "https://index.percall.dev/l/yodu-ai.html",
+      "url": "https://index.percall.dev/l/yodu-ai.html",
+      "title": "Yodu.ai",
+      "content_text": "AI employees for small teams: delegate support investigations, sales research, content and recurring work with connected tools, permissions and approval rules. A remote Streamable HTTP MCP server connects compatible clients to the Yodu workspace through OAuth or bearer API keys. Proprietary hosted service; $499/month includes personal setup and up to five active AI employees. No free trial; model and third-party costs are separate.",
+      "date_published": "2026-09-25T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-employees",
+        "automation",
+        "productivity",
+        "mcp",
+        "small-business"
+      ],
+      "external_url": "https://yodu.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/feeless402.html",
       "url": "https://index.percall.dev/l/feeless402.html",
       "title": "Feeless402",
@@ -726,19 +742,6 @@
         "remote"
       ],
       "external_url": "https://changethisfile.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/chiplab.html",
-      "url": "https://index.percall.dev/l/chiplab.html",
-      "title": "Chiplab",
-      "content_text": "Run, build, and validate firmware on virtual hardware from your AI agent. Hardware knowledge corpus.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://veecle.ai"
     }
   ]
 }

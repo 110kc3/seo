@@ -31,6 +31,14 @@
     <description>Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.</description>
   </item>
   <item>
+    <title>Yodu.ai</title>
+    <link>https://index.percall.dev/l/yodu-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/yodu-ai.html</guid>
+    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>AI employees for small teams: delegate support investigations, sales research, content and recurring work with connected tools, permissions and approval rules. A remote Streamable HTTP MCP server connects compatible clients to the Yodu workspace through OAuth or bearer API keys. Proprietary hosted service; $499/month includes personal setup and up to five active AI employees. No free trial; model and third-party costs are separate.</description>
+  </item>
+  <item>
     <title>Feeless402</title>
     <link>https://index.percall.dev/l/feeless402.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/feeless402.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Convert files between 690+ formats: image, video, audio, documents, ebooks, archives. Free, no auth.</description>
-  </item>
-  <item>
-    <title>Chiplab</title>
-    <link>https://index.percall.dev/l/chiplab.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/chiplab.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Run, build, and validate firmware on virtual hardware from your AI agent. Hardware knowledge corpus.</description>
   </item>
 </channel>
 </rss>

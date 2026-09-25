@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 76 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 77 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (76)
+## All listings (77)
 
 ### API.market MCP Gateway (api-market-mcp-gateway)
 - url: https://api.market/mcp
@@ -315,6 +315,14 @@ redirects to the index so this remains its canonical machine-readable guide.
 - mcp: https://extract.paypercall.dev/mcp
 - listing JSON: https://index.percall.dev/listings/vend-api-merchant.json
 - listing page: https://index.percall.dev/l/vend-api-merchant.html
+
+### Yodu.ai (yodu-ai)
+- url: https://yodu.ai
+- category: mcp · pricing: paid · tags: ai-employees, automation, productivity, mcp, small-business
+- AI employees for small teams: delegate support investigations, sales research, content and recurring work with connected tools, permissions and approval rules. A remote Streamable HTTP MCP server connects compatible clients to the Yodu workspace through OAuth or bearer API keys. Proprietary hosted service; $499/month includes personal setup and up to five active AI employees. No free trial; model and third-party costs are separate.
+- mcp: https://app.yodu.ai/api/mcp/oauth
+- listing JSON: https://index.percall.dev/listings/yodu-ai.json
+- listing page: https://index.percall.dev/l/yodu-ai.html
 
 ### Feeless402 (feeless402)
 - url: https://feeless402.com
