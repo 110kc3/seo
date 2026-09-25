@@ -1,0 +1,25 @@
+{
+  "slug": "vend-api-merchant",
+  "name": "Vend API Merchant (Nano x402)",
+  "url": "https://extract.paypercall.dev",
+  "description": "Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://extract.paypercall.dev/llms.txt",
+    "openapi": "https://extract.paypercall.dev/openapi.json",
+    "mcp": "https://extract.paypercall.dev/mcp"
+  },
+  "tags": [
+    "nano",
+    "x402",
+    "web-extract",
+    "web-search",
+    "pay-per-call"
+  ],
+  "submitted_by": "dhyabi2",
+  "created": "2026-09-25",
+  "github_user": "dhyabi2",
+  "tier": "free",
+  "origin": "self-registered"
+}

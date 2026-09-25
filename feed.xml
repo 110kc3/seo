@@ -15,6 +15,14 @@
     <description>Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.</description>
   </item>
   <item>
+    <title>Vend API Merchant (Nano x402)</title>
+    <link>https://index.percall.dev/l/vend-api-merchant.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/vend-api-merchant.html</guid>
+    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.</description>
+  </item>
+  <item>
     <title>Feeless402</title>
     <link>https://index.percall.dev/l/feeless402.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/feeless402.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Privacy Protocol directory, guides, diagnostics, formation intake. 23 tools, 7 resources, 6 prompts.</description>
-  </item>
-  <item>
-    <title>Embers: Tabletop RPG Toolkit</title>
-    <link>https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Characters, campaigns, adventures &amp; worlds for D&amp;D 5e/5.5e, Pathfinder, Savage Worlds, Fate, &amp; more.</description>
   </item>
 </channel>
 </rss>

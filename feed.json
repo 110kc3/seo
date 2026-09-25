@@ -22,6 +22,22 @@
       "external_url": "https://github.com/cpys/codex-quota-overlay"
     },
     {
+      "id": "https://index.percall.dev/l/vend-api-merchant.html",
+      "url": "https://index.percall.dev/l/vend-api-merchant.html",
+      "title": "Vend API Merchant (Nano x402)",
+      "content_text": "Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.",
+      "date_published": "2026-09-25T00:00:00Z",
+      "tags": [
+        "mcp",
+        "nano",
+        "x402",
+        "web-extract",
+        "web-search",
+        "pay-per-call"
+      ],
+      "external_url": "https://extract.paypercall.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/feeless402.html",
       "url": "https://index.percall.dev/l/feeless402.html",
       "title": "Feeless402",
@@ -720,19 +736,6 @@
         "remote"
       ],
       "external_url": "https://defaultprivacy.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html",
-      "url": "https://index.percall.dev/l/embers-tabletop-rpg-toolkit.html",
-      "title": "Embers: Tabletop RPG Toolkit",
-      "content_text": "Characters, campaigns, adventures & worlds for D&D 5e/5.5e, Pathfinder, Savage Worlds, Fate, & more.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://embersds.com"
     }
   ]
 }
