@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 73 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 74 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,14 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (73)
+## All listings (74)
+
+### Codex Quota Overlay (codex-quota-overlay)
+- url: https://github.com/cpys/codex-quota-overlay
+- category: app · pricing: free · tags: codex, quota, developer-tools, windows, macos
+- Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.
+- listing JSON: https://index.percall.dev/listings/codex-quota-overlay.json
+- listing page: https://index.percall.dev/l/codex-quota-overlay.html
 
 ### Feeless402 (feeless402)
 - url: https://feeless402.com

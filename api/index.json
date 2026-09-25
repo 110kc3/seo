@@ -1,7 +1,27 @@
 {
-  "count": 73,
-  "updated": "2026-09-24",
+  "count": 74,
+  "updated": "2026-09-25",
   "listings": [
+    {
+      "slug": "codex-quota-overlay",
+      "name": "Codex Quota Overlay",
+      "url": "https://github.com/cpys/codex-quota-overlay",
+      "description": "Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "codex",
+        "quota",
+        "developer-tools",
+        "windows",
+        "macos"
+      ],
+      "submitted_by": "Project maintainer; independent open-source project",
+      "created": "2026-09-25",
+      "github_user": "cpys",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "feeless402",
       "name": "Feeless402",

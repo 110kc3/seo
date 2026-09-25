@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Codex Quota Overlay</title>
+    <link>https://index.percall.dev/l/codex-quota-overlay.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/codex-quota-overlay.html</guid>
+    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.</description>
+  </item>
+  <item>
     <title>Feeless402</title>
     <link>https://index.percall.dev/l/feeless402.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/feeless402.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Characters, campaigns, adventures &amp; worlds for D&amp;D 5e/5.5e, Pathfinder, Savage Worlds, Fate, &amp; more.</description>
-  </item>
-  <item>
-    <title>Environmental Compliance</title>
-    <link>https://index.percall.dev/l/environmental-compliance.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/environmental-compliance.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>EPA air quality monitoring and HUD foreclosure data. 3 MCP tools for environmental and housing data.</description>
   </item>
 </channel>
 </rss>

@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/codex-quota-overlay.html",
+      "url": "https://index.percall.dev/l/codex-quota-overlay.html",
+      "title": "Codex Quota Overlay",
+      "content_text": "Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.",
+      "date_published": "2026-09-25T00:00:00Z",
+      "tags": [
+        "app",
+        "codex",
+        "quota",
+        "developer-tools",
+        "windows",
+        "macos"
+      ],
+      "external_url": "https://github.com/cpys/codex-quota-overlay"
+    },
+    {
       "id": "https://index.percall.dev/l/feeless402.html",
       "url": "https://index.percall.dev/l/feeless402.html",
       "title": "Feeless402",
@@ -717,19 +733,6 @@
         "remote"
       ],
       "external_url": "https://embersds.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/environmental-compliance.html",
-      "url": "https://index.percall.dev/l/environmental-compliance.html",
-      "title": "Environmental Compliance",
-      "content_text": "EPA air quality monitoring and HUD foreclosure data. 3 MCP tools for environmental and housing data.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://github.com/martc03/gov-mcp-servers"
     }
   ]
 }
