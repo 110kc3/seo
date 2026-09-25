@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>API.market MCP Gateway</title>
+    <link>https://index.percall.dev/l/api-market-mcp-gateway.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/api-market-mcp-gateway.html</guid>
+    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Proprietary hosted MCP gateway for API discovery, operation lookup, execution, usage checks and subscription management through five tools. Streamable HTTP with OAuth or API-key authentication; API.market account required. Free tiers, quotas, paid plans and usage charges vary by API. Calls and subscription changes can incur charges. Public integration metadata is separate from server source.</description>
+  </item>
+  <item>
     <title>Codex Quota Overlay</title>
     <link>https://index.percall.dev/l/codex-quota-overlay.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/codex-quota-overlay.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Run, build, and validate firmware on virtual hardware from your AI agent. Hardware knowledge corpus.</description>
-  </item>
-  <item>
-    <title>Default Privacy</title>
-    <link>https://index.percall.dev/l/default-privacy.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/default-privacy.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Privacy Protocol directory, guides, diagnostics, formation intake. 23 tools, 7 resources, 6 prompts.</description>
   </item>
 </channel>
 </rss>

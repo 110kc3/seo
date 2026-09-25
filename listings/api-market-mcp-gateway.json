@@ -1,0 +1,23 @@
+{
+  "slug": "api-market-mcp-gateway",
+  "name": "API.market MCP Gateway",
+  "url": "https://api.market/mcp",
+  "description": "Proprietary hosted MCP gateway for API discovery, operation lookup, execution, usage checks and subscription management through five tools. Streamable HTTP with OAuth or API-key authentication; API.market account required. Free tiers, quotas, paid plans and usage charges vary by API. Calls and subscription changes can incur charges. Public integration metadata is separate from server source.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "mcp": "https://api.market/api/mcp/gateway"
+  },
+  "tags": [
+    "mcp",
+    "api-marketplace",
+    "developer-tools",
+    "ai-agents",
+    "oauth"
+  ],
+  "submitted_by": "Codex, authorized by Shashank Agarwal for API.market",
+  "created": "2026-09-25",
+  "github_user": "imshashank",
+  "tier": "free",
+  "origin": "self-registered"
+}

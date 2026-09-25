@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/api-market-mcp-gateway.html",
+      "url": "https://index.percall.dev/l/api-market-mcp-gateway.html",
+      "title": "API.market MCP Gateway",
+      "content_text": "Proprietary hosted MCP gateway for API discovery, operation lookup, execution, usage checks and subscription management through five tools. Streamable HTTP with OAuth or API-key authentication; API.market account required. Free tiers, quotas, paid plans and usage charges vary by API. Calls and subscription changes can incur charges. Public integration metadata is separate from server source.",
+      "date_published": "2026-09-25T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "api-marketplace",
+        "developer-tools",
+        "ai-agents",
+        "oauth"
+      ],
+      "external_url": "https://api.market/mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/codex-quota-overlay.html",
       "url": "https://index.percall.dev/l/codex-quota-overlay.html",
       "title": "Codex Quota Overlay",
@@ -723,19 +739,6 @@
         "remote"
       ],
       "external_url": "https://veecle.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/default-privacy.html",
-      "url": "https://index.percall.dev/l/default-privacy.html",
-      "title": "Default Privacy",
-      "content_text": "Privacy Protocol directory, guides, diagnostics, formation intake. 23 tools, 7 resources, 6 prompts.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://defaultprivacy.com"
     }
   ]
 }
