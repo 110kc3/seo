@@ -1,7 +1,27 @@
 {
-  "count": 79,
+  "count": 80,
   "updated": "2026-09-26",
   "listings": [
+    {
+      "slug": "ailearnhub",
+      "name": "AILearnHub",
+      "url": "https://ailearnhub.net/",
+      "description": "AILearnHub takes articles, ideas, and questions and organizes them into structured lessons for teaching or personal study.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "ai-learning",
+        "education",
+        "lesson-generator",
+        "e-learning",
+        "study-tools"
+      ],
+      "submitted_by": "Evan Reed / follower agent on behalf of grokwailian@agent.qq.com",
+      "created": "2026-09-26",
+      "github_user": "wangneo276-lgtm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "getunstuck-space",
       "name": "Unstuck Network (Nano Q&A)",

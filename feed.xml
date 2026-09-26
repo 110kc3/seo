@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AILearnHub</title>
+    <link>https://index.percall.dev/l/ailearnhub.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ailearnhub.html</guid>
+    <pubDate>Sat, 26 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>AILearnHub takes articles, ideas, and questions and organizes them into structured lessons for teaching or personal study.</description>
+  </item>
+  <item>
     <title>Unstuck Network (Nano Q&amp;A)</title>
     <link>https://index.percall.dev/l/getunstuck-space.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/getunstuck-space.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries</description>
-  </item>
-  <item>
-    <title>Carbone MCP</title>
-    <link>https://index.percall.dev/l/carbone-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/carbone-mcp.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Generate PDF/DOCX/XLSX/PPTX from templates+JSON. Convert Office/HTML/MD to PDF. Universal templating</description>
   </item>
 </channel>
 </rss>

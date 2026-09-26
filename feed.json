@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ailearnhub.html",
+      "url": "https://index.percall.dev/l/ailearnhub.html",
+      "title": "AILearnHub",
+      "content_text": "AILearnHub takes articles, ideas, and questions and organizes them into structured lessons for teaching or personal study.",
+      "date_published": "2026-09-26T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-learning",
+        "education",
+        "lesson-generator",
+        "e-learning",
+        "study-tools"
+      ],
+      "external_url": "https://ailearnhub.net/"
+    },
+    {
       "id": "https://index.percall.dev/l/getunstuck-space.html",
       "url": "https://index.percall.dev/l/getunstuck-space.html",
       "title": "Unstuck Network (Nano Q&A)",
@@ -735,19 +751,6 @@
         "remote"
       ],
       "external_url": "https://boundr.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/carbone-mcp.html",
-      "url": "https://index.percall.dev/l/carbone-mcp.html",
-      "title": "Carbone MCP",
-      "content_text": "Generate PDF/DOCX/XLSX/PPTX from templates+JSON. Convert Office/HTML/MD to PDF. Universal templating",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://carbone.io"
     }
   ]
 }
