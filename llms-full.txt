@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 82 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 83 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (82)
+## All listings (83)
 
 ### DishVivid (dishvivid)
 - url: https://dishvivid.com/
@@ -297,6 +297,13 @@ redirects to the index so this remains its canonical machine-readable guide.
 - DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.
 - listing JSON: https://index.percall.dev/listings/dishvivid.json
 - listing page: https://index.percall.dev/l/dishvivid.html
+
+### NailMoodLab (nailmoodlab)
+- url: https://nailmoodlab.com/
+- category: app · pricing: freemium · tags: nail-design, image-generation, design
+- NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.
+- listing JSON: https://index.percall.dev/listings/nailmoodlab.json
+- listing page: https://index.percall.dev/l/nailmoodlab.html
 
 ### ResumePlot (resumeplot)
 - url: https://resumeplot.com/

@@ -15,6 +15,14 @@
     <description>DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.</description>
   </item>
   <item>
+    <title>NailMoodLab</title>
+    <link>https://index.percall.dev/l/nailmoodlab.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/nailmoodlab.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.</description>
+  </item>
+  <item>
     <title>ResumePlot</title>
     <link>https://index.percall.dev/l/resumeplot.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/resumeplot.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Concentrated liquidity on Uniswap/Aerodrome (rebalance, compound, leverage) or single-sided lending.</description>
-  </item>
-  <item>
-    <title>Avo</title>
-    <link>https://index.percall.dev/l/avo.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/avo.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Define, ship &amp; query your analytics tracking from one source of truth, trusted by humans and agents.</description>
   </item>
 </channel>
 </rss>

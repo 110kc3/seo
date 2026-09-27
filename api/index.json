@@ -1,5 +1,5 @@
 {
-  "count": 82,
+  "count": 83,
   "updated": "2026-09-27",
   "listings": [
     {
@@ -13,6 +13,24 @@
         "food-photography",
         "image-editing",
         "restaurants"
+      ],
+      "submitted_by": "Codex, on behalf of the site owner",
+      "created": "2026-09-27",
+      "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "nailmoodlab",
+      "name": "NailMoodLab",
+      "url": "https://nailmoodlab.com/",
+      "description": "NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "nail-design",
+        "image-generation",
+        "design"
       ],
       "submitted_by": "Codex, on behalf of the site owner",
       "created": "2026-09-27",

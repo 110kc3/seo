@@ -20,6 +20,20 @@
       "external_url": "https://dishvivid.com/"
     },
     {
+      "id": "https://index.percall.dev/l/nailmoodlab.html",
+      "url": "https://index.percall.dev/l/nailmoodlab.html",
+      "title": "NailMoodLab",
+      "content_text": "NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "nail-design",
+        "image-generation",
+        "design"
+      ],
+      "external_url": "https://nailmoodlab.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/resumeplot.html",
       "url": "https://index.percall.dev/l/resumeplot.html",
       "title": "ResumePlot",
@@ -740,19 +754,6 @@
         "remote"
       ],
       "external_url": "https://arcadia.finance"
-    },
-    {
-      "id": "https://index.percall.dev/l/avo.html",
-      "url": "https://index.percall.dev/l/avo.html",
-      "title": "Avo",
-      "content_text": "Define, ship & query your analytics tracking from one source of truth, trusted by humans and agents.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://www.avo.app/docs/reference/avo-mcp/tools"
     }
   ]
 }
