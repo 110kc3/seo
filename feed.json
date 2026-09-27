@@ -104,6 +104,20 @@
       "external_url": "https://resumeplot.com/"
     },
     {
+      "id": "https://index.percall.dev/l/subatlas.html",
+      "url": "https://index.percall.dev/l/subatlas.html",
+      "title": "SubAtlas",
+      "content_text": "SubAtlas is a Chinese-language subscription comparison and renewal-planning resource. Browse public guides and source-linked information about AI subscription plans, and organize renewal details. Prices, eligibility and cancellation terms can change; confirm them with the original provider. Listed third-party subscriptions may be paid.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "subscriptions",
+        "comparison",
+        "productivity"
+      ],
+      "external_url": "https://subatlas.packscena.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/ailearnhub.html",
       "url": "https://index.percall.dev/l/ailearnhub.html",
       "title": "AILearnHub",
@@ -743,21 +757,6 @@
         "llm"
       ],
       "external_url": "https://cap-alpha-one.vercel.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-readability-service.html",
-      "url": "https://index.percall.dev/l/agent-readability-service.html",
-      "title": "Agent Readability Service",
-      "content_text": "Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $49 report or $199 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.",
-      "date_published": "2026-08-07T00:00:00Z",
-      "tags": [
-        "other",
-        "geo",
-        "llms-txt",
-        "json-ld",
-        "audit"
-      ],
-      "external_url": "https://kc-it.pl/services/agent-readability"
     }
   ]
 }

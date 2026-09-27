@@ -63,6 +63,14 @@
     <description>ResumePlot is a resume editor with Chinese and English content, templates and AI-assisted writing tools. It offers a limited free AI allowance and paid subscription plans. Users should check every statement against their own experience before exporting or applying.</description>
   </item>
   <item>
+    <title>SubAtlas</title>
+    <link>https://index.percall.dev/l/subatlas.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/subatlas.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>SubAtlas is a Chinese-language subscription comparison and renewal-planning resource. Browse public guides and source-linked information about AI subscription plans, and organize renewal details. Prices, eligibility and cancellation terms can change; confirm them with the original provider. Listed third-party subscriptions may be paid.</description>
+  </item>
+  <item>
     <title>AILearnHub</title>
     <link>https://index.percall.dev/l/ailearnhub.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ailearnhub.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 16 Aug 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Add a spend cap to your AI route. One consume() call before a model request. Default 20 units per user per day. Denied requests return HTTP 402. No Stripe, no dashboard, no plan builder.</description>
-  </item>
-  <item>
-    <title>Agent Readability Service</title>
-    <link>https://index.percall.dev/l/agent-readability-service.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agent-readability-service.html</guid>
-    <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $49 report or $199 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.</description>
   </item>
 </channel>
 </rss>

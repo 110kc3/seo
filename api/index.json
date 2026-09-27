@@ -1,5 +1,5 @@
 {
-  "count": 87,
+  "count": 88,
   "updated": "2026-09-27",
   "listings": [
     {
@@ -121,6 +121,24 @@
         "resume",
         "career",
         "writing"
+      ],
+      "submitted_by": "Codex, on behalf of the site owner",
+      "created": "2026-09-27",
+      "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "subatlas",
+      "name": "SubAtlas",
+      "url": "https://subatlas.packscena.com/",
+      "description": "SubAtlas is a Chinese-language subscription comparison and renewal-planning resource. Browse public guides and source-linked information about AI subscription plans, and organize renewal details. Prices, eligibility and cancellation terms can change; confirm them with the original provider. Listed third-party subscriptions may be paid.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "subscriptions",
+        "comparison",
+        "productivity"
       ],
       "submitted_by": "Codex, on behalf of the site owner",
       "created": "2026-09-27",
