@@ -92,6 +92,22 @@
       "external_url": "https://lookscene.packscena.com/"
     },
     {
+      "id": "https://index.percall.dev/l/musicvideoai.html",
+      "url": "https://index.percall.dev/l/musicvideoai.html",
+      "title": "Music Video AI",
+      "content_text": "Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "music-video",
+        "ai-video",
+        "music-generator",
+        "video-editor",
+        "audio-to-video"
+      ],
+      "external_url": "https://musicvideoai.pro/"
+    },
+    {
       "id": "https://index.percall.dev/l/nailmoodlab.html",
       "url": "https://index.percall.dev/l/nailmoodlab.html",
       "title": "NailMoodLab",
@@ -744,17 +760,6 @@
         "web-app"
       ],
       "external_url": "https://wistful-pointless-calculators.doany.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/fluentedi.html",
-      "url": "https://index.percall.dev/l/fluentedi.html",
-      "title": "FluentEDI",
-      "content_text": "42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.",
-      "date_published": "2026-08-24T00:00:00Z",
-      "tags": [
-        "api"
-      ],
-      "external_url": "https://fluentedi.com"
     }
   ]
 }

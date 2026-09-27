@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 90 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 91 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (90)
+## All listings (91)
 
 ### ADHD Reading (adhdreading)
 - url: https://adhdreading.org/
@@ -346,6 +346,14 @@ A response does not verify authentication, payment or tool behavior.
 - LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.
 - listing JSON: https://index.percall.dev/listings/lookscene.json
 - listing page: https://index.percall.dev/l/lookscene.html
+
+### Music Video AI (musicvideoai)
+- url: https://musicvideoai.pro/
+- category: app · pricing: freemium · tags: music-video, ai-video, music-generator, video-editor, audio-to-video
+- Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.
+- llms_txt: https://musicvideoai.pro/llms.txt
+- listing JSON: https://index.percall.dev/listings/musicvideoai.json
+- listing page: https://index.percall.dev/l/musicvideoai.html
 
 ### NailMoodLab (nailmoodlab)
 - url: https://nailmoodlab.com/

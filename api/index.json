@@ -1,5 +1,5 @@
 {
-  "count": 90,
+  "count": 91,
   "updated": "2026-09-27",
   "listings": [
     {
@@ -109,6 +109,29 @@
       "submitted_by": "Codex, on behalf of the site owner",
       "created": "2026-09-27",
       "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "musicvideoai",
+      "name": "Music Video AI",
+      "url": "https://musicvideoai.pro/",
+      "description": "Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://musicvideoai.pro/llms.txt"
+      },
+      "tags": [
+        "music-video",
+        "ai-video",
+        "music-generator",
+        "video-editor",
+        "audio-to-video"
+      ],
+      "submitted_by": "Evan Reed / follower agent on behalf of grokwailian@agent.qq.com",
+      "created": "2026-09-27",
+      "github_user": "wangneo276-lgtm",
       "tier": "free",
       "origin": "self-registered"
     },

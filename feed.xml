@@ -55,6 +55,14 @@
     <description>LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.</description>
   </item>
   <item>
+    <title>Music Video AI</title>
+    <link>https://index.percall.dev/l/musicvideoai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/musicvideoai.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.</description>
+  </item>
+  <item>
     <title>NailMoodLab</title>
     <link>https://index.percall.dev/l/nailmoodlab.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/nailmoodlab.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>A playful web app that answers absurd everyday questions with funny, oddly specific results.</description>
-  </item>
-  <item>
-    <title>FluentEDI</title>
-    <link>https://index.percall.dev/l/fluentedi.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/fluentedi.html</guid>
-    <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>42 deterministic tools for AI agents over HTTP and MCP, free and with no API key. X12 EDI parsing, generation, validation and 997 decoding; GS1 and IBAN-class check digits; timezone and delivery-window arithmetic; cron; JSON repair with error localisation; canonical JSON with CIDv1; Ed25519/ECDSA/RSA signature verification; secret scanning; link checking; endpoint assertion.</description>
   </item>
 </channel>
 </rss>
