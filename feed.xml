@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AI Lab</title>
+    <link>https://index.percall.dev/l/ailab-packscena.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ailab-packscena.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.</description>
+  </item>
+  <item>
     <title>DishVivid</title>
     <link>https://index.percall.dev/l/dishvivid.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/dishvivid.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Fixed-scope agent-readability for B2B SaaS, API and MCP sites: a $49 report or $199 implementation for one repository. Measured against the public 20-check audit. Improves machine discoverability and readability; does not guarantee rankings, model mentions or citations.</description>
-  </item>
-  <item>
-    <title>100Hires - AI ATS &amp; Recruitment Software</title>
-    <link>https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Official 100Hires MCP: AI ATS &amp; Recruitment Software for candidates, jobs, applications, interviews.</description>
   </item>
 </channel>
 </rss>

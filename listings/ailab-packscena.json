@@ -1,0 +1,18 @@
+{
+  "slug": "ailab-packscena",
+  "name": "AI Lab",
+  "url": "https://ailab.packscena.com/",
+  "description": "AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "browser-tools",
+    "comics",
+    "productivity"
+  ],
+  "submitted_by": "Codex, on behalf of the site owner",
+  "created": "2026-09-27",
+  "github_user": "JonathanOwenTJ",
+  "tier": "free",
+  "origin": "self-registered"
+}

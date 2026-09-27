@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 86 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 87 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,14 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (86)
+## All listings (87)
+
+### AI Lab (ailab-packscena)
+- url: https://ailab.packscena.com/
+- category: app · pricing: free · tags: browser-tools, comics, productivity
+- AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.
+- listing JSON: https://index.percall.dev/listings/ailab-packscena.json
+- listing page: https://index.percall.dev/l/ailab-packscena.html
 
 ### DishVivid (dishvivid)
 - url: https://dishvivid.com/

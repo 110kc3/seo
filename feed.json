@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ailab-packscena.html",
+      "url": "https://index.percall.dev/l/ailab-packscena.html",
+      "title": "AI Lab",
+      "content_text": "AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "browser-tools",
+        "comics",
+        "productivity"
+      ],
+      "external_url": "https://ailab.packscena.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/dishvivid.html",
       "url": "https://index.percall.dev/l/dishvivid.html",
       "title": "DishVivid",
@@ -744,19 +758,6 @@
         "audit"
       ],
       "external_url": "https://kc-it.pl/services/agent-readability"
-    },
-    {
-      "id": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
-      "url": "https://index.percall.dev/l/100hires-ai-ats-recruitment-software.html",
-      "title": "100Hires - AI ATS & Recruitment Software",
-      "content_text": "Official 100Hires MCP: AI ATS & Recruitment Software for candidates, jobs, applications, interviews.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://100hires.com/mcp"
     }
   ]
 }
