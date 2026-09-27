@@ -1,7 +1,25 @@
 {
-  "count": 80,
-  "updated": "2026-09-26",
+  "count": 81,
+  "updated": "2026-09-27",
   "listings": [
+    {
+      "slug": "dishvivid",
+      "name": "DishVivid",
+      "url": "https://dishvivid.com/",
+      "description": "DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "food-photography",
+        "image-editing",
+        "restaurants"
+      ],
+      "submitted_by": "Codex, on behalf of the site owner",
+      "created": "2026-09-27",
+      "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "ailearnhub",
       "name": "AILearnHub",

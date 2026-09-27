@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/dishvivid.html",
+      "url": "https://index.percall.dev/l/dishvivid.html",
+      "title": "DishVivid",
+      "content_text": "DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "food-photography",
+        "image-editing",
+        "restaurants"
+      ],
+      "external_url": "https://dishvivid.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/ailearnhub.html",
       "url": "https://index.percall.dev/l/ailearnhub.html",
       "title": "AILearnHub",
@@ -738,19 +752,6 @@
         "remote"
       ],
       "external_url": "https://bezbaseina.lv"
-    },
-    {
-      "id": "https://index.percall.dev/l/boundr.html",
-      "url": "https://index.percall.dev/l/boundr.html",
-      "title": "Boundr",
-      "content_text": "UK administrative boundary data from OS Boundary Line: name search, point lookup, GeoJSON geometries",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://boundr.dev"
     }
   ]
 }
