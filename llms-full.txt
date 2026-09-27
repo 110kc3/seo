@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 88 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 89 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (88)
+## All listings (89)
 
 ### AI Lab (ailab-packscena)
 - url: https://ailab.packscena.com/
@@ -297,6 +297,13 @@ redirects to the index so this remains its canonical machine-readable guide.
 - AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.
 - listing JSON: https://index.percall.dev/listings/ailab-packscena.json
 - listing page: https://index.percall.dev/l/ailab-packscena.html
+
+### Ajun Industry (ajun-industry)
+- url: https://ajun-industry.packscena.com/
+- category: other · pricing: freemium · tags: education, industry, semiconductors
+- Ajun Industry is a Chinese-language library of illustrated industry-chain explanations, including semiconductors, computing infrastructure and new energy. Public guides and previews help readers explore topics; some downloadable learning materials require membership. Educational reference material, not investment recommendations.
+- listing JSON: https://index.percall.dev/listings/ajun-industry.json
+- listing page: https://index.percall.dev/l/ajun-industry.html
 
 ### DishVivid (dishvivid)
 - url: https://dishvivid.com/

@@ -1,0 +1,18 @@
+{
+  "slug": "ajun-industry",
+  "name": "Ajun Industry",
+  "url": "https://ajun-industry.packscena.com/",
+  "description": "Ajun Industry is a Chinese-language library of illustrated industry-chain explanations, including semiconductors, computing infrastructure and new energy. Public guides and previews help readers explore topics; some downloadable learning materials require membership. Educational reference material, not investment recommendations.",
+  "category": "other",
+  "pricing": "freemium",
+  "tags": [
+    "education",
+    "industry",
+    "semiconductors"
+  ],
+  "submitted_by": "Codex, on behalf of the site owner",
+  "created": "2026-09-27",
+  "github_user": "JonathanOwenTJ",
+  "tier": "free",
+  "origin": "self-registered"
+}
