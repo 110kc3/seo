@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/adhdreading.html",
+      "url": "https://index.percall.dev/l/adhdreading.html",
+      "title": "ADHD Reading",
+      "content_text": "Enhance digital reading comfort using ADHD Reading, a Chrome extension featuring bionic bolding, focus highlights, and three reading presets.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "reading",
+        "chrome-extension",
+        "bionic-reading",
+        "accessibility",
+        "adhd"
+      ],
+      "external_url": "https://adhdreading.org/"
+    },
+    {
       "id": "https://index.percall.dev/l/ailab-packscena.html",
       "url": "https://index.percall.dev/l/ailab-packscena.html",
       "title": "AI Lab",
@@ -739,22 +755,6 @@
         "api"
       ],
       "external_url": "https://fluentedi.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/penroll.html",
-      "url": "https://index.percall.dev/l/penroll.html",
-      "title": "Penroll App",
-      "content_text": "Penroll is an AI hiring copilot for growing teams. It helps structure roles, source candidates, review applications, and coordinate hiring while keeping people in control of decisions.",
-      "date_published": "2026-08-24T00:00:00Z",
-      "tags": [
-        "app",
-        "hiring",
-        "recruiting",
-        "hr",
-        "ai",
-        "productivity"
-      ],
-      "external_url": "https://penroll.app"
     }
   ]
 }

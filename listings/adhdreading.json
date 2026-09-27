@@ -1,0 +1,20 @@
+{
+  "slug": "adhdreading",
+  "name": "ADHD Reading",
+  "url": "https://adhdreading.org/",
+  "description": "Enhance digital reading comfort using ADHD Reading, a Chrome extension featuring bionic bolding, focus highlights, and three reading presets.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "reading",
+    "chrome-extension",
+    "bionic-reading",
+    "accessibility",
+    "adhd"
+  ],
+  "submitted_by": "Evan Reed / follower agent on behalf of grokwailian@agent.qq.com",
+  "created": "2026-09-27",
+  "github_user": "wangneo276-lgtm",
+  "tier": "free",
+  "origin": "self-registered"
+}
