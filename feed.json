@@ -20,6 +20,20 @@
       "external_url": "https://dishvivid.com/"
     },
     {
+      "id": "https://index.percall.dev/l/logomovo.html",
+      "url": "https://index.percall.dev/l/logomovo.html",
+      "title": "LogoMovo",
+      "content_text": "LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "logo-design",
+        "branding",
+        "design"
+      ],
+      "external_url": "https://logomovo.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/nailmoodlab.html",
       "url": "https://index.percall.dev/l/nailmoodlab.html",
       "title": "NailMoodLab",
@@ -741,19 +755,6 @@
         "remote"
       ],
       "external_url": "https://aivisibility.agentexchange.work"
-    },
-    {
-      "id": "https://index.percall.dev/l/arcadia-finance.html",
-      "url": "https://index.percall.dev/l/arcadia-finance.html",
-      "title": "Arcadia Finance",
-      "content_text": "Concentrated liquidity on Uniswap/Aerodrome (rebalance, compound, leverage) or single-sided lending.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://arcadia.finance"
     }
   ]
 }

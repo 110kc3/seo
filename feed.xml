@@ -15,6 +15,14 @@
     <description>DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.</description>
   </item>
   <item>
+    <title>LogoMovo</title>
+    <link>https://index.percall.dev/l/logomovo.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/logomovo.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.</description>
+  </item>
+  <item>
     <title>NailMoodLab</title>
     <link>https://index.percall.dev/l/nailmoodlab.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/nailmoodlab.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Free, no signup. Check if ChatGPT, Perplexity &amp; Google AI recommend a brand in 15 markets (GEO/AEO).</description>
-  </item>
-  <item>
-    <title>Arcadia Finance</title>
-    <link>https://index.percall.dev/l/arcadia-finance.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/arcadia-finance.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Concentrated liquidity on Uniswap/Aerodrome (rebalance, compound, leverage) or single-sided lending.</description>
   </item>
 </channel>
 </rss>
