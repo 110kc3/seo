@@ -34,6 +34,20 @@
       "external_url": "https://logomovo.com/"
     },
     {
+      "id": "https://index.percall.dev/l/lookscene.html",
+      "url": "https://index.percall.dev/l/lookscene.html",
+      "title": "LookScene",
+      "content_text": "LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "portraits",
+        "hairstyles",
+        "image-editing"
+      ],
+      "external_url": "https://lookscene.packscena.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/nailmoodlab.html",
       "url": "https://index.percall.dev/l/nailmoodlab.html",
       "title": "NailMoodLab",
@@ -743,19 +757,6 @@
         "remote"
       ],
       "external_url": "https://100hires.com/mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/3tg-test-generation.html",
-      "url": "https://index.percall.dev/l/3tg-test-generation.html",
-      "title": "3TG Test Generation",
-      "content_text": "3rd Generation Testing (3TG) — generate deterministic test suites from Markdown spec tables via MCP.",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://3tg.dev"
     }
   ]
 }

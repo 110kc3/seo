@@ -1,5 +1,5 @@
 {
-  "count": 85,
+  "count": 86,
   "updated": "2026-09-27",
   "listings": [
     {
@@ -31,6 +31,24 @@
         "logo-design",
         "branding",
         "design"
+      ],
+      "submitted_by": "Codex, on behalf of the site owner",
+      "created": "2026-09-27",
+      "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "lookscene",
+      "name": "LookScene",
+      "url": "https://lookscene.packscena.com/",
+      "description": "LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "portraits",
+        "hairstyles",
+        "image-editing"
       ],
       "submitted_by": "Codex, on behalf of the site owner",
       "created": "2026-09-27",

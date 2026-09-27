@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 85 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 86 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -289,7 +289,7 @@ https://percall.dev/ introduces the free index, catalogs and website checks, wit
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
 
-## All listings (85)
+## All listings (86)
 
 ### DishVivid (dishvivid)
 - url: https://dishvivid.com/
@@ -304,6 +304,13 @@ redirects to the index so this remains its canonical machine-readable guide.
 - LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.
 - listing JSON: https://index.percall.dev/listings/logomovo.json
 - listing page: https://index.percall.dev/l/logomovo.html
+
+### LookScene (lookscene)
+- url: https://lookscene.packscena.com/
+- category: app · pricing: free · tags: portraits, hairstyles, image-editing
+- LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.
+- listing JSON: https://index.percall.dev/listings/lookscene.json
+- listing page: https://index.percall.dev/l/lookscene.html
 
 ### NailMoodLab (nailmoodlab)
 - url: https://nailmoodlab.com/
