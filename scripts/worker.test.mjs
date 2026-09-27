@@ -1057,7 +1057,7 @@ test('the free view withholds exactly what the paid audit sells', () => {
 
   // Withheld: everything actionable.
   const serialised = JSON.stringify(view);
-  for (const leaked of ['detail', 'fix', 'snippet', 'next_steps', 'HTTP 404']) {
+  for (const leaked of ['"detail":', '"fix":', '"snippet":', '"next_steps":', 'HTTP 404']) {
     assert.ok(!serialised.includes(leaked), `free tier leaked "${leaked}"`);
   }
 });
@@ -1361,9 +1361,9 @@ test('a fully passing audit scores exactly 100, whatever the weights are', () =>
 
   const all = (pass) => weights.map((weight, i) => ({ id: `c${i}`, weight, pass }));
   assert.equal(audit.scoreChecks(all(true)).score, 100);
-  assert.equal(audit.scoreChecks(all(true)).grade, 'agent-ready');
+  assert.equal(audit.scoreChecks(all(true)).grade, 'high checklist coverage');
   assert.equal(audit.scoreChecks(all(false)).score, 0);
-  assert.equal(audit.scoreChecks(all(false)).grade, 'invisible to agents');
+  assert.equal(audit.scoreChecks(all(false)).grade, 'very low checklist coverage');
 
   // Unequal weights still land inside the band they describe.
   const half = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: i % 2 === 0 }));
@@ -2181,7 +2181,7 @@ test('an endpoint confirmed unreachable is flagged, not removed', async () => {
   const env = withHealth({
     probed_at: '2026-08-01',
     unreachable: [
-      { url: 'https://b.example/weather', reason: 'timeout', misses: 2 },
+      { url: 'https://b.example/weather', reason: 'timeout', misses: 2, last_checked: '2026-07-25' },
       // One miss is a bad moment, not a death — it must not reach the caller.
       { url: 'https://a.example/weather', reason: 'timeout', misses: 1 },
     ],
@@ -2192,6 +2192,8 @@ test('an endpoint confirmed unreachable is flagged, not removed', async () => {
   // the caller loses the cheapest endpoint on one week's evidence.
   assert.equal(body.results[0].url, 'https://b.example/weather');
   assert.equal(body.results[0].unreachable, true);
+  assert.deepEqual(body.results[0].health, { state: 'failed', reason: 'timeout', misses: 2, last_checked: '2026-07-25' });
+  assert.equal(body.results.find((r) => r.url === 'https://a.example/weather').health.misses, 1);
   assert.equal(body.results.length, 3, 'a flagged endpoint was dropped from results');
   assert.equal(body.results.find((r) => r.url === 'https://a.example/weather').unreachable, undefined);
   assert.equal(body.catalog.liveness_sampled, '2026-08-01');
@@ -2206,6 +2208,7 @@ test('search works unchanged when liveness has never run', async () => {
   const body = await (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?q=weather`), withHealth(null), BASE)).json();
 
   assert.equal(body.ok, true);
+  assert.ok(body.results.every((r) => r.health.state === 'unknown'), 'no failure record must not imply a successful probe');
   assert.equal(body.results.length, 3);
   assert.ok(body.results.every((r) => r.unreachable === undefined));
   assert.equal(body.catalog.liveness, undefined);

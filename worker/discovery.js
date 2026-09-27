@@ -214,17 +214,19 @@ function loadCatalog(env, base, key) {
       // nothing about these endpoints, which is different from knowing they
       // are fine, but it is never a reason to fail the query.
       let unreachable = new Set();
+      let observations = new Map();
       let probed = null;
       try {
         const h = await get(`${base}/api/${path}/health.json`);
         if (h.ok) {
           const health = await h.json();
           probed = health.probed_at ?? null;
+          observations = new Map((health.unreachable ?? []).map((e) => [e.url, e]));
           unreachable = new Set((health.unreachable ?? []).filter((e) => (e.misses ?? 0) >= 2).map((e) => e.url));
         }
       } catch { /* liveness is an enrichment, never a dependency */ }
 
-      return { ...body, at: Object.fromEntries(body.fields.map((f, i) => [f, i])), unreachable, probed };
+      return { ...body, at: Object.fromEntries(body.fields.map((f, i) => [f, i])), unreachable, observations, probed };
     })().catch((e) => {
       // A failed load must not poison every later request: drop the cached
       // promise so the next caller retries rather than replaying the error.
@@ -300,6 +302,15 @@ export async function handleCatalogSearch(key, url, env, base) {
   const view = ([, row]) => {
     const out = Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
     if (catalog.unreachable?.has(out.url)) out.unreachable = true;
+    const observation = catalog.observations?.get(out.url);
+    // The file retains failures, not per-endpoint successes. Its global sample
+    // date must never be presented as the last check of an individual result.
+    out.health = observation ? {
+      state: 'failed',
+      last_checked: observation.last_checked ?? null,
+      reason: observation.reason ?? null,
+      misses: observation.misses ?? 1,
+    } : { state: 'unknown' };
     return out;
   };
   return json({

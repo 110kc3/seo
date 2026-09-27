@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "Grade any public URL for agent-readability across 20 checks and get paste-ready fixes. Use when asked whether a site is readable by AI agents, why an agent cannot use a site, or how to make a site discoverable to LLMs and agents.",
       "url": "/.well-known/agent-skills/grade-a-site/SKILL.md",
-      "digest": "sha256:1150607f104865f046ef09c8e12a473ece11b326579636917bd944dbd4e35ab7"
+      "digest": "sha256:547a7e6db20e1d748a3b4ae928313ca777a7a962014c63060c2469e94eab81e4"
     },
     {
       "name": "list-a-product",

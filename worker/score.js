@@ -16,7 +16,7 @@
 //   * results are cached per URL and callers are rate limited per IP, so it
 //     cannot be used as a free fetch proxy or to burn our subrequest budget.
 
-import { auditUrl, parseAuditRequest, CHECK_LABELS, resolveCheckSet } from './audit.js';
+import { auditUrl, parseAuditRequest, CHECK_LABELS, resolveCheckSet, scoreDescription, SCORE_INTERPRETATION, CHECK_CONTEXT } from './audit.js';
 import { botAuthHeaders, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { serveStatic } from './assets.js';
 
@@ -130,7 +130,8 @@ export function canonicalTarget(target, cfg) {
   return target;
 }
 
-const CACHE_PREFIX = 'score:v1:';
+// v2 invalidates cached free projections with the old visibility claims.
+const CACHE_PREFIX = 'score:v2:';
 const CACHE_TTL_SECONDS = 3600;
 const RATE_PREFIX = 'score:rl:';
 // 20 was set when the registry held eight listings. It now holds forty, and the
@@ -167,7 +168,8 @@ export function freeView(result, upsell) {
     score: result.score,
     max_score: result.max_score,
     check_set: result.check_set,
-    grade: result.grade,
+    grade: scoreDescription(result.score),
+    interpretation: SCORE_INTERPRETATION,
     passed: result.passed,
     total_checks: result.total_checks,
     checks: (result.checks ?? []).map((c) => ({
@@ -175,6 +177,8 @@ export function freeView(result, upsell) {
       label: c.label ?? CHECK_LABELS[c.id] ?? c.id,
       pass: c.pass,
       weight: c.weight,
+      scope: CHECK_CONTEXT[c.id] ? 'optional_service' : 'site_information',
+      applicability: CHECK_CONTEXT[c.id] ?? 'Site information and access: assess this finding against your intended audience and publishing policy.',
     })),
     // Free too. These are unscored observations, so withholding them would be
     // withholding the part that is only useful as information — and a free

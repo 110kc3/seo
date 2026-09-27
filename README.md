@@ -6,6 +6,19 @@ An open registry and discovery API for AI products, agent tools, and MCP service
 
 AI Product Index publishes each accepted listing as structured HTML and JSON, then makes the registry available through search, NLWeb, MCP, feeds, sitemaps, and `llms.txt`. Products can register through a validated GitHub issue workflow; accepted changes are rebuilt, committed, and deployed automatically.
 
+## Interpreting discovery and scores
+
+The [MCP browser](https://index.percall.dev/mcp-servers.html) exposes authentication
+and transport filters; the [x402 browser](https://index.percall.dev/x402.html)
+filters published USD-equivalent prices. Result cards show dated failed probes,
+unknown health and connection guidance. No credentials does not mean free, and
+an HTTP response does not prove successful authentication or tool execution.
+
+The score measures technical checklist coverage, not AI visibility or referrals.
+Results separate site information from optional service interfaces and link to
+the free remedies. Numeric scores, check weights and A–F thresholds are unchanged;
+only the coverage descriptions and applicability guidance have changed.
+
 ## What it provides
 
 - A public, machine-readable registry with one canonical page and JSON document per product.

@@ -17,7 +17,7 @@ Three ways to query this index, in ascending order of how little you have to kno
 16,526 remotely-callable MCP servers, normalized from the official MCP registry.
 Every entry has a URL, so it can be added without installing anything. Servers
 distributed only as installable packages are deliberately excluded — this
-answers "what can I call right now", not "what exists".
+finds declared remote endpoints; setup, credentials and task-level behavior still need verification.
 
 - Search: https://index.percall.dev/api/mcp/search?q=github&auth=none — filters: `transport`, `host`, `auth`, `limit`
 - Full catalog (JSON): https://index.percall.dev/api/mcp/catalog.json
@@ -58,8 +58,8 @@ Generated from the data files above, so they never disagree with the JSON.
   ever paid for anything here. Dated, sourced, and regenerated with the data.
 - https://index.percall.dev/x402.html — the machine-payable web: every x402 endpoint by price,
   chain and operator, with liveness. Searchable against /api/x402/search.
-- https://index.percall.dev/mcp-servers.html — MCP servers with a URL you can actually call,
-  by auth requirement and transport, with liveness.
+- https://index.percall.dev/mcp-servers.html — declared remote MCP endpoints,
+  by auth requirement and transport, with sampled health evidence.
 - https://index.percall.dev/leaderboard.html — every listed product ranked by agent-readability,
   re-scored weekly by the same free endpoint anyone can call.
 - https://index.percall.dev/checks/ — the complete 20-check checklist: every weight, why it is
@@ -175,6 +175,11 @@ Install: git clone https://github.com/110kc3/seo && claude mcp add ai-product-in
 
 ## Free endpoint: agent-readability score
 
+The score measures technical checklist coverage, not AI visibility, referrals
+or task success. The free result includes `interpretation` and per-check `scope`
+and `applicability`. Optional service interfaces apply only to capabilities a
+site actually offers; scoring weights and A–F thresholds are unchanged.
+
 GET https://index.percall.dev/api/score?url=https://your-site.example — no payment, no signup.
 Returns an A-F letter grade, the numeric score out of 100, and every one of the 20
 checks with a label and pass/fail. This is the whole verdict; what it does not
@@ -288,3 +293,12 @@ someone to.
 https://percall.dev/ introduces the free index, catalogs and website checks, with
 the optional paid audit API documented here. Every other path on that host
 redirects to the index so this remains its canonical machine-readable guide.
+
+## Interpreting catalog health
+
+Catalog search results include `health.state`: `failed` carries a recorded probe
+failure, with `last_checked`, `reason` and `misses` when available; `unknown`
+means there is no per-endpoint success evidence. `unreachable: true` still means
+at least two consecutive failed observations, and never hides the result.
+The catalog-wide sample date is not an individual endpoint's last check.
+A response does not verify authentication, payment or tool behavior.

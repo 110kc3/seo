@@ -16,6 +16,8 @@
 // rebuild with unchanged inputs produces an unchanged byte stream.
 
 import { esc, jsonLd } from './validate.mjs';
+import { catalogBrowser, catalogResults } from './catalog-ui.mjs';
+import { CHECK_CONTEXT, SCORE_INTERPRETATION } from '../worker/audit.js';
 
 // --- shared shell -----------------------------------------------------------
 
@@ -246,14 +248,15 @@ the entire point of an x402 catalog as dead.</p>
 covers every entry. Raw: <a href="${base}/api/x402/health.json">x402 health</a> ·
 <a href="${base}/api/mcp/health.json">MCP health</a>.</p>
 
-<h2>5. Sites are not ready for any of it</h2>
+<h2>5. Coverage of the technical checklist</h2>
+<p>${esc(SCORE_INTERPRETATION)}</p>
 ${graded.length ? `<p>${num(graded.length)} sites in this registry are re-graded weekly against the
 20-check agent-readability set. The distribution:</p>
 <table>
 <thead><tr><th>grade</th><th class="num">sites</th><th class="wrap">reading</th></tr></thead>
 <tbody>
 ${['A', 'B', 'C', 'D', 'E', 'F'].filter((g) => byLetter[g]).map((g) => `<tr><td class="grade">${g}</td><td class="num">${num(byLetter[g])}</td><td class="wrap">${esc({
-    A: 'agent-ready', B: 'minor gaps', C: 'partially legible', D: 'weak', E: 'barely legible', F: 'effectively invisible to agents',
+    A: '90–100% checklist coverage', B: '80–89% checklist coverage', C: '70–79% checklist coverage', D: '60–69% checklist coverage', E: '45–59% checklist coverage', F: 'below 45% checklist coverage',
   }[g])}</td></tr>`).join('\n')}
 </tbody></table>
 <p>Full ranking, with what each site is missing: <a href="${base}/leaderboard.html">the leaderboard</a>.
@@ -318,6 +321,21 @@ export function catalogPage({ base, kind, stats, health, title, lede, columns, s
   </tr>`).join('\n');
 
   const body = `
+<style>
+  * { box-sizing:border-box; }
+  #q-form { display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:end; }
+  #q-form p { margin:.4rem 0; max-width:100%; }
+  #q-form input, #q-form select, #q-form button { font:inherit; padding:.5rem; max-width:100%; border:1px solid var(--border); border-radius:6px; background:var(--card); color:var(--fg); }
+  #q-form button { cursor:pointer; }
+  #q-form button:disabled { opacity:.6; }
+  .catalog-results { list-style:none; padding:0; }
+  .catalog-results > li { padding:1rem; margin:1rem 0; border:1px solid var(--border); border-radius:8px; overflow-wrap:anywhere; }
+  .catalog-results h3 { margin:0 0 .5rem; }
+  .result-fields { display:flex; flex-wrap:wrap; gap:1rem 2rem; }
+  .result-fields dt { color:var(--muted); }
+  .result-fields dd { margin:0; }
+  .health { border-left:3px solid var(--accent); padding-left:.7rem; }
+</style>
 <h1>${esc(title)}</h1>
 <p class="lede">${lede}</p>
 <p class="meta">Mirrored from <a href="${esc(stats.source_url)}">${esc(stats.source)}</a> on ${esc(stats.fetched)}${health ? `, liveness probed ${esc(health.probed_at)}` : ''}.
@@ -326,49 +344,36 @@ Raw: <a href="${base}/api/${kind}/stats.json">stats.json</a> ·
 
 ${extraSections}
 
-<h2>Search it</h2>
-<p>Queries run against <a href="${base}${searchPath}"><code>${esc(searchPath)}</code></a>, the same
-endpoint an agent would call. Nothing is stored.</p>
-<form id="q-form" onsubmit="return false">
-  <p><input id="q" type="search" placeholder="e.g. weather, github, translate" style="padding:.5rem .7rem;font:inherit;width:min(22rem,100%);border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg)">
-  <button style="padding:.5rem 1rem;font:inherit;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--fg);cursor:pointer">Search</button></p>
+<h2>Find an endpoint</h2>
+<p>Filter by the requirements of your client. Catalog details are publisher declarations, not a compatibility guarantee.</p>
+<form id="q-form">
+  <p><label for="q">What should it do?</label><br><input id="q" name="q" type="search" placeholder="e.g. weather, github, translate"></p>
+  ${kind === 'mcp' ? `<p><label for="auth">Credentials</label><br><select id="auth" name="auth">
+    <option value="">Any authentication</option><option value="none">No credentials declared</option><option value="required">Credentials required</option>
+  </select></p>
+  <p><label for="transport">Client transport</label><br><select id="transport" name="transport"><option value="">Any transport</option>
+    ${Object.keys(stats.by_transport ?? {}).sort().map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}
+  </select></p>` : `<p><label for="max-price">Maximum quoted price per call (USD equivalent)</label><br>
+    <input id="max-price" name="max_price" type="number" min="0" step="any" placeholder="e.g. 0.01"></p>`}
+  <p><button type="submit">Search</button></p>
 </form>
-<div id="q-out"><p class="meta">Results appear here. With JavaScript off, call
-<a href="${base}${searchPath}?q=weather">${esc(searchPath)}?q=…</a> directly — it returns JSON.</p></div>
+<p class="meta">${kind === 'mcp' ? 'No credentials does not mean free. Check the provider’s price and your client’s supported transport.' : 'Price filters exclude unknown prices. A catalog quote is not a live payment offer; confirm the asset, chain and amount before paying.'}</p>
+<div id="q-out" aria-live="polite" aria-busy="false"><p class="meta">Results appear here. With JavaScript off, use the
+<a href="${base}${searchPath}?q=weather">JSON search</a>.</p></div>
 <script>
-(function () {
-  var f = document.getElementById('q-form'), q = document.getElementById('q'), out = document.getElementById('q-out');
-  var cols = ${JSON.stringify(columns)};
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
-  function run() {
-    var term = q.value.trim();
-    if (!term) return;
-    out.innerHTML = '<p class="meta">Searching…</p>';
-    fetch(${JSON.stringify(searchPath)} + '?q=' + encodeURIComponent(term) + '&limit=25', { headers: { accept: 'application/json' } })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        var rows = j.results || j.endpoints || j.servers || [];
-        if (!rows.length) { out.innerHTML = '<p class="meta">Nothing matched “' + esc(term) + '”.</p>'; return; }
-        var h = '<table><thead><tr>' + cols.map(function (c) {
-          return '<th class="' + (c.num ? 'num' : (c.wrap ? 'wrap' : '')) + '">' + esc(c.label) + '</th>'; }).join('') + '</tr></thead><tbody>';
-        rows.forEach(function (r) {
-          h += '<tr>' + cols.map(function (c) {
-            var v = r[c.key];
-            if (c.key === 'url') return '<td class="wrap"><a href="' + esc(v) + '" rel="nofollow noopener">' + esc(v) + '</a></td>';
-            if (c.money && v != null) return '<td class="num">$' + Number(v).toFixed(4) + '</td>';
-            if (v == null || v === '') return '<td class="' + (c.num ? 'num' : '') + '">—</td>';
-            return '<td class="' + (c.num ? 'num' : (c.wrap ? 'wrap' : '')) + '">' + esc(v) + '</td>';
-          }).join('') + (r.unreachable ? '' : '') + '</tr>';
-        });
-        out.innerHTML = h + '</tbody></table><p class="meta">' + esc(rows.length) + ' shown. Entries confirmed unreachable by the weekly probe are flagged in the JSON and never hidden.</p>';
-      })
-      .catch(function () { out.innerHTML = '<p class="meta">Search failed. The JSON endpoint is at <code>' + ${JSON.stringify(searchPath)} + '</code>.</p>'; });
-  }
-  f.addEventListener('submit', run);
-  document.querySelector('#q-form button').addEventListener('click', run);
-})();
+(${catalogBrowser.toString()})(${JSON.stringify({ searchPath, columns, kind })}, ${catalogResults.toString()});
 </script>
+
+<h2 id="connection-guide">Before you connect</h2>
+<p>Health checks cover a rotating sample. Failed observations carry their own date;
+no recorded failure does not mean a successful check. Even an HTTP response does not prove
+that authentication, payment or a tool operation will succeed.</p>
+${kind === 'mcp' ? `<ol><li>Choose a client that supports the result’s transport and accepts a remote MCP URL.</li>
+<li>Use the endpoint URL in that client’s remote-server configuration. Follow the provider’s own instructions for credentials and pricing.</li>
+<li>Inspect the offered tools and permissions before running anything. This directory has not verified their task-level behavior.</li></ol>`
+: `<ol><li>Check the result’s HTTP method and chain against your x402 client.</li>
+<li>Obtain the provider’s request schema and current payment terms. The endpoint URL alone is not a complete request example.</li>
+<li>Review the asset, recipient and amount before authorizing payment. This directory has not verified the paid result.</li></ol>`}
 
 <h2>The ${num(topHosts.length)} largest operators</h2>
 <p>Concentration is the thing the headline count hides: ${total ? num(total) : ''} endpoints across
@@ -418,7 +423,7 @@ ${statCards([
     { n: num(stats.endpoints), k: 'endpoints' },
     { n: num(stats.hosts), k: 'distinct hosts' },
     { n: usd(p.p50 ?? 0), k: 'median price/call' },
-    { n: health ? pct(health.answered_share, 1) : '—', k: 'answering, last probe' },
+    { n: health ? pct(health.answered_share, 1) : '—', k: 'responded in latest sample' },
   ])}
 <h2>What a call costs</h2>
 <table>
@@ -440,7 +445,7 @@ sorted as free.</p>`;
     stats,
     health,
     title: 'The machine-payable web',
-    lede: `Every endpoint in the x402 Bazaar that an agent can pay for and call: ${num(stats.endpoints)} of them across ${num(stats.hosts)} hosts, with prices, and — the part nobody else publishes — whether they still answer.`,
+    lede: `Published x402 endpoints mirrored from the Bazaar: ${num(stats.endpoints)} of them across ${num(stats.hosts)} hosts, with declared prices and failed observations from rotating health samples.`,
     searchPath: '/api/x402/search',
     columns: [
       { key: 'url', label: 'endpoint', wrap: true },
@@ -458,16 +463,16 @@ export function mcpPage({ base, stats, health }) {
   const transport = stats.by_transport ?? {};
   const extra = `
 ${statCards([
-    { n: num(stats.remote_endpoints), k: 'callable servers' },
+    { n: num(stats.remote_endpoints), k: 'declared remote endpoints' },
     { n: num(stats.hosts), k: 'distinct hosts' },
-    { n: num(auth.none ?? 0), k: 'need no credentials' },
-    { n: health ? pct(health.answered_share, 1) : '—', k: 'answering, last probe' },
+    { n: num(auth.none ?? 0), k: 'declare no credentials' },
+    { n: health ? pct(health.answered_share, 1) : '—', k: 'responded in latest sample' },
   ])}
 <h2>What is in scope</h2>
 <p>The rule is <strong>${esc(stats.scope?.rule ?? 'active + latest + remotely callable')}</strong>, and the
 exclusions are the opinion. A server distributed only as an installable package is
-a thing you set up; one with a URL is a thing an agent can use right now, and this
-catalog answers the second question.</p>
+a thing you install; this catalog covers declared remote URLs. A URL may still
+require provider setup, credentials or an account before you can use it.</p>
 <table>
 <thead><tr><th class="wrap">from ${num(stats.scope?.registry_records_seen ?? 0)} registry records</th><th class="num">excluded</th></tr></thead>
 <tbody>
@@ -490,8 +495,8 @@ ${Object.entries(auth).sort((a, b) => b[1] - a[1]).map(([k, v], i) => {
     kind: 'mcp',
     stats,
     health,
-    title: 'MCP servers you can actually call',
-    lede: `${num(stats.remote_endpoints)} remotely-callable MCP servers across ${num(stats.hosts)} hosts — the ones with a URL, not the ones you would have to install — checked weekly for whether they answer.`,
+    title: 'Find a remote MCP endpoint',
+    lede: `${num(stats.remote_endpoints)} declared remote MCP endpoints across ${num(stats.hosts)} hosts, with authentication and transport details. A rotating sample is probed weekly; individual availability and tool behavior remain unverified.`,
     searchPath: '/api/mcp/search',
     columns: [
       { key: 'url', label: 'endpoint', wrap: true },
@@ -527,6 +532,7 @@ export function leaderboardPage({ base, scores, listings }) {
 
   const body = `
 <h1>Agent-readability leaderboard</h1>
+<p>${esc(SCORE_INTERPRETATION)}</p>
 <p class="lede">Every product in this registry, graded by the same public endpoint
 anyone can call on any URL. Re-scored weekly, unedited.</p>
 ${statCards([
@@ -652,11 +658,14 @@ export function checkPages({ base, checkMeta, signalMeta, v2Weights, labels, sni
   <div class="card"><div class="n">${item.set === 'v1' ? '2025' : '2026'}</div><div class="k">checklist generation</div></div>
 </div>
 
-<h2>How to pass it</h2>
+<h2>Does this apply to your site?</h2>
+<p>${esc(CHECK_CONTEXT[item.id] ?? 'This check concerns site information and access. Consider your intended audience and publishing policy before making a change.')}</p>
+<p class="meta">${esc(SCORE_INTERPRETATION)}</p>
+<h2>How to address it when relevant</h2>
 <p>${esc(item.fix)}</p>
-${snippet ? `<h2>Paste-ready</h2>
+${snippet ? `<h2>Example to adapt</h2>
 <p class="meta">Replace <code>{{ORIGIN}}</code> with your own origin — or call the paid endpoint, which
-substitutes it for you and tells you which checks you actually failed.</p>
+substitutes it for you and tells you which checks failed. Review all placeholder names, paths, prices and capabilities before publishing; origin substitution does not verify them.</p>
 <pre><code>${esc(snippet)}</code></pre>` : ''}
 
 <h2>Check your own site</h2>
@@ -698,6 +707,9 @@ snippet with your origin already in it.</p>
 
   const indexBody = `
 <h1>The agent-readability checklist</h1>
+<p>${esc(SCORE_INTERPRETATION)}</p>
+<h2>Choose fixes that fit your site</h2>
+<p>Start with accurate site information and intended access. A2A agent cards, MCP server cards, API catalogs and Agent Skills describe optional services, not requirements for every website. Publish them only when those capabilities exist. Signing is also optional for reading public content. The fixed scoring weights remain unchanged.</p>
 <p class="lede">Twenty checks, ${total} points, and the reasoning behind each weight.
 This is the whole checklist the audit scores against — published in full, because
 what is worth paying for is the diagnosis of your site, not secrecy about what
@@ -707,7 +719,7 @@ product cannot disagree. Run it against your own site free:
 <code>${base}/api/score?url=…</code></p>
 
 <h2>The 2025 checks (${items.filter((i) => i.set === 'v1').length}, ${items.filter((i) => i.set === 'v1').reduce((a, i) => a + i.weight, 0)} points)</h2>
-<p>Established signals. Every grade this site has ever published was produced by these alone.</p>
+<p>These checks form the v1 set. The current v2 set also includes the checks below.</p>
 <table>
 <thead><tr><th class="wrap">check</th><th class="num">weight</th><th></th><th class="wrap">why it matters</th></tr></thead>
 <tbody>

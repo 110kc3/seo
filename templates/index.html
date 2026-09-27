@@ -78,8 +78,8 @@
 <p class="badges">{{COUNT}} products indexed · registration: autonomous · listings: free</p>
 
 <section class="try" id="try">
-<h2 style="margin-top:.2rem">Is your site readable to AI agents?</h2>
-<p>Type a domain. You get an <strong>Agent Readability Score</strong> from A to F across {{CHECKS}} weighted checks — free, no signup, one request.</p>
+<h2 style="margin-top:.2rem">Check your site’s machine-readable information</h2>
+<p>Type a domain. You get an <strong>Agent Readability Score</strong> from A to F across {{CHECKS}} weighted checks — free, no signup, one request. This measures checklist coverage, not AI visibility or whether an agent can complete a task.</p>
 <form id="score-form">
   <input id="score-url" name="url" type="url" inputmode="url" autocomplete="url"
          aria-label="Site to check for agent readability"
@@ -139,7 +139,7 @@ and <a href="https://github.com/{{REPO}}/tree/main/clients">runnable clients</a>
 <ul>
   <li><a href="report.html"><strong>The state of the agent web</strong></a> — what share of traffic here is agents and how fast it is rising, how much of the machine-payable web answers, and how many agents have ever actually paid for anything.</li>
   <li><a href="x402.html">The machine-payable web</a> — every x402 endpoint by price, chain and operator, with weekly liveness. Searchable.</li>
-  <li><a href="mcp-servers.html">MCP servers you can actually call</a> — the ones with a URL rather than an install step, by auth and transport.</li>
+  <li><a href="mcp-servers.html">Find a remote MCP endpoint</a> — the ones with a URL rather than an install step, by auth and transport.</li>
   <li><a href="leaderboard.html">Agent-readability leaderboard</a> — every listed product ranked, re-scored weekly.</li>
   <li><a href="checks/">The checklist</a> — all 20 checks, every weight, and how to pass each one.</li>
   <li><a href="compare.html">How the checkers differ</a> — this audit vs Cloudflare and agentswelcome.dev, honestly.</li>
@@ -202,22 +202,34 @@ availability guarantees.</p>
     verdict.appendChild(right);
     out.appendChild(verdict);
 
-    var list = el('ul', null, 'checks');
+    out.appendChild(el('p', data.interpretation, 'note'));
+    var groups = {
+      site_information: el('ul', null, 'checks'),
+      optional_service: el('ul', null, 'checks')
+    };
     // Failures first, and within each group heaviest first — the order to fix in.
     data.checks.slice().sort(function (a, b) {
       return (a.pass - b.pass) || (b.weight - a.weight);
     }).forEach(function (c) {
       var li = el('li', null, c.pass ? 'ok' : 'no');
       li.appendChild(el('span', c.pass ? '✓' : '✗', 'mark'));
-      li.appendChild(el('span', c.label));
-      list.appendChild(li);
+      var remedy = el('a', c.label);
+      remedy.href = /^[a-z0-9_]+$/.test(c.id) ? 'checks/' + c.id + '.html' : 'checks/';
+      li.appendChild(remedy);
+      if (c.applicability) li.appendChild(el('div', c.applicability, 'note'));
+      groups[c.scope === 'optional_service' ? 'optional_service' : 'site_information'].appendChild(li);
     });
-    out.appendChild(list);
+    [['site_information', 'Site information and access'], ['optional_service', 'Optional service interfaces']].forEach(function (group) {
+      if (!groups[group[0]].childNodes.length) return;
+      out.appendChild(el('h3', group[1]));
+      if (group[0] === 'optional_service') out.appendChild(el('p', 'Only publish capabilities your site actually offers. These checks still count in this fixed score.', 'note'));
+      out.appendChild(groups[group[0]]);
+    });
 
     var failed = data.total_checks - data.passed;
     if (failed > 0 && data.unlock) {
       var box = el('div', null, 'locked');
-      box.appendChild(el('h3', 'Fix ' + failed + (failed === 1 ? ' failing check' : ' failing checks')));
+      box.appendChild(el('h3', 'Review ' + failed + (failed === 1 ? ' failed check' : ' failed checks')));
       box.appendChild(el('p', 'The checklist explains each finding. Developers can also request a full audit with ranked fixes and domain-specific snippets.'));
       var links = el('p', null, 'note');
       var checklist = el('a', 'Read the free checklist and remedies');

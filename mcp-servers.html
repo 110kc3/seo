@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MCP servers you can actually call — AI Product Index</title>
-<meta name="description" content="16,526 remotely-callable MCP servers across 11,899 hosts — the ones with a URL, not the ones you would have to install — checked weekly for whether they answer.">
+<title>Find a remote MCP endpoint — AI Product Index</title>
+<meta name="description" content="16,526 declared remote MCP endpoints across 11,899 hosts, with authentication and transport details. A rotating sample is probed weekly; individual…">
 
 <link rel="canonical" href="https://index.percall.dev/mcp-servers.html">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MCP servers you can actually call — AI Product Index">
-<meta property="og:description" content="16,526 remotely-callable MCP servers across 11,899 hosts — the ones with a URL, not the ones you would have to install — checked weekly for whether they answer.">
+<meta property="og:title" content="Find a remote MCP endpoint — AI Product Index">
+<meta property="og:description" content="16,526 declared remote MCP endpoints across 11,899 hosts, with authentication and transport details. A rotating sample is probed weekly; individual…">
 <meta property="og:url" content="https://index.percall.dev/mcp-servers.html">
 <meta property="og:image" content="https://index.percall.dev/assets/og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  "name": "MCP servers you can actually call",
-  "description": "16,526 remotely-callable MCP servers across 11,899 hosts — the ones with a URL, not the ones you would have to install — checked weekly for whether they answer.",
+  "name": "Find a remote MCP endpoint",
+  "description": "16,526 declared remote MCP endpoints across 11,899 hosts, with authentication and transport details. A rotating sample is probed weekly; individual availability and tool behavior remain unverified.",
   "url": "https://index.percall.dev/mcp-servers.html",
   "creator": {
     "@type": "Organization",
@@ -66,21 +66,36 @@
 </style>
 </head>
 <body>
-<p class="crumb"><a href="./index.html">AI Product Index</a> / MCP servers you can actually call</p>
+<p class="crumb"><a href="./index.html">AI Product Index</a> / Find a remote MCP endpoint</p>
 
-<h1>MCP servers you can actually call</h1>
-<p class="lede">16,526 remotely-callable MCP servers across 11,899 hosts — the ones with a URL, not the ones you would have to install — checked weekly for whether they answer.</p>
+<style>
+  * { box-sizing:border-box; }
+  #q-form { display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:end; }
+  #q-form p { margin:.4rem 0; max-width:100%; }
+  #q-form input, #q-form select, #q-form button { font:inherit; padding:.5rem; max-width:100%; border:1px solid var(--border); border-radius:6px; background:var(--card); color:var(--fg); }
+  #q-form button { cursor:pointer; }
+  #q-form button:disabled { opacity:.6; }
+  .catalog-results { list-style:none; padding:0; }
+  .catalog-results > li { padding:1rem; margin:1rem 0; border:1px solid var(--border); border-radius:8px; overflow-wrap:anywhere; }
+  .catalog-results h3 { margin:0 0 .5rem; }
+  .result-fields { display:flex; flex-wrap:wrap; gap:1rem 2rem; }
+  .result-fields dt { color:var(--muted); }
+  .result-fields dd { margin:0; }
+  .health { border-left:3px solid var(--accent); padding-left:.7rem; }
+</style>
+<h1>Find a remote MCP endpoint</h1>
+<p class="lede">16,526 declared remote MCP endpoints across 11,899 hosts, with authentication and transport details. A rotating sample is probed weekly; individual availability and tool behavior remain unverified.</p>
 <p class="meta">Mirrored from <a href="https://registry.modelcontextprotocol.io/v0/servers">Official MCP Registry</a> on 2026-09-07, liveness probed 2026-09-21.
 Raw: <a href="https://index.percall.dev/api/mcp/stats.json">stats.json</a> ·
 <a href="https://index.percall.dev/api/mcp/catalog.json">catalog.json</a> · <a href="https://index.percall.dev/api/mcp/health.json">health.json</a>.</p>
 
 
-<div class="cards"><div class="card"><div class="n">16,526</div><div class="k">callable servers</div></div><div class="card"><div class="n">11,899</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">13,469</div><div class="k">need no credentials</div></div><div class="card"><div class="n">90.5%</div><div class="k">answering, last probe</div></div></div>
+<div class="cards"><div class="card"><div class="n">16,526</div><div class="k">declared remote endpoints</div></div><div class="card"><div class="n">11,899</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">13,469</div><div class="k">declare no credentials</div></div><div class="card"><div class="n">90.5%</div><div class="k">responded in latest sample</div></div></div>
 <h2>What is in scope</h2>
 <p>The rule is <strong>active + latest + remotely callable</strong>, and the
 exclusions are the opinion. A server distributed only as an installable package is
-a thing you set up; one with a URL is a thing an agent can use right now, and this
-catalog answers the second question.</p>
+a thing you install; this catalog covers declared remote URLs. A URL may still
+require provider setup, credentials or an account before you can use it.</p>
 <table>
 <thead><tr><th class="wrap">from 94,665 registry records</th><th class="num">excluded</th></tr></thead>
 <tbody>
@@ -96,49 +111,114 @@ catalog answers the second question.</p>
 <tr><td>required</td><td class="num">3,057</td><td>sse</td><td class="num">1,066</td></tr>
 </tbody></table>
 
-<h2>Search it</h2>
-<p>Queries run against <a href="https://index.percall.dev/api/mcp/search"><code>/api/mcp/search</code></a>, the same
-endpoint an agent would call. Nothing is stored.</p>
-<form id="q-form" onsubmit="return false">
-  <p><input id="q" type="search" placeholder="e.g. weather, github, translate" style="padding:.5rem .7rem;font:inherit;width:min(22rem,100%);border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg)">
-  <button style="padding:.5rem 1rem;font:inherit;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--fg);cursor:pointer">Search</button></p>
+<h2>Find an endpoint</h2>
+<p>Filter by the requirements of your client. Catalog details are publisher declarations, not a compatibility guarantee.</p>
+<form id="q-form">
+  <p><label for="q">What should it do?</label><br><input id="q" name="q" type="search" placeholder="e.g. weather, github, translate"></p>
+  <p><label for="auth">Credentials</label><br><select id="auth" name="auth">
+    <option value="">Any authentication</option><option value="none">No credentials declared</option><option value="required">Credentials required</option>
+  </select></p>
+  <p><label for="transport">Client transport</label><br><select id="transport" name="transport"><option value="">Any transport</option>
+    <option value="sse">sse</option><option value="streamable-http">streamable-http</option>
+  </select></p>
+  <p><button type="submit">Search</button></p>
 </form>
-<div id="q-out"><p class="meta">Results appear here. With JavaScript off, call
-<a href="https://index.percall.dev/api/mcp/search?q=weather">/api/mcp/search?q=…</a> directly — it returns JSON.</p></div>
+<p class="meta">No credentials does not mean free. Check the provider’s price and your client’s supported transport.</p>
+<div id="q-out" aria-live="polite" aria-busy="false"><p class="meta">Results appear here. With JavaScript off, use the
+<a href="https://index.percall.dev/api/mcp/search?q=weather">JSON search</a>.</p></div>
 <script>
-(function () {
-  var f = document.getElementById('q-form'), q = document.getElementById('q'), out = document.getElementById('q-out');
-  var cols = [{"key":"url","label":"endpoint","wrap":true},{"key":"title","label":"name","wrap":true},{"key":"auth","label":"auth"},{"key":"transport","label":"transport"},{"key":"description","label":"what it does","wrap":true}];
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
-  function run() {
-    var term = q.value.trim();
-    if (!term) return;
-    out.innerHTML = '<p class="meta">Searching…</p>';
-    fetch("/api/mcp/search" + '?q=' + encodeURIComponent(term) + '&limit=25', { headers: { accept: 'application/json' } })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        var rows = j.results || j.endpoints || j.servers || [];
-        if (!rows.length) { out.innerHTML = '<p class="meta">Nothing matched “' + esc(term) + '”.</p>'; return; }
-        var h = '<table><thead><tr>' + cols.map(function (c) {
-          return '<th class="' + (c.num ? 'num' : (c.wrap ? 'wrap' : '')) + '">' + esc(c.label) + '</th>'; }).join('') + '</tr></thead><tbody>';
-        rows.forEach(function (r) {
-          h += '<tr>' + cols.map(function (c) {
-            var v = r[c.key];
-            if (c.key === 'url') return '<td class="wrap"><a href="' + esc(v) + '" rel="nofollow noopener">' + esc(v) + '</a></td>';
-            if (c.money && v != null) return '<td class="num">$' + Number(v).toFixed(4) + '</td>';
-            if (v == null || v === '') return '<td class="' + (c.num ? 'num' : '') + '">—</td>';
-            return '<td class="' + (c.num ? 'num' : (c.wrap ? 'wrap' : '')) + '">' + esc(v) + '</td>';
-          }).join('') + (r.unreachable ? '' : '') + '</tr>';
-        });
-        out.innerHTML = h + '</tbody></table><p class="meta">' + esc(rows.length) + ' shown. Entries confirmed unreachable by the weekly probe are flagged in the JSON and never hidden.</p>';
-      })
-      .catch(function () { out.innerHTML = '<p class="meta">Search failed. The JSON endpoint is at <code>' + "/api/mcp/search" + '</code>.</p>'; });
-  }
-  f.addEventListener('submit', run);
-  document.querySelector('#q-form button').addEventListener('click', run);
-})();
+(function catalogBrowser(config, render) {
+  const form = document.getElementById('q-form');
+  const out = document.getElementById('q-out');
+  const button = form.querySelector('button');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const params = new URLSearchParams(new FormData(form));
+    for (const [key, value] of [...params]) {
+      if (!value.trim()) params.delete(key);
+      else params.set(key, value.trim());
+    }
+    params.set('limit', '25');
+    button.disabled = true;
+    out.setAttribute('aria-busy', 'true');
+    out.textContent = 'Searching…';
+    try {
+      const response = await fetch(config.searchPath + '?' + params, { headers: { accept: 'application/json' } });
+      if (!response.ok) throw new Error('Search unavailable');
+      const data = await response.json();
+      if (data.ok === false || !Array.isArray(data.results)) throw new Error('Invalid results');
+      if (!data.results.length) {
+        out.textContent = 'No matches in this catalog with these filters. Try broader terms or remove a filter.';
+      } else {
+        out.innerHTML = render(data.results, config.columns, config.kind);
+        const summary = document.createElement('p');
+        summary.className = 'meta';
+        summary.textContent = data.results.length + ' of ' + data.total + ' matches shown. '
+          + 'Unverified and failed endpoints stay visible. A response does not prove a tool works or that authorization will succeed.';
+        out.prepend(summary);
+      }
+    } catch {
+      out.textContent = 'Search is unavailable. Try again; this is not a zero-result search.';
+    } finally {
+      button.disabled = false;
+      out.setAttribute('aria-busy', 'false');
+    }
+  });
+})({"searchPath":"/api/mcp/search","columns":[{"key":"url","label":"endpoint","wrap":true},{"key":"title","label":"name","wrap":true},{"key":"auth","label":"auth"},{"key":"transport","label":"transport"},{"key":"description","label":"what it does","wrap":true}],"kind":"mcp"}, function catalogResults(rows, columns, kind) {
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const safeUrl = (s) => {
+    try {
+      const u = new URL(s);
+      return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password
+        && !/[{}]/.test(s) ? u.href : null;
+    } catch { return null; }
+  };
+  return '<ul class="catalog-results">' + rows.map((r) => {
+    const url = safeUrl(r.url);
+    const endpoint = url
+      ? '<a href="' + esc(url) + '" rel="nofollow noopener">' + esc(r.url) + '</a>'
+      : '<code>' + esc(r.url) + '</code> (not a ready-to-use HTTP URL)';
+    const fields = columns.filter((c) => !['url', 'title', 'description'].includes(c.key)).map((c) => {
+      const value = r[c.key];
+      let display = value == null || value === '' ? 'Not supplied' : String(value);
+      if (c.money) display = typeof value === 'number' && Number.isFinite(value) && value >= 0
+        ? '$' + value.toFixed(4) + ' USD equivalent (catalog quote)' : 'Price unknown';
+      if (c.key === 'auth') display = value === 'none' ? 'No credentials declared; may still cost money'
+        : value === 'required' ? 'Credentials required' : 'Authentication unknown';
+      return '<div><dt>' + esc(c.label) + '</dt><dd>' + esc(display) + '</dd></div>';
+    }).join('');
+    const h = r.health;
+    let status = 'Unverified — no per-endpoint success observation is available.';
+    if (h?.state === 'failed' || r.unreachable) {
+      status = h?.misses >= 2 || r.unreachable ? 'Repeated probe failures' : 'One probe failed';
+      status += h?.last_checked ? ' — last checked ' + h.last_checked : ' — observation date unavailable';
+      if (h?.reason) status += ': ' + h.reason;
+      status += '. This is an observation, not proof that the endpoint is still unavailable.';
+    }
+    const next = !url ? 'Ask the provider for a complete endpoint URL before connecting.'
+      : kind === 'mcp'
+        ? 'Use this URL in an MCP client that supports the declared transport. Confirm credentials and provider pricing before connecting.'
+        : 'Use an x402-compatible client with the listed HTTP method and chain. Confirm current terms before authorizing any payment.';
+    return '<li><article><h3>' + esc(r.title || r.name || 'Endpoint') + '</h3>'
+      + '<p class="endpoint">' + endpoint + '</p>'
+      + '<p>' + esc(r.description || 'Description not supplied.') + '</p>'
+      + '<dl class="result-fields">' + fields + '</dl>'
+      + '<p class="health"><strong>Health:</strong> ' + esc(status) + '</p>'
+      + '<p><strong>Next step:</strong> ' + esc(next) + '</p>'
+      + '<p class="meta">Provider setup documentation is not supplied by this search result. '
+      + '<a href="#connection-guide">Read the connection checklist</a>.</p></article></li>';
+  }).join('') + '</ul>';
+});
 </script>
+
+<h2 id="connection-guide">Before you connect</h2>
+<p>Health checks cover a rotating sample. Failed observations carry their own date;
+no recorded failure does not mean a successful check. Even an HTTP response does not prove
+that authentication, payment or a tool operation will succeed.</p>
+<ol><li>Choose a client that supports the result’s transport and accepts a remote MCP URL.</li>
+<li>Use the endpoint URL in that client’s remote-server configuration. Follow the provider’s own instructions for credentials and pricing.</li>
+<li>Inspect the offered tools and permissions before running anything. This directory has not verified their task-level behavior.</li></ol>
 
 <h2>The 25 largest operators</h2>
 <p>Concentration is the thing the headline count hides: 16,526 endpoints across

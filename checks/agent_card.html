@@ -68,11 +68,14 @@
   <div class="card"><div class="n">2025</div><div class="k">checklist generation</div></div>
 </div>
 
-<h2>How to pass it</h2>
+<h2>Does this apply to your site?</h2>
+<p>For sites offering an A2A agent service. A content-only site does not need to invent one.</p>
+<p class="meta">This score measures coverage of a published technical checklist. It does not measure AI visibility, referrals, content understanding or successful agent tasks. Optional service interfaces may not apply to your site; missing them still affects this fixed checklist.</p>
+<h2>How to address it when relevant</h2>
 <p>Publish an agent card at /.well-known/agent-card.json describing your callable interfaces (A2A 1.0) — this is what turns a page into a tool. Serve the same document at /.well-known/agent.json too, for clients written before the path moved.</p>
-<h2>Paste-ready</h2>
+<h2>Example to adapt</h2>
 <p class="meta">Replace <code>{{ORIGIN}}</code> with your own origin — or call the paid endpoint, which
-substitutes it for you and tells you which checks you actually failed.</p>
+substitutes it for you and tells you which checks failed. Review all placeholder names, paths, prices and capabilities before publishing; origin substitution does not verify them.</p>
 <pre><code>{
   &quot;_comment&quot;: &quot;publish at {{ORIGIN}}/.well-known/agent-card.json (A2A 1.0), and at {{ORIGIN}}/.well-known/agent.json for pre-0.3 clients&quot;,
   &quot;name&quot;: &quot;Your Product&quot;,

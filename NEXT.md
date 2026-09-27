@@ -1,5 +1,16 @@
 # NEXT — the one pending list
 
+> **2026-09-27 — selected discovery and score UX improvements completed locally.**
+> Catalog results now expose auth/transport or price filters, dated failed probes,
+> unknown health and connection guidance. Score wording describes checklist coverage,
+> separates optional service interfaces and links findings to free remedies.
+> Numeric scores, letter thresholds and weights are unchanged. This was an explicit
+> owner-selected slice; the broader product-work gate remains active.
+> Local verification: full Node 22 suite, deterministic rebuild and desktop/mobile
+> browser checks. Push/Actions and post-deploy live verification are pending; next
+> session check the resulting commit once and compare live `llms.txt` byte for byte.
+> No further implementation slice is selected. Real-user validation remains pending.
+
 > **2026-09-05 API simplification:** only `POST /api/audit` remains paid
 > ($0.05 USDC). `/api/check`, `/api/liveness`, `/api/route` and new
 > `/api/watch` purchases return 410 without accepting payment. Existing

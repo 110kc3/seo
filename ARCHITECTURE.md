@@ -159,6 +159,25 @@ They differ because a GitHub issue cannot carry a 402 handshake — by the time 
 
 `worker/cdp-auth.js` mints the Bearer JWT the Coinbase facilitator requires, using WebCrypto and **no dependencies** — pulling `@coinbase/x402` would drag `viem`, `zod` and the whole CDP SDK into a Worker for one signature. The `uris` claim binds each token to a single method+host+path, so a `/verify` token cannot be replayed against `/settle`. A rail declaring `auth: "cdp"` with no credentials fails closed rather than firing unauthenticated and surfacing Coinbase's 401 as though the agent's payment were bad.
 
+## Discovery and score interpretation — 2026-09-27
+
+Catalog search adds `health` to each result. A tracked failed probe carries
+`state: failed`, its own `last_checked`, `reason` and `misses`; other results
+carry `state: unknown`. The health file retains failures, not successful
+observations for every endpoint. Never substitute the global sample date for an
+individual check date. The existing `unreachable` flag still requires two misses
+and does not affect ranking or inclusion.
+
+`scripts/catalog-ui.mjs` supplies the generated browser interaction and result
+renderer. It escapes remote fields and allows only complete HTTP(S) result links.
+The MCP UI uses existing auth/transport filters; x402 uses existing price filters.
+No new catalog or search algorithm is introduced.
+
+Audit `grade` descriptions now express checklist coverage. Scores, weights, check
+sets and letter thresholds are unchanged. Both audit and free score responses
+explain interpretation; free checks add scope and applicability. The free-result
+cache prefix is versioned separately from check sets to discard older projections.
+
 ## Data stores
 
 One KV namespace (`PAYMENTS`), three prefixes, chosen so each read is cheap:

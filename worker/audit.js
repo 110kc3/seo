@@ -463,6 +463,23 @@ export function snippetFor(id, origin) {
   return template ? template.replaceAll('{{ORIGIN}}', origin.replace(/\/+$/, '')) : null;
 }
 
+export const SCORE_INTERPRETATION = 'This score measures coverage of a published technical checklist. It does not measure AI visibility, referrals, content understanding or successful agent tasks. Optional service interfaces may not apply to your site; missing them still affects this fixed checklist.';
+
+export const CHECK_CONTEXT = {
+  agent_card: 'For sites offering an A2A agent service. A content-only site does not need to invent one.',
+  agent_card_current_path: 'For sites offering an A2A agent service. Publish only capabilities you actually provide.',
+  mcp_server_card: 'For sites offering an MCP server. A content-only site does not need an MCP interface.',
+  api_catalog: 'For sites publishing APIs. Do not advertise endpoints you do not provide.',
+  agent_skills: 'For sites offering reusable agent instructions. Optional for a content-only site.',
+  web_bot_auth: 'For sites supporting signed machine requests or responses. This is not a prerequisite for reading public content.',
+};
+
+export function scoreDescription(score) {
+  return score >= 80 ? 'high checklist coverage'
+    : score >= 55 ? 'partial checklist coverage'
+      : score >= 30 ? 'low checklist coverage' : 'very low checklist coverage';
+}
+
 /**
  * Percentage of the achievable weight, plus the band it falls in. Pure and
  * exported so the "a perfect site scores exactly 100" invariant is testable —
@@ -471,17 +488,15 @@ export function snippetFor(id, origin) {
 export function scoreChecks(checks) {
   // A weightless entry contributes nothing instead of poisoning the total.
   // Without this, one item with no `weight` makes the sum NaN, NaN is falsy, and
-  // the function returns 0 — so a flawless site would be graded "invisible to
-  // agents" because something weightless got into the array. The 2026 signals
+  // the function returns 0 — so a flawless site would be given zero coverage because something
+  // weightless got into the array. The 2026 signals
   // are deliberately weightless and live in their own list, but the arithmetic
   // should not depend on nobody ever mixing the two.
   const weightOf = (c) => (Number.isFinite(c.weight) ? c.weight : 0);
   const totalWeight = checks.reduce((sum, c) => sum + weightOf(c), 0);
   const earned = checks.reduce((sum, c) => sum + (c.pass ? weightOf(c) : 0), 0);
   const score = totalWeight ? Math.round((earned / totalWeight) * 100) : 0;
-  const grade = score >= 80 ? 'agent-ready'
-    : score >= 55 ? 'partially readable'
-      : score >= 30 ? 'weak' : 'invisible to agents';
+  const grade = scoreDescription(score);
   return { score, grade };
 }
 
@@ -729,11 +744,13 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     check_set: set,
     letter: letterGrade(score),
     grade,
+    interpretation: SCORE_INTERPRETATION,
     passed: scored.filter((c) => c.pass).length,
     total_checks: scored.length,
     checks: scored.map((c) => ({
       ...c,
       label: c.label ?? CHECK_LABELS[c.id] ?? c.id,
+      applicability: CHECK_CONTEXT[c.id] ?? 'Site information and access: assess this finding against your intended audience and publishing policy.',
       // The paid half: paste-ready code for this specific origin, not advice.
       ...(c.pass ? {} : { snippet: snippetFor(c.id, origin) }),
     })),

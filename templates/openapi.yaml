@@ -248,7 +248,13 @@ paths:
       summary: Agent-readability score (free, no payment)
       description: |
         Returns an A-F letter grade, the numeric score out of 100, and every
-        check with a label and pass/fail — the verdict, free and without signup.
+        check with a label and pass/fail, free and without signup.
+        `grade` describes checklist coverage; `interpretation` explains that this
+        does not measure AI visibility, referrals or completed agent tasks.
+        Checks include `scope` (site_information or optional_service) and
+        `applicability`. Optional interfaces should describe actual capabilities;
+        their absence still affects the fixed score. Weights and A-F thresholds
+        are unchanged.
 
         It deliberately omits what POST /api/audit sells: the per-check reason for
         failure, fixes ranked by weight, and a paste-ready code snippet for each

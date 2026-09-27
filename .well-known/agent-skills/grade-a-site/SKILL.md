@@ -20,13 +20,12 @@ llms.txt (published, has a title and summary, llms-full.txt), robots.txt
 meta description, Open Graph, canonical URL, machine-readable alternates, an A2A
 agent card, and HTTPS.
 
-It also returns `signals` — emerging 2026 surfaces that are **detected but not
-scored**: Content Signals in robots.txt, the A2A 1.0 card path, an MCP server
-card, an RFC 9727 API catalog, an Agent Skills index, and a Web Bot Auth key
-directory. Absence is normal rather than negligent; adoption of most is still
-tiny. They do not affect the grade.
+The default check set is v2: all 20 checks count. With `?set=v1`, the
+2026 signals are reported separately without affecting that version's score.
+`interpretation` explains the limits; each free check includes `scope` and
+`applicability` to distinguish site information from optional service interfaces.
 
-Cached for an hour per URL. 20 uncached audits per hour per IP.
+Cached for an hour per URL. 60 uncached audits per hour per IP.
 
 ## Paid — the reason and the fix
 
@@ -44,10 +43,9 @@ Read the terms without provoking a 402 at `https://index.percall.dev/api/x402/in
 
 ## Reading the result
 
-- **Grade bands**: `agent-ready` ≥ 80, `partially readable` ≥ 55, `weak` ≥ 30,
-  below that `invisible to agents`.
+- **Coverage descriptions**: `high checklist coverage` ≥ 80, `partial checklist coverage` ≥ 55, `low checklist coverage` ≥ 30, below that `very low checklist coverage`. Numeric scores and A–F letter thresholds are unchanged.
 - `next_steps` is already sorted by weight, so working down it fixes the most
-  valuable thing first.
+  heavily weighted item first. First assess whether each check applies to the site; optional interfaces should describe capabilities that actually exist.
 - A failing `ai_crawlers_allowed` usually means a host-level default rather than
   a deliberate choice — worth checking the CDN before rewriting robots.txt.
 
@@ -55,4 +53,4 @@ Read the terms without provoking a 402 at `https://index.percall.dev/api/x402/in
 
 It reads what a site publishes. It cannot tell you whether the content is
 *good*, whether the facts are true, or whether an agent will choose to use it.
-A site can score 100 and still be useless.
+It does not measure AI referrals, visibility or successful task completion. A content-only site need not offer MCP, A2A or APIs. Missing optional interfaces still affects this fixed checklist; a high score is not a reason to publish nonexistent capabilities.
