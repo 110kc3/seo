@@ -48,6 +48,20 @@
       "external_url": "https://nailmoodlab.com/"
     },
     {
+      "id": "https://index.percall.dev/l/packscena.html",
+      "url": "https://index.percall.dev/l/packscena.html",
+      "title": "PackScena",
+      "content_text": "PackScena helps online sellers explore AI-generated product backgrounds and lifestyle scenes from original photos. Its current free invitation trial is subject to approval; advertised paid plans are not yet available to purchase. Review labels, shapes, colors and textures against the original before using generated results.",
+      "date_published": "2026-09-27T00:00:00Z",
+      "tags": [
+        "app",
+        "product-photography",
+        "image-editing",
+        "ecommerce"
+      ],
+      "external_url": "https://packscena.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/resumeplot.html",
       "url": "https://index.percall.dev/l/resumeplot.html",
       "title": "ResumePlot",
@@ -742,19 +756,6 @@
         "remote"
       ],
       "external_url": "https://3tg.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/ai-visibility-checker.html",
-      "url": "https://index.percall.dev/l/ai-visibility-checker.html",
-      "title": "AI Visibility Checker",
-      "content_text": "Free, no signup. Check if ChatGPT, Perplexity & Google AI recommend a brand in 15 markets (GEO/AEO).",
-      "date_published": "2026-08-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "remote"
-      ],
-      "external_url": "https://aivisibility.agentexchange.work"
     }
   ]
 }

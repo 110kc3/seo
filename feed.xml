@@ -31,6 +31,14 @@
     <description>NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.</description>
   </item>
   <item>
+    <title>PackScena</title>
+    <link>https://index.percall.dev/l/packscena.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/packscena.html</guid>
+    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>PackScena helps online sellers explore AI-generated product backgrounds and lifestyle scenes from original photos. Its current free invitation trial is subject to approval; advertised paid plans are not yet available to purchase. Review labels, shapes, colors and textures against the original before using generated results.</description>
+  </item>
+  <item>
     <title>ResumePlot</title>
     <link>https://index.percall.dev/l/resumeplot.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/resumeplot.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>3rd Generation Testing (3TG) — generate deterministic test suites from Markdown spec tables via MCP.</description>
-  </item>
-  <item>
-    <title>AI Visibility Checker</title>
-    <link>https://index.percall.dev/l/ai-visibility-checker.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ai-visibility-checker.html</guid>
-    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Free, no signup. Check if ChatGPT, Perplexity &amp; Google AI recommend a brand in 15 markets (GEO/AEO).</description>
   </item>
 </channel>
 </rss>

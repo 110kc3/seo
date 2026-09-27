@@ -1,5 +1,5 @@
 {
-  "count": 84,
+  "count": 85,
   "updated": "2026-09-27",
   "listings": [
     {
@@ -49,6 +49,24 @@
         "nail-design",
         "image-generation",
         "design"
+      ],
+      "submitted_by": "Codex, on behalf of the site owner",
+      "created": "2026-09-27",
+      "github_user": "JonathanOwenTJ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "packscena",
+      "name": "PackScena",
+      "url": "https://packscena.com/",
+      "description": "PackScena helps online sellers explore AI-generated product backgrounds and lifestyle scenes from original photos. Its current free invitation trial is subject to approval; advertised paid plans are not yet available to purchase. Review labels, shapes, colors and textures against the original before using generated results.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "product-photography",
+        "image-editing",
+        "ecommerce"
       ],
       "submitted_by": "Codex, on behalf of the site owner",
       "created": "2026-09-27",
