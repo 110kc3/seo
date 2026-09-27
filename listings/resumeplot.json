@@ -1,0 +1,18 @@
+{
+  "slug": "resumeplot",
+  "name": "ResumePlot",
+  "url": "https://resumeplot.com/",
+  "description": "ResumePlot is a resume editor with Chinese and English content, templates and AI-assisted writing tools. It offers a limited free AI allowance and paid subscription plans. Users should check every statement against their own experience before exporting or applying.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "resume",
+    "career",
+    "writing"
+  ],
+  "submitted_by": "Codex, on behalf of the site owner",
+  "created": "2026-09-27",
+  "github_user": "JonathanOwenTJ",
+  "tier": "free",
+  "origin": "self-registered"
+}
