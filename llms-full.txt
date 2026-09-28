@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 91 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 92 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (91)
+## All listings (92)
+
+### KI Integration Register (kiintegration)
+- url: https://kiintegration.com/
+- category: app · pricing: freemium · tags: directory, ai-services, dach, b2b, mcp
+- Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers' own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.
+- llms_txt: https://kiintegration.com/llms.txt
+- mcp: https://kiintegration.com/mcp/
+- listing JSON: https://index.percall.dev/listings/kiintegration.json
+- listing page: https://index.percall.dev/l/kiintegration.html
 
 ### ADHD Reading (adhdreading)
 - url: https://adhdreading.org/

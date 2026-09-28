@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/kiintegration.html",
+      "url": "https://index.percall.dev/l/kiintegration.html",
+      "title": "KI Integration Register",
+      "content_text": "Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers' own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.",
+      "date_published": "2026-09-28T00:00:00Z",
+      "tags": [
+        "app",
+        "directory",
+        "ai-services",
+        "dach",
+        "b2b",
+        "mcp"
+      ],
+      "external_url": "https://kiintegration.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/adhdreading.html",
       "url": "https://index.percall.dev/l/adhdreading.html",
       "title": "ADHD Reading",
@@ -745,21 +761,6 @@
         "api-gateway"
       ],
       "external_url": "https://router.xiu.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/question-machine.html",
-      "url": "https://index.percall.dev/l/question-machine.html",
-      "title": "Question Machine",
-      "content_text": "A playful web app that answers absurd everyday questions with funny, oddly specific results.",
-      "date_published": "2026-08-25T00:00:00Z",
-      "tags": [
-        "app",
-        "fun-calculator",
-        "entertainment",
-        "humor",
-        "web-app"
-      ],
-      "external_url": "https://wistful-pointless-calculators.doany.dev/"
     }
   ]
 }

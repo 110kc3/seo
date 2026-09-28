@@ -1,7 +1,31 @@
 {
-  "count": 91,
-  "updated": "2026-09-27",
+  "count": 92,
+  "updated": "2026-09-28",
   "listings": [
+    {
+      "slug": "kiintegration",
+      "name": "KI Integration Register",
+      "url": "https://kiintegration.com/",
+      "description": "Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers' own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://kiintegration.com/llms.txt",
+        "mcp": "https://kiintegration.com/mcp/"
+      },
+      "tags": [
+        "directory",
+        "ai-services",
+        "dach",
+        "b2b",
+        "mcp"
+      ],
+      "submitted_by": "Christopher Nonne (operator)",
+      "created": "2026-09-28",
+      "github_user": "klsdfr",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "adhdreading",
       "name": "ADHD Reading",
