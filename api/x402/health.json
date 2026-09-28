@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-21",
-  "catalog_size": 15133,
-  "cursor": 10,
+  "probed_at": "2026-09-28",
+  "catalog_size": 17863,
+  "cursor": 11,
   "slice": 600,
-  "stride": 25,
-  "runs_per_full_pass": 25,
+  "stride": 29,
+  "runs_per_full_pass": 29,
   "window": {
     "probed": 600,
-    "ok": 586,
-    "unreachable": 14,
+    "ok": 588,
+    "unreachable": 12,
     "untestable": 0
   },
-  "answered_share": 0.9767,
+  "answered_share": 0.98,
   "confirmed_unreachable": 1,
-  "tracked_unreachable": 37,
+  "tracked_unreachable": 43,
   "unreachable": [
     {
       "url": "https://cryptyx.ai/api/taker-flow",
@@ -116,13 +116,6 @@
       "last_checked": "2026-08-26"
     },
     {
-      "url": "https://api.osf-master-server.com/x402/screen/sanctions/:name",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-31",
-      "last_checked": "2026-08-31"
-    },
-    {
       "url": "https://app.r3p.xyz/mcp/x402",
       "reason": "HTTP 500",
       "misses": 1,
@@ -135,20 +128,6 @@
       "misses": 1,
       "since": "2026-08-31",
       "last_checked": "2026-08-31"
-    },
-    {
-      "url": "https://gpt55.558686.xyz/v1/tools/x402-opportunity-finder",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
-      "url": "https://techforce-agents.onrender.com/api/all-jobs",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
     },
     {
       "url": "https://x402-factory.com/v1/evergreen/fed-next-meeting-hike",
@@ -179,22 +158,8 @@
       "last_checked": "2026-09-14"
     },
     {
-      "url": "https://agentstack-research-3bnlllaboa-ts.a.run.app/v1/us/announcements/:ticker",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
       "url": "https://api.brazilayer.com/v1/fundos/carteira/:cnpj",
       "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://api.gocreativeai.com/v1/shopify/leads/contacts/:var1",
-      "reason": "HTTP 502",
       "misses": 1,
       "since": "2026-09-21",
       "last_checked": "2026-09-21"
@@ -209,13 +174,6 @@
     {
       "url": "https://api.x402node.dev/web/sitemap",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://bryan-hermes.lenok-gorgon.ts.net:8443/v1/company",
-      "reason": "ECONNRESET",
       "misses": 1,
       "since": "2026-09-21",
       "last_checked": "2026-09-21"
@@ -275,6 +233,90 @@
       "misses": 1,
       "since": "2026-09-21",
       "last_checked": "2026-09-21"
+    },
+    {
+      "url": "https://aayatai.com/defi/yields",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://app.metalift.ai/v1/map",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://dev-5090-box.tailfb4c1f.ts.net/v1/chat/uncensored",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://entropy.rip/api/schema/transduce",
+      "reason": "ETIMEDOUT",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://finance-api.kdlcfa.workers.dev/dax-index",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://fittings.sh/v1/time/zone-clock",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://hubvibe-io.com/work/commerce/availability",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://i3p3mgbsn54dvlivnk6wbumal40eqtsn.lambda-url.us-east-1.on.aws/v1/website-change-monitor",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://toll402.dev/v1/t/orgnr_se_validate",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://x402.agentutility.ai/caption-translate-pack",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://x402.agentutility.ai/text-to-speech",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
+    },
+    {
+      "url": "https://x402.creative-tim.com/api/shadcn-block",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-09-28",
+      "last_checked": "2026-09-28"
     }
   ]
 }
