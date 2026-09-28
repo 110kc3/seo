@@ -22,6 +22,22 @@
       "external_url": "https://kiintegration.com/"
     },
     {
+      "id": "https://index.percall.dev/l/toolvori.html",
+      "url": "https://index.percall.dev/l/toolvori.html",
+      "title": "Toolvori",
+      "content_text": "Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.",
+      "date_published": "2026-09-28T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-tools",
+        "directory",
+        "productivity",
+        "discovery",
+        "indie"
+      ],
+      "external_url": "https://www.toolvori.com/?utm_source=index-percall-dev&utm_medium=referral&utm_campaign=directory_listing&utm_content=toolvori_directory"
+    },
+    {
       "id": "https://index.percall.dev/l/adhdreading.html",
       "url": "https://index.percall.dev/l/adhdreading.html",
       "title": "ADHD Reading",
@@ -745,22 +761,6 @@
         "ai"
       ],
       "external_url": "https://pzero.studio"
-    },
-    {
-      "id": "https://index.percall.dev/l/xiurouter.html",
-      "url": "https://index.percall.dev/l/xiurouter.html",
-      "title": "XiuRouter",
-      "content_text": "XiuRouter is a usage-based model API service that connects applications, AI agents, and developer tools to leading models through one API. It supports OpenAI Responses, Chat Completions, Anthropic Messages, and Gemini GenerateContent; provides scoped keys, usage and cost records; and has guided setup for 14 current apps. Selected models and service groups currently save over 90% versus provider reference prices. XiuAI and its products are operated by XiuLab Inc, a U.S. corporation.",
-      "date_published": "2026-08-27T00:00:00Z",
-      "tags": [
-        "api",
-        "llm-api",
-        "model-routing",
-        "agent-infrastructure",
-        "developer-tools",
-        "api-gateway"
-      ],
-      "external_url": "https://router.xiu.ai/"
     }
   ]
 }

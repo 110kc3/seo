@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 92 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 93 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (92)
+## All listings (93)
 
 ### KI Integration Register (kiintegration)
 - url: https://kiintegration.com/
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://kiintegration.com/mcp/
 - listing JSON: https://index.percall.dev/listings/kiintegration.json
 - listing page: https://index.percall.dev/l/kiintegration.html
+
+### Toolvori (toolvori)
+- url: https://www.toolvori.com/?utm_source=index-percall-dev&utm_medium=referral&utm_campaign=directory_listing&utm_content=toolvori_directory
+- category: app · pricing: free · tags: ai-tools, directory, productivity, discovery, indie
+- Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.
+- listing JSON: https://index.percall.dev/listings/toolvori.json
+- listing page: https://index.percall.dev/l/toolvori.html
 
 ### ADHD Reading (adhdreading)
 - url: https://adhdreading.org/

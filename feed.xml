@@ -15,6 +15,14 @@
     <description>Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers&#39; own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.</description>
   </item>
   <item>
+    <title>Toolvori</title>
+    <link>https://index.percall.dev/l/toolvori.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/toolvori.html</guid>
+    <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.</description>
+  </item>
+  <item>
     <title>ADHD Reading</title>
     <link>https://index.percall.dev/l/adhdreading.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/adhdreading.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.</description>
-  </item>
-  <item>
-    <title>XiuRouter</title>
-    <link>https://index.percall.dev/l/xiurouter.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/xiurouter.html</guid>
-    <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>XiuRouter is a usage-based model API service that connects applications, AI agents, and developer tools to leading models through one API. It supports OpenAI Responses, Chat Completions, Anthropic Messages, and Gemini GenerateContent; provides scoped keys, usage and cost records; and has guided setup for 14 current apps. Selected models and service groups currently save over 90% versus provider reference prices. XiuAI and its products are operated by XiuLab Inc, a U.S. corporation.</description>
   </item>
 </channel>
 </rss>
