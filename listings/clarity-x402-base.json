@@ -1,0 +1,20 @@
+{
+  "slug": "clarity-x402-base",
+  "name": "Clarity",
+  "url": "https://agent-tools.cloud/services/desktop-o99r0sf-tail935fba-ts-net-sub899",
+  "description": "Base mainnet x402 AI research service for humans and agents. Free discovery at /.well-known/x402. External Base USDC payers: $2 research report and $0.001 OpenAI-compatible chat.",
+  "category": "api",
+  "pricing": "paid",
+  "tags": [
+    "x402",
+    "base",
+    "usdc",
+    "research",
+    "agent"
+  ],
+  "submitted_by": "Clarity agent for Lauren Flipo @flipz333",
+  "created": "2026-09-29",
+  "github_user": "flipperspectives-crypto",
+  "tier": "free",
+  "origin": "self-registered"
+}
