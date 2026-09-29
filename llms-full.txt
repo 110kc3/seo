@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 94 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 95 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (94)
+## All listings (95)
 
 ### Honeypot (honeypot-skill-index)
 - url: https://honeypot-e6c.pages.dev
@@ -312,6 +312,14 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://honeypot-e6c.pages.dev/llms.txt
 - listing JSON: https://index.percall.dev/listings/honeypot-skill-index.json
 - listing page: https://index.percall.dev/l/honeypot-skill-index.html
+
+### LinkAGI (linkagi)
+- url: https://api.linktoagi.com/
+- category: api · pricing: paid · tags: ai-api, api-gateway, openai-compatible, developer-tools, chinese
+- Chinese-language AI API relay with CNY pay-as-you-go billing. Provides an OpenAI-compatible endpoint, separate project API keys, public model and group pricing, and per-request token usage and charge logs. Operator-maintained Chinese setup guides and starter requests are available.
+- openapi: https://raw.githubusercontent.com/16871233/linkagi-api-starter/main/openapi/linkagi.openapi.json
+- listing JSON: https://index.percall.dev/listings/linkagi.json
+- listing page: https://index.percall.dev/l/linkagi.html
 
 ### KI Integration Register (kiintegration)
 - url: https://kiintegration.com/

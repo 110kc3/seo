@@ -1,5 +1,5 @@
 {
-  "count": 94,
+  "count": 95,
   "updated": "2026-09-29",
   "listings": [
     {
@@ -14,6 +14,29 @@
       },
       "created": "2026-09-29",
       "github_user": "oidsdev",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "linkagi",
+      "name": "LinkAGI",
+      "url": "https://api.linktoagi.com/",
+      "description": "Chinese-language AI API relay with CNY pay-as-you-go billing. Provides an OpenAI-compatible endpoint, separate project API keys, public model and group pricing, and per-request token usage and charge logs. Operator-maintained Chinese setup guides and starter requests are available.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "openapi": "https://raw.githubusercontent.com/16871233/linkagi-api-starter/main/openapi/linkagi.openapi.json"
+      },
+      "tags": [
+        "ai-api",
+        "api-gateway",
+        "openai-compatible",
+        "developer-tools",
+        "chinese"
+      ],
+      "submitted_by": "LinkAGI operator via Codex",
+      "created": "2026-09-29",
+      "github_user": "16871233",
       "tier": "free",
       "origin": "self-registered"
     },

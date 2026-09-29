@@ -15,6 +15,14 @@
     <description>Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.</description>
   </item>
   <item>
+    <title>LinkAGI</title>
+    <link>https://index.percall.dev/l/linkagi.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/linkagi.html</guid>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Chinese-language AI API relay with CNY pay-as-you-go billing. Provides an OpenAI-compatible endpoint, separate project API keys, public model and group pricing, and per-request token usage and charge logs. Operator-maintained Chinese setup guides and starter requests are available.</description>
+  </item>
+  <item>
     <title>KI Integration Register</title>
     <link>https://index.percall.dev/l/kiintegration.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kiintegration.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Hosted Model Context Protocol server for Magic Hour’s AI media platform, giving compatible AI clients authenticated access to image, video, and audio generation and editing tools over Streamable HTTP. Developers can also use Magic Hour’s REST API and SDKs.</description>
-  </item>
-  <item>
-    <title>Dash</title>
-    <link>https://index.percall.dev/l/dash.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/dash.html</guid>
-    <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Dash is an AI teammate in Slack and Microsoft Teams that connects to 3,000+ tools, learns how a team works, and ships reports, research, follow-ups, and automated work with approval controls.</description>
   </item>
 </channel>
 </rss>
