@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 93 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 94 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (93)
+## All listings (94)
+
+### Honeypot (honeypot-skill-index)
+- url: https://honeypot-e6c.pages.dev
+- category: other · pricing: free
+- Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.
+- llms_txt: https://honeypot-e6c.pages.dev/llms.txt
+- listing JSON: https://index.percall.dev/listings/honeypot-skill-index.json
+- listing page: https://index.percall.dev/l/honeypot-skill-index.html
 
 ### KI Integration Register (kiintegration)
 - url: https://kiintegration.com/

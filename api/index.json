@@ -1,7 +1,22 @@
 {
-  "count": 93,
-  "updated": "2026-09-28",
+  "count": 94,
+  "updated": "2026-09-29",
   "listings": [
+    {
+      "slug": "honeypot-skill-index",
+      "name": "Honeypot",
+      "url": "https://honeypot-e6c.pages.dev",
+      "description": "Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.",
+      "category": "other",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://honeypot-e6c.pages.dev/llms.txt"
+      },
+      "created": "2026-09-29",
+      "github_user": "oidsdev",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "kiintegration",
       "name": "KI Integration Register",

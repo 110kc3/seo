@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/honeypot-skill-index.html",
+      "url": "https://index.percall.dev/l/honeypot-skill-index.html",
+      "title": "Honeypot",
+      "content_text": "Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.",
+      "date_published": "2026-09-29T00:00:00Z",
+      "tags": [
+        "other"
+      ],
+      "external_url": "https://honeypot-e6c.pages.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/kiintegration.html",
       "url": "https://index.percall.dev/l/kiintegration.html",
       "title": "KI Integration Register",
@@ -745,22 +756,6 @@
         "approval-controls"
       ],
       "external_url": "https://dashpup.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/pzero.html",
-      "url": "https://index.percall.dev/l/pzero.html",
-      "title": "PZERO",
-      "content_text": "Frontier First AI Marketplace. Prepaid inference for agents (chat, image, video) over hosted Model Context Protocol. Bearer pzero_ key. Remote https://mcp.pzero.studio/mcp.",
-      "date_published": "2026-08-27T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "inference",
-        "agents",
-        "cursor",
-        "ai"
-      ],
-      "external_url": "https://pzero.studio"
     }
   ]
 }
