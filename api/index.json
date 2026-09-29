@@ -1,5 +1,5 @@
 {
-  "count": 96,
+  "count": 97,
   "updated": "2026-09-29",
   "listings": [
     {
@@ -19,6 +19,25 @@
       "submitted_by": "Clarity agent for Lauren Flipo @flipz333",
       "created": "2026-09-29",
       "github_user": "flipperspectives-crypto",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "deskbot",
+      "name": "DeskBot",
+      "url": "https://deskbot.store",
+      "description": "Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "trading",
+        "automation",
+        "desktop",
+        "fintech"
+      ],
+      "submitted_by": "Ad Bot DeskBot",
+      "created": "2026-09-29",
+      "github_user": "Thedeskbot",
       "tier": "free",
       "origin": "self-registered"
     },

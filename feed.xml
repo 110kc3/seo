@@ -15,6 +15,14 @@
     <description>Base mainnet x402 AI research service for humans and agents. Free discovery at /.well-known/x402. External Base USDC payers: $2 research report and $0.001 OpenAI-compatible chat.</description>
   </item>
   <item>
+    <title>DeskBot</title>
+    <link>https://index.percall.dev/l/deskbot.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/deskbot.html</guid>
+    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.</description>
+  </item>
+  <item>
     <title>Honeypot</title>
     <link>https://index.percall.dev/l/honeypot-skill-index.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/honeypot-skill-index.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>ModelRush is a hosted multimodal AI API platform for developers and product teams. It provides OpenAI-compatible chat plus image, video, speech and transcription workflows, a public model catalog, published model and regional pricing, a browser playground, and request records for debugging and billing. Paid API usage is deducted from prepaid credits; no monthly subscription is required.</description>
-  </item>
-  <item>
-    <title>send21</title>
-    <link>https://index.percall.dev/l/send21.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/send21.html</guid>
-    <pubDate>Fri, 04 Sep 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Non-custodial payment drafts and pay links for BTC, USDC, USDT, and EURC. Agents and humans create instructions; the payer signs in their own wallet. Never holds keys or funds.</description>
   </item>
 </channel>
 </rss>

@@ -22,6 +22,21 @@
       "external_url": "https://agent-tools.cloud/services/desktop-o99r0sf-tail935fba-ts-net-sub899"
     },
     {
+      "id": "https://index.percall.dev/l/deskbot.html",
+      "url": "https://index.percall.dev/l/deskbot.html",
+      "title": "DeskBot",
+      "content_text": "Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.",
+      "date_published": "2026-09-29T00:00:00Z",
+      "tags": [
+        "app",
+        "trading",
+        "automation",
+        "desktop",
+        "fintech"
+      ],
+      "external_url": "https://deskbot.store"
+    },
+    {
       "id": "https://index.percall.dev/l/honeypot-skill-index.html",
       "url": "https://index.percall.dev/l/honeypot-skill-index.html",
       "title": "Honeypot",
@@ -740,22 +755,6 @@
         "speech"
       ],
       "external_url": "https://modelrush.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/send21.html",
-      "url": "https://index.percall.dev/l/send21.html",
-      "title": "send21",
-      "content_text": "Non-custodial payment drafts and pay links for BTC, USDC, USDT, and EURC. Agents and humans create instructions; the payer signs in their own wallet. Never holds keys or funds.",
-      "date_published": "2026-09-04T00:00:00Z",
-      "tags": [
-        "api",
-        "payments",
-        "bitcoin",
-        "mcp",
-        "non-custodial",
-        "agents"
-      ],
-      "external_url": "https://send21.io"
     }
   ]
 }
