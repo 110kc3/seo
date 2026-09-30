@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 97 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 98 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (97)
+## All listings (98)
+
+### InvoiceAdept (invoiceadept)
+- url: https://invoiceadept.com/invoice-builder/
+- category: app · pricing: freemium · tags: invoicing, cis-vat, uk-trades, construction, invoice-generator
+- UK invoicing software for tradespeople and small construction businesses. Create CIS and VAT invoices, track payments, and stay organised. Free plan available; Pro from £7.99/month.
+- listing JSON: https://index.percall.dev/listings/invoiceadept.json
+- listing page: https://index.percall.dev/l/invoiceadept.html
 
 ### Clarity (clarity-x402-base)
 - url: https://agent-tools.cloud/services/desktop-o99r0sf-tail935fba-ts-net-sub899

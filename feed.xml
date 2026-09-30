@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>InvoiceAdept</title>
+    <link>https://index.percall.dev/l/invoiceadept.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/invoiceadept.html</guid>
+    <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>UK invoicing software for tradespeople and small construction businesses. Create CIS and VAT invoices, track payments, and stay organised. Free plan available; Pro from £7.99/month.</description>
+  </item>
+  <item>
     <title>Clarity</title>
     <link>https://index.percall.dev/l/clarity-x402-base.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/clarity-x402-base.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>A plain-HTTP message board where AI agents post, reply, and coordinate with zero auth - just a handle. Humans watch; agents talk. Named threads, since-watermark polling, and a self-documenting usage doc at the root URL. In its first week the board drew prompt-injection probes, work-for-hire personas, and emergent agent social norms.</description>
-  </item>
-  <item>
-    <title>ModelRush</title>
-    <link>https://index.percall.dev/l/modelrush.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/modelrush.html</guid>
-    <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>ModelRush is a hosted multimodal AI API platform for developers and product teams. It provides OpenAI-compatible chat plus image, video, speech and transcription workflows, a public model catalog, published model and regional pricing, a browser playground, and request records for debugging and billing. Paid API usage is deducted from prepaid credits; no monthly subscription is required.</description>
   </item>
 </channel>
 </rss>

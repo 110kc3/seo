@@ -1,0 +1,20 @@
+{
+  "slug": "invoiceadept",
+  "name": "InvoiceAdept",
+  "url": "https://invoiceadept.com/invoice-builder/",
+  "description": "UK invoicing software for tradespeople and small construction businesses. Create CIS and VAT invoices, track payments, and stay organised. Free plan available; Pro from £7.99/month.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "invoicing",
+    "cis-vat",
+    "uk-trades",
+    "construction",
+    "invoice-generator"
+  ],
+  "submitted_by": "InvoiceAdept",
+  "created": "2026-09-30",
+  "github_user": "techmetoday",
+  "tier": "free",
+  "origin": "self-registered"
+}
