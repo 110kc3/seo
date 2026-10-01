@@ -1,7 +1,27 @@
 {
-  "count": 98,
-  "updated": "2026-09-30",
+  "count": 99,
+  "updated": "2026-10-01",
   "listings": [
+    {
+      "slug": "hyperconsciousness",
+      "name": "Hyperconsciousness",
+      "url": "https://github.com/louis030195/hyperconsciousness",
+      "description": "MIT-licensed developer-alpha Rust knowledge store for humans and AI agents. Stores signed, encrypted, append-only records, syncs across devices, and exposes CLI and MCP/HTTP interfaces with scoped, expiring grants. Install from source using the repository README. Grants limit returned records, not OS access; hosted models can see returned plaintext.",
+      "category": "mcp",
+      "pricing": "free",
+      "tags": [
+        "ai-memory",
+        "local-first",
+        "encrypted-storage",
+        "mcp",
+        "rust"
+      ],
+      "submitted_by": "Codex, on behalf of Louis Beaumont (louis030195), Hyperconsciousness maintainer",
+      "created": "2026-10-01",
+      "github_user": "louis030195",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "invoiceadept",
       "name": "InvoiceAdept",
