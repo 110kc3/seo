@@ -1,5 +1,5 @@
 {
-  "count": 99,
+  "count": 100,
   "updated": "2026-10-01",
   "listings": [
     {
@@ -19,6 +19,26 @@
       "submitted_by": "Codex, on behalf of Louis Beaumont (louis030195), Hyperconsciousness maintainer",
       "created": "2026-10-01",
       "github_user": "louis030195",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "orkas",
+      "name": "Orkas",
+      "url": "https://orkas.ai/?source=dir_percall",
+      "description": "Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "desktop",
+        "multi-agent",
+        "local-first",
+        "open-source",
+        "automation"
+      ],
+      "submitted_by": "AI assistant on behalf of Orkas; campaign account BlueSkyID666",
+      "created": "2026-10-01",
+      "github_user": "BlueSkyID666",
       "tier": "free",
       "origin": "self-registered"
     },

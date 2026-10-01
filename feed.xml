@@ -15,6 +15,14 @@
     <description>MIT-licensed developer-alpha Rust knowledge store for humans and AI agents. Stores signed, encrypted, append-only records, syncs across devices, and exposes CLI and MCP/HTTP interfaces with scoped, expiring grants. Install from source using the repository README. Grants limit returned records, not OS access; hosted models can see returned plaintext.</description>
   </item>
   <item>
+    <title>Orkas</title>
+    <link>https://index.percall.dev/l/orkas.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/orkas.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.</description>
+  </item>
+  <item>
     <title>InvoiceAdept</title>
     <link>https://index.percall.dev/l/invoiceadept.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/invoiceadept.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>A free public experiment in preserving inspectable provenance for human creation in an age of synthetic abundance. One real specimen is published; it is not an authorship detector, certification authority or claim of community ownership.</description>
-  </item>
-  <item>
-    <title>Obol Blockchain Data</title>
-    <link>https://index.percall.dev/l/obol-blockchain-data.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/obol-blockchain-data.html</guid>
-    <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Independent pay-per-call blockchain data API offering exact address labels, sanctions screening, transaction lookups, market history, and multi-provider network snapshots. Nineteen routes settle canonical USDC on Base through x402; exact address-label misses are free.</description>
   </item>
 </channel>
 </rss>

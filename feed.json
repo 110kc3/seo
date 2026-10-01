@@ -22,6 +22,22 @@
       "external_url": "https://github.com/louis030195/hyperconsciousness"
     },
     {
+      "id": "https://index.percall.dev/l/orkas.html",
+      "url": "https://index.percall.dev/l/orkas.html",
+      "title": "Orkas",
+      "content_text": "Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.",
+      "date_published": "2026-10-01T00:00:00Z",
+      "tags": [
+        "app",
+        "desktop",
+        "multi-agent",
+        "local-first",
+        "open-source",
+        "automation"
+      ],
+      "external_url": "https://orkas.ai/?source=dir_percall"
+    },
+    {
       "id": "https://index.percall.dev/l/invoiceadept.html",
       "url": "https://index.percall.dev/l/invoiceadept.html",
       "title": "InvoiceAdept",
@@ -744,22 +760,6 @@
         "cultural-memory"
       ],
       "external_url": "https://thehumanrecord.net/"
-    },
-    {
-      "id": "https://index.percall.dev/l/obol-blockchain-data.html",
-      "url": "https://index.percall.dev/l/obol-blockchain-data.html",
-      "title": "Obol Blockchain Data",
-      "content_text": "Independent pay-per-call blockchain data API offering exact address labels, sanctions screening, transaction lookups, market history, and multi-provider network snapshots. Nineteen routes settle canonical USDC on Base through x402; exact address-label misses are free.",
-      "date_published": "2026-09-14T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "blockchain-data",
-        "address-labels",
-        "sanctions",
-        "market-data"
-      ],
-      "external_url": "https://obol.danieldutoit.net"
     }
   ]
 }
