@@ -1,5 +1,5 @@
 {
-  "count": 100,
+  "count": 101,
   "updated": "2026-10-01",
   "listings": [
     {
@@ -39,6 +39,29 @@
       "submitted_by": "AI assistant on behalf of Orkas; campaign account BlueSkyID666",
       "created": "2026-10-01",
       "github_user": "BlueSkyID666",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "screenpipe",
+      "name": "Screenpipe",
+      "url": "https://screenpipe.com",
+      "description": "Search locally captured screen text and audio history for recall, meeting notes, work summaries and AI context through a local API and MCP server. Source-available under the Screenpipe Commercial License. Configured cloud AI, transcription, sync and integrations can send context off-device. Free and paid plans: https://screenpipe.com/pricing.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://github.com/screenpipe/screenpipe/tree/main/packages/screenpipe-mcp"
+      },
+      "tags": [
+        "memory",
+        "productivity",
+        "mcp",
+        "meeting-notes",
+        "local-context"
+      ],
+      "submitted_by": "Codex, on behalf of Screenpipe maintainer Louis (louis030195)",
+      "created": "2026-10-01",
+      "github_user": "louis030195",
       "tier": "free",
       "origin": "self-registered"
     },

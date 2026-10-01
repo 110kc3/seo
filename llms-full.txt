@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 100 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 101 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (100)
+## All listings (101)
 
 ### Hyperconsciousness (hyperconsciousness)
 - url: https://github.com/louis030195/hyperconsciousness
@@ -318,6 +318,14 @@ A response does not verify authentication, payment or tool behavior.
 - Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.
 - listing JSON: https://index.percall.dev/listings/orkas.json
 - listing page: https://index.percall.dev/l/orkas.html
+
+### Screenpipe (screenpipe)
+- url: https://screenpipe.com
+- category: app · pricing: freemium · tags: memory, productivity, mcp, meeting-notes, local-context
+- Search locally captured screen text and audio history for recall, meeting notes, work summaries and AI context through a local API and MCP server. Source-available under the Screenpipe Commercial License. Configured cloud AI, transcription, sync and integrations can send context off-device. Free and paid plans: https://screenpipe.com/pricing.
+- mcp: https://github.com/screenpipe/screenpipe/tree/main/packages/screenpipe-mcp
+- listing JSON: https://index.percall.dev/listings/screenpipe.json
+- listing page: https://index.percall.dev/l/screenpipe.html
 
 ### InvoiceAdept (invoiceadept)
 - url: https://invoiceadept.com/invoice-builder/

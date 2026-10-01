@@ -38,6 +38,22 @@
       "external_url": "https://orkas.ai/?source=dir_percall"
     },
     {
+      "id": "https://index.percall.dev/l/screenpipe.html",
+      "url": "https://index.percall.dev/l/screenpipe.html",
+      "title": "Screenpipe",
+      "content_text": "Search locally captured screen text and audio history for recall, meeting notes, work summaries and AI context through a local API and MCP server. Source-available under the Screenpipe Commercial License. Configured cloud AI, transcription, sync and integrations can send context off-device. Free and paid plans: https://screenpipe.com/pricing.",
+      "date_published": "2026-10-01T00:00:00Z",
+      "tags": [
+        "app",
+        "memory",
+        "productivity",
+        "mcp",
+        "meeting-notes",
+        "local-context"
+      ],
+      "external_url": "https://screenpipe.com"
+    },
+    {
       "id": "https://index.percall.dev/l/invoiceadept.html",
       "url": "https://index.percall.dev/l/invoiceadept.html",
       "title": "InvoiceAdept",
@@ -744,22 +760,6 @@
         "public-goods"
       ],
       "external_url": "https://pleasestartfromhere.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/the-human-record.html",
-      "url": "https://index.percall.dev/l/the-human-record.html",
-      "title": "The Human Record",
-      "content_text": "A free public experiment in preserving inspectable provenance for human creation in an age of synthetic abundance. One real specimen is published; it is not an authorship detector, certification authority or claim of community ownership.",
-      "date_published": "2026-09-15T00:00:00Z",
-      "tags": [
-        "other",
-        "provenance",
-        "human-creation",
-        "ai-readable",
-        "public-record",
-        "cultural-memory"
-      ],
-      "external_url": "https://thehumanrecord.net/"
     }
   ]
 }

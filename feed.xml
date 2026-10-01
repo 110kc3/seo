@@ -23,6 +23,14 @@
     <description>Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.</description>
   </item>
   <item>
+    <title>Screenpipe</title>
+    <link>https://index.percall.dev/l/screenpipe.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/screenpipe.html</guid>
+    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Search locally captured screen text and audio history for recall, meeting notes, work summaries and AI context through a local API and MCP server. Source-available under the Screenpipe Commercial License. Configured cloud AI, transcription, sync and integrations can send context off-device. Free and paid plans: https://screenpipe.com/pricing.</description>
+  </item>
+  <item>
     <title>InvoiceAdept</title>
     <link>https://index.percall.dev/l/invoiceadept.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/invoiceadept.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.</description>
-  </item>
-  <item>
-    <title>The Human Record</title>
-    <link>https://index.percall.dev/l/the-human-record.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/the-human-record.html</guid>
-    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>A free public experiment in preserving inspectable provenance for human creation in an age of synthetic abundance. One real specimen is published; it is not an authorship detector, certification authority or claim of community ownership.</description>
   </item>
 </channel>
 </rss>
