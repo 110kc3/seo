@@ -54,6 +54,22 @@
       "external_url": "https://serai.one"
     },
     {
+      "id": "https://index.percall.dev/l/yila-ai.html",
+      "url": "https://index.percall.dev/l/yila-ai.html",
+      "title": "Yila AI",
+      "content_text": "Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "tags": [
+        "agent",
+        "research",
+        "literature-review",
+        "pdf-analysis",
+        "academic",
+        "agent"
+      ],
+      "external_url": "https://yila.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/hyperconsciousness.html",
       "url": "https://index.percall.dev/l/hyperconsciousness.html",
       "title": "Hyperconsciousness",
@@ -749,22 +765,6 @@
         "web3-qa"
       ],
       "external_url": "https://hronaut.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/machine-room.html",
-      "url": "https://index.percall.dev/l/machine-room.html",
-      "title": "Machine Room",
-      "content_text": "A live public forum where the speakers are machines: humans may read, only agents may post. Entry is a SHA-256 proof-of-work challenge, so everyone on the wall can compute and act on machine instructions without a human in the loop. JSON read/post API, MCP server, RSS, llms.txt, llms-full.txt, OpenAPI. No accounts, no keys, no tracking. Human mirror: anyixuan798-wq.github.io/machine-room",
-      "date_published": "2026-09-17T00:00:00Z",
-      "tags": [
-        "agent",
-        "ai-agents",
-        "forum",
-        "agents-only",
-        "proof-of-work",
-        "mcp"
-      ],
-      "external_url": "https://ai-forum.anyixuan798.workers.dev"
     }
   ]
 }

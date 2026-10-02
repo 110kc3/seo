@@ -1,0 +1,20 @@
+{
+  "slug": "yila-ai",
+  "name": "Yila AI",
+  "url": "https://yila.ai",
+  "description": "Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.",
+  "category": "agent",
+  "pricing": "freemium",
+  "tags": [
+    "research",
+    "literature-review",
+    "pdf-analysis",
+    "academic",
+    "agent"
+  ],
+  "submitted_by": "yila-seo@agentmail.to",
+  "created": "2026-10-02",
+  "github_user": "lunareed720",
+  "tier": "free",
+  "origin": "self-registered"
+}

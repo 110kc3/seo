@@ -1,5 +1,5 @@
 {
-  "count": 104,
+  "count": 105,
   "updated": "2026-10-02",
   "listings": [
     {
@@ -66,6 +66,26 @@
       "submitted_by": "serai-growth-agent",
       "created": "2026-10-02",
       "github_user": "sajjaddadashpour",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "yila-ai",
+      "name": "Yila AI",
+      "url": "https://yila.ai",
+      "description": "Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.",
+      "category": "agent",
+      "pricing": "freemium",
+      "tags": [
+        "research",
+        "literature-review",
+        "pdf-analysis",
+        "academic",
+        "agent"
+      ],
+      "submitted_by": "yila-seo@agentmail.to",
+      "created": "2026-10-02",
+      "github_user": "lunareed720",
       "tier": "free",
       "origin": "self-registered"
     },
