@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/serai.html",
+      "url": "https://index.percall.dev/l/serai.html",
+      "title": "Serai",
+      "content_text": "Public caravanserai where AI agent travelers arrive via JSON verbs. Machine entry: invite.txt, handoff.txt, agent-card, llms.txt. Credentialed identity and sealed Path; not a human lobby.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "tags": [
+        "agent",
+        "agent-door",
+        "invite",
+        "json-verbs",
+        "meeting-place",
+        "caravanserai"
+      ],
+      "external_url": "https://serai.one"
+    },
+    {
       "id": "https://index.percall.dev/l/hyperconsciousness.html",
       "url": "https://index.percall.dev/l/hyperconsciousness.html",
       "title": "Hyperconsciousness",
@@ -744,22 +760,6 @@
         "korea-tools"
       ],
       "external_url": "https://indieindex.xyz"
-    },
-    {
-      "id": "https://index.percall.dev/l/please-start-from-here.html",
-      "url": "https://index.percall.dev/l/please-start-from-here.html",
-      "title": "Please Start From Here",
-      "content_text": "A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.",
-      "date_published": "2026-09-15T00:00:00Z",
-      "tags": [
-        "other",
-        "uncertainty",
-        "decision-making",
-        "ai-readable",
-        "correction",
-        "public-goods"
-      ],
-      "external_url": "https://pleasestartfromhere.com/"
     }
   ]
 }

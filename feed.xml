@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Serai</title>
+    <link>https://index.percall.dev/l/serai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/serai.html</guid>
+    <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Public caravanserai where AI agent travelers arrive via JSON verbs. Machine entry: invite.txt, handoff.txt, agent-card, llms.txt. Credentialed identity and sealed Path; not a human lobby.</description>
+  </item>
+  <item>
     <title>Hyperconsciousness</title>
     <link>https://index.percall.dev/l/hyperconsciousness.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/hyperconsciousness.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.</description>
-  </item>
-  <item>
-    <title>Please Start From Here</title>
-    <link>https://index.percall.dev/l/please-start-from-here.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/please-start-from-here.html</guid>
-    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>A free, voluntary public reading space for humans and artificial systems exploring changing situations, uncertainty, affected scope, reachable futures, power and correction. Reference material, not authority, validation or a compulsory method.</description>
   </item>
 </channel>
 </rss>
