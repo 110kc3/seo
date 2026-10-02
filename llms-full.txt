@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 102 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 103 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (102)
+## All listings (103)
+
+### Eye.Art Polyphemus (eye-art-polyphemus)
+- url: https://eye.art/polyphemus
+- category: mcp · pricing: free · tags: image-generation, image-editing, reference-images, svg, motion
+- A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.
+- mcp: https://eye.art/api/eye-mcp
+- listing JSON: https://index.percall.dev/listings/eye-art-polyphemus.json
+- listing page: https://index.percall.dev/l/eye-art-polyphemus.html
 
 ### Serai (serai)
 - url: https://serai.one

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Eye.Art Polyphemus</title>
+    <link>https://index.percall.dev/l/eye-art-polyphemus.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/eye-art-polyphemus.html</guid>
+    <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.</description>
+  </item>
+  <item>
     <title>Serai</title>
     <link>https://index.percall.dev/l/serai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/serai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 16 Sep 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Machine-readable comparative audits of agent-service discovery, readiness, and OpenAPI contract drift.</description>
-  </item>
-  <item>
-    <title>IndieIndex</title>
-    <link>https://index.percall.dev/l/indieindex.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/indieindex.html</guid>
-    <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.</description>
   </item>
 </channel>
 </rss>

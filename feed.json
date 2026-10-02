@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/eye-art-polyphemus.html",
+      "url": "https://index.percall.dev/l/eye-art-polyphemus.html",
+      "title": "Eye.Art Polyphemus",
+      "content_text": "A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "tags": [
+        "mcp",
+        "image-generation",
+        "image-editing",
+        "reference-images",
+        "svg",
+        "motion"
+      ],
+      "external_url": "https://eye.art/polyphemus"
+    },
+    {
       "id": "https://index.percall.dev/l/serai.html",
       "url": "https://index.percall.dev/l/serai.html",
       "title": "Serai",
@@ -744,22 +760,6 @@
         "other"
       ],
       "external_url": "https://agent-surface-audit.pages.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/indieindex.html",
-      "url": "https://index.percall.dev/l/indieindex.html",
-      "title": "IndieIndex",
-      "content_text": "Agent-native public product registry for indie software. Public HTTP search and JSON listings without API keys; queue-only submit; default ugc nofollow; korea-tools and privacy-local categories.",
-      "date_published": "2026-09-15T00:00:00Z",
-      "tags": [
-        "other",
-        "registry",
-        "llms-txt",
-        "agents",
-        "indie",
-        "korea-tools"
-      ],
-      "external_url": "https://indieindex.xyz"
     }
   ]
 }

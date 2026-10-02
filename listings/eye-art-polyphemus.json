@@ -1,0 +1,23 @@
+{
+  "slug": "eye-art-polyphemus",
+  "name": "Eye.Art Polyphemus",
+  "url": "https://eye.art/polyphemus",
+  "description": "A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://eye.art/api/eye-mcp"
+  },
+  "tags": [
+    "image-generation",
+    "image-editing",
+    "reference-images",
+    "svg",
+    "motion"
+  ],
+  "submitted_by": "Eye.Art / Polyphemus",
+  "created": "2026-10-02",
+  "github_user": "jacobwell",
+  "tier": "free",
+  "origin": "self-registered"
+}
