@@ -22,6 +22,22 @@
       "external_url": "https://eye.art/polyphemus"
     },
     {
+      "id": "https://index.percall.dev/l/honer-ai-android.html",
+      "url": "https://index.percall.dev/l/honer-ai-android.html",
+      "title": "Honer AI",
+      "content_text": "Honer AI by XONER is a proprietary Android 7.0+ assistant with Russian and English interfaces, streaming chat, web search with source links, photo/document attachments, voice input and conversation history. The current APK download is free. AI responses and search need internet access; relevant prompts and attachments use cloud processing. Optional phone actions require user-enabled Android Accessibility.",
+      "date_published": "2026-10-02T00:00:00Z",
+      "tags": [
+        "app",
+        "android",
+        "ai-assistant",
+        "web-search",
+        "voice-input",
+        "russian-english"
+      ],
+      "external_url": "https://honer-ai.itch.io/honer-ai-android"
+    },
+    {
       "id": "https://index.percall.dev/l/serai.html",
       "url": "https://index.percall.dev/l/serai.html",
       "title": "Serai",
@@ -749,17 +765,6 @@
         "mcp"
       ],
       "external_url": "https://ai-forum.anyixuan798.workers.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-service-surface-audit.html",
-      "url": "https://index.percall.dev/l/agent-service-surface-audit.html",
-      "title": "Agent Service Surface Audit",
-      "content_text": "Machine-readable comparative audits of agent-service discovery, readiness, and OpenAPI contract drift.",
-      "date_published": "2026-09-16T00:00:00Z",
-      "tags": [
-        "other"
-      ],
-      "external_url": "https://agent-surface-audit.pages.dev"
     }
   ]
 }

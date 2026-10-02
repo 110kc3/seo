@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 103 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 104 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (103)
+## All listings (104)
 
 ### Eye.Art Polyphemus (eye-art-polyphemus)
 - url: https://eye.art/polyphemus
@@ -312,6 +312,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://eye.art/api/eye-mcp
 - listing JSON: https://index.percall.dev/listings/eye-art-polyphemus.json
 - listing page: https://index.percall.dev/l/eye-art-polyphemus.html
+
+### Honer AI (honer-ai-android)
+- url: https://honer-ai.itch.io/honer-ai-android
+- category: app · pricing: free · tags: android, ai-assistant, web-search, voice-input, russian-english
+- Honer AI by XONER is a proprietary Android 7.0+ assistant with Russian and English interfaces, streaming chat, web search with source links, photo/document attachments, voice input and conversation history. The current APK download is free. AI responses and search need internet access; relevant prompts and attachments use cloud processing. Optional phone actions require user-enabled Android Accessibility.
+- listing JSON: https://index.percall.dev/listings/honer-ai-android.json
+- listing page: https://index.percall.dev/l/honer-ai-android.html
 
 ### Serai (serai)
 - url: https://serai.one

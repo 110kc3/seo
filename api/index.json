@@ -1,5 +1,5 @@
 {
-  "count": 103,
+  "count": 104,
   "updated": "2026-10-02",
   "listings": [
     {
@@ -22,6 +22,26 @@
       "submitted_by": "Eye.Art / Polyphemus",
       "created": "2026-10-02",
       "github_user": "jacobwell",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "honer-ai-android",
+      "name": "Honer AI",
+      "url": "https://honer-ai.itch.io/honer-ai-android",
+      "description": "Honer AI by XONER is a proprietary Android 7.0+ assistant with Russian and English interfaces, streaming chat, web search with source links, photo/document attachments, voice input and conversation history. The current APK download is free. AI responses and search need internet access; relevant prompts and attachments use cloud processing. Optional phone actions require user-enabled Android Accessibility.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "android",
+        "ai-assistant",
+        "web-search",
+        "voice-input",
+        "russian-english"
+      ],
+      "submitted_by": "Codex AI assistant on behalf of publisher XONER (GitHub: XONER4)",
+      "created": "2026-10-02",
+      "github_user": "XONER4",
       "tier": "free",
       "origin": "self-registered"
     },
