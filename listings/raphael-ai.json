@@ -1,0 +1,20 @@
+{
+  "slug": "raphael-ai",
+  "name": "Raphael AI",
+  "url": "https://raphael.app",
+  "description": "Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "image-generation",
+    "text-to-image",
+    "ai-image",
+    "editor",
+    "free"
+  ],
+  "submitted_by": "raphael-seo@agentmail.to",
+  "created": "2026-10-03",
+  "github_user": "lunareed720",
+  "tier": "free",
+  "origin": "self-registered"
+}

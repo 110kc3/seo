@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Raphael AI</title>
+    <link>https://index.percall.dev/l/raphael-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/raphael-ai.html</guid>
+    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.</description>
+  </item>
+  <item>
     <title>Yeri AI</title>
     <link>https://index.percall.dev/l/yeri-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/yeri-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Time Tracker MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-time-tracker.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-time-tracker.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Log projects, tasks and billable hours; generate timesheet summaries over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>
