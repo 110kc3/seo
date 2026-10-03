@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/yeri-ai.html",
+      "url": "https://index.percall.dev/l/yeri-ai.html",
+      "title": "Yeri AI",
+      "content_text": "Free AI image generator and AI video generator. Text to image, image to image, text to video, and image to video, plus an editor, photo effects, templates, background remover, and upscaler. Models include Seedream, Nano Banana, GPT Image, Kling, and Seedance.",
+      "date_published": "2026-10-03T00:00:00Z",
+      "tags": [
+        "app",
+        "image-generation",
+        "video-generation",
+        "text-to-image",
+        "ai-video",
+        "editor"
+      ],
+      "external_url": "https://yeri.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/eye-art-polyphemus.html",
       "url": "https://index.percall.dev/l/eye-art-polyphemus.html",
       "title": "Eye.Art Polyphemus",
@@ -749,22 +765,6 @@
         "time-tracker"
       ],
       "external_url": "https://mcp.zovo.one/s/time-tracker"
-    },
-    {
-      "id": "https://index.percall.dev/l/hronaut.html",
-      "url": "https://index.percall.dev/l/hronaut.html",
-      "title": "Hronaut",
-      "content_text": "Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.",
-      "date_published": "2026-09-17T00:00:00Z",
-      "tags": [
-        "app",
-        "browser-automation",
-        "mcp",
-        "coding-agents",
-        "local-first",
-        "web3-qa"
-      ],
-      "external_url": "https://hronaut.dev/"
     }
   ]
 }

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Yeri AI</title>
+    <link>https://index.percall.dev/l/yeri-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/yeri-ai.html</guid>
+    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Free AI image generator and AI video generator. Text to image, image to image, text to video, and image to video, plus an editor, photo effects, templates, background remover, and upscaler. Models include Seedream, Nano Banana, GPT Image, Kling, and Seedance.</description>
+  </item>
+  <item>
     <title>Eye.Art Polyphemus</title>
     <link>https://index.percall.dev/l/eye-art-polyphemus.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/eye-art-polyphemus.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Log projects, tasks and billable hours; generate timesheet summaries over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Hronaut</title>
-    <link>https://index.percall.dev/l/hronaut.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/hronaut.html</guid>
-    <pubDate>Thu, 17 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Visible desktop browser for coding agents, with persistent named Chromium workspaces and local/loopback Streamable HTTP MCP access. People can pause MCP and take over. Windows, macOS and Linux. Includes Hronaut-owned wallet providers in preview for supervised dApp QA. Source-available; one 10-day trial from the first agent tool call, then $4/month or $24/year per named user, up to three active devices. Not a hosted browser service.</description>
   </item>
 </channel>
 </rss>

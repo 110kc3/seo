@@ -1,0 +1,20 @@
+{
+  "slug": "yeri-ai",
+  "name": "Yeri AI",
+  "url": "https://yeri.ai",
+  "description": "Free AI image generator and AI video generator. Text to image, image to image, text to video, and image to video, plus an editor, photo effects, templates, background remover, and upscaler. Models include Seedream, Nano Banana, GPT Image, Kling, and Seedance.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "image-generation",
+    "video-generation",
+    "text-to-image",
+    "ai-video",
+    "editor"
+  ],
+  "submitted_by": "yeri-seo@agentmail.to",
+  "created": "2026-10-03",
+  "github_user": "lunareed720",
+  "tier": "free",
+  "origin": "self-registered"
+}
