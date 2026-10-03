@@ -1,15 +1,21 @@
 # NEXT — the one pending list
 
-> **2026-09-27 — selected discovery and score UX improvements completed locally.**
-> Catalog results now expose auth/transport or price filters, dated failed probes,
-> unknown health and connection guidance. Score wording describes checklist coverage,
-> separates optional service interfaces and links findings to free remedies.
-> Numeric scores, letter thresholds and weights are unchanged. This was an explicit
-> owner-selected slice; the broader product-work gate remains active.
-> Local verification: full Node 22 suite, deterministic rebuild and desktop/mobile
-> browser checks. Push/Actions and post-deploy live verification are pending; next
-> session check the resulting commit once and compare live `llms.txt` byte for byte.
-> No further implementation slice is selected. Real-user validation remains pending.
+> **2026-10-03 — selected scoring reliability and status cleanup implemented.**
+> Weekly scoring now authenticates with the existing operations token, restricted
+> to URLs in the deployed registry. The public limit stays at 60 uncached
+> audits/hour/IP. Failed refreshes preserve previous grades and dates, report
+> refreshed/retained/missing totals, and fail the workflow after publication.
+> Local verification: 307 tests on Node 22, two unchanged builds and diff checks.
+> Push/Actions and production verification for this change are pending. Next
+> session check the resulting commit once, compare live `llms.txt` byte for byte,
+> and inspect the next scheduled health summary for complete registry coverage.
+> No further implementation slice is selected; the commercial-evidence gate remains.
+>
+> **Previous work verified:** the September 27 catalog and score UX improvements
+> shipped in `a2d286a`. October 3 verification of `cf33940` passed all 302 then-current
+> tests, deterministic builds and production checks, including byte-identical
+> `llms.txt`. [Deployment](https://github.com/110kc3/seo/actions/runs/37124489258)
+> succeeded. Real-user value remains unvalidated.
 
 > **2026-09-05 API simplification:** only `POST /api/audit` remains paid
 > ($0.05 USDC). `/api/check`, `/api/liveness`, `/api/route` and new
@@ -39,86 +45,40 @@ pricing, sizing and product strategy are not for it:
 - `2026-07-29-project-review.md` — a point-in-time review, now historical.
 - `competitors.md`, `service-ideas.md`, `page-ideas.md`, `README.md` — pre-existing portfolio notes.
 
-**The live queue in §§1–3 was re-verified on 2026-09-01.** Sections 4 onward are
+**The current status and external PR outcomes were refreshed on 2026-10-03.** Sections 4 onward are
 dated records of what shipped. Where an older record disagrees with the queue,
 the queue is right.
 
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-> **Updated 2026-09-01, eleventh pass.** Analytics is restored and the Show HN
-> hold has expired. The latest result is now 71,814 requests, 5.75% AI
-> crawler/action-agent share, seven third-party registrations and zero organic
-> payments. The private draft has been rewritten around that contrast (§1.1).
->
-> **Your next action is the Show HN, then the commercial evidence work:** the
-> 50-founder outreach test, logged-in indexation, and the optional Clustly and
-> Stripe setup. The no-new-product gate remains in force until the commercial
-> reset is evaluated after 50 qualified contacts or 30 days, whichever is later.
->
-> The code-side review found and corrected four stale agent-facing claims in
-> `llms.txt` and the runtime MCP metadata (§2.2). The deterministic patch
-> deployed from `38bd15b`, the canonical live file now matches the generated
-> file byte for byte, and the current full suite passes all 293 tests. All three
-> upstream PRs were also refreshed on 2026-09-01 (§3).
->
-> **Repository health, checked 2026-09-01:** there are no open issues or pull
-> requests in this repo, the latest workflows are green, production is healthy,
-> and the live `llms.txt` still matches the generated artifact byte for byte.
-> The deprecated action-runtime warning found on the verification deploy was
-> cleared by moving all workflows to the Node 24-based `checkout@v7` and
-> `setup-node@v7` actions while keeping the project test runtime on Node 22.
-> The three external PRs are all zero commits behind their upstream bases, have
-> no failing checks and now wait only on maintainer review or merge.
+### Actual open queue — 2026-10-03
 
-### Actual open queue
-
-- **Required owner actions:** post the prepared Show HN; run the 50-founder
-  outreach test; complete Google/Bing indexation in the logged-in consoles.
-- **Optional owner actions:** create the two Stripe Payment Links; configure
-  `SIGNING_KEY` for kc-it.pl; run the Clustly experiment; delete the unused
-  `GLAMA_API_KEY`; optionally join the two machine-payment waitlists.
-- **External waits:** three healthy upstream PRs await maintainers. The x402
-  Bazaar still omits this service, but every seller-side step is complete; only
-  recheck if upstream state changes.
-- **Repository/Codex:** nothing open. Do not invent another product task while
-  the commercial evidence gate is running.
+- **Owner actions:** Show HN and logged-in indexation remain unconfirmed. Refresh
+  the private draft before any posting; its September dates and figures are old.
+- **Commercial validation:** use the private user-value plan and current evidence
+  in `vault 40-projects/x402-scale-up/`. Self-service remains the accepted direction.
+  Older consulting/outreach/Stripe plans are historical, not a reopened offer.
+  The existing commercial-evidence gate has not been satisfied or replaced.
+- **External status:** Awesome-llms-txt #114 merged; awesome-mcp-servers #11152
+  closed unmerged after remote entries moved to another repository. Only
+  llms-txt-hub #1460 remains open awaiting review (§3). A replacement submission
+  is unselected. Bazaar's last recorded absence remains an external wait; recheck
+  only if upstream state changes.
+- **Repository/Codex:** the selected scoring fix and status cleanup are implemented;
+  deployment and the next scheduled scoring run still need observation. No new
+  product work is selected. Keep current metrics and owner strategy in the vault.
 
 ---
 
 ## 1. Pending on Kamil
 
-### 1.1 Show HN — READY; next clean window Wed 2 Sep 2026
+### 1.1 Show HN — owner action, draft refresh required
 
-The 25 Aug hold did its job. All four gates now pass:
-
-1. **Full 30-day window:** 71,814 requests in the live snapshot generated at
-   `2026-09-01T16:13:38.737Z`.
-2. **Real registration path:** seven third-party `self-registered` listings are
-   live — Cap, Dash, FluentEDI, Penroll App, PZERO, Question Machine and
-   XiuRouter.
-3. **Inbound activity:** 4,131 requests identified as an AI crawler or action
-   agent (5.75%), with 436 free scores and 609 `llms.txt` reads. This is a
-   self-reported User-Agent classification, not an identity claim.
-4. **Conversion result:** six audit settlements and eleven settlements across
-   all paid surfaces, all from one known test wallet; no organic payer and no
-   payment since 3 Aug.
-
-The result is more useful than the one held on 2 Aug: third parties will use the
-free write workflow, while nobody has crossed the paid boundary. The private
-draft now leads with that contrast and no longer claims zero registrations:
-`vault 40-projects/x402-scale-up/show-hn-draft.md`.
-
-The figures were refreshed at 16:13 UTC after Tuesday's slot closed. Refresh
-them once more immediately before submitting in the next normal HN slot:
-Wednesday 2 Sep, 14:00–16:00 UTC.
-
-**On credentials: don't send them, and I would not use them.** Posting would be
-under your name, on your account, on a one-shot channel — that is yours to press
-send on. HN also expects a Show HN to come from the person who built the thing
-and does not permit automated submission, and a days-old account is already a
-risk factor there without adding that. What I can do instead is have it
-60-seconds-from-posted: numbers refreshed, title picked, body in the clipboard.
+Posting remains unconfirmed as of 2026-10-03. The old 2 September slot has passed.
+The private `show-hn-draft.md` must be refreshed against the dated evidence in
+`vault 40-projects/x402-scale-up/README.md` before Kamil posts under his account.
+No public submission or outreach is authorized by repository maintenance.
 
 ### ~~1.2 Directory submissions~~ — all five done
 
@@ -309,7 +269,14 @@ against); freeze x402 spend. None is started.
 
 ---
 
-## 2. Pending on Codex — cleared by the 2026-08-27 deploy
+## 2. Codex status — 2026-10-03
+
+The selected weekly-scoring reliability fix and documentation refresh are complete
+locally. Public throttling is unchanged; operations scoring is registry-restricted.
+Local regression coverage includes 110 uncached audits, anonymous throttling,
+authentication, retained dates and CLI failure reporting. Deployment and the next
+scheduled health run remain pending as recorded above. The entries below are
+historical implementation records, not an accepted queue.
 
 ### ~~2.1 Glama badge + tool count on PR #11152~~ — refreshed 2026-08-28
 
@@ -689,14 +656,14 @@ following it.
 outage edge and the recovery edge, with delivery confirmed by a webhook sink
 rather than inferred. **265 tests.**
 
-## 3. Waiting on maintainers — refreshed 2026-09-01
+## 3. External listing outcomes — checked 2026-10-03
 
 | what | current state |
 |---|---|
-| **[awesome-mcp-servers #11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** | OPEN, CLEAN and MERGEABLE after a 28 Aug rebase onto current `main`; zero commits behind. Six tools, 15k x402 endpoints and 14k MCP endpoints are reflected upstream; the Glama listing/badge return 200 and `check-submission` is green. Wait for the maintainer. |
-| **[Awesome-llms-txt #114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)** | OPEN and MERGEABLE; zero commits behind `master`. The diff is one line, the canonical URL returns 200 without a redirect and `normalize_lists.py --check` passes. GitHub still carries the 2 Aug `CHANGES_REQUESTED` state even though both requested changes were addressed on 3 Aug and re-review was requested in the thread. Contributor permissions cannot clear or formally re-request that review; only the maintainer can. |
-| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN and MERGEABLE, waiting on required review. The branch was rebased onto current `main` through SSH on 28 Aug and is now zero commits behind; the one-file/three-URL diff is preserved and the refreshed Auto-merge check is green. Wait for the requested maintainer review. |
-| **x402 Bazaar listing** | Still absent. A live 1 Sep check read **14,819 resources**; the 26 Aug committed snapshot contains **15,127 endpoints**. Nothing pays our address or lives on our host. Everything on our side is done: the rail is CDP, the 402 carries discovery metadata and a settlement carried it. Upstream `x402-foundation/x402#2112` is now closed and documents several indexing/re-indexing causes, so it does not identify ours. Check with `node scripts/bazaar-check.mjs`; do not spend more time on this unless the upstream state changes. |
+| **[awesome-mcp-servers #11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** | CLOSED unmerged on 8 September. Maintainers moved remote entries to `punkpeye/awesome-remote-mcp-servers`. No replacement submission selected or sent. |
+| **[Awesome-llms-txt #114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)** | MERGED on 28 September. No pending review action. |
+| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN, MERGEABLE, REVIEW_REQUIRED. Await the maintainer; no new comment or review request sent. |
+| **x402 Bazaar listing** | Last verified absent on 1 September; not rechecked this session. That check read **14,819 resources**; the 26 Aug committed snapshot contains **15,127 endpoints**. Nothing pays our address or lives on our host. Everything on our side is done: the rail is CDP, the 402 carries discovery metadata and a settlement carried it. Upstream `x402-foundation/x402#2112` is now closed and documents several indexing/re-indexing causes, so it does not identify ours. Check with `node scripts/bazaar-check.mjs`; do not spend more time on this unless the upstream state changes. |
 
 ---
 
@@ -840,13 +807,13 @@ and agent-readiness Phases 1, 3 and 5.
 
 ---
 
-## 6. If you only do one thing in each column
+## 6. Current follow-up
 
-- **You:** post the prepared Show HN in the next clean window, then run the
-  50-founder outreach test and the logged-in indexation jobs. Clustly, Stripe and
-  signing remain useful but are not launch blockers.
-- **Me:** nothing unblocked. The source corrections are deployed and verified;
-  all three upstream PRs have current review notes and now wait on maintainers.
+- **Owner:** refresh the private Show HN draft before posting; indexation remains
+  unconfirmed. User-value validation is still pending in the private plan.
+- **Codex:** check the scoring-fix deployment once next session and inspect the
+  next scheduled refresh summary. Maintain the single open external PR when its
+  state changes. No additional product slice is selected.
 
 ---
 

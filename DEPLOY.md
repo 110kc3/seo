@@ -489,3 +489,19 @@ Public by design, and correctly living in `site.config.json`: the receiving addr
 ## Rollback
 
 The static build is committed, so any deploy is reproducible from a commit. To disable payments instantly without a deploy, set `payments.x402_address` to `""` — `resolveX402()` returns null and every paid path fails closed with `payments_not_enabled`. To take the whole site back to GitHub Pages, point DNS away and re-enable the Pages deploy; the repo still builds identically for it.
+
+## Weekly score refresh — 2026-10-03
+
+`health.yml` uses the existing GitHub `DASHBOARD_TOKEN` secret for scoring as well
+as watch fulfilment. It must match the Worker's secret. No new secret is needed.
+Deploy the Worker change before expecting the scheduled scorer to bypass the
+public allowance; an older deployment still limits the runner to 60 misses/hour.
+The scorer fails early when the token is absent and refuses service redirects.
+
+Inspect the **Registry score refresh** job summary: refreshed must equal attempted
+for a complete run. Retained grades keep their old dates, and missing grades are
+reported separately. Successful updates are published even if some audits fail;
+the final job status then fails visibly. A deployed-registry mismatch (403) can
+occur if registration landed before deployment; inspect deployment before retrying.
+Check the next scheduled run after rollout. A green deploy alone does not prove
+that all remote sites were scored successfully.

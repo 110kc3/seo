@@ -25,11 +25,13 @@ jobs:
         run: node scripts/check-liveness.mjs
 
       # Grades for the score badge. Runs after the liveness pass so a delisted
-      # product is not scored, and never fails the job: a scoring hiccup must not
-      # block a delisting, and last week's grade is kept rather than blanked.
+      # product is not scored. Continue through publishing partial results, then
+      # fail the job at the end if any listing could not be refreshed.
       - name: Re-score every listing
         id: score
         continue-on-error: true
+        env:
+          DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
         run: node scripts/score-listings.mjs
 
       # One dated traffic reading appended per run, so /report.html can quote a
@@ -145,6 +147,8 @@ jobs:
       # inferred from step outputs.
       - name: Commit health state / delistings / catalog
         id: commit
+        env:
+          DASHBOARD_TOKEN: ${{ secrets.DASHBOARD_TOKEN }}
         run: |
           echo "pushed=false" >> "$GITHUB_OUTPUT"
           git config user.name "registry-bot"
@@ -164,7 +168,9 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             node scripts/check-liveness.mjs
-            node scripts/score-listings.mjs || true
+            if ! node scripts/score-listings.mjs; then
+              echo "scoring_failed=true" >> "$GITHUB_OUTPUT"
+            fi
             node scripts/fetch-x402-catalog.mjs || true
             node scripts/fetch-mcp-catalog.mjs || true
             sleep $(( (RANDOM % 5) + 2 ))
@@ -188,3 +194,11 @@ jobs:
           gh issue create --repo "$GITHUB_REPOSITORY" \
             --title "Liveness report $(date -u +%Y-%m-%d)" \
             --body-file health-report.md
+
+      # A green workflow must not conceal retained/stale or missing scores.
+      # This runs after publication so failures do not discard successful updates.
+      - name: Report incomplete scoring
+        if: always() && (steps.score.outcome == 'failure' || steps.commit.outputs.scoring_failed == 'true')
+        run: |
+          echo "::error::Registry scoring was incomplete; see the score refresh job summary. Previous successful grades were retained with their original dates."
+          exit 1

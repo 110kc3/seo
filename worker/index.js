@@ -346,7 +346,7 @@ export default {
           authorized: authorizeDashboard(request, env).state === 'ok',
         });
       } else if (url.pathname === '/api/score') {
-        response = await handleScore(request, env, cfg, resolveX402(cfg));
+        response = await handleScore(request, env, cfg, resolveX402(cfg), registry.listings ?? []);
       } else if (url.pathname === '/api/search') {
         response = handleSearch(url, registry.listings ?? [], BASE);
       } else if (url.pathname === '/ask') {

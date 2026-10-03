@@ -130,7 +130,7 @@ The project combines a deterministic static build with a small Cloudflare Worker
 2. `scripts/build.mjs` validates the inputs and generates the HTML, JSON, manifests, feeds, and sitemap committed to the repository.
 3. `worker/` serves dynamic search, NLWeb, MCP, scoring, routing, response negotiation, and aggregate request statistics.
 4. GitHub Actions validate registration and update issues, rebuild the registry, and deploy accepted changes.
-5. A weekly workflow checks listing health, refreshes readability scores, and samples the external catalogs.
+5. A weekly workflow checks listing health, refreshes readability scores, and samples the external catalogs. Incomplete score refreshes retain previous grades with their original dates and fail visibly after publishing successful updates.
 
 The runtime has no package dependencies. Worker modules are written so that most behavior can be tested under plain Node.
 

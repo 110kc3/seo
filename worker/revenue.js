@@ -136,6 +136,12 @@ function tokensMatch(a, b) {
   return diff === 0;
 }
 
+/** Operations clients must explicitly use Bearer auth, never a cookie or URL. */
+export function authorizeOperationsBearer(request, env) {
+  const token = (request.headers.get('authorization') ?? '').match(/^Bearer\s+(.+)$/i)?.[1];
+  return Boolean(env?.DASHBOARD_TOKEN && token && tokensMatch(token, env.DASHBOARD_TOKEN));
+}
+
 function cookieValue(request, name) {
   const header = request.headers.get('cookie') ?? '';
   for (const part of header.split(';')) {

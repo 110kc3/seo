@@ -178,6 +178,22 @@ sets and letter thresholds are unchanged. Both audit and free score responses
 explain interpretation; free checks add scope and applicability. The free-result
 cache prefix is versioned separately from check sets to discard older projections.
 
+### Scheduled registry scoring — 2026-10-03
+
+The weekly runner sends `Authorization: Bearer <DASHBOARD_TOKEN>` and
+`X-Registry-Score: 1` to `/api/score`. Only this explicit mode bypasses the public
+60-uncached-audits/hour/IP allowance. It requires an exact normalized URL match
+in the deployed registry, checked before cache lookup or host-alias rewriting.
+URL validation still applies. Cookies, query credentials and User-Agent strings
+do not authorize this mode. The operations bearer is never passed to audit targets.
+
+The runner requires an HTTPS service URL and refuses redirects when carrying the
+bearer. It validates responses, reports refreshed/retained/missing counts and
+keeps a failed listing's previous score and original date. Incomplete runs exit
+nonzero. `health.yml` publishes successful updates before its final failure step;
+its push-retry path authenticates and reports failures too. Newly committed URLs
+not yet deployed fail explicitly and can be scored after their deployment.
+
 ## Data stores
 
 One KV namespace (`PAYMENTS`), three prefixes, chosen so each read is cheap:

@@ -7,8 +7,8 @@
 - Keep commercial strategy, pricing analysis and private owner notes in the
   Obsidian vault under `40-projects/x402-scale-up/`, not in this public repo.
 - Do not create new product work while the commercial-evidence gate in
-  `NEXT.md` remains active. Maintain the three upstream PRs listed there when
-  their state changes.
+  `NEXT.md` remains active. Maintain the open upstream PRs listed there when
+  their state changes; retain merged/closed outcomes as records.
 
 ## Runtime and verification
 

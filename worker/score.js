@@ -19,6 +19,7 @@
 import { auditUrl, parseAuditRequest, CHECK_LABELS, resolveCheckSet, scoreDescription, SCORE_INTERPRETATION, CHECK_CONTEXT } from './audit.js';
 import { botAuthHeaders, keyDirectory, DIRECTORY_PATH, DIRECTORY_CONTENT_TYPE } from './signing.js';
 import { serveStatic } from './assets.js';
+import { authorizeOperationsBearer } from './revenue.js';
 
 /**
  * Signs the auditor's outbound requests under the web-bot-auth profile, and
@@ -134,16 +135,9 @@ export function canonicalTarget(target, cfg) {
 const CACHE_PREFIX = 'score:v2:';
 const CACHE_TTL_SECONDS = 3600;
 const RATE_PREFIX = 'score:rl:';
-// 20 was set when the registry held eight listings. It now holds forty, and the
-// weekly scorer audits every one of them from a single runner IP — so the limit
-// had become tight enough to throttle our own cron, which fails *quietly*:
-// score-listings keeps the previous grade on error, and thirty-two of those
-// listings have no previous grade to keep. The badges would have read "not
-// scored yet" indefinitely while every run looked green.
-//
-// 60 covers the fleet with room to grow. What the limit is actually defending
-// is unchanged: an uncached score costs ~14 outbound fetches, cache hits are
-// free and unmetered, and the paid endpoint is not rate limited at all.
+// Public callers get 60 uncached audits/hour/IP. Scheduled registry refreshes
+// use explicit operations authentication and the deployed URL allowlist below;
+// registry growth must not require increasing the public abuse allowance.
 const RATE_LIMIT_PER_HOUR = 60;
 
 const json = (body, status = 200, headers = {}) =>
@@ -233,7 +227,7 @@ async function overRateLimit(env, ip) {
   return false;
 }
 
-export async function handleScore(request, env, cfg, rail) {
+export async function handleScore(request, env, cfg, rail, listings = []) {
   const base = cfg.base.replace(/\/+$/, '');
   const upsell = upsellFor(base, rail);
   const url = new URL(request.url);
@@ -251,6 +245,20 @@ export async function handleScore(request, env, cfg, rail) {
   // Same validation as the paid endpoint, so the free tier is not a softer door.
   const parsed = parseAuditRequest({ url: target });
   if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
+
+  // The weekly runner has outgrown the anonymous allowance. Its existing
+  // operations bearer can score registered URLs only, never arbitrary targets.
+  // Validate the original URL before alias rewriting and before reading cache.
+  const registryRun = request.headers.get('x-registry-score') === '1';
+  if (registryRun) {
+    if (!authorizeOperationsBearer(request, env)) {
+      return json({ ok: false, code: 'unauthorized', error: 'registry scoring requires an operations bearer' }, 401);
+    }
+    const registered = listings.some((listing) => parseAuditRequest({ url: listing.url }).url === parsed.url);
+    if (!registered) {
+      return json({ ok: false, code: 'not_registered', error: 'registry scoring is limited to registered URLs' }, 403);
+    }
+  }
 
   const targetUrl = canonicalTarget(parsed.url, cfg);
   // The check set is part of the cache identity. Without it, whichever set was
@@ -273,7 +281,7 @@ export async function handleScore(request, env, cfg, rail) {
   }
 
   const ip = request.headers.get('cf-connecting-ip') ?? '';
-  if (await overRateLimit(env, ip)) {
+  if (!registryRun && await overRateLimit(env, ip)) {
     return json({
       ok: false,
       code: 'rate_limited',

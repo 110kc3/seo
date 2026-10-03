@@ -1,119 +1,35 @@
 # TODO
 
-## ⚡ Needs Kamil — read this, skip the rest
+## Needs Kamil
 
-*Everything here needs your credentials, a browser, or an external/public
-action. There is currently no open repository-side implementation. Updated
-2026-09-01; where the changelog below disagrees with this list, this list wins.*
+Updated 2026-10-03. `NEXT.md` is the only implementation queue; this list contains
+owner actions only. The folded changelog is historical.
 
-### Ready now
+1. **Show HN:** posting remains unconfirmed. Refresh the private draft and its
+   evidence before posting; the September posting window is obsolete.
+2. **Indexation:** Google/Bing verification and submissions still need the owner's
+   logged-in consoles. See `NEXT.md` §1.8; completion has not been observed.
+3. **User-value validation:** the private September 27 plan records proposed
+   participant tasks and decision criteria. Participation/outreach has not begun.
+   Its remaining phases are proposals, not accepted implementation work.
 
-1. **Post Show HN in the next Tue–Thu, 14:00–16:00 UTC window.** The 25 Aug
-   hold has expired and every gate now passes: analytics is healthy, the rolling
-   window is a full 30 days, seven third-party products have exercised the real
-   registration workflow, and organic payment conversion remains zero. The
-   draft and posting checklist were refreshed from the 2026-09-01 16:13 UTC live
-   snapshot: `vault 40-projects/x402-scale-up/show-hn-draft.md`. The next clean
-   slot is Wed 2 Sep, 14:00–16:00 UTC. Refresh once immediately before posting;
-   submission under your HN account remains your action.
+Private metrics, strategy and legacy commercial setup notes live in
+`vault 40-projects/x402-scale-up/`. The self-service preference supersedes older
+manual-service suggestions. Do not reopen consulting or Stripe offer setup from
+this changelog. Historical Clustly/signing setup observations are dated September 1,
+not verified current blockers for this repository.
 
-### Commercial evidence — do not replace this with more engineering
+## Current health — not tasks
 
-2. **Personal outreach is the 30-day sales test.** Use the ICP, tracker fields,
-   two-message sequence and stop gates in
-   `vault 40-projects/x402-scale-up/2026-08-06-commercial-reset.md`. Send 10
-   genuinely personalized messages per weekday until 50 qualified founders have
-   been contacted. Do not buy a list or automate the sending. Record replies,
-   calls and payments, not opens.
-
-3. **Indexation:**
-
-   1. Google Search Console — verify `percall.dev` and `kc-it.pl` as Domain
-      properties.
-   2. Submit `https://index.percall.dev/sitemap.xml` and
-      `https://kc-it.pl/sitemap.xml`.
-   3. Bing Webmaster Tools — verify both; submit `https://percall.dev/` and
-      `https://kc-it.pl/services/agent-readability` manually.
-   4. Request indexing for both sales/front-door URLs in GSC.
-
-4. **Optional: Clustly — one small channel experiment.** It was still
-   unconfigured on 2026-09-01 (`/etc/clustly-agent.env` absent; unit inactive).
-   Register at <https://www.clustly.ai/operator>, store the one-time `clk_…` key in
-   `/etc/clustly-agent.env`, publish `clustly/listing.json`, and enable the unit.
-   Runbook: [docs/clustly.md](docs/clustly.md). Read the custody caveat first:
-   their managed wallet holds earnings until swept. Stop the unit and listing
-   after 30 days if it produces no qualified order.
-
-### Useful, but not launch blockers
-
-5. **Create two optional Stripe Payment Links** in the KC-IT Stripe account:
-
-   - `Agent-readability report` — **$49 USD**, one-time, quantity fixed at 1.
-     Collect buyer email and a required `Website URL` custom field.
-   - `Done-for-you agent-readability implementation` — **$199 USD**, one-time,
-     quantity fixed at 1. Collect buyer email plus required `Website URL` and
-     `Repository or platform` fields.
-
-   Do not promise automatic fulfilment or recurring service. Set the
-   confirmation message to say Kamil will confirm scope and delivery date by
-   email; refund rather than silently expanding a site that does not fit.
-
-   Send the two `https://buy.stripe.com/...` URLs back here. They must replace
-   the temporary `mailto:` order links in the `personal-page` repo:
-   `services/agent-readability.html`, `.json`, `.md`, and the Agent Skill.
-   The public prices and exact scopes are already live in those files.
-
-   The service remains buyable by email while these are absent; the live page
-   still used the temporary `mailto:` links on 2026-09-01.
-
-6. **Configure honest response signing on the kc-it.pl Pages project.** The key
-   directory still returned 404 on 2026-09-01. Confirm the Pages project name,
-   then run this from a terminal authenticated to the correct Cloudflare
-   account:
-
-   ```bash
-   node --input-type=module -e 'const k=await crypto.subtle.generateKey("Ed25519",true,["sign","verify"]);const j=await crypto.subtle.exportKey("jwk",k.privateKey);process.stdout.write(Buffer.concat([Buffer.from(j.d,"base64url"),Buffer.from(j.x,"base64url")]).toString("base64"))' |
-     npx wrangler pages secret put SIGNING_KEY --project-name PERSONAL_PAGE_PROJECT
-   ```
-
-   Replace `PERSONAL_PAGE_PROJECT` first. Re-deploy the Pages project, then
-   verify that
-   `https://kc-it.pl/.well-known/http-message-signatures-directory` returns 200
-   and that `curl -I https://kc-it.pl/services/agent-readability` shows
-   `content-digest`, `signature-input`, and `signature`. Until the secret exists,
-   the directory deliberately returns 404 instead of pretending unsigned
-   content is verifiable.
-
-### Current health — not tasks
-
-- **Traffic measurement restored.** `/api/stats.json` returned `ok: true` on
-  2026-09-01 and the 2026-08-26 health run committed a fresh traffic snapshot.
-  The live 30-day reading was 71,814 requests with 5.75% classified as an AI
-  crawler or action agent. The incident workflow remains in place and will open
-  one exact-title issue without overwriting the last good series if this fails
-  again.
-- **Repository health confirmed.** On 2026-09-01 there were no open issues or
-  pull requests, the latest workflows were green, production endpoints returned
-  200, and live `llms.txt` matched the generated artifact byte for byte. All
-  three external directory PRs were zero commits behind with no failing checks;
-  each now waits on a maintainer. The deprecated action-runtime warning exposed
-  by the verification deploy was cleared by upgrading all workflows to the
-  Node 24-based `checkout@v7` and `setup-node@v7` actions; project tests still
-  run on the required Node 22 runtime.
-
-### Held — do not do these yet
-
-- **No new x402 endpoint, directory feature, paid listing work, or marketplace
-  build until the commercial reset is evaluated after 50 qualified contacts or
-  30 days, whichever is later.** The gate is evidence, not another deploy.
-- **No paid acquisition.** First require at least 5 positive replies, 2 sales
-  calls and 1 paid human order from the 50-lead outreach test.
-
-### Optional, low urgency
-
-- Stripe machine-payments access and the Cloudflare Monetization Gateway
-  waitlist can remain applications; neither is needed for the two card offers.
-- Delete `GLAMA_API_KEY`; nothing uses it.
+- `cf33940` production was verified on October 3: 302 then-current tests passed,
+  deterministic builds matched, and live `llms.txt` matched the committed artifact.
+- The September 28 health job was green despite incomplete score refreshes. The
+  selected fix authenticates scheduled scoring for registered URLs, retains old
+  dates on failures and makes incomplete runs fail visibly after publication.
+  Deployment and the next scheduled run remain pending; follow `NEXT.md`.
+- External PRs: Awesome-llms-txt #114 merged; awesome-mcp-servers #11152 closed
+  unmerged; llms-txt-hub #1460 remains open awaiting review. See `NEXT.md` §3.
+- The commercial-evidence gate remains active. No new product work is selected.
 
 ---
 
