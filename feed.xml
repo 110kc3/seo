@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Autoposting MCP</title>
+    <link>https://index.percall.dev/l/autoposting.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/autoposting.html</guid>
+    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>MCP tools for social drafts, AI content, carousels, video clips, scheduling and publishing. Hosted Streamable HTTP uses OAuth 2.1 and workspace consent. The MIT TypeScript CLI (@autoposting.ai/cli 0.4.0) offers stdio via ap mcp with AUTOPOSTING_API_KEY and Node &gt;=20. Requires paid Autoposting access; publishing requires connected social accounts. Backend is proprietary, not self-hostable; render jobs are asynchronous.</description>
+  </item>
+  <item>
     <title>Raphael AI</title>
     <link>https://index.percall.dev/l/raphael-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/raphael-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Build and export structured resumes and cover letters over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Spreadsheet MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-spreadsheet.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-spreadsheet.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Create and manipulate spreadsheet data, formulas and sheets over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

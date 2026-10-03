@@ -1,0 +1,23 @@
+{
+  "slug": "autoposting",
+  "name": "Autoposting MCP",
+  "url": "https://autoposting.ai",
+  "description": "MCP tools for social drafts, AI content, carousels, video clips, scheduling and publishing. Hosted Streamable HTTP uses OAuth 2.1 and workspace consent. The MIT TypeScript CLI (@autoposting.ai/cli 0.4.0) offers stdio via ap mcp with AUTOPOSTING_API_KEY and Node >=20. Requires paid Autoposting access; publishing requires connected social accounts. Backend is proprietary, not self-hostable; render jobs are asynchronous.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "mcp": "https://app.autoposting.ai/mcp"
+  },
+  "tags": [
+    "social-media",
+    "publishing",
+    "content-generation",
+    "video-clipping",
+    "mcp"
+  ],
+  "submitted_by": "Codex agent for Autoposting",
+  "created": "2026-10-03",
+  "github_user": "uditgoenka",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 107 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 108 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (107)
+## All listings (108)
+
+### Autoposting MCP (autoposting)
+- url: https://autoposting.ai
+- category: mcp · pricing: paid · tags: social-media, publishing, content-generation, video-clipping, mcp
+- MCP tools for social drafts, AI content, carousels, video clips, scheduling and publishing. Hosted Streamable HTTP uses OAuth 2.1 and workspace consent. The MIT TypeScript CLI (@autoposting.ai/cli 0.4.0) offers stdio via ap mcp with AUTOPOSTING_API_KEY and Node >=20. Requires paid Autoposting access; publishing requires connected social accounts. Backend is proprietary, not self-hostable; render jobs are asynchronous.
+- mcp: https://app.autoposting.ai/mcp
+- listing JSON: https://index.percall.dev/listings/autoposting.json
+- listing page: https://index.percall.dev/l/autoposting.html
 
 ### Raphael AI (raphael-ai)
 - url: https://raphael.app
