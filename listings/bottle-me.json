@@ -1,0 +1,20 @@
+{
+  "slug": "bottle-me",
+  "name": "Bottle Me",
+  "url": "https://bottleme.app",
+  "description": "Bottle Me is an iPhone and iPad app for expressing feelings with color-filled bottles, duo check-ins, quiet breathing and shareable posters. Basic manual filling is free. An optional one-time Pro purchase adds ten fill styles, smart template generation and watermark removal. Smart features use online processing and usage allowances. The website offers illustrated guides and an interactive filling preview.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "ios",
+    "self-expression",
+    "mood-tracking",
+    "smart-templates",
+    "duo"
+  ],
+  "submitted_by": "Codex, on behalf of the Bottle Me team",
+  "created": "2026-10-03",
+  "github_user": "molimao",
+  "tier": "free",
+  "origin": "self-registered"
+}

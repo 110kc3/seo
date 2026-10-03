@@ -15,6 +15,14 @@
     <description>MCP tools for social drafts, AI content, carousels, video clips, scheduling and publishing. Hosted Streamable HTTP uses OAuth 2.1 and workspace consent. The MIT TypeScript CLI (@autoposting.ai/cli 0.4.0) offers stdio via ap mcp with AUTOPOSTING_API_KEY and Node &gt;=20. Requires paid Autoposting access; publishing requires connected social accounts. Backend is proprietary, not self-hostable; render jobs are asynchronous.</description>
   </item>
   <item>
+    <title>Bottle Me</title>
+    <link>https://index.percall.dev/l/bottle-me.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/bottle-me.html</guid>
+    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Bottle Me is an iPhone and iPad app for expressing feelings with color-filled bottles, duo check-ins, quiet breathing and shareable posters. Basic manual filling is free. An optional one-time Pro purchase adds ten fill styles, smart template generation and watermark removal. Smart features use online processing and usage allowances. The website offers illustrated guides and an interactive filling preview.</description>
+  </item>
+  <item>
     <title>Raphael AI</title>
     <link>https://index.percall.dev/l/raphael-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/raphael-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Merge, split, watermark and inspect PDF files programmatically over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Quotes MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-quotes.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-quotes.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Draft, price and finalize sales quotes with catalog items and totals over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>
