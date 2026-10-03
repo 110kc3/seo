@@ -38,6 +38,22 @@
       "external_url": "https://raphael.app"
     },
     {
+      "id": "https://index.percall.dev/l/tale.html",
+      "url": "https://index.percall.dev/l/tale.html",
+      "title": "Tale",
+      "content_text": "Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.",
+      "date_published": "2026-10-03T00:00:00Z",
+      "tags": [
+        "app",
+        "project-management",
+        "ai-agents",
+        "team-collaboration",
+        "open-source",
+        "self-hosted"
+      ],
+      "external_url": "https://tale.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/yeri-ai.html",
       "url": "https://index.percall.dev/l/yeri-ai.html",
       "title": "Yeri AI",
@@ -752,21 +768,6 @@
         "quotes"
       ],
       "external_url": "https://mcp.zovo.one/s/quotes"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-resume.html",
-      "url": "https://index.percall.dev/l/zovo-resume.html",
-      "title": "Zovo Resume MCP Server",
-      "content_text": "Build and export structured resumes and cover letters over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "resume"
-      ],
-      "external_url": "https://mcp.zovo.one/s/resume"
     }
   ]
 }

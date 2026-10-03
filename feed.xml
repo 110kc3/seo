@@ -23,6 +23,14 @@
     <description>Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.</description>
   </item>
   <item>
+    <title>Tale</title>
+    <link>https://index.percall.dev/l/tale.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tale.html</guid>
+    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.</description>
+  </item>
+  <item>
     <title>Yeri AI</title>
     <link>https://index.percall.dev/l/yeri-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/yeri-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Draft, price and finalize sales quotes with catalog items and totals over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Resume MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-resume.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-resume.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Build and export structured resumes and cover letters over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

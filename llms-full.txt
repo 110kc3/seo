@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 108 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 109 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (108)
+## All listings (109)
 
 ### Autoposting MCP (autoposting)
 - url: https://autoposting.ai
@@ -319,6 +319,13 @@ A response does not verify authentication, payment or tool behavior.
 - Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.
 - listing JSON: https://index.percall.dev/listings/raphael-ai.json
 - listing page: https://index.percall.dev/l/raphael-ai.html
+
+### Tale (tale)
+- url: https://tale.dev
+- category: app · pricing: freemium · tags: project-management, ai-agents, team-collaboration, open-source, self-hosted
+- Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.
+- listing JSON: https://index.percall.dev/listings/tale.json
+- listing page: https://index.percall.dev/l/tale.html
 
 ### Yeri AI (yeri-ai)
 - url: https://yeri.ai

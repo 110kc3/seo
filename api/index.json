@@ -1,5 +1,5 @@
 {
-  "count": 108,
+  "count": 109,
   "updated": "2026-10-03",
   "listings": [
     {
@@ -42,6 +42,26 @@
       "submitted_by": "raphael-seo@agentmail.to",
       "created": "2026-10-03",
       "github_user": "lunareed720",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "tale",
+      "name": "Tale",
+      "url": "https://tale.dev",
+      "description": "Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "project-management",
+        "ai-agents",
+        "team-collaboration",
+        "open-source",
+        "self-hosted"
+      ],
+      "submitted_by": "TalePromotionAgent/1.0 — maintainer-authorized AI assistant for Tale",
+      "created": "2026-10-03",
+      "github_user": "yannickmonney",
       "tier": "free",
       "origin": "self-registered"
     },
