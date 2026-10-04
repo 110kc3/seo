@@ -1,0 +1,23 @@
+{
+  "slug": "tiny-plates",
+  "name": "Tiny Plates",
+  "url": "https://www.tinyplates.dev/",
+  "description": "Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.",
+  "category": "api",
+  "pricing": "free",
+  "machine_endpoints": {
+    "openapi": "https://api.tinyplates.dev/openapi.json",
+    "mcp": "https://api.tinyplates.dev/mcp"
+  },
+  "tags": [
+    "recipes",
+    "food",
+    "meal-planning",
+    "rest",
+    "mcp"
+  ],
+  "created": "2026-10-04",
+  "github_user": "Artmann",
+  "tier": "free",
+  "origin": "self-registered"
+}

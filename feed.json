@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/tiny-plates.html",
+      "url": "https://index.percall.dev/l/tiny-plates.html",
+      "title": "Tiny Plates",
+      "content_text": "Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.",
+      "date_published": "2026-10-04T00:00:00Z",
+      "tags": [
+        "api",
+        "recipes",
+        "food",
+        "meal-planning",
+        "rest",
+        "mcp"
+      ],
+      "external_url": "https://www.tinyplates.dev/"
+    },
+    {
       "id": "https://index.percall.dev/l/autoposting.html",
       "url": "https://index.percall.dev/l/autoposting.html",
       "title": "Autoposting MCP",
@@ -754,21 +770,6 @@
         "invoice"
       ],
       "external_url": "https://mcp.zovo.one/s/invoice"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-pdf.html",
-      "url": "https://index.percall.dev/l/zovo-pdf.html",
-      "title": "Zovo Pdf MCP Server",
-      "content_text": "Merge, split, watermark and inspect PDF files programmatically over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "pdf"
-      ],
-      "external_url": "https://mcp.zovo.one/s/pdf"
     }
   ]
 }

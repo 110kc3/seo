@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Tiny Plates</title>
+    <link>https://index.percall.dev/l/tiny-plates.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tiny-plates.html</guid>
+    <pubDate>Sun, 04 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.</description>
+  </item>
+  <item>
     <title>Autoposting MCP</title>
     <link>https://index.percall.dev/l/autoposting.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/autoposting.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Create, validate and export professional invoices with line items, tax and totals over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Pdf MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-pdf.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-pdf.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Merge, split, watermark and inspect PDF files programmatically over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

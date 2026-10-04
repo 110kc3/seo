@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 110 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 111 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (110)
+## All listings (111)
+
+### Tiny Plates (tiny-plates)
+- url: https://www.tinyplates.dev/
+- category: api · pricing: free · tags: recipes, food, meal-planning, rest, mcp
+- Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.
+- openapi: https://api.tinyplates.dev/openapi.json
+- mcp: https://api.tinyplates.dev/mcp
+- listing JSON: https://index.percall.dev/listings/tiny-plates.json
+- listing page: https://index.percall.dev/l/tiny-plates.html
 
 ### Autoposting MCP (autoposting)
 - url: https://autoposting.ai
