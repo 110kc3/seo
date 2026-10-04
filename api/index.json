@@ -1,7 +1,30 @@
 {
-  "count": 111,
+  "count": 112,
   "updated": "2026-10-04",
   "listings": [
+    {
+      "slug": "shipvela",
+      "name": "Shipvela",
+      "url": "https://shipvela.com",
+      "description": "Remote Streamable HTTP MCP for creating website projects, deploying supported GitHub repositories, and reading deployment status, build logs and usage. Shipvela account and OAuth S256 PKCE required. Hobby free: 3 projects and 20 publishes/month; paid plans available. Public beta Codex plugin and publishing skill; hosted runtime is private. Setup: https://shipvela.com/integrations/codex.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://shipvela.com/mcp"
+      },
+      "tags": [
+        "mcp",
+        "oauth",
+        "codex",
+        "deployment",
+        "website-hosting"
+      ],
+      "submitted_by": "Stefan Mitrovic, Shipvela maker, with Codex assistance",
+      "created": "2026-10-04",
+      "github_user": "stefanautomateed",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "tiny-plates",
       "name": "Tiny Plates",

@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/shipvela.html",
+      "url": "https://index.percall.dev/l/shipvela.html",
+      "title": "Shipvela",
+      "content_text": "Remote Streamable HTTP MCP for creating website projects, deploying supported GitHub repositories, and reading deployment status, build logs and usage. Shipvela account and OAuth S256 PKCE required. Hobby free: 3 projects and 20 publishes/month; paid plans available. Public beta Codex plugin and publishing skill; hosted runtime is private. Setup: https://shipvela.com/integrations/codex.",
+      "date_published": "2026-10-04T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "oauth",
+        "codex",
+        "deployment",
+        "website-hosting"
+      ],
+      "external_url": "https://shipvela.com"
+    },
+    {
       "id": "https://index.percall.dev/l/tiny-plates.html",
       "url": "https://index.percall.dev/l/tiny-plates.html",
       "title": "Tiny Plates",
@@ -755,21 +771,6 @@
         "image"
       ],
       "external_url": "https://mcp.zovo.one/s/image"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-invoice.html",
-      "url": "https://index.percall.dev/l/zovo-invoice.html",
-      "title": "Zovo Invoice MCP Server",
-      "content_text": "Create, validate and export professional invoices with line items, tax and totals over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "invoice"
-      ],
-      "external_url": "https://mcp.zovo.one/s/invoice"
     }
   ]
 }

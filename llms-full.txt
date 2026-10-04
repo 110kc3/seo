@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 111 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 112 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (111)
+## All listings (112)
+
+### Shipvela (shipvela)
+- url: https://shipvela.com
+- category: mcp · pricing: freemium · tags: mcp, oauth, codex, deployment, website-hosting
+- Remote Streamable HTTP MCP for creating website projects, deploying supported GitHub repositories, and reading deployment status, build logs and usage. Shipvela account and OAuth S256 PKCE required. Hobby free: 3 projects and 20 publishes/month; paid plans available. Public beta Codex plugin and publishing skill; hosted runtime is private. Setup: https://shipvela.com/integrations/codex.
+- mcp: https://shipvela.com/mcp
+- listing JSON: https://index.percall.dev/listings/shipvela.json
+- listing page: https://index.percall.dev/l/shipvela.html
 
 ### Tiny Plates (tiny-plates)
 - url: https://www.tinyplates.dev/
