@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 113 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 114 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (113)
+## All listings (114)
 
 ### Menlo Insurance Customer MCP (menlo-insurance-customer-mcp)
 - url: https://menloinsurance.com/ai-assistants
@@ -312,6 +312,15 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://menloinsurance.com/ai-assistants
 - listing JSON: https://index.percall.dev/listings/menlo-insurance-customer-mcp.json
 - listing page: https://index.percall.dev/l/menlo-insurance-customer-mcp.html
+
+### SkyAccess (skyaccess)
+- url: https://github.com/sky-access/skyaccess-mcp
+- category: mcp · pricing: free · tags: travel, private-jet, empty-legs, charter-flights, remote-mcp
+- Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.
+- llms_txt: https://skyaccess.com/llms.txt
+- mcp: https://mcp.skyaccess.com/mcp
+- listing JSON: https://index.percall.dev/listings/skyaccess.json
+- listing page: https://index.percall.dev/l/skyaccess.html
 
 ### Shipvela (shipvela)
 - url: https://shipvela.com

@@ -20,6 +20,22 @@
       "external_url": "https://menloinsurance.com/ai-assistants"
     },
     {
+      "id": "https://index.percall.dev/l/skyaccess.html",
+      "url": "https://index.percall.dev/l/skyaccess.html",
+      "title": "SkyAccess",
+      "content_text": "Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.",
+      "date_published": "2026-10-05T00:00:00Z",
+      "tags": [
+        "mcp",
+        "travel",
+        "private-jet",
+        "empty-legs",
+        "charter-flights",
+        "remote-mcp"
+      ],
+      "external_url": "https://github.com/sky-access/skyaccess-mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/shipvela.html",
       "url": "https://index.percall.dev/l/shipvela.html",
       "title": "Shipvela",
@@ -755,21 +771,6 @@
         "calendar"
       ],
       "external_url": "https://mcp.zovo.one/s/calendar"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-currency.html",
-      "url": "https://index.percall.dev/l/zovo-currency.html",
-      "title": "Zovo Currency MCP Server",
-      "content_text": "Fetch and convert exchange rates with historical lookups over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "currency"
-      ],
-      "external_url": "https://mcp.zovo.one/s/currency"
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "slug": "skyaccess",
+  "name": "SkyAccess",
+  "url": "https://github.com/sky-access/skyaccess-mcp",
+  "description": "Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://skyaccess.com/llms.txt",
+    "mcp": "https://mcp.skyaccess.com/mcp"
+  },
+  "tags": [
+    "travel",
+    "private-jet",
+    "empty-legs",
+    "charter-flights",
+    "remote-mcp"
+  ],
+  "submitted_by": "SkyAccess",
+  "created": "2026-10-05",
+  "github_user": "skyaccess",
+  "tier": "free",
+  "origin": "self-registered"
+}
