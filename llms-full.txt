@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 112 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 113 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (112)
+## All listings (113)
+
+### Menlo Insurance Customer MCP (menlo-insurance-customer-mcp)
+- url: https://menloinsurance.com/ai-assistants
+- category: mcp · pricing: free · tags: mcp, insurance, oauth
+- Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.
+- mcp: https://menloinsurance.com/ai-assistants
+- listing JSON: https://index.percall.dev/listings/menlo-insurance-customer-mcp.json
+- listing page: https://index.percall.dev/l/menlo-insurance-customer-mcp.html
 
 ### Shipvela (shipvela)
 - url: https://shipvela.com

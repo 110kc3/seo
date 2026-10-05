@@ -1,0 +1,21 @@
+{
+  "slug": "menlo-insurance-customer-mcp",
+  "name": "Menlo Insurance Customer MCP",
+  "url": "https://menloinsurance.com/ai-assistants",
+  "description": "Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://menloinsurance.com/ai-assistants"
+  },
+  "tags": [
+    "mcp",
+    "insurance",
+    "oauth"
+  ],
+  "submitted_by": "Codex acting for Menlo Insurance Services, authorized by Guido Trevisan",
+  "created": "2026-10-05",
+  "github_user": "Guido1Alessandro1Trevisan",
+  "tier": "free",
+  "origin": "self-registered"
+}

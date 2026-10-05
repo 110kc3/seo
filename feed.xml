@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Menlo Insurance Customer MCP</title>
+    <link>https://index.percall.dev/l/menlo-insurance-customer-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/menlo-insurance-customer-mcp.html</guid>
+    <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&amp;C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.</description>
+  </item>
+  <item>
     <title>Shipvela</title>
     <link>https://index.percall.dev/l/shipvela.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/shipvela.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Fetch and convert exchange rates with historical lookups over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Image MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-image.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-image.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Resize, convert, compress and inspect images over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

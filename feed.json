@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
+      "url": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
+      "title": "Menlo Insurance Customer MCP",
+      "content_text": "Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.",
+      "date_published": "2026-10-05T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "insurance",
+        "oauth"
+      ],
+      "external_url": "https://menloinsurance.com/ai-assistants"
+    },
+    {
       "id": "https://index.percall.dev/l/shipvela.html",
       "url": "https://index.percall.dev/l/shipvela.html",
       "title": "Shipvela",
@@ -756,21 +770,6 @@
         "currency"
       ],
       "external_url": "https://mcp.zovo.one/s/currency"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-image.html",
-      "url": "https://index.percall.dev/l/zovo-image.html",
-      "title": "Zovo Image MCP Server",
-      "content_text": "Resize, convert, compress and inspect images over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "image"
-      ],
-      "external_url": "https://mcp.zovo.one/s/image"
     }
   ]
 }
