@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-28",
-  "catalog_size": 17863,
+  "probed_at": "2026-10-05",
+  "catalog_size": 34473,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -12,8 +12,8 @@
   "free": true,
   "counts": {
     "confirmed": 1,
-    "suspected": 42,
-    "tracked": 43
+    "suspected": 38,
+    "tracked": 39
   },
   "endpoints": [
     {
@@ -117,13 +117,6 @@
       "last_checked": "2026-08-26"
     },
     {
-      "url": "https://app.r3p.xyz/mcp/x402",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-31",
-      "last_checked": "2026-08-31"
-    },
-    {
       "url": "https://x402-factory.com/v1/movers",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -147,13 +140,6 @@
     {
       "url": "https://toll402.dev/v1/t/mst_vn_validate",
       "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-09-14",
-      "last_checked": "2026-09-14"
-    },
-    {
-      "url": "https://x402.agentutility.ai/video-to-subtitles",
-      "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-14",
       "last_checked": "2026-09-14"
@@ -250,20 +236,6 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://dev-5090-box.tailfb4c1f.ts.net/v1/chat/uncensored",
-      "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://entropy.rip/api/schema/transduce",
-      "reason": "ETIMEDOUT",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
       "url": "https://finance-api.kdlcfa.workers.dev/dax-index",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -299,13 +271,6 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://x402.agentutility.ai/caption-translate-pack",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
       "url": "https://x402.agentutility.ai/text-to-speech",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -313,11 +278,18 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://x402.creative-tim.com/api/shadcn-block",
-      "reason": "HTTP 503",
+      "url": "https://spawnxchange-api-485602182462.europe-west4.run.app/api/v1/items",
+      "reason": "HTTP 500",
       "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
+      "since": "2026-10-05",
+      "last_checked": "2026-10-05"
+    },
+    {
+      "url": "https://x402.agentutility.ai/astro-times",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-05",
+      "last_checked": "2026-10-05"
     }
   ]
 }

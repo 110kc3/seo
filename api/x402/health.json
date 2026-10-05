@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-09-28",
-  "catalog_size": 17863,
-  "cursor": 11,
+  "probed_at": "2026-10-05",
+  "catalog_size": 34473,
+  "cursor": 12,
   "slice": 600,
-  "stride": 29,
-  "runs_per_full_pass": 29,
+  "stride": 57,
+  "runs_per_full_pass": 57,
   "window": {
     "probed": 600,
-    "ok": 588,
-    "unreachable": 12,
+    "ok": 598,
+    "unreachable": 2,
     "untestable": 0
   },
-  "answered_share": 0.98,
+  "answered_share": 0.9967,
   "confirmed_unreachable": 1,
-  "tracked_unreachable": 43,
+  "tracked_unreachable": 39,
   "unreachable": [
     {
       "url": "https://cryptyx.ai/api/taker-flow",
@@ -116,13 +116,6 @@
       "last_checked": "2026-08-26"
     },
     {
-      "url": "https://app.r3p.xyz/mcp/x402",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-31",
-      "last_checked": "2026-08-31"
-    },
-    {
       "url": "https://x402-factory.com/v1/movers",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -146,13 +139,6 @@
     {
       "url": "https://toll402.dev/v1/t/mst_vn_validate",
       "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-09-14",
-      "last_checked": "2026-09-14"
-    },
-    {
-      "url": "https://x402.agentutility.ai/video-to-subtitles",
-      "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-14",
       "last_checked": "2026-09-14"
@@ -249,20 +235,6 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://dev-5090-box.tailfb4c1f.ts.net/v1/chat/uncensored",
-      "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://entropy.rip/api/schema/transduce",
-      "reason": "ETIMEDOUT",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
       "url": "https://finance-api.kdlcfa.workers.dev/dax-index",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -298,13 +270,6 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://x402.agentutility.ai/caption-translate-pack",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
       "url": "https://x402.agentutility.ai/text-to-speech",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -312,11 +277,18 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://x402.creative-tim.com/api/shadcn-block",
-      "reason": "HTTP 503",
+      "url": "https://spawnxchange-api-485602182462.europe-west4.run.app/api/v1/items",
+      "reason": "HTTP 500",
       "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
+      "since": "2026-10-05",
+      "last_checked": "2026-10-05"
+    },
+    {
+      "url": "https://x402.agentutility.ai/astro-times",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-05",
+      "last_checked": "2026-10-05"
     }
   ]
 }

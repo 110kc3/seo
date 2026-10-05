@@ -133,6 +133,19 @@
       "llms_txt": 859,
       "audit_hits": 17,
       "x402_info": 112
+    },
+    {
+      "date": "2026-10-05",
+      "window": "30d",
+      "total_requests": 111431,
+      "agent_share": 0.0286,
+      "ai_crawler": 3190,
+      "browser": 74224,
+      "script": 4456,
+      "free_scores": 478,
+      "llms_txt": 1129,
+      "audit_hits": 19,
+      "x402_info": 107
     }
   ]
 }

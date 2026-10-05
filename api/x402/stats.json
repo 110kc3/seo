@@ -1,119 +1,130 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-09-28",
-  "endpoints": 17863,
-  "hosts": 2024,
+  "fetched": "2026-10-05",
+  "endpoints": 34473,
+  "hosts": 2111,
   "concentration": {
-    "top_10_hosts_share": 0.268,
+    "top_10_hosts_share": 0.581,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 16744,
-    "solana": 829,
-    "base-sepolia": 213,
-    "solana-devnet": 35,
-    "eip155:5042": 23,
-    "polygon": 9,
+    "base": 33485,
+    "solana": 757,
+    "base-sepolia": 190,
+    "eip155:5042": 26,
     "x-layer": 4,
+    "polygon": 3,
     "arbitrum": 3,
+    "solana-devnet": 2,
     "eip155:11142220": 1,
     "eip155:4663": 1,
     "eip155:56": 1
   },
   "by_version": {
-    "1": 206,
-    "2": 17657
+    "1": 184,
+    "2": 34289
   },
   "by_method": {
-    "POST": 8987,
-    "GET": 8872,
-    "DELETE": 2,
-    "HEAD": 1
+    "POST": 24001,
+    "GET": 10437,
+    "DELETE": 3
   },
   "price_usd": {
-    "priced": 17798,
-    "unpriced": 65,
+    "priced": 34438,
+    "unpriced": 35,
     "min": 0.0002,
     "p50": 0.01,
-    "p90": 0.06,
+    "p90": 0.03,
     "max": 1000
   },
   "top_hosts": [
+    {
+      "host": "market.datapackvibe.com",
+      "endpoints": 13470
+    },
     {
       "host": "agentshelf.syntexa.ch",
       "endpoints": 1182
     },
     {
+      "host": "api.vextorium.com",
+      "endpoints": 1014
+    },
+    {
       "host": "intel.rallylive.ca",
-      "endpoints": 840
+      "endpoints": 892
+    },
+    {
+      "host": "api.magentlab.com",
+      "endpoints": 844
+    },
+    {
+      "host": "dns.intel.rallylive.ca",
+      "endpoints": 698
     },
     {
       "host": "agent402.tools",
-      "endpoints": 598
+      "endpoints": 604
     },
     {
       "host": "pay.edge-agents.ai",
       "endpoints": 586
     },
     {
-      "host": "saylorinnovations.com",
-      "endpoints": 396
+      "host": "api.x402node.dev",
+      "endpoints": 366
     },
     {
       "host": "twin.unykorn.org",
-      "endpoints": 347
+      "endpoints": 361
     },
     {
-      "host": "api.x402node.dev",
-      "endpoints": 306
+      "host": "email.intel.rallylive.ca",
+      "endpoints": 282
     },
     {
       "host": "x402-factory.com",
-      "endpoints": 205
+      "endpoints": 189
+    },
+    {
+      "host": "agents.daedalusdevelopmentgroup.com",
+      "endpoints": 183
     },
     {
       "host": "402.com.tr",
-      "endpoints": 174
+      "endpoints": 173
     },
     {
-      "host": "minia2a.uk",
-      "endpoints": 154
+      "host": "saylorinnovations.com",
+      "endpoints": 172
+    },
+    {
+      "host": "api.xynaptic.io",
+      "endpoints": 148
     },
     {
       "host": "api.strale.io",
-      "endpoints": 143
+      "endpoints": 145
     },
     {
       "host": "api.agentstools.dev",
       "endpoints": 141
     },
     {
+      "host": "minia2a.uk",
+      "endpoints": 140
+    },
+    {
       "host": "x402.orthogonal.com",
+      "endpoints": 137
+    },
+    {
+      "host": "47620.xyz",
       "endpoints": 130
     },
     {
-      "host": "atlantikland.halowerk.com",
-      "endpoints": 125
-    },
-    {
-      "host": "baltikum.halowerk.com",
-      "endpoints": 125
-    },
-    {
-      "host": "mitteleuropa.halowerk.com",
-      "endpoints": 125
-    },
-    {
-      "host": "nordland.halowerk.com",
-      "endpoints": 125
-    },
-    {
-      "host": "ostland.halowerk.com",
-      "endpoints": 125
-    },
-    {
-      "host": "suedland.halowerk.com",
+      "host": "eltociear-tokenguard.hf.space",
       "endpoints": 125
     },
     {
@@ -121,24 +132,12 @@
       "endpoints": 124
     },
     {
-      "host": "www.tradepilotusa.com",
-      "endpoints": 118
-    },
-    {
-      "host": "api.sirenic.eu",
-      "endpoints": 117
-    },
-    {
-      "host": "agents.daedalusdevelopmentgroup.com",
-      "endpoints": 113
-    },
-    {
       "host": "phion.systems",
-      "endpoints": 112
+      "endpoints": 123
     },
     {
-      "host": "api.xynaptic.io",
-      "endpoints": 110
+      "host": "www.tradepilotusa.com",
+      "endpoints": 120
     }
   ]
 }
