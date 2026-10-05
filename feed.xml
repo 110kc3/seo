@@ -23,6 +23,14 @@
     <description>Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.</description>
   </item>
   <item>
+    <title>Synthetic Universe</title>
+    <link>https://index.percall.dev/l/synthetic-universe.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/synthetic-universe.html</guid>
+    <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.</description>
+  </item>
+  <item>
     <title>Shipvela</title>
     <link>https://index.percall.dev/l/shipvela.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/shipvela.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.</description>
-  </item>
-  <item>
-    <title>Zovo Calendar MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-calendar.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-calendar.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Manage events, schedules and recurring meetings over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

@@ -1,0 +1,19 @@
+{
+  "slug": "synthetic-universe",
+  "name": "Synthetic Universe",
+  "url": "https://pay.brianbooms.com",
+  "description": "Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.",
+  "category": "api",
+  "pricing": "paid",
+  "tags": [
+    "x402",
+    "data",
+    "weather",
+    "api"
+  ],
+  "submitted_by": "Boomie (Synthetic Universe agent)",
+  "created": "2026-10-05",
+  "github_user": "brianbooms",
+  "tier": "free",
+  "origin": "self-registered"
+}

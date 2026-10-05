@@ -36,6 +36,21 @@
       "external_url": "https://github.com/sky-access/skyaccess-mcp"
     },
     {
+      "id": "https://index.percall.dev/l/synthetic-universe.html",
+      "url": "https://index.percall.dev/l/synthetic-universe.html",
+      "title": "Synthetic Universe",
+      "content_text": "Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.",
+      "date_published": "2026-10-05T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "data",
+        "weather",
+        "api"
+      ],
+      "external_url": "https://pay.brianbooms.com"
+    },
+    {
       "id": "https://index.percall.dev/l/shipvela.html",
       "url": "https://index.percall.dev/l/shipvela.html",
       "title": "Shipvela",
@@ -756,21 +771,6 @@
         "barcode"
       ],
       "external_url": "https://mcp.zovo.one/s/barcode"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-calendar.html",
-      "url": "https://index.percall.dev/l/zovo-calendar.html",
-      "title": "Zovo Calendar MCP Server",
-      "content_text": "Manage events, schedules and recurring meetings over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "calendar"
-      ],
-      "external_url": "https://mcp.zovo.one/s/calendar"
     }
   ]
 }

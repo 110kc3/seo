@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 114 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 115 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (114)
+## All listings (115)
 
 ### Menlo Insurance Customer MCP (menlo-insurance-customer-mcp)
 - url: https://menloinsurance.com/ai-assistants
@@ -321,6 +321,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://mcp.skyaccess.com/mcp
 - listing JSON: https://index.percall.dev/listings/skyaccess.json
 - listing page: https://index.percall.dev/l/skyaccess.html
+
+### Synthetic Universe (synthetic-universe)
+- url: https://pay.brianbooms.com
+- category: api · pricing: paid · tags: x402, data, weather, api
+- Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.
+- listing JSON: https://index.percall.dev/listings/synthetic-universe.json
+- listing page: https://index.percall.dev/l/synthetic-universe.html
 
 ### Shipvela (shipvela)
 - url: https://shipvela.com
