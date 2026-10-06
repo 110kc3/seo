@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/placement-api.html",
+      "url": "https://index.percall.dev/l/placement-api.html",
+      "title": "Placement API",
+      "content_text": "Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.",
+      "date_published": "2026-10-06T00:00:00Z",
+      "tags": [
+        "mcp",
+        "seo",
+        "backlinks",
+        "marketing",
+        "api",
+        "mcp"
+      ],
+      "external_url": "https://placementapi.com"
+    },
+    {
       "id": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
       "url": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
       "title": "Menlo Insurance Customer MCP",
@@ -756,21 +772,6 @@
         "open-source"
       ],
       "external_url": "https://yylo.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/zovo-barcode.html",
-      "url": "https://index.percall.dev/l/zovo-barcode.html",
-      "title": "Zovo Barcode MCP Server",
-      "content_text": "Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "productivity",
-        "local-first",
-        "barcode"
-      ],
-      "external_url": "https://mcp.zovo.one/s/barcode"
     }
   ]
 }

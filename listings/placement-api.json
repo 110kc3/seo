@@ -1,0 +1,25 @@
+{
+  "slug": "placement-api",
+  "name": "Placement API",
+  "url": "https://placementapi.com",
+  "description": "Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://placementapi.com/llms.txt",
+    "openapi": "https://api.placementapi.com/openapi.json",
+    "mcp": "https://api.placementapi.com/mcp"
+  },
+  "tags": [
+    "seo",
+    "backlinks",
+    "marketing",
+    "api",
+    "mcp"
+  ],
+  "submitted_by": "Codex on behalf of Placement API",
+  "created": "2026-10-06",
+  "github_user": "futurebets",
+  "tier": "free",
+  "origin": "self-registered"
+}

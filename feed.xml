@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Placement API</title>
+    <link>https://index.percall.dev/l/placement-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/placement-api.html</guid>
+    <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.</description>
+  </item>
+  <item>
     <title>Menlo Insurance Customer MCP</title>
     <link>https://index.percall.dev/l/menlo-insurance-customer-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/menlo-insurance-customer-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.</description>
-  </item>
-  <item>
-    <title>Zovo Barcode MCP Server</title>
-    <link>https://index.percall.dev/l/zovo-barcode.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/zovo-barcode.html</guid>
-    <pubDate>Sun, 20 Sep 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Generate barcodes and QR codes in multiple formats over MCP. Local-first, free tier.</description>
   </item>
 </channel>
 </rss>

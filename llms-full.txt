@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 115 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 116 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (115)
+## All listings (116)
+
+### Placement API (placement-api)
+- url: https://placementapi.com
+- category: mcp · pricing: freemium · tags: seo, backlinks, marketing, api, mcp
+- Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.
+- llms_txt: https://placementapi.com/llms.txt
+- openapi: https://api.placementapi.com/openapi.json
+- mcp: https://api.placementapi.com/mcp
+- listing JSON: https://index.percall.dev/listings/placement-api.json
+- listing page: https://index.percall.dev/l/placement-api.html
 
 ### Menlo Insurance Customer MCP (menlo-insurance-customer-mcp)
 - url: https://menloinsurance.com/ai-assistants
