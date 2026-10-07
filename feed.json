@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/pocket-invoice-mcp.html",
+      "url": "https://index.percall.dev/l/pocket-invoice-mcp.html",
+      "title": "Pocket Invoice MCP",
+      "content_text": "Hosted MCP for invoices, estimates, quotes, receipts, purchase orders and PDF export. Uses saved customers, items, payment records and unpaid balances. Streamable HTTP and OAuth; Codex verified. Records shared with web, iOS and Android under company permissions. Currently free; account document and storage limits apply. Email is disabled by default and each send needs confirmation. No card charging, transfers or refunds. Other clients need remote MCP and OAuth support.",
+      "date_published": "2026-10-07T00:00:00Z",
+      "tags": [
+        "mcp",
+        "invoicing",
+        "business-documents",
+        "pdf-export",
+        "oauth",
+        "finance"
+      ],
+      "external_url": "https://www.freedominvoice.com/mcp/"
+    },
+    {
       "id": "https://index.percall.dev/l/placement-api.html",
       "url": "https://index.percall.dev/l/placement-api.html",
       "title": "Placement API",
@@ -756,22 +772,6 @@
         "open-source"
       ],
       "external_url": "https://huggingface.co/datasets/lfcarry/guide-evidence-smoke-tests"
-    },
-    {
-      "id": "https://index.percall.dev/l/yylo.html",
-      "url": "https://index.percall.dev/l/yylo.html",
-      "title": "YYLO",
-      "content_text": "Command-line orchestrator for coding agents: typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree, with receipt-backed repository changes.",
-      "date_published": "2026-09-20T00:00:00Z",
-      "tags": [
-        "agent",
-        "cli",
-        "coding-agents",
-        "orchestration",
-        "developer-tools",
-        "open-source"
-      ],
-      "external_url": "https://yylo.dev"
     }
   ]
 }

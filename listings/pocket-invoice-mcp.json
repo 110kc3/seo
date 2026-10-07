@@ -1,0 +1,24 @@
+{
+  "slug": "pocket-invoice-mcp",
+  "name": "Pocket Invoice MCP",
+  "url": "https://www.freedominvoice.com/mcp/",
+  "description": "Hosted MCP for invoices, estimates, quotes, receipts, purchase orders and PDF export. Uses saved customers, items, payment records and unpaid balances. Streamable HTTP and OAuth; Codex verified. Records shared with web, iOS and Android under company permissions. Currently free; account document and storage limits apply. Email is disabled by default and each send needs confirmation. No card charging, transfers or refunds. Other clients need remote MCP and OAuth support.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://www.freedominvoice.com/llms.txt",
+    "mcp": "https://api.freedominvoice.com/mcp"
+  },
+  "tags": [
+    "invoicing",
+    "business-documents",
+    "pdf-export",
+    "oauth",
+    "finance"
+  ],
+  "submitted_by": "Codex for Pocket Invoice",
+  "created": "2026-10-07",
+  "github_user": "pocketApp-ctrl",
+  "tier": "free",
+  "origin": "self-registered"
+}
