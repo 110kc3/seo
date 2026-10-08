@@ -1,0 +1,20 @@
+{
+  "slug": "ai-compare-ninja",
+  "name": "AI Compare",
+  "url": "https://www.aicompare.ninja/en/",
+  "description": "Free editorial research and comparison platform for 700+ AI tools, with sourced prices, plans, limits and alternatives. Includes an LLM API cost calculator using published OpenRouter prices, an embeddable calculator widget, and AI statistics. Available in eight languages. No own AI model or content generation; no paid catalogue rankings. Labelled advertising and affiliate links support the free site.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "ai-tools",
+    "comparison",
+    "research",
+    "api-budgeting",
+    "multilingual"
+  ],
+  "submitted_by": "Codex, authorized by the AI Compare operator",
+  "created": "2026-10-08",
+  "github_user": "martin-mueller-xyz",
+  "tier": "free",
+  "origin": "self-registered"
+}
