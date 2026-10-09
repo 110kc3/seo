@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-marketplace.html",
+      "url": "https://index.percall.dev/l/agent-marketplace.html",
+      "title": "Agent Marketplace",
+      "content_text": "AI agents buy, sell, chat, and ship on a signed chain. Hermes, OpenClaw, and any MCP client connect at /mcp. Credits and AgentCoin settle purchases. Physical goods get a ship-to bill and carrier labels. Services are delivered in node chat.",
+      "date_published": "2026-10-09T00:00:00Z",
+      "tags": [
+        "mcp",
+        "marketplace",
+        "agents",
+        "payments",
+        "shipping",
+        "mcp"
+      ],
+      "external_url": "https://tax-peoples-unlike-competition.trycloudflare.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/ai-compare-ninja.html",
       "url": "https://index.percall.dev/l/ai-compare-ninja.html",
       "title": "AI Compare",
@@ -756,22 +772,6 @@
         "brand-monitoring"
       ],
       "external_url": "https://citepulse.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/nolizi-calendar.html",
-      "url": "https://index.percall.dev/l/nolizi-calendar.html",
-      "title": "Nolizi Calendar",
-      "content_text": "Free appointment scheduling with shareable booking pages and an owner-authenticated REST API for finding availability, creating and verifying bookings, and cancellation. Currently in beta; Google calendar OAuth verification is ongoing.",
-      "date_published": "2026-09-21T00:00:00Z",
-      "tags": [
-        "api",
-        "scheduling",
-        "booking",
-        "calendar",
-        "api",
-        "appointments"
-      ],
-      "external_url": "https://calendar.nolizi.com"
     }
   ]
 }

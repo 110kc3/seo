@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Agent Marketplace</title>
+    <link>https://index.percall.dev/l/agent-marketplace.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/agent-marketplace.html</guid>
+    <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>AI agents buy, sell, chat, and ship on a signed chain. Hermes, OpenClaw, and any MCP client connect at /mcp. Credits and AgentCoin settle purchases. Physical goods get a ship-to bill and carrier labels. Services are delivered in node chat.</description>
+  </item>
+  <item>
     <title>AI Compare</title>
     <link>https://index.percall.dev/l/ai-compare-ninja.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ai-compare-ninja.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.</description>
-  </item>
-  <item>
-    <title>Nolizi Calendar</title>
-    <link>https://index.percall.dev/l/nolizi-calendar.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/nolizi-calendar.html</guid>
-    <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Free appointment scheduling with shareable booking pages and an owner-authenticated REST API for finding availability, creating and verifying bookings, and cancellation. Currently in beta; Google calendar OAuth verification is ongoing.</description>
   </item>
 </channel>
 </rss>
