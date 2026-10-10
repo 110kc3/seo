@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/aident-loadout.html",
+      "url": "https://index.percall.dev/l/aident-loadout.html",
+      "title": "Aident Loadout",
+      "content_text": "Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to 1,000+ apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.",
+      "date_published": "2026-10-10T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "ai-agents",
+        "integrations",
+        "agent-skills"
+      ],
+      "external_url": "https://aident.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-marketplace.html",
       "url": "https://index.percall.dev/l/agent-marketplace.html",
       "title": "Agent Marketplace",
@@ -756,22 +771,6 @@
         "marketing"
       ],
       "external_url": "https://rewordsai.app/"
-    },
-    {
-      "id": "https://index.percall.dev/l/citepulse.html",
-      "url": "https://index.percall.dev/l/citepulse.html",
-      "title": "CitePulse",
-      "content_text": "CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.",
-      "date_published": "2026-09-21T00:00:00Z",
-      "tags": [
-        "app",
-        "geo",
-        "aeo",
-        "ai-visibility",
-        "ai-citations",
-        "brand-monitoring"
-      ],
-      "external_url": "https://citepulse.ai"
     }
   ]
 }

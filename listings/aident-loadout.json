@@ -1,0 +1,22 @@
+{
+  "slug": "aident-loadout",
+  "name": "Aident Loadout",
+  "url": "https://aident.ai",
+  "description": "Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to 1,000+ apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "mcp": "https://loadout.aident.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "ai-agents",
+    "integrations",
+    "agent-skills"
+  ],
+  "submitted_by": "Aident AI",
+  "created": "2026-10-10",
+  "github_user": "ljhskyso",
+  "tier": "free",
+  "origin": "self-registered"
+}

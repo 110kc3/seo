@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Aident Loadout</title>
+    <link>https://index.percall.dev/l/aident-loadout.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/aident-loadout.html</guid>
+    <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to 1,000+ apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.</description>
+  </item>
+  <item>
     <title>Agent Marketplace</title>
     <link>https://index.percall.dev/l/agent-marketplace.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-marketplace.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Online AI image text editor that replaces existing words in finished PNG/JPG/WebP images and tries to match the original font, color, and background. Results vary by image.</description>
-  </item>
-  <item>
-    <title>CitePulse</title>
-    <link>https://index.percall.dev/l/citepulse.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/citepulse.html</guid>
-    <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>CitePulse audits and monitors whether AI assistants — ChatGPT, Perplexity, Gemini and Claude — cite your brand in their answers, and shows exactly which sources each engine pulls from. Free mini-audit; paid continuous monitoring. Built by GeoFlow Solutions.</description>
   </item>
 </channel>
 </rss>
