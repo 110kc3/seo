@@ -1,0 +1,23 @@
+{
+  "slug": "aihot",
+  "name": "AIHOT",
+  "url": "https://aihot.news",
+  "description": "Chinese-language AI news website with summaries linked to original sources, topic search, event timelines, and daily, weekly and monthly reports. Provides RSS feeds and documented read-only API, MCP and Agent Skill access. Personal, nonprofit and internal use is free; external commercial use and public redistribution require prior written permission under https://aihot.news/terms.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://aihot.news/llms.txt",
+    "mcp": "https://aihot.news/api/mcp"
+  },
+  "tags": [
+    "ai-news",
+    "chinese",
+    "rss",
+    "mcp",
+    "agent-skill"
+  ],
+  "created": "2026-10-10",
+  "github_user": "KKKKhazix",
+  "tier": "free",
+  "origin": "self-registered"
+}
