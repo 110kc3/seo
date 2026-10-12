@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-10-05",
-  "catalog_size": 34473,
+  "probed_at": "2026-10-12",
+  "catalog_size": 31625,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -166,13 +166,6 @@
       "last_checked": "2026-09-21"
     },
     {
-      "url": "https://i3p3mgbsn54dvlivnk6wbumal40eqtsn.lambda-url.us-east-1.on.aws/v1/url-to-agent-markdown",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
       "url": "https://imagegen.coinopai.com/generate/clean",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -222,27 +215,6 @@
       "last_checked": "2026-09-21"
     },
     {
-      "url": "https://aayatai.com/defi/yields",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://app.metalift.ai/v1/map",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://finance-api.kdlcfa.workers.dev/dax-index",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
       "url": "https://fittings.sh/v1/time/zone-clock",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -252,13 +224,6 @@
     {
       "url": "https://hubvibe-io.com/work/commerce/availability",
       "reason": "UND_ERR_HEADERS_OVERFLOW",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://i3p3mgbsn54dvlivnk6wbumal40eqtsn.lambda-url.us-east-1.on.aws/v1/website-change-monitor",
-      "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-09-28",
       "last_checked": "2026-09-28"
@@ -278,18 +243,53 @@
       "last_checked": "2026-09-28"
     },
     {
-      "url": "https://spawnxchange-api-485602182462.europe-west4.run.app/api/v1/items",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-10-05",
-      "last_checked": "2026-10-05"
-    },
-    {
       "url": "https://x402.agentutility.ai/astro-times",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-10-05",
       "last_checked": "2026-10-05"
+    },
+    {
+      "url": "https://api.brazilayer.com/v1/cadeias/capital_br",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://api.ibancheck.co.uk/api/iban/generate-epc-qr",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://api.magentlab.com/api/calc/caprini",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://api.seerium.xyz/v1/prediction/rewards",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://ari001.tailb4ac3a.ts.net/v1/ventures/x402_chain_reads_v1/erc20_allowance",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://x402-factory.com/v1/movers/sports-soccer",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-12",
+      "last_checked": "2026-10-12"
     }
   ]
 }

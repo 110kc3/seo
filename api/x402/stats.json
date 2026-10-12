@@ -1,59 +1,59 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-10-05",
-  "endpoints": 34473,
-  "hosts": 2111,
+  "fetched": "2026-10-12",
+  "endpoints": 31625,
+  "hosts": 2207,
   "concentration": {
-    "top_10_hosts_share": 0.581,
+    "top_10_hosts_share": 0.455,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 33485,
-    "solana": 757,
+    "base": 30649,
+    "solana": 735,
     "base-sepolia": 190,
-    "eip155:5042": 26,
+    "eip155:5042": 37,
     "x-layer": 4,
-    "polygon": 3,
     "arbitrum": 3,
+    "eip155:42220": 2,
     "solana-devnet": 2,
     "eip155:11142220": 1,
     "eip155:4663": 1,
     "eip155:56": 1
   },
   "by_version": {
-    "1": 184,
-    "2": 34289
+    "1": 173,
+    "2": 31452
   },
   "by_method": {
-    "POST": 24001,
-    "GET": 10437,
-    "DELETE": 3
+    "POST": 20057,
+    "GET": 11528,
+    "HEAD": 1
   },
   "price_usd": {
-    "priced": 34438,
-    "unpriced": 35,
+    "priced": 31577,
+    "unpriced": 48,
     "min": 0.0002,
     "p50": 0.01,
-    "p90": 0.03,
+    "p90": 0.05,
     "max": 1000
   },
   "top_hosts": [
     {
       "host": "market.datapackvibe.com",
-      "endpoints": 13470
+      "endpoints": 8017
     },
     {
       "host": "agentshelf.syntexa.ch",
-      "endpoints": 1182
+      "endpoints": 1193
     },
     {
       "host": "api.vextorium.com",
-      "endpoints": 1014
+      "endpoints": 1020
     },
     {
       "host": "intel.rallylive.ca",
-      "endpoints": 892
+      "endpoints": 847
     },
     {
       "host": "api.magentlab.com",
@@ -61,83 +61,83 @@
     },
     {
       "host": "dns.intel.rallylive.ca",
-      "endpoints": 698
+      "endpoints": 595
     },
     {
       "host": "agent402.tools",
-      "endpoints": 604
+      "endpoints": 580
     },
     {
       "host": "pay.edge-agents.ai",
-      "endpoints": 586
-    },
-    {
-      "host": "api.x402node.dev",
-      "endpoints": 366
+      "endpoints": 575
     },
     {
       "host": "twin.unykorn.org",
-      "endpoints": 361
+      "endpoints": 368
+    },
+    {
+      "host": "api.x402node.dev",
+      "endpoints": 357
     },
     {
       "host": "email.intel.rallylive.ca",
       "endpoints": 282
     },
     {
+      "host": "agents.daedalusdevelopmentgroup.com",
+      "endpoints": 248
+    },
+    {
+      "host": "agents.driftflight.com",
+      "endpoints": 242
+    },
+    {
+      "host": "tanod.dev",
+      "endpoints": 222
+    },
+    {
       "host": "x402-factory.com",
       "endpoints": 189
     },
     {
-      "host": "agents.daedalusdevelopmentgroup.com",
-      "endpoints": 183
-    },
-    {
-      "host": "402.com.tr",
-      "endpoints": 173
-    },
-    {
       "host": "saylorinnovations.com",
+      "endpoints": 186
+    },
+    {
+      "host": "api.myceliasignal.com",
+      "endpoints": 175
+    },
+    {
+      "host": "underground.substratesymposium.com",
       "endpoints": 172
     },
     {
-      "host": "api.xynaptic.io",
-      "endpoints": 148
+      "host": "x402.orthogonal.com",
+      "endpoints": 166
     },
     {
-      "host": "api.strale.io",
-      "endpoints": 145
+      "host": "www.mahastrategies.com",
+      "endpoints": 156
+    },
+    {
+      "host": "api.delx.ai",
+      "endpoints": 146
     },
     {
       "host": "api.agentstools.dev",
-      "endpoints": 141
+      "endpoints": 145
     },
     {
-      "host": "minia2a.uk",
-      "endpoints": 140
+      "host": "api.manylives.me",
+      "endpoints": 142
     },
     {
-      "host": "x402.orthogonal.com",
+      "host": "api.strale.io",
       "endpoints": 137
     },
     {
       "host": "47620.xyz",
-      "endpoints": 130
-    },
-    {
-      "host": "eltociear-tokenguard.hf.space",
-      "endpoints": 125
-    },
-    {
-      "host": "netintel.dev",
-      "endpoints": 124
-    },
-    {
-      "host": "phion.systems",
-      "endpoints": 123
-    },
-    {
-      "host": "www.tradepilotusa.com",
-      "endpoints": 120
+      "endpoints": 131
     }
   ]
 }
