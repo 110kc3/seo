@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/unsora.html",
+      "url": "https://index.percall.dev/l/unsora.html",
+      "title": "Unsora",
+      "content_text": "Creative toolkit for AI agents. Connect ChatGPT, Claude, Cursor or any MCP client to generate AI video, clip long videos into captioned shorts, create thumbnails and AI influencers, upscale to 4K, and schedule posts to YouTube, TikTok, Instagram, Facebook and LinkedIn.",
+      "date_published": "2026-10-13T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-video",
+        "mcp",
+        "social-media",
+        "clipping",
+        "agents"
+      ],
+      "external_url": "https://tryunsora.com"
+    },
+    {
       "id": "https://index.percall.dev/l/aident-loadout.html",
       "url": "https://index.percall.dev/l/aident-loadout.html",
       "title": "Aident Loadout",
@@ -760,17 +776,6 @@
         "small-business"
       ],
       "external_url": "https://yodu.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/feeless402.html",
-      "url": "https://index.percall.dev/l/feeless402.html",
-      "title": "Feeless402",
-      "content_text": "Feeless x402 micropayments for AI agents — self-custodied XNO wallet, pay-per-call pricing, live A2A agent card on the Nano (XNO) feeless settlement rail.",
-      "date_published": "2026-09-24T00:00:00Z",
-      "tags": [
-        "agent"
-      ],
-      "external_url": "https://feeless402.com"
     }
   ]
 }

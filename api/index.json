@@ -1,7 +1,30 @@
 {
-  "count": 122,
-  "updated": "2026-10-10",
+  "count": 123,
+  "updated": "2026-10-13",
   "listings": [
+    {
+      "slug": "unsora",
+      "name": "Unsora",
+      "url": "https://tryunsora.com",
+      "description": "Creative toolkit for AI agents. Connect ChatGPT, Claude, Cursor or any MCP client to generate AI video, clip long videos into captioned shorts, create thumbnails and AI influencers, upscale to 4K, and schedule posts to YouTube, TikTok, Instagram, Facebook and LinkedIn.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://mcp.tryunsora.com/mcp"
+      },
+      "tags": [
+        "ai-video",
+        "mcp",
+        "social-media",
+        "clipping",
+        "agents"
+      ],
+      "submitted_by": "sadekxD via Grok Bot backlink automation",
+      "created": "2026-10-13",
+      "github_user": "sadekxD",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "aident-loadout",
       "name": "Aident Loadout",

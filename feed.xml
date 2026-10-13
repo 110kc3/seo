@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Unsora</title>
+    <link>https://index.percall.dev/l/unsora.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/unsora.html</guid>
+    <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Creative toolkit for AI agents. Connect ChatGPT, Claude, Cursor or any MCP client to generate AI video, clip long videos into captioned shorts, create thumbnails and AI influencers, upscale to 4K, and schedule posts to YouTube, TikTok, Instagram, Facebook and LinkedIn.</description>
+  </item>
+  <item>
     <title>Aident Loadout</title>
     <link>https://index.percall.dev/l/aident-loadout.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/aident-loadout.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>AI employees for small teams: delegate support investigations, sales research, content and recurring work with connected tools, permissions and approval rules. A remote Streamable HTTP MCP server connects compatible clients to the Yodu workspace through OAuth or bearer API keys. Proprietary hosted service; $499/month includes personal setup and up to five active AI employees. No free trial; model and third-party costs are separate.</description>
-  </item>
-  <item>
-    <title>Feeless402</title>
-    <link>https://index.percall.dev/l/feeless402.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/feeless402.html</guid>
-    <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Feeless x402 micropayments for AI agents — self-custodied XNO wallet, pay-per-call pricing, live A2A agent card on the Nano (XNO) feeless settlement rail.</description>
   </item>
 </channel>
 </rss>
