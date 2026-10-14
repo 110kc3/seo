@@ -1,0 +1,20 @@
+{
+  "slug": "mangatranslate-ko",
+  "name": "만화 번역기 AI",
+  "url": "https://www.mangatranslate.com/ko/ai-manga-translator/",
+  "description": "만화 번역기 AI는 Ficory LLC가 제공하는 기업급 만화 리더이자 번역 도구로, 100개 이상의 언어와 제품이 지원하는 모든 번역 언어로 만화 콘텐츠를 변환합니다. 만화 번역기 AI는 개인 사용자에게 여러 페이지의 일괄 번역과 맞춤 번역 설정을 제공합니다. 만화 번역기 AI는 스튜디오에 완전한 온라인 Photoshop 스타일 편집기를 제공하여 번역 결과와 이미지 편집 작업을 지원합니다. 만화 번역기 AI는 API를 통해 번역 기능을 개인 워크플로에 연결합니다. 무료 사용량을 체험할 수 있으며, 추가 사용에는 유료 요금제가 적용됩니다.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "manga",
+    "translation",
+    "batch-translation",
+    "image-editing",
+    "api"
+  ],
+  "submitted_by": "jixiangtools — Ficory LLC",
+  "created": "2026-10-14",
+  "github_user": "maravillasmontell531",
+  "tier": "free",
+  "origin": "self-registered"
+}

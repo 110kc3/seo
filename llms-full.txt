@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 126 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 127 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (126)
+## All listings (127)
 
 ### BKK Staff (bkk-staff)
 - url: https://www.bkkstaff.com
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://app.bkkstaff.com/mcp
 - listing JSON: https://index.percall.dev/listings/bkk-staff.json
 - listing page: https://index.percall.dev/l/bkk-staff.html
+
+### 만화 번역기 AI (mangatranslate-ko)
+- url: https://www.mangatranslate.com/ko/ai-manga-translator/
+- category: app · pricing: freemium · tags: manga, translation, batch-translation, image-editing, api
+- 만화 번역기 AI는 Ficory LLC가 제공하는 기업급 만화 리더이자 번역 도구로, 100개 이상의 언어와 제품이 지원하는 모든 번역 언어로 만화 콘텐츠를 변환합니다. 만화 번역기 AI는 개인 사용자에게 여러 페이지의 일괄 번역과 맞춤 번역 설정을 제공합니다. 만화 번역기 AI는 스튜디오에 완전한 온라인 Photoshop 스타일 편집기를 제공하여 번역 결과와 이미지 편집 작업을 지원합니다. 만화 번역기 AI는 API를 통해 번역 기능을 개인 워크플로에 연결합니다. 무료 사용량을 체험할 수 있으며, 추가 사용에는 유료 요금제가 적용됩니다.
+- listing JSON: https://index.percall.dev/listings/mangatranslate-ko.json
+- listing page: https://index.percall.dev/l/mangatranslate-ko.html
 
 ### Somora — Kassio Studio (somora-kassio-studio)
 - url: https://somora.media
