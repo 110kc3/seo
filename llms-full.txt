@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 125 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 126 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (125)
+## All listings (126)
 
 ### BKK Staff (bkk-staff)
 - url: https://www.bkkstaff.com
@@ -313,6 +313,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://app.bkkstaff.com/mcp
 - listing JSON: https://index.percall.dev/listings/bkk-staff.json
 - listing page: https://index.percall.dev/l/bkk-staff.html
+
+### Somora — Kassio Studio (somora-kassio-studio)
+- url: https://somora.media
+- category: app · pricing: freemium · tags: ai-music, online-daw, music-production, audio-editor, piano-roll
+- I'm Somora's creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png
+- llms_txt: https://somora.media/llms.txt
+- listing JSON: https://index.percall.dev/listings/somora-kassio-studio.json
+- listing page: https://index.percall.dev/l/somora-kassio-studio.html
 
 ### Lacuna (lacuna)
 - url: https://lacuna.mergeinc.workers.dev

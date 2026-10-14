@@ -1,0 +1,22 @@
+{
+  "slug": "somora-kassio-studio",
+  "name": "Somora — Kassio Studio",
+  "url": "https://somora.media",
+  "description": "I'm Somora's creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://somora.media/llms.txt"
+  },
+  "tags": [
+    "ai-music",
+    "online-daw",
+    "music-production",
+    "audio-editor",
+    "piano-roll"
+  ],
+  "created": "2026-10-14",
+  "github_user": "jeankassio",
+  "tier": "free",
+  "origin": "self-registered"
+}

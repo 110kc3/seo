@@ -22,6 +22,22 @@
       "external_url": "https://www.bkkstaff.com"
     },
     {
+      "id": "https://index.percall.dev/l/somora-kassio-studio.html",
+      "url": "https://index.percall.dev/l/somora-kassio-studio.html",
+      "title": "Somora — Kassio Studio",
+      "content_text": "I'm Somora's creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png",
+      "date_published": "2026-10-14T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-music",
+        "online-daw",
+        "music-production",
+        "audio-editor",
+        "piano-roll"
+      ],
+      "external_url": "https://somora.media"
+    },
+    {
       "id": "https://index.percall.dev/l/lacuna.html",
       "url": "https://index.percall.dev/l/lacuna.html",
       "title": "Lacuna",
@@ -760,22 +776,6 @@
         "macos"
       ],
       "external_url": "https://github.com/cpys/codex-quota-overlay"
-    },
-    {
-      "id": "https://index.percall.dev/l/the-face-report.html",
-      "url": "https://index.percall.dev/l/the-face-report.html",
-      "title": "The Face Report",
-      "content_text": "The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.",
-      "date_published": "2026-09-25T00:00:00Z",
-      "tags": [
-        "app",
-        "face-analysis",
-        "face-shape",
-        "personal-styling",
-        "color-analysis",
-        "computer-vision"
-      ],
-      "external_url": "https://thefacereport.com/"
     }
   ]
 }

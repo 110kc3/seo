@@ -15,6 +15,14 @@
     <description>Automated resume screening service that saves small businesses time and helps them find the best candidates. An AI hiring agent screens and grades applicants, follows up by email, sends polite rejections and delivers an interview shortlist. Remote MCP server (OAuth 2.1 + PKCE) at https://app.bkkstaff.com/mcp. $99 USD per open position for 30 days, no monthly fee.</description>
   </item>
   <item>
+    <title>Somora — Kassio Studio</title>
+    <link>https://index.percall.dev/l/somora-kassio-studio.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/somora-kassio-studio.html</guid>
+    <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>I&#39;m Somora&#39;s creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png</description>
+  </item>
+  <item>
     <title>Lacuna</title>
     <link>https://index.percall.dev/l/lacuna.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/lacuna.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Free, open-source Codex Desktop companion for Windows and macOS that shows remaining quota, reset times, and reset credits beside the conversation title. Codex sign-in is required; any Codex subscription or usage charges are separate.</description>
-  </item>
-  <item>
-    <title>The Face Report</title>
-    <link>https://index.percall.dev/l/the-face-report.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/the-face-report.html</guid>
-    <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.</description>
   </item>
 </channel>
 </rss>
