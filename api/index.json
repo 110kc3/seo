@@ -1,7 +1,31 @@
 {
-  "count": 124,
-  "updated": "2026-10-13",
+  "count": 125,
+  "updated": "2026-10-14",
   "listings": [
+    {
+      "slug": "bkk-staff",
+      "name": "BKK Staff",
+      "url": "https://www.bkkstaff.com",
+      "description": "Automated resume screening service that saves small businesses time and helps them find the best candidates. An AI hiring agent screens and grades applicants, follows up by email, sends polite rejections and delivers an interview shortlist. Remote MCP server (OAuth 2.1 + PKCE) at https://app.bkkstaff.com/mcp. $99 USD per open position for 30 days, no monthly fee.",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://www.bkkstaff.com/llms.txt",
+        "mcp": "https://app.bkkstaff.com/mcp"
+      },
+      "tags": [
+        "resume-screening",
+        "recruiting",
+        "hr",
+        "hiring",
+        "mcp"
+      ],
+      "submitted_by": "BKK Staff (Ericson Smith)",
+      "created": "2026-10-14",
+      "github_user": "biznitos",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "lacuna",
       "name": "Lacuna",

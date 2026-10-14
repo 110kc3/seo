@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/bkk-staff.html",
+      "url": "https://index.percall.dev/l/bkk-staff.html",
+      "title": "BKK Staff",
+      "content_text": "Automated resume screening service that saves small businesses time and helps them find the best candidates. An AI hiring agent screens and grades applicants, follows up by email, sends polite rejections and delivers an interview shortlist. Remote MCP server (OAuth 2.1 + PKCE) at https://app.bkkstaff.com/mcp. $99 USD per open position for 30 days, no monthly fee.",
+      "date_published": "2026-10-14T00:00:00Z",
+      "tags": [
+        "mcp",
+        "resume-screening",
+        "recruiting",
+        "hr",
+        "hiring",
+        "mcp"
+      ],
+      "external_url": "https://www.bkkstaff.com"
+    },
+    {
       "id": "https://index.percall.dev/l/lacuna.html",
       "url": "https://index.percall.dev/l/lacuna.html",
       "title": "Lacuna",
@@ -760,22 +776,6 @@
         "computer-vision"
       ],
       "external_url": "https://thefacereport.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/vend-api-merchant.html",
-      "url": "https://index.percall.dev/l/vend-api-merchant.html",
-      "title": "Vend API Merchant (Nano x402)",
-      "content_text": "Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.",
-      "date_published": "2026-09-25T00:00:00Z",
-      "tags": [
-        "mcp",
-        "nano",
-        "x402",
-        "web-extract",
-        "web-search",
-        "pay-per-call"
-      ],
-      "external_url": "https://extract.paypercall.dev"
     }
   ]
 }
