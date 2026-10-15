@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/linkflow-desktop.html",
+      "url": "https://index.percall.dev/l/linkflow-desktop.html",
+      "title": "Linkflow · 外链助手",
+      "content_text": "A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.",
+      "date_published": "2026-10-15T00:00:00Z",
+      "tags": [
+        "app",
+        "desktop",
+        "publishing",
+        "ai-assisted",
+        "workflow"
+      ],
+      "external_url": "https://github.com/xiaogan123/linkflow-desktop"
+    },
+    {
       "id": "https://index.percall.dev/l/bkk-staff.html",
       "url": "https://index.percall.dev/l/bkk-staff.html",
       "title": "BKK Staff",
@@ -760,22 +775,6 @@
         "feeless"
       ],
       "external_url": "https://getunstuck.space"
-    },
-    {
-      "id": "https://index.percall.dev/l/api-market-mcp-gateway.html",
-      "url": "https://index.percall.dev/l/api-market-mcp-gateway.html",
-      "title": "API.market MCP Gateway",
-      "content_text": "Proprietary hosted MCP gateway for API discovery, operation lookup, execution, usage checks and subscription management through five tools. Streamable HTTP with OAuth or API-key authentication; API.market account required. Free tiers, quotas, paid plans and usage charges vary by API. Calls and subscription changes can incur charges. Public integration metadata is separate from server source.",
-      "date_published": "2026-09-25T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "api-marketplace",
-        "developer-tools",
-        "ai-agents",
-        "oauth"
-      ],
-      "external_url": "https://api.market/mcp"
     }
   ]
 }

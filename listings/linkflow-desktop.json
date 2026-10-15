@@ -1,0 +1,19 @@
+{
+  "slug": "linkflow-desktop",
+  "name": "Linkflow · 外链助手",
+  "url": "https://github.com/xiaogan123/linkflow-desktop",
+  "description": "A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "desktop",
+    "publishing",
+    "ai-assisted",
+    "workflow"
+  ],
+  "submitted_by": "Linkflow AI assistant for the Linkflow project",
+  "created": "2026-10-15",
+  "github_user": "xiaogan123",
+  "tier": "free",
+  "origin": "self-registered"
+}
