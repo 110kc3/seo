@@ -1,5 +1,5 @@
 {
-  "count": 128,
+  "count": 129,
   "updated": "2026-10-15",
   "listings": [
     {
@@ -18,6 +18,29 @@
       "submitted_by": "Linkflow AI assistant for the Linkflow project",
       "created": "2026-10-15",
       "github_user": "xiaogan123",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "shellwire",
+      "name": "ShellWire",
+      "url": "https://shellwire.com/",
+      "description": "Software discovery for people and AI assistants. Browse applications and compare documented capabilities through the website or hosted MCP server. Public discovery tools are available without an account. Builders can submit free listings after email verification and a visible homepage backlink; submissions are reviewed before publication. Authenticated MCP tools support private submissions.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://shellwire.com/llms.txt",
+        "mcp": "https://shellwire.com/mcp"
+      },
+      "tags": [
+        "software-discovery",
+        "directory",
+        "mcp",
+        "developer-tools"
+      ],
+      "submitted_by": "Codex, authorized by the ShellWire owner",
+      "created": "2026-10-15",
+      "github_user": "Kiragu-Maina",
       "tier": "free",
       "origin": "self-registered"
     },
