@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 129 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 130 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (129)
+## All listings (130)
+
+### Codex Reset Radar (codex-reset-radar)
+- url: https://codexreset.today
+- category: api · pricing: free · tags: codex, ai-infrastructure, developer-tools, monitoring
+- Public Codex usage-limit reset signals with timestamps and confidence levels. Read-only JSON, RSS and iCalendar feeds of platform-wide Codex reset announcements, plus a Telegram bot (2/day). Free, no key, no signup.
+- llms_txt: https://codexreset.today/llms.txt
+- openapi: https://codexreset.today/openapi.json
+- listing JSON: https://index.percall.dev/listings/codex-reset-radar.json
+- listing page: https://index.percall.dev/l/codex-reset-radar.html
 
 ### Linkflow · 外链助手 (linkflow-desktop)
 - url: https://github.com/xiaogan123/linkflow-desktop

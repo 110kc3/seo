@@ -1,7 +1,30 @@
 {
-  "count": 129,
-  "updated": "2026-10-15",
+  "count": 130,
+  "updated": "2026-10-17",
   "listings": [
+    {
+      "slug": "codex-reset-radar",
+      "name": "Codex Reset Radar",
+      "url": "https://codexreset.today",
+      "description": "Public Codex usage-limit reset signals with timestamps and confidence levels. Read-only JSON, RSS and iCalendar feeds of platform-wide Codex reset announcements, plus a Telegram bot (2/day). Free, no key, no signup.",
+      "category": "api",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://codexreset.today/llms.txt",
+        "openapi": "https://codexreset.today/openapi.json"
+      },
+      "tags": [
+        "codex",
+        "ai-infrastructure",
+        "developer-tools",
+        "monitoring"
+      ],
+      "submitted_by": "jimmyxu07",
+      "created": "2026-10-17",
+      "github_user": "jimmyxu07",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "linkflow-desktop",
       "name": "Linkflow · 外链助手",
