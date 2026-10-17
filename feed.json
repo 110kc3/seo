@@ -21,6 +21,17 @@
       "external_url": "https://codexreset.today"
     },
     {
+      "id": "https://index.percall.dev/l/ddg-agent-services.html",
+      "url": "https://index.percall.dev/l/ddg-agent-services.html",
+      "title": "DDG Agent Services",
+      "content_text": "421 x402-paid agent API endpoints on Base (USDC, no-KYC): security audits, verification rails (UCP/AP2 checkout verification, ERC-8004 agent screening, MPP payment-intent verification), search, embeddings, enrichment, screenshots, price feeds. Freemium: 15 flagship routes free first call per agent per day; paid routes $0.002-$0.05.",
+      "date_published": "2026-10-17T00:00:00Z",
+      "tags": [
+        "api"
+      ],
+      "external_url": "https://agents.daedalusdevelopmentgroup.com"
+    },
+    {
       "id": "https://index.percall.dev/l/linkflow-desktop.html",
       "url": "https://index.percall.dev/l/linkflow-desktop.html",
       "title": "Linkflow · 外链助手",
@@ -759,20 +770,6 @@
         "writing"
       ],
       "external_url": "https://resumeplot.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/subatlas.html",
-      "url": "https://index.percall.dev/l/subatlas.html",
-      "title": "SubAtlas",
-      "content_text": "SubAtlas is a Chinese-language subscription comparison and renewal-planning resource. Browse public guides and source-linked information about AI subscription plans, and organize renewal details. Prices, eligibility and cancellation terms can change; confirm them with the original provider. Listed third-party subscriptions may be paid.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "subscriptions",
-        "comparison",
-        "productivity"
-      ],
-      "external_url": "https://subatlas.packscena.com/"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "count": 130,
+  "count": 131,
   "updated": "2026-10-17",
   "listings": [
     {
@@ -22,6 +22,18 @@
       "submitted_by": "jimmyxu07",
       "created": "2026-10-17",
       "github_user": "jimmyxu07",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "ddg-agent-services",
+      "name": "DDG Agent Services",
+      "url": "https://agents.daedalusdevelopmentgroup.com",
+      "description": "421 x402-paid agent API endpoints on Base (USDC, no-KYC): security audits, verification rails (UCP/AP2 checkout verification, ERC-8004 agent screening, MPP payment-intent verification), search, embeddings, enrichment, screenshots, price feeds. Freemium: 15 flagship routes free first call per agent per day; paid routes $0.002-$0.05.",
+      "category": "api",
+      "pricing": "freemium",
+      "created": "2026-10-17",
+      "github_user": "0xcircuitbreaker",
       "tier": "free",
       "origin": "self-registered"
     },

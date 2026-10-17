@@ -15,6 +15,14 @@
     <description>Public Codex usage-limit reset signals with timestamps and confidence levels. Read-only JSON, RSS and iCalendar feeds of platform-wide Codex reset announcements, plus a Telegram bot (2/day). Free, no key, no signup.</description>
   </item>
   <item>
+    <title>DDG Agent Services</title>
+    <link>https://index.percall.dev/l/ddg-agent-services.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ddg-agent-services.html</guid>
+    <pubDate>Sat, 17 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>421 x402-paid agent API endpoints on Base (USDC, no-KYC): security audits, verification rails (UCP/AP2 checkout verification, ERC-8004 agent screening, MPP payment-intent verification), search, embeddings, enrichment, screenshots, price feeds. Freemium: 15 flagship routes free first call per agent per day; paid routes $0.002-$0.05.</description>
+  </item>
+  <item>
     <title>Linkflow · 外链助手</title>
     <link>https://index.percall.dev/l/linkflow-desktop.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/linkflow-desktop.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>ResumePlot is a resume editor with Chinese and English content, templates and AI-assisted writing tools. It offers a limited free AI allowance and paid subscription plans. Users should check every statement against their own experience before exporting or applying.</description>
-  </item>
-  <item>
-    <title>SubAtlas</title>
-    <link>https://index.percall.dev/l/subatlas.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/subatlas.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>SubAtlas is a Chinese-language subscription comparison and renewal-planning resource. Browse public guides and source-linked information about AI subscription plans, and organize renewal details. Prices, eligibility and cancellation terms can change; confirm them with the original provider. Listed third-party subscriptions may be paid.</description>
   </item>
 </channel>
 </rss>
