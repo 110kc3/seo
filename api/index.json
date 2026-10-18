@@ -1,7 +1,25 @@
 {
-  "count": 133,
+  "count": 134,
   "updated": "2026-10-18",
   "listings": [
+    {
+      "slug": "awakepix",
+      "name": "AwakePix",
+      "url": "https://awakepix.com/",
+      "description": "Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "image-to-video",
+        "text-to-video",
+        "image-generation",
+        "image-editing"
+      ],
+      "created": "2026-10-18",
+      "github_user": "nongyi531415",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "local-biz-leads-email",
       "name": "Local Business Leads Email",

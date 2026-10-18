@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AwakePix</title>
+    <link>https://index.percall.dev/l/awakepix.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
+    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.</description>
+  </item>
+  <item>
     <title>Local Business Leads Email</title>
     <link>https://index.percall.dev/l/local-biz-leads-email.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/local-biz-leads-email.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.</description>
-  </item>
-  <item>
-    <title>NailMoodLab</title>
-    <link>https://index.percall.dev/l/nailmoodlab.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/nailmoodlab.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.</description>
   </item>
 </channel>
 </rss>

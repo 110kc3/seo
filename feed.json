@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/awakepix.html",
+      "url": "https://index.percall.dev/l/awakepix.html",
+      "title": "AwakePix",
+      "content_text": "Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.",
+      "date_published": "2026-10-18T00:00:00Z",
+      "tags": [
+        "app",
+        "image-to-video",
+        "text-to-video",
+        "image-generation",
+        "image-editing"
+      ],
+      "external_url": "https://awakepix.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/local-biz-leads-email.html",
       "url": "https://index.percall.dev/l/local-biz-leads-email.html",
       "title": "Local Business Leads Email",
@@ -760,20 +775,6 @@
         "audio-to-video"
       ],
       "external_url": "https://musicvideoai.pro/"
-    },
-    {
-      "id": "https://index.percall.dev/l/nailmoodlab.html",
-      "url": "https://index.percall.dev/l/nailmoodlab.html",
-      "title": "NailMoodLab",
-      "content_text": "NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "nail-design",
-        "image-generation",
-        "design"
-      ],
-      "external_url": "https://nailmoodlab.com/"
     }
   ]
 }
