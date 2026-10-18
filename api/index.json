@@ -1,7 +1,27 @@
 {
-  "count": 131,
-  "updated": "2026-10-17",
+  "count": 132,
+  "updated": "2026-10-18",
   "listings": [
+    {
+      "slug": "steam-page-auditor",
+      "name": "Steam Page Auditor",
+      "url": "https://steam-page-auditor.vercel.app",
+      "description": "Paste a Steam store URL for a ~60s AI conversion audit: score/100, prioritized fixes, ready-to-paste short-description and hook rewrites, tag suggestions, and 5 comparable games. Indie-dev focused; Apify PPE also available.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "steam",
+        "games",
+        "ai",
+        "marketing",
+        "seo"
+      ],
+      "submitted_by": "steam-acq-bot",
+      "created": "2026-10-18",
+      "github_user": "KEithwy1030",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "codex-reset-radar",
       "name": "Codex Reset Radar",

@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/steam-page-auditor.html",
+      "url": "https://index.percall.dev/l/steam-page-auditor.html",
+      "title": "Steam Page Auditor",
+      "content_text": "Paste a Steam store URL for a ~60s AI conversion audit: score/100, prioritized fixes, ready-to-paste short-description and hook rewrites, tag suggestions, and 5 comparable games. Indie-dev focused; Apify PPE also available.",
+      "date_published": "2026-10-18T00:00:00Z",
+      "tags": [
+        "app",
+        "steam",
+        "games",
+        "ai",
+        "marketing",
+        "seo"
+      ],
+      "external_url": "https://steam-page-auditor.vercel.app"
+    },
+    {
       "id": "https://index.percall.dev/l/codex-reset-radar.html",
       "url": "https://index.percall.dev/l/codex-reset-radar.html",
       "title": "Codex Reset Radar",
@@ -756,20 +772,6 @@
         "ecommerce"
       ],
       "external_url": "https://packscena.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/resumeplot.html",
-      "url": "https://index.percall.dev/l/resumeplot.html",
-      "title": "ResumePlot",
-      "content_text": "ResumePlot is a resume editor with Chinese and English content, templates and AI-assisted writing tools. It offers a limited free AI allowance and paid subscription plans. Users should check every statement against their own experience before exporting or applying.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "resume",
-        "career",
-        "writing"
-      ],
-      "external_url": "https://resumeplot.com/"
     }
   ]
 }
