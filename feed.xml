@@ -31,6 +31,14 @@
     <description>Keyword + city to local business leads with website, phone, and public email when available. Apify Actor with free trial and pay-per-event pricing (~$1.50 per 1k leads with email). No Google Maps API key required.</description>
   </item>
   <item>
+    <title>Mysocial</title>
+    <link>https://index.percall.dev/l/mysocial.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/mysocial.html</guid>
+    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Mysocial connects AI assistants to permitted social content, research, ideas and Brand Studio context over Streamable HTTP/OAuth 2.1. Free basic tools; paid Content Memory and creator research. Monthly USD: Free $0; Creator Memory $49; Creator System $149; Authority Intelligence $349; Authority Studio $799; Agency from $1,999 (annual contract). Platform/plan limits apply. Proprietary hosted service; public plugin metadata is MIT. No social publishing or scheduling.</description>
+  </item>
+  <item>
     <title>Steam Page Auditor</title>
     <link>https://index.percall.dev/l/steam-page-auditor.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/steam-page-auditor.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.</description>
-  </item>
-  <item>
-    <title>LookScene</title>
-    <link>https://index.percall.dev/l/lookscene.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/lookscene.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.</description>
   </item>
 </channel>
 </rss>

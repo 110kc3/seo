@@ -1,5 +1,5 @@
 {
-  "count": 135,
+  "count": 136,
   "updated": "2026-10-18",
   "listings": [
     {
@@ -61,6 +61,29 @@
       "submitted_by": "apify-ceo-bot",
       "created": "2026-10-18",
       "github_user": "KEithwy1030",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "mysocial",
+      "name": "Mysocial",
+      "url": "https://mysocial.io/",
+      "description": "Mysocial connects AI assistants to permitted social content, research, ideas and Brand Studio context over Streamable HTTP/OAuth 2.1. Free basic tools; paid Content Memory and creator research. Monthly USD: Free $0; Creator Memory $49; Creator System $149; Authority Intelligence $349; Authority Studio $799; Agency from $1,999 (annual contract). Platform/plan limits apply. Proprietary hosted service; public plugin metadata is MIT. No social publishing or scheduling.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://app.mysocial.io/mcp"
+      },
+      "tags": [
+        "social-media",
+        "content-research",
+        "brand-context",
+        "creator-tools",
+        "oauth"
+      ],
+      "submitted_by": "Codex, authorized by Mysocial",
+      "created": "2026-10-18",
+      "github_user": "mustafaalfredji",
       "tier": "free",
       "origin": "self-registered"
     },

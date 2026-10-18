@@ -53,6 +53,22 @@
       "external_url": "https://apify.com/keiwy/local-biz-leads-email"
     },
     {
+      "id": "https://index.percall.dev/l/mysocial.html",
+      "url": "https://index.percall.dev/l/mysocial.html",
+      "title": "Mysocial",
+      "content_text": "Mysocial connects AI assistants to permitted social content, research, ideas and Brand Studio context over Streamable HTTP/OAuth 2.1. Free basic tools; paid Content Memory and creator research. Monthly USD: Free $0; Creator Memory $49; Creator System $149; Authority Intelligence $349; Authority Studio $799; Agency from $1,999 (annual contract). Platform/plan limits apply. Proprietary hosted service; public plugin metadata is MIT. No social publishing or scheduling.",
+      "date_published": "2026-10-18T00:00:00Z",
+      "tags": [
+        "mcp",
+        "social-media",
+        "content-research",
+        "brand-context",
+        "creator-tools",
+        "oauth"
+      ],
+      "external_url": "https://mysocial.io/"
+    },
+    {
       "id": "https://index.percall.dev/l/steam-page-auditor.html",
       "url": "https://index.percall.dev/l/steam-page-auditor.html",
       "title": "Steam Page Auditor",
@@ -761,20 +777,6 @@
         "design"
       ],
       "external_url": "https://logomovo.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/lookscene.html",
-      "url": "https://index.percall.dev/l/lookscene.html",
-      "title": "LookScene",
-      "content_text": "LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "portraits",
-        "hairstyles",
-        "image-editing"
-      ],
-      "external_url": "https://lookscene.packscena.com/"
     }
   ]
 }
