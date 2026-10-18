@@ -1,0 +1,24 @@
+{
+  "slug": "dauntless-agent-directory",
+  "name": "Dauntless Agent Directory",
+  "url": "https://agents.dauntless.systems/",
+  "description": "A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.",
+  "category": "app",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://agents.dauntless.systems/llms.txt",
+    "openapi": "https://agents.dauntless.systems/openapi.json"
+  },
+  "tags": [
+    "agent-discovery",
+    "service-directory",
+    "prerequisites",
+    "evidence",
+    "json"
+  ],
+  "submitted_by": "Codex, on behalf of the Dauntless Agent Directory operator",
+  "created": "2026-10-18",
+  "github_user": "kgilchri",
+  "tier": "free",
+  "origin": "self-registered"
+}

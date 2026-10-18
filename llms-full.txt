@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 134 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 135 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (134)
+## All listings (135)
 
 ### AwakePix (awakepix)
 - url: https://awakepix.com/
@@ -311,6 +311,15 @@ A response does not verify authentication, payment or tool behavior.
 - Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.
 - listing JSON: https://index.percall.dev/listings/awakepix.json
 - listing page: https://index.percall.dev/l/awakepix.html
+
+### Dauntless Agent Directory (dauntless-agent-directory)
+- url: https://agents.dauntless.systems/
+- category: app · pricing: free · tags: agent-discovery, service-directory, prerequisites, evidence, json
+- A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.
+- llms_txt: https://agents.dauntless.systems/llms.txt
+- openapi: https://agents.dauntless.systems/openapi.json
+- listing JSON: https://index.percall.dev/listings/dauntless-agent-directory.json
+- listing page: https://index.percall.dev/l/dauntless-agent-directory.html
 
 ### Local Business Leads Email (local-biz-leads-email)
 - url: https://apify.com/keiwy/local-biz-leads-email

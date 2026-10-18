@@ -15,6 +15,14 @@
     <description>Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.</description>
   </item>
   <item>
+    <title>Dauntless Agent Directory</title>
+    <link>https://index.percall.dev/l/dauntless-agent-directory.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/dauntless-agent-directory.html</guid>
+    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.</description>
+  </item>
+  <item>
     <title>Local Business Leads Email</title>
     <link>https://index.percall.dev/l/local-biz-leads-email.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/local-biz-leads-email.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>LookScene offers adults AI-generated portrait, hairstyle and outfit ideas from their own photos. The current free invitation preview has limited availability. Generated images are visual references, not exact virtual fitting or identity guarantees; review likeness and image details before use.</description>
-  </item>
-  <item>
-    <title>Music Video AI</title>
-    <link>https://index.percall.dev/l/musicvideoai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/musicvideoai.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.</description>
   </item>
 </channel>
 </rss>

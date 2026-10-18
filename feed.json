@@ -21,6 +21,22 @@
       "external_url": "https://awakepix.com/"
     },
     {
+      "id": "https://index.percall.dev/l/dauntless-agent-directory.html",
+      "url": "https://index.percall.dev/l/dauntless-agent-directory.html",
+      "title": "Dauntless Agent Directory",
+      "content_text": "A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.",
+      "date_published": "2026-10-18T00:00:00Z",
+      "tags": [
+        "app",
+        "agent-discovery",
+        "service-directory",
+        "prerequisites",
+        "evidence",
+        "json"
+      ],
+      "external_url": "https://agents.dauntless.systems/"
+    },
+    {
       "id": "https://index.percall.dev/l/local-biz-leads-email.html",
       "url": "https://index.percall.dev/l/local-biz-leads-email.html",
       "title": "Local Business Leads Email",
@@ -759,22 +775,6 @@
         "image-editing"
       ],
       "external_url": "https://lookscene.packscena.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/musicvideoai.html",
-      "url": "https://index.percall.dev/l/musicvideoai.html",
-      "title": "Music Video AI",
-      "content_text": "Music Video AI puts audio first, producing tempo-synced video drafts with mood styling, flexible editing workspaces, and multi-ratio 1080p exports.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "music-video",
-        "ai-video",
-        "music-generator",
-        "video-editor",
-        "audio-to-video"
-      ],
-      "external_url": "https://musicvideoai.pro/"
     }
   ]
 }
