@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Local Business Leads Email</title>
+    <link>https://index.percall.dev/l/local-biz-leads-email.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/local-biz-leads-email.html</guid>
+    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Keyword + city to local business leads with website, phone, and public email when available. Apify Actor with free trial and pay-per-event pricing (~$1.50 per 1k leads with email). No Google Maps API key required.</description>
+  </item>
+  <item>
     <title>Steam Page Auditor</title>
     <link>https://index.percall.dev/l/steam-page-auditor.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/steam-page-auditor.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>NailMoodLab helps users explore AI nail designs and prepare manicure references. It offers a small free monthly AI allowance and lists paid plans, whose checkout availability should be checked on the site. Generated images are design ideas, not a guarantee of a salon result.</description>
-  </item>
-  <item>
-    <title>PackScena</title>
-    <link>https://index.percall.dev/l/packscena.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/packscena.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>PackScena helps online sellers explore AI-generated product backgrounds and lifestyle scenes from original photos. Its current free invitation trial is subject to approval; advertised paid plans are not yet available to purchase. Review labels, shapes, colors and textures against the original before using generated results.</description>
   </item>
 </channel>
 </rss>
