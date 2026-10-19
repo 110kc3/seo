@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-10-12",
-  "catalog_size": 31625,
+  "probed_at": "2026-10-19",
+  "catalog_size": 25702,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,9 +11,9 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 1,
-    "suspected": 38,
-    "tracked": 39
+    "confirmed": 2,
+    "suspected": 42,
+    "tracked": 44
   },
   "endpoints": [
     {
@@ -22,6 +22,13 @@
       "misses": 2,
       "since": "2026-08-01",
       "last_checked": "2026-09-07"
+    },
+    {
+      "url": "https://polynews.news/api/v1/feed",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-09-21",
+      "last_checked": "2026-10-19"
     }
   ],
   "suspected": [
@@ -180,21 +187,7 @@
       "last_checked": "2026-09-21"
     },
     {
-      "url": "https://pay.edge-agents.ai/v1/services/narrative-evidence-divergence",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
       "url": "https://pay.edge-agents.ai/v1/services/refinancing-window-intelligence",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://polynews.news/api/v1/feed",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-21",
@@ -257,29 +250,8 @@
       "last_checked": "2026-10-12"
     },
     {
-      "url": "https://api.ibancheck.co.uk/api/iban/generate-epc-qr",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
-    },
-    {
-      "url": "https://api.magentlab.com/api/calc/caprini",
-      "reason": "UND_ERR_HEADERS_OVERFLOW",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
-    },
-    {
       "url": "https://api.seerium.xyz/v1/prediction/rewards",
       "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
-    },
-    {
-      "url": "https://ari001.tailb4ac3a.ts.net/v1/ventures/x402_chain_reads_v1/erc20_allowance",
-      "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-10-12",
       "last_checked": "2026-10-12"
@@ -290,6 +262,69 @@
       "misses": 1,
       "since": "2026-10-12",
       "last_checked": "2026-10-12"
+    },
+    {
+      "url": "https://agentworld.me/api/agentworld/cce/verify",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://apexfaucet.xyz/api/x402/arc-eurc",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://apexfaucet.xyz/api/x402/candles/:mint",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://apexfaucet.xyz/api/x402/place-conditions",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://api.maxwellinternational.ai/v1/gov/at/legislation",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://api.maxwellinternational.ai/v1/openfda/drug/label",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://merchant-production-c224.up.railway.app/v1/buy/hoodi",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://quickly-techrepublic-modified-fate.trycloudflare.com/fx-rate/:pair",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://sweetai.tiamatcrypto.com/api/v1/bazaar/organic-ranking",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-10-19",
+      "last_checked": "2026-10-19"
     }
   ]
 }

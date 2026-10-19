@@ -1,4 +1,5 @@
 {
-  "agent-marketplace": 1,
-  "jp-bids-mcp": 1
+  "agent-marketplace": 2,
+  "jp-bids-mcp": 2,
+  "vend-api-merchant": 1
 }
