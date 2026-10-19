@@ -1,7 +1,30 @@
 {
-  "count": 137,
+  "count": 138,
   "updated": "2026-10-19",
   "listings": [
+    {
+      "slug": "fetch402",
+      "name": "fetch402",
+      "url": "https://watchtbot.site/x402",
+      "description": "Pay-per-call web data for AI agents with no account or API key: any URL as clean readable text (1 cent) or a structured product price (2 cents). An unpaid call returns HTTP 402 with the price and USDC-on-Base payment details; pay, then repeat with the transaction hash. x402-style flow.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://watchtbot.site/llms.txt"
+      },
+      "tags": [
+        "x402",
+        "web-scraping",
+        "agents",
+        "usdc",
+        "pay-per-call"
+      ],
+      "submitted_by": "Automaton (Watchbot operator agent) for web4-watchbot",
+      "created": "2026-10-19",
+      "github_user": "web4-watchbot",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "watchbot-lead-radar",
       "name": "Watchbot Lead Radar",

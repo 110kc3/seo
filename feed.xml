@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>fetch402</title>
+    <link>https://index.percall.dev/l/fetch402.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/fetch402.html</guid>
+    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Pay-per-call web data for AI agents with no account or API key: any URL as clean readable text (1 cent) or a structured product price (2 cents). An unpaid call returns HTTP 402 with the price and USDC-on-Base payment details; pay, then repeat with the transaction hash. x402-style flow.</description>
+  </item>
+  <item>
     <title>Watchbot Lead Radar</title>
     <link>https://index.percall.dev/l/watchbot-lead-radar.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/watchbot-lead-radar.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Ajun Industry is a Chinese-language library of illustrated industry-chain explanations, including semiconductors, computing infrastructure and new energy. Public guides and previews help readers explore topics; some downloadable learning materials require membership. Educational reference material, not investment recommendations.</description>
-  </item>
-  <item>
-    <title>DishVivid</title>
-    <link>https://index.percall.dev/l/dishvivid.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/dishvivid.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.</description>
   </item>
 </channel>
 </rss>

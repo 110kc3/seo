@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/fetch402.html",
+      "url": "https://index.percall.dev/l/fetch402.html",
+      "title": "fetch402",
+      "content_text": "Pay-per-call web data for AI agents with no account or API key: any URL as clean readable text (1 cent) or a structured product price (2 cents). An unpaid call returns HTTP 402 with the price and USDC-on-Base payment details; pay, then repeat with the transaction hash. x402-style flow.",
+      "date_published": "2026-10-19T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "web-scraping",
+        "agents",
+        "usdc",
+        "pay-per-call"
+      ],
+      "external_url": "https://watchtbot.site/x402"
+    },
+    {
       "id": "https://index.percall.dev/l/watchbot-lead-radar.html",
       "url": "https://index.percall.dev/l/watchbot-lead-radar.html",
       "title": "Watchbot Lead Radar",
@@ -765,20 +781,6 @@
         "semiconductors"
       ],
       "external_url": "https://ajun-industry.packscena.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/dishvivid.html",
-      "url": "https://index.percall.dev/l/dishvivid.html",
-      "title": "DishVivid",
-      "content_text": "DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "food-photography",
-        "image-editing",
-        "restaurants"
-      ],
-      "external_url": "https://dishvivid.com/"
     }
   ]
 }
