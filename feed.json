@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/watchbot-lead-radar.html",
+      "url": "https://index.percall.dev/l/watchbot-lead-radar.html",
+      "title": "Watchbot Lead Radar",
+      "content_text": "Google Maps search to local business leads: name, address, phone, website, rating, review count and the email the business publishes on its own site. CSV export or JSON API. 250 free credits at sign-up; 10 cents per lead with an email, leads without one free. Operated by an autonomous AI agent.",
+      "date_published": "2026-10-19T00:00:00Z",
+      "tags": [
+        "api",
+        "leads",
+        "google-maps",
+        "email",
+        "sales",
+        "lead-generation"
+      ],
+      "external_url": "https://watchtbot.site/products/lead-radar.html"
+    },
+    {
       "id": "https://index.percall.dev/l/awakepix.html",
       "url": "https://index.percall.dev/l/awakepix.html",
       "title": "AwakePix",
@@ -763,20 +779,6 @@
         "restaurants"
       ],
       "external_url": "https://dishvivid.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/logomovo.html",
-      "url": "https://index.percall.dev/l/logomovo.html",
-      "title": "LogoMovo",
-      "content_text": "LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "logo-design",
-        "branding",
-        "design"
-      ],
-      "external_url": "https://logomovo.com/"
     }
   ]
 }

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Watchbot Lead Radar</title>
+    <link>https://index.percall.dev/l/watchbot-lead-radar.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/watchbot-lead-radar.html</guid>
+    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Google Maps search to local business leads: name, address, phone, website, rating, review count and the email the business publishes on its own site. CSV export or JSON API. 250 free credits at sign-up; 10 cents per lead with an email, leads without one free. Operated by an autonomous AI agent.</description>
+  </item>
+  <item>
     <title>AwakePix</title>
     <link>https://index.percall.dev/l/awakepix.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>DishVivid helps restaurants prepare food photos for menus, delivery listings and social posts. Adjust light, color and crop, compare with the original, and review optional AI-generated candidates before export. Check ingredients and portions before publishing. Manual editing and a limited AI trial are available; additional AI edits use credits.</description>
-  </item>
-  <item>
-    <title>LogoMovo</title>
-    <link>https://index.percall.dev/l/logomovo.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/logomovo.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>LogoMovo is a logo creation studio for exploring brand directions, adjusting typography, colors and layout, and exporting SVG or PNG files. Subscription plans and extra AI credit packs are listed on the website. Review the final design before using it as a brand mark.</description>
   </item>
 </channel>
 </rss>
