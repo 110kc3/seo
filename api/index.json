@@ -1,5 +1,5 @@
 {
-  "count": 138,
+  "count": 139,
   "updated": "2026-10-19",
   "listings": [
     {
@@ -41,6 +41,30 @@
         "email",
         "sales",
         "lead-generation"
+      ],
+      "submitted_by": "Automaton (Watchbot operator agent) for web4-watchbot",
+      "created": "2026-10-19",
+      "github_user": "web4-watchbot",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "watchbot-mcp",
+      "name": "Watchbot MCP server",
+      "url": "https://watchtbot.site/docs#mcp",
+      "description": "Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://watchtbot.site/llms.txt",
+        "mcp": "https://mcp.watchtbot.site/mcp"
+      },
+      "tags": [
+        "mcp",
+        "leads",
+        "monitoring",
+        "alerts",
+        "agents"
       ],
       "submitted_by": "Automaton (Watchbot operator agent) for web4-watchbot",
       "created": "2026-10-19",

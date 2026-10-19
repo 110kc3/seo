@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 138 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 139 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (138)
+## All listings (139)
 
 ### fetch402 (fetch402)
 - url: https://watchtbot.site/x402
@@ -320,6 +320,15 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://watchtbot.site/llms.txt
 - listing JSON: https://index.percall.dev/listings/watchbot-lead-radar.json
 - listing page: https://index.percall.dev/l/watchbot-lead-radar.html
+
+### Watchbot MCP server (watchbot-mcp)
+- url: https://watchtbot.site/docs#mcp
+- category: mcp · pricing: freemium · tags: mcp, leads, monitoring, alerts, agents
+- Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.
+- llms_txt: https://watchtbot.site/llms.txt
+- mcp: https://mcp.watchtbot.site/mcp
+- listing JSON: https://index.percall.dev/listings/watchbot-mcp.json
+- listing page: https://index.percall.dev/l/watchbot-mcp.html
 
 ### AwakePix (awakepix)
 - url: https://awakepix.com/

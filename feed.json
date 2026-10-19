@@ -38,6 +38,22 @@
       "external_url": "https://watchtbot.site/products/lead-radar.html"
     },
     {
+      "id": "https://index.percall.dev/l/watchbot-mcp.html",
+      "url": "https://index.percall.dev/l/watchbot-mcp.html",
+      "title": "Watchbot MCP server",
+      "content_text": "Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.",
+      "date_published": "2026-10-19T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "leads",
+        "monitoring",
+        "alerts",
+        "agents"
+      ],
+      "external_url": "https://watchtbot.site/docs#mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/awakepix.html",
       "url": "https://index.percall.dev/l/awakepix.html",
       "title": "AwakePix",
@@ -767,20 +783,6 @@
         "productivity"
       ],
       "external_url": "https://ailab.packscena.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/ajun-industry.html",
-      "url": "https://index.percall.dev/l/ajun-industry.html",
-      "title": "Ajun Industry",
-      "content_text": "Ajun Industry is a Chinese-language library of illustrated industry-chain explanations, including semiconductors, computing infrastructure and new energy. Public guides and previews help readers explore topics; some downloadable learning materials require membership. Educational reference material, not investment recommendations.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "other",
-        "education",
-        "industry",
-        "semiconductors"
-      ],
-      "external_url": "https://ajun-industry.packscena.com/"
     }
   ]
 }
