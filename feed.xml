@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>DC Hub</title>
+    <link>https://index.percall.dev/l/dc-hub.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/dc-hub.html</guid>
+    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.</description>
+  </item>
+  <item>
     <title>fetch402</title>
     <link>https://index.percall.dev/l/fetch402.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fetch402.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Enhance digital reading comfort using ADHD Reading, a Chrome extension featuring bionic bolding, focus highlights, and three reading presets.</description>
-  </item>
-  <item>
-    <title>AI Lab</title>
-    <link>https://index.percall.dev/l/ailab-packscena.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ailab-packscena.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.</description>
   </item>
 </channel>
 </rss>

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 139 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 140 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (139)
+## All listings (140)
+
+### DC Hub (dc-hub)
+- url: https://dchub.cloud
+- category: mcp · pricing: freemium · tags: data-center, energy, grid, site-selection, mcp
+- DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.
+- llms_txt: https://dchub.cloud/llms.txt
+- openapi: https://dchub.cloud/openapi.json
+- mcp: https://dchub.cloud/mcp
+- listing JSON: https://index.percall.dev/listings/dc-hub.json
+- listing page: https://index.percall.dev/l/dc-hub.html
 
 ### fetch402 (fetch402)
 - url: https://watchtbot.site/x402

@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/dc-hub.html",
+      "url": "https://index.percall.dev/l/dc-hub.html",
+      "title": "DC Hub",
+      "content_text": "DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.",
+      "date_published": "2026-10-19T00:00:00Z",
+      "tags": [
+        "mcp",
+        "data-center",
+        "energy",
+        "grid",
+        "site-selection",
+        "mcp"
+      ],
+      "external_url": "https://dchub.cloud"
+    },
+    {
       "id": "https://index.percall.dev/l/fetch402.html",
       "url": "https://index.percall.dev/l/fetch402.html",
       "title": "fetch402",
@@ -769,20 +785,6 @@
         "adhd"
       ],
       "external_url": "https://adhdreading.org/"
-    },
-    {
-      "id": "https://index.percall.dev/l/ailab-packscena.html",
-      "url": "https://index.percall.dev/l/ailab-packscena.html",
-      "title": "AI Lab",
-      "content_text": "AI Lab is a Chinese-language collection of browser image and text utilities, casual games and AI-assisted comics. Basic compression and comic samples are public. Full items require an account and points earned through login or referrals; cash top-ups are not currently available.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "browser-tools",
-        "comics",
-        "productivity"
-      ],
-      "external_url": "https://ailab.packscena.com/"
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "slug": "dc-hub",
+  "name": "DC Hub",
+  "url": "https://dchub.cloud",
+  "description": "DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://dchub.cloud/llms.txt",
+    "openapi": "https://dchub.cloud/openapi.json",
+    "mcp": "https://dchub.cloud/mcp"
+  },
+  "tags": [
+    "data-center",
+    "energy",
+    "grid",
+    "site-selection",
+    "mcp"
+  ],
+  "submitted_by": "DC Hub owner (azmartone67)",
+  "created": "2026-10-19",
+  "github_user": "azmartone67",
+  "tier": "free",
+  "origin": "self-registered"
+}
