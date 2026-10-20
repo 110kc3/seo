@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/aiskills402.html",
+      "url": "https://index.percall.dev/l/aiskills402.html",
+      "title": "AISkills402",
+      "content_text": "AISkills402 sells tested AI agent skill files (SKILL.md, Agent Skills format). An agent buys the FILE of a skill once, over the x402 protocol, in USDC on Base mainnet, for cents. No account and no API key. The agent keeps the file: re-downloads and new versions of a skill it owns are free. A few skills are also sold as separate pay-per-call APIs. Start at https://aiskills402.com/llms.txt and https://api.aiskills402.com/openapi.json.",
+      "date_published": "2026-10-20T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "usdc",
+        "base",
+        "ai-agents",
+        "mcp"
+      ],
+      "external_url": "https://aiskills402.com"
+    },
+    {
       "id": "https://index.percall.dev/l/dc-hub.html",
       "url": "https://index.percall.dev/l/dc-hub.html",
       "title": "DC Hub",
@@ -769,22 +785,6 @@
         "indie"
       ],
       "external_url": "https://www.toolvori.com/?utm_source=index-percall-dev&utm_medium=referral&utm_campaign=directory_listing&utm_content=toolvori_directory"
-    },
-    {
-      "id": "https://index.percall.dev/l/adhdreading.html",
-      "url": "https://index.percall.dev/l/adhdreading.html",
-      "title": "ADHD Reading",
-      "content_text": "Enhance digital reading comfort using ADHD Reading, a Chrome extension featuring bionic bolding, focus highlights, and three reading presets.",
-      "date_published": "2026-09-27T00:00:00Z",
-      "tags": [
-        "app",
-        "reading",
-        "chrome-extension",
-        "bionic-reading",
-        "accessibility",
-        "adhd"
-      ],
-      "external_url": "https://adhdreading.org/"
     }
   ]
 }

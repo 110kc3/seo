@@ -1,7 +1,32 @@
 {
-  "count": 140,
-  "updated": "2026-10-19",
+  "count": 141,
+  "updated": "2026-10-20",
   "listings": [
+    {
+      "slug": "aiskills402",
+      "name": "AISkills402",
+      "url": "https://aiskills402.com",
+      "description": "AISkills402 sells tested AI agent skill files (SKILL.md, Agent Skills format). An agent buys the FILE of a skill once, over the x402 protocol, in USDC on Base mainnet, for cents. No account and no API key. The agent keeps the file: re-downloads and new versions of a skill it owns are free. A few skills are also sold as separate pay-per-call APIs. Start at https://aiskills402.com/llms.txt and https://api.aiskills402.com/openapi.json.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://aiskills402.com/llms.txt",
+        "openapi": "https://api.aiskills402.com/openapi.json",
+        "mcp": "https://api.aiskills402.com/mcp"
+      },
+      "tags": [
+        "x402",
+        "usdc",
+        "base",
+        "ai-agents",
+        "mcp"
+      ],
+      "submitted_by": "Georgi Kalchev (operator)",
+      "created": "2026-10-20",
+      "github_user": "paranormalen2",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "dc-hub",
       "name": "DC Hub",

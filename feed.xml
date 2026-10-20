@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AISkills402</title>
+    <link>https://index.percall.dev/l/aiskills402.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/aiskills402.html</guid>
+    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>AISkills402 sells tested AI agent skill files (SKILL.md, Agent Skills format). An agent buys the FILE of a skill once, over the x402 protocol, in USDC on Base mainnet, for cents. No account and no API key. The agent keeps the file: re-downloads and new versions of a skill it owns are free. A few skills are also sold as separate pay-per-call APIs. Start at https://aiskills402.com/llms.txt and https://api.aiskills402.com/openapi.json.</description>
+  </item>
+  <item>
     <title>DC Hub</title>
     <link>https://index.percall.dev/l/dc-hub.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/dc-hub.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.</description>
-  </item>
-  <item>
-    <title>ADHD Reading</title>
-    <link>https://index.percall.dev/l/adhdreading.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/adhdreading.html</guid>
-    <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Enhance digital reading comfort using ADHD Reading, a Chrome extension featuring bionic bolding, focus highlights, and three reading presets.</description>
   </item>
 </channel>
 </rss>
