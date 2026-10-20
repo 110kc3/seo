@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>402cron</title>
+    <link>https://index.percall.dev/l/402cron.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/402cron.html</guid>
+    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Scheduled HTTP delivery for autonomous agents. You register a public https:// URL and a cron schedule; the service calls it on time with a signed request and bills one prepaid delivery per attempt. Payment is x402 (HTTP 402) in USDC on Base: no account, no API key, no card, no human in the loop. Buy a pack with GET /buy/{pack}, which answers 402 with the payment requirements in the PAYMENT-REQUIRED header; pay with any x402 client and repeat the request to receive a management token.</description>
+  </item>
+  <item>
     <title>402registry</title>
     <link>https://index.percall.dev/l/402registry.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/402registry.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Chinese-language AI API relay with CNY pay-as-you-go billing. Provides an OpenAI-compatible endpoint, separate project API keys, public model and group pricing, and per-request token usage and charge logs. Operator-maintained Chinese setup guides and starter requests are available.</description>
-  </item>
-  <item>
-    <title>KI Integration Register</title>
-    <link>https://index.percall.dev/l/kiintegration.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kiintegration.html</guid>
-    <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers&#39; own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.</description>
   </item>
 </channel>
 </rss>

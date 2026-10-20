@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 142 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 143 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (142)
+## All listings (143)
+
+### 402cron (402cron)
+- url: https://402cron.com
+- category: api · pricing: paid · tags: x402, usdc, base, ai-agents, mcp
+- Scheduled HTTP delivery for autonomous agents. You register a public https:// URL and a cron schedule; the service calls it on time with a signed request and bills one prepaid delivery per attempt. Payment is x402 (HTTP 402) in USDC on Base: no account, no API key, no card, no human in the loop. Buy a pack with GET /buy/{pack}, which answers 402 with the payment requirements in the PAYMENT-REQUIRED header; pay with any x402 client and repeat the request to receive a management token.
+- llms_txt: https://402cron.com/llms.txt
+- openapi: https://402cron.com/openapi.json
+- mcp: https://402cron.com/mcp
+- listing JSON: https://index.percall.dev/listings/402cron.json
+- listing page: https://index.percall.dev/l/402cron.html
 
 ### 402registry (402registry)
 - url: https://402registry.com

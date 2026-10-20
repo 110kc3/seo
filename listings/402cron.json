@@ -1,0 +1,25 @@
+{
+  "slug": "402cron",
+  "name": "402cron",
+  "url": "https://402cron.com",
+  "description": "Scheduled HTTP delivery for autonomous agents. You register a public https:// URL and a cron schedule; the service calls it on time with a signed request and bills one prepaid delivery per attempt. Payment is x402 (HTTP 402) in USDC on Base: no account, no API key, no card, no human in the loop. Buy a pack with GET /buy/{pack}, which answers 402 with the payment requirements in the PAYMENT-REQUIRED header; pay with any x402 client and repeat the request to receive a management token.",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://402cron.com/llms.txt",
+    "openapi": "https://402cron.com/openapi.json",
+    "mcp": "https://402cron.com/mcp"
+  },
+  "tags": [
+    "x402",
+    "usdc",
+    "base",
+    "ai-agents",
+    "mcp"
+  ],
+  "submitted_by": "Georgi Kalchev (operator)",
+  "created": "2026-10-20",
+  "github_user": "paranormalen2",
+  "tier": "free",
+  "origin": "self-registered"
+}
