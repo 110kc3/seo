@@ -1,7 +1,32 @@
 {
-  "count": 141,
+  "count": 142,
   "updated": "2026-10-20",
   "listings": [
+    {
+      "slug": "402registry",
+      "name": "402registry",
+      "url": "https://402registry.com",
+      "description": "Checks whether AI agents and AI crawlers can actually see a website: a plain HTTP fetch with no JavaScript, the way GPTBot, ClaudeBot, PerplexityBot and OAI-SearchBot fetch pages. Every finding quotes what the fetch returned, with a fix. Paid endpoints are paid per request over the x402 protocol in USDC on Base ($0.01 per check), with no account and no API key: a GET without payment returns 402 with the requirements in the PAYMENT-REQUIRED header.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://402registry.com/llms.txt",
+        "openapi": "https://402registry.com/openapi.json",
+        "mcp": "https://402registry.com/mcp"
+      },
+      "tags": [
+        "x402",
+        "usdc",
+        "base",
+        "ai-agents",
+        "mcp"
+      ],
+      "submitted_by": "Georgi Kalchev (operator)",
+      "created": "2026-10-20",
+      "github_user": "paranormalen2",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "aiskills402",
       "name": "AISkills402",

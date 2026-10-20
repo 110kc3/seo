@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>402registry</title>
+    <link>https://index.percall.dev/l/402registry.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/402registry.html</guid>
+    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Checks whether AI agents and AI crawlers can actually see a website: a plain HTTP fetch with no JavaScript, the way GPTBot, ClaudeBot, PerplexityBot and OAI-SearchBot fetch pages. Every finding quotes what the fetch returned, with a fix. Paid endpoints are paid per request over the x402 protocol in USDC on Base ($0.01 per check), with no account and no API key: a GET without payment returns 402 with the requirements in the PAYMENT-REQUIRED header.</description>
+  </item>
+  <item>
     <title>AISkills402</title>
     <link>https://index.percall.dev/l/aiskills402.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/aiskills402.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Register of AI, automation and robotics service providers in Germany, Austria and Switzerland, built from the providers&#39; own public imprints. Companies find an implementation partner by service, industry and region; providers verify their entry for free and receive project requests. Machine-readable via llms.txt, Markdown and an MCP server.</description>
-  </item>
-  <item>
-    <title>Toolvori</title>
-    <link>https://index.percall.dev/l/toolvori.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/toolvori.html</guid>
-    <pubDate>Mon, 28 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.</description>
   </item>
 </channel>
 </rss>

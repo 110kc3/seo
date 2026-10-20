@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/402registry.html",
+      "url": "https://index.percall.dev/l/402registry.html",
+      "title": "402registry",
+      "content_text": "Checks whether AI agents and AI crawlers can actually see a website: a plain HTTP fetch with no JavaScript, the way GPTBot, ClaudeBot, PerplexityBot and OAI-SearchBot fetch pages. Every finding quotes what the fetch returned, with a fix. Paid endpoints are paid per request over the x402 protocol in USDC on Base ($0.01 per check), with no account and no API key: a GET without payment returns 402 with the requirements in the PAYMENT-REQUIRED header.",
+      "date_published": "2026-10-20T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "usdc",
+        "base",
+        "ai-agents",
+        "mcp"
+      ],
+      "external_url": "https://402registry.com"
+    },
+    {
       "id": "https://index.percall.dev/l/aiskills402.html",
       "url": "https://index.percall.dev/l/aiskills402.html",
       "title": "AISkills402",
@@ -769,22 +785,6 @@
         "mcp"
       ],
       "external_url": "https://kiintegration.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/toolvori.html",
-      "url": "https://index.percall.dev/l/toolvori.html",
-      "title": "Toolvori",
-      "content_text": "Toolvori (工具派) is a curated tools directory for creators, developers, and indie teams. Search and browse AI, design, developer, productivity, writing, project management, marketing, and data tools by category and use case.",
-      "date_published": "2026-09-28T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-tools",
-        "directory",
-        "productivity",
-        "discovery",
-        "indie"
-      ],
-      "external_url": "https://www.toolvori.com/?utm_source=index-percall-dev&utm_medium=referral&utm_campaign=directory_listing&utm_content=toolvori_directory"
     }
   ]
 }
