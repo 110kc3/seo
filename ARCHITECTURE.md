@@ -55,6 +55,8 @@ Hand-edited or workflow-written; everything else is derived.
 - `templates/` — page and protocol templates with `{{BASE}}` / `{{REPO}}` / `{{COUNT}}` / `{{LISTINGS_HTML}}` placeholders
 - `site.config.json` — base URL, repo slug, payment rails. **The single knob for migration.**
 - `scripts/validate.mjs` — the security boundary (see below)
+- `health.json` and `health-weeks.json` — workflow-written listing strike counts
+  and the URL/UTC week associated with each count.
 
 `scripts/build.mjs` regenerates every derived artifact and is a **pure function of those inputs**: no timestamps, so building twice yields a zero diff. `deploy.yml` asserts this — a dirty tree after a rebuild means someone hand-edited a generated file, and the deploy fails rather than shipping drift.
 
@@ -193,6 +195,22 @@ keeps a failed listing's previous score and original date. Incomplete runs exit
 nonzero. `health.yml` publishes successful updates before its final failure step;
 its push-retry path authenticates and reports failures too. Newly committed URLs
 not yet deployed fail explicitly and can be scored after their deployment.
+
+### Weekly liveness strikes — 2026-10-21
+
+`scripts/check-liveness.mjs` counts at most one failure per listing URL in each
+UTC week (Monday through Sunday). Three consecutive observed weeks are required
+for delisting. Manual reruns and push retries in the same week retain the count.
+A successful check, changed listing URL or missed week resets the streak.
+
+The public `health.json` remains a slug-to-number map. `health-weeks.json` records
+the exact URL and Monday date behind each count; both files are committed by the
+health workflow. The initial dates come from the October 19 liveness report.
+Undated legacy state starts a new streak rather than risking premature removal.
+Each probe releases its response body and clears its timeout on both success
+and failure. Obsolete local reports are removed when no listing is failing.
+Scoring remains independent: an inaccessible site receives no invented grade,
+retained grades keep their dates, and incomplete scoring still fails the job.
 
 ## Data stores
 

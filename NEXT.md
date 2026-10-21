@@ -1,21 +1,26 @@
 # NEXT — the one pending list
 
-> **2026-10-03 — selected scoring reliability and status cleanup implemented.**
-> Weekly scoring now authenticates with the existing operations token, restricted
-> to URLs in the deployed registry. The public limit stays at 60 uncached
-> audits/hour/IP. Failed refreshes preserve previous grades and dates, report
-> refreshed/retained/missing totals, and fail the workflow after publication.
-> Local verification: 307 tests on Node 22, two unchanged builds and diff checks.
-> Push/Actions and production verification for this change are pending. Next
-> session check the resulting commit once, compare live `llms.txt` byte for byte,
-> and inspect the next scheduled health summary for complete registry coverage.
-> No further implementation slice is selected; the commercial-evidence gate remains.
+> **2026-10-21 — weekly liveness reruns made safe; status refreshed.**
+> Liveness now counts one failure per URL per UTC week, preventing manual reruns
+> from prematurely reaching the three-week delisting threshold. Public numeric
+> strike counts are preserved; `health-weeks.json` records their URL/week evidence.
+> Recovery, a changed URL or a missed week resets the streak. Probe timers and
+> response bodies are released, and obsolete local reports are removed.
+> Local verification: all 313 tests passed on Node 22; two builds left generated
+> artifacts unchanged and diff checks passed. This change's push/Actions and
+> post-deployment production verification are pending at commit time.
+> Next session check the resulting deployment once and inspect the next scheduled
+> health summary. No new product work is selected; the commercial-evidence gate remains.
 >
-> **Previous work verified:** the September 27 catalog and score UX improvements
-> shipped in `a2d286a`. October 3 verification of `cf33940` passed all 302 then-current
-> tests, deterministic builds and production checks, including byte-identical
-> `llms.txt`. [Deployment](https://github.com/110kc3/seo/actions/runs/37124489258)
-> succeeded. Real-user value remains unvalidated.
+> **Production baseline verified October 21:** `5791ba2`, [deployment passed](https://github.com/110kc3/seo/actions/runs/39626055590),
+> tests and committed-build checks passed, and live `llms.txt` matched byte for byte.
+> The October 3 scoring fix `a61f58f` also deployed successfully; its old deployment
+> follow-up is closed. The [October 19 health run](https://github.com/110kc3/seo/actions/runs/39233857977)
+> published 136/139 refreshed scores, retaining two previous grades and leaving
+> one without a grade, then correctly failed. All three failed audits match the
+> liveness report: `agent-marketplace` and `jp-bids-mcp` at 2/3 strikes, and
+> `vend-api-merchant` at 1/3. The liveness fix does not hide incomplete scoring.
+> Later registrations can lack scores until the next scheduled refresh.
 
 > **2026-09-05 API simplification:** only `POST /api/audit` remains paid
 > ($0.05 USDC). `/api/check`, `/api/liveness`, `/api/route` and new
@@ -45,14 +50,14 @@ pricing, sizing and product strategy are not for it:
 - `2026-07-29-project-review.md` — a point-in-time review, now historical.
 - `competitors.md`, `service-ideas.md`, `page-ideas.md`, `README.md` — pre-existing portfolio notes.
 
-**The current status and external PR outcomes were refreshed on 2026-10-03.** Sections 4 onward are
+**The current status and open external PR were rechecked on 2026-10-21.** Sections 4 onward are
 dated records of what shipped. Where an older record disagrees with the queue,
 the queue is right.
 
 The split is simple: **§1 needs a browser, a public action, or a decision only
 you can make. §2 is code and PRs, and needs nothing from you.**
 
-### Actual open queue — 2026-10-03
+### Actual open queue — 2026-10-21
 
 - **Owner actions:** Show HN and logged-in indexation remain unconfirmed. Refresh
   the private draft before any posting; its September dates and figures are old.
@@ -65,9 +70,11 @@ you can make. §2 is code and PRs, and needs nothing from you.**
   llms-txt-hub #1460 remains open awaiting review (§3). A replacement submission
   is unselected. Bazaar's last recorded absence remains an external wait; recheck
   only if upstream state changes.
-- **Repository/Codex:** the selected scoring fix and status cleanup are implemented;
-  deployment and the next scheduled scoring run still need observation. No new
-  product work is selected. Keep current metrics and owner strategy in the vault.
+- **Repository/Codex:** weekly liveness rerun safety is implemented; this change's
+  deployment and the next scheduled health run need observation. The October 3
+  scoring fix is deployed; the October 19 run correctly reported three inaccessible
+  targets. No new product work is selected. Keep current metrics and owner strategy
+  in the vault.
 
 ---
 
@@ -269,13 +276,15 @@ against); freeze x402 spend. None is started.
 
 ---
 
-## 2. Codex status — 2026-10-03
+## 2. Codex status — 2026-10-21
 
-The selected weekly-scoring reliability fix and documentation refresh are complete
-locally. Public throttling is unchanged; operations scoring is registry-restricted.
-Local regression coverage includes 110 uncached audits, anonymous throttling,
-authentication, retained dates and CLI failure reporting. Deployment and the next
-scheduled health run remain pending as recorded above. The entries below are
+Weekly liveness rerun safety is implemented. A failed URL receives at most one
+strike per UTC week, with three consecutive weeks required before delisting.
+The October 3 scoring reliability fix is deployed and its deployment follow-up is
+closed. Public throttling remains unchanged and operations scoring is restricted
+to registered URLs. October 19's incomplete scores correspond to three failing
+listing URLs; preserving old grades/dates and failing visibly is intended behavior.
+This maintenance change's verification is recorded above. The entries below are
 historical implementation records, not an accepted queue.
 
 ### ~~2.1 Glama badge + tool count on PR #11152~~ — refreshed 2026-08-28
@@ -656,13 +665,13 @@ following it.
 outage edge and the recovery edge, with delivery confirmed by a webhook sink
 rather than inferred. **265 tests.**
 
-## 3. External listing outcomes — checked 2026-10-03
+## 3. External listing outcomes — open PR checked 2026-10-21
 
 | what | current state |
 |---|---|
 | **[awesome-mcp-servers #11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** | CLOSED unmerged on 8 September. Maintainers moved remote entries to `punkpeye/awesome-remote-mcp-servers`. No replacement submission selected or sent. |
 | **[Awesome-llms-txt #114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)** | MERGED on 28 September. No pending review action. |
-| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN, MERGEABLE, REVIEW_REQUIRED. Await the maintainer; no new comment or review request sent. |
+| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN, BLOCKED pending required review (rechecked October 21). Await the maintainer; no new comment or review request sent. |
 | **x402 Bazaar listing** | Last verified absent on 1 September; not rechecked this session. That check read **14,819 resources**; the 26 Aug committed snapshot contains **15,127 endpoints**. Nothing pays our address or lives on our host. Everything on our side is done: the rail is CDP, the 402 carries discovery metadata and a settlement carried it. Upstream `x402-foundation/x402#2112` is now closed and documents several indexing/re-indexing causes, so it does not identify ours. Check with `node scripts/bazaar-check.mjs`; do not spend more time on this unless the upstream state changes. |
 
 ---
@@ -811,9 +820,10 @@ and agent-readiness Phases 1, 3 and 5.
 
 - **Owner:** refresh the private Show HN draft before posting; indexation remains
   unconfirmed. User-value validation is still pending in the private plan.
-- **Codex:** check the scoring-fix deployment once next session and inspect the
-  next scheduled refresh summary. Maintain the single open external PR when its
-  state changes. No additional product slice is selected.
+- **Codex:** check the liveness-fix deployment once next session and inspect the
+  next scheduled health summary. Incomplete scoring stays visible while listing
+  URLs cannot be audited. Maintain the single open external PR when its state
+  changes. No additional product slice is selected.
 
 ---
 

@@ -642,7 +642,7 @@ test('no source directory is published as a static asset by accident', async () 
   // Everything here is site content on purpose.
   const published = new Set([
     ...(cfg.indexnow_key ? [`${cfg.indexnow_key}.txt`] : []),
-    '404.html', 'api', 'assets', 'dashboard.html', 'health.json', 'index.html',
+    '404.html', 'api', 'assets', 'dashboard.html', 'health.json', 'health-weeks.json', 'index.html',
     'l', 'listings', 'llms-full.txt', 'llms.txt', 'openapi.yaml', 'robots.txt',
     // Published for the same reason health.json is: the registry's own state
     // about its listings should be inspectable by whoever it describes.

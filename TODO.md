@@ -2,7 +2,7 @@
 
 ## Needs Kamil
 
-Updated 2026-10-03. `NEXT.md` is the only implementation queue; this list contains
+Updated 2026-10-21. `NEXT.md` is the only implementation queue; this list contains
 owner actions only. The folded changelog is historical.
 
 1. **Show HN:** posting remains unconfirmed. Refresh the private draft and its
@@ -21,14 +21,16 @@ not verified current blockers for this repository.
 
 ## Current health — not tasks
 
-- `cf33940` production was verified on October 3: 302 then-current tests passed,
-  deterministic builds matched, and live `llms.txt` matched the committed artifact.
-- The September 28 health job was green despite incomplete score refreshes. The
-  selected fix authenticates scheduled scoring for registered URLs, retains old
-  dates on failures and makes incomplete runs fail visibly after publication.
-  Deployment and the next scheduled run remain pending; follow `NEXT.md`.
+- `5791ba2` production was verified on October 21: deployment, tests and committed
+  build checks passed; live `llms.txt` matched the committed artifact byte for byte.
+- The October 3 scoring fix is deployed. October 19 refreshed 136/139 scores;
+  three inaccessible targets caused the intended visible failure after publication.
+  Retained grades keep their original dates. See `NEXT.md` for the report links.
+- Weekly liveness rerun safety is implemented: one strike per URL per UTC week,
+  with recovery, URL changes and missed weeks resetting the streak. This change's
+  deployment and next scheduled health run remain pending; follow `NEXT.md`.
 - External PRs: Awesome-llms-txt #114 merged; awesome-mcp-servers #11152 closed
-  unmerged; llms-txt-hub #1460 remains open awaiting review. See `NEXT.md` §3.
+  unmerged; llms-txt-hub #1460 remains open awaiting review (rechecked October 21).
 - The commercial-evidence gate remains active. No new product work is selected.
 
 ---

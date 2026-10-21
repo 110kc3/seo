@@ -22,6 +22,7 @@ jobs:
 
       - name: Re-check every listing URL
         id: check
+        # UTC-week observations make manual reruns and push retries idempotent.
         run: node scripts/check-liveness.mjs
 
       # Grades for the score badge. Runs after the liveness pass so a delisted
