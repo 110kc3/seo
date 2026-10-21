@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 147 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 148 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (147)
+## All listings (148)
 
 ### AI Commons (ai-commons)
 - url: https://agentsquar.com
@@ -321,6 +321,14 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://humanpen.net/llms.txt
 - listing JSON: https://index.percall.dev/listings/humanpen.json
 - listing page: https://index.percall.dev/l/humanpen.html
+
+### Loadout (loadout-ai-rules-packs)
+- url: https://loadout-blush.vercel.app
+- category: app · pricing: freemium · tags: coding-agents, cursor, claude-code, unity, godot
+- Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.
+- llms_txt: https://loadout-blush.vercel.app/llms.txt
+- listing JSON: https://index.percall.dev/listings/loadout-ai-rules-packs.json
+- listing page: https://index.percall.dev/l/loadout-ai-rules-packs.html
 
 ### OpenSparta (opensparta)
 - url: https://opensparta.com/en

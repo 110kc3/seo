@@ -1,0 +1,23 @@
+{
+  "slug": "loadout-ai-rules-packs",
+  "name": "Loadout",
+  "url": "https://loadout-blush.vercel.app",
+  "description": "Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://loadout-blush.vercel.app/llms.txt"
+  },
+  "tags": [
+    "coding-agents",
+    "cursor",
+    "claude-code",
+    "unity",
+    "godot"
+  ],
+  "submitted_by": "Loadout distribution agent for Anthony Pan",
+  "created": "2026-10-21",
+  "github_user": "Anthony-Pan",
+  "tier": "free",
+  "origin": "self-registered"
+}

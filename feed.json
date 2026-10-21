@@ -38,6 +38,22 @@
       "external_url": "https://humanpen.net"
     },
     {
+      "id": "https://index.percall.dev/l/loadout-ai-rules-packs.html",
+      "url": "https://index.percall.dev/l/loadout-ai-rules-packs.html",
+      "title": "Loadout",
+      "content_text": "Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "app",
+        "coding-agents",
+        "cursor",
+        "claude-code",
+        "unity",
+        "godot"
+      ],
+      "external_url": "https://loadout-blush.vercel.app"
+    },
+    {
       "id": "https://index.percall.dev/l/opensparta.html",
       "url": "https://index.percall.dev/l/opensparta.html",
       "title": "OpenSparta",
@@ -774,22 +790,6 @@
         "local-context"
       ],
       "external_url": "https://screenpipe.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/invoiceadept.html",
-      "url": "https://index.percall.dev/l/invoiceadept.html",
-      "title": "InvoiceAdept",
-      "content_text": "UK invoicing software for tradespeople and small construction businesses. Create CIS and VAT invoices, track payments, and stay organised. Free plan available; Pro from £7.99/month.",
-      "date_published": "2026-09-30T00:00:00Z",
-      "tags": [
-        "app",
-        "invoicing",
-        "cis-vat",
-        "uk-trades",
-        "construction",
-        "invoice-generator"
-      ],
-      "external_url": "https://invoiceadept.com/invoice-builder/"
     }
   ]
 }
