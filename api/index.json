@@ -1,6 +1,6 @@
 {
   "count": 144,
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "listings": [
     {
       "slug": "402cron",
@@ -201,7 +201,7 @@
       "slug": "awakepix",
       "name": "AwakePix",
       "url": "https://awakepix.com/",
-      "description": "Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.",
+      "description": "AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.",
       "category": "app",
       "pricing": "freemium",
       "tags": [
@@ -213,7 +213,8 @@
       "created": "2026-10-18",
       "github_user": "nongyi531415",
       "tier": "free",
-      "origin": "self-registered"
+      "origin": "self-registered",
+      "updated": "2026-10-21"
     },
     {
       "slug": "dauntless-agent-directory",

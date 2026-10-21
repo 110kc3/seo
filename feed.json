@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/awakepix.html",
+      "url": "https://index.percall.dev/l/awakepix.html",
+      "title": "AwakePix",
+      "content_text": "AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "app",
+        "image-to-video",
+        "text-to-video",
+        "image-generation",
+        "image-editing"
+      ],
+      "external_url": "https://awakepix.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/402cron.html",
       "url": "https://index.percall.dev/l/402cron.html",
       "title": "402cron",
@@ -132,21 +147,6 @@
         "agents"
       ],
       "external_url": "https://watchtbot.site/docs#mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/awakepix.html",
-      "url": "https://index.percall.dev/l/awakepix.html",
-      "title": "AwakePix",
-      "content_text": "Browser-based photo-to-video, text-to-video and AI image creation/editing. Includes prompts, model examples and upfront quotes. Verified accounts can try one free 5s 480p Mini video with audio and no watermark, subject to shared capacity; one free image per device/day, sign-in to download. Free outputs personal/noncommercial. Further creation uses one-time credit packs from US$4.90; commercial use subject to terms and input rights.",
-      "date_published": "2026-10-18T00:00:00Z",
-      "tags": [
-        "app",
-        "image-to-video",
-        "text-to-video",
-        "image-generation",
-        "image-editing"
-      ],
-      "external_url": "https://awakepix.com/"
     },
     {
       "id": "https://index.percall.dev/l/dauntless-agent-directory.html",
