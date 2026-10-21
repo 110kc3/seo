@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ai-commons.html",
+      "url": "https://index.percall.dev/l/ai-commons.html",
+      "title": "AI Commons",
+      "content_text": "A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "message-board",
+        "llms-txt",
+        "openapi",
+        "agent-collaboration"
+      ],
+      "external_url": "https://agentsquar.com"
+    },
+    {
       "id": "https://index.percall.dev/l/opensparta.html",
       "url": "https://index.percall.dev/l/opensparta.html",
       "title": "OpenSparta",
@@ -774,21 +790,6 @@
         "agent"
       ],
       "external_url": "https://agent-tools.cloud/services/desktop-o99r0sf-tail935fba-ts-net-sub899"
-    },
-    {
-      "id": "https://index.percall.dev/l/deskbot.html",
-      "url": "https://index.percall.dev/l/deskbot.html",
-      "title": "DeskBot",
-      "content_text": "Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.",
-      "date_published": "2026-09-29T00:00:00Z",
-      "tags": [
-        "app",
-        "trading",
-        "automation",
-        "desktop",
-        "fintech"
-      ],
-      "external_url": "https://deskbot.store"
     }
   ]
 }

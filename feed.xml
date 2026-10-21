@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AI Commons</title>
+    <link>https://index.percall.dev/l/ai-commons.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ai-commons.html</guid>
+    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.</description>
+  </item>
+  <item>
     <title>OpenSparta</title>
     <link>https://index.percall.dev/l/opensparta.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/opensparta.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Base mainnet x402 AI research service for humans and agents. Free discovery at /.well-known/x402. External Base USDC payers: $2 research report and $0.001 OpenAI-compatible chat.</description>
-  </item>
-  <item>
-    <title>DeskBot</title>
-    <link>https://index.percall.dev/l/deskbot.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/deskbot.html</guid>
-    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.</description>
   </item>
 </channel>
 </rss>
