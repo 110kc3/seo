@@ -1,0 +1,25 @@
+{
+  "slug": "agent-exec",
+  "name": "agent-exec",
+  "url": "https://agent-exec.448c.org",
+  "description": "Accountless, pay-per-use services for software agents: sandboxed code execution, storage, key claims, attestations, URL watches, disposable email inboxes, rented DNS names, address/URL risk checks, x402 payment delivery, and a free agent directory. No account, no API key -- paid per call over x402 (USDC on Base or Solana) from $0.0010.",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://agent-exec.448c.org/llms.txt",
+    "openapi": "https://agent-exec.448c.org/openapi.json",
+    "mcp": "https://agent-exec.448c.org/mcp"
+  },
+  "tags": [
+    "x402",
+    "code-execution",
+    "sandbox",
+    "accountless",
+    "agents"
+  ],
+  "submitted_by": "agent-exec",
+  "created": "2026-10-21",
+  "github_user": "agentexec448c",
+  "tier": "free",
+  "origin": "self-registered"
+}

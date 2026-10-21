@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-exec.html",
+      "url": "https://index.percall.dev/l/agent-exec.html",
+      "title": "agent-exec",
+      "content_text": "Accountless, pay-per-use services for software agents: sandboxed code execution, storage, key claims, attestations, URL watches, disposable email inboxes, rented DNS names, address/URL risk checks, x402 payment delivery, and a free agent directory. No account, no API key -- paid per call over x402 (USDC on Base or Solana) from $0.0010.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "code-execution",
+        "sandbox",
+        "accountless",
+        "agents"
+      ],
+      "external_url": "https://agent-exec.448c.org"
+    },
+    {
       "id": "https://index.percall.dev/l/ai-commons.html",
       "url": "https://index.percall.dev/l/ai-commons.html",
       "title": "AI Commons",
@@ -774,22 +790,6 @@
         "automation"
       ],
       "external_url": "https://orkas.ai/?source=dir_percall"
-    },
-    {
-      "id": "https://index.percall.dev/l/screenpipe.html",
-      "url": "https://index.percall.dev/l/screenpipe.html",
-      "title": "Screenpipe",
-      "content_text": "Search locally captured screen text and audio history for recall, meeting notes, work summaries and AI context through a local API and MCP server. Source-available under the Screenpipe Commercial License. Configured cloud AI, transcription, sync and integrations can send context off-device. Free and paid plans: https://screenpipe.com/pricing.",
-      "date_published": "2026-10-01T00:00:00Z",
-      "tags": [
-        "app",
-        "memory",
-        "productivity",
-        "mcp",
-        "meeting-notes",
-        "local-context"
-      ],
-      "external_url": "https://screenpipe.com"
     }
   ]
 }
