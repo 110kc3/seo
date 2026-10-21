@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>OpenSparta</title>
+    <link>https://index.percall.dev/l/opensparta.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/opensparta.html</guid>
+    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.</description>
+  </item>
+  <item>
     <title>AwakePix</title>
     <link>https://index.percall.dev/l/awakepix.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Ready-to-ship Windows + Intel Mac desktop for rules-based trading (stocks, options, crypto, prediction markets). AI research beside statistical signals; automation follows your rules and limits. Full Access $399/year or $9.99 per coin/platform. Trading involves risk of loss. You can lose money. No profit guarantees.</description>
-  </item>
-  <item>
-    <title>Honeypot</title>
-    <link>https://index.percall.dev/l/honeypot-skill-index.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/honeypot-skill-index.html</guid>
-    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.</description>
   </item>
 </channel>
 </rss>

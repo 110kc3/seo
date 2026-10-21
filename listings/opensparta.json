@@ -1,0 +1,18 @@
+{
+  "slug": "opensparta",
+  "name": "OpenSparta",
+  "url": "https://opensparta.com/en",
+  "description": "OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "telegram",
+    "saas",
+    "audience-discovery",
+    "account-management"
+  ],
+  "created": "2026-10-21",
+  "github_user": "thinkpad2050",
+  "tier": "free",
+  "origin": "self-registered"
+}

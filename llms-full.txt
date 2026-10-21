@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 144 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 145 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (144)
+## All listings (145)
+
+### OpenSparta (opensparta)
+- url: https://opensparta.com/en
+- category: app · pricing: freemium · tags: telegram, saas, audience-discovery, account-management
+- OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.
+- listing JSON: https://index.percall.dev/listings/opensparta.json
+- listing page: https://index.percall.dev/l/opensparta.html
 
 ### 402cron (402cron)
 - url: https://402cron.com

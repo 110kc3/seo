@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/opensparta.html",
+      "url": "https://index.percall.dev/l/opensparta.html",
+      "title": "OpenSparta",
+      "content_text": "OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "app",
+        "telegram",
+        "saas",
+        "audience-discovery",
+        "account-management"
+      ],
+      "external_url": "https://opensparta.com/en"
+    },
+    {
       "id": "https://index.percall.dev/l/awakepix.html",
       "url": "https://index.percall.dev/l/awakepix.html",
       "title": "AwakePix",
@@ -774,17 +789,6 @@
         "fintech"
       ],
       "external_url": "https://deskbot.store"
-    },
-    {
-      "id": "https://index.percall.dev/l/honeypot-skill-index.html",
-      "url": "https://index.percall.dev/l/honeypot-skill-index.html",
-      "title": "Honeypot",
-      "content_text": "Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.",
-      "date_published": "2026-09-29T00:00:00Z",
-      "tags": [
-        "other"
-      ],
-      "external_url": "https://honeypot-e6c.pages.dev"
     }
   ]
 }
