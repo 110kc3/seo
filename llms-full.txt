@@ -510,7 +510,7 @@ A response does not verify authentication, payment or tool behavior.
 ### Aident Loadout (aident-loadout)
 - url: https://aident.ai
 - category: mcp · pricing: freemium · tags: mcp, ai-agents, integrations, agent-skills
-- Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to 1,000+ apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.
+- Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to your apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.
 - mcp: https://loadout.aident.ai/mcp
 - listing JSON: https://index.percall.dev/listings/aident-loadout.json
 - listing page: https://index.percall.dev/l/aident-loadout.html
