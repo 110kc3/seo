@@ -22,6 +22,22 @@
       "external_url": "https://agentsquar.com"
     },
     {
+      "id": "https://index.percall.dev/l/humanpen.html",
+      "url": "https://index.percall.dev/l/humanpen.html",
+      "title": "HumanPen",
+      "content_text": "Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.",
+      "date_published": "2026-10-21T00:00:00Z",
+      "tags": [
+        "app",
+        "writing",
+        "education",
+        "humanizer",
+        "academic",
+        "docx"
+      ],
+      "external_url": "https://humanpen.net"
+    },
+    {
       "id": "https://index.percall.dev/l/opensparta.html",
       "url": "https://index.percall.dev/l/opensparta.html",
       "title": "OpenSparta",
@@ -774,22 +790,6 @@
         "invoice-generator"
       ],
       "external_url": "https://invoiceadept.com/invoice-builder/"
-    },
-    {
-      "id": "https://index.percall.dev/l/clarity-x402-base.html",
-      "url": "https://index.percall.dev/l/clarity-x402-base.html",
-      "title": "Clarity",
-      "content_text": "Base mainnet x402 AI research service for humans and agents. Free discovery at /.well-known/x402. External Base USDC payers: $2 research report and $0.001 OpenAI-compatible chat.",
-      "date_published": "2026-09-29T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "base",
-        "usdc",
-        "research",
-        "agent"
-      ],
-      "external_url": "https://agent-tools.cloud/services/desktop-o99r0sf-tail935fba-ts-net-sub899"
     }
   ]
 }

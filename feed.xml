@@ -15,6 +15,14 @@
     <description>A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.</description>
   </item>
   <item>
+    <title>HumanPen</title>
+    <link>https://index.percall.dev/l/humanpen.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/humanpen.html</guid>
+    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.</description>
+  </item>
+  <item>
     <title>OpenSparta</title>
     <link>https://index.percall.dev/l/opensparta.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/opensparta.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>UK invoicing software for tradespeople and small construction businesses. Create CIS and VAT invoices, track payments, and stay organised. Free plan available; Pro from £7.99/month.</description>
-  </item>
-  <item>
-    <title>Clarity</title>
-    <link>https://index.percall.dev/l/clarity-x402-base.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/clarity-x402-base.html</guid>
-    <pubDate>Tue, 29 Sep 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Base mainnet x402 AI research service for humans and agents. Free discovery at /.well-known/x402. External Base USDC payers: $2 research report and $0.001 OpenAI-compatible chat.</description>
   </item>
 </channel>
 </rss>
