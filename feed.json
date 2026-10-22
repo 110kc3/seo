@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/reposted.html",
+      "url": "https://index.percall.dev/l/reposted.html",
+      "title": "Reposted",
+      "content_text": "German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.",
+      "date_published": "2026-10-22T00:00:00Z",
+      "tags": [
+        "app",
+        "social-media",
+        "content-planning",
+        "ai-content",
+        "publishing"
+      ],
+      "external_url": "https://reposted.de/"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-exec.html",
       "url": "https://index.percall.dev/l/agent-exec.html",
       "title": "agent-exec",
@@ -774,22 +789,6 @@
         "rust"
       ],
       "external_url": "https://github.com/louis030195/hyperconsciousness"
-    },
-    {
-      "id": "https://index.percall.dev/l/orkas.html",
-      "url": "https://index.percall.dev/l/orkas.html",
-      "title": "Orkas",
-      "content_text": "Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.",
-      "date_published": "2026-10-01T00:00:00Z",
-      "tags": [
-        "app",
-        "desktop",
-        "multi-agent",
-        "local-first",
-        "open-source",
-        "automation"
-      ],
-      "external_url": "https://orkas.ai/?source=dir_percall"
     }
   ]
 }

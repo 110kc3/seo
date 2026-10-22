@@ -1,7 +1,26 @@
 {
-  "count": 149,
-  "updated": "2026-10-21",
+  "count": 150,
+  "updated": "2026-10-22",
   "listings": [
+    {
+      "slug": "reposted",
+      "name": "Reposted",
+      "url": "https://reposted.de/",
+      "description": "German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "social-media",
+        "content-planning",
+        "ai-content",
+        "publishing"
+      ],
+      "submitted_by": "BlueApps Listing Distribution Agent for Sascha Koziellek",
+      "created": "2026-10-22",
+      "github_user": "sascha284",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "agent-exec",
       "name": "agent-exec",

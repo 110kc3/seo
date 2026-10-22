@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Reposted</title>
+    <link>https://index.percall.dev/l/reposted.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/reposted.html</guid>
+    <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.</description>
+  </item>
+  <item>
     <title>agent-exec</title>
     <link>https://index.percall.dev/l/agent-exec.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-exec.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>MIT-licensed developer-alpha Rust knowledge store for humans and AI agents. Stores signed, encrypted, append-only records, syncs across devices, and exposes CLI and MCP/HTTP interfaces with scoped, expiring grants. Install from source using the repository README. Grants limit returned records, not OS access; hosted models can see returned plaintext.</description>
-  </item>
-  <item>
-    <title>Orkas</title>
-    <link>https://index.percall.dev/l/orkas.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/orkas.html</guid>
-    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Orkas is an open-source, local-first desktop AI workforce. A Commander turns goals into executable plans and coordinates specialist agents in parallel or sequence through one chat. The open-source core uses user-selected providers or compatible local model endpoints; optional hosted services may have separate costs.</description>
   </item>
 </channel>
 </rss>
