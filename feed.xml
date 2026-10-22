@@ -15,6 +15,14 @@
     <description>German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.</description>
   </item>
   <item>
+    <title>TITANHOLD QC</title>
+    <link>https://index.percall.dev/l/titanhold-qc-x402.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/titanhold-qc-x402.html</guid>
+    <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.</description>
+  </item>
+  <item>
     <title>agent-exec</title>
     <link>https://index.percall.dev/l/agent-exec.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-exec.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.</description>
-  </item>
-  <item>
-    <title>Hyperconsciousness</title>
-    <link>https://index.percall.dev/l/hyperconsciousness.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/hyperconsciousness.html</guid>
-    <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>MIT-licensed developer-alpha Rust knowledge store for humans and AI agents. Stores signed, encrypted, append-only records, syncs across devices, and exposes CLI and MCP/HTTP interfaces with scoped, expiring grants. Install from source using the repository README. Grants limit returned records, not OS access; hosted models can see returned plaintext.</description>
   </item>
 </channel>
 </rss>

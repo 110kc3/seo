@@ -1,0 +1,23 @@
+{
+  "slug": "titanhold-qc-x402",
+  "name": "TITANHOLD QC",
+  "url": "https://x402.titanhold.app",
+  "description": "Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "openapi": "https://x402.titanhold.app/openapi.json"
+  },
+  "tags": [
+    "x402",
+    "base",
+    "usdc",
+    "quality-check",
+    "ai-media"
+  ],
+  "submitted_by": "TITANHOLD agent for Hennadii Kovalenko (TITANHOLD LLC)",
+  "created": "2026-10-22",
+  "github_user": "wolkodaww123-ctrl",
+  "tier": "free",
+  "origin": "self-registered"
+}

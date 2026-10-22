@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 150 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 151 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (150)
+## All listings (151)
 
 ### Reposted (reposted)
 - url: https://reposted.de/
@@ -311,6 +311,14 @@ A response does not verify authentication, payment or tool behavior.
 - German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.
 - listing JSON: https://index.percall.dev/listings/reposted.json
 - listing page: https://index.percall.dev/l/reposted.html
+
+### TITANHOLD QC (titanhold-qc-x402)
+- url: https://x402.titanhold.app
+- category: api · pricing: paid · tags: x402, base, usdc, quality-check, ai-media
+- Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.
+- openapi: https://x402.titanhold.app/openapi.json
+- listing JSON: https://index.percall.dev/listings/titanhold-qc-x402.json
+- listing page: https://index.percall.dev/l/titanhold-qc-x402.html
 
 ### agent-exec (agent-exec)
 - url: https://agent-exec.448c.org

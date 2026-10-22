@@ -21,6 +21,22 @@
       "external_url": "https://reposted.de/"
     },
     {
+      "id": "https://index.percall.dev/l/titanhold-qc-x402.html",
+      "url": "https://index.percall.dev/l/titanhold-qc-x402.html",
+      "title": "TITANHOLD QC",
+      "content_text": "Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.",
+      "date_published": "2026-10-22T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "base",
+        "usdc",
+        "quality-check",
+        "ai-media"
+      ],
+      "external_url": "https://x402.titanhold.app"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-exec.html",
       "url": "https://index.percall.dev/l/agent-exec.html",
       "title": "agent-exec",
@@ -773,22 +789,6 @@
         "agent"
       ],
       "external_url": "https://yila.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/hyperconsciousness.html",
-      "url": "https://index.percall.dev/l/hyperconsciousness.html",
-      "title": "Hyperconsciousness",
-      "content_text": "MIT-licensed developer-alpha Rust knowledge store for humans and AI agents. Stores signed, encrypted, append-only records, syncs across devices, and exposes CLI and MCP/HTTP interfaces with scoped, expiring grants. Install from source using the repository README. Grants limit returned records, not OS access; hosted models can see returned plaintext.",
-      "date_published": "2026-10-01T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-memory",
-        "local-first",
-        "encrypted-storage",
-        "mcp",
-        "rust"
-      ],
-      "external_url": "https://github.com/louis030195/hyperconsciousness"
     }
   ]
 }
