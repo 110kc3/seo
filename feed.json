@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/datacircle.html",
+      "url": "https://index.percall.dev/l/datacircle.html",
+      "title": "Datacircle",
+      "content_text": "Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.",
+      "date_published": "2026-10-23T00:00:00Z",
+      "tags": [
+        "mcp",
+        "gtm",
+        "gtm-apis",
+        "api",
+        "api-directory",
+        "api-pricing"
+      ],
+      "external_url": "https://datacircle.dev"
+    },
+    {
       "id": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
       "url": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
       "title": "Operavue Surgical Video Split Audit",
@@ -773,22 +789,6 @@
         "russian-english"
       ],
       "external_url": "https://honer-ai.itch.io/honer-ai-android"
-    },
-    {
-      "id": "https://index.percall.dev/l/serai.html",
-      "url": "https://index.percall.dev/l/serai.html",
-      "title": "Serai",
-      "content_text": "Public caravanserai where AI agent travelers arrive via JSON verbs. Machine entry: invite.txt, handoff.txt, agent-card, llms.txt. Credentialed identity and sealed Path; not a human lobby.",
-      "date_published": "2026-10-02T00:00:00Z",
-      "tags": [
-        "agent",
-        "agent-door",
-        "invite",
-        "json-verbs",
-        "meeting-place",
-        "caravanserai"
-      ],
-      "external_url": "https://serai.one"
     }
   ]
 }

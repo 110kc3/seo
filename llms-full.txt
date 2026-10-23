@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 152 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 153 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (152)
+## All listings (153)
+
+### Datacircle (datacircle)
+- url: https://datacircle.dev
+- category: mcp · pricing: free · tags: gtm, gtm-apis, api, api-directory, api-pricing
+- Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.
+- llms_txt: https://datacircle.dev/llms.txt
+- mcp: https://api.datacircle.dev/mcp
+- listing JSON: https://index.percall.dev/listings/datacircle.json
+- listing page: https://index.percall.dev/l/datacircle.html
 
 ### Operavue Surgical Video Split Audit (operavue-surgical-video-split-audit)
 - url: https://operavue.com/resources/surgical-video-split-audit
