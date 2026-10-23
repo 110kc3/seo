@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
+      "url": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
+      "title": "Operavue Surgical Video Split Audit",
+      "content_text": "Free local Python checker and synthetic CSV exercise for surgical-video dataset evaluation. Checks supplied case, recording and patient-group IDs across train, validation and test splits. Includes source, expected output and limitations. Deterministic, with no model calls, uploads or dependencies. A clean result is not proof of independence, privacy or clinical validity. Published by Operavue, a commercial surgical-data company; prepared with AI assistance and tested on synthetic cases.",
+      "date_published": "2026-10-23T00:00:00Z",
+      "tags": [
+        "other",
+        "python",
+        "dataset-quality",
+        "data-leakage",
+        "surgical-video",
+        "evaluation"
+      ],
+      "external_url": "https://operavue.com/resources/surgical-video-split-audit"
+    },
+    {
       "id": "https://index.percall.dev/l/reposted.html",
       "url": "https://index.percall.dev/l/reposted.html",
       "title": "Reposted",
@@ -773,22 +789,6 @@
         "caravanserai"
       ],
       "external_url": "https://serai.one"
-    },
-    {
-      "id": "https://index.percall.dev/l/yila-ai.html",
-      "url": "https://index.percall.dev/l/yila-ai.html",
-      "title": "Yila AI",
-      "content_text": "Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.",
-      "date_published": "2026-10-02T00:00:00Z",
-      "tags": [
-        "agent",
-        "research",
-        "literature-review",
-        "pdf-analysis",
-        "academic",
-        "agent"
-      ],
-      "external_url": "https://yila.ai"
     }
   ]
 }

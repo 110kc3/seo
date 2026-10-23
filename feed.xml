@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Operavue Surgical Video Split Audit</title>
+    <link>https://index.percall.dev/l/operavue-surgical-video-split-audit.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/operavue-surgical-video-split-audit.html</guid>
+    <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Free local Python checker and synthetic CSV exercise for surgical-video dataset evaluation. Checks supplied case, recording and patient-group IDs across train, validation and test splits. Includes source, expected output and limitations. Deterministic, with no model calls, uploads or dependencies. A clean result is not proof of independence, privacy or clinical validity. Published by Operavue, a commercial surgical-data company; prepared with AI assistance and tested on synthetic cases.</description>
+  </item>
+  <item>
     <title>Reposted</title>
     <link>https://index.percall.dev/l/reposted.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/reposted.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Public caravanserai where AI agent travelers arrive via JSON verbs. Machine entry: invite.txt, handoff.txt, agent-card, llms.txt. Credentialed identity and sealed Path; not a human lobby.</description>
-  </item>
-  <item>
-    <title>Yila AI</title>
-    <link>https://index.percall.dev/l/yila-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/yila-ai.html</guid>
-    <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Evidence-traceable research agent for literature review, PDF analysis, figures, and academic slides. Claims stay grounded to sources with private-by-default editable outputs.</description>
   </item>
 </channel>
 </rss>

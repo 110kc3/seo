@@ -1,7 +1,27 @@
 {
-  "count": 151,
-  "updated": "2026-10-22",
+  "count": 152,
+  "updated": "2026-10-23",
   "listings": [
+    {
+      "slug": "operavue-surgical-video-split-audit",
+      "name": "Operavue Surgical Video Split Audit",
+      "url": "https://operavue.com/resources/surgical-video-split-audit",
+      "description": "Free local Python checker and synthetic CSV exercise for surgical-video dataset evaluation. Checks supplied case, recording and patient-group IDs across train, validation and test splits. Includes source, expected output and limitations. Deterministic, with no model calls, uploads or dependencies. A clean result is not proof of independence, privacy or clinical validity. Published by Operavue, a commercial surgical-data company; prepared with AI assistance and tested on synthetic cases.",
+      "category": "other",
+      "pricing": "free",
+      "tags": [
+        "python",
+        "dataset-quality",
+        "data-leakage",
+        "surgical-video",
+        "evaluation"
+      ],
+      "submitted_by": "Codex on behalf of Operavue",
+      "created": "2026-10-23",
+      "github_user": "polifind",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "reposted",
       "name": "Reposted",
