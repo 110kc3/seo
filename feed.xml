@@ -15,6 +15,14 @@
     <description>Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.</description>
   </item>
   <item>
+    <title>NEON DUO Guides</title>
+    <link>https://index.percall.dev/l/neon-duo-guides.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/neon-duo-guides.html</guid>
+    <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.</description>
+  </item>
+  <item>
     <title>Operavue Surgical Video Split Audit</title>
     <link>https://index.percall.dev/l/operavue-surgical-video-split-audit.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/operavue-surgical-video-split-audit.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.</description>
-  </item>
-  <item>
-    <title>Honer AI</title>
-    <link>https://index.percall.dev/l/honer-ai-android.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/honer-ai-android.html</guid>
-    <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Honer AI by XONER is a proprietary Android 7.0+ assistant with Russian and English interfaces, streaming chat, web search with source links, photo/document attachments, voice input and conversation history. The current APK download is free. AI responses and search need internet access; relevant prompts and attachments use cloud processing. Optional phone actions require user-enabled Android Accessibility.</description>
   </item>
 </channel>
 </rss>

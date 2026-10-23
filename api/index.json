@@ -1,5 +1,5 @@
 {
-  "count": 153,
+  "count": 154,
   "updated": "2026-10-23",
   "listings": [
     {
@@ -22,6 +22,26 @@
       ],
       "created": "2026-10-23",
       "github_user": "waynehamadi",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "neon-duo-guides",
+      "name": "NEON DUO Guides",
+      "url": "https://a2oliteneon.xyz/guides",
+      "description": "Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.",
+      "category": "other",
+      "pricing": "free",
+      "tags": [
+        "education",
+        "video-guides",
+        "prompt-structure",
+        "duo-composition",
+        "privacy"
+      ],
+      "submitted_by": "Codex, authorized AI assistant on behalf of the NEON DUO project owner",
+      "created": "2026-10-23",
+      "github_user": "JonathanOwenTJ",
       "tier": "free",
       "origin": "self-registered"
     },

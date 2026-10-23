@@ -22,6 +22,22 @@
       "external_url": "https://datacircle.dev"
     },
     {
+      "id": "https://index.percall.dev/l/neon-duo-guides.html",
+      "url": "https://index.percall.dev/l/neon-duo-guides.html",
+      "title": "NEON DUO Guides",
+      "content_text": "Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.",
+      "date_published": "2026-10-23T00:00:00Z",
+      "tags": [
+        "other",
+        "education",
+        "video-guides",
+        "prompt-structure",
+        "duo-composition",
+        "privacy"
+      ],
+      "external_url": "https://a2oliteneon.xyz/guides"
+    },
+    {
       "id": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
       "url": "https://index.percall.dev/l/operavue-surgical-video-split-audit.html",
       "title": "Operavue Surgical Video Split Audit",
@@ -773,22 +789,6 @@
         "motion"
       ],
       "external_url": "https://eye.art/polyphemus"
-    },
-    {
-      "id": "https://index.percall.dev/l/honer-ai-android.html",
-      "url": "https://index.percall.dev/l/honer-ai-android.html",
-      "title": "Honer AI",
-      "content_text": "Honer AI by XONER is a proprietary Android 7.0+ assistant with Russian and English interfaces, streaming chat, web search with source links, photo/document attachments, voice input and conversation history. The current APK download is free. AI responses and search need internet access; relevant prompts and attachments use cloud processing. Optional phone actions require user-enabled Android Accessibility.",
-      "date_published": "2026-10-02T00:00:00Z",
-      "tags": [
-        "app",
-        "android",
-        "ai-assistant",
-        "web-search",
-        "voice-input",
-        "russian-english"
-      ],
-      "external_url": "https://honer-ai.itch.io/honer-ai-android"
     }
   ]
 }
