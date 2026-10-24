@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>CCC — Claude Command Center</title>
+    <link>https://index.percall.dev/l/claude-command-center.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/claude-command-center.html</guid>
+    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.</description>
+  </item>
+  <item>
     <title>Orbi</title>
     <link>https://index.percall.dev/l/orbi.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/orbi.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Bottle Me is an iPhone and iPad app for expressing feelings with color-filled bottles, duo check-ins, quiet breathing and shareable posters. Basic manual filling is free. An optional one-time Pro purchase adds ten fill styles, smart template generation and watermark removal. Smart features use online processing and usage allowances. The website offers illustrated guides and an interactive filling preview.</description>
-  </item>
-  <item>
-    <title>Raphael AI</title>
-    <link>https://index.percall.dev/l/raphael-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/raphael-ai.html</guid>
-    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.</description>
   </item>
 </channel>
 </rss>

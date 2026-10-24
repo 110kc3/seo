@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/claude-command-center.html",
+      "url": "https://index.percall.dev/l/claude-command-center.html",
+      "title": "CCC — Claude Command Center",
+      "content_text": "CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "app",
+        "developer-tools",
+        "coding-agents",
+        "productivity"
+      ],
+      "external_url": "https://ccc.amirfish.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/orbi.html",
       "url": "https://index.percall.dev/l/orbi.html",
       "title": "Orbi",
@@ -773,22 +787,6 @@
         "duo"
       ],
       "external_url": "https://bottleme.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/raphael-ai.html",
-      "url": "https://index.percall.dev/l/raphael-ai.html",
-      "title": "Raphael AI",
-      "content_text": "Raphael AI is a free AI image generator for text-to-image and image editing. Use Raphael AI when you want an AI image generator without a login on the basic plan: text to image, an AI image editor, and common models. The free tier adds a watermark; paid plans are for commercial use.",
-      "date_published": "2026-10-03T00:00:00Z",
-      "tags": [
-        "app",
-        "image-generation",
-        "text-to-image",
-        "ai-image",
-        "editor",
-        "free"
-      ],
-      "external_url": "https://raphael.app"
     }
   ]
 }

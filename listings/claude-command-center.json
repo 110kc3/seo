@@ -1,0 +1,18 @@
+{
+  "slug": "claude-command-center",
+  "name": "CCC — Claude Command Center",
+  "url": "https://ccc.amirfish.ai",
+  "description": "CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "developer-tools",
+    "coding-agents",
+    "productivity"
+  ],
+  "submitted_by": "Amir Fish",
+  "created": "2026-10-24",
+  "github_user": "amirfish1",
+  "tier": "free",
+  "origin": "self-registered"
+}

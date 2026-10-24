@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 157 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 158 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (157)
+## All listings (158)
+
+### CCC — Claude Command Center (claude-command-center)
+- url: https://ccc.amirfish.ai
+- category: app · pricing: free · tags: developer-tools, coding-agents, productivity
+- CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.
+- listing JSON: https://index.percall.dev/listings/claude-command-center.json
+- listing page: https://index.percall.dev/l/claude-command-center.html
 
 ### Orbi (orbi)
 - url: https://orbi.build/?ref=dir-percall
