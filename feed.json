@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/botsee.html",
+      "url": "https://index.percall.dev/l/botsee.html",
+      "title": "BotSee",
+      "content_text": "Agent-native API and hosted OAuth MCP for repeatable AI-visibility research across ChatGPT, Claude, Perplexity and Gemini. Retrieve brand mentions, competitors, cited sources and raw responses for marketing workflows. Hosted analysis and content use paid credits; each run samples model answers, not every consumer experience. Docs: https://botsee.io/docs#mcp. Official icon: https://botsee.io/botsee/favicon.svg",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "api",
+        "ai-visibility",
+        "marketing",
+        "mcp",
+        "analytics"
+      ],
+      "external_url": "https://botsee.io"
+    },
+    {
       "id": "https://index.percall.dev/l/claude-command-center.html",
       "url": "https://index.percall.dev/l/claude-command-center.html",
       "title": "CCC — Claude Command Center",
@@ -771,22 +786,6 @@
         "mcp"
       ],
       "external_url": "https://autoposting.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/bottle-me.html",
-      "url": "https://index.percall.dev/l/bottle-me.html",
-      "title": "Bottle Me",
-      "content_text": "Bottle Me is an iPhone and iPad app for expressing feelings with color-filled bottles, duo check-ins, quiet breathing and shareable posters. Basic manual filling is free. An optional one-time Pro purchase adds ten fill styles, smart template generation and watermark removal. Smart features use online processing and usage allowances. The website offers illustrated guides and an interactive filling preview.",
-      "date_published": "2026-10-03T00:00:00Z",
-      "tags": [
-        "app",
-        "ios",
-        "self-expression",
-        "mood-tracking",
-        "smart-templates",
-        "duo"
-      ],
-      "external_url": "https://bottleme.app"
     }
   ]
 }

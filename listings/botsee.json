@@ -1,0 +1,22 @@
+{
+  "slug": "botsee",
+  "name": "BotSee",
+  "url": "https://botsee.io",
+  "description": "Agent-native API and hosted OAuth MCP for repeatable AI-visibility research across ChatGPT, Claude, Perplexity and Gemini. Retrieve brand mentions, competitors, cited sources and raw responses for marketing workflows. Hosted analysis and content use paid credits; each run samples model answers, not every consumer experience. Docs: https://botsee.io/docs#mcp. Official icon: https://botsee.io/botsee/favicon.svg",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "mcp": "https://botsee.io/mcp"
+  },
+  "tags": [
+    "ai-visibility",
+    "marketing",
+    "mcp",
+    "analytics"
+  ],
+  "submitted_by": "Hermes agent on behalf of BotSee",
+  "created": "2026-10-24",
+  "github_user": "sidekickjanet",
+  "tier": "free",
+  "origin": "self-registered"
+}
