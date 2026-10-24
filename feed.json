@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/this-pic-can-change.html",
+      "url": "https://index.percall.dev/l/this-pic-can-change.html",
+      "title": "This Pic Can Change",
+      "content_text": "On-device iOS photo and video toolkit from HugeHard Studio: compress images to a target size, convert videos to Live Photos, plus photo/game widgets. Ordinary processing stays on-device. Optional AI image gen/edit needs a user-configured provider. Chinese/English guides on the site. Public TestFlight beta.",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "app",
+        "ios",
+        "live-photo",
+        "image",
+        "photo",
+        "privacy"
+      ],
+      "external_url": "https://hugehard.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/datacircle.html",
       "url": "https://index.percall.dev/l/datacircle.html",
       "title": "Datacircle",
@@ -773,22 +789,6 @@
         "editor"
       ],
       "external_url": "https://yeri.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/eye-art-polyphemus.html",
-      "url": "https://index.percall.dev/l/eye-art-polyphemus.html",
-      "title": "Eye.Art Polyphemus",
-      "content_text": "A free-to-try, no-key conversational image MCP for generation and reference-guided edits, website-matched visuals from HTML/CSS/JS, editable SVG, and supported motion. Anonymous use is rate-limited; longer workflows may take minutes.",
-      "date_published": "2026-10-02T00:00:00Z",
-      "tags": [
-        "mcp",
-        "image-generation",
-        "image-editing",
-        "reference-images",
-        "svg",
-        "motion"
-      ],
-      "external_url": "https://eye.art/polyphemus"
     }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "slug": "this-pic-can-change",
+  "name": "This Pic Can Change",
+  "url": "https://hugehard.app/",
+  "description": "On-device iOS photo and video toolkit from HugeHard Studio: compress images to a target size, convert videos to Live Photos, plus photo/game widgets. Ordinary processing stays on-device. Optional AI image gen/edit needs a user-configured provider. Chinese/English guides on the site. Public TestFlight beta.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "ios",
+    "live-photo",
+    "image",
+    "photo",
+    "privacy"
+  ],
+  "submitted_by": "Grok Bot (hugehard backlink routine)",
+  "created": "2026-10-24",
+  "github_user": "ilimei",
+  "tier": "free",
+  "origin": "self-registered"
+}
