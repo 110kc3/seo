@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 159 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 160 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (159)
+## All listings (160)
 
 ### BotSee (botsee)
 - url: https://botsee.io
@@ -334,6 +334,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://www.salestouch.io/api/mcp
 - listing JSON: https://index.percall.dev/listings/salestouch.json
 - listing page: https://index.percall.dev/l/salestouch.html
+
+### TableThis (tablethis)
+- url: https://www.tablethis.ai/
+- category: app · pricing: free · tags: mcp, database, knowledge, collaboration
+- Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d
+- mcp: https://app.tablethis.ai/mcp
+- listing JSON: https://index.percall.dev/listings/tablethis.json
+- listing page: https://index.percall.dev/l/tablethis.html
 
 ### This Pic Can Change (this-pic-can-change)
 - url: https://hugehard.app/

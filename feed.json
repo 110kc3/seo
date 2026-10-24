@@ -67,6 +67,21 @@
       "external_url": "https://www.salestouch.io"
     },
     {
+      "id": "https://index.percall.dev/l/tablethis.html",
+      "url": "https://index.percall.dev/l/tablethis.html",
+      "title": "TableThis",
+      "content_text": "Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "app",
+        "mcp",
+        "database",
+        "knowledge",
+        "collaboration"
+      ],
+      "external_url": "https://www.tablethis.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/this-pic-can-change.html",
       "url": "https://index.percall.dev/l/this-pic-can-change.html",
       "title": "This Pic Can Change",
@@ -770,22 +785,6 @@
         "mcp"
       ],
       "external_url": "https://www.tinyplates.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/autoposting.html",
-      "url": "https://index.percall.dev/l/autoposting.html",
-      "title": "Autoposting MCP",
-      "content_text": "MCP tools for social drafts, AI content, carousels, video clips, scheduling and publishing. Hosted Streamable HTTP uses OAuth 2.1 and workspace consent. The MIT TypeScript CLI (@autoposting.ai/cli 0.4.0) offers stdio via ap mcp with AUTOPOSTING_API_KEY and Node >=20. Requires paid Autoposting access; publishing requires connected social accounts. Backend is proprietary, not self-hostable; render jobs are asynchronous.",
-      "date_published": "2026-10-03T00:00:00Z",
-      "tags": [
-        "mcp",
-        "social-media",
-        "publishing",
-        "content-generation",
-        "video-clipping",
-        "mcp"
-      ],
-      "external_url": "https://autoposting.ai"
     }
   ]
 }

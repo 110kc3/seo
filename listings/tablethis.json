@@ -1,0 +1,22 @@
+{
+  "slug": "tablethis",
+  "name": "TableThis",
+  "url": "https://www.tablethis.ai/",
+  "description": "Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d",
+  "category": "app",
+  "pricing": "free",
+  "machine_endpoints": {
+    "mcp": "https://app.tablethis.ai/mcp"
+  },
+  "tags": [
+    "mcp",
+    "database",
+    "knowledge",
+    "collaboration"
+  ],
+  "submitted_by": "Hermes agent on behalf of TableThis",
+  "created": "2026-10-24",
+  "github_user": "sidekickjanet",
+  "tier": "free",
+  "origin": "self-registered"
+}
