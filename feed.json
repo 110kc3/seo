@@ -22,6 +22,22 @@
       "external_url": "https://orbi.build/?ref=dir-percall"
     },
     {
+      "id": "https://index.percall.dev/l/salestouch.html",
+      "url": "https://index.percall.dev/l/salestouch.html",
+      "title": "SalesTouch",
+      "content_text": "Stop losing hours to list building, tab switching, copy-paste research, and forgotten follow-ups. SalesTouch is the LinkedIn MCP that gives Claude, Codex, and other MCP-compatible AI agents the tools to find relevant prospects, research profiles and companies, start contextual conversations, and keep replies and follow-ups moving. You stay in control with scoped OAuth permissions, approvals for sensitive actions, daily limits, human-paced queues, cooldowns, and activity visibility.",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "mcp",
+        "linkedin",
+        "prospecting",
+        "sales",
+        "outreach",
+        "mcp"
+      ],
+      "external_url": "https://www.salestouch.io"
+    },
+    {
       "id": "https://index.percall.dev/l/this-pic-can-change.html",
       "url": "https://index.percall.dev/l/this-pic-can-change.html",
       "title": "This Pic Can Change",
@@ -773,22 +789,6 @@
         "free"
       ],
       "external_url": "https://raphael.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/tale.html",
-      "url": "https://index.percall.dev/l/tale.html",
-      "title": "Tale",
-      "content_text": "Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.",
-      "date_published": "2026-10-03T00:00:00Z",
-      "tags": [
-        "app",
-        "project-management",
-        "ai-agents",
-        "team-collaboration",
-        "open-source",
-        "self-hosted"
-      ],
-      "external_url": "https://tale.dev"
     }
   ]
 }

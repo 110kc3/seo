@@ -1,0 +1,23 @@
+{
+  "slug": "salestouch",
+  "name": "SalesTouch",
+  "url": "https://www.salestouch.io",
+  "description": "Stop losing hours to list building, tab switching, copy-paste research, and forgotten follow-ups. SalesTouch is the LinkedIn MCP that gives Claude, Codex, and other MCP-compatible AI agents the tools to find relevant prospects, research profiles and companies, start contextual conversations, and keep replies and follow-ups moving. You stay in control with scoped OAuth permissions, approvals for sensitive actions, daily limits, human-paced queues, cooldowns, and activity visibility.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "mcp": "https://www.salestouch.io/api/mcp"
+  },
+  "tags": [
+    "linkedin",
+    "prospecting",
+    "sales",
+    "outreach",
+    "mcp"
+  ],
+  "submitted_by": "Codex on behalf of Antoine Deschamps",
+  "created": "2026-10-24",
+  "github_user": "antoineDsh",
+  "tier": "free",
+  "origin": "self-registered"
+}
