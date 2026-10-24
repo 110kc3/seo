@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 155 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 156 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (155)
+## All listings (156)
+
+### Orbi (orbi)
+- url: https://orbi.build/?ref=dir-percall
+- category: agent · pricing: freemium · tags: coding-agent, github-app, pull-requests, open-source, devtools
+- Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.
+- listing JSON: https://index.percall.dev/listings/orbi.json
+- listing page: https://index.percall.dev/l/orbi.html
 
 ### This Pic Can Change (this-pic-can-change)
 - url: https://hugehard.app/

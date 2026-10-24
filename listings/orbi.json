@@ -1,0 +1,20 @@
+{
+  "slug": "orbi",
+  "name": "Orbi",
+  "url": "https://orbi.build/?ref=dir-percall",
+  "description": "Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.",
+  "category": "agent",
+  "pricing": "freemium",
+  "tags": [
+    "coding-agent",
+    "github-app",
+    "pull-requests",
+    "open-source",
+    "devtools"
+  ],
+  "submitted_by": "Lawrence Liu (Orbi team)",
+  "created": "2026-10-24",
+  "github_user": "xqliu",
+  "tier": "free",
+  "origin": "self-registered"
+}

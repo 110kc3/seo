@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/orbi.html",
+      "url": "https://index.percall.dev/l/orbi.html",
+      "title": "Orbi",
+      "content_text": "Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "agent",
+        "coding-agent",
+        "github-app",
+        "pull-requests",
+        "open-source",
+        "devtools"
+      ],
+      "external_url": "https://orbi.build/?ref=dir-percall"
+    },
+    {
       "id": "https://index.percall.dev/l/this-pic-can-change.html",
       "url": "https://index.percall.dev/l/this-pic-can-change.html",
       "title": "This Pic Can Change",
@@ -773,22 +789,6 @@
         "self-hosted"
       ],
       "external_url": "https://tale.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/yeri-ai.html",
-      "url": "https://index.percall.dev/l/yeri-ai.html",
-      "title": "Yeri AI",
-      "content_text": "Free AI image generator and AI video generator. Text to image, image to image, text to video, and image to video, plus an editor, photo effects, templates, background remover, and upscaler. Models include Seedream, Nano Banana, GPT Image, Kling, and Seedance.",
-      "date_published": "2026-10-03T00:00:00Z",
-      "tags": [
-        "app",
-        "image-generation",
-        "video-generation",
-        "text-to-image",
-        "ai-video",
-        "editor"
-      ],
-      "external_url": "https://yeri.ai"
     }
   ]
 }

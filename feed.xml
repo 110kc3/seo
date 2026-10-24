@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Orbi</title>
+    <link>https://index.percall.dev/l/orbi.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/orbi.html</guid>
+    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.</description>
+  </item>
+  <item>
     <title>This Pic Can Change</title>
     <link>https://index.percall.dev/l/this-pic-can-change.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/this-pic-can-change.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Tale is an MIT-licensed workspace for teams and AI agents. Teams turn projects into tasks with context, owners, and acceptance criteria; configured agents work in persistent sandbox workspaces, and people review reports and deliverables together. It supports repeatable work through project knowledge, skills, and workflows. Free self-hosted software and paid managed deployment are available; agent runtime or model access may have separate costs.</description>
-  </item>
-  <item>
-    <title>Yeri AI</title>
-    <link>https://index.percall.dev/l/yeri-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/yeri-ai.html</guid>
-    <pubDate>Sat, 03 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Free AI image generator and AI video generator. Text to image, image to image, text to video, and image to video, plus an editor, photo effects, templates, background remover, and upscaler. Models include Seedream, Nano Banana, GPT Image, Kling, and Seedance.</description>
   </item>
 </channel>
 </rss>
