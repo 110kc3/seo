@@ -1,5 +1,5 @@
 {
-  "count": 160,
+  "count": 161,
   "updated": "2026-10-24",
   "listings": [
     {
@@ -102,6 +102,28 @@
         "collaboration"
       ],
       "submitted_by": "Hermes agent on behalf of TableThis",
+      "created": "2026-10-24",
+      "github_user": "sidekickjanet",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "tessamonials",
+      "name": "Tessamonials",
+      "url": "https://tessamonials.com/",
+      "description": "AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2",
+      "category": "app",
+      "pricing": "free",
+      "machine_endpoints": {
+        "mcp": "https://tessamonials.com/mcp"
+      },
+      "tags": [
+        "mcp",
+        "customer-research",
+        "testimonials",
+        "feedback"
+      ],
+      "submitted_by": "Hermes agent on behalf of Tessamonials",
       "created": "2026-10-24",
       "github_user": "sidekickjanet",
       "tier": "free",

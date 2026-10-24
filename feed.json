@@ -82,6 +82,21 @@
       "external_url": "https://www.tablethis.ai/"
     },
     {
+      "id": "https://index.percall.dev/l/tessamonials.html",
+      "url": "https://index.percall.dev/l/tessamonials.html",
+      "title": "Tessamonials",
+      "content_text": "AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2",
+      "date_published": "2026-10-24T00:00:00Z",
+      "tags": [
+        "app",
+        "mcp",
+        "customer-research",
+        "testimonials",
+        "feedback"
+      ],
+      "external_url": "https://tessamonials.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/this-pic-can-change.html",
       "url": "https://index.percall.dev/l/this-pic-can-change.html",
       "title": "This Pic Can Change",
@@ -769,22 +784,6 @@
         "website-hosting"
       ],
       "external_url": "https://shipvela.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/tiny-plates.html",
-      "url": "https://index.percall.dev/l/tiny-plates.html",
-      "title": "Tiny Plates",
-      "content_text": "Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.",
-      "date_published": "2026-10-04T00:00:00Z",
-      "tags": [
-        "api",
-        "recipes",
-        "food",
-        "meal-planning",
-        "rest",
-        "mcp"
-      ],
-      "external_url": "https://www.tinyplates.dev/"
     }
   ]
 }

@@ -47,6 +47,14 @@
     <description>Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d</description>
   </item>
   <item>
+    <title>Tessamonials</title>
+    <link>https://index.percall.dev/l/tessamonials.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tessamonials.html</guid>
+    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2</description>
+  </item>
+  <item>
     <title>This Pic Can Change</title>
     <link>https://index.percall.dev/l/this-pic-can-change.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/this-pic-can-change.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 04 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Remote Streamable HTTP MCP for creating website projects, deploying supported GitHub repositories, and reading deployment status, build logs and usage. Shipvela account and OAuth S256 PKCE required. Hobby free: 3 projects and 20 publishes/month; paid plans available. Public beta Codex plugin and publishing skill; hosted runtime is private. Setup: https://shipvela.com/integrations/codex.</description>
-  </item>
-  <item>
-    <title>Tiny Plates</title>
-    <link>https://index.percall.dev/l/tiny-plates.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/tiny-plates.html</guid>
-    <pubDate>Sun, 04 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Structured recipe data through a REST API and hosted MCP server. Search recipes by meaning, retrieve ingredients and cooking steps, adjust servings, convert units, find substitutions, match pantry ingredients, and create shopping lists. English and other languages supported. REST uses an API key; MCP supports OAuth or an API key. Free account with usage limits; no credit card required.</description>
   </item>
 </channel>
 </rss>
