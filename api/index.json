@@ -1,7 +1,25 @@
 {
-  "count": 161,
-  "updated": "2026-10-24",
+  "count": 162,
+  "updated": "2026-10-25",
   "listings": [
+    {
+      "slug": "stamp-identifier",
+      "name": "Stamp Identifier",
+      "url": "https://stampscanner.app/",
+      "description": "Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "stamp-collecting",
+        "stamp-identification",
+        "mobile-app"
+      ],
+      "submitted_by": "Backlink Builder, authorized submission for Savuko",
+      "created": "2026-10-25",
+      "github_user": "constantinginga",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "botsee",
       "name": "BotSee",

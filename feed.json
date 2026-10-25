@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/stamp-identifier.html",
+      "url": "https://index.percall.dev/l/stamp-identifier.html",
+      "title": "Stamp Identifier",
+      "content_text": "Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.",
+      "date_published": "2026-10-25T00:00:00Z",
+      "tags": [
+        "app",
+        "stamp-collecting",
+        "stamp-identification",
+        "mobile-app"
+      ],
+      "external_url": "https://stampscanner.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/botsee.html",
       "url": "https://index.percall.dev/l/botsee.html",
       "title": "BotSee",
@@ -768,22 +782,6 @@
         "api"
       ],
       "external_url": "https://pay.brianbooms.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/shipvela.html",
-      "url": "https://index.percall.dev/l/shipvela.html",
-      "title": "Shipvela",
-      "content_text": "Remote Streamable HTTP MCP for creating website projects, deploying supported GitHub repositories, and reading deployment status, build logs and usage. Shipvela account and OAuth S256 PKCE required. Hobby free: 3 projects and 20 publishes/month; paid plans available. Public beta Codex plugin and publishing skill; hosted runtime is private. Setup: https://shipvela.com/integrations/codex.",
-      "date_published": "2026-10-04T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "oauth",
-        "codex",
-        "deployment",
-        "website-hosting"
-      ],
-      "external_url": "https://shipvela.com"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 161 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 162 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (161)
+## All listings (162)
+
+### Stamp Identifier (stamp-identifier)
+- url: https://stampscanner.app/
+- category: app · pricing: freemium · tags: stamp-collecting, stamp-identification, mobile-app
+- Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.
+- listing JSON: https://index.percall.dev/listings/stamp-identifier.json
+- listing page: https://index.percall.dev/l/stamp-identifier.html
 
 ### BotSee (botsee)
 - url: https://botsee.io
