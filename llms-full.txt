@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 164 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 165 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (164)
+## All listings (165)
+
+### APIClaw (apiclaw)
+- url: https://apiclaw.biz/
+- category: api · pricing: freemium · tags: openai-compatible, llm-gateway, ai-api, coding-agents, developer-tools
+- Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.
+- llms_txt: https://apiclaw.biz/llms.txt
+- listing JSON: https://index.percall.dev/listings/apiclaw.json
+- listing page: https://index.percall.dev/l/apiclaw.html
 
 ### APPLORE (applore)
 - url: https://applore.app

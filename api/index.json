@@ -1,7 +1,30 @@
 {
-  "count": 164,
+  "count": 165,
   "updated": "2026-10-26",
   "listings": [
+    {
+      "slug": "apiclaw",
+      "name": "APIClaw",
+      "url": "https://apiclaw.biz/",
+      "description": "Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.",
+      "category": "api",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://apiclaw.biz/llms.txt"
+      },
+      "tags": [
+        "openai-compatible",
+        "llm-gateway",
+        "ai-api",
+        "coding-agents",
+        "developer-tools"
+      ],
+      "submitted_by": "APIClaw Team (the maker)",
+      "created": "2026-10-26",
+      "github_user": "ankita37105",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "applore",
       "name": "APPLORE",

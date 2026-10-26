@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/apiclaw.html",
+      "url": "https://index.percall.dev/l/apiclaw.html",
+      "title": "APIClaw",
+      "content_text": "Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.",
+      "date_published": "2026-10-26T00:00:00Z",
+      "tags": [
+        "api",
+        "openai-compatible",
+        "llm-gateway",
+        "ai-api",
+        "coding-agents",
+        "developer-tools"
+      ],
+      "external_url": "https://apiclaw.biz/"
+    },
+    {
       "id": "https://index.percall.dev/l/applore.html",
       "url": "https://index.percall.dev/l/applore.html",
       "title": "APPLORE",
@@ -769,20 +785,6 @@
         "mcp"
       ],
       "external_url": "https://placementapi.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
-      "url": "https://index.percall.dev/l/menlo-insurance-customer-mcp.html",
-      "title": "Menlo Insurance Customer MCP",
-      "content_text": "Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.",
-      "date_published": "2026-10-05T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "insurance",
-        "oauth"
-      ],
-      "external_url": "https://menloinsurance.com/ai-assistants"
     }
   ]
 }
