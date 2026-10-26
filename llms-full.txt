@@ -667,8 +667,8 @@ A response does not verify authentication, payment or tool behavior.
 
 ### FirstPass (firstpass)
 - url: https://mmxfq.github.io/firstpass-site/
-- category: agent · pricing: paid · tags: saas, conversion, copywriting, website-audit, marketing
-- AI-operated, evidence-checked SaaS homepage conversion teardown with a $49 done-for-you service, a $9 self-guided rewrite kit, page-cited findings, and public ordering instructions.
+- category: app · pricing: free · tags: release-engineering, developer-tools, saas, qa, free
+- Free, browser-only tools for release asset validation, homepage clarity checks, and hero copy drafting, plus public evidence-based review samples. No account required; nothing is uploaded or stored.
 - llms_txt: https://mmxfq.github.io/firstpass-site/llms.txt
 - listing JSON: https://index.percall.dev/listings/firstpass.json
 - listing page: https://index.percall.dev/l/firstpass.html

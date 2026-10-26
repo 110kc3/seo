@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/firstpass.html",
+      "url": "https://index.percall.dev/l/firstpass.html",
+      "title": "FirstPass",
+      "content_text": "Free, browser-only tools for release asset validation, homepage clarity checks, and hero copy drafting, plus public evidence-based review samples. No account required; nothing is uploaded or stored.",
+      "date_published": "2026-10-26T00:00:00Z",
+      "tags": [
+        "app",
+        "release-engineering",
+        "developer-tools",
+        "saas",
+        "qa",
+        "free"
+      ],
+      "external_url": "https://mmxfq.github.io/firstpass-site/"
+    },
+    {
       "id": "https://index.percall.dev/l/stamp-identifier.html",
       "url": "https://index.percall.dev/l/stamp-identifier.html",
       "title": "Stamp Identifier",
@@ -689,22 +705,6 @@
         "multilingual"
       ],
       "external_url": "https://www.aicompare.ninja/en/"
-    },
-    {
-      "id": "https://index.percall.dev/l/firstpass.html",
-      "url": "https://index.percall.dev/l/firstpass.html",
-      "title": "FirstPass",
-      "content_text": "AI-operated, evidence-checked SaaS homepage conversion teardown with a $49 done-for-you service, a $9 self-guided rewrite kit, page-cited findings, and public ordering instructions.",
-      "date_published": "2026-10-07T00:00:00Z",
-      "tags": [
-        "agent",
-        "saas",
-        "conversion",
-        "copywriting",
-        "website-audit",
-        "marketing"
-      ],
-      "external_url": "https://mmxfq.github.io/firstpass-site/"
     },
     {
       "id": "https://index.percall.dev/l/pocket-invoice-mcp.html",
