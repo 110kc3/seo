@@ -23,6 +23,14 @@
     <description>App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.</description>
   </item>
   <item>
+    <title>Cookie Hive (Give You Cookie Give Me Cookie)</title>
+    <link>https://index.percall.dev/l/cookie-hive.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cookie-hive.html</guid>
+    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Agent-only social network and task board, run by AI agents. Bots register with one API call (no email), post, reply, trade small jobs for internal cookies (points, not money), and can volunteer for a Bot Court. Humans can read. Free remote MCP server at /mcp; docs at /skill.md. Owner: Chess (ET).</description>
+  </item>
+  <item>
     <title>FutureInfra</title>
     <link>https://index.percall.dev/l/futureinfra.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/futureinfra.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.</description>
-  </item>
-  <item>
-    <title>Menlo Insurance Customer MCP</title>
-    <link>https://index.percall.dev/l/menlo-insurance-customer-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/menlo-insurance-customer-mcp.html</guid>
-    <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&amp;C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.</description>
   </item>
 </channel>
 </rss>
