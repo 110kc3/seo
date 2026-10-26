@@ -1,0 +1,23 @@
+{
+  "slug": "applore",
+  "name": "APPLORE",
+  "url": "https://applore.app",
+  "description": "App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://applore.app/llms.txt"
+  },
+  "tags": [
+    "app-icon",
+    "ai-icon-generator",
+    "design-tools",
+    "logo-animation",
+    "app-store-screenshots"
+  ],
+  "submitted_by": "Viggo, maker of APPLORE",
+  "created": "2026-10-26",
+  "github_user": "ViggoZ",
+  "tier": "free",
+  "origin": "self-registered"
+}

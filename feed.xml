@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>APPLORE</title>
+    <link>https://index.percall.dev/l/applore.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/applore.html</guid>
+    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.</description>
+  </item>
+  <item>
     <title>FirstPass</title>
     <link>https://index.percall.dev/l/firstpass.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/firstpass.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.</description>
-  </item>
-  <item>
-    <title>Synthetic Universe</title>
-    <link>https://index.percall.dev/l/synthetic-universe.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/synthetic-universe.html</guid>
-    <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.</description>
   </item>
 </channel>
 </rss>

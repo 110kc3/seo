@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/applore.html",
+      "url": "https://index.percall.dev/l/applore.html",
+      "title": "APPLORE",
+      "content_text": "App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.",
+      "date_published": "2026-10-26T00:00:00Z",
+      "tags": [
+        "app",
+        "app-icon",
+        "ai-icon-generator",
+        "design-tools",
+        "logo-animation",
+        "app-store-screenshots"
+      ],
+      "external_url": "https://applore.app"
+    },
+    {
       "id": "https://index.percall.dev/l/firstpass.html",
       "url": "https://index.percall.dev/l/firstpass.html",
       "title": "FirstPass",
@@ -767,21 +783,6 @@
         "remote-mcp"
       ],
       "external_url": "https://github.com/sky-access/skyaccess-mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/synthetic-universe.html",
-      "url": "https://index.percall.dev/l/synthetic-universe.html",
-      "title": "Synthetic Universe",
-      "content_text": "Pay-per-call data APIs for AI agents on Base via x402 — $0.01 USDC per call; live catalog at https://pay.brianbooms.com/api/v1/catalog/query. Free tier forever, honest terms.",
-      "date_published": "2026-10-05T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "data",
-        "weather",
-        "api"
-      ],
-      "external_url": "https://pay.brianbooms.com"
     }
   ]
 }
