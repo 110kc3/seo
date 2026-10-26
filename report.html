@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The state of the agent web — AI Product Index</title>
-<meta name="description" content="Measured: 2.35% of traffic is AI agents and rising, 25,702 machine-payable endpoints of which 98% answer, and zero organic payments.">
+<meta name="description" content="Measured: 2.35% of traffic is AI agents and rising, 59,834 machine-payable endpoints of which 98% answer, and zero organic payments.">
 
 <link rel="canonical" href="https://index.percall.dev/report.html">
 <link rel="alternate" type="text/markdown" href="./llms.txt" title="llms.txt (agent-readable index)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The state of the agent web — AI Product Index">
-<meta property="og:description" content="Measured: 2.35% of traffic is AI agents and rising, 25,702 machine-payable endpoints of which 98% answer, and zero organic payments.">
+<meta property="og:description" content="Measured: 2.35% of traffic is AI agents and rising, 59,834 machine-payable endpoints of which 98% answer, and zero organic payments.">
 <meta property="og:url" content="https://index.percall.dev/report.html">
 <meta property="og:image" content="https://index.percall.dev/assets/og.png">
 <script type="application/ld+json">
@@ -198,23 +198,23 @@ the free tier already answers the question the paid tier charges for. Both are
 more interesting than "the price is wrong".</p>
 
 <h2>3. The machine-payable web is smaller than it counts</h2>
-<div class="cards"><div class="card"><div class="n">25,702</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">2,508</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">22.9%</div><div class="k">held by top 10 hosts</div></div></div>
-<p>25,702 endpoints sounds like an ecosystem. 22.9% of them
-belong to ten operators, and the 2,508 distinct hosts are the honest
+<div class="cards"><div class="card"><div class="n">59,834</div><div class="k">x402 endpoints</div></div><div class="card"><div class="n">2,556</div><div class="k">distinct hosts</div></div><div class="card"><div class="n">$0.01</div><div class="k">median price/call</div></div><div class="card"><div class="n">65.4%</div><div class="k">held by top 10 hosts</div></div></div>
+<p>59,834 endpoints sounds like an ecosystem. 65.4% of them
+belong to ten operators, and the 2,556 distinct hosts are the honest
 denominator. Prices cluster low — median $0.01, 90th percentile
-$0.08 — which is what a market of machine-to-machine calls
+$0.02 — which is what a market of machine-to-machine calls
 should look like, and it means a five-cent audit sits above the median rather than below it.</p>
 <table>
 <thead><tr><th>chain</th><th class="num">endpoints</th><th class="num">share</th></tr></thead>
 <tbody>
-<tr><td>base</td><td class="num">24,356</td><td class="num">94.8%</td></tr>
-<tr><td>solana</td><td class="num">1,089</td><td class="num">4.2%</td></tr>
-<tr><td>base-sepolia</td><td class="num">194</td><td class="num">0.8%</td></tr>
-<tr><td>eip155:5042</td><td class="num">40</td><td class="num">0.2%</td></tr>
+<tr><td>base</td><td class="num">59,028</td><td class="num">98.7%</td></tr>
+<tr><td>solana</td><td class="num">595</td><td class="num">1.0%</td></tr>
+<tr><td>base-sepolia</td><td class="num">149</td><td class="num">0.2%</td></tr>
+<tr><td>eip155:5042</td><td class="num">40</td><td class="num">0.1%</td></tr>
 <tr><td>eip155:8217</td><td class="num">7</td><td class="num">0.0%</td></tr>
-<tr><td>arbitrum</td><td class="num">5</td><td class="num">0.0%</td></tr>
+<tr><td>solana-devnet</td><td class="num">4</td><td class="num">0.0%</td></tr>
 </tbody></table>
-<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-10-19.
+<p class="meta">Source: <a href="https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources">Coinbase CDP x402 Bazaar</a>, read 2026-10-26.
 Full figures: <a href="https://index.percall.dev/api/x402/stats.json">stats.json</a> · browse: <a href="https://index.percall.dev/x402.html">the catalog</a>.</p>
 
 <h2>4. Most of it answers, which was not obvious</h2>
@@ -235,17 +235,17 @@ covers every entry. Raw: <a href="https://index.percall.dev/api/x402/health.json
 
 <h2>5. Coverage of the technical checklist</h2>
 <p>This score measures coverage of a published technical checklist. It does not measure AI visibility, referrals, content understanding or successful agent tasks. Optional service interfaces may not apply to your site; missing them still affects this fixed checklist.</p>
-<p>138 sites in this registry are re-graded weekly against the
+<p>161 sites in this registry are re-graded weekly against the
 20-check agent-readability set. The distribution:</p>
 <table>
 <thead><tr><th>grade</th><th class="num">sites</th><th class="wrap">reading</th></tr></thead>
 <tbody>
-<tr><td class="grade">A</td><td class="num">12</td><td class="wrap">90–100% checklist coverage</td></tr>
-<tr><td class="grade">B</td><td class="num">9</td><td class="wrap">80–89% checklist coverage</td></tr>
-<tr><td class="grade">C</td><td class="num">25</td><td class="wrap">70–79% checklist coverage</td></tr>
-<tr><td class="grade">D</td><td class="num">37</td><td class="wrap">60–69% checklist coverage</td></tr>
-<tr><td class="grade">E</td><td class="num">40</td><td class="wrap">45–59% checklist coverage</td></tr>
-<tr><td class="grade">F</td><td class="num">15</td><td class="wrap">below 45% checklist coverage</td></tr>
+<tr><td class="grade">A</td><td class="num">14</td><td class="wrap">90–100% checklist coverage</td></tr>
+<tr><td class="grade">B</td><td class="num">12</td><td class="wrap">80–89% checklist coverage</td></tr>
+<tr><td class="grade">C</td><td class="num">30</td><td class="wrap">70–79% checklist coverage</td></tr>
+<tr><td class="grade">D</td><td class="num">46</td><td class="wrap">60–69% checklist coverage</td></tr>
+<tr><td class="grade">E</td><td class="num">42</td><td class="wrap">45–59% checklist coverage</td></tr>
+<tr><td class="grade">F</td><td class="num">17</td><td class="wrap">below 45% checklist coverage</td></tr>
 </tbody></table>
 <p>Full ranking, with what each site is missing: <a href="https://index.percall.dev/leaderboard.html">the leaderboard</a>.
 What each check means and how to pass it: <a href="https://index.percall.dev/checks/">the checklist</a>.</p>

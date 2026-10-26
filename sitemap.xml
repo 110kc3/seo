@@ -5,9 +5,9 @@
   <url><loc>https://index.percall.dev/ask</loc></url>
   <url><loc>https://index.percall.dev/api/search</loc></url>
   <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://index.percall.dev/mcp-servers.html</loc><lastmod>2026-09-07</lastmod></url>
-  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://index.percall.dev/checks/llms_txt.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_txt_summary.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_full_txt.html</loc></url>
@@ -75,7 +75,6 @@
   <url><loc>https://index.percall.dev/l/unsora.html</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://index.percall.dev/l/aident-loadout.html</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://index.percall.dev/l/aihot.html</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://index.percall.dev/l/agent-marketplace.html</loc><lastmod>2026-10-09</lastmod></url>
   <url><loc>https://index.percall.dev/l/ai-compare-ninja.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://index.percall.dev/l/firstpass.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://index.percall.dev/l/pocket-invoice-mcp.html</loc><lastmod>2026-10-07</lastmod></url>
@@ -176,7 +175,6 @@
   <url><loc>https://index.percall.dev/l/futia.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/fxmacrodata.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/hlido-agent-reviews.html</loc><lastmod>2026-08-01</lastmod></url>
-  <url><loc>https://index.percall.dev/l/jp-bids-mcp.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/llm-optimizer.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/mowgli.html</loc><lastmod>2026-08-01</lastmod></url>
   <url><loc>https://index.percall.dev/l/newzai-mcp-server.html</loc><lastmod>2026-08-01</lastmod></url>

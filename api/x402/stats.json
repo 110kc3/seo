@@ -1,143 +1,142 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-10-19",
-  "endpoints": 25702,
-  "hosts": 2508,
+  "fetched": "2026-10-26",
+  "endpoints": 59834,
+  "hosts": 2556,
   "concentration": {
-    "top_10_hosts_share": 0.229,
+    "top_10_hosts_share": 0.654,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 24356,
-    "solana": 1089,
-    "base-sepolia": 194,
+    "base": 59028,
+    "solana": 595,
+    "base-sepolia": 149,
     "eip155:5042": 40,
     "eip155:8217": 7,
-    "arbitrum": 5,
-    "x-layer": 4,
+    "solana-devnet": 4,
     "eip155:42220": 3,
-    "solana-devnet": 2,
+    "x-layer": 3,
+    "arbitrum": 3,
     "eip155:11142220": 1,
     "eip155:56": 1
   },
   "by_version": {
-    "1": 187,
-    "2": 25515
+    "1": 154,
+    "2": 59680
   },
   "by_method": {
-    "GET": 13997,
-    "POST": 11586,
-    "HEAD": 1
+    "POST": 43798,
+    "GET": 15946
   },
   "price_usd": {
-    "priced": 25644,
-    "unpriced": 58,
+    "priced": 59775,
+    "unpriced": 59,
     "min": 0.001,
     "p50": 0.01,
-    "p90": 0.08,
+    "p90": 0.02,
     "max": 1000
   },
   "top_hosts": [
     {
-      "host": "agentshelf.syntexa.ch",
-      "endpoints": 1226
+      "host": "market.datapackvibe.com",
+      "endpoints": 34239
     },
     {
       "host": "saylorinnovations.com",
-      "endpoints": 1037
+      "endpoints": 1561
     },
     {
       "host": "dns.intel.rallylive.ca",
-      "endpoints": 695
+      "endpoints": 689
     },
     {
       "host": "agent402.tools",
-      "endpoints": 596
+      "endpoints": 610
     },
     {
       "host": "pay.edge-agents.ai",
-      "endpoints": 493
+      "endpoints": 486
     },
     {
       "host": "api.vextorium.com",
       "endpoints": 463
     },
     {
-      "host": "api.x402node.dev",
-      "endpoints": 370
-    },
-    {
-      "host": "agents.driftflight.com",
-      "endpoints": 369
-    },
-    {
-      "host": "twin.unykorn.org",
-      "endpoints": 369
+      "host": "agent-data-tools.revmesh2074.workers.dev",
+      "endpoints": 342
     },
     {
       "host": "email.intel.rallylive.ca",
-      "endpoints": 275
-    },
-    {
-      "host": "x402.orthogonal.com",
-      "endpoints": 270
-    },
-    {
-      "host": "www.mahastrategies.com",
-      "endpoints": 265
-    },
-    {
-      "host": "agents.daedalusdevelopmentgroup.com",
-      "endpoints": 248
+      "endpoints": 272
     },
     {
       "host": "tanod.dev",
-      "endpoints": 248
+      "endpoints": 247
     },
     {
       "host": "api.sitecheck-api.workers.dev",
-      "endpoints": 221
+      "endpoints": 225
+    },
+    {
+      "host": "www.mahastrategies.com",
+      "endpoints": 215
     },
     {
       "host": "agents.citiviewgroup.com",
       "endpoints": 205
     },
     {
-      "host": "x402-factory.com",
-      "endpoints": 190
+      "host": "api.myceliasignal.com",
+      "endpoints": 205
+    },
+    {
+      "host": "bess-x402.onrender.com",
+      "endpoints": 180
     },
     {
       "host": "underground.substratesymposium.com",
-      "endpoints": 177
+      "endpoints": 178
     },
     {
-      "host": "api.myceliasignal.com",
-      "endpoints": 172
-    },
-    {
-      "host": "api.xynaptic.io",
-      "endpoints": 148
+      "host": "x402-factory.com",
+      "endpoints": 173
     },
     {
       "host": "api.aiskills402.com",
-      "endpoints": 147
-    },
-    {
-      "host": "api.agentstools.dev",
-      "endpoints": 146
+      "endpoints": 150
     },
     {
       "host": "api.delx.ai",
       "endpoints": 146
     },
     {
-      "host": "api.strale.io",
-      "endpoints": 145
+      "host": "api.agentstools.dev",
+      "endpoints": 144
     },
     {
-      "host": "api.manylives.me",
-      "endpoints": 142
+      "host": "api.xynaptic.io",
+      "endpoints": 141
+    },
+    {
+      "host": "x402.freeq.one",
+      "endpoints": 139
+    },
+    {
+      "host": "api.fadeandco.workers.dev",
+      "endpoints": 135
+    },
+    {
+      "host": "47620.xyz",
+      "endpoints": 131
+    },
+    {
+      "host": "api.webintel-api.workers.dev",
+      "endpoints": 129
+    },
+    {
+      "host": "api.chainmarket-api.workers.dev",
+      "endpoints": 128
     }
   ]
 }

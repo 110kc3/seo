@@ -1,14 +1,14 @@
 {
-  "agent-marketplace": {
-    "url": "https://tax-peoples-unlike-competition.trycloudflare.com/",
-    "week": "2026-10-19"
+  "ai-commons": {
+    "url": "https://agentsquar.com",
+    "week": "2026-10-26"
   },
-  "jp-bids-mcp": {
-    "url": "https://github.com/sugukurukabe/koko-call-mcp",
-    "week": "2026-10-19"
+  "apiclaw": {
+    "url": "https://apiclaw.biz/",
+    "week": "2026-10-26"
   },
   "vend-api-merchant": {
     "url": "https://extract.paypercall.dev",
-    "week": "2026-10-19"
+    "week": "2026-10-26"
   }
 }

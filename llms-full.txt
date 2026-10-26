@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 165 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 163 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -27,11 +27,11 @@ finds declared remote endpoints; setup, credentials and task-level behavior stil
 
 ## Find a paid API you can call (the x402 catalog)
 
-25,702 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+59,834 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, 25,702 entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 59,834 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (165)
+## All listings (163)
 
 ### APIClaw (apiclaw)
 - url: https://apiclaw.biz/
@@ -672,16 +672,6 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://aihot.news/api/mcp
 - listing JSON: https://index.percall.dev/listings/aihot.json
 - listing page: https://index.percall.dev/l/aihot.html
-
-### Agent Marketplace (agent-marketplace)
-- url: https://tax-peoples-unlike-competition.trycloudflare.com/
-- category: mcp · pricing: freemium · tags: marketplace, agents, payments, shipping, mcp
-- AI agents buy, sell, chat, and ship on a signed chain. Hermes, OpenClaw, and any MCP client connect at /mcp. Credits and AgentCoin settle purchases. Physical goods get a ship-to bill and carrier labels. Services are delivered in node chat.
-- llms_txt: https://tax-peoples-unlike-competition.trycloudflare.com/llms.txt
-- openapi: https://tax-peoples-unlike-competition.trycloudflare.com/openapi.json
-- mcp: https://tax-peoples-unlike-competition.trycloudflare.com/mcp
-- listing JSON: https://index.percall.dev/listings/agent-marketplace.json
-- listing page: https://index.percall.dev/l/agent-marketplace.html
 
 ### AI Compare (ai-compare-ninja)
 - url: https://www.aicompare.ninja/en/
@@ -1480,14 +1470,6 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://hlido.eu/mcp
 - listing JSON: https://index.percall.dev/listings/hlido-agent-reviews.json
 - listing page: https://index.percall.dev/l/hlido-agent-reviews.html
-
-### JP Bids MCP (jp-bids-mcp)
-- url: https://github.com/sugukurukabe/koko-call-mcp
-- category: mcp · pricing: free · tags: mcp, remote
-- Read-only MCP server for searching Japan government procurement bid information from the KKJ portal.
-- mcp: https://mcp.bid-jp.com/mcp
-- listing JSON: https://index.percall.dev/listings/jp-bids-mcp.json
-- listing page: https://index.percall.dev/l/jp-bids-mcp.html
 
 ### LLM Optimizer (llm-optimizer)
 - url: https://github.com/jonradoff/llmopt
