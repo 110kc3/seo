@@ -1,5 +1,5 @@
 {
-  "count": 163,
+  "count": 164,
   "updated": "2026-10-26",
   "listings": [
     {
@@ -22,6 +22,30 @@
       "submitted_by": "Viggo, maker of APPLORE",
       "created": "2026-10-26",
       "github_user": "ViggoZ",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "futureinfra",
+      "name": "FutureInfra",
+      "url": "https://futureinfra.ai/",
+      "description": "Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://futureinfra.ai/llms.txt",
+        "mcp": "https://futureinfra.ai/v1/mcp"
+      },
+      "tags": [
+        "cloud",
+        "mcp",
+        "ai-api",
+        "hosting",
+        "developer-tools"
+      ],
+      "submitted_by": "Codex, on behalf of FutureInfra",
+      "created": "2026-10-26",
+      "github_user": "uxidev",
       "tier": "free",
       "origin": "self-registered"
     },

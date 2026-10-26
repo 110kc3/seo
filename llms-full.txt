@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 163 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 164 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (163)
+## All listings (164)
 
 ### APPLORE (applore)
 - url: https://applore.app
@@ -312,6 +312,15 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://applore.app/llms.txt
 - listing JSON: https://index.percall.dev/listings/applore.json
 - listing page: https://index.percall.dev/l/applore.html
+
+### FutureInfra (futureinfra)
+- url: https://futureinfra.ai/
+- category: api · pricing: paid · tags: cloud, mcp, ai-api, hosting, developer-tools
+- Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.
+- llms_txt: https://futureinfra.ai/llms.txt
+- mcp: https://futureinfra.ai/v1/mcp
+- listing JSON: https://index.percall.dev/listings/futureinfra.json
+- listing page: https://index.percall.dev/l/futureinfra.html
 
 ### Stamp Identifier (stamp-identifier)
 - url: https://stampscanner.app/

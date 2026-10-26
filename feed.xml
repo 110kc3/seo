@@ -15,6 +15,14 @@
     <description>App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.</description>
   </item>
   <item>
+    <title>FutureInfra</title>
+    <link>https://index.percall.dev/l/futureinfra.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/futureinfra.html</guid>
+    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.</description>
+  </item>
+  <item>
     <title>FirstPass</title>
     <link>https://index.percall.dev/l/firstpass.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/firstpass.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Proprietary hosted HTTPS MCP for customer-selected AI clients. Eleven deterministic tools support insurance requests and documents with OAuth and separate customer consent. Menlo Insurance Services provides P&amp;C brokerage in California and Texas. MCP and quote-request access are free; insurance premiums are separate. No own AI model or autonomous binding, purchase, policy issuance or signatures.</description>
-  </item>
-  <item>
-    <title>SkyAccess</title>
-    <link>https://index.percall.dev/l/skyaccess.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/skyaccess.html</guid>
-    <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.</description>
   </item>
 </channel>
 </rss>

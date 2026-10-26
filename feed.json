@@ -22,6 +22,22 @@
       "external_url": "https://applore.app"
     },
     {
+      "id": "https://index.percall.dev/l/futureinfra.html",
+      "url": "https://index.percall.dev/l/futureinfra.html",
+      "title": "FutureInfra",
+      "content_text": "Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.",
+      "date_published": "2026-10-26T00:00:00Z",
+      "tags": [
+        "api",
+        "cloud",
+        "mcp",
+        "ai-api",
+        "hosting",
+        "developer-tools"
+      ],
+      "external_url": "https://futureinfra.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/firstpass.html",
       "url": "https://index.percall.dev/l/firstpass.html",
       "title": "FirstPass",
@@ -767,22 +783,6 @@
         "oauth"
       ],
       "external_url": "https://menloinsurance.com/ai-assistants"
-    },
-    {
-      "id": "https://index.percall.dev/l/skyaccess.html",
-      "url": "https://index.percall.dev/l/skyaccess.html",
-      "title": "SkyAccess",
-      "content_text": "Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.",
-      "date_published": "2026-10-05T00:00:00Z",
-      "tags": [
-        "mcp",
-        "travel",
-        "private-jet",
-        "empty-legs",
-        "charter-flights",
-        "remote-mcp"
-      ],
-      "external_url": "https://github.com/sky-access/skyaccess-mcp"
     }
   ]
 }
