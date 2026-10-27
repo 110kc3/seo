@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>RSP Editor AI</title>
+    <link>https://index.percall.dev/l/rsp-editor-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/rsp-editor-ai.html</guid>
+    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.</description>
+  </item>
+  <item>
     <title>APIClaw</title>
     <link>https://index.percall.dev/l/apiclaw.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/apiclaw.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 07 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Hosted MCP for invoices, estimates, quotes, receipts, purchase orders and PDF export. Uses saved customers, items, payment records and unpaid balances. Streamable HTTP and OAuth; Codex verified. Records shared with web, iOS and Android under company permissions. Currently free; account document and storage limits apply. Email is disabled by default and each send needs confirmation. No card charging, transfers or refunds. Other clients need remote MCP and OAuth support.</description>
-  </item>
-  <item>
-    <title>Placement API</title>
-    <link>https://index.percall.dev/l/placement-api.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/placement-api.html</guid>
-    <pubDate>Tue, 06 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.</description>
   </item>
 </channel>
 </rss>

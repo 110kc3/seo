@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/rsp-editor-ai.html",
+      "url": "https://index.percall.dev/l/rsp-editor-ai.html",
+      "title": "RSP Editor AI",
+      "content_text": "RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.",
+      "date_published": "2026-10-27T00:00:00Z",
+      "tags": [
+        "app",
+        "photo-editing",
+        "portraits",
+        "image-to-image",
+        "presets"
+      ],
+      "external_url": "https://rspeditor.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/apiclaw.html",
       "url": "https://index.percall.dev/l/apiclaw.html",
       "title": "APIClaw",
@@ -768,22 +783,6 @@
         "finance"
       ],
       "external_url": "https://www.freedominvoice.com/mcp/"
-    },
-    {
-      "id": "https://index.percall.dev/l/placement-api.html",
-      "url": "https://index.percall.dev/l/placement-api.html",
-      "title": "Placement API",
-      "content_text": "Hosted API and MCP infrastructure for SEO link placements. Search publisher inventory, compare vendor offers for the same domain, and plan purchases against relevance, quality and budget constraints. Streamable HTTP with bearer API keys. Public signup and catalog research are free; purchasing requires an order-scoped key and prepaid credits. The hosted service is proprietary; its TypeScript client and MCP manifest are public.",
-      "date_published": "2026-10-06T00:00:00Z",
-      "tags": [
-        "mcp",
-        "seo",
-        "backlinks",
-        "marketing",
-        "api",
-        "mcp"
-      ],
-      "external_url": "https://placementapi.com"
     }
   ]
 }

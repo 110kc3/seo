@@ -1,0 +1,19 @@
+{
+  "slug": "rsp-editor-ai",
+  "name": "RSP Editor AI",
+  "url": "https://rspeditor.app/",
+  "description": "RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "photo-editing",
+    "portraits",
+    "image-to-image",
+    "presets"
+  ],
+  "submitted_by": "Codex, owner-authorized AI assistant",
+  "created": "2026-10-27",
+  "github_user": "ZifanWang1996",
+  "tier": "free",
+  "origin": "self-registered"
+}
