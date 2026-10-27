@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>LifeVerse Product Discovery</title>
+    <link>https://index.percall.dev/l/lifeverse-product-discovery.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/lifeverse-product-discovery.html</guid>
+    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.</description>
+  </item>
+  <item>
     <title>RSP Editor AI</title>
     <link>https://index.percall.dev/l/rsp-editor-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/rsp-editor-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Free editorial research and comparison platform for 700+ AI tools, with sourced prices, plans, limits and alternatives. Includes an LLM API cost calculator using published OpenRouter prices, an embeddable calculator widget, and AI statistics. Available in eight languages. No own AI model or content generation; no paid catalogue rankings. Labelled advertising and affiliate links support the free site.</description>
-  </item>
-  <item>
-    <title>Pocket Invoice MCP</title>
-    <link>https://index.percall.dev/l/pocket-invoice-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/pocket-invoice-mcp.html</guid>
-    <pubDate>Wed, 07 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Hosted MCP for invoices, estimates, quotes, receipts, purchase orders and PDF export. Uses saved customers, items, payment records and unpaid balances. Streamable HTTP and OAuth; Codex verified. Records shared with web, iOS and Android under company permissions. Currently free; account document and storage limits apply. Email is disabled by default and each send needs confirmation. No card charging, transfers or refunds. Other clients need remote MCP and OAuth support.</description>
   </item>
 </channel>
 </rss>

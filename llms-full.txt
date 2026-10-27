@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 165 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 166 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (165)
+## All listings (166)
+
+### LifeVerse Product Discovery (lifeverse-product-discovery)
+- url: https://lifeverse.gufreelancer.com/mcp
+- category: mcp · pricing: free · tags: lifeverse, product-discovery, recommendations, chinese, ai-tools
+- Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.
+- llms_txt: https://lifeverse.gufreelancer.com/llms.txt
+- mcp: https://lifeverse.gufreelancer.com/api/mcp
+- listing JSON: https://index.percall.dev/listings/lifeverse-product-discovery.json
+- listing page: https://index.percall.dev/l/lifeverse-product-discovery.html
 
 ### RSP Editor AI (rsp-editor-ai)
 - url: https://rspeditor.app/

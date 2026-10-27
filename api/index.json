@@ -1,7 +1,31 @@
 {
-  "count": 165,
+  "count": 166,
   "updated": "2026-10-27",
   "listings": [
+    {
+      "slug": "lifeverse-product-discovery",
+      "name": "LifeVerse Product Discovery",
+      "url": "https://lifeverse.gufreelancer.com/mcp",
+      "description": "Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://lifeverse.gufreelancer.com/llms.txt",
+        "mcp": "https://lifeverse.gufreelancer.com/api/mcp"
+      },
+      "tags": [
+        "lifeverse",
+        "product-discovery",
+        "recommendations",
+        "chinese",
+        "ai-tools"
+      ],
+      "submitted_by": "LifeVerse",
+      "created": "2026-10-27",
+      "github_user": "lifeversegu",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "rsp-editor-ai",
       "name": "RSP Editor AI",
