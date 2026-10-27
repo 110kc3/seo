@@ -22,6 +22,20 @@
       "external_url": "https://lifeverse.gufreelancer.com/mcp"
     },
     {
+      "id": "https://index.percall.dev/l/novasynth-by-noveum.html",
+      "url": "https://index.percall.dev/l/novasynth-by-noveum.html",
+      "title": "NovaSynth by Noveum",
+      "content_text": "Self-service automated voice agent testing over phone or LiveKit. Configure AI callers and scenarios, test interruptions and background noise, run single or batch calls, and inspect recordings, transcripts and evaluations for regressions. Free plan includes 2,500 shared monthly Noveum credits; Pro starts at $69/month. Voice testing uses 100 credits/minute.",
+      "date_published": "2026-10-27T00:00:00Z",
+      "tags": [
+        "app",
+        "voice-ai",
+        "agent-testing",
+        "regression-testing"
+      ],
+      "external_url": "https://noveum.ai/en/novasynth"
+    },
+    {
       "id": "https://index.percall.dev/l/rsp-editor-ai.html",
       "url": "https://index.percall.dev/l/rsp-editor-ai.html",
       "title": "RSP Editor AI",
@@ -767,22 +781,6 @@
         "agent-skill"
       ],
       "external_url": "https://aihot.news"
-    },
-    {
-      "id": "https://index.percall.dev/l/ai-compare-ninja.html",
-      "url": "https://index.percall.dev/l/ai-compare-ninja.html",
-      "title": "AI Compare",
-      "content_text": "Free editorial research and comparison platform for 700+ AI tools, with sourced prices, plans, limits and alternatives. Includes an LLM API cost calculator using published OpenRouter prices, an embeddable calculator widget, and AI statistics. Available in eight languages. No own AI model or content generation; no paid catalogue rankings. Labelled advertising and affiliate links support the free site.",
-      "date_published": "2026-10-08T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-tools",
-        "comparison",
-        "research",
-        "api-budgeting",
-        "multilingual"
-      ],
-      "external_url": "https://www.aicompare.ninja/en/"
     }
   ]
 }

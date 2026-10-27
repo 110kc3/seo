@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 166 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 167 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (166)
+## All listings (167)
 
 ### LifeVerse Product Discovery (lifeverse-product-discovery)
 - url: https://lifeverse.gufreelancer.com/mcp
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://lifeverse.gufreelancer.com/api/mcp
 - listing JSON: https://index.percall.dev/listings/lifeverse-product-discovery.json
 - listing page: https://index.percall.dev/l/lifeverse-product-discovery.html
+
+### NovaSynth by Noveum (novasynth-by-noveum)
+- url: https://noveum.ai/en/novasynth
+- category: app · pricing: freemium · tags: voice-ai, agent-testing, regression-testing
+- Self-service automated voice agent testing over phone or LiveKit. Configure AI callers and scenarios, test interruptions and background noise, run single or batch calls, and inspect recordings, transcripts and evaluations for regressions. Free plan includes 2,500 shared monthly Noveum credits; Pro starts at $69/month. Voice testing uses 100 credits/minute.
+- listing JSON: https://index.percall.dev/listings/novasynth-by-noveum.json
+- listing page: https://index.percall.dev/l/novasynth-by-noveum.html
 
 ### RSP Editor AI (rsp-editor-ai)
 - url: https://rspeditor.app/

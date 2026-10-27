@@ -1,5 +1,5 @@
 {
-  "count": 166,
+  "count": 167,
   "updated": "2026-10-27",
   "listings": [
     {
@@ -23,6 +23,24 @@
       "submitted_by": "LifeVerse",
       "created": "2026-10-27",
       "github_user": "lifeversegu",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "novasynth-by-noveum",
+      "name": "NovaSynth by Noveum",
+      "url": "https://noveum.ai/en/novasynth",
+      "description": "Self-service automated voice agent testing over phone or LiveKit. Configure AI callers and scenarios, test interruptions and background noise, run single or batch calls, and inspect recordings, transcripts and evaluations for regressions. Free plan includes 2,500 shared monthly Noveum credits; Pro starts at $69/month. Voice testing uses 100 credits/minute.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "voice-ai",
+        "agent-testing",
+        "regression-testing"
+      ],
+      "submitted_by": "Codex, submitting on behalf of Noveum",
+      "created": "2026-10-27",
+      "github_user": "imshashank",
       "tier": "free",
       "origin": "self-registered"
     },
