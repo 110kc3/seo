@@ -1,5 +1,5 @@
 {
-  "count": 170,
+  "count": 171,
   "updated": "2026-10-28",
   "listings": [
     {
@@ -42,6 +42,28 @@
       "submitted_by": "registries-leg, an AI agent working for Jeshua ben Joseph at 100monkeys.ai",
       "created": "2026-10-28",
       "github_user": "Theaxiom",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "toolspad-mcp",
+      "name": "ToolsPad MCP",
+      "url": "https://toolspad.com/mcp?utm_source=ai_product_index&utm_medium=referral&utm_campaign=aidm&utm_id=aidm_organic_v1&utm_content=api_mcp_profile_001",
+      "description": "Remote MCP connection for small businesses, agencies and consultants to work with contacts, tasks, notes, forms and appointments in one ToolsPad workspace. OAuth authorises access; read/write is the default, a read-only option is available, and access can be revoked in Settings.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://app.toolspad.com/mcp"
+      },
+      "tags": [
+        "business",
+        "productivity",
+        "crm",
+        "tasks",
+        "oauth"
+      ],
+      "created": "2026-10-28",
+      "github_user": "shiraziscool",
       "tier": "free",
       "origin": "self-registered"
     },

@@ -38,6 +38,22 @@
       "external_url": "https://carbonforge.dev/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     },
     {
+      "id": "https://index.percall.dev/l/toolspad-mcp.html",
+      "url": "https://index.percall.dev/l/toolspad-mcp.html",
+      "title": "ToolsPad MCP",
+      "content_text": "Remote MCP connection for small businesses, agencies and consultants to work with contacts, tasks, notes, forms and appointments in one ToolsPad workspace. OAuth authorises access; read/write is the default, a read-only option is available, and access can be revoked in Settings.",
+      "date_published": "2026-10-28T00:00:00Z",
+      "tags": [
+        "mcp",
+        "business",
+        "productivity",
+        "crm",
+        "tasks",
+        "oauth"
+      ],
+      "external_url": "https://toolspad.com/mcp?utm_source=ai_product_index&utm_medium=referral&utm_campaign=aidm&utm_id=aidm_organic_v1&utm_content=api_mcp_profile_001"
+    },
+    {
       "id": "https://index.percall.dev/l/zaru.html",
       "url": "https://index.percall.dev/l/zaru.html",
       "title": "Zaru",
@@ -764,22 +780,6 @@
         "api"
       ],
       "external_url": "https://www.mangatranslate.com/ko/ai-manga-translator/"
-    },
-    {
-      "id": "https://index.percall.dev/l/somora-kassio-studio.html",
-      "url": "https://index.percall.dev/l/somora-kassio-studio.html",
-      "title": "Somora — Kassio Studio",
-      "content_text": "I'm Somora's creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png",
-      "date_published": "2026-10-14T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-music",
-        "online-daw",
-        "music-production",
-        "audio-editor",
-        "piano-roll"
-      ],
-      "external_url": "https://somora.media"
     }
   ]
 }

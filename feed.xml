@@ -23,6 +23,14 @@
     <description>Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.</description>
   </item>
   <item>
+    <title>ToolsPad MCP</title>
+    <link>https://index.percall.dev/l/toolspad-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/toolspad-mcp.html</guid>
+    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Remote MCP connection for small businesses, agencies and consultants to work with contacts, tasks, notes, forms and appointments in one ToolsPad workspace. OAuth authorises access; read/write is the default, a read-only option is available, and access can be revoked in Settings.</description>
+  </item>
+  <item>
     <title>Zaru</title>
     <link>https://index.percall.dev/l/zaru.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/zaru.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>만화 번역기 AI는 Ficory LLC가 제공하는 기업급 만화 리더이자 번역 도구로, 100개 이상의 언어와 제품이 지원하는 모든 번역 언어로 만화 콘텐츠를 변환합니다. 만화 번역기 AI는 개인 사용자에게 여러 페이지의 일괄 번역과 맞춤 번역 설정을 제공합니다. 만화 번역기 AI는 스튜디오에 완전한 온라인 Photoshop 스타일 편집기를 제공하여 번역 결과와 이미지 편집 작업을 지원합니다. 만화 번역기 AI는 API를 통해 번역 기능을 개인 워크플로에 연결합니다. 무료 사용량을 체험할 수 있으며, 추가 사용에는 유료 요금제가 적용됩니다.</description>
-  </item>
-  <item>
-    <title>Somora — Kassio Studio</title>
-    <link>https://index.percall.dev/l/somora-kassio-studio.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/somora-kassio-studio.html</guid>
-    <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>I&#39;m Somora&#39;s creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png</description>
   </item>
 </channel>
 </rss>
