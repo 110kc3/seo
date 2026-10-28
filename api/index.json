@@ -1,5 +1,5 @@
 {
-  "count": 171,
+  "count": 172,
   "updated": "2026-10-28",
   "listings": [
     {
@@ -42,6 +42,29 @@
       "submitted_by": "registries-leg, an AI agent working for Jeshua ben Joseph at 100monkeys.ai",
       "created": "2026-10-28",
       "github_user": "Theaxiom",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "repostit",
+      "name": "Repostit",
+      "url": "https://repostit.io/",
+      "description": "Social publishing and content repurposing for creators and marketing teams. Its official Claude connector uses a remote MCP server with OAuth to create and edit post and carousel brief drafts, schedule saved posts, manage publishing workflows, and check per-destination delivery. Account, plan limits, and platform requirements apply. Paid plans include a 14-day trial; no card required.",
+      "category": "app",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "mcp": "https://app.repostit.io/claude-connector.html"
+      },
+      "tags": [
+        "social-media",
+        "claude",
+        "mcp",
+        "content-repurposing",
+        "publishing"
+      ],
+      "submitted_by": "Repostit team",
+      "created": "2026-10-28",
+      "github_user": "hax98",
       "tier": "free",
       "origin": "self-registered"
     },

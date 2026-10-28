@@ -38,6 +38,22 @@
       "external_url": "https://carbonforge.dev/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     },
     {
+      "id": "https://index.percall.dev/l/repostit.html",
+      "url": "https://index.percall.dev/l/repostit.html",
+      "title": "Repostit",
+      "content_text": "Social publishing and content repurposing for creators and marketing teams. Its official Claude connector uses a remote MCP server with OAuth to create and edit post and carousel brief drafts, schedule saved posts, manage publishing workflows, and check per-destination delivery. Account, plan limits, and platform requirements apply. Paid plans include a 14-day trial; no card required.",
+      "date_published": "2026-10-28T00:00:00Z",
+      "tags": [
+        "app",
+        "social-media",
+        "claude",
+        "mcp",
+        "content-repurposing",
+        "publishing"
+      ],
+      "external_url": "https://repostit.io/"
+    },
+    {
       "id": "https://index.percall.dev/l/toolspad-mcp.html",
       "url": "https://index.percall.dev/l/toolspad-mcp.html",
       "title": "ToolsPad MCP",
@@ -764,22 +780,6 @@
         "mcp"
       ],
       "external_url": "https://www.bkkstaff.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/mangatranslate-ko.html",
-      "url": "https://index.percall.dev/l/mangatranslate-ko.html",
-      "title": "만화 번역기 AI",
-      "content_text": "만화 번역기 AI는 Ficory LLC가 제공하는 기업급 만화 리더이자 번역 도구로, 100개 이상의 언어와 제품이 지원하는 모든 번역 언어로 만화 콘텐츠를 변환합니다. 만화 번역기 AI는 개인 사용자에게 여러 페이지의 일괄 번역과 맞춤 번역 설정을 제공합니다. 만화 번역기 AI는 스튜디오에 완전한 온라인 Photoshop 스타일 편집기를 제공하여 번역 결과와 이미지 편집 작업을 지원합니다. 만화 번역기 AI는 API를 통해 번역 기능을 개인 워크플로에 연결합니다. 무료 사용량을 체험할 수 있으며, 추가 사용에는 유료 요금제가 적용됩니다.",
-      "date_published": "2026-10-14T00:00:00Z",
-      "tags": [
-        "app",
-        "manga",
-        "translation",
-        "batch-translation",
-        "image-editing",
-        "api"
-      ],
-      "external_url": "https://www.mangatranslate.com/ko/ai-manga-translator/"
     }
   ]
 }
