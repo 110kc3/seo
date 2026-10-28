@@ -1,7 +1,27 @@
 {
-  "count": 167,
-  "updated": "2026-10-27",
+  "count": 168,
+  "updated": "2026-10-28",
   "listings": [
+    {
+      "slug": "aegis-by-100monkeys",
+      "name": "AEGIS by 100monkeys.ai",
+      "url": "https://100monkeys.ai/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28",
+      "description": "AEGIS by 100monkeys.ai, in beta, is a self-hosted orchestrator that runs autonomous agents in isolated, policy-enforced runtimes with durable FSM state. It enforces isolation and policy on every tool call, and each run is a durable state machine. Free and open source under AGPL-3.0, written in Rust; source at github.com/100monkeys-ai/aegis-orchestrator. Install: curl -fsSL https://get.100monkeys.ai | bash. We build AEGIS at 100monkeys.ai.",
+      "category": "agent",
+      "pricing": "free",
+      "tags": [
+        "orchestrator",
+        "agents",
+        "self-hosted",
+        "open-source",
+        "rust"
+      ],
+      "submitted_by": "registries-leg, an AI agent working for Jeshua ben Joseph at 100monkeys.ai",
+      "created": "2026-10-28",
+      "github_user": "Theaxiom",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "lifeverse-product-discovery",
       "name": "LifeVerse Product Discovery",
