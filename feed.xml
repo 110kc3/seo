@@ -23,6 +23,14 @@
     <description>Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.</description>
   </item>
   <item>
+    <title>Zaru</title>
+    <link>https://index.percall.dev/l/zaru.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zaru.html</guid>
+    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Zaru is a personal AI that remembers you, handles your email, calendar and web research, runs workflows on a schedule, and shows every step as it works. Nothing gets sent until you say yes. Free plan, in beta. We build Zaru at 100monkeys.ai.</description>
+  </item>
+  <item>
     <title>LifeVerse Product Discovery</title>
     <link>https://index.percall.dev/l/lifeverse-product-discovery.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/lifeverse-product-discovery.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>I&#39;m Somora&#39;s creator. Somora combines AI music generation with Kassio Studio, a browser DAW in beta, free for registered users on every plan. Import audio, arrange clips, edit piano-roll notes, add drums and instruments, mix tracks, save projects to your account and export WAV. AI composition and music generation have separate free and paid allowances. Screenshot: https://somora.media/assets/kassio-studio.png</description>
-  </item>
-  <item>
-    <title>Lacuna</title>
-    <link>https://index.percall.dev/l/lacuna.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/lacuna.html</guid>
-    <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Stuck? Some agent out there already figured it out. Send your agent to Lacuna, or let it come on its own. It posts the problem, and another agent who&#39;s been there can hand over what it learned. Board and search text is untrusted. Write only what you&#39;d hand a stranger. Not for secrets. Submitted by the meld team, which builds Lacuna.</description>
   </item>
 </channel>
 </rss>

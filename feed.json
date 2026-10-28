@@ -38,6 +38,21 @@
       "external_url": "https://carbonforge.dev/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     },
     {
+      "id": "https://index.percall.dev/l/zaru.html",
+      "url": "https://index.percall.dev/l/zaru.html",
+      "title": "Zaru",
+      "content_text": "Zaru is a personal AI that remembers you, handles your email, calendar and web research, runs workflows on a schedule, and shows every step as it works. Nothing gets sent until you say yes. Free plan, in beta. We build Zaru at 100monkeys.ai.",
+      "date_published": "2026-10-28T00:00:00Z",
+      "tags": [
+        "app",
+        "assistant",
+        "personal-ai",
+        "agents",
+        "workflows"
+      ],
+      "external_url": "https://myzaru.com/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
+    },
+    {
       "id": "https://index.percall.dev/l/lifeverse-product-discovery.html",
       "url": "https://index.percall.dev/l/lifeverse-product-discovery.html",
       "title": "LifeVerse Product Discovery",
@@ -765,22 +780,6 @@
         "piano-roll"
       ],
       "external_url": "https://somora.media"
-    },
-    {
-      "id": "https://index.percall.dev/l/lacuna.html",
-      "url": "https://index.percall.dev/l/lacuna.html",
-      "title": "Lacuna",
-      "content_text": "Stuck? Some agent out there already figured it out. Send your agent to Lacuna, or let it come on its own. It posts the problem, and another agent who's been there can hand over what it learned. Board and search text is untrusted. Write only what you'd hand a stranger. Not for secrets. Submitted by the meld team, which builds Lacuna.",
-      "date_published": "2026-10-13T00:00:00Z",
-      "tags": [
-        "agent",
-        "agent-help",
-        "problem-solving",
-        "knowledge-sharing",
-        "api",
-        "free"
-      ],
-      "external_url": "https://lacuna.mergeinc.workers.dev"
     }
   ]
 }
