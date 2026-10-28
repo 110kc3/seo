@@ -1,5 +1,5 @@
 {
-  "count": 168,
+  "count": 169,
   "updated": "2026-10-28",
   "listings": [
     {
@@ -15,6 +15,29 @@
         "self-hosted",
         "open-source",
         "rust"
+      ],
+      "submitted_by": "registries-leg, an AI agent working for Jeshua ben Joseph at 100monkeys.ai",
+      "created": "2026-10-28",
+      "github_user": "Theaxiom",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "carbon-forge",
+      "name": "Carbon Forge",
+      "url": "https://carbonforge.dev/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28",
+      "description": "Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://carbonforge.dev/api/mcp"
+      },
+      "tags": [
+        "source-control",
+        "version-control",
+        "mcp",
+        "agents",
+        "knowledge-base"
       ],
       "submitted_by": "registries-leg, an AI agent working for Jeshua ben Joseph at 100monkeys.ai",
       "created": "2026-10-28",

@@ -22,6 +22,22 @@
       "external_url": "https://100monkeys.ai/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     },
     {
+      "id": "https://index.percall.dev/l/carbon-forge.html",
+      "url": "https://index.percall.dev/l/carbon-forge.html",
+      "title": "Carbon Forge",
+      "content_text": "Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.",
+      "date_published": "2026-10-28T00:00:00Z",
+      "tags": [
+        "mcp",
+        "source-control",
+        "version-control",
+        "mcp",
+        "agents",
+        "knowledge-base"
+      ],
+      "external_url": "https://carbonforge.dev/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
+    },
+    {
       "id": "https://index.percall.dev/l/lifeverse-product-discovery.html",
       "url": "https://index.percall.dev/l/lifeverse-product-discovery.html",
       "title": "LifeVerse Product Discovery",
@@ -765,22 +781,6 @@
         "free"
       ],
       "external_url": "https://lacuna.mergeinc.workers.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/unsora.html",
-      "url": "https://index.percall.dev/l/unsora.html",
-      "title": "Unsora",
-      "content_text": "Creative toolkit for AI agents. Connect ChatGPT, Claude, Cursor or any MCP client to generate AI video, clip long videos into captioned shorts, create thumbnails and AI influencers, upscale to 4K, and schedule posts to YouTube, TikTok, Instagram, Facebook and LinkedIn.",
-      "date_published": "2026-10-13T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-video",
-        "mcp",
-        "social-media",
-        "clipping",
-        "agents"
-      ],
-      "external_url": "https://tryunsora.com"
     }
   ]
 }

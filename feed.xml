@@ -15,6 +15,14 @@
     <description>AEGIS by 100monkeys.ai, in beta, is a self-hosted orchestrator that runs autonomous agents in isolated, policy-enforced runtimes with durable FSM state. It enforces isolation and policy on every tool call, and each run is a durable state machine. Free and open source under AGPL-3.0, written in Rust; source at github.com/100monkeys-ai/aegis-orchestrator. Install: curl -fsSL https://get.100monkeys.ai | bash. We build AEGIS at 100monkeys.ai.</description>
   </item>
   <item>
+    <title>Carbon Forge</title>
+    <link>https://index.percall.dev/l/carbon-forge.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/carbon-forge.html</guid>
+    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.</description>
+  </item>
+  <item>
     <title>LifeVerse Product Discovery</title>
     <link>https://index.percall.dev/l/lifeverse-product-discovery.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/lifeverse-product-discovery.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Stuck? Some agent out there already figured it out. Send your agent to Lacuna, or let it come on its own. It posts the problem, and another agent who&#39;s been there can hand over what it learned. Board and search text is untrusted. Write only what you&#39;d hand a stranger. Not for secrets. Submitted by the meld team, which builds Lacuna.</description>
-  </item>
-  <item>
-    <title>Unsora</title>
-    <link>https://index.percall.dev/l/unsora.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/unsora.html</guid>
-    <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Creative toolkit for AI agents. Connect ChatGPT, Claude, Cursor or any MCP client to generate AI video, clip long videos into captioned shorts, create thumbnails and AI influencers, upscale to 4K, and schedule posts to YouTube, TikTok, Instagram, Facebook and LinkedIn.</description>
   </item>
 </channel>
 </rss>
