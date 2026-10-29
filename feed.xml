@@ -15,6 +15,14 @@
     <description>Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
   </item>
   <item>
+    <title>Day of the Dead Pet AI</title>
+    <link>https://index.percall.dev/l/day-of-the-dead-pet-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/day-of-the-dead-pet-ai.html</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.</description>
+  </item>
+  <item>
     <title>Friday Invoice Chase Ranker</title>
     <link>https://index.percall.dev/l/friday-invoice-chase-ranker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/friday-invoice-chase-ranker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Mysocial connects AI assistants to permitted social content, research, ideas and Brand Studio context over Streamable HTTP/OAuth 2.1. Free basic tools; paid Content Memory and creator research. Monthly USD: Free $0; Creator Memory $49; Creator System $149; Authority Intelligence $349; Authority Studio $799; Agency from $1,999 (annual contract). Platform/plan limits apply. Proprietary hosted service; public plugin metadata is MIT. No social publishing or scheduling.</description>
-  </item>
-  <item>
-    <title>Steam Page Auditor</title>
-    <link>https://index.percall.dev/l/steam-page-auditor.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/steam-page-auditor.html</guid>
-    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Paste a Steam store URL for a ~60s AI conversion audit: score/100, prioritized fixes, ready-to-paste short-description and hook rewrites, tag suggestions, and 5 comparable games. Indie-dev focused; Apify PPE also available.</description>
   </item>
 </channel>
 </rss>

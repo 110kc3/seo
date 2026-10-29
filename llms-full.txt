@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 177 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 178 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (177)
+## All listings (178)
 
 ### AI Tiny Desk (ai-tiny-desk)
 - url: https://ai-tinydesk.com/
@@ -311,6 +311,13 @@ A response does not verify authentication, payment or tool behavior.
 - Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.
 - listing JSON: https://index.percall.dev/listings/ai-tiny-desk.json
 - listing page: https://index.percall.dev/l/ai-tiny-desk.html
+
+### Day of the Dead Pet AI (day-of-the-dead-pet-ai)
+- url: https://dayofthedeadpet-ai.com/
+- category: app · pricing: paid · tags: video, pets, photo-to-video
+- Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.
+- listing JSON: https://index.percall.dev/listings/day-of-the-dead-pet-ai.json
+- listing page: https://index.percall.dev/l/day-of-the-dead-pet-ai.html
 
 ### Friday Invoice Chase Ranker (friday-invoice-chase-ranker)
 - url: https://sirmem.github.io/friday-invoice-chase-tool/

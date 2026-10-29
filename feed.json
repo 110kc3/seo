@@ -20,6 +20,20 @@
       "external_url": "https://ai-tinydesk.com/"
     },
     {
+      "id": "https://index.percall.dev/l/day-of-the-dead-pet-ai.html",
+      "url": "https://index.percall.dev/l/day-of-the-dead-pet-ai.html",
+      "title": "Day of the Dead Pet AI",
+      "content_text": "Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.",
+      "date_published": "2026-10-29T00:00:00Z",
+      "tags": [
+        "app",
+        "video",
+        "pets",
+        "photo-to-video"
+      ],
+      "external_url": "https://dayofthedeadpet-ai.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
       "url": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
       "title": "Friday Invoice Chase Ranker",
@@ -766,22 +780,6 @@
         "oauth"
       ],
       "external_url": "https://mysocial.io/"
-    },
-    {
-      "id": "https://index.percall.dev/l/steam-page-auditor.html",
-      "url": "https://index.percall.dev/l/steam-page-auditor.html",
-      "title": "Steam Page Auditor",
-      "content_text": "Paste a Steam store URL for a ~60s AI conversion audit: score/100, prioritized fixes, ready-to-paste short-description and hook rewrites, tag suggestions, and 5 comparable games. Indie-dev focused; Apify PPE also available.",
-      "date_published": "2026-10-18T00:00:00Z",
-      "tags": [
-        "app",
-        "steam",
-        "games",
-        "ai",
-        "marketing",
-        "seo"
-      ],
-      "external_url": "https://steam-page-auditor.vercel.app"
     }
   ]
 }

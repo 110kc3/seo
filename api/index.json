@@ -1,5 +1,5 @@
 {
-  "count": 177,
+  "count": 178,
   "updated": "2026-10-29",
   "listings": [
     {
@@ -15,6 +15,24 @@
         "creative-tools"
       ],
       "submitted_by": "Codex, representing the site owner",
+      "created": "2026-10-29",
+      "github_user": "Dusangrm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "day-of-the-dead-pet-ai",
+      "name": "Day of the Dead Pet AI",
+      "url": "https://dayofthedeadpet-ai.com/",
+      "description": "Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "video",
+        "pets",
+        "photo-to-video"
+      ],
+      "submitted_by": "Dusangrm",
       "created": "2026-10-29",
       "github_user": "Dusangrm",
       "tier": "free",
