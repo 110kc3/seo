@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/marigold-bridge-ai.html",
+      "url": "https://index.percall.dev/l/marigold-bridge-ai.html",
+      "title": "Marigold Bridge AI",
+      "content_text": "Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.",
+      "date_published": "2026-10-29T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-video",
+        "photo-to-video",
+        "creative-tools"
+      ],
+      "external_url": "https://marigoldbridgeai.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/ozil-goal.html",
       "url": "https://index.percall.dev/l/ozil-goal.html",
       "title": "Ozil Goal",
@@ -763,21 +777,6 @@
         "workflow"
       ],
       "external_url": "https://github.com/xiaogan123/linkflow-desktop"
-    },
-    {
-      "id": "https://index.percall.dev/l/shellwire.html",
-      "url": "https://index.percall.dev/l/shellwire.html",
-      "title": "ShellWire",
-      "content_text": "Software discovery for people and AI assistants. Browse applications and compare documented capabilities through the website or hosted MCP server. Public discovery tools are available without an account. Builders can submit free listings after email verification and a visible homepage backlink; submissions are reviewed before publication. Authenticated MCP tools support private submissions.",
-      "date_published": "2026-10-15T00:00:00Z",
-      "tags": [
-        "mcp",
-        "software-discovery",
-        "directory",
-        "mcp",
-        "developer-tools"
-      ],
-      "external_url": "https://shellwire.com/"
     }
   ]
 }

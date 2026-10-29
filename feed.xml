@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Marigold Bridge AI</title>
+    <link>https://index.percall.dev/l/marigold-bridge-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/marigold-bridge-ai.html</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
+  </item>
+  <item>
     <title>Ozil Goal</title>
     <link>https://index.percall.dev/l/ozil-goal.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ozil-goal.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.</description>
-  </item>
-  <item>
-    <title>ShellWire</title>
-    <link>https://index.percall.dev/l/shellwire.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/shellwire.html</guid>
-    <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Software discovery for people and AI assistants. Browse applications and compare documented capabilities through the website or hosted MCP server. Public discovery tools are available without an account. Builders can submit free listings after email verification and a visible homepage backlink; submissions are reviewed before publication. Authenticated MCP tools support private submissions.</description>
   </item>
 </channel>
 </rss>

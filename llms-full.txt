@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 173 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 174 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (173)
+## All listings (174)
+
+### Marigold Bridge AI (marigold-bridge-ai)
+- url: https://marigoldbridgeai.com/
+- category: app · pricing: paid · tags: ai-video, photo-to-video, creative-tools
+- Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.
+- listing JSON: https://index.percall.dev/listings/marigold-bridge-ai.json
+- listing page: https://index.percall.dev/l/marigold-bridge-ai.html
 
 ### Ozil Goal (ozil-goal)
 - url: https://ozilgoal.run/

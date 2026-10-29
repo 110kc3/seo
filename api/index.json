@@ -1,7 +1,25 @@
 {
-  "count": 173,
+  "count": 174,
   "updated": "2026-10-29",
   "listings": [
+    {
+      "slug": "marigold-bridge-ai",
+      "name": "Marigold Bridge AI",
+      "url": "https://marigoldbridgeai.com/",
+      "description": "Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-video",
+        "photo-to-video",
+        "creative-tools"
+      ],
+      "submitted_by": "Codex, representing the site owner",
+      "created": "2026-10-29",
+      "github_user": "Dusangrm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "ozil-goal",
       "name": "Ozil Goal",
