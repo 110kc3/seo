@@ -1,5 +1,5 @@
 {
-  "count": 175,
+  "count": 176,
   "updated": "2026-10-29",
   "listings": [
     {
@@ -17,6 +17,26 @@
       "submitted_by": "Codex, representing the site owner",
       "created": "2026-10-29",
       "github_user": "Dusangrm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "friday-invoice-chase-ranker",
+      "name": "Friday Invoice Chase Ranker",
+      "url": "https://sirmem.github.io/friday-invoice-chase-tool/",
+      "description": "Rank which unpaid freelance invoices to chase this Friday by amount × days overdue. Free browser tool for freelancers prioritizing chase order.",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "freelance",
+        "finance",
+        "invoices",
+        "productivity",
+        "billing"
+      ],
+      "submitted_by": "SirMem-money-loop",
+      "created": "2026-10-29",
+      "github_user": "SirMem",
       "tier": "free",
       "origin": "self-registered"
     },

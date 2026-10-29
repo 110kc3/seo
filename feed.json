@@ -20,6 +20,22 @@
       "external_url": "https://ai-tinydesk.com/"
     },
     {
+      "id": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
+      "url": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
+      "title": "Friday Invoice Chase Ranker",
+      "content_text": "Rank which unpaid freelance invoices to chase this Friday by amount × days overdue. Free browser tool for freelancers prioritizing chase order.",
+      "date_published": "2026-10-29T00:00:00Z",
+      "tags": [
+        "app",
+        "freelance",
+        "finance",
+        "invoices",
+        "productivity",
+        "billing"
+      ],
+      "external_url": "https://sirmem.github.io/friday-invoice-chase-tool/"
+    },
+    {
       "id": "https://index.percall.dev/l/marigold-bridge-ai.html",
       "url": "https://index.percall.dev/l/marigold-bridge-ai.html",
       "title": "Marigold Bridge AI",
@@ -765,17 +781,6 @@
         "monitoring"
       ],
       "external_url": "https://codexreset.today"
-    },
-    {
-      "id": "https://index.percall.dev/l/ddg-agent-services.html",
-      "url": "https://index.percall.dev/l/ddg-agent-services.html",
-      "title": "DDG Agent Services",
-      "content_text": "421 x402-paid agent API endpoints on Base (USDC, no-KYC): security audits, verification rails (UCP/AP2 checkout verification, ERC-8004 agent screening, MPP payment-intent verification), search, embeddings, enrichment, screenshots, price feeds. Freemium: 15 flagship routes free first call per agent per day; paid routes $0.002-$0.05.",
-      "date_published": "2026-10-17T00:00:00Z",
-      "tags": [
-        "api"
-      ],
-      "external_url": "https://agents.daedalusdevelopmentgroup.com"
     }
   ]
 }
