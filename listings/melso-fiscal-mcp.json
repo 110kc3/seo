@@ -1,0 +1,24 @@
+{
+  "slug": "melso-fiscal-mcp",
+  "name": "Melso fiscal MCP",
+  "url": "https://melso.ai/en/mcp",
+  "description": "OAuth-protected hosted MCP for Spanish invoices, income, expenses and tax calendars in Melso. Customers authorize company access; tools can record expenses and prepare invoice work within granted permissions. The paid Spanish fiscal service combines a personal AI agent with human tax professionals. Tax-return approval and filing remain in Melso. Proprietary hosted service; no public implementation repository.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://melso.ai/llms.txt",
+    "mcp": "https://mcp.melso.ai/mcp"
+  },
+  "tags": [
+    "spanish-tax",
+    "invoicing",
+    "expenses",
+    "oauth",
+    "mcp"
+  ],
+  "submitted_by": "Codex on behalf of Melso",
+  "created": "2026-10-29",
+  "github_user": "albertsalgueda",
+  "tier": "free",
+  "origin": "self-registered"
+}

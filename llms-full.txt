@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 176 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 177 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (176)
+## All listings (177)
 
 ### AI Tiny Desk (ai-tiny-desk)
 - url: https://ai-tinydesk.com/
@@ -325,6 +325,15 @@ A response does not verify authentication, payment or tool behavior.
 - Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.
 - listing JSON: https://index.percall.dev/listings/marigold-bridge-ai.json
 - listing page: https://index.percall.dev/l/marigold-bridge-ai.html
+
+### Melso fiscal MCP (melso-fiscal-mcp)
+- url: https://melso.ai/en/mcp
+- category: mcp · pricing: paid · tags: spanish-tax, invoicing, expenses, oauth, mcp
+- OAuth-protected hosted MCP for Spanish invoices, income, expenses and tax calendars in Melso. Customers authorize company access; tools can record expenses and prepare invoice work within granted permissions. The paid Spanish fiscal service combines a personal AI agent with human tax professionals. Tax-return approval and filing remain in Melso. Proprietary hosted service; no public implementation repository.
+- llms_txt: https://melso.ai/llms.txt
+- mcp: https://mcp.melso.ai/mcp
+- listing JSON: https://index.percall.dev/listings/melso-fiscal-mcp.json
+- listing page: https://index.percall.dev/l/melso-fiscal-mcp.html
 
 ### Ozil Goal (ozil-goal)
 - url: https://ozilgoal.run/

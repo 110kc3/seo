@@ -50,6 +50,22 @@
       "external_url": "https://marigoldbridgeai.com/"
     },
     {
+      "id": "https://index.percall.dev/l/melso-fiscal-mcp.html",
+      "url": "https://index.percall.dev/l/melso-fiscal-mcp.html",
+      "title": "Melso fiscal MCP",
+      "content_text": "OAuth-protected hosted MCP for Spanish invoices, income, expenses and tax calendars in Melso. Customers authorize company access; tools can record expenses and prepare invoice work within granted permissions. The paid Spanish fiscal service combines a personal AI agent with human tax professionals. Tax-return approval and filing remain in Melso. Proprietary hosted service; no public implementation repository.",
+      "date_published": "2026-10-29T00:00:00Z",
+      "tags": [
+        "mcp",
+        "spanish-tax",
+        "invoicing",
+        "expenses",
+        "oauth",
+        "mcp"
+      ],
+      "external_url": "https://melso.ai/en/mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/ozil-goal.html",
       "url": "https://index.percall.dev/l/ozil-goal.html",
       "title": "Ozil Goal",
@@ -766,21 +782,6 @@
         "seo"
       ],
       "external_url": "https://steam-page-auditor.vercel.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/codex-reset-radar.html",
-      "url": "https://index.percall.dev/l/codex-reset-radar.html",
-      "title": "Codex Reset Radar",
-      "content_text": "Public Codex usage-limit reset signals with timestamps and confidence levels. Read-only JSON, RSS and iCalendar feeds of platform-wide Codex reset announcements, plus a Telegram bot (2/day). Free, no key, no signup.",
-      "date_published": "2026-10-17T00:00:00Z",
-      "tags": [
-        "api",
-        "codex",
-        "ai-infrastructure",
-        "developer-tools",
-        "monitoring"
-      ],
-      "external_url": "https://codexreset.today"
     }
   ]
 }

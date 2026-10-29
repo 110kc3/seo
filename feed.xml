@@ -31,6 +31,14 @@
     <description>Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
   </item>
   <item>
+    <title>Melso fiscal MCP</title>
+    <link>https://index.percall.dev/l/melso-fiscal-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/melso-fiscal-mcp.html</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>OAuth-protected hosted MCP for Spanish invoices, income, expenses and tax calendars in Melso. Customers authorize company access; tools can record expenses and prepare invoice work within granted permissions. The paid Spanish fiscal service combines a personal AI agent with human tax professionals. Tax-return approval and filing remain in Melso. Proprietary hosted service; no public implementation repository.</description>
+  </item>
+  <item>
     <title>Ozil Goal</title>
     <link>https://index.percall.dev/l/ozil-goal.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ozil-goal.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Paste a Steam store URL for a ~60s AI conversion audit: score/100, prioritized fixes, ready-to-paste short-description and hook rewrites, tag suggestions, and 5 comparable games. Indie-dev focused; Apify PPE also available.</description>
-  </item>
-  <item>
-    <title>Codex Reset Radar</title>
-    <link>https://index.percall.dev/l/codex-reset-radar.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/codex-reset-radar.html</guid>
-    <pubDate>Sat, 17 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Public Codex usage-limit reset signals with timestamps and confidence levels. Read-only JSON, RSS and iCalendar feeds of platform-wide Codex reset announcements, plus a Telegram bot (2/day). Free, no key, no signup.</description>
   </item>
 </channel>
 </rss>
