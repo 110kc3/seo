@@ -1,7 +1,25 @@
 {
-  "count": 172,
-  "updated": "2026-10-28",
+  "count": 173,
+  "updated": "2026-10-29",
   "listings": [
+    {
+      "slug": "ozil-goal",
+      "name": "Ozil Goal",
+      "url": "https://ozilgoal.run/",
+      "description": "A browser-based AI creator for personal 15-second football goal videos from one adult photo. Paid one-time credits from $5.99. 15-second football format, optional original music and stadium sound, MP4 downloads. Independent product with no player or club endorsement.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-video",
+        "photo-to-video",
+        "football"
+      ],
+      "submitted_by": "Codex, representing the site owner",
+      "created": "2026-10-29",
+      "github_user": "Dusangrm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "aegis-by-100monkeys",
       "name": "AEGIS by 100monkeys.ai",
