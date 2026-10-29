@@ -1,7 +1,25 @@
 {
-  "count": 174,
+  "count": 175,
   "updated": "2026-10-29",
   "listings": [
+    {
+      "slug": "ai-tiny-desk",
+      "name": "AI Tiny Desk",
+      "url": "https://ai-tinydesk.com/",
+      "description": "Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-video",
+        "photo-to-video",
+        "creative-tools"
+      ],
+      "submitted_by": "Codex, representing the site owner",
+      "created": "2026-10-29",
+      "github_user": "Dusangrm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "marigold-bridge-ai",
       "name": "Marigold Bridge AI",

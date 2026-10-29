@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ai-tiny-desk.html",
+      "url": "https://index.percall.dev/l/ai-tiny-desk.html",
+      "title": "AI Tiny Desk",
+      "content_text": "Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.",
+      "date_published": "2026-10-29T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-video",
+        "photo-to-video",
+        "creative-tools"
+      ],
+      "external_url": "https://ai-tinydesk.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/marigold-bridge-ai.html",
       "url": "https://index.percall.dev/l/marigold-bridge-ai.html",
       "title": "Marigold Bridge AI",
@@ -762,21 +776,6 @@
         "api"
       ],
       "external_url": "https://agents.daedalusdevelopmentgroup.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/linkflow-desktop.html",
-      "url": "https://index.percall.dev/l/linkflow-desktop.html",
-      "title": "Linkflow · 外链助手",
-      "content_text": "A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.",
-      "date_published": "2026-10-15T00:00:00Z",
-      "tags": [
-        "app",
-        "desktop",
-        "publishing",
-        "ai-assisted",
-        "workflow"
-      ],
-      "external_url": "https://github.com/xiaogan123/linkflow-desktop"
     }
   ]
 }

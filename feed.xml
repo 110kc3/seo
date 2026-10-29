@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AI Tiny Desk</title>
+    <link>https://index.percall.dev/l/ai-tiny-desk.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ai-tiny-desk.html</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
+  </item>
+  <item>
     <title>Marigold Bridge AI</title>
     <link>https://index.percall.dev/l/marigold-bridge-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/marigold-bridge-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 17 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>421 x402-paid agent API endpoints on Base (USDC, no-KYC): security audits, verification rails (UCP/AP2 checkout verification, ERC-8004 agent screening, MPP payment-intent verification), search, embeddings, enrichment, screenshots, price feeds. Freemium: 15 flagship routes free first call per agent per day; paid routes $0.002-$0.05.</description>
-  </item>
-  <item>
-    <title>Linkflow · 外链助手</title>
-    <link>https://index.percall.dev/l/linkflow-desktop.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/linkflow-desktop.html</guid>
-    <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.</description>
   </item>
 </channel>
 </rss>
