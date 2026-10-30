@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 178 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 179 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (178)
+## All listings (179)
+
+### EchoEmpire Machine Foundry (echoempire-machine-foundry)
+- url: https://foundry.echoempire.org/
+- category: api · pricing: paid · tags: scraping, rag, youtube, pdf, apify
+- Machine-readable catalog of EchoEmpire's pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.
+- llms_txt: https://foundry.echoempire.org/llms.txt
+- mcp: https://mcp.apify.com/?tools=skilled_glee/youtube-transcript-extractor
+- listing JSON: https://index.percall.dev/listings/echoempire-machine-foundry.json
+- listing page: https://index.percall.dev/l/echoempire-machine-foundry.html
 
 ### AI Tiny Desk (ai-tiny-desk)
 - url: https://ai-tinydesk.com/

@@ -1,7 +1,31 @@
 {
-  "count": 178,
-  "updated": "2026-10-29",
+  "count": 179,
+  "updated": "2026-10-30",
   "listings": [
+    {
+      "slug": "echoempire-machine-foundry",
+      "name": "EchoEmpire Machine Foundry",
+      "url": "https://foundry.echoempire.org/",
+      "description": "Machine-readable catalog of EchoEmpire's pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://foundry.echoempire.org/llms.txt",
+        "mcp": "https://mcp.apify.com/?tools=skilled_glee/youtube-transcript-extractor"
+      },
+      "tags": [
+        "scraping",
+        "rag",
+        "youtube",
+        "pdf",
+        "apify"
+      ],
+      "submitted_by": "EchoEmpire Visibility via Tech",
+      "created": "2026-10-30",
+      "github_user": "EchoEmpireUtility-bot",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "ai-tiny-desk",
       "name": "AI Tiny Desk",

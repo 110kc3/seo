@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
+      "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
+      "title": "EchoEmpire Machine Foundry",
+      "content_text": "Machine-readable catalog of EchoEmpire's pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.",
+      "date_published": "2026-10-30T00:00:00Z",
+      "tags": [
+        "api",
+        "scraping",
+        "rag",
+        "youtube",
+        "pdf",
+        "apify"
+      ],
+      "external_url": "https://foundry.echoempire.org/"
+    },
+    {
       "id": "https://index.percall.dev/l/ai-tiny-desk.html",
       "url": "https://index.percall.dev/l/ai-tiny-desk.html",
       "title": "AI Tiny Desk",
@@ -764,22 +780,6 @@
         "scraping"
       ],
       "external_url": "https://apify.com/keiwy/local-biz-leads-email"
-    },
-    {
-      "id": "https://index.percall.dev/l/mysocial.html",
-      "url": "https://index.percall.dev/l/mysocial.html",
-      "title": "Mysocial",
-      "content_text": "Mysocial connects AI assistants to permitted social content, research, ideas and Brand Studio context over Streamable HTTP/OAuth 2.1. Free basic tools; paid Content Memory and creator research. Monthly USD: Free $0; Creator Memory $49; Creator System $149; Authority Intelligence $349; Authority Studio $799; Agency from $1,999 (annual contract). Platform/plan limits apply. Proprietary hosted service; public plugin metadata is MIT. No social publishing or scheduling.",
-      "date_published": "2026-10-18T00:00:00Z",
-      "tags": [
-        "mcp",
-        "social-media",
-        "content-research",
-        "brand-context",
-        "creator-tools",
-        "oauth"
-      ],
-      "external_url": "https://mysocial.io/"
     }
   ]
 }
