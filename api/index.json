@@ -1,5 +1,5 @@
 {
-  "count": 180,
+  "count": 181,
   "updated": "2026-10-30",
   "listings": [
     {
@@ -23,6 +23,26 @@
       "submitted_by": "EchoEmpire Visibility via Tech",
       "created": "2026-10-30",
       "github_user": "EchoEmpireUtility-bot",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "heynab",
+      "name": "Nab",
+      "url": "https://heynab.com",
+      "description": "Phone, SMS and email tools for AI agents, with owner-granted permissions and approvals for sensitive actions. Nab is an early beta with web and iOS access. Tool use requires paid activation; availability depends on country and provider. Developer guide: https://heynab.com/developers. Sign up: https://heynab.com/login.",
+      "category": "api",
+      "pricing": "paid",
+      "tags": [
+        "phone",
+        "sms",
+        "email",
+        "ai-agents",
+        "productivity"
+      ],
+      "submitted_by": "Codex, authorized by the Nab owner",
+      "created": "2026-10-30",
+      "github_user": "Zentelechia",
       "tier": "free",
       "origin": "self-registered"
     },

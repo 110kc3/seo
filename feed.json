@@ -22,6 +22,22 @@
       "external_url": "https://foundry.echoempire.org/"
     },
     {
+      "id": "https://index.percall.dev/l/heynab.html",
+      "url": "https://index.percall.dev/l/heynab.html",
+      "title": "Nab",
+      "content_text": "Phone, SMS and email tools for AI agents, with owner-granted permissions and approvals for sensitive actions. Nab is an early beta with web and iOS access. Tool use requires paid activation; availability depends on country and provider. Developer guide: https://heynab.com/developers. Sign up: https://heynab.com/login.",
+      "date_published": "2026-10-30T00:00:00Z",
+      "tags": [
+        "api",
+        "phone",
+        "sms",
+        "email",
+        "ai-agents",
+        "productivity"
+      ],
+      "external_url": "https://heynab.com"
+    },
+    {
       "id": "https://index.percall.dev/l/voxsail.html",
       "url": "https://index.percall.dev/l/voxsail.html",
       "title": "VoxSail",
@@ -764,22 +780,6 @@
         "agents"
       ],
       "external_url": "https://watchtbot.site/docs#mcp"
-    },
-    {
-      "id": "https://index.percall.dev/l/dauntless-agent-directory.html",
-      "url": "https://index.percall.dev/l/dauntless-agent-directory.html",
-      "title": "Dauntless Agent Directory",
-      "content_text": "A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.",
-      "date_published": "2026-10-18T00:00:00Z",
-      "tags": [
-        "app",
-        "agent-discovery",
-        "service-directory",
-        "prerequisites",
-        "evidence",
-        "json"
-      ],
-      "external_url": "https://agents.dauntless.systems/"
     }
   ]
 }

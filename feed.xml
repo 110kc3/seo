@@ -15,6 +15,14 @@
     <description>Machine-readable catalog of EchoEmpire&#39;s pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.</description>
   </item>
   <item>
+    <title>Nab</title>
+    <link>https://index.percall.dev/l/heynab.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/heynab.html</guid>
+    <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Phone, SMS and email tools for AI agents, with owner-granted permissions and approvals for sensitive actions. Nab is an early beta with web and iOS access. Tool use requires paid activation; availability depends on country and provider. Developer guide: https://heynab.com/developers. Sign up: https://heynab.com/login.</description>
+  </item>
+  <item>
     <title>VoxSail</title>
     <link>https://index.percall.dev/l/voxsail.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/voxsail.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.</description>
-  </item>
-  <item>
-    <title>Dauntless Agent Directory</title>
-    <link>https://index.percall.dev/l/dauntless-agent-directory.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/dauntless-agent-directory.html</guid>
-    <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>A free, read-only directory of services for AI agents. Eight pilot records include authentication prerequisites, provider documentation, limitations, and scoped observations where available. Read HTML pages or retrieve JSON through the documented OpenAPI paths. No account is required to read the directory; listed providers have their own prerequisites. Listings are not endorsements or safety guarantees.</description>
   </item>
 </channel>
 </rss>
