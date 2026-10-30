@@ -1,0 +1,20 @@
+{
+  "slug": "voxsail",
+  "name": "VoxSail",
+  "url": "https://voxsail.com/en/",
+  "description": "Browser-based video and audio localization for creators, educators, and teams. Transcribe and translate subtitles, generate AI dubbing, review results in an online editor, and export localized media, transcripts, or SRT/ASS subtitle files. Paid subscriptions and credit add-ons, with one-time starter credits. Company: Hefei Qiangshi Information Technology Co., Ltd.",
+  "category": "app",
+  "pricing": "paid",
+  "tags": [
+    "video-translation",
+    "subtitles",
+    "ai-dubbing",
+    "transcription",
+    "localization"
+  ],
+  "submitted_by": "Codex on behalf of VoxSail / York",
+  "created": "2026-10-30",
+  "github_user": "goodyorkye",
+  "tier": "free",
+  "origin": "self-registered"
+}

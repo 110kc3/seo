@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 179 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 180 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (179)
+## All listings (180)
 
 ### EchoEmpire Machine Foundry (echoempire-machine-foundry)
 - url: https://foundry.echoempire.org/
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://mcp.apify.com/?tools=skilled_glee/youtube-transcript-extractor
 - listing JSON: https://index.percall.dev/listings/echoempire-machine-foundry.json
 - listing page: https://index.percall.dev/l/echoempire-machine-foundry.html
+
+### VoxSail (voxsail)
+- url: https://voxsail.com/en/
+- category: app · pricing: paid · tags: video-translation, subtitles, ai-dubbing, transcription, localization
+- Browser-based video and audio localization for creators, educators, and teams. Transcribe and translate subtitles, generate AI dubbing, review results in an online editor, and export localized media, transcripts, or SRT/ASS subtitle files. Paid subscriptions and credit add-ons, with one-time starter credits. Company: Hefei Qiangshi Information Technology Co., Ltd.
+- listing JSON: https://index.percall.dev/listings/voxsail.json
+- listing page: https://index.percall.dev/l/voxsail.html
 
 ### AI Tiny Desk (ai-tiny-desk)
 - url: https://ai-tinydesk.com/
