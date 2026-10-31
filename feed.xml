@@ -23,6 +23,14 @@
     <description>Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).</description>
   </item>
   <item>
+    <title>Kepo</title>
+    <link>https://index.percall.dev/l/kepo-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/kepo-ai.html</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.</description>
+  </item>
+  <item>
     <title>ViewHTML</title>
     <link>https://index.percall.dev/l/viewhtml-app.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/viewhtml-app.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>AISkills402 sells tested AI agent skill files (SKILL.md, Agent Skills format). An agent buys the FILE of a skill once, over the x402 protocol, in USDC on Base mainnet, for cents. No account and no API key. The agent keeps the file: re-downloads and new versions of a skill it owns are free. A few skills are also sold as separate pay-per-call APIs. Start at https://aiskills402.com/llms.txt and https://api.aiskills402.com/openapi.json.</description>
-  </item>
-  <item>
-    <title>DC Hub</title>
-    <link>https://index.percall.dev/l/dc-hub.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/dc-hub.html</guid>
-    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.</description>
   </item>
 </channel>
 </rss>

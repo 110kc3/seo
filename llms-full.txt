@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 184 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 185 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (184)
+## All listings (185)
 
 ### 1ZheAI (1zheai)
 - url: https://1zheai.com/
@@ -319,6 +319,13 @@ A response does not verify authentication, payment or tool behavior.
 - Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).
 - listing JSON: https://index.percall.dev/listings/fondoblanco-org.json
 - listing page: https://index.percall.dev/l/fondoblanco-org.html
+
+### Kepo (kepo-ai)
+- url: https://kepo.ai
+- category: app · pricing: freemium · tags: macos, widgets, desktop
+- Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.
+- listing JSON: https://index.percall.dev/listings/kepo-ai.json
+- listing page: https://index.percall.dev/l/kepo-ai.html
 
 ### ViewHTML (viewhtml-app)
 - url: https://viewhtml.app

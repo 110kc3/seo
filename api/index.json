@@ -1,5 +1,5 @@
 {
-  "count": 184,
+  "count": 185,
   "updated": "2026-10-31",
   "listings": [
     {
@@ -35,6 +35,24 @@
         "background",
         "image",
         "spanish"
+      ],
+      "submitted_by": "Enivel",
+      "created": "2026-10-31",
+      "github_user": "Enivel",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "kepo-ai",
+      "name": "Kepo",
+      "url": "https://kepo.ai",
+      "description": "Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "macos",
+        "widgets",
+        "desktop"
       ],
       "submitted_by": "Enivel",
       "created": "2026-10-31",

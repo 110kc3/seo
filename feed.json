@@ -35,6 +35,20 @@
       "external_url": "https://fondoblanco.org"
     },
     {
+      "id": "https://index.percall.dev/l/kepo-ai.html",
+      "url": "https://index.percall.dev/l/kepo-ai.html",
+      "title": "Kepo",
+      "content_text": "Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "app",
+        "macos",
+        "widgets",
+        "desktop"
+      ],
+      "external_url": "https://kepo.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/viewhtml-app.html",
       "url": "https://index.percall.dev/l/viewhtml-app.html",
       "title": "ViewHTML",
@@ -759,22 +773,6 @@
         "mcp"
       ],
       "external_url": "https://aiskills402.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/dc-hub.html",
-      "url": "https://index.percall.dev/l/dc-hub.html",
-      "title": "DC Hub",
-      "content_text": "DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.",
-      "date_published": "2026-10-19T00:00:00Z",
-      "tags": [
-        "mcp",
-        "data-center",
-        "energy",
-        "grid",
-        "site-selection",
-        "mcp"
-      ],
-      "external_url": "https://dchub.cloud"
     }
   ]
 }
