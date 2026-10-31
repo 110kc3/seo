@@ -544,8 +544,8 @@ A response does not verify authentication, payment or tool behavior.
 
 ### Tessamonials (tessamonials)
 - url: https://tessamonials.com/
-- category: app · pricing: free · tags: mcp, customer-research, testimonials, feedback
-- AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2
+- category: app · pricing: freemium · tags: mcp, customer-research, testimonials, feedback
+- AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Saved testimonials default to approved; participants can unapprove or withdraw. Publication is separate. Free: 15 lifetime voice or text interviews per Company, counted at three answers or over two minutes. Short visits and member tests excluded. Paid plans available. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2
 - mcp: https://tessamonials.com/mcp
 - listing JSON: https://index.percall.dev/listings/tessamonials.json
 - listing page: https://index.percall.dev/l/tessamonials.html

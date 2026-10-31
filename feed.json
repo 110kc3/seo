@@ -63,6 +63,21 @@
       "external_url": "https://viewhtml.app"
     },
     {
+      "id": "https://index.percall.dev/l/tessamonials.html",
+      "url": "https://index.percall.dev/l/tessamonials.html",
+      "title": "Tessamonials",
+      "content_text": "AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Saved testimonials default to approved; participants can unapprove or withdraw. Publication is separate. Free: 15 lifetime voice or text interviews per Company, counted at three answers or over two minutes. Short visits and member tests excluded. Paid plans available. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "app",
+        "mcp",
+        "customer-research",
+        "testimonials",
+        "feedback"
+      ],
+      "external_url": "https://tessamonials.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "title": "EchoEmpire Machine Foundry",
@@ -490,21 +505,6 @@
         "collaboration"
       ],
       "external_url": "https://www.tablethis.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/tessamonials.html",
-      "url": "https://index.percall.dev/l/tessamonials.html",
-      "title": "Tessamonials",
-      "content_text": "AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2",
-      "date_published": "2026-10-24T00:00:00Z",
-      "tags": [
-        "app",
-        "mcp",
-        "customer-research",
-        "testimonials",
-        "feedback"
-      ],
-      "external_url": "https://tessamonials.com/"
     },
     {
       "id": "https://index.percall.dev/l/this-pic-can-change.html",

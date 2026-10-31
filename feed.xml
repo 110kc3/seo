@@ -39,6 +39,14 @@
     <description>Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.</description>
   </item>
   <item>
+    <title>Tessamonials</title>
+    <link>https://index.percall.dev/l/tessamonials.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tessamonials.html</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Saved testimonials default to approved; participants can unapprove or withdraw. Publication is separate. Free: 15 lifetime voice or text interviews per Company, counted at three answers or over two minutes. Short visits and member tests excluded. Paid plans available. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2</description>
+  </item>
+  <item>
     <title>EchoEmpire Machine Foundry</title>
     <link>https://index.percall.dev/l/echoempire-machine-foundry.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/echoempire-machine-foundry.html</guid>
@@ -261,14 +269,6 @@
     <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d</description>
-  </item>
-  <item>
-    <title>Tessamonials</title>
-    <link>https://index.percall.dev/l/tessamonials.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/tessamonials.html</guid>
-    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Scoped OAuth MCP for campaign/results workflows. Participants can review testimonials and withdraw approval; publication is separate. Free: 25 connected voice interviews per Company for its lifetime; text/member tests excluded. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2</description>
   </item>
   <item>
     <title>This Pic Can Change</title>
