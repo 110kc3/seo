@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 182 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 183 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (182)
+## All listings (183)
 
 ### 1ZheAI (1zheai)
 - url: https://1zheai.com/
@@ -312,6 +312,13 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://1zheai.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/1zheai.json
 - listing page: https://index.percall.dev/l/1zheai.html
+
+### Fondo Blanco (fondoblanco-org)
+- url: https://fondoblanco.org
+- category: app · pricing: free · tags: background, image, spanish
+- Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).
+- listing JSON: https://index.percall.dev/listings/fondoblanco-org.json
+- listing page: https://index.percall.dev/l/fondoblanco-org.html
 
 ### EchoEmpire Machine Foundry (echoempire-machine-foundry)
 - url: https://foundry.echoempire.org/

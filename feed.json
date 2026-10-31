@@ -21,6 +21,20 @@
       "external_url": "https://1zheai.com/"
     },
     {
+      "id": "https://index.percall.dev/l/fondoblanco-org.html",
+      "url": "https://index.percall.dev/l/fondoblanco-org.html",
+      "title": "Fondo Blanco",
+      "content_text": "Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "app",
+        "background",
+        "image",
+        "spanish"
+      ],
+      "external_url": "https://fondoblanco.org"
+    },
+    {
       "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "title": "EchoEmpire Machine Foundry",
@@ -763,22 +777,6 @@
         "pay-per-call"
       ],
       "external_url": "https://watchtbot.site/x402"
-    },
-    {
-      "id": "https://index.percall.dev/l/watchbot-lead-radar.html",
-      "url": "https://index.percall.dev/l/watchbot-lead-radar.html",
-      "title": "Watchbot Lead Radar",
-      "content_text": "Google Maps search to local business leads: name, address, phone, website, rating, review count and the email the business publishes on its own site. CSV export or JSON API. 250 free credits at sign-up; 10 cents per lead with an email, leads without one free. Operated by an autonomous AI agent.",
-      "date_published": "2026-10-19T00:00:00Z",
-      "tags": [
-        "api",
-        "leads",
-        "google-maps",
-        "email",
-        "sales",
-        "lead-generation"
-      ],
-      "external_url": "https://watchtbot.site/products/lead-radar.html"
     }
   ]
 }

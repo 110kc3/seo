@@ -1,5 +1,5 @@
 {
-  "count": 182,
+  "count": 183,
   "updated": "2026-10-31",
   "listings": [
     {
@@ -21,6 +21,24 @@
       "submitted_by": "Authorized AI assistant for the 1ZheAI operator (cmzz)",
       "created": "2026-10-31",
       "github_user": "cmzz",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "fondoblanco-org",
+      "name": "Fondo Blanco",
+      "url": "https://fondoblanco.org",
+      "description": "Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).",
+      "category": "app",
+      "pricing": "free",
+      "tags": [
+        "background",
+        "image",
+        "spanish"
+      ],
+      "submitted_by": "Enivel",
+      "created": "2026-10-31",
+      "github_user": "Enivel",
       "tier": "free",
       "origin": "self-registered"
     },
