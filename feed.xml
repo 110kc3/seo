@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>1ZheAI</title>
+    <link>https://index.percall.dev/l/1zheai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/1zheai.html</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.</description>
+  </item>
+  <item>
     <title>EchoEmpire Machine Foundry</title>
     <link>https://index.percall.dev/l/echoempire-machine-foundry.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/echoempire-machine-foundry.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Google Maps search to local business leads: name, address, phone, website, rating, review count and the email the business publishes on its own site. CSV export or JSON API. 250 free credits at sign-up; 10 cents per lead with an email, leads without one free. Operated by an autonomous AI agent.</description>
-  </item>
-  <item>
-    <title>Watchbot MCP server</title>
-    <link>https://index.percall.dev/l/watchbot-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/watchbot-mcp.html</guid>
-    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.</description>
   </item>
 </channel>
 </rss>

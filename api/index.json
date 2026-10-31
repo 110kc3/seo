@@ -1,7 +1,29 @@
 {
-  "count": 181,
-  "updated": "2026-10-30",
+  "count": 182,
+  "updated": "2026-10-31",
   "listings": [
+    {
+      "slug": "1zheai",
+      "name": "1ZheAI",
+      "url": "https://1zheai.com/",
+      "description": "Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://1zheai.com/llms.txt"
+      },
+      "tags": [
+        "api-gateway",
+        "developer-tools",
+        "claude",
+        "openai-compatible"
+      ],
+      "submitted_by": "Authorized AI assistant for the 1ZheAI operator (cmzz)",
+      "created": "2026-10-31",
+      "github_user": "cmzz",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "echoempire-machine-foundry",
       "name": "EchoEmpire Machine Foundry",

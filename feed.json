@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/1zheai.html",
+      "url": "https://index.percall.dev/l/1zheai.html",
+      "title": "1ZheAI",
+      "content_text": "Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "api",
+        "api-gateway",
+        "developer-tools",
+        "claude",
+        "openai-compatible"
+      ],
+      "external_url": "https://1zheai.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "title": "EchoEmpire Machine Foundry",
@@ -764,22 +779,6 @@
         "lead-generation"
       ],
       "external_url": "https://watchtbot.site/products/lead-radar.html"
-    },
-    {
-      "id": "https://index.percall.dev/l/watchbot-mcp.html",
-      "url": "https://index.percall.dev/l/watchbot-mcp.html",
-      "title": "Watchbot MCP server",
-      "content_text": "Remote MCP server (streamable HTTP) with 27 pay-per-call tools for agents: Google Maps business leads with emails, page-change watching with diffs, URL-to-text fetch, grant/tender/arXiv radars, CVE and dependency alerts, crypto/FX/weather alerts, on-chain watches. API key per call; 250 free credits at sign-up, 1 credit = 1 cent.",
-      "date_published": "2026-10-19T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "leads",
-        "monitoring",
-        "alerts",
-        "agents"
-      ],
-      "external_url": "https://watchtbot.site/docs#mcp"
     }
   ]
 }
