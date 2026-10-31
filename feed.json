@@ -35,6 +35,20 @@
       "external_url": "https://fondoblanco.org"
     },
     {
+      "id": "https://index.percall.dev/l/viewhtml-app.html",
+      "url": "https://index.percall.dev/l/viewhtml-app.html",
+      "title": "ViewHTML",
+      "content_text": "Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.",
+      "date_published": "2026-10-31T00:00:00Z",
+      "tags": [
+        "app",
+        "html",
+        "preview",
+        "developer"
+      ],
+      "external_url": "https://viewhtml.app"
+    },
+    {
       "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
       "title": "EchoEmpire Machine Foundry",
@@ -761,22 +775,6 @@
         "mcp"
       ],
       "external_url": "https://dchub.cloud"
-    },
-    {
-      "id": "https://index.percall.dev/l/fetch402.html",
-      "url": "https://index.percall.dev/l/fetch402.html",
-      "title": "fetch402",
-      "content_text": "Pay-per-call web data for AI agents with no account or API key: any URL as clean readable text (1 cent) or a structured product price (2 cents). An unpaid call returns HTTP 402 with the price and USDC-on-Base payment details; pay, then repeat with the transaction hash. x402-style flow.",
-      "date_published": "2026-10-19T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "web-scraping",
-        "agents",
-        "usdc",
-        "pay-per-call"
-      ],
-      "external_url": "https://watchtbot.site/x402"
     }
   ]
 }

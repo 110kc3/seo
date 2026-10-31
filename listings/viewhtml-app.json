@@ -1,0 +1,18 @@
+{
+  "slug": "viewhtml-app",
+  "name": "ViewHTML",
+  "url": "https://viewhtml.app",
+  "description": "Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "html",
+    "preview",
+    "developer"
+  ],
+  "submitted_by": "Enivel",
+  "created": "2026-10-31",
+  "github_user": "Enivel",
+  "tier": "free",
+  "origin": "self-registered"
+}

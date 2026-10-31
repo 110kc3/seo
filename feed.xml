@@ -23,6 +23,14 @@
     <description>Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).</description>
   </item>
   <item>
+    <title>ViewHTML</title>
+    <link>https://index.percall.dev/l/viewhtml-app.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/viewhtml-app.html</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.</description>
+  </item>
+  <item>
     <title>EchoEmpire Machine Foundry</title>
     <link>https://index.percall.dev/l/echoempire-machine-foundry.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/echoempire-machine-foundry.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>DC Hub is the live data layer for data-center site selection. Its Data Center Power Index (DCPI) is a daily score of where data centers can get grid power, across 300+ markets. Remote MCP server (streamable HTTP) plus REST API; the free tier needs no key. Answers carry an as-of timestamp and a citation line.</description>
-  </item>
-  <item>
-    <title>fetch402</title>
-    <link>https://index.percall.dev/l/fetch402.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/fetch402.html</guid>
-    <pubDate>Mon, 19 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Pay-per-call web data for AI agents with no account or API key: any URL as clean readable text (1 cent) or a structured product price (2 cents). An unpaid call returns HTTP 402 with the price and USDC-on-Base payment details; pay, then repeat with the transaction hash. x402-style flow.</description>
   </item>
 </channel>
 </rss>
