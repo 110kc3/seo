@@ -1,5 +1,5 @@
 {
-  "count": 190,
+  "count": 191,
   "updated": "2026-11-01",
   "listings": [
     {
@@ -76,6 +76,26 @@
         "jobs",
         "linkedin",
         "recruiting",
+        "mcp",
+        "apify"
+      ],
+      "submitted_by": "johnvc",
+      "created": "2026-11-01",
+      "github_user": "johnisanerd",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "johnvc-linkedin-profile-api",
+      "name": "LinkedIn Profile API",
+      "url": "https://apify.com/johnvc/linkedin-profile-api",
+      "description": "Takes public LinkedIn profile URLs and returns name, headline, location, current company, experience, education and follower count as JSON, with no login or cookies. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "category": "api",
+      "pricing": "freemium",
+      "tags": [
+        "linkedin",
+        "profiles",
+        "people-data",
         "mcp",
         "apify"
       ],

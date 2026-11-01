@@ -70,6 +70,22 @@
       "external_url": "https://apify.com/johnvc/linkedin-jobs-api"
     },
     {
+      "id": "https://index.percall.dev/l/johnvc-linkedin-profile-api.html",
+      "url": "https://index.percall.dev/l/johnvc-linkedin-profile-api.html",
+      "title": "LinkedIn Profile API",
+      "content_text": "Takes public LinkedIn profile URLs and returns name, headline, location, current company, experience, education and follower count as JSON, with no login or cookies. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "api",
+        "linkedin",
+        "profiles",
+        "people-data",
+        "mcp",
+        "apify"
+      ],
+      "external_url": "https://apify.com/johnvc/linkedin-profile-api"
+    },
+    {
       "id": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
       "url": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
       "title": "YouTube Transcript & Subtitles API",
@@ -759,21 +775,6 @@
         "account-management"
       ],
       "external_url": "https://opensparta.com/en"
-    },
-    {
-      "id": "https://index.percall.dev/l/awakepix.html",
-      "url": "https://index.percall.dev/l/awakepix.html",
-      "title": "AwakePix",
-      "content_text": "AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "app",
-        "image-to-video",
-        "text-to-video",
-        "image-generation",
-        "image-editing"
-      ],
-      "external_url": "https://awakepix.com/"
     }
   ]
 }

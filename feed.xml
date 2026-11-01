@@ -39,6 +39,14 @@
     <description>Searches public LinkedIn job listings by keyword, location, seniority and job type, or fetches specific job URLs, and returns title, company, location, salary when listed and the full description as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
   </item>
   <item>
+    <title>LinkedIn Profile API</title>
+    <link>https://index.percall.dev/l/johnvc-linkedin-profile-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/johnvc-linkedin-profile-api.html</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Takes public LinkedIn profile URLs and returns name, headline, location, current company, experience, education and follower count as JSON, with no login or cookies. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
+  </item>
+  <item>
     <title>YouTube Transcript &amp; Subtitles API</title>
     <link>https://index.percall.dev/l/johnvc-youtube-transcripts.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/johnvc-youtube-transcripts.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.</description>
-  </item>
-  <item>
-    <title>AwakePix</title>
-    <link>https://index.percall.dev/l/awakepix.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.</description>
   </item>
 </channel>
 </rss>

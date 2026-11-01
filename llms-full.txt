@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 190 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 191 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (190)
+## All listings (191)
 
 ### Cloudbrowser (cloudbrowser)
 - url: https://cloudbrowser.tv/
@@ -333,6 +333,13 @@ A response does not verify authentication, payment or tool behavior.
 - Searches public LinkedIn job listings by keyword, location, seniority and job type, or fetches specific job URLs, and returns title, company, location, salary when listed and the full description as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.
 - listing JSON: https://index.percall.dev/listings/johnvc-linkedin-jobs-api.json
 - listing page: https://index.percall.dev/l/johnvc-linkedin-jobs-api.html
+
+### LinkedIn Profile API (johnvc-linkedin-profile-api)
+- url: https://apify.com/johnvc/linkedin-profile-api
+- category: api · pricing: freemium · tags: linkedin, profiles, people-data, mcp, apify
+- Takes public LinkedIn profile URLs and returns name, headline, location, current company, experience, education and follower count as JSON, with no login or cookies. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.
+- listing JSON: https://index.percall.dev/listings/johnvc-linkedin-profile-api.json
+- listing page: https://index.percall.dev/l/johnvc-linkedin-profile-api.html
 
 ### YouTube Transcript & Subtitles API (johnvc-youtube-transcripts)
 - url: https://apify.com/johnvc/youtubetranscripts
