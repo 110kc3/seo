@@ -15,6 +15,14 @@
     <description>Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.</description>
   </item>
   <item>
+    <title>Google Jobs API</title>
+    <link>https://index.percall.dev/l/johnvc-google-jobs-scraper.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/johnvc-google-jobs-scraper.html</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Searches Google for Jobs by query and location and returns each listing with title, company, location, posting age, salary when shown, description and every apply link (LinkedIn, Indeed, Glassdoor, company sites) as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
+  </item>
+  <item>
     <title>Google Maps Places API</title>
     <link>https://index.percall.dev/l/johnvc-google-maps-places-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/johnvc-google-maps-places-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.</description>
-  </item>
-  <item>
-    <title>Aident Loadout</title>
-    <link>https://index.percall.dev/l/aident-loadout.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/aident-loadout.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to your apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.</description>
   </item>
 </channel>
 </rss>

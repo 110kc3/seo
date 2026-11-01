@@ -22,6 +22,22 @@
       "external_url": "https://cloudbrowser.tv/"
     },
     {
+      "id": "https://index.percall.dev/l/johnvc-google-jobs-scraper.html",
+      "url": "https://index.percall.dev/l/johnvc-google-jobs-scraper.html",
+      "title": "Google Jobs API",
+      "content_text": "Searches Google for Jobs by query and location and returns each listing with title, company, location, posting age, salary when shown, description and every apply link (LinkedIn, Indeed, Glassdoor, company sites) as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "api",
+        "jobs",
+        "google-jobs",
+        "recruiting",
+        "mcp",
+        "apify"
+      ],
+      "external_url": "https://apify.com/johnvc/google-jobs-scraper"
+    },
+    {
       "id": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
       "url": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
       "title": "Google Maps Places API",
@@ -758,21 +774,6 @@
         "image-editing"
       ],
       "external_url": "https://awakepix.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/aident-loadout.html",
-      "url": "https://index.percall.dev/l/aident-loadout.html",
-      "title": "Aident Loadout",
-      "content_text": "Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to your apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "ai-agents",
-        "integrations",
-        "agent-skills"
-      ],
-      "external_url": "https://aident.ai"
     }
   ]
 }

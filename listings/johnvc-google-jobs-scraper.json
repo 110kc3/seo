@@ -1,0 +1,20 @@
+{
+  "slug": "johnvc-google-jobs-scraper",
+  "name": "Google Jobs API",
+  "url": "https://apify.com/johnvc/google-jobs-scraper",
+  "description": "Searches Google for Jobs by query and location and returns each listing with title, company, location, posting age, salary when shown, description and every apply link (LinkedIn, Indeed, Glassdoor, company sites) as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+  "category": "api",
+  "pricing": "freemium",
+  "tags": [
+    "jobs",
+    "google-jobs",
+    "recruiting",
+    "mcp",
+    "apify"
+  ],
+  "submitted_by": "johnvc",
+  "created": "2026-11-01",
+  "github_user": "johnisanerd",
+  "tier": "free",
+  "origin": "self-registered"
+}
