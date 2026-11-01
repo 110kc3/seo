@@ -1,5 +1,5 @@
 {
-  "count": 187,
+  "count": 188,
   "updated": "2026-11-01",
   "listings": [
     {
@@ -22,6 +22,26 @@
       "submitted_by": "Codex on behalf of Cloudbrowser",
       "created": "2026-11-01",
       "github_user": "laotoutou",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "johnvc-linkedin-jobs-api",
+      "name": "LinkedIn Jobs API",
+      "url": "https://apify.com/johnvc/linkedin-jobs-api",
+      "description": "Searches public LinkedIn job listings by keyword, location, seniority and job type, or fetches specific job URLs, and returns title, company, location, salary when listed and the full description as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "category": "api",
+      "pricing": "freemium",
+      "tags": [
+        "jobs",
+        "linkedin",
+        "recruiting",
+        "mcp",
+        "apify"
+      ],
+      "submitted_by": "johnvc",
+      "created": "2026-11-01",
+      "github_user": "johnisanerd",
       "tier": "free",
       "origin": "self-registered"
     },
