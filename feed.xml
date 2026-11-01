@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Cloudbrowser</title>
+    <link>https://index.percall.dev/l/cloudbrowser.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cloudbrowser.html</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.</description>
+  </item>
+  <item>
     <title>1ZheAI</title>
     <link>https://index.percall.dev/l/1zheai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/1zheai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Checks whether AI agents and AI crawlers can actually see a website: a plain HTTP fetch with no JavaScript, the way GPTBot, ClaudeBot, PerplexityBot and OAI-SearchBot fetch pages. Every finding quotes what the fetch returned, with a fix. Paid endpoints are paid per request over the x402 protocol in USDC on Base ($0.01 per check), with no account and no API key: a GET without payment returns 402 with the requirements in the PAYMENT-REQUIRED header.</description>
-  </item>
-  <item>
-    <title>AISkills402</title>
-    <link>https://index.percall.dev/l/aiskills402.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/aiskills402.html</guid>
-    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>AISkills402 sells tested AI agent skill files (SKILL.md, Agent Skills format). An agent buys the FILE of a skill once, over the x402 protocol, in USDC on Base mainnet, for cents. No account and no API key. The agent keeps the file: re-downloads and new versions of a skill it owns are free. A few skills are also sold as separate pay-per-call APIs. Start at https://aiskills402.com/llms.txt and https://api.aiskills402.com/openapi.json.</description>
   </item>
 </channel>
 </rss>

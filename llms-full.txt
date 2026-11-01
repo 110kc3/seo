@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 185 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 186 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (185)
+## All listings (186)
+
+### Cloudbrowser (cloudbrowser)
+- url: https://cloudbrowser.tv/
+- category: app · pricing: freemium · tags: cloud-browser, chrome, browser-automation, ai-agents, cdp
+- Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.
+- openapi: https://cloudbrowser.tv/openapi.json
+- listing JSON: https://index.percall.dev/listings/cloudbrowser.json
+- listing page: https://index.percall.dev/l/cloudbrowser.html
 
 ### 1ZheAI (1zheai)
 - url: https://1zheai.com/
