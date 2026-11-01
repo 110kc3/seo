@@ -1,0 +1,20 @@
+{
+  "slug": "johnvc-google-maps-places-api",
+  "name": "Google Maps Places API",
+  "url": "https://apify.com/johnvc/google-maps-places-api",
+  "description": "Turns search terms like 'dentists in Austin, TX' into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+  "category": "api",
+  "pricing": "freemium",
+  "tags": [
+    "maps",
+    "local-business",
+    "leads",
+    "mcp",
+    "apify"
+  ],
+  "submitted_by": "johnvc",
+  "created": "2026-11-01",
+  "github_user": "johnisanerd",
+  "tier": "free",
+  "origin": "self-registered"
+}

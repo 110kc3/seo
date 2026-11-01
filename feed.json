@@ -22,6 +22,22 @@
       "external_url": "https://cloudbrowser.tv/"
     },
     {
+      "id": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
+      "url": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
+      "title": "Google Maps Places API",
+      "content_text": "Turns search terms like 'dentists in Austin, TX' into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "api",
+        "maps",
+        "local-business",
+        "leads",
+        "mcp",
+        "apify"
+      ],
+      "external_url": "https://apify.com/johnvc/google-maps-places-api"
+    },
+    {
       "id": "https://index.percall.dev/l/johnvc-linkedin-jobs-api.html",
       "url": "https://index.percall.dev/l/johnvc-linkedin-jobs-api.html",
       "title": "LinkedIn Jobs API",
@@ -757,22 +773,6 @@
         "agent-skills"
       ],
       "external_url": "https://aident.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/402cron.html",
-      "url": "https://index.percall.dev/l/402cron.html",
-      "title": "402cron",
-      "content_text": "Scheduled HTTP delivery for autonomous agents. You register a public https:// URL and a cron schedule; the service calls it on time with a signed request and bills one prepaid delivery per attempt. Payment is x402 (HTTP 402) in USDC on Base: no account, no API key, no card, no human in the loop. Buy a pack with GET /buy/{pack}, which answers 402 with the payment requirements in the PAYMENT-REQUIRED header; pay with any x402 client and repeat the request to receive a management token.",
-      "date_published": "2026-10-20T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "usdc",
-        "base",
-        "ai-agents",
-        "mcp"
-      ],
-      "external_url": "https://402cron.com"
     }
   ]
 }

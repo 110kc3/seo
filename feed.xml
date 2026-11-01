@@ -15,6 +15,14 @@
     <description>Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.</description>
   </item>
   <item>
+    <title>Google Maps Places API</title>
+    <link>https://index.percall.dev/l/johnvc-google-maps-places-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/johnvc-google-maps-places-api.html</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Turns search terms like &#39;dentists in Austin, TX&#39; into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
+  </item>
+  <item>
     <title>LinkedIn Jobs API</title>
     <link>https://index.percall.dev/l/johnvc-linkedin-jobs-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/johnvc-linkedin-jobs-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Aident Loadout connects Codex, Claude Code, Cursor, ChatGPT and other MCP clients to your apps and 400+ expert-built Skills through one setup. Connect accounts once and reuse them across agents; credentials stay in Aident Vault and every action is logged in Audit.</description>
-  </item>
-  <item>
-    <title>402cron</title>
-    <link>https://index.percall.dev/l/402cron.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/402cron.html</guid>
-    <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Scheduled HTTP delivery for autonomous agents. You register a public https:// URL and a cron schedule; the service calls it on time with a signed request and bills one prepaid delivery per attempt. Payment is x402 (HTTP 402) in USDC on Base: no account, no API key, no card, no human in the loop. Buy a pack with GET /buy/{pack}, which answers 402 with the payment requirements in the PAYMENT-REQUIRED header; pay with any x402 client and repeat the request to receive a management token.</description>
   </item>
 </channel>
 </rss>

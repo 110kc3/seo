@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 188 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 189 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (188)
+## All listings (189)
 
 ### Cloudbrowser (cloudbrowser)
 - url: https://cloudbrowser.tv/
@@ -312,6 +312,13 @@ A response does not verify authentication, payment or tool behavior.
 - openapi: https://cloudbrowser.tv/openapi.json
 - listing JSON: https://index.percall.dev/listings/cloudbrowser.json
 - listing page: https://index.percall.dev/l/cloudbrowser.html
+
+### Google Maps Places API (johnvc-google-maps-places-api)
+- url: https://apify.com/johnvc/google-maps-places-api
+- category: api · pricing: freemium · tags: maps, local-business, leads, mcp, apify
+- Turns search terms like 'dentists in Austin, TX' into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.
+- listing JSON: https://index.percall.dev/listings/johnvc-google-maps-places-api.json
+- listing page: https://index.percall.dev/l/johnvc-google-maps-places-api.html
 
 ### LinkedIn Jobs API (johnvc-linkedin-jobs-api)
 - url: https://apify.com/johnvc/linkedin-jobs-api
