@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 186 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 187 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (186)
+## All listings (187)
 
 ### Cloudbrowser (cloudbrowser)
 - url: https://cloudbrowser.tv/
@@ -312,6 +312,13 @@ A response does not verify authentication, payment or tool behavior.
 - openapi: https://cloudbrowser.tv/openapi.json
 - listing JSON: https://index.percall.dev/listings/cloudbrowser.json
 - listing page: https://index.percall.dev/l/cloudbrowser.html
+
+### YouTube Transcript & Subtitles API (johnvc-youtube-transcripts)
+- url: https://apify.com/johnvc/youtubetranscripts
+- category: api · pricing: freemium · tags: youtube, transcripts, captions, mcp, apify
+- Returns YouTube transcripts, subtitles and captions as text, SRT or VTT, with video metadata. Works on single videos, lists of URLs or a whole channel, and runs from servers where YouTube blocks direct caption requests. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.
+- listing JSON: https://index.percall.dev/listings/johnvc-youtube-transcripts.json
+- listing page: https://index.percall.dev/l/johnvc-youtube-transcripts.html
 
 ### 1ZheAI (1zheai)
 - url: https://1zheai.com/

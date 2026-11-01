@@ -22,6 +22,22 @@
       "external_url": "https://cloudbrowser.tv/"
     },
     {
+      "id": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
+      "url": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
+      "title": "YouTube Transcript & Subtitles API",
+      "content_text": "Returns YouTube transcripts, subtitles and captions as text, SRT or VTT, with video metadata. Works on single videos, lists of URLs or a whole channel, and runs from servers where YouTube blocks direct caption requests. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
+      "date_published": "2026-11-01T00:00:00Z",
+      "tags": [
+        "api",
+        "youtube",
+        "transcripts",
+        "captions",
+        "mcp",
+        "apify"
+      ],
+      "external_url": "https://apify.com/johnvc/youtubetranscripts"
+    },
+    {
       "id": "https://index.percall.dev/l/1zheai.html",
       "url": "https://index.percall.dev/l/1zheai.html",
       "title": "1ZheAI",
@@ -757,22 +773,6 @@
         "mcp"
       ],
       "external_url": "https://402post.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/402registry.html",
-      "url": "https://index.percall.dev/l/402registry.html",
-      "title": "402registry",
-      "content_text": "Checks whether AI agents and AI crawlers can actually see a website: a plain HTTP fetch with no JavaScript, the way GPTBot, ClaudeBot, PerplexityBot and OAI-SearchBot fetch pages. Every finding quotes what the fetch returned, with a fix. Paid endpoints are paid per request over the x402 protocol in USDC on Base ($0.01 per check), with no account and no API key: a GET without payment returns 402 with the requirements in the PAYMENT-REQUIRED header.",
-      "date_published": "2026-10-20T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "usdc",
-        "base",
-        "ai-agents",
-        "mcp"
-      ],
-      "external_url": "https://402registry.com"
     }
   ]
 }
