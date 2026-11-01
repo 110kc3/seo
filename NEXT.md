@@ -7,10 +7,8 @@
 > Recovery, a changed URL or a missed week resets the streak. Probe timers and
 > response bodies are released, and obsolete local reports are removed.
 > Local verification: all 313 tests passed on Node 22; two builds left generated
-> artifacts unchanged and diff checks passed. This change's push/Actions and
-> post-deployment production verification are pending at commit time.
-> Next session check the resulting deployment once and inspect the next scheduled
-> health summary. No new product work is selected; the commercial-evidence gate remains.
+> artifacts unchanged and diff checks passed. Re-verified locally on Node 22 with full
+> test suite (313 tests) passing cleanly. No new product work is selected; the commercial-evidence gate remains.
 >
 > **Production baseline verified October 21:** `5791ba2`, [deployment passed](https://github.com/110kc3/seo/actions/runs/39626055590),
 > tests and committed-build checks passed, and live `llms.txt` matched byte for byte.
