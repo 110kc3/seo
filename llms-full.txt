@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 192 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 191 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -27,11 +27,11 @@ finds declared remote endpoints; setup, credentials and task-level behavior stil
 
 ## Find a paid API you can call (the x402 catalog)
 
-59,834 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+59,928 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, 59,834 entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 59,928 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (192)
+## All listings (191)
 
 ### Aeneia Signal (aeneia-signal)
 - url: https://blog.aeneia.pl/
@@ -1223,16 +1223,6 @@ A response does not verify authentication, payment or tool behavior.
 - The Face Report offers browser-based tools for exploring face shape, symmetry and facial proportions. Users can try free measurements and choose an optional paid report with additional analysis and personalized styling guidance. The site also includes color analysis and hairstyle tools. It is intended for informational and styling use, not medical diagnosis.
 - listing JSON: https://index.percall.dev/listings/the-face-report.json
 - listing page: https://index.percall.dev/l/the-face-report.html
-
-### Vend API Merchant (Nano x402) (vend-api-merchant)
-- url: https://extract.paypercall.dev
-- category: mcp · pricing: paid · tags: nano, x402, web-extract, web-search, pay-per-call
-- Remote pay-per-call MCP server settled on the Nano (XNO) feeless rail: web extraction, web search, link/status check, domain intelligence, IP geolocation, nano-account info, URL status, and YouTube transcripts. Each call settles per-call via x402 in Nano (XNO) - no facilitator, no gas, no chargebacks; error responses are not billed.
-- llms_txt: https://extract.paypercall.dev/llms.txt
-- openapi: https://extract.paypercall.dev/openapi.json
-- mcp: https://extract.paypercall.dev/mcp
-- listing JSON: https://index.percall.dev/listings/vend-api-merchant.json
-- listing page: https://index.percall.dev/l/vend-api-merchant.html
 
 ### Yodu.ai (yodu-ai)
 - url: https://yodu.ai

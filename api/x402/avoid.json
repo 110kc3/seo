@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-10-19",
-  "catalog_size": 25702,
+  "probed_at": "2026-11-02",
+  "catalog_size": 59928,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -12,8 +12,8 @@
   "free": true,
   "counts": {
     "confirmed": 2,
-    "suspected": 42,
-    "tracked": 44
+    "suspected": 30,
+    "tracked": 32
   },
   "endpoints": [
     {
@@ -32,20 +32,6 @@
     }
   ],
   "suspected": [
-    {
-      "url": "https://api.x402node.dev/web/headers",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
-    {
-      "url": "https://vape-x402.vapex402.workers.dev/data/protocol",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-08-01",
-      "last_checked": "2026-08-01"
-    },
     {
       "url": "https://api.brazilayer.com/v1/commodities/clima",
       "reason": "timeout after 8000ms",
@@ -124,20 +110,6 @@
       "last_checked": "2026-08-26"
     },
     {
-      "url": "https://x402-factory.com/v1/movers",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-31",
-      "last_checked": "2026-08-31"
-    },
-    {
-      "url": "https://x402-factory.com/v1/evergreen/fed-next-meeting-hike",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-07",
-      "last_checked": "2026-09-07"
-    },
-    {
       "url": "https://api.brazilayer.com/v1/desmatamento/municipio/:ibge",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -154,20 +126,6 @@
     {
       "url": "https://api.brazilayer.com/v1/fundos/carteira/:cnpj",
       "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://api.x402node.dev/domain/dns",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://api.x402node.dev/web/sitemap",
-      "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-09-21",
       "last_checked": "2026-09-21"
@@ -194,32 +152,11 @@
       "last_checked": "2026-09-21"
     },
     {
-      "url": "https://toll402.dev/v1/t/siren_validate",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
       "url": "https://x402.sniperx.fun/api/v1/token/activities/smarttraders_kol",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-09-21",
       "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://fittings.sh/v1/time/zone-clock",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://hubvibe-io.com/work/commerce/availability",
-      "reason": "UND_ERR_HEADERS_OVERFLOW",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
     },
     {
       "url": "https://toll402.dev/v1/t/orgnr_se_validate",
@@ -243,32 +180,11 @@
       "last_checked": "2026-10-05"
     },
     {
-      "url": "https://api.brazilayer.com/v1/cadeias/capital_br",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
-    },
-    {
       "url": "https://api.seerium.xyz/v1/prediction/rewards",
       "reason": "HTTP 500",
       "misses": 1,
       "since": "2026-10-12",
       "last_checked": "2026-10-12"
-    },
-    {
-      "url": "https://x402-factory.com/v1/movers/sports-soccer",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
-    },
-    {
-      "url": "https://agentworld.me/api/agentworld/cce/verify",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-10-19",
-      "last_checked": "2026-10-19"
     },
     {
       "url": "https://apexfaucet.xyz/api/x402/arc-eurc",
@@ -299,20 +215,6 @@
       "last_checked": "2026-10-19"
     },
     {
-      "url": "https://api.maxwellinternational.ai/v1/openfda/drug/label",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-10-19",
-      "last_checked": "2026-10-19"
-    },
-    {
-      "url": "https://merchant-production-c224.up.railway.app/v1/buy/hoodi",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-10-19",
-      "last_checked": "2026-10-19"
-    },
-    {
       "url": "https://quickly-techrepublic-modified-fate.trycloudflare.com/fx-rate/:pair",
       "reason": "ENOTFOUND",
       "misses": 1,
@@ -325,6 +227,20 @@
       "misses": 1,
       "since": "2026-10-19",
       "last_checked": "2026-10-19"
+    },
+    {
+      "url": "https://goodsong.dev/verify/citation",
+      "reason": "ECONNRESET",
+      "misses": 1,
+      "since": "2026-11-02",
+      "last_checked": "2026-11-02"
+    },
+    {
+      "url": "https://x402-v2-mint-rag-chunker.vercel.app/v1/rag-chunk",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-02",
+      "last_checked": "2026-11-02"
     }
   ]
 }

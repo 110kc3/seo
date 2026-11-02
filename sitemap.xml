@@ -4,10 +4,10 @@
   <url><loc>https://percall.dev/</loc></url>
   <url><loc>https://index.percall.dev/ask</loc></url>
   <url><loc>https://index.percall.dev/api/search</loc></url>
-  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-10-19</lastmod></url>
-  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://index.percall.dev/mcp-servers.html</loc><lastmod>2026-09-07</lastmod></url>
-  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://index.percall.dev/checks/llms_txt.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_txt_summary.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_full_txt.html</loc></url>
@@ -148,7 +148,6 @@
   <url><loc>https://index.percall.dev/l/api-market-mcp-gateway.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://index.percall.dev/l/codex-quota-overlay.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://index.percall.dev/l/the-face-report.html</loc><lastmod>2026-09-25</lastmod></url>
-  <url><loc>https://index.percall.dev/l/vend-api-merchant.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://index.percall.dev/l/yodu-ai.html</loc><lastmod>2026-09-25</lastmod></url>
   <url><loc>https://index.percall.dev/l/feeless402.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://index.percall.dev/l/rewords-ai.html</loc><lastmod>2026-09-23</lastmod></url>

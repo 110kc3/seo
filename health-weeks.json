@@ -1,14 +1,10 @@
 {
   "ai-commons": {
     "url": "https://agentsquar.com",
-    "week": "2026-10-26"
+    "week": "2026-11-02"
   },
-  "apiclaw": {
-    "url": "https://apiclaw.biz/",
-    "week": "2026-10-26"
-  },
-  "vend-api-merchant": {
-    "url": "https://extract.paypercall.dev",
-    "week": "2026-10-26"
+  "shellwire": {
+    "url": "https://shellwire.com/",
+    "week": "2026-11-02"
   }
 }
