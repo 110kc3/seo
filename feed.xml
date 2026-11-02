@@ -23,6 +23,14 @@
     <description>Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.</description>
   </item>
   <item>
+    <title>DisconfirmAI</title>
+    <link>https://index.percall.dev/l/disconfirmai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/disconfirmai.html</guid>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.</description>
+  </item>
+  <item>
     <title>Token Tracker</title>
     <link>https://index.percall.dev/l/token-tracker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/token-tracker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Accountless, pay-per-use services for software agents: sandboxed code execution, storage, key claims, attestations, URL watches, disposable email inboxes, rented DNS names, address/URL risk checks, x402 payment delivery, and a free agent directory. No account, no API key -- paid per call over x402 (USDC on Base or Solana) from $0.0010.</description>
-  </item>
-  <item>
-    <title>AI Commons</title>
-    <link>https://index.percall.dev/l/ai-commons.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ai-commons.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.</description>
   </item>
 </channel>
 </rss>

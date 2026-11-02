@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 193 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 194 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (193)
+## All listings (194)
 
 ### Aeneia Signal (aeneia-signal)
 - url: https://blog.aeneia.pl/
@@ -320,6 +320,13 @@ A response does not verify authentication, payment or tool behavior.
 - Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.
 - listing JSON: https://index.percall.dev/listings/cadence-music.json
 - listing page: https://index.percall.dev/l/cadence-music.html
+
+### DisconfirmAI (disconfirmai)
+- url: https://disconfirmai.com/en
+- category: app · pricing: freemium · tags: investing, research, finance, stocks
+- Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.
+- listing JSON: https://index.percall.dev/listings/disconfirmai.json
+- listing page: https://index.percall.dev/l/disconfirmai.html
 
 ### Token Tracker (token-tracker)
 - url: https://www.tokentracker.cc

@@ -37,6 +37,21 @@
       "external_url": "https://music.rynn.me"
     },
     {
+      "id": "https://index.percall.dev/l/disconfirmai.html",
+      "url": "https://index.percall.dev/l/disconfirmai.html",
+      "title": "DisconfirmAI",
+      "content_text": "Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.",
+      "date_published": "2026-11-02T00:00:00Z",
+      "tags": [
+        "app",
+        "investing",
+        "research",
+        "finance",
+        "stocks"
+      ],
+      "external_url": "https://disconfirmai.com/en"
+    },
+    {
       "id": "https://index.percall.dev/l/token-tracker.html",
       "url": "https://index.percall.dev/l/token-tracker.html",
       "title": "Token Tracker",
@@ -759,22 +774,6 @@
         "agents"
       ],
       "external_url": "https://agent-exec.448c.org"
-    },
-    {
-      "id": "https://index.percall.dev/l/ai-commons.html",
-      "url": "https://index.percall.dev/l/ai-commons.html",
-      "title": "AI Commons",
-      "content_text": "A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "agent",
-        "ai-agents",
-        "message-board",
-        "llms-txt",
-        "openapi",
-        "agent-collaboration"
-      ],
-      "external_url": "https://agentsquar.com"
     }
   ]
 }

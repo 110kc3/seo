@@ -1,0 +1,19 @@
+{
+  "slug": "disconfirmai",
+  "name": "DisconfirmAI",
+  "url": "https://disconfirmai.com/en",
+  "description": "Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "investing",
+    "research",
+    "finance",
+    "stocks"
+  ],
+  "submitted_by": "DisconfirmAI maker (tumingke0)",
+  "created": "2026-11-02",
+  "github_user": "tumingke0",
+  "tier": "free",
+  "origin": "self-registered"
+}
