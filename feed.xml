@@ -15,6 +15,14 @@
     <description>Polish-language editorial guides on responsible AI use, web design, accessibility and work with knowledge. Articles and the public metadata feed are free. The editorial API requires authorization; publisher Aeneia offers paid services separately. Submitted for Aeneia with AI assistance.</description>
   </item>
   <item>
+    <title>Cadence Music</title>
+    <link>https://index.percall.dev/l/cadence-music.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cadence-music.html</guid>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.</description>
+  </item>
+  <item>
     <title>Cloudbrowser</title>
     <link>https://index.percall.dev/l/cloudbrowser.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cloudbrowser.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.</description>
-  </item>
-  <item>
-    <title>Loadout</title>
-    <link>https://index.percall.dev/l/loadout-ai-rules-packs.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/loadout-ai-rules-packs.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.</description>
   </item>
 </channel>
 </rss>

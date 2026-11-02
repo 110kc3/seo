@@ -1,5 +1,5 @@
 {
-  "count": 191,
+  "count": 192,
   "updated": "2026-11-02",
   "listings": [
     {
@@ -22,6 +22,26 @@
       "submitted_by": "Codex for Aeneia",
       "created": "2026-11-02",
       "github_user": "Pygmalione",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "cadence-music",
+      "name": "Cadence Music",
+      "url": "https://music.rynn.me",
+      "description": "Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "ai-music",
+        "song-generator",
+        "vocals",
+        "gifts",
+        "text-to-song"
+      ],
+      "submitted_by": "WAVE92 overnight acquisition (xiufengsun)",
+      "created": "2026-11-02",
+      "github_user": "xiufengsun",
       "tier": "free",
       "origin": "self-registered"
     },

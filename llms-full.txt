@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 191 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 192 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (191)
+## All listings (192)
 
 ### Aeneia Signal (aeneia-signal)
 - url: https://blog.aeneia.pl/
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - openapi: https://blog.aeneia.pl/openapi.json
 - listing JSON: https://index.percall.dev/listings/aeneia-signal.json
 - listing page: https://index.percall.dev/l/aeneia-signal.html
+
+### Cadence Music (cadence-music)
+- url: https://music.rynn.me
+- category: app · pricing: freemium · tags: ai-music, song-generator, vocals, gifts, text-to-song
+- Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.
+- listing JSON: https://index.percall.dev/listings/cadence-music.json
+- listing page: https://index.percall.dev/l/cadence-music.html
 
 ### Cloudbrowser (cloudbrowser)
 - url: https://cloudbrowser.tv/

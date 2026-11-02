@@ -21,6 +21,22 @@
       "external_url": "https://blog.aeneia.pl/"
     },
     {
+      "id": "https://index.percall.dev/l/cadence-music.html",
+      "url": "https://index.percall.dev/l/cadence-music.html",
+      "title": "Cadence Music",
+      "content_text": "Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.",
+      "date_published": "2026-11-02T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-music",
+        "song-generator",
+        "vocals",
+        "gifts",
+        "text-to-song"
+      ],
+      "external_url": "https://music.rynn.me"
+    },
+    {
       "id": "https://index.percall.dev/l/cloudbrowser.html",
       "url": "https://index.percall.dev/l/cloudbrowser.html",
       "title": "Cloudbrowser",
@@ -759,22 +775,6 @@
         "docx"
       ],
       "external_url": "https://humanpen.net"
-    },
-    {
-      "id": "https://index.percall.dev/l/loadout-ai-rules-packs.html",
-      "url": "https://index.percall.dev/l/loadout-ai-rules-packs.html",
-      "title": "Loadout",
-      "content_text": "Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "app",
-        "coding-agents",
-        "cursor",
-        "claude-code",
-        "unity",
-        "godot"
-      ],
-      "external_url": "https://loadout-blush.vercel.app"
     }
   ]
 }
