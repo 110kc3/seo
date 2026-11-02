@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/aeneia-signal.html",
+      "url": "https://index.percall.dev/l/aeneia-signal.html",
+      "title": "Aeneia Signal",
+      "content_text": "Polish-language editorial guides on responsible AI use, web design, accessibility and work with knowledge. Articles and the public metadata feed are free. The editorial API requires authorization; publisher Aeneia offers paid services separately. Submitted for Aeneia with AI assistance.",
+      "date_published": "2026-11-02T00:00:00Z",
+      "tags": [
+        "other",
+        "ai-literacy",
+        "web-design",
+        "polish",
+        "governance"
+      ],
+      "external_url": "https://blog.aeneia.pl/"
+    },
+    {
       "id": "https://index.percall.dev/l/cloudbrowser.html",
       "url": "https://index.percall.dev/l/cloudbrowser.html",
       "title": "Cloudbrowser",
@@ -760,21 +775,6 @@
         "godot"
       ],
       "external_url": "https://loadout-blush.vercel.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/opensparta.html",
-      "url": "https://index.percall.dev/l/opensparta.html",
-      "title": "OpenSparta",
-      "content_text": "OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "app",
-        "telegram",
-        "saas",
-        "audience-discovery",
-        "account-management"
-      ],
-      "external_url": "https://opensparta.com/en"
     }
   ]
 }

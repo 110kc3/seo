@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Aeneia Signal</title>
+    <link>https://index.percall.dev/l/aeneia-signal.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/aeneia-signal.html</guid>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Polish-language editorial guides on responsible AI use, web design, accessibility and work with knowledge. Articles and the public metadata feed are free. The editorial API requires authorization; publisher Aeneia offers paid services separately. Submitted for Aeneia with AI assistance.</description>
+  </item>
+  <item>
     <title>Cloudbrowser</title>
     <link>https://index.percall.dev/l/cloudbrowser.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cloudbrowser.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Free and Pro AI coding rule packs for Cursor, Claude Code, AGENTS.md, and GitHub Copilot. Version-pinned packs for Next.js+Supabase, Unity 6, Godot 4, and vibe coding, with verified fix pages for common agent mistakes.</description>
-  </item>
-  <item>
-    <title>OpenSparta</title>
-    <link>https://index.percall.dev/l/opensparta.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/opensparta.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>OpenSparta is a SaaS workspace for Telegram operations and audience discovery. Discover relevant conversations, manage connected accounts and proxies, and coordinate engagement workflows from one place. A free tier covers account and proxy management; optional modules add AI-assisted engagement capabilities.</description>
   </item>
 </channel>
 </rss>

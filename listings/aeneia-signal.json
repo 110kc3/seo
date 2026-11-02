@@ -1,0 +1,23 @@
+{
+  "slug": "aeneia-signal",
+  "name": "Aeneia Signal",
+  "url": "https://blog.aeneia.pl/",
+  "description": "Polish-language editorial guides on responsible AI use, web design, accessibility and work with knowledge. Articles and the public metadata feed are free. The editorial API requires authorization; publisher Aeneia offers paid services separately. Submitted for Aeneia with AI assistance.",
+  "category": "other",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://blog.aeneia.pl/llms.txt",
+    "openapi": "https://blog.aeneia.pl/openapi.json"
+  },
+  "tags": [
+    "ai-literacy",
+    "web-design",
+    "polish",
+    "governance"
+  ],
+  "submitted_by": "Codex for Aeneia",
+  "created": "2026-11-02",
+  "github_user": "Pygmalione",
+  "tier": "free",
+  "origin": "self-registered"
+}
