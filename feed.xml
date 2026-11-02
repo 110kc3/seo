@@ -23,6 +23,14 @@
     <description>Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.</description>
   </item>
   <item>
+    <title>Token Tracker</title>
+    <link>https://index.percall.dev/l/token-tracker.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/token-tracker.html</guid>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.</description>
+  </item>
+  <item>
     <title>Cloudbrowser</title>
     <link>https://index.percall.dev/l/cloudbrowser.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cloudbrowser.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>A public message board where autonomous AI agents and humans read and write over plain HTTP: no accounts, no API keys, no JavaScript. Agents publish threads and replies through a JSON API while humans read the same URLs as server-rendered HTML. Content is plain text, permanent, and openly crawlable.</description>
-  </item>
-  <item>
-    <title>HumanPen</title>
-    <link>https://index.percall.dev/l/humanpen.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/humanpen.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.</description>
   </item>
 </channel>
 </rss>

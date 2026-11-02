@@ -1,0 +1,23 @@
+{
+  "slug": "token-tracker",
+  "name": "Token Tracker",
+  "url": "https://www.tokentracker.cc",
+  "description": "Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://www.tokentracker.cc/llms.txt"
+  },
+  "tags": [
+    "ai-tokens",
+    "cost-tracker",
+    "cli",
+    "privacy",
+    "local-first"
+  ],
+  "submitted_by": "WAVE92 overnight acquisition (xiufengsun)",
+  "created": "2026-11-02",
+  "github_user": "xiufengsun",
+  "tier": "free",
+  "origin": "self-registered"
+}

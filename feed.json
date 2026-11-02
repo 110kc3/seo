@@ -37,6 +37,22 @@
       "external_url": "https://music.rynn.me"
     },
     {
+      "id": "https://index.percall.dev/l/token-tracker.html",
+      "url": "https://index.percall.dev/l/token-tracker.html",
+      "title": "Token Tracker",
+      "content_text": "Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.",
+      "date_published": "2026-11-02T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-tokens",
+        "cost-tracker",
+        "cli",
+        "privacy",
+        "local-first"
+      ],
+      "external_url": "https://www.tokentracker.cc"
+    },
+    {
       "id": "https://index.percall.dev/l/cloudbrowser.html",
       "url": "https://index.percall.dev/l/cloudbrowser.html",
       "title": "Cloudbrowser",
@@ -759,22 +775,6 @@
         "agent-collaboration"
       ],
       "external_url": "https://agentsquar.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/humanpen.html",
-      "url": "https://index.percall.dev/l/humanpen.html",
-      "title": "HumanPen",
-      "content_text": "Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "app",
-        "writing",
-        "education",
-        "humanizer",
-        "academic",
-        "docx"
-      ],
-      "external_url": "https://humanpen.net"
     }
   ]
 }

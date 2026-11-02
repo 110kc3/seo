@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 192 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 193 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (192)
+## All listings (193)
 
 ### Aeneia Signal (aeneia-signal)
 - url: https://blog.aeneia.pl/
@@ -320,6 +320,14 @@ A response does not verify authentication, payment or tool behavior.
 - Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.
 - listing JSON: https://index.percall.dev/listings/cadence-music.json
 - listing page: https://index.percall.dev/l/cadence-music.html
+
+### Token Tracker (token-tracker)
+- url: https://www.tokentracker.cc
+- category: app · pricing: freemium · tags: ai-tokens, cost-tracker, cli, privacy, local-first
+- Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.
+- llms_txt: https://www.tokentracker.cc/llms.txt
+- listing JSON: https://index.percall.dev/listings/token-tracker.json
+- listing page: https://index.percall.dev/l/token-tracker.html
 
 ### Cloudbrowser (cloudbrowser)
 - url: https://cloudbrowser.tv/
