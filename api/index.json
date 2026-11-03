@@ -1,7 +1,26 @@
 {
-  "count": 194,
-  "updated": "2026-11-02",
+  "count": 195,
+  "updated": "2026-11-03",
   "listings": [
+    {
+      "slug": "face-analysis-report",
+      "name": "Face Analysis Report",
+      "url": "https://faceanalysis.io/?utm_source=percall",
+      "description": "Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "ai",
+        "face-analysis",
+        "beauty",
+        "style-guide",
+        "hairstyle-preview"
+      ],
+      "created": "2026-11-03",
+      "github_user": "litao82122911-glitch",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "aeneia-signal",
       "name": "Aeneia Signal",

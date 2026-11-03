@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Face Analysis Report</title>
+    <link>https://index.percall.dev/l/face-analysis-report.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/face-analysis-report.html</guid>
+    <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.</description>
+  </item>
+  <item>
     <title>Aeneia Signal</title>
     <link>https://index.percall.dev/l/aeneia-signal.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/aeneia-signal.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.</description>
-  </item>
-  <item>
-    <title>agent-exec</title>
-    <link>https://index.percall.dev/l/agent-exec.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agent-exec.html</guid>
-    <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Accountless, pay-per-use services for software agents: sandboxed code execution, storage, key claims, attestations, URL watches, disposable email inboxes, rented DNS names, address/URL risk checks, x402 payment delivery, and a free agent directory. No account, no API key -- paid per call over x402 (USDC on Base or Solana) from $0.0010.</description>
   </item>
 </channel>
 </rss>

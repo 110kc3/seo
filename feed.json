@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/face-analysis-report.html",
+      "url": "https://index.percall.dev/l/face-analysis-report.html",
+      "title": "Face Analysis Report",
+      "content_text": "Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.",
+      "date_published": "2026-11-03T00:00:00Z",
+      "tags": [
+        "app",
+        "ai",
+        "face-analysis",
+        "beauty",
+        "style-guide",
+        "hairstyle-preview"
+      ],
+      "external_url": "https://faceanalysis.io/?utm_source=percall"
+    },
+    {
       "id": "https://index.percall.dev/l/aeneia-signal.html",
       "url": "https://index.percall.dev/l/aeneia-signal.html",
       "title": "Aeneia Signal",
@@ -758,22 +774,6 @@
         "ai-media"
       ],
       "external_url": "https://x402.titanhold.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-exec.html",
-      "url": "https://index.percall.dev/l/agent-exec.html",
-      "title": "agent-exec",
-      "content_text": "Accountless, pay-per-use services for software agents: sandboxed code execution, storage, key claims, attestations, URL watches, disposable email inboxes, rented DNS names, address/URL risk checks, x402 payment delivery, and a free agent directory. No account, no API key -- paid per call over x402 (USDC on Base or Solana) from $0.0010.",
-      "date_published": "2026-10-21T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "code-execution",
-        "sandbox",
-        "accountless",
-        "agents"
-      ],
-      "external_url": "https://agent-exec.448c.org"
     }
   ]
 }

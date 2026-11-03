@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 194 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 195 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (194)
+## All listings (195)
+
+### Face Analysis Report (face-analysis-report)
+- url: https://faceanalysis.io/?utm_source=percall
+- category: app · pricing: freemium · tags: ai, face-analysis, beauty, style-guide, hairstyle-preview
+- Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.
+- listing JSON: https://index.percall.dev/listings/face-analysis-report.json
+- listing page: https://index.percall.dev/l/face-analysis-report.html
 
 ### Aeneia Signal (aeneia-signal)
 - url: https://blog.aeneia.pl/
