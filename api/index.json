@@ -1,5 +1,5 @@
 {
-  "count": 195,
+  "count": 196,
   "updated": "2026-11-03",
   "listings": [
     {
@@ -18,6 +18,18 @@
       ],
       "created": "2026-11-03",
       "github_user": "litao82122911-glitch",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "guessnow",
+      "name": "guessNow",
+      "url": "https://guessnow.fun",
+      "description": "Free daily browser game: guess the year a historical photograph was taken. Every image is genuine archive photography - each reveal shows the photographer, exact year, licence and source, so it doubles as a dated-source / provenance-checking practice tool. No signup, no ads, no student data. Includes a free guide on spotting AI-faked historical photographs.",
+      "category": "app",
+      "pricing": "free",
+      "created": "2026-11-03",
+      "github_user": "taquanx1",
       "tier": "free",
       "origin": "self-registered"
     },

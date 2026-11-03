@@ -15,6 +15,14 @@
     <description>Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.</description>
   </item>
   <item>
+    <title>guessNow</title>
+    <link>https://index.percall.dev/l/guessnow.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/guessnow.html</guid>
+    <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Free daily browser game: guess the year a historical photograph was taken. Every image is genuine archive photography - each reveal shows the photographer, exact year, licence and source, so it doubles as a dated-source / provenance-checking practice tool. No signup, no ads, no student data. Includes a free guide on spotting AI-faked historical photographs.</description>
+  </item>
+  <item>
     <title>Aeneia Signal</title>
     <link>https://index.percall.dev/l/aeneia-signal.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/aeneia-signal.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.</description>
-  </item>
-  <item>
-    <title>TITANHOLD QC</title>
-    <link>https://index.percall.dev/l/titanhold-qc-x402.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/titanhold-qc-x402.html</guid>
-    <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Pay-per-call x402 API on Base mainnet (USDC, PayAI facilitator) that checks an AI-generated image or video for defects before a buyer agent releases payment to the seller. $0.02 per image check, $0.10 per video check, charged only when a verdict is returned. Open source.</description>
   </item>
 </channel>
 </rss>
