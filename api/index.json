@@ -1,7 +1,30 @@
 {
-  "count": 197,
+  "count": 198,
   "updated": "2026-11-04",
   "listings": [
+    {
+      "slug": "code-by-ai",
+      "name": "Code By AI",
+      "url": "https://www.codebyai.net",
+      "description": "Unified API gateway for AI coding agents: one API key and one prepaid balance for Claude, GPT/Codex and Gemini models, usable from Claude Code, Codex CLI, Gemini CLI and other coding tools via an OpenAI-compatible base URL (https://www.codebyai.net/api/agent/v1). Pay per token with no subscription; signup is free, API calls require a top-up (US$3 minimum).",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://www.codebyai.net/llms.txt"
+      },
+      "tags": [
+        "llm-api",
+        "api-gateway",
+        "ai-coding",
+        "claude-code",
+        "codex"
+      ],
+      "submitted_by": "Code By AI team",
+      "created": "2026-11-04",
+      "github_user": "moutsea",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "teable",
       "name": "Teable",

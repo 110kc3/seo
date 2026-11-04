@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Code By AI</title>
+    <link>https://index.percall.dev/l/code-by-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/code-by-ai.html</guid>
+    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Unified API gateway for AI coding agents: one API key and one prepaid balance for Claude, GPT/Codex and Gemini models, usable from Claude Code, Codex CLI, Gemini CLI and other coding tools via an OpenAI-compatible base URL (https://www.codebyai.net/api/agent/v1). Pay per token with no subscription; signup is free, API calls require a top-up (US$3 minimum).</description>
+  </item>
+  <item>
     <title>Teable</title>
     <link>https://index.percall.dev/l/teable.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/teable.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.</description>
-  </item>
-  <item>
-    <title>Operavue Surgical Video Split Audit</title>
-    <link>https://index.percall.dev/l/operavue-surgical-video-split-audit.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/operavue-surgical-video-split-audit.html</guid>
-    <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Free local Python checker and synthetic CSV exercise for surgical-video dataset evaluation. Checks supplied case, recording and patient-group IDs across train, validation and test splits. Includes source, expected output and limitations. Deterministic, with no model calls, uploads or dependencies. A clean result is not proof of independence, privacy or clinical validity. Published by Operavue, a commercial surgical-data company; prepared with AI assistance and tested on synthetic cases.</description>
   </item>
 </channel>
 </rss>
