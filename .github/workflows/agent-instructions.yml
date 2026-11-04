@@ -1,0 +1,21 @@
+name: Agent instructions
+on:
+  push:
+    paths: [AGENTS.md, CLAUDE.md, .github/workflows/agent-instructions.yml]
+  pull_request:
+    paths: [AGENTS.md, CLAUDE.md, .github/workflows/agent-instructions.yml]
+permissions:
+  contents: read
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require identical nonempty regular files
+        shell: python
+        run: |
+          from pathlib import Path
+          a, c = Path('AGENTS.md'), Path('CLAUDE.md')
+          assert all(p.is_file() and not p.is_symlink() for p in (a, c)), 'Missing regular instruction file'
+          assert a.read_bytes().strip(), 'Empty instructions'
+          assert a.read_bytes() == c.read_bytes(), 'Edit AGENTS.md and synchronize CLAUDE.md'
