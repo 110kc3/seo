@@ -1,5 +1,25 @@
 # NEXT — the one pending list
 
+## Current — 2026-11-04
+
+Last completed slice: replaced AGENTS.md symlink with canonical regular file, mirrored CLAUDE.md, and added agent-instructions CI workflow (`883fa86`). Added listing code-by-ai (`78a6cea`); all 313 tests pass.
+
+### Accepted next work
+
+- [ ] Monitor weekly scheduled liveness and scoring refreshes (`health-weeks.json`).
+
+### Owner actions / blocked
+
+- Show HN: posting remains unconfirmed; refresh private draft in vault before posting.
+- Indexation: Google/Bing search console verification and sitemap submissions need owner's logged-in consoles.
+- User-value validation: participant recruitment and outreach per private September 27 plan.
+
+### Pending verification
+
+- Commit `883fa86` pushed to `origin/main`; [Actions runs](https://github.com/110kc3/seo/actions) pending observation next session.
+
+### History / deferred
+
 > **2026-10-21 — weekly liveness reruns made safe; status refreshed.**
 > Liveness now counts one failure per URL per UTC week, preventing manual reruns
 > from prematurely reaching the three-week delisting threshold. Public numeric
