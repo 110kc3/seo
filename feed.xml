@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Teable</title>
+    <link>https://index.percall.dev/l/teable.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/teable.html</guid>
+    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.</description>
+  </item>
+  <item>
     <title>Face Analysis Report</title>
     <link>https://index.percall.dev/l/face-analysis-report.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/face-analysis-report.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Free local Python checker and synthetic CSV exercise for surgical-video dataset evaluation. Checks supplied case, recording and patient-group IDs across train, validation and test splits. Includes source, expected output and limitations. Deterministic, with no model calls, uploads or dependencies. A clean result is not proof of independence, privacy or clinical validity. Published by Operavue, a commercial surgical-data company; prepared with AI assistance and tested on synthetic cases.</description>
-  </item>
-  <item>
-    <title>Reposted</title>
-    <link>https://index.percall.dev/l/reposted.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/reposted.html</guid>
-    <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.</description>
   </item>
 </channel>
 </rss>

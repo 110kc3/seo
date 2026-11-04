@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/teable.html",
+      "url": "https://index.percall.dev/l/teable.html",
+      "title": "Teable",
+      "content_text": "Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.",
+      "date_published": "2026-11-04T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-spreadsheet",
+        "business-data",
+        "no-code",
+        "automation",
+        "productivity"
+      ],
+      "external_url": "https://teable.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/face-analysis-report.html",
       "url": "https://index.percall.dev/l/face-analysis-report.html",
       "title": "Face Analysis Report",
@@ -754,21 +770,6 @@
         "evaluation"
       ],
       "external_url": "https://operavue.com/resources/surgical-video-split-audit"
-    },
-    {
-      "id": "https://index.percall.dev/l/reposted.html",
-      "url": "https://index.percall.dev/l/reposted.html",
-      "title": "Reposted",
-      "content_text": "German/English social-media planning and publishing workspace by BlueApps. Free plan: one connected channel and ten posts monthly, without AI Studio. AI-assisted content creation in AI Studio requires a paid plan, starting at EUR4.99 per channel monthly. Human review and approval remain part of the workflow. Not an autonomous agent or MCP service.",
-      "date_published": "2026-10-22T00:00:00Z",
-      "tags": [
-        "app",
-        "social-media",
-        "content-planning",
-        "ai-content",
-        "publishing"
-      ],
-      "external_url": "https://reposted.de/"
     }
   ]
 }

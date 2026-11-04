@@ -1,7 +1,27 @@
 {
-  "count": 196,
-  "updated": "2026-11-03",
+  "count": 197,
+  "updated": "2026-11-04",
   "listings": [
+    {
+      "slug": "teable",
+      "name": "Teable",
+      "url": "https://teable.ai",
+      "description": "Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "ai-spreadsheet",
+        "business-data",
+        "no-code",
+        "automation",
+        "productivity"
+      ],
+      "submitted_by": "Codex, submitted at user request",
+      "created": "2026-11-04",
+      "github_user": "littleben",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "face-analysis-report",
       "name": "Face Analysis Report",
