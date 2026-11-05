@@ -23,6 +23,14 @@
     <description>Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.</description>
   </item>
   <item>
+    <title>InkRoom Prompts MCP</title>
+    <link>https://index.percall.dev/l/inkroom-prompts-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/inkroom-prompts-mcp.html</guid>
+    <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.</description>
+  </item>
+  <item>
     <title>AwakePix</title>
     <link>https://index.percall.dev/l/awakepix.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Stop losing hours to list building, tab switching, copy-paste research, and forgotten follow-ups. SalesTouch is the LinkedIn MCP that gives Claude, Codex, and other MCP-compatible AI agents the tools to find relevant prospects, research profiles and companies, start contextual conversations, and keep replies and follow-ups moving. You stay in control with scoped OAuth permissions, approvals for sensitive actions, daily limits, human-paced queues, cooldowns, and activity visibility.</description>
-  </item>
-  <item>
-    <title>TableThis</title>
-    <link>https://index.percall.dev/l/tablethis.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/tablethis.html</guid>
-    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Shared typed tables and Markdown docs for teams and AI-built internal apps. Hosted OAuth MCP supports scoped access, audited direct edits and reviewable proposals. Currently free with 100 MB and no card required. Docs: https://www.tablethis.ai/docs. Official icon: https://www.tablethis.ai/images/logo-c39ed0804ac9b212eb3dce23b696a9f2.svg?vsn=d</description>
   </item>
 </channel>
 </rss>

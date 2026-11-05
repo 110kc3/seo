@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 200 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 201 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (200)
+## All listings (201)
 
 ### CodeI Lab (codei-lab)
 - url: https://www.codeilab.com
@@ -320,6 +320,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://mcp.inkroom.ai
 - listing JSON: https://index.percall.dev/listings/inkroom-image-mcp.json
 - listing page: https://index.percall.dev/l/inkroom-image-mcp.html
+
+### InkRoom Prompts MCP (inkroom-prompts-mcp)
+- url: https://github.com/InkRoom-AI/inkroom-prompts
+- category: mcp · pricing: free · tags: prompts, visual-workflow, mcp
+- Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.
+- listing JSON: https://index.percall.dev/listings/inkroom-prompts-mcp.json
+- listing page: https://index.percall.dev/l/inkroom-prompts-mcp.html
 
 ### Code By AI (code-by-ai)
 - url: https://www.codebyai.net

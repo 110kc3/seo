@@ -1,0 +1,17 @@
+{
+  "slug": "inkroom-prompts-mcp",
+  "name": "InkRoom Prompts MCP",
+  "url": "https://github.com/InkRoom-AI/inkroom-prompts",
+  "description": "Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.",
+  "category": "mcp",
+  "pricing": "free",
+  "tags": [
+    "prompts",
+    "visual-workflow",
+    "mcp"
+  ],
+  "created": "2026-11-05",
+  "github_user": "InkRoomAI",
+  "tier": "free",
+  "origin": "self-registered"
+}
