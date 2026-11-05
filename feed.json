@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/awakepix.html",
+      "url": "https://index.percall.dev/l/awakepix.html",
+      "title": "AwakePix",
+      "content_text": "AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.",
+      "date_published": "2026-11-05T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://awakepix.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/code-by-ai.html",
       "url": "https://index.percall.dev/l/code-by-ai.html",
       "title": "Code By AI",
@@ -754,22 +765,6 @@
         "api-pricing"
       ],
       "external_url": "https://datacircle.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/neon-duo-guides.html",
-      "url": "https://index.percall.dev/l/neon-duo-guides.html",
-      "title": "NEON DUO Guides",
-      "content_text": "Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.",
-      "date_published": "2026-10-23T00:00:00Z",
-      "tags": [
-        "other",
-        "education",
-        "video-guides",
-        "prompt-structure",
-        "duo-composition",
-        "privacy"
-      ],
-      "external_url": "https://a2oliteneon.xyz/guides"
     }
   ]
 }

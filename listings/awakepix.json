@@ -2,18 +2,12 @@
   "slug": "awakepix",
   "name": "AwakePix",
   "url": "https://awakepix.com/",
-  "description": "AwakePix turns photos and ideas into short AI videos, with image generation and editing in the same browser-based tool. Animate portraits, explore product visuals, or create scenes for social posts. Real examples and reusable prompts provide a starting point, with credit costs shown before generation. One-time credit packs require no recurring subscription. Eligible users can try limited free photo animation for personal, non-commercial use, subject to availability.",
+  "description": "AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.",
   "category": "app",
   "pricing": "freemium",
-  "tags": [
-    "image-to-video",
-    "text-to-video",
-    "image-generation",
-    "image-editing"
-  ],
   "created": "2026-10-18",
   "github_user": "nongyi531415",
   "tier": "free",
   "origin": "self-registered",
-  "updated": "2026-10-21"
+  "updated": "2026-11-05"
 }

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AwakePix</title>
+    <link>https://index.percall.dev/l/awakepix.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
+    <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.</description>
+  </item>
+  <item>
     <title>Code By AI</title>
     <link>https://index.percall.dev/l/code-by-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/code-by-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.</description>
-  </item>
-  <item>
-    <title>NEON DUO Guides</title>
-    <link>https://index.percall.dev/l/neon-duo-guides.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/neon-duo-guides.html</guid>
-    <pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Free English educational guides for planning two-person dance videos, including photo preparation, role mapping, prompt structure, framing, audio alignment and privacy checks. Reference previews and hypothetical examples are labelled. This is an independent guide collection; live AI video generation and purchases on NEON DUO are currently closed.</description>
   </item>
 </channel>
 </rss>
