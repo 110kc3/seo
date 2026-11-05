@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/codei-lab.html",
+      "url": "https://index.percall.dev/l/codei-lab.html",
+      "title": "CodeI Lab",
+      "content_text": "CodeI Lab is an independent third-party GPT API gateway for coding agents (not affiliated with OpenAI). One API key calls GPT-6 and GPT-5.6 models through the OpenAI Responses/Chat Completions API or the Anthropic Messages API, so Claude Code, Codex CLI, Cursor and OpenCode work unchanged (OpenAI-compatible base URL https://www.codeilab.com/api/codex). Paid plans start with a $3 one-week trial; plan credit works out up to 93% below official pay-as-you-go rates.",
+      "date_published": "2026-11-05T00:00:00Z",
+      "tags": [
+        "api",
+        "llm-api",
+        "api-gateway",
+        "ai-coding",
+        "codex-cli",
+        "claude-code"
+      ],
+      "external_url": "https://www.codeilab.com"
+    },
+    {
       "id": "https://index.percall.dev/l/awakepix.html",
       "url": "https://index.percall.dev/l/awakepix.html",
       "title": "AwakePix",
@@ -749,22 +765,6 @@
         "privacy"
       ],
       "external_url": "https://hugehard.app/"
-    },
-    {
-      "id": "https://index.percall.dev/l/datacircle.html",
-      "url": "https://index.percall.dev/l/datacircle.html",
-      "title": "Datacircle",
-      "content_text": "Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.",
-      "date_published": "2026-10-23T00:00:00Z",
-      "tags": [
-        "mcp",
-        "gtm",
-        "gtm-apis",
-        "api",
-        "api-directory",
-        "api-pricing"
-      ],
-      "external_url": "https://datacircle.dev"
     }
   ]
 }
