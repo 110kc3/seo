@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 201 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 202 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (201)
+## All listings (202)
 
 ### CodeI Lab (codei-lab)
 - url: https://www.codeilab.com
@@ -312,6 +312,15 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://www.codeilab.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/codei-lab.json
 - listing page: https://index.percall.dev/l/codei-lab.html
+
+### DMT Receipts (dmt-receipts)
+- url: https://misty-flame-3nw3.here.now/
+- category: mcp · pricing: free · tags: mcp, opentimestamps, bitcoin, memory, receipts
+- Stamp and verify Bitcoin-anchored OpenTimestamps memory receipts for AI agents (dmt-memory/v1). Local MCP stamp_memory / verify_receipt plus a static verifier UI.
+- llms_txt: https://misty-flame-3nw3.here.now/llms.txt
+- mcp: https://github.com/many77146-bot/dmt-receipts
+- listing JSON: https://index.percall.dev/listings/dmt-receipts.json
+- listing page: https://index.percall.dev/l/dmt-receipts.html
 
 ### InkRoom Image MCP (inkroom-image-mcp)
 - url: https://inkroom.ai/en/solutions/mcp-server

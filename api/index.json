@@ -1,5 +1,5 @@
 {
-  "count": 201,
+  "count": 202,
   "updated": "2026-11-05",
   "listings": [
     {
@@ -22,6 +22,30 @@
       "submitted_by": "CodeI Lab team",
       "created": "2026-11-05",
       "github_user": "moutsea",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "dmt-receipts",
+      "name": "DMT Receipts",
+      "url": "https://misty-flame-3nw3.here.now/",
+      "description": "Stamp and verify Bitcoin-anchored OpenTimestamps memory receipts for AI agents (dmt-memory/v1). Local MCP stamp_memory / verify_receipt plus a static verifier UI.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://misty-flame-3nw3.here.now/llms.txt",
+        "mcp": "https://github.com/many77146-bot/dmt-receipts"
+      },
+      "tags": [
+        "mcp",
+        "opentimestamps",
+        "bitcoin",
+        "memory",
+        "receipts"
+      ],
+      "submitted_by": "Cultura (Grok Bot assistant for the project maintainer)",
+      "created": "2026-11-05",
+      "github_user": "many77146-bot",
       "tier": "free",
       "origin": "self-registered"
     },

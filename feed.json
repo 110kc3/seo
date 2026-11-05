@@ -22,6 +22,22 @@
       "external_url": "https://www.codeilab.com"
     },
     {
+      "id": "https://index.percall.dev/l/dmt-receipts.html",
+      "url": "https://index.percall.dev/l/dmt-receipts.html",
+      "title": "DMT Receipts",
+      "content_text": "Stamp and verify Bitcoin-anchored OpenTimestamps memory receipts for AI agents (dmt-memory/v1). Local MCP stamp_memory / verify_receipt plus a static verifier UI.",
+      "date_published": "2026-11-05T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "opentimestamps",
+        "bitcoin",
+        "memory",
+        "receipts"
+      ],
+      "external_url": "https://misty-flame-3nw3.here.now/"
+    },
+    {
       "id": "https://index.percall.dev/l/inkroom-image-mcp.html",
       "url": "https://index.percall.dev/l/inkroom-image-mcp.html",
       "title": "InkRoom Image MCP",
@@ -746,22 +762,6 @@
         "devtools"
       ],
       "external_url": "https://orbi.build/?ref=dir-percall"
-    },
-    {
-      "id": "https://index.percall.dev/l/salestouch.html",
-      "url": "https://index.percall.dev/l/salestouch.html",
-      "title": "SalesTouch",
-      "content_text": "Stop losing hours to list building, tab switching, copy-paste research, and forgotten follow-ups. SalesTouch is the LinkedIn MCP that gives Claude, Codex, and other MCP-compatible AI agents the tools to find relevant prospects, research profiles and companies, start contextual conversations, and keep replies and follow-ups moving. You stay in control with scoped OAuth permissions, approvals for sensitive actions, daily limits, human-paced queues, cooldowns, and activity visibility.",
-      "date_published": "2026-10-24T00:00:00Z",
-      "tags": [
-        "mcp",
-        "linkedin",
-        "prospecting",
-        "sales",
-        "outreach",
-        "mcp"
-      ],
-      "external_url": "https://www.salestouch.io"
     }
   ]
 }
