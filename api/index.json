@@ -1,5 +1,5 @@
 {
-  "count": 199,
+  "count": 200,
   "updated": "2026-11-05",
   "listings": [
     {
@@ -22,6 +22,26 @@
       "submitted_by": "CodeI Lab team",
       "created": "2026-11-05",
       "github_user": "moutsea",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "inkroom-image-mcp",
+      "name": "InkRoom Image MCP",
+      "url": "https://inkroom.ai/en/solutions/mcp-server",
+      "description": "Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "mcp": "https://mcp.inkroom.ai"
+      },
+      "tags": [
+        "image-generation",
+        "design",
+        "mcp"
+      ],
+      "created": "2026-11-05",
+      "github_user": "InkRoomAI",
       "tier": "free",
       "origin": "self-registered"
     },

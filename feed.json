@@ -22,6 +22,20 @@
       "external_url": "https://www.codeilab.com"
     },
     {
+      "id": "https://index.percall.dev/l/inkroom-image-mcp.html",
+      "url": "https://index.percall.dev/l/inkroom-image-mcp.html",
+      "title": "InkRoom Image MCP",
+      "content_text": "Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.",
+      "date_published": "2026-11-05T00:00:00Z",
+      "tags": [
+        "mcp",
+        "image-generation",
+        "design",
+        "mcp"
+      ],
+      "external_url": "https://inkroom.ai/en/solutions/mcp-server"
+    },
+    {
       "id": "https://index.percall.dev/l/awakepix.html",
       "url": "https://index.percall.dev/l/awakepix.html",
       "title": "AwakePix",
@@ -749,22 +763,6 @@
         "collaboration"
       ],
       "external_url": "https://www.tablethis.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/this-pic-can-change.html",
-      "url": "https://index.percall.dev/l/this-pic-can-change.html",
-      "title": "This Pic Can Change",
-      "content_text": "On-device iOS photo and video toolkit from HugeHard Studio: compress images to a target size, convert videos to Live Photos, plus photo/game widgets. Ordinary processing stays on-device. Optional AI image gen/edit needs a user-configured provider. Chinese/English guides on the site. Public TestFlight beta.",
-      "date_published": "2026-10-24T00:00:00Z",
-      "tags": [
-        "app",
-        "ios",
-        "live-photo",
-        "image",
-        "photo",
-        "privacy"
-      ],
-      "external_url": "https://hugehard.app/"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 199 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 200 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (199)
+## All listings (200)
 
 ### CodeI Lab (codei-lab)
 - url: https://www.codeilab.com
@@ -312,6 +312,14 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://www.codeilab.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/codei-lab.json
 - listing page: https://index.percall.dev/l/codei-lab.html
+
+### InkRoom Image MCP (inkroom-image-mcp)
+- url: https://inkroom.ai/en/solutions/mcp-server
+- category: mcp · pricing: paid · tags: image-generation, design, mcp
+- Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.
+- mcp: https://mcp.inkroom.ai
+- listing JSON: https://index.percall.dev/listings/inkroom-image-mcp.json
+- listing page: https://index.percall.dev/l/inkroom-image-mcp.html
 
 ### Code By AI (code-by-ai)
 - url: https://www.codebyai.net
