@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 202 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 203 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (202)
+## All listings (203)
+
+### Sandbox0 (sandbox0)
+- url: https://sandbox0.ai/
+- category: api · pricing: paid · tags: ai-agents, cloud-sandbox, persistent-storage, developer-tools
+- Managed cloud runtime for long-running AI agents. Sandbox0 provides isolated cloud computers with persistent writable filesystems across successful checkpoints, plus lifecycle and file APIs, SDKs, and the s0 CLI. Default pause and resume preserve files and start fresh processes.
+- listing JSON: https://index.percall.dev/listings/sandbox0.json
+- listing page: https://index.percall.dev/l/sandbox0.html
 
 ### CodeI Lab (codei-lab)
 - url: https://www.codeilab.com

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Sandbox0</title>
+    <link>https://index.percall.dev/l/sandbox0.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/sandbox0.html</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Managed cloud runtime for long-running AI agents. Sandbox0 provides isolated cloud computers with persistent writable filesystems across successful checkpoints, plus lifecycle and file APIs, SDKs, and the s0 CLI. Default pause and resume preserve files and start fresh processes.</description>
+  </item>
+  <item>
     <title>CodeI Lab</title>
     <link>https://index.percall.dev/l/codei-lab.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/codei-lab.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.</description>
-  </item>
-  <item>
-    <title>Orbi</title>
-    <link>https://index.percall.dev/l/orbi.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/orbi.html</guid>
-    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.</description>
   </item>
 </channel>
 </rss>

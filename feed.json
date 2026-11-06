@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/sandbox0.html",
+      "url": "https://index.percall.dev/l/sandbox0.html",
+      "title": "Sandbox0",
+      "content_text": "Managed cloud runtime for long-running AI agents. Sandbox0 provides isolated cloud computers with persistent writable filesystems across successful checkpoints, plus lifecycle and file APIs, SDKs, and the s0 CLI. Default pause and resume preserve files and start fresh processes.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "tags": [
+        "api",
+        "ai-agents",
+        "cloud-sandbox",
+        "persistent-storage",
+        "developer-tools"
+      ],
+      "external_url": "https://sandbox0.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/codei-lab.html",
       "url": "https://index.percall.dev/l/codei-lab.html",
       "title": "CodeI Lab",
@@ -746,22 +761,6 @@
         "productivity"
       ],
       "external_url": "https://ccc.amirfish.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/orbi.html",
-      "url": "https://index.percall.dev/l/orbi.html",
-      "title": "Orbi",
-      "content_text": "Orbi is an open-source AI GitHub App that turns GitHub issues into merged pull requests: it plans the change, writes the code, opens the PR, answers review and fixes CI until it is ready to merge. Self-hostable (https://github.com/orbi-build/orbi, AGPL-3.0) or hosted Orbi Cloud with the first 3 merged pull requests free, no credit card needed.",
-      "date_published": "2026-10-24T00:00:00Z",
-      "tags": [
-        "agent",
-        "coding-agent",
-        "github-app",
-        "pull-requests",
-        "open-source",
-        "devtools"
-      ],
-      "external_url": "https://orbi.build/?ref=dir-percall"
     }
   ]
 }
