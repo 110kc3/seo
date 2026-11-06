@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 204 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 205 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (204)
+## All listings (205)
+
+### Akii: SEO & AI Search Optimizer (akii-seo-ai-search-optimizer)
+- url: https://akii.com/portfolio#search-optimizer
+- category: other · pricing: free · tags: seo, aeo, geo, claude-code, open-source
+- A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.
+- listing JSON: https://index.percall.dev/listings/akii-seo-ai-search-optimizer.json
+- listing page: https://index.percall.dev/l/akii-seo-ai-search-optimizer.html
 
 ### AzYun (azyun)
 - url: https://www.azyun.com

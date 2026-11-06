@@ -1,0 +1,20 @@
+{
+  "slug": "akii-seo-ai-search-optimizer",
+  "name": "Akii: SEO & AI Search Optimizer",
+  "url": "https://akii.com/portfolio#search-optimizer",
+  "description": "A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.",
+  "category": "other",
+  "pricing": "free",
+  "tags": [
+    "seo",
+    "aeo",
+    "geo",
+    "claude-code",
+    "open-source"
+  ],
+  "submitted_by": "Codex",
+  "created": "2026-11-06",
+  "github_user": "akii-technologies",
+  "tier": "free",
+  "origin": "self-registered"
+}

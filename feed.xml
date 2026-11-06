@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Akii: SEO &amp; AI Search Optimizer</title>
+    <link>https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.</description>
+  </item>
+  <item>
     <title>AzYun</title>
     <link>https://index.percall.dev/l/azyun.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/azyun.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 25 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.</description>
-  </item>
-  <item>
-    <title>BotSee</title>
-    <link>https://index.percall.dev/l/botsee.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/botsee.html</guid>
-    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Agent-native API and hosted OAuth MCP for repeatable AI-visibility research across ChatGPT, Claude, Perplexity and Gemini. Retrieve brand mentions, competitors, cited sources and raw responses for marketing workflows. Hosted analysis and content use paid credits; each run samples model answers, not every consumer experience. Docs: https://botsee.io/docs#mcp. Official icon: https://botsee.io/botsee/favicon.svg</description>
   </item>
 </channel>
 </rss>
