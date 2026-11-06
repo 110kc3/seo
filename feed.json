@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-qa.html",
+      "url": "https://index.percall.dev/l/agent-qa.html",
+      "title": "agent-qa",
+      "content_text": "agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "tags": [
+        "agent",
+        "testing",
+        "mcp",
+        "web",
+        "mobile",
+        "memory"
+      ],
+      "external_url": "https://vostride.com"
+    },
+    {
       "id": "https://index.percall.dev/l/akii-seo-ai-search-optimizer.html",
       "url": "https://index.percall.dev/l/akii-seo-ai-search-optimizer.html",
       "title": "Akii: SEO & AI Search Optimizer",
@@ -745,22 +761,6 @@
         "developer-tools"
       ],
       "external_url": "https://futureinfra.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/firstpass.html",
-      "url": "https://index.percall.dev/l/firstpass.html",
-      "title": "FirstPass",
-      "content_text": "Free, browser-only tools for release asset validation, homepage clarity checks, and hero copy drafting, plus public evidence-based review samples. No account required; nothing is uploaded or stored.",
-      "date_published": "2026-10-26T00:00:00Z",
-      "tags": [
-        "app",
-        "release-engineering",
-        "developer-tools",
-        "saas",
-        "qa",
-        "free"
-      ],
-      "external_url": "https://mmxfq.github.io/firstpass-site/"
     }
   ]
 }

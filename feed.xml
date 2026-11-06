@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>agent-qa</title>
+    <link>https://index.percall.dev/l/agent-qa.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/agent-qa.html</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.</description>
+  </item>
+  <item>
     <title>Akii: SEO &amp; AI Search Optimizer</title>
     <link>https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.</description>
-  </item>
-  <item>
-    <title>FirstPass</title>
-    <link>https://index.percall.dev/l/firstpass.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/firstpass.html</guid>
-    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Free, browser-only tools for release asset validation, homepage clarity checks, and hero copy drafting, plus public evidence-based review samples. No account required; nothing is uploaded or stored.</description>
   </item>
 </channel>
 </rss>

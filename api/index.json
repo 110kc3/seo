@@ -1,7 +1,31 @@
 {
-  "count": 206,
+  "count": 207,
   "updated": "2026-11-06",
   "listings": [
+    {
+      "slug": "agent-qa",
+      "name": "agent-qa",
+      "url": "https://vostride.com",
+      "description": "agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.",
+      "category": "agent",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://vostride.com/llms.txt",
+        "mcp": "https://vostride.com/docs/agent-qa/mcp"
+      },
+      "tags": [
+        "testing",
+        "mcp",
+        "web",
+        "mobile",
+        "memory"
+      ],
+      "submitted_by": "AI assistant on behalf of vostride",
+      "created": "2026-11-06",
+      "github_user": "pranshuchittora",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "akii-seo-ai-search-optimizer",
       "name": "Akii: SEO & AI Search Optimizer",
