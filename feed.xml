@@ -23,6 +23,14 @@
     <description>AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.</description>
   </item>
   <item>
+    <title>Revenue Scout</title>
+    <link>https://index.percall.dev/l/revenue-scout.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/revenue-scout.html</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.</description>
+  </item>
+  <item>
     <title>Sandbox0</title>
     <link>https://index.percall.dev/l/sandbox0.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/sandbox0.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Free, browser-only tools for release asset validation, homepage clarity checks, and hero copy drafting, plus public evidence-based review samples. No account required; nothing is uploaded or stored.</description>
-  </item>
-  <item>
-    <title>Stamp Identifier</title>
-    <link>https://index.percall.dev/l/stamp-identifier.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/stamp-identifier.html</guid>
-    <pubDate>Sun, 25 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.</description>
   </item>
 </channel>
 </rss>

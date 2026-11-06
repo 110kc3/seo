@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 205 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 206 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (205)
+## All listings (206)
 
 ### Akii: SEO & AI Search Optimizer (akii-seo-ai-search-optimizer)
 - url: https://akii.com/portfolio#search-optimizer
@@ -318,6 +318,13 @@ A response does not verify authentication, payment or tool behavior.
 - AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.
 - listing JSON: https://index.percall.dev/listings/azyun.json
 - listing page: https://index.percall.dev/l/azyun.html
+
+### Revenue Scout (revenue-scout)
+- url: https://revenuescout.ai/
+- category: app · pricing: freemium · tags: sales, social-listening, lead-discovery, reply-drafts, public-conversations
+- Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.
+- listing JSON: https://index.percall.dev/listings/revenue-scout.json
+- listing page: https://index.percall.dev/l/revenue-scout.html
 
 ### Sandbox0 (sandbox0)
 - url: https://sandbox0.ai/

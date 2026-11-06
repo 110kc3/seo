@@ -33,6 +33,22 @@
       "external_url": "https://www.azyun.com"
     },
     {
+      "id": "https://index.percall.dev/l/revenue-scout.html",
+      "url": "https://index.percall.dev/l/revenue-scout.html",
+      "title": "Revenue Scout",
+      "content_text": "Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "tags": [
+        "app",
+        "sales",
+        "social-listening",
+        "lead-discovery",
+        "reply-drafts",
+        "public-conversations"
+      ],
+      "external_url": "https://revenuescout.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/sandbox0.html",
       "url": "https://index.percall.dev/l/sandbox0.html",
       "title": "Sandbox0",
@@ -745,20 +761,6 @@
         "free"
       ],
       "external_url": "https://mmxfq.github.io/firstpass-site/"
-    },
-    {
-      "id": "https://index.percall.dev/l/stamp-identifier.html",
-      "url": "https://index.percall.dev/l/stamp-identifier.html",
-      "title": "Stamp Identifier",
-      "content_text": "Stamp Identifier helps collectors identify old, foreign and unfamiliar postage stamps from a photo. It provides stamp details and estimated value ranges, AI follow-up chat and a saved collection. Available for iPhone and Android, with free scans included and in-app purchases.",
-      "date_published": "2026-10-25T00:00:00Z",
-      "tags": [
-        "app",
-        "stamp-collecting",
-        "stamp-identification",
-        "mobile-app"
-      ],
-      "external_url": "https://stampscanner.app/"
     }
   ]
 }

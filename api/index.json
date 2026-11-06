@@ -1,5 +1,5 @@
 {
-  "count": 205,
+  "count": 206,
   "updated": "2026-11-06",
   "listings": [
     {
@@ -31,6 +31,26 @@
       "pricing": "paid",
       "created": "2026-11-06",
       "github_user": "wujian8150",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "revenue-scout",
+      "name": "Revenue Scout",
+      "url": "https://revenuescout.ai/",
+      "description": "Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "sales",
+        "social-listening",
+        "lead-discovery",
+        "reply-drafts",
+        "public-conversations"
+      ],
+      "submitted_by": "Codex",
+      "created": "2026-11-06",
+      "github_user": "akii-technologies",
       "tier": "free",
       "origin": "self-registered"
     },
