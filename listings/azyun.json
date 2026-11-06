@@ -1,0 +1,12 @@
+{
+  "slug": "azyun",
+  "name": "AzYun",
+  "url": "https://www.azyun.com",
+  "description": "AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.",
+  "category": "api",
+  "pricing": "paid",
+  "created": "2026-11-06",
+  "github_user": "wujian8150",
+  "tier": "free",
+  "origin": "self-registered"
+}

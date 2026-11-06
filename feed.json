@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/azyun.html",
+      "url": "https://index.percall.dev/l/azyun.html",
+      "title": "AzYun",
+      "content_text": "AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.",
+      "date_published": "2026-11-06T00:00:00Z",
+      "tags": [
+        "api"
+      ],
+      "external_url": "https://www.azyun.com"
+    },
+    {
       "id": "https://index.percall.dev/l/sandbox0.html",
       "url": "https://index.percall.dev/l/sandbox0.html",
       "title": "Sandbox0",
@@ -747,20 +758,6 @@
         "analytics"
       ],
       "external_url": "https://botsee.io"
-    },
-    {
-      "id": "https://index.percall.dev/l/claude-command-center.html",
-      "url": "https://index.percall.dev/l/claude-command-center.html",
-      "title": "CCC — Claude Command Center",
-      "content_text": "CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.",
-      "date_published": "2026-10-24T00:00:00Z",
-      "tags": [
-        "app",
-        "developer-tools",
-        "coding-agents",
-        "productivity"
-      ],
-      "external_url": "https://ccc.amirfish.ai"
     }
   ]
 }

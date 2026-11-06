@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AzYun</title>
+    <link>https://index.percall.dev/l/azyun.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/azyun.html</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.</description>
+  </item>
+  <item>
     <title>Sandbox0</title>
     <link>https://index.percall.dev/l/sandbox0.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/sandbox0.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Agent-native API and hosted OAuth MCP for repeatable AI-visibility research across ChatGPT, Claude, Perplexity and Gemini. Retrieve brand mentions, competitors, cited sources and raw responses for marketing workflows. Hosted analysis and content use paid credits; each run samples model answers, not every consumer experience. Docs: https://botsee.io/docs#mcp. Official icon: https://botsee.io/botsee/favicon.svg</description>
-  </item>
-  <item>
-    <title>CCC — Claude Command Center</title>
-    <link>https://index.percall.dev/l/claude-command-center.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/claude-command-center.html</guid>
-    <pubDate>Sat, 24 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>CCC is a free local dashboard for managing Claude Code, Codex, Cursor and other coding-agent sessions. See which sessions need you, organize work on a visual board, and track usage from one place.</description>
   </item>
 </channel>
 </rss>
