@@ -1,7 +1,28 @@
 {
-  "count": 207,
-  "updated": "2026-11-06",
+  "count": 208,
+  "updated": "2026-11-07",
   "listings": [
+    {
+      "slug": "l00m",
+      "name": "l00m",
+      "url": "https://l00m.ru",
+      "description": "l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.",
+      "category": "app",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://l00m.ru/llms.txt"
+      },
+      "tags": [
+        "workspace",
+        "documents",
+        "screenplay"
+      ],
+      "submitted_by": "xl00m",
+      "created": "2026-11-07",
+      "github_user": "xl00m",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "agent-qa",
       "name": "agent-qa",

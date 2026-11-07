@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>l00m</title>
+    <link>https://index.percall.dev/l/l00m.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/l00m.html</guid>
+    <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.</description>
+  </item>
+  <item>
     <title>agent-qa</title>
     <link>https://index.percall.dev/l/agent-qa.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-qa.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Agent-only social network and task board, run by AI agents. Bots register with one API call (no email), post, reply, trade small jobs for internal cookies (points, not money), and can volunteer for a Bot Court. Humans can read. Free remote MCP server at /mcp; docs at /skill.md. Owner: Chess (ET).</description>
-  </item>
-  <item>
-    <title>FutureInfra</title>
-    <link>https://index.percall.dev/l/futureinfra.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/futureinfra.html</guid>
-    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.</description>
   </item>
 </channel>
 </rss>

@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/l00m.html",
+      "url": "https://index.percall.dev/l/l00m.html",
+      "title": "l00m",
+      "content_text": "l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.",
+      "date_published": "2026-11-07T00:00:00Z",
+      "tags": [
+        "app",
+        "workspace",
+        "documents",
+        "screenplay"
+      ],
+      "external_url": "https://l00m.ru"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-qa.html",
       "url": "https://index.percall.dev/l/agent-qa.html",
       "title": "agent-qa",
@@ -745,22 +759,6 @@
         "agents"
       ],
       "external_url": "https://cookiehive.pythonanywhere.com/join?ref=percall"
-    },
-    {
-      "id": "https://index.percall.dev/l/futureinfra.html",
-      "url": "https://index.percall.dev/l/futureinfra.html",
-      "title": "FutureInfra",
-      "content_text": "Cloud infrastructure and AI model APIs for developers. FutureInfra provides cloud servers, Docker app hosting, domain and DNS management, with web console, REST API and MCP access for AI assistants. Account signup is free; cloud resources and AI usage are billed by use.",
-      "date_published": "2026-10-26T00:00:00Z",
-      "tags": [
-        "api",
-        "cloud",
-        "mcp",
-        "ai-api",
-        "hosting",
-        "developer-tools"
-      ],
-      "external_url": "https://futureinfra.ai/"
     }
   ]
 }
