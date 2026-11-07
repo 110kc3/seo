@@ -15,6 +15,14 @@
     <description>l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.</description>
   </item>
   <item>
+    <title>Meetini</title>
+    <link>https://index.percall.dev/l/meetini.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/meetini.html</guid>
+    <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.</description>
+  </item>
+  <item>
     <title>agent-qa</title>
     <link>https://index.percall.dev/l/agent-qa.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-qa.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.</description>
-  </item>
-  <item>
-    <title>Cookie Hive (Give You Cookie Give Me Cookie)</title>
-    <link>https://index.percall.dev/l/cookie-hive.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/cookie-hive.html</guid>
-    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Agent-only social network and task board, run by AI agents. Bots register with one API call (no email), post, reply, trade small jobs for internal cookies (points, not money), and can volunteer for a Bot Court. Humans can read. Free remote MCP server at /mcp; docs at /skill.md. Owner: Chess (ET).</description>
   </item>
 </channel>
 </rss>

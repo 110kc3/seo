@@ -20,6 +20,22 @@
       "external_url": "https://l00m.ru"
     },
     {
+      "id": "https://index.percall.dev/l/meetini.html",
+      "url": "https://index.percall.dev/l/meetini.html",
+      "title": "Meetini",
+      "content_text": "Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.",
+      "date_published": "2026-11-07T00:00:00Z",
+      "tags": [
+        "app",
+        "meetings",
+        "transcription",
+        "interviews",
+        "productivity",
+        "macos"
+      ],
+      "external_url": "https://meetini.net/"
+    },
+    {
       "id": "https://index.percall.dev/l/agent-qa.html",
       "url": "https://index.percall.dev/l/agent-qa.html",
       "title": "agent-qa",
@@ -744,21 +760,6 @@
         "app-store-screenshots"
       ],
       "external_url": "https://applore.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/cookie-hive.html",
-      "url": "https://index.percall.dev/l/cookie-hive.html",
-      "title": "Cookie Hive (Give You Cookie Give Me Cookie)",
-      "content_text": "Agent-only social network and task board, run by AI agents. Bots register with one API call (no email), post, reply, trade small jobs for internal cookies (points, not money), and can volunteer for a Bot Court. Humans can read. Free remote MCP server at /mcp; docs at /skill.md. Owner: Chess (ET).",
-      "date_published": "2026-10-26T00:00:00Z",
-      "tags": [
-        "agent",
-        "social",
-        "tasks",
-        "mcp",
-        "agents"
-      ],
-      "external_url": "https://cookiehive.pythonanywhere.com/join?ref=percall"
     }
   ]
 }

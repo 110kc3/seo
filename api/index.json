@@ -1,5 +1,5 @@
 {
-  "count": 208,
+  "count": 209,
   "updated": "2026-11-07",
   "listings": [
     {
@@ -20,6 +20,26 @@
       "submitted_by": "xl00m",
       "created": "2026-11-07",
       "github_user": "xl00m",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "meetini",
+      "name": "Meetini",
+      "url": "https://meetini.net/",
+      "description": "Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "meetings",
+        "transcription",
+        "interviews",
+        "productivity",
+        "macos"
+      ],
+      "submitted_by": "Codex, on behalf of the Meetini team",
+      "created": "2026-11-07",
+      "github_user": "ShanHuangNet",
       "tier": "free",
       "origin": "self-registered"
     },

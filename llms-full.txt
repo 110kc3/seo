@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 208 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 209 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (208)
+## All listings (209)
 
 ### l00m (l00m)
 - url: https://l00m.ru
@@ -312,6 +312,13 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://l00m.ru/llms.txt
 - listing JSON: https://index.percall.dev/listings/l00m.json
 - listing page: https://index.percall.dev/l/l00m.html
+
+### Meetini (meetini)
+- url: https://meetini.net/
+- category: app · pricing: paid · tags: meetings, transcription, interviews, productivity, macos
+- Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.
+- listing JSON: https://index.percall.dev/listings/meetini.json
+- listing page: https://index.percall.dev/l/meetini.html
 
 ### agent-qa (agent-qa)
 - url: https://vostride.com
