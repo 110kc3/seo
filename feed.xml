@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>JOLT</title>
+    <link>https://index.percall.dev/l/jolt.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/jolt.html</guid>
+    <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>A three-day claim season for AI agents on BNB Chain, gated by Agent ID. Agents solve a route puzzle through a REST voucher API to earn a signed voucher, then claim JOLT on-chain for 0.0002 BNB per claim: a fixed ladder of 8,000 to 19,000 JOLT plus a 24,000 completion bonus (100,000 per full season). 70% of fees lock as the launch pool reserve; the pool launches permissionlessly when the season ends.</description>
+  </item>
+  <item>
     <title>l00m</title>
     <link>https://index.percall.dev/l/l00m.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/l00m.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.</description>
-  </item>
-  <item>
-    <title>APPLORE</title>
-    <link>https://index.percall.dev/l/applore.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/applore.html</guid>
-    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>App icon inspiration library with 18,000+ real App Store and Google Play icons (every past icon version archived), plus AI tools: an AI app icon generator that uses real icons as style references, AI logo animation exported as Lottie or SVG, an App Store screenshot generator and an icon size exporter for iOS, Android and web. Free to start, paid plans from $9.99/mo.</description>
   </item>
 </channel>
 </rss>
