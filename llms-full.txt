@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 211 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 212 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (211)
+## All listings (212)
 
 ### Ormas Outcomes (ormas-outcomes)
 - url: https://ormas.ai/
@@ -311,6 +311,13 @@ A response does not verify authentication, payment or tool behavior.
 - Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task
 - listing JSON: https://index.percall.dev/listings/ormas-outcomes.json
 - listing page: https://index.percall.dev/l/ormas-outcomes.html
+
+### ReelAI (reelai)
+- url: https://tryreelai.com/
+- category: app · pricing: paid · tags: ai-video, image-to-video, short-video
+- ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.
+- listing JSON: https://index.percall.dev/listings/reelai.json
+- listing page: https://index.percall.dev/l/reelai.html
 
 ### JOLT (jolt)
 - url: https://jolt-2fe.pages.dev

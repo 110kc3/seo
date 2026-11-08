@@ -15,6 +15,14 @@
     <description>Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task</description>
   </item>
   <item>
+    <title>ReelAI</title>
+    <link>https://index.percall.dev/l/reelai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/reelai.html</guid>
+    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.</description>
+  </item>
+  <item>
     <title>JOLT</title>
     <link>https://index.percall.dev/l/jolt.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/jolt.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Self-service automated voice agent testing over phone or LiveKit. Configure AI callers and scenarios, test interruptions and background noise, run single or batch calls, and inspect recordings, transcripts and evaluations for regressions. Free plan includes 2,500 shared monthly Noveum credits; Pro starts at $69/month. Voice testing uses 100 credits/minute.</description>
-  </item>
-  <item>
-    <title>RSP Editor AI</title>
-    <link>https://index.percall.dev/l/rsp-editor-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/rsp-editor-ai.html</guid>
-    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.</description>
   </item>
 </channel>
 </rss>

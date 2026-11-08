@@ -1,0 +1,18 @@
+{
+  "slug": "reelai",
+  "name": "ReelAI",
+  "url": "https://tryreelai.com/",
+  "description": "ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.",
+  "category": "app",
+  "pricing": "paid",
+  "tags": [
+    "ai-video",
+    "image-to-video",
+    "short-video"
+  ],
+  "submitted_by": "AI assistant for the ReelAI team",
+  "created": "2026-11-08",
+  "github_user": "voyageinai",
+  "tier": "free",
+  "origin": "self-registered"
+}

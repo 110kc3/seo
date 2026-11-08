@@ -22,6 +22,20 @@
       "external_url": "https://ormas.ai/"
     },
     {
+      "id": "https://index.percall.dev/l/reelai.html",
+      "url": "https://index.percall.dev/l/reelai.html",
+      "title": "ReelAI",
+      "content_text": "ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.",
+      "date_published": "2026-11-08T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-video",
+        "image-to-video",
+        "short-video"
+      ],
+      "external_url": "https://tryreelai.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/jolt.html",
       "url": "https://index.percall.dev/l/jolt.html",
       "title": "JOLT",
@@ -745,21 +759,6 @@
         "regression-testing"
       ],
       "external_url": "https://noveum.ai/en/novasynth"
-    },
-    {
-      "id": "https://index.percall.dev/l/rsp-editor-ai.html",
-      "url": "https://index.percall.dev/l/rsp-editor-ai.html",
-      "title": "RSP Editor AI",
-      "content_text": "RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.",
-      "date_published": "2026-10-27T00:00:00Z",
-      "tags": [
-        "app",
-        "photo-editing",
-        "portraits",
-        "image-to-image",
-        "presets"
-      ],
-      "external_url": "https://rspeditor.app/"
     }
   ]
 }
