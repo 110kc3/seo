@@ -23,6 +23,14 @@
     <description>ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.</description>
   </item>
   <item>
+    <title>Datacircle</title>
+    <link>https://index.percall.dev/l/datacircle.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/datacircle.html</guid>
+    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Find the best GTM APIs. We benchmark all the GTM APIs and we put the results on our website. Our API is free and open, with no key: list every API, see who is best for each and search every plan, at api.datacircle.dev/v1.</description>
+  </item>
+  <item>
     <title>JOLT</title>
     <link>https://index.percall.dev/l/jolt.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/jolt.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.</description>
-  </item>
-  <item>
-    <title>NovaSynth by Noveum</title>
-    <link>https://index.percall.dev/l/novasynth-by-noveum.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/novasynth-by-noveum.html</guid>
-    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Self-service automated voice agent testing over phone or LiveKit. Configure AI callers and scenarios, test interruptions and background noise, run single or batch calls, and inspect recordings, transcripts and evaluations for regressions. Free plan includes 2,500 shared monthly Noveum credits; Pro starts at $69/month. Voice testing uses 100 credits/minute.</description>
   </item>
 </channel>
 </rss>

@@ -2,22 +2,25 @@
   "slug": "datacircle",
   "name": "Datacircle",
   "url": "https://datacircle.dev",
-  "description": "Datacircle lists all the GTM APIs. Our MCP server is open to anyone, with no key: add api.datacircle.dev/mcp to Claude, ChatGPT or Cursor. It answers from the sheet. list_apis lists the GTM APIs on it, and search_plans finds their plans by API, provider or price. Each plan comes with its score, and the best come first, as on the sheet.",
-  "category": "mcp",
+  "description": "Find the best GTM APIs. We benchmark all the GTM APIs and we put the results on our website. Our API is free and open, with no key: list every API, see who is best for each and search every plan, at api.datacircle.dev/v1.",
+  "category": "api",
   "pricing": "free",
   "machine_endpoints": {
     "llms_txt": "https://datacircle.dev/llms.txt",
+    "openapi": "https://api.datacircle.dev/v1/openapi.json",
     "mcp": "https://api.datacircle.dev/mcp"
   },
   "tags": [
     "gtm",
-    "gtm-apis",
     "api",
     "api-directory",
-    "api-pricing"
+    "api-pricing",
+    "b2b-data"
   ],
+  "submitted_by": "Datacircle",
   "created": "2026-10-23",
   "github_user": "waynehamadi",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-11-08"
 }
