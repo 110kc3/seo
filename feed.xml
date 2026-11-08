@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Ormas Outcomes</title>
+    <link>https://index.percall.dev/l/ormas-outcomes.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ormas-outcomes.html</guid>
+    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task</description>
+  </item>
+  <item>
     <title>JOLT</title>
     <link>https://index.percall.dev/l/jolt.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/jolt.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>RSP Editor AI restyles uploaded photos with 150 preset styles. Sign-in is required; new accounts receive one trial image. Extra images cost USD 3 for five or USD 9 per month for fifty, with automatic renewal. Gallery images are AI style illustrations, not tested before-and-after results or guarantees. On-site generation uses preset prompts and does not accept custom prompt text. Submitted by an owner-authorized AI assistant.</description>
-  </item>
-  <item>
-    <title>APIClaw</title>
-    <link>https://index.percall.dev/l/apiclaw.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/apiclaw.html</guid>
-    <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.</description>
   </item>
 </channel>
 </rss>

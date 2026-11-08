@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ormas-outcomes.html",
+      "url": "https://index.percall.dev/l/ormas-outcomes.html",
+      "title": "Ormas Outcomes",
+      "content_text": "Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task",
+      "date_published": "2026-11-08T00:00:00Z",
+      "tags": [
+        "mcp",
+        "coding",
+        "github",
+        "mcp",
+        "developer-tools",
+        "code-review"
+      ],
+      "external_url": "https://ormas.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/jolt.html",
       "url": "https://index.percall.dev/l/jolt.html",
       "title": "JOLT",
@@ -744,22 +760,6 @@
         "presets"
       ],
       "external_url": "https://rspeditor.app/"
-    },
-    {
-      "id": "https://index.percall.dev/l/apiclaw.html",
-      "url": "https://index.percall.dev/l/apiclaw.html",
-      "title": "APIClaw",
-      "content_text": "Flat-rate OpenAI-compatible AI API gateway. Point any OpenAI SDK or coding agent at https://apiclaw.biz/v1; one key reaches Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more (default model apiclaw/claude-sonnet-5.5). $19-$129/mo flat by daily request tier, no per-token bills; 50 free trial requests, no card; crypto checkout. Routes to models available through publicly available sources and provider APIs.",
-      "date_published": "2026-10-26T00:00:00Z",
-      "tags": [
-        "api",
-        "openai-compatible",
-        "llm-gateway",
-        "ai-api",
-        "coding-agents",
-        "developer-tools"
-      ],
-      "external_url": "https://apiclaw.biz/"
     }
   ]
 }

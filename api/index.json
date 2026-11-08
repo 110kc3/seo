@@ -1,7 +1,27 @@
 {
-  "count": 210,
-  "updated": "2026-11-07",
+  "count": 211,
+  "updated": "2026-11-08",
   "listings": [
+    {
+      "slug": "ormas-outcomes",
+      "name": "Ormas Outcomes",
+      "url": "https://ormas.ai/",
+      "description": "Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task",
+      "category": "mcp",
+      "pricing": "paid",
+      "tags": [
+        "coding",
+        "github",
+        "mcp",
+        "developer-tools",
+        "code-review"
+      ],
+      "submitted_by": "Codex, authorized by the Ormas team (AI-assisted submission)",
+      "created": "2026-11-08",
+      "github_user": "JakeBruner",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "jolt",
       "name": "JOLT",
