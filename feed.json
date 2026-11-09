@@ -38,6 +38,21 @@
       "external_url": "https://www.agentseo.dev/"
     },
     {
+      "id": "https://index.percall.dev/l/paperhumanizer.html",
+      "url": "https://index.percall.dev/l/paperhumanizer.html",
+      "title": "PaperHumanizer",
+      "content_text": "Academic English revision for students and researchers. Compare suggested wording with the original and check citations, numbers, terms and claims before use. Generation requires sign-in and available credits. Submitted by the PaperHumanizer team.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "tags": [
+        "app",
+        "academic-writing",
+        "research",
+        "english",
+        "revision"
+      ],
+      "external_url": "https://paperhumanizer.com"
+    },
+    {
       "id": "https://index.percall.dev/l/ormas-outcomes.html",
       "url": "https://index.percall.dev/l/ormas-outcomes.html",
       "title": "Ormas Outcomes",
@@ -746,22 +761,6 @@
         "publishing"
       ],
       "external_url": "https://repostit.io/"
-    },
-    {
-      "id": "https://index.percall.dev/l/toolspad-mcp.html",
-      "url": "https://index.percall.dev/l/toolspad-mcp.html",
-      "title": "ToolsPad MCP",
-      "content_text": "Remote MCP connection for small businesses, agencies and consultants to work with contacts, tasks, notes, forms and appointments in one ToolsPad workspace. OAuth authorises access; read/write is the default, a read-only option is available, and access can be revoked in Settings.",
-      "date_published": "2026-10-28T00:00:00Z",
-      "tags": [
-        "mcp",
-        "business",
-        "productivity",
-        "crm",
-        "tasks",
-        "oauth"
-      ],
-      "external_url": "https://toolspad.com/mcp?utm_source=ai_product_index&utm_medium=referral&utm_campaign=aidm&utm_id=aidm_organic_v1&utm_content=api_mcp_profile_001"
     }
   ]
 }

@@ -23,6 +23,14 @@
     <description>AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.</description>
   </item>
   <item>
+    <title>PaperHumanizer</title>
+    <link>https://index.percall.dev/l/paperhumanizer.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/paperhumanizer.html</guid>
+    <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Academic English revision for students and researchers. Compare suggested wording with the original and check citations, numbers, terms and claims before use. Generation requires sign-in and available credits. Submitted by the PaperHumanizer team.</description>
+  </item>
+  <item>
     <title>Ormas Outcomes</title>
     <link>https://index.percall.dev/l/ormas-outcomes.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ormas-outcomes.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Social publishing and content repurposing for creators and marketing teams. Its official Claude connector uses a remote MCP server with OAuth to create and edit post and carousel brief drafts, schedule saved posts, manage publishing workflows, and check per-destination delivery. Account, plan limits, and platform requirements apply. Paid plans include a 14-day trial; no card required.</description>
-  </item>
-  <item>
-    <title>ToolsPad MCP</title>
-    <link>https://index.percall.dev/l/toolspad-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/toolspad-mcp.html</guid>
-    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Remote MCP connection for small businesses, agencies and consultants to work with contacts, tasks, notes, forms and appointments in one ToolsPad workspace. OAuth authorises access; read/write is the default, a read-only option is available, and access can be revoked in Settings.</description>
   </item>
 </channel>
 </rss>

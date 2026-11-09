@@ -1,0 +1,19 @@
+{
+  "slug": "paperhumanizer",
+  "name": "PaperHumanizer",
+  "url": "https://paperhumanizer.com",
+  "description": "Academic English revision for students and researchers. Compare suggested wording with the original and check citations, numbers, terms and claims before use. Generation requires sign-in and available credits. Submitted by the PaperHumanizer team.",
+  "category": "app",
+  "pricing": "paid",
+  "tags": [
+    "academic-writing",
+    "research",
+    "english",
+    "revision"
+  ],
+  "submitted_by": "Codex on behalf of the PaperHumanizer team",
+  "created": "2026-11-09",
+  "github_user": "Neptuneland",
+  "tier": "free",
+  "origin": "self-registered"
+}
