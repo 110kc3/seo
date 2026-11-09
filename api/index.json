@@ -1,7 +1,31 @@
 {
-  "count": 212,
-  "updated": "2026-11-08",
+  "count": 213,
+  "updated": "2026-11-09",
   "listings": [
+    {
+      "slug": "agentseo",
+      "name": "AgentSEO",
+      "url": "https://www.agentseo.dev/",
+      "description": "AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "openapi": "https://www.agentseo.dev/openapi.yaml",
+        "mcp": "https://www.agentseo.dev/seo-mcp-server"
+      },
+      "tags": [
+        "seo-api",
+        "aeo",
+        "serp",
+        "keyword-research",
+        "mcp"
+      ],
+      "submitted_by": "AgentSEO team",
+      "created": "2026-11-09",
+      "github_user": "AgentSEO-dev",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "ormas-outcomes",
       "name": "Ormas Outcomes",

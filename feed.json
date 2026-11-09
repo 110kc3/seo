@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agentseo.html",
+      "url": "https://index.percall.dev/l/agentseo.html",
+      "title": "AgentSEO",
+      "content_text": "AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "tags": [
+        "api",
+        "seo-api",
+        "aeo",
+        "serp",
+        "keyword-research",
+        "mcp"
+      ],
+      "external_url": "https://www.agentseo.dev/"
+    },
+    {
       "id": "https://index.percall.dev/l/ormas-outcomes.html",
       "url": "https://index.percall.dev/l/ormas-outcomes.html",
       "title": "Ormas Outcomes",
@@ -745,22 +761,6 @@
         "workflows"
       ],
       "external_url": "https://myzaru.com/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
-    },
-    {
-      "id": "https://index.percall.dev/l/lifeverse-product-discovery.html",
-      "url": "https://index.percall.dev/l/lifeverse-product-discovery.html",
-      "title": "LifeVerse Product Discovery",
-      "content_text": "Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.",
-      "date_published": "2026-10-27T00:00:00Z",
-      "tags": [
-        "mcp",
-        "lifeverse",
-        "product-discovery",
-        "recommendations",
-        "chinese",
-        "ai-tools"
-      ],
-      "external_url": "https://lifeverse.gufreelancer.com/mcp"
     }
   ]
 }

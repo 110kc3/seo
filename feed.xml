@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AgentSEO</title>
+    <link>https://index.percall.dev/l/agentseo.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/agentseo.html</guid>
+    <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.</description>
+  </item>
+  <item>
     <title>Ormas Outcomes</title>
     <link>https://index.percall.dev/l/ormas-outcomes.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ormas-outcomes.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Zaru is a personal AI that remembers you, handles your email, calendar and web research, runs workflows on a schedule, and shows every step as it works. Nothing gets sent until you say yes. Free plan, in beta. We build Zaru at 100monkeys.ai.</description>
-  </item>
-  <item>
-    <title>LifeVerse Product Discovery</title>
-    <link>https://index.percall.dev/l/lifeverse-product-discovery.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/lifeverse-product-discovery.html</guid>
-    <pubDate>Tue, 27 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Public, read-only MCP discovery service for eleven ready-to-use LifeVerse AI products and interactive experiences. AI agents can list, search, inspect, and recommend products through a no-auth Streamable HTTP endpoint.</description>
   </item>
 </channel>
 </rss>
