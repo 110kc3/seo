@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/agent-garrett.html",
+      "url": "https://index.percall.dev/l/agent-garrett.html",
+      "title": "Agent Garrett",
+      "content_text": "Hosted personal cybersecurity agent that keeps working after logout. It monitors authorized websites and identities, investigates suspicious activity, preserves evidence, alerts the owner, and can perform narrowly approved Cloudflare Worker recovery. Dashboard, MCP, and backend API access are authenticated.",
+      "date_published": "2026-11-09T00:00:00Z",
+      "tags": [
+        "agent",
+        "cybersecurity",
+        "monitoring",
+        "incident-response",
+        "identity-protection",
+        "evidence"
+      ],
+      "external_url": "https://agent.garrettstimpson.ca/"
+    },
+    {
       "id": "https://index.percall.dev/l/agentseo.html",
       "url": "https://index.percall.dev/l/agentseo.html",
       "title": "AgentSEO",
@@ -746,21 +762,6 @@
         "oauth"
       ],
       "external_url": "https://toolspad.com/mcp?utm_source=ai_product_index&utm_medium=referral&utm_campaign=aidm&utm_id=aidm_organic_v1&utm_content=api_mcp_profile_001"
-    },
-    {
-      "id": "https://index.percall.dev/l/zaru.html",
-      "url": "https://index.percall.dev/l/zaru.html",
-      "title": "Zaru",
-      "content_text": "Zaru is a personal AI that remembers you, handles your email, calendar and web research, runs workflows on a schedule, and shows every step as it works. Nothing gets sent until you say yes. Free plan, in beta. We build Zaru at 100monkeys.ai.",
-      "date_published": "2026-10-28T00:00:00Z",
-      "tags": [
-        "app",
-        "assistant",
-        "personal-ai",
-        "agents",
-        "workflows"
-      ],
-      "external_url": "https://myzaru.com/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     }
   ]
 }

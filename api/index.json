@@ -1,7 +1,26 @@
 {
-  "count": 213,
+  "count": 214,
   "updated": "2026-11-09",
   "listings": [
+    {
+      "slug": "agent-garrett",
+      "name": "Agent Garrett",
+      "url": "https://agent.garrettstimpson.ca/",
+      "description": "Hosted personal cybersecurity agent that keeps working after logout. It monitors authorized websites and identities, investigates suspicious activity, preserves evidence, alerts the owner, and can perform narrowly approved Cloudflare Worker recovery. Dashboard, MCP, and backend API access are authenticated.",
+      "category": "agent",
+      "pricing": "paid",
+      "tags": [
+        "cybersecurity",
+        "monitoring",
+        "incident-response",
+        "identity-protection",
+        "evidence"
+      ],
+      "created": "2026-11-09",
+      "github_user": "gary23w",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "agentseo",
       "name": "AgentSEO",
