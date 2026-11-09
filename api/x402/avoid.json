@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-11-02",
-  "catalog_size": 59928,
+  "probed_at": "2026-11-09",
+  "catalog_size": 33140,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,18 +11,11 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 2,
-    "suspected": 30,
-    "tracked": 32
+    "confirmed": 1,
+    "suspected": 29,
+    "tracked": 30
   },
   "endpoints": [
-    {
-      "url": "https://cryptyx.ai/api/taker-flow",
-      "reason": "HTTP 500",
-      "misses": 2,
-      "since": "2026-08-01",
-      "last_checked": "2026-09-07"
-    },
     {
       "url": "https://polynews.news/api/v1/feed",
       "reason": "timeout after 8000ms",
@@ -32,13 +25,6 @@
     }
   ],
   "suspected": [
-    {
-      "url": "https://api.brazilayer.com/v1/commodities/clima",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-03",
-      "last_checked": "2026-08-03"
-    },
     {
       "url": "https://coingecko.use.x402atlas.com/price",
       "reason": "timeout after 8000ms",
@@ -103,13 +89,6 @@
       "last_checked": "2026-08-24"
     },
     {
-      "url": "https://api.wallettriage.com/scan",
-      "reason": "HTTP 502",
-      "misses": 1,
-      "since": "2026-08-26",
-      "last_checked": "2026-08-26"
-    },
-    {
       "url": "https://api.brazilayer.com/v1/desmatamento/municipio/:ibge",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -131,27 +110,6 @@
       "last_checked": "2026-09-21"
     },
     {
-      "url": "https://imagegen.coinopai.com/generate/clean",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://pay.edge-agents.ai/v1/services/fx-margin-pressure",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
-      "url": "https://pay.edge-agents.ai/v1/services/refinancing-window-intelligence",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-21",
-      "last_checked": "2026-09-21"
-    },
-    {
       "url": "https://x402.sniperx.fun/api/v1/token/activities/smarttraders_kol",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -164,27 +122,6 @@
       "misses": 1,
       "since": "2026-09-28",
       "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://x402.agentutility.ai/text-to-speech",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-09-28",
-      "last_checked": "2026-09-28"
-    },
-    {
-      "url": "https://x402.agentutility.ai/astro-times",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-10-05",
-      "last_checked": "2026-10-05"
-    },
-    {
-      "url": "https://api.seerium.xyz/v1/prediction/rewards",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-10-12",
-      "last_checked": "2026-10-12"
     },
     {
       "url": "https://apexfaucet.xyz/api/x402/arc-eurc",
@@ -229,18 +166,67 @@
       "last_checked": "2026-10-19"
     },
     {
-      "url": "https://goodsong.dev/verify/citation",
-      "reason": "ECONNRESET",
-      "misses": 1,
-      "since": "2026-11-02",
-      "last_checked": "2026-11-02"
-    },
-    {
       "url": "https://x402-v2-mint-rag-chunker.vercel.app/v1/rag-chunk",
       "reason": "HTTP 503",
       "misses": 1,
       "since": "2026-11-02",
       "last_checked": "2026-11-02"
+    },
+    {
+      "url": "https://api.jpverify.com/mcp#jp_invoice_registration_verify#jp_invoice_registration_verify",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://api.thaikit.dev/thai-time",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://base-facts.yankii.fr/v1/wallet",
+      "reason": "ENOTFOUND",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://saylorinnovations.com/api/bio/pdb/:pdb_id",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://saylorinnovations.com/api/evm/ethereum/erc1155-balance/:address/:address2/1",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://saylorinnovations.com/api/rail/finland/station/:code",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://signal-api.shicoars.workers.dev/p/regime-hot",
+      "reason": "HTTP 500",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
+    },
+    {
+      "url": "https://soo-lichenologic-wan.ngrok-free.dev/generate-text",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-09"
     }
   ]
 }

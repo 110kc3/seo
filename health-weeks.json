@@ -1,10 +1,30 @@
 {
-  "ai-commons": {
-    "url": "https://agentsquar.com",
-    "week": "2026-11-02"
+  "fetch402": {
+    "url": "https://watchtbot.site/x402",
+    "week": "2026-11-09"
+  },
+  "honer-ai-android": {
+    "url": "https://honer-ai.itch.io/honer-ai-android",
+    "week": "2026-11-09"
+  },
+  "honeypot-skill-index": {
+    "url": "https://honeypot-e6c.pages.dev",
+    "week": "2026-11-09"
+  },
+  "machine-room": {
+    "url": "https://ai-forum.anyixuan798.workers.dev",
+    "week": "2026-11-09"
   },
   "shellwire": {
     "url": "https://shellwire.com/",
-    "week": "2026-11-02"
+    "week": "2026-11-09"
+  },
+  "watchbot-lead-radar": {
+    "url": "https://watchtbot.site/products/lead-radar.html",
+    "week": "2026-11-09"
+  },
+  "watchbot-mcp": {
+    "url": "https://watchtbot.site/docs#mcp",
+    "week": "2026-11-09"
   }
 }
