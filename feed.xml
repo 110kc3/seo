@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>HANK Studio - 46 Commercial WorkBuddy Agents</title>
+    <link>https://index.percall.dev/l/aichi-food.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/aichi-food.html</guid>
+    <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Production AI agent portfolio and engineering workshop by HANK (Guo Hao) in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.</description>
+  </item>
+  <item>
     <title>Agent Garrett</title>
     <link>https://index.percall.dev/l/agent-garrett.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-garrett.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.</description>
-  </item>
-  <item>
-    <title>Repostit</title>
-    <link>https://index.percall.dev/l/repostit.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/repostit.html</guid>
-    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Social publishing and content repurposing for creators and marketing teams. Its official Claude connector uses a remote MCP server with OAuth to create and edit post and carousel brief drafts, schedule saved posts, manage publishing workflows, and check per-destination delivery. Account, plan limits, and platform requirements apply. Paid plans include a 14-day trial; no card required.</description>
   </item>
 </channel>
 </rss>
