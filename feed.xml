@@ -15,6 +15,14 @@
     <description>Production AI agent portfolio and engineering workshop by HANK (Guo Hao) in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.</description>
   </item>
   <item>
+    <title>RAYDA TECH - Enterprise AI Agent Studio</title>
+    <link>https://index.percall.dev/l/rayda-tech.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/rayda-tech.html</guid>
+    <pubDate>Tue, 10 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by Chengdu Xinjin Rayda Information Technology Service Center.</description>
+  </item>
+  <item>
     <title>Agent Garrett</title>
     <link>https://index.percall.dev/l/agent-garrett.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/agent-garrett.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>AEGIS by 100monkeys.ai, in beta, is a self-hosted orchestrator that runs autonomous agents in isolated, policy-enforced runtimes with durable FSM state. It enforces isolation and policy on every tool call, and each run is a durable state machine. Free and open source under AGPL-3.0, written in Rust; source at github.com/100monkeys-ai/aegis-orchestrator. Install: curl -fsSL https://get.100monkeys.ai | bash. We build AEGIS at 100monkeys.ai.</description>
-  </item>
-  <item>
-    <title>Carbon Forge</title>
-    <link>https://index.percall.dev/l/carbon-forge.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/carbon-forge.html</guid>
-    <pubDate>Wed, 28 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Carbon Forge is source control and a shared record for people and AI agents. Code, files and prose live in one record on the server, read and written through the same tools over MCP. An agent opens a lane, a set of patches over the trunk, instead of cloning; each landing is one all-or-nothing changeset; blame, grep and history run on the server; git is a projection pushed to GitHub. Public workspaces read over MCP without a token. We build Carbon Forge at 100monkeys.ai.</description>
   </item>
 </channel>
 </rss>

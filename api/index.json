@@ -1,5 +1,5 @@
 {
-  "count": 216,
+  "count": 217,
   "updated": "2026-11-10",
   "listings": [
     {
@@ -18,6 +18,28 @@
         "mcp",
         "rag",
         "devtools"
+      ],
+      "created": "2026-11-10",
+      "github_user": "HankGuo",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "rayda-tech",
+      "name": "RAYDA TECH - Enterprise AI Agent Studio",
+      "url": "https://rayda-tech.com",
+      "description": "Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by Chengdu Xinjin Rayda Information Technology Service Center.",
+      "category": "agent",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://rayda-tech.com/llms.txt"
+      },
+      "tags": [
+        "enterprise-ai",
+        "agents",
+        "rag",
+        "mcp",
+        "automation"
       ],
       "created": "2026-11-10",
       "github_user": "HankGuo",
