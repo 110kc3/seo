@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 217 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 218 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (217)
+## All listings (218)
+
+### Publora – Social Media Scheduler (publora)
+- url: https://publora.com/?utm_source=percall&utm_medium=referral&utm_campaign=ai-directories
+- category: mcp · pricing: freemium · tags: social-media, scheduling, publishing, mcp, rest-api
+- Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user's own Publora account. Free Starter plan; paid plans per account.
+- llms_txt: https://publora.com/llms.txt
+- openapi: https://docs.publora.com/openapi.json
+- mcp: https://mcp.publora.com/mcp
+- listing JSON: https://index.percall.dev/listings/publora.json
+- listing page: https://index.percall.dev/l/publora.html
 
 ### HANK Studio - 46 Commercial WorkBuddy Agents (aichi-food)
 - url: https://aichi.food

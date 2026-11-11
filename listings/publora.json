@@ -1,0 +1,25 @@
+{
+  "slug": "publora",
+  "name": "Publora – Social Media Scheduler",
+  "url": "https://publora.com/?utm_source=percall&utm_medium=referral&utm_campaign=ai-directories",
+  "description": "Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user's own Publora account. Free Starter plan; paid plans per account.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://publora.com/llms.txt",
+    "openapi": "https://docs.publora.com/openapi.json",
+    "mcp": "https://mcp.publora.com/mcp"
+  },
+  "tags": [
+    "social-media",
+    "scheduling",
+    "publishing",
+    "mcp",
+    "rest-api"
+  ],
+  "submitted_by": "Publora team",
+  "created": "2026-11-11",
+  "github_user": "publora-team",
+  "tier": "free",
+  "origin": "self-registered"
+}

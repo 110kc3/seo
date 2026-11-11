@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/publora.html",
+      "url": "https://index.percall.dev/l/publora.html",
+      "title": "Publora – Social Media Scheduler",
+      "content_text": "Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user's own Publora account. Free Starter plan; paid plans per account.",
+      "date_published": "2026-11-11T00:00:00Z",
+      "tags": [
+        "mcp",
+        "social-media",
+        "scheduling",
+        "publishing",
+        "mcp",
+        "rest-api"
+      ],
+      "external_url": "https://publora.com/?utm_source=percall&utm_medium=referral&utm_campaign=ai-directories"
+    },
+    {
       "id": "https://index.percall.dev/l/aichi-food.html",
       "url": "https://index.percall.dev/l/aichi-food.html",
       "title": "HANK Studio - 46 Commercial WorkBuddy Agents",
@@ -745,22 +761,6 @@
         "football"
       ],
       "external_url": "https://ozilgoal.run/"
-    },
-    {
-      "id": "https://index.percall.dev/l/aegis-by-100monkeys.html",
-      "url": "https://index.percall.dev/l/aegis-by-100monkeys.html",
-      "title": "AEGIS by 100monkeys.ai",
-      "content_text": "AEGIS by 100monkeys.ai, in beta, is a self-hosted orchestrator that runs autonomous agents in isolated, policy-enforced runtimes with durable FSM state. It enforces isolation and policy on every tool call, and each run is a durable state machine. Free and open source under AGPL-3.0, written in Rust; source at github.com/100monkeys-ai/aegis-orchestrator. Install: curl -fsSL https://get.100monkeys.ai | bash. We build AEGIS at 100monkeys.ai.",
-      "date_published": "2026-10-28T00:00:00Z",
-      "tags": [
-        "agent",
-        "orchestrator",
-        "agents",
-        "self-hosted",
-        "open-source",
-        "rust"
-      ],
-      "external_url": "https://100monkeys.ai/?utm_source=percall&utm_medium=referral&utm_campaign=push-2026-10-28"
     }
   ]
 }
