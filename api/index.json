@@ -1,12 +1,12 @@
 {
   "count": 217,
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "listings": [
     {
       "slug": "aichi-food",
       "name": "HANK Studio - 46 Commercial WorkBuddy Agents",
       "url": "https://aichi.food",
-      "description": "Production AI agent portfolio and engineering workshop by HANK (Guo Hao) in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.",
+      "description": "Production AI agent portfolio and engineering workshop by HANK in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.",
       "category": "agent",
       "pricing": "free",
       "machine_endpoints": {
@@ -22,7 +22,8 @@
       "created": "2026-11-10",
       "github_user": "HankGuo",
       "tier": "free",
-      "origin": "self-registered"
+      "origin": "self-registered",
+      "updated": "2026-11-11"
     },
     {
       "slug": "rayda-tech",

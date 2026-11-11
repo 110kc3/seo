@@ -308,7 +308,7 @@ A response does not verify authentication, payment or tool behavior.
 ### HANK Studio - 46 Commercial WorkBuddy Agents (aichi-food)
 - url: https://aichi.food
 - category: agent · pricing: free · tags: agents, ai, mcp, rag, devtools
-- Production AI agent portfolio and engineering workshop by HANK (Guo Hao) in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.
+- Production AI agent portfolio and engineering workshop by HANK in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.
 - llms_txt: https://aichi.food/llms.txt
 - listing JSON: https://index.percall.dev/listings/aichi-food.json
 - listing page: https://index.percall.dev/l/aichi-food.html
