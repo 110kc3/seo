@@ -316,7 +316,7 @@ A response does not verify authentication, payment or tool behavior.
 ### RAYDA TECH - Enterprise AI Agent Studio (rayda-tech)
 - url: https://rayda-tech.com
 - category: agent · pricing: paid · tags: enterprise-ai, agents, rag, mcp, automation
-- Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by Chengdu Xinjin Rayda Information Technology Service Center.
+- Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by RAYDA TECH in Chengdu.
 - llms_txt: https://rayda-tech.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/rayda-tech.json
 - listing page: https://index.percall.dev/l/rayda-tech.html
