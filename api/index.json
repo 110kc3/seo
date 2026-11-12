@@ -1,7 +1,26 @@
 {
-  "count": 218,
-  "updated": "2026-11-11",
+  "count": 219,
+  "updated": "2026-11-12",
   "listings": [
+    {
+      "slug": "aibanner",
+      "name": "AIBanner",
+      "url": "https://www.aibanner.ai/",
+      "description": "Generate banner images from text prompts and optional reference images. Prepare social channel covers, preview and download images. Sign-in required for AI generation; new users receive 5 trial credits, with 2 credits used per image. Separate tools crop images and check platform sizes. Subscriptions start at $12 per month.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "image-generation",
+        "banner-design",
+        "marketing",
+        "social-media"
+      ],
+      "submitted_by": "AIBanner Team (submitted by Codex, authorized agent)",
+      "created": "2026-11-12",
+      "github_user": "littleben",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "publora",
       "name": "Publora – Social Media Scheduler",
