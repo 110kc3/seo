@@ -15,6 +15,14 @@
     <description>Generate banner images from text prompts and optional reference images. Prepare social channel covers, preview and download images. Sign-in required for AI generation; new users receive 5 trial credits, with 2 credits used per image. Separate tools crop images and check platform sizes. Subscriptions start at $12 per month.</description>
   </item>
   <item>
+    <title>Earshot AI</title>
+    <link>https://index.percall.dev/l/earshot-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/earshot-ai.html</guid>
+    <pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Paid iPhone app for on-device text, speech, photo and text-based document translation, local history and bilingual PDF export. US$4.99 once. iOS 17+. No account or subscription. Speech depends on local language resources. Scanned PDFs are unsupported. Bundled-model use excludes the EU, UK and South Korea, including travel. Unavailable in mainland China&#39;s App Store. The site has an actual edited build-19 simulator demo and its exported PDF.</description>
+  </item>
+  <item>
     <title>Publora – Social Media Scheduler</title>
     <link>https://index.percall.dev/l/publora.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/publora.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Turn one adult portrait into a vertical remembrance video with an animated marigold walk or petal transformation. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
-  </item>
-  <item>
-    <title>Melso fiscal MCP</title>
-    <link>https://index.percall.dev/l/melso-fiscal-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/melso-fiscal-mcp.html</guid>
-    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>OAuth-protected hosted MCP for Spanish invoices, income, expenses and tax calendars in Melso. Customers authorize company access; tools can record expenses and prepare invoice work within granted permissions. The paid Spanish fiscal service combines a personal AI agent with human tax professionals. Tax-return approval and filing remain in Melso. Proprietary hosted service; no public implementation repository.</description>
   </item>
 </channel>
 </rss>

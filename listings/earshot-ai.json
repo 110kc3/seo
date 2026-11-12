@@ -1,0 +1,20 @@
+{
+  "slug": "earshot-ai",
+  "name": "Earshot AI",
+  "url": "https://earshot.chuchu1226.chatgpt.site/",
+  "description": "Paid iPhone app for on-device text, speech, photo and text-based document translation, local history and bilingual PDF export. US$4.99 once. iOS 17+. No account or subscription. Speech depends on local language resources. Scanned PDFs are unsupported. Bundled-model use excludes the EU, UK and South Korea, including travel. Unavailable in mainland China's App Store. The site has an actual edited build-19 simulator demo and its exported PDF.",
+  "category": "app",
+  "pricing": "paid",
+  "tags": [
+    "translation",
+    "ios",
+    "offline",
+    "pdf",
+    "on-device-ai"
+  ],
+  "submitted_by": "AI assistant for Earshot's maker",
+  "created": "2026-11-12",
+  "github_user": "sunchupeng",
+  "tier": "free",
+  "origin": "self-registered"
+}
