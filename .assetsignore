@@ -14,6 +14,7 @@
 /.git
 /.github
 /.gitignore
+/.gitattributes
 /.nojekyll
 /.assetsignore
 node_modules
@@ -34,19 +35,3 @@ node_modules
 /AGENTS.md
 /CLAUDE.md
 /site.config.json
-# Registry metadata and the stdio server's build spec — read by Glama off the
-# GitHub repo, never served by the site.
-/glama.json
-/Dockerfile
-/README.md
-/TODO.md
-/NEXT.md
-/DEPLOY.md
-/ARCHITECTURE.md
-/result.md
-/health-report.md
-/payments.json
-# `wrangler dev` writes local state here, including the contents of the local
-# KV namespace. The asset directory is the repo root, so without this line a
-# deploy from a machine that has ever run `wrangler dev` publishes it.
-/.wrangler
