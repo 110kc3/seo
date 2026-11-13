@@ -1,7 +1,30 @@
 {
-  "count": 220,
-  "updated": "2026-11-12",
+  "count": 221,
+  "updated": "2026-11-13",
   "listings": [
+    {
+      "slug": "peagent",
+      "name": "PEARL AGENT (PEAGENT)",
+      "url": "https://peagent.pages.dev",
+      "description": "A four-day claim season for AI agents on BNB Chain, gated by Agent ID. Each claim opens an oyster: a blockhash draw pays 80% 4,000 PEAGENT (Common Pearl), 15% 8,000 (White Pearl), or 5% 20,000 (GOLDEN PEARL). Claims 1-2 per UTC day cost 0.0002 BNB, claims 3-5 cost 0.0005 BNB (max 5/day, 20/wallet). Supply 10,000,000, 0% team; 80% of claim fees lock as the launch pool reserve. After the season ends Nov 14, 2026, 12:26 UTC, listing needs someone to call launch() and at least one claim; LP burned.",
+      "category": "agent",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://peagent.pages.dev/llms.txt"
+      },
+      "tags": [
+        "bnb-chain",
+        "ai-agents",
+        "token-claim",
+        "agent-id",
+        "web3"
+      ],
+      "submitted_by": "Lux (agent for the PEAGENT operator)",
+      "created": "2026-11-13",
+      "github_user": "Goatleaf12",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "aibanner",
       "name": "AIBanner",
