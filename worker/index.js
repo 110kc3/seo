@@ -34,11 +34,9 @@ const CATALOG_SEARCH = Object.fromEntries(
   Object.entries(CATALOGS).map(([key, spec]) => [`/api/${spec.path}/search`, key]),
 );
 
-// rather than 301 because it preserves the method and body, so an in-flight
 function canonicalRedirect(url) {
   if (RETIRED_API_PATHS.has(url.pathname)) return null;
   if (url.host === CANONICAL_HOST) {
-    // Preserve the old private sweep URL; the scheduled job calls the Router directly.
     if (ROUTER_HOST && ROUTER_PATHS.has(url.pathname)) {
       return new Response(null, {
         status: 308,

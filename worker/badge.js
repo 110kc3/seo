@@ -28,10 +28,6 @@ const COLOURS = {
 
 const GRADE_COLOURS = { A: '#0b6e4f', B: '#4c9141', C: '#a8791b', D: '#c26a1c', E: '#b3402f', F: '#9b2c1e' };
 
-/**
- * Shields-style two-pill badge. Pure and exported so its geometry and escaping
- * are testable without a runtime.
- */
 export function badgeSvg(label, message, colour) {
   const padding = 9;
   const labelW = textWidth(label) + padding * 2;

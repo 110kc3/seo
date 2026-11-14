@@ -1,5 +1,3 @@
-//   * `auditUrl()` needs HTMLRewriter, a Worker global. It cannot run under
-
 import { CHECK_META, SIGNAL_META, CHECK_LABELS, SNIPPETS, snippetFor, letterGrade } from '../worker/audit.js';
 
 export function fixFor(id) {

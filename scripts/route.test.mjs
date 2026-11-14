@@ -204,9 +204,9 @@ test('candidates come back probed, alive first, cheapest live quote next', async
   );
   const body = await r.json();
   assert.deepEqual(body.candidates.map((c) => c.url), [
-    'https://cheap.example/c',   // alive, live quote $0.003 — cheaper than its catalog price
-    'https://pricey.example/b',  // alive, live quote $0.020
-    'https://dead.example/a',    // did not answer: reported, not hidden
+    'https://cheap.example/c',
+    'https://pricey.example/b',
+    'https://dead.example/a',
   ]);
   assert.equal(body.candidates[2].probe.alive, false);
   assert.match(body.settlement, /never holds, forwards or fronts funds/i);

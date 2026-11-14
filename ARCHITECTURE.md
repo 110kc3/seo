@@ -69,6 +69,7 @@ Everything that reaches disk or generated HTML goes through `scripts/validate.mj
 - **JSON-LD `<`-escaped** against `</script>` breakout.
 - **Slug regex + resolved-path assertion** stop path traversal.
 - **`reconstruct()` rebuilds accepted objects field-by-field from an allowlist** — the submitted object is never written through, so `__proto__` and junk keys cannot survive.
+- **`origin` is server-set and ignored as input**, like `tier`; the per-account cap counts `self-registered` listings, and a listing without `origin` defaults to `self-registered` so it costs its account a slot (fail closed).
 - `api/schema.json` is *generated from the same constants that enforce validation*, so published docs cannot drift from behaviour.
 
 ## Payments

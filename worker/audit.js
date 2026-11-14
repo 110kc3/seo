@@ -367,11 +367,6 @@ export function scoreDescription(score) {
       : score >= 30 ? 'low checklist coverage' : 'very low checklist coverage';
 }
 
-/**
- * Percentage of the achievable weight, plus the band it falls in. Pure and
- * exported so the "a perfect site scores exactly 100" invariant is testable —
- * `auditUrl` itself needs HTMLRewriter and so cannot run under `node --test`.
- */
 export function scoreChecks(checks) {
   const weightOf = (c) => (Number.isFinite(c.weight) ? c.weight : 0);
   const totalWeight = checks.reduce((sum, c) => sum + weightOf(c), 0);
@@ -381,16 +376,6 @@ export function scoreChecks(checks) {
   return { score, grade };
 }
 
-/**
- * @param {string} target        already through urlError()
- * @param {Function} [fetchImpl] fetcher for the target's own origin. Defaults to
- *   the global fetch; callers pass the ASSETS binding when the target *is* this
- *   deployment, because a Worker cannot fetch its own hostname — Cloudflare
- *   answers 522 on both the custom domain and the workers.dev one, so auditing
- *   our own site (the showcase, and the first thing anyone types) failed
- *   outright. No check reads a response header, so serving those sub-requests
- *   from the asset binding scores identically.
- */
 function jsonDoc(res) {
   if (!res?.ok) return { ok: false, soft404: false };
   if (res.truncated) {

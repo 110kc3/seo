@@ -243,7 +243,6 @@ async function sweepRework(api, ledger, now) {
   }
 }
 
-/** One full pass. Exported so a test can drive it with a fake API. */
 export async function tick(api, ledger, now = Date.now) {
   await sweepHires(api, ledger, now);
   await sweepRework(api, ledger, now);

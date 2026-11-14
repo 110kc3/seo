@@ -1,4 +1,3 @@
-// These modules are deliberately free of Cloudflare-only globals at import
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
@@ -535,7 +534,6 @@ test('no source directory is published as a static asset by accident', async () 
   const ignored = new Set(
     (await readFile(new URL('../.assetsignore', import.meta.url), 'utf8'))
       .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
-      // Entries are anchored (`/docs`); the names read off disk are not.
       .map((l) => l.replace(/^\//, '')),
   );
 
@@ -1562,7 +1560,7 @@ test('stats report which hostname was asked, and do not invent one for old rows'
     { client_type: 'browser', path_bucket: 'home', host: '', requests: '5' },
   ]);
   assert.deepEqual(body.by_host, {
-    unrecorded: 60,             // null and '' both mean "before we measured this"
+    unrecorded: 60,
     'index.percall.dev': 30,
     'percall.dev': 12,
     'index.kc-it.pl': 3,

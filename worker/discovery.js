@@ -216,7 +216,6 @@ export async function handleCatalogSearch(key, url, env, base) {
     const out = Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
     if (catalog.unreachable?.has(out.url)) out.unreachable = true;
     const observation = catalog.observations?.get(out.url);
-    // The file retains failures, not per-endpoint successes. Its global sample
     out.health = observation ? {
       state: 'failed',
       last_checked: observation.last_checked ?? null,
