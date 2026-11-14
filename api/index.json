@@ -1,7 +1,30 @@
 {
-  "count": 225,
+  "count": 226,
   "updated": "2026-11-14",
   "listings": [
+    {
+      "slug": "beliefstate",
+      "name": "BeliefState",
+      "url": "https://beliefstate.ai/",
+      "description": "Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://beliefstate.ai/llms.txt",
+        "openapi": "https://beliefstate.ai/openapi.json",
+        "mcp": "https://beliefstate.ai/v1/research/mcp"
+      },
+      "tags": [
+        "investor-research",
+        "finance",
+        "stocks",
+        "x402"
+      ],
+      "created": "2026-11-14",
+      "github_user": "Antcolombo",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "kling-ai-official-mcp",
       "name": "Kling AI Official MCP",

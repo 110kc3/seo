@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 225 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 226 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (225)
+## All listings (226)
+
+### BeliefState (beliefstate)
+- url: https://beliefstate.ai/
+- category: mcp · pricing: freemium · tags: investor-research, finance, stocks, x402
+- Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.
+- llms_txt: https://beliefstate.ai/llms.txt
+- openapi: https://beliefstate.ai/openapi.json
+- mcp: https://beliefstate.ai/v1/research/mcp
+- listing JSON: https://index.percall.dev/listings/beliefstate.json
+- listing page: https://index.percall.dev/l/beliefstate.html
 
 ### Kling AI Official MCP (kling-ai-official-mcp)
 - url: https://kling.ai/app/mcp/guide

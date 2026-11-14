@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/beliefstate.html",
+      "url": "https://index.percall.dev/l/beliefstate.html",
+      "title": "BeliefState",
+      "content_text": "Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.",
+      "date_published": "2026-11-14T00:00:00Z",
+      "tags": [
+        "mcp",
+        "investor-research",
+        "finance",
+        "stocks",
+        "x402"
+      ],
+      "external_url": "https://beliefstate.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "title": "Kling AI Official MCP",
@@ -752,22 +767,6 @@
         "apify"
       ],
       "external_url": "https://foundry.echoempire.org/"
-    },
-    {
-      "id": "https://index.percall.dev/l/heynab.html",
-      "url": "https://index.percall.dev/l/heynab.html",
-      "title": "Nab",
-      "content_text": "Phone, SMS and email tools for AI agents, with owner-granted permissions and approvals for sensitive actions. Nab is an early beta with web and iOS access. Tool use requires paid activation; availability depends on country and provider. Developer guide: https://heynab.com/developers. Sign up: https://heynab.com/login.",
-      "date_published": "2026-10-30T00:00:00Z",
-      "tags": [
-        "api",
-        "phone",
-        "sms",
-        "email",
-        "ai-agents",
-        "productivity"
-      ],
-      "external_url": "https://heynab.com"
     }
   ]
 }

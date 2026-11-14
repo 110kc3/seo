@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>BeliefState</title>
+    <link>https://index.percall.dev/l/beliefstate.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/beliefstate.html</guid>
+    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.</description>
+  </item>
+  <item>
     <title>Kling AI Official MCP</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Machine-readable catalog of EchoEmpire&#39;s pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.</description>
-  </item>
-  <item>
-    <title>Nab</title>
-    <link>https://index.percall.dev/l/heynab.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/heynab.html</guid>
-    <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Phone, SMS and email tools for AI agents, with owner-granted permissions and approvals for sensitive actions. Nab is an early beta with web and iOS access. Tool use requires paid activation; availability depends on country and provider. Developer guide: https://heynab.com/developers. Sign up: https://heynab.com/login.</description>
   </item>
 </channel>
 </rss>
