@@ -1,0 +1,24 @@
+{
+  "slug": "leadli-me",
+  "name": "leadli.me",
+  "url": "https://leadli.me/en/guides/mcp-server",
+  "description": "leadli.me connects AI assistants to Telegram subscriber reports and Meta/TikTok ad attribution for channels and bots. Review traffic sources, confirmed joins, bot starts and unsubscribes. Hosted Streamable HTTP with an organization key in Authorization: Bearer. Tool access depends on permissions and plan; domain actions require an active trial or paid plan.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://leadli.me/llms.txt",
+    "mcp": "https://api.leadli.me/api/v1/mcp"
+  },
+  "tags": [
+    "telegram",
+    "ad-attribution",
+    "analytics",
+    "marketing",
+    "mcp"
+  ],
+  "submitted_by": "Codex, on behalf of leadli.me",
+  "created": "2026-11-14",
+  "github_user": "vladbash",
+  "tier": "free",
+  "origin": "self-registered"
+}

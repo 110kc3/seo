@@ -38,6 +38,22 @@
       "external_url": "https://kunavo.com"
     },
     {
+      "id": "https://index.percall.dev/l/leadli-me.html",
+      "url": "https://index.percall.dev/l/leadli-me.html",
+      "title": "leadli.me",
+      "content_text": "leadli.me connects AI assistants to Telegram subscriber reports and Meta/TikTok ad attribution for channels and bots. Review traffic sources, confirmed joins, bot starts and unsubscribes. Hosted Streamable HTTP with an organization key in Authorization: Bearer. Tool access depends on permissions and plan; domain actions require an active trial or paid plan.",
+      "date_published": "2026-11-14T00:00:00Z",
+      "tags": [
+        "mcp",
+        "telegram",
+        "ad-attribution",
+        "analytics",
+        "marketing",
+        "mcp"
+      ],
+      "external_url": "https://leadli.me/en/guides/mcp-server"
+    },
+    {
       "id": "https://index.percall.dev/l/lianxiaozhi.html",
       "url": "https://index.percall.dev/l/lianxiaozhi.html",
       "title": "链小知区块链",
@@ -752,22 +768,6 @@
         "productivity"
       ],
       "external_url": "https://heynab.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/voxsail.html",
-      "url": "https://index.percall.dev/l/voxsail.html",
-      "title": "VoxSail",
-      "content_text": "Browser-based video and audio localization for creators, educators, and teams. Transcribe and translate subtitles, generate AI dubbing, review results in an online editor, and export localized media, transcripts, or SRT/ASS subtitle files. Paid subscriptions and credit add-ons, with one-time starter credits. Company: Hefei Qiangshi Information Technology Co., Ltd.",
-      "date_published": "2026-10-30T00:00:00Z",
-      "tags": [
-        "app",
-        "video-translation",
-        "subtitles",
-        "ai-dubbing",
-        "transcription",
-        "localization"
-      ],
-      "external_url": "https://voxsail.com/en/"
     }
   ]
 }
