@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 222 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 223 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (222)
+## All listings (223)
+
+### Kling AI Official MCP (kling-ai-official-mcp)
+- url: https://kling.ai/app/mcp/guide
+- category: mcp · pricing: paid · tags: ai-video, image-generation, mcp, creative-tools, oauth
+- Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global
+- mcp: https://kling.ai/mcp/plugin
+- listing JSON: https://index.percall.dev/listings/kling-ai-official-mcp.json
+- listing page: https://index.percall.dev/l/kling-ai-official-mcp.html
 
 ### 链小知区块链 (lianxiaozhi)
 - url: https://lianxiaozhi.com

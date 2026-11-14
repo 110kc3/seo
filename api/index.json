@@ -1,7 +1,30 @@
 {
-  "count": 222,
+  "count": 223,
   "updated": "2026-11-14",
   "listings": [
+    {
+      "slug": "kling-ai-official-mcp",
+      "name": "Kling AI Official MCP",
+      "url": "https://kling.ai/app/mcp/guide",
+      "description": "Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "mcp": "https://kling.ai/mcp/plugin"
+      },
+      "tags": [
+        "ai-video",
+        "image-generation",
+        "mcp",
+        "creative-tools",
+        "oauth"
+      ],
+      "submitted_by": "Wlain, assisting Kling AI promotion",
+      "created": "2026-11-14",
+      "github_user": "Wlain",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "lianxiaozhi",
       "name": "链小知区块链",

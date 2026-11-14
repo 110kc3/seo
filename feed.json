@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "title": "Kling AI Official MCP",
+      "content_text": "Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global",
+      "date_published": "2026-11-14T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-video",
+        "image-generation",
+        "mcp",
+        "creative-tools",
+        "oauth"
+      ],
+      "external_url": "https://kling.ai/app/mcp/guide"
+    },
+    {
       "id": "https://index.percall.dev/l/lianxiaozhi.html",
       "url": "https://index.percall.dev/l/lianxiaozhi.html",
       "title": "链小知区块链",
@@ -750,20 +766,6 @@
         "creative-tools"
       ],
       "external_url": "https://ai-tinydesk.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/day-of-the-dead-pet-ai.html",
-      "url": "https://index.percall.dev/l/day-of-the-dead-pet-ai.html",
-      "title": "Day of the Dead Pet AI",
-      "content_text": "Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.",
-      "date_published": "2026-10-29T00:00:00Z",
-      "tags": [
-        "app",
-        "video",
-        "pets",
-        "photo-to-video"
-      ],
-      "external_url": "https://dayofthedeadpet-ai.com/"
     }
   ]
 }
