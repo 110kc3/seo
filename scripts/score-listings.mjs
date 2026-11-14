@@ -1,5 +1,3 @@
-// Refresh stored grades through the real Worker scorer. Operations authentication
-// bypasses the anonymous rate limit only for URLs in the deployed registry.
 import { readFileSync, writeFileSync, readdirSync, appendFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -26,8 +24,6 @@ export async function refreshScores({ listings, previous = {}, base, token, fetc
     try {
       const resp = await fetchImpl(url.href, {
         signal: ctl.signal,
-        // Never follow a redirect with the operations credential. The configured
-        // canonical host owns this path; a moved service must be configured first.
         redirect: 'error',
         headers: {
           accept: 'application/json', authorization: `Bearer ${token}`,
@@ -54,7 +50,6 @@ export async function refreshScores({ listings, previous = {}, base, token, fetc
       const kept = previous[listing.slug];
       if (kept) { scores[listing.slug] = kept; retained++; }
       else missing++;
-      // No remote error bodies or bearer values belong in public job logs.
       const reason = e.name === 'AbortError' ? 'timeout' : String(e.message ?? e.name).replaceAll(token, '[redacted]').slice(0, 160);
       failures.push({ slug: listing.slug, reason, retained: Boolean(kept) });
     } finally { clearTimeout(timeout); }

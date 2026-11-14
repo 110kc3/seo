@@ -1,7 +1,3 @@
-// Generates every derived artifact of the AI Product Index from
-// listings/*.json + templates/ + site.config.json. Output is a pure function
-// of those inputs (no timestamps): running the build twice yields zero diff.
-// Fails hard on any invalid listing so a bad manual edit can't reach the site.
 import { readFileSync, writeFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
 import { reportPage, x402Page, mcpPage, leaderboardPage, checkPages, comparePage, apexPage, routerPage } from './pages.mjs';
 import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../worker/audit.js';
@@ -15,31 +11,17 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
 const BASE = cfg.base.replace(/\/+$/, '');
 const REPO = cfg.repo;
-// The umbrella. Required rather than optional: the templates link up to it, and
-// a portfolio page nothing links to is a page search engines never find — which
-// is exactly the state percall.dev was in on the day it shipped.
 const APEX = cfg.apex_host;
 if (!APEX) throw new Error('site.config.json: apex_host is required — the site templates link up to the umbrella');
 
-// The Router's hostname, empty until its custom domain is attached. Empty has to
-// produce exactly today's output, so both the endpoint base and the page's own
-// canonical address are derived here rather than guessed at each use site.
 const ROUTER_HOST = cfg.router_host || '';
 const ROUTER_BASE = ROUTER_HOST ? `https://${ROUTER_HOST}` : BASE;
 const ROUTER_PAGE = ROUTER_HOST
   ? { base: ROUTER_BASE, path: '/' }
   : { base: BASE, path: '/router.html' };
 
-// How many checks the default set actually runs, derived from the scorer rather
-// than typed. Ten published surfaces said "13 checks" for a day after v2 became
-// the default and started running 20 — the manifests, the agent card, the MCP
-// card, the plugin manifest, the Agent Skill and the homepage all told agents a
-// number the audit had stopped using. Same discipline that moved the weights and
-// remedies into CHECK_META: the thing being sold cannot drift from its
-// description if the description is generated from it.
 const CHECKS = String(Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length);
 
-// --- load + validate the source of truth ---
 const listingDir = join(ROOT, 'listings');
 mkdirSync(listingDir, { recursive: true });
 const files = readdirSync(listingDir).filter((f) => f.endsWith('.json')).sort();
@@ -58,7 +40,6 @@ for (const f of files) {
   urls.set(n, f);
   listings.push(obj);
 }
-// Paid tiers rank above free (that IS the paid product), then newest first.
 const TIER_RANK = { featured: 0, verified: 1, free: 2 };
 listings.sort((a, b) => {
   const r = (TIER_RANK[a.tier] ?? 2) - (TIER_RANK[b.tier] ?? 2);
@@ -71,10 +52,6 @@ const tpl = (name) => readFileSync(join(ROOT, 'templates', name), 'utf8');
 const readJson = (rel) => {
   try { return JSON.parse(readFileSync(join(ROOT, rel), 'utf8')); } catch { return null; }
 };
-// Catalog sizes move every week, so any generated surface that quotes them
-// must read the same committed snapshots as the catalog pages. The previous
-// hand-written approximations drifted by thousands while every build stayed
-// green, which is exactly what these generated documents are meant to prevent.
 const x402Stats = readJson('api/x402/stats.json');
 const mcpStats = readJson('api/mcp/stats.json');
 const catalogCount = (value, fallback) => Number.isInteger(value)
@@ -167,7 +144,6 @@ ${jsonLd(ld)}
 `;
 }
 
-// --- generate ---
 mkdirSync(join(ROOT, 'api'), { recursive: true });
 const updated = listings.length ? listings.map((l) => l.updated ?? l.created).sort().at(-1) : null;
 writeFileSync(join(ROOT, 'api', 'index.json'), JSON.stringify({ count: listings.length, updated, listings }, null, 2) + '\n');
@@ -184,55 +160,21 @@ const listItems = listings.map((l) => {
 writeFileSync(join(ROOT, 'index.html'), fill(tpl('index.html'), { LISTINGS_HTML: listItems }));
 
 writeFileSync(join(ROOT, '404.html'), fill(tpl('404.html')));
-// Owner tool, not content: noindex on the page, Disallow in robots, absent
-// from the sitemap. The data behind it is bearer-gated at the Worker.
 writeFileSync(join(ROOT, 'dashboard.html'), fill(tpl('dashboard.html')));
 writeFileSync(join(ROOT, 'llms.txt'), fill(tpl('llms.txt')));
 writeFileSync(join(ROOT, 'robots.txt'), fill(tpl('robots.txt')));
 writeFileSync(join(ROOT, 'openapi.yaml'), fill(tpl('openapi.yaml')));
 
-// Well-known surfaces. Only reachable now that the index sits at a domain root —
-// on the old /seo/ project path there was no /.well-known to serve.
 mkdirSync(join(ROOT, '.well-known'), { recursive: true });
-// A2A agent card (singular). Describes this service as an A2A agent.
-//
-// Written to BOTH paths from one template, because the spec moved and the
-// installed base did not. A2A is 1.0 under the Linux Foundation and the card
-// belongs at /.well-known/agent-card.json; /.well-known/agent.json is the
-// pre-0.3 path, where a spec-compliant 1.0 client will never look. Older
-// clients only know the old path. One template, two files, no drift — the
-// alternative is being invisible to one generation of client or the other.
 const agentCard = fill(tpl('agent-card.json'));
 writeFileSync(join(ROOT, '.well-known', 'agent-card.json'), agentCard);
 writeFileSync(join(ROOT, '.well-known', 'agent.json'), agentCard);
-// agents.json (PLURAL) — a different spec from the card above, and the one
-// agent-readiness auditors read: it enumerates the machine-readable interfaces,
-// endpoints and policies of the *site*. Everything it advertises is served.
 writeFileSync(join(ROOT, '.well-known', 'agents.json'), fill(tpl('agents-manifest.json')));
-// RFC 9116 security contact. The Expires date is fixed in the template, not
-// computed, so the build stays a pure function of its inputs.
 writeFileSync(join(ROOT, '.well-known', 'security.txt'), fill(tpl('security.txt')));
-// MCP server card — how a client finds the remote MCP endpoint at /mcp without
-// being handed a URL. Two paths for one card again, and this time the specs
-// disagree with each other rather than with their own past: SEP-2127 says
-// /.well-known/mcp.json, Cloudflare's agent-readiness check reads
-// /.well-known/mcp/server-card.json. Serving both costs a file and lets the
-// client be right either way.
 const mcpCard = fill(tpl('mcp-card.json'));
 writeFileSync(join(ROOT, '.well-known', 'mcp.json'), mcpCard);
 mkdirSync(join(ROOT, '.well-known', 'mcp'), { recursive: true });
 writeFileSync(join(ROOT, '.well-known', 'mcp', 'server-card.json'), mcpCard);
-// Agent Skills (schemas.agentskills.io 0.2.0). Each skill says what an agent can
-// accomplish here, so it does not have to read the docs to find out.
-//
-// The digests are the reason this is generated rather than hand-maintained: the
-// index publishes a sha256 of every skill body, and a hand-written one goes
-// wrong the first time anyone edits a SKILL.md and forgets. Computing it from
-// the bytes actually written means the index cannot disagree with the file.
-//
-// Every skill here wraps capability that already ships — grade a URL, search
-// either catalog, register a product — rather than promising anything new. A
-// skills index describing things the site cannot do is worse than none.
 const skillsDir = join(ROOT, 'templates', 'skills');
 const skillNames = readdirSync(skillsDir, { withFileTypes: true })
   .filter((e) => e.isDirectory()).map((e) => e.name).sort();
@@ -241,8 +183,6 @@ const skills = skillNames.map((name) => {
   const body = fill(readFileSync(join(skillsDir, name, 'SKILL.md'), 'utf8'));
   mkdirSync(join(ROOT, '.well-known', 'agent-skills', name), { recursive: true });
   writeFileSync(join(ROOT, '.well-known', 'agent-skills', name, 'SKILL.md'), body);
-  // Description comes from the skill's own frontmatter, so the index and the
-  // file can never describe the skill differently.
   const described = body.match(/^description:\s*(.+)$/m);
   if (!described) throw new Error(`skill ${name} has no description in its frontmatter`);
   return {
@@ -256,24 +196,10 @@ const skills = skillNames.map((name) => {
 writeFileSync(join(ROOT, '.well-known', 'agent-skills', 'index.json'),
   JSON.stringify({ $schema: 'https://schemas.agentskills.io/discovery/0.2.0/schema.json', skills }, null, 2) + '\n');
 
-// RFC 9727 API Catalog. Extensionless on purpose — the RFC fixes the URI as
-// /.well-known/api-catalog — so worker/index.js labels it application/linkset+json;
-// the asset store would otherwise serve it as something a strict client rejects.
-// It adds no new facts, it just states the ones in openapi.yaml where a machine
-// looking for APIs is specified to look.
 writeFileSync(join(ROOT, '.well-known', 'api-catalog'), fill(tpl('api-catalog.json')));
-// The OpenAI plugin manifest. Superseded, and still probed by enough crawlers
-// that answering costs less than the 404s do.
 writeFileSync(join(ROOT, '.well-known', 'ai-plugin.json'), fill(tpl('ai-plugin.json')));
-// OpenSearch: the only discovery format that turns a domain into a callable
-// search box for a client that knows nothing else about it.
 writeFileSync(join(ROOT, 'opensearch.xml'), fill(tpl('opensearch.xml')));
 
-// --- feeds ------------------------------------------------------------------
-// A directory that gains entries is a feed, and feeds are how aggregators and
-// several crawlers notice change without polling every listing. Two formats
-// because the consumers differ: RSS for readers and crawlers, JSON Feed for
-// anything that would rather not parse XML.
 const feedItems = [...listings]
   .sort((a, b) => String(b.updated ?? b.created).localeCompare(String(a.updated ?? a.created)))
   .slice(0, 50);
@@ -332,12 +258,6 @@ const fullBlocks = listings.map((l) => {
 writeFileSync(join(ROOT, 'llms-full.txt'),
   `${fill(tpl('llms.txt'))}\n## All listings (${listings.length})\n\n${fullBlocks.join('\n\n')}\n`);
 
-// --- generated human-facing pages -------------------------------------------
-// Everything below renders from committed data files. Each returns null-safe:
-// a page whose data file is missing is skipped rather than built empty, because
-// the catalogs are refreshed by a weekly cron and a fresh clone may not have
-// them yet. `pagePaths` feeds the sitemap, so a skipped page is also absent
-// from the sitemap rather than advertised as a 404.
 const pagePaths = [];
 const x402Health = readJson('api/x402/health.json');
 const mcpHealth = readJson('api/mcp/health.json');
@@ -362,8 +282,6 @@ if (Object.keys(scores).length) {
   pagePaths.push(['/leaderboard.html', Object.values(scores).map((s) => s.checked).filter(Boolean).sort().at(-1)]);
 }
 
-// The checklist is wiped and rebuilt like l/, so a check removed from the
-// scorer cannot leave a page behind claiming it is still graded.
 rmSync(join(ROOT, 'checks'), { recursive: true, force: true });
 mkdirSync(join(ROOT, 'checks'), { recursive: true });
 const checkHtml = checkPages({
@@ -375,16 +293,8 @@ for (const [name, html] of checkHtml) {
   pagePaths.push([name === 'index.html' ? '/checks/' : `/checks/${name}`, null]);
 }
 
-// The Router's front door, at the root of its own hostname once one is
-// attached. Built unconditionally: the page has to exist before the domain can
-// serve it, and while `router_host` is empty it renders against the service host
-// so nothing here advertises a name that does not resolve.
 if (x402Stats && mcpStats) {
   writeFileSync(join(ROOT, 'router.html'), routerPage({
-    // Where this page's one canonical address is, which is NOT the same thing
-    // while the domain is unattached: `${BASE}/` is the index's home page, and
-    // canonicalising to it would tell every crawler that the Router's page and
-    // the index's are one document.
     canonicalBase: ROUTER_PAGE.base,
     canonicalPath: ROUTER_PAGE.path,
     serviceBase: BASE,
@@ -392,10 +302,6 @@ if (x402Stats && mcpStats) {
   }));
 }
 
-// The umbrella apex. Served only at the apex host's root — every other path
-// there still 308s here, so this is a page the portfolio needed rather than a
-// second copy of the index. Its canonical points at the apex, so serving the
-// same asset from the canonical host cannot create a duplicate.
 if (cfg.apex_host && x402Stats && mcpStats) {
   writeFileSync(join(ROOT, 'apex.html'), apexPage({
     apexBase: `https://${cfg.apex_host}`,
@@ -412,37 +318,12 @@ pagePaths.push(['/compare.html', null]);
 
 const smUrls = [
   `  <url><loc>${BASE}/</loc></url>`,
-  // The umbrella, which is on another host and was therefore in no sitemap at
-  // all: this is the only sitemap the fleet publishes, and `percall.dev/
-  // sitemap.xml` 308s straight into it. Cross-host entries are legitimate when
-  // the sitemap is declared by the robots.txt of the host whose URLs it
-  // carries, and the apex's robots.txt resolves — via that same 308 — to the
-  // one declaring this file. Discovery still leans on the links added to
-  // index.html and llms.txt; this is the belt to their braces.
   `  <url><loc>https://${APEX}/</loc></url>`,
-  // The query endpoints belong in the sitemap even though they take
-  // parameters: a crawler that reads sitemaps and nothing else would otherwise
-  // never learn this site can be asked questions.
   `  <url><loc>${BASE}/ask</loc></url>`,
   `  <url><loc>${BASE}/api/search</loc></url>`,
   ...pagePaths.map(([p, lastmod]) => `  <url><loc>${BASE}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`),
   ...listings.map((l) => `  <url><loc>${BASE}/l/${l.slug}.html</loc><lastmod>${l.updated ?? l.created}</lastmod></url>`),
 ];
-// --- the avoid-list ---------------------------------------------------------
-//
-// The endpoints that have failed their last two or more probes, published free,
-// per catalog. Everything here already existed inside `health.json`; what was
-// missing was saying it as its own artifact.
-//
-// Free on purpose, and it is the one thing in this repo where "free" is the
-// commercial decision rather than the default: a list of things *not* to call is
-// the most linkable object this data can produce, it is the half of liveness a
-// competitor sells as a paid "avoid-list", and giving it away is cheaper than
-// the distribution it buys. Fresh paid probes have been retired.
-//
-// A miss is not a verdict. Two consecutive failures on a weekly rotating sample
-// from one network path is evidence, and the file says so in its own `$comment`
-// rather than leaving a reader to assume a dead host.
 for (const [key, dir] of [['x402', 'api/x402'], ['mcp', 'api/mcp']]) {
   const health = readJson(`${dir}/health.json`);
   if (!health) continue;
@@ -456,12 +337,6 @@ for (const [key, dir] of [['x402', 'api/x402'], ['mcp', 'api/mcp']]) {
     source: health.source,
     probed_at: health.probed_at,
     catalog_size: health.catalog_size,
-    // Why the confirmed list is short and will stay short, stated here so a
-    // reader does not mistake it for a healthy catalog. The sweep walks a
-    // rotating slice, so any one endpoint is re-probed roughly twice a year —
-    // which means two *consecutive* misses take about a year to accumulate.
-    // `suspected` is therefore the more informative list today, and the honest
-    // way to publish it is under a name that does not overclaim.
     confidence: {
       confirmed: 'failed at least two consecutive probes',
       suspected: 'failed its most recent probe, once',
@@ -476,12 +351,6 @@ for (const [key, dir] of [['x402', 'api/x402'], ['mcp', 'api/mcp']]) {
   console.log(`avoid-list ${key}: ${confirmed.length} confirmed, ${suspected.length} suspected`);
 }
 
-// IndexNow's proof of control: the key, served as plain text at its own name.
-// Bing, Yandex and Seznam share one submission endpoint, and Bing's index is
-// what ChatGPT search reads — so this is the one channel where a push can be
-// announced rather than waited on. Only the canonical host gets one: the apex
-// serves exactly one path and cannot host a key file, which is why its single
-// URL is submitted by hand instead (NEXT.md §1.8).
 if (cfg.indexnow_key) {
   writeFileSync(join(ROOT, `${cfg.indexnow_key}.txt`), `${cfg.indexnow_key}\n`);
 }

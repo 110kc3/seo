@@ -1,25 +1,3 @@
-// Pre-flight check for an x402 rail, run before pointing real money at it.
-//
-//   node scripts/verify-rail.mjs            # the active profile
-//   node scripts/verify-rail.mjs mainnet    # any named profile
-//
-// Three things can be wrong in a way no unit test can catch, because the truth
-// lives on chain and at the facilitator, not in this repo:
-//
-//   1. The asset address is not the token we think it is. A plausible-looking
-//      wrong address means payers are quoted a contract that isn't USDC.
-//   2. The published EIP-712 domain (`extra: {name, version}`) does not equal
-//      the token's own name()/version(). Payers then sign over a different
-//      domain and the facilitator rejects every payment as invalid. USDC is
-//      "USDC" on Base Sepolia but "USD Coin" on Base mainnet, so this is a
-//      live trap, not a hypothetical one.
-//   3. The facilitator does not actually settle this network. The public
-//      x402.org facilitator is testnet-only — it advertises eip155:84532 and
-//      no Base mainnet at all — so a mainnet profile aimed at it fails at
-//      settlement, after the caller has already signed.
-//
-// Everything is read from the network; nothing here is asserted from memory.
-// Zero dependencies: JSON-RPC and one GET, both over fetch.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -30,7 +8,6 @@ import { facilitatorHeaders } from '../worker/cdp-auth.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
 
-// name() / symbol() / decimals() / version() — ERC-20 plus USDC's EIP-712 version.
 const SELECTORS = {
   name: '0x06fdde03',
   symbol: '0x95d89b41',
@@ -70,7 +47,6 @@ async function ethCall(rpcUrl, to, data) {
   }
 }
 
-/** Reads the token's own metadata off chain. */
 async function readToken(rpcUrl, asset) {
   const out = {};
   for (const [key, selector] of Object.entries(SELECTORS)) {
@@ -85,15 +61,6 @@ async function readToken(rpcUrl, asset) {
   return out;
 }
 
-/**
- * Asks the facilitator what it will actually settle.
- *
- * A CDP rail answers 401 to anonymous callers, so this signs the request with
- * the same code path the Worker uses when CDP_API_KEY_ID / CDP_API_KEY_SECRET
- * are in the environment. That turns the check from "cannot be verified" into
- * a real one, and it doubles as a credential test: a malformed or revoked key
- * shows up here rather than at the first paid call.
- */
 async function readSupported(rail) {
   const url = `${rail.facilitator_url.replace(/\/+$/, '')}/supported`;
   const headers = { accept: 'application/json', 'user-agent': 'ai-product-index-verify-rail' };
@@ -122,7 +89,6 @@ const human = (atomic, decimals) => {
   return `${whole}.${padded.slice(-decimals)}`.replace(/0+$/, '').replace(/\.$/, '.0');
 };
 
-// --- resolve the profile ----------------------------------------------------
 
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
 const requested = process.argv[2] ?? cfg.payments?.x402?.active;
@@ -132,9 +98,6 @@ if (!known.includes(requested)) {
   process.exit(2);
 }
 
-// resolveX402 only ever resolves the active rail, which is the right contract
-// for the Worker. Overriding `active` on a copy lets this script check a
-// profile before it is switched on, which is the entire point.
 const rail = resolveX402({ ...cfg, payments: { ...cfg.payments, x402: { ...cfg.payments.x402, active: requested } } });
 
 console.log(`profile:      ${requested}${requested === cfg.payments?.x402?.active ? ' (active)' : ''}`);
@@ -155,7 +118,6 @@ console.log('');
 if (!ADDRESS_RE.test(rail.asset)) fail(`asset "${rail.asset}" is not a 20-byte hex address`);
 if (!ADDRESS_RE.test(rail.payTo)) fail(`payTo "${rail.payTo}" is not a 20-byte hex address`);
 
-// --- 1 + 2. the token, read off chain ---------------------------------------
 
 if (ADDRESS_RE.test(rail.asset) && rail.rpc_url) {
   const token = await readToken(rail.rpc_url, rail.asset);
@@ -164,8 +126,6 @@ if (ADDRESS_RE.test(rail.asset) && rail.rpc_url) {
   } else {
     console.log(`on chain:     name=${JSON.stringify(token.name)} symbol=${JSON.stringify(token.symbol)} decimals=${token.decimals} version=${JSON.stringify(token.version)}`);
 
-    // The money-critical comparison: the EIP-712 domain we publish must be the
-    // one the token itself enforces.
     if (token.name !== rail.asset_name) {
       fail(`EIP-712 domain name mismatch: config publishes asset_name ${JSON.stringify(rail.asset_name)} but the token's name() is ${JSON.stringify(token.name)} — every payment signature would be rejected. Set "asset_name": ${JSON.stringify(token.name)} on the "${requested}" profile.`);
     }
@@ -181,7 +141,6 @@ if (ADDRESS_RE.test(rail.asset) && rail.rpc_url) {
   }
 }
 
-// --- 3. the facilitator, asked directly -------------------------------------
 
 try {
   const supported = await readSupported(rail);
@@ -196,8 +155,6 @@ try {
     if (!advertises(2, rail.network)) {
       fail(`facilitator ${rail.facilitator_url} does not advertise {x402Version: 2, scheme: "exact", network: "${rail.network}"} — settlement on this network will fail after the payer has signed.`);
     }
-    // v1 is the version most deployed clients actually speak, so a rail that
-    // cannot settle v1 is a rail almost nobody can pay.
     if (rail.network_v1) {
       if (!advertises(1, rail.network_v1)) {
         fail(`facilitator does not advertise {x402Version: 1, scheme: "exact", network: "${rail.network_v1}"}, but this profile offers v1 — v1 clients would sign and then fail at settlement. Either pick a facilitator that settles v1 on this chain, or clear "network_v1" to stop advertising v1.`);
@@ -218,7 +175,6 @@ try {
   note(`facilitator ${rail.facilitator_url} unreachable from here: ${e.message}`);
 }
 
-// --- verdict ----------------------------------------------------------------
 
 console.log('');
 for (const n of notes) console.log(`note:  ${n}`);

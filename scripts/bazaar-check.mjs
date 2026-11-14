@@ -1,19 +1,3 @@
-// Are we in the x402 Bazaar yet?
-//
-//   node scripts/bazaar-check.mjs           # is this site listed?
-//   node scripts/bazaar-check.mjs --sample  # what listed v1 entries look like
-//
-// The CDP facilitator catalogs an endpoint from the discovery metadata attached
-// to a *settlement* — `outputSchema` on the v1 payment requirements, or
-// `extensions.bazaar` on v2 — so a rail can settle real money for months and
-// never be listed. Nothing in the 402 response says which is happening. This
-// asks the catalog directly.
-//
-// Matching is on payTo, not on the URL: the receiving address is shared by
-// every service on this rail, so one run answers for all of them, and it keeps
-// working across a domain move.
-//
-// Zero dependencies; the discovery API needs no authentication to read.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -22,7 +6,7 @@ import { resolveX402 } from './x402-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PAGE = 1000;
-const MAX_PAGES = 40; // ~40k resources; the catalog was 14.7k in Aug 2026
+const MAX_PAGES = 40;
 
 const cfg = JSON.parse(readFileSync(join(ROOT, 'site.config.json'), 'utf8'));
 const rail = resolveX402(cfg);
@@ -56,8 +40,6 @@ for (let i = 0; i < MAX_PAGES; i += 1) {
 console.log(`catalog:   ${items.length} resources read${total ? ` of ${total} reported` : ''} at ${discovery}`);
 
 if (process.argv.includes('--sample')) {
-  // What a listed v1 entry carries, which is the spec that matters — the docs
-  // describe the SDK's helper, not the wire.
   const v1 = items.filter((r) => r.x402Version === 1);
   const flagged = v1.filter((r) => r.accepts?.[0]?.outputSchema?.input?.discoverable === true);
   console.log(`v1 entries: ${v1.length}, of which ${flagged.length} declare outputSchema.input.discoverable = true`);

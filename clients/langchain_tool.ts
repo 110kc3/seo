@@ -1,9 +1,3 @@
-// AI Product Index as LangChain.js tools. Paste into your project.
-//
-//   npm i @langchain/core zod
-//
-// The registry is a plain JSON document, so this is a thin wrapper: one GET,
-// filtered locally. No key, no account, no rate limit.
 import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 

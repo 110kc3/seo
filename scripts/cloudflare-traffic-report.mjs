@@ -1,16 +1,3 @@
-// Aggregate-only traffic report for a hostname on this Cloudflare account.
-//
-// The report intentionally combines two different datasets:
-// - Web Analytics / RUM says which HTML pages real browsers loaded. Its `bot`
-//   dimension lets the report keep likely-human activity separate.
-// - Zone HTTP analytics says what reached Cloudflare's edge, including assets,
-//   crawlers and failed requests.
-//
-// No raw events, IP addresses, full user agents or query strings are requested.
-// Cloudflare limits the HTTP adaptive dataset to short windows on lower plans,
-// so a 2-7 day report is queried as consecutive 24-hour slices and combined
-// locally. Run this through `.github/workflows/cf-admin.yml`; the credentials
-// deliberately exist only in GitHub Actions.
 
 import { appendFile, mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';

@@ -1,20 +1,6 @@
-// AI Product Index — Cloudflare Worker.
-//
-// Everything here is something GitHub Pages structurally could not do:
-//   * per-request telemetry (Pages gave zero logs, so "do agents use this?"
-//     was unanswerable)
-//   * custom response headers and Accept-based content negotiation (the two
-//     agent-readiness checks that capped the audit at 81/100)
-//   * HTTP 402 payment gating for the paid audit endpoint
-// Static assets are served by the ASSETS binding; this Worker only owns the
-// dynamic routes and the header layer on top.
 
 import cfg from '../site.config.json' with { type: 'json' };
-// The committed registry, so /badge.svg answers from the bundle rather than
-// fetching its own API. Deploys follow accepted registrations, so it is current.
 import registry from '../api/index.json' with { type: 'json' };
-// Grades refreshed weekly by scripts/score-listings.mjs, committed so the badge
-// stays an O(1) lookup rather than an audit per README view.
 import scores from '../scores.json' with { type: 'json' };
 import { classifyUserAgent, classifyPath } from './classify.js';
 import { auditUrl, parseAuditRequest } from './audit.js';
@@ -34,35 +20,22 @@ import { handleSweep } from './watch.js';
 
 const BASE = cfg.base.replace(/\/+$/, '');
 const CANONICAL_HOST = new URL(BASE).host;
-// The umbrella domain. Unlike the other host aliases it is not a retired name:
-// its root serves the portfolio page that says what runs under it. Everything
-// else on that host still redirects, so exactly one copy of the content exists.
 const APEX_HOST = cfg.apex_host ?? null;
-// Retained for the retirement notice and fulfilment of prepaid watches.
 const ROUTER_HOST = cfg.router_host || null;
-// Retired purchases answer 410 before canonicalisation.
 const ROUTER_PATHS = new Set(['/api/watch/sweep']);
 const isRoot = (url) => url.pathname === '/' || url.pathname === '/index.html';
 const isApexRoot = (url) => Boolean(APEX_HOST) && url.host === APEX_HOST && isRoot(url);
 const isRouterHost = (url) => Boolean(ROUTER_HOST) && url.host === ROUTER_HOST;
 const isRouterRoot = (url) => isRouterHost(url) && isRoot(url);
-/** True for a request the Router host answers itself rather than redirecting. */
 const isRouterOwned = (url) => isRouterHost(url) && (isRoot(url) || ROUTER_PATHS.has(url.pathname));
 const MAX_AUDIT_BODY = 4 * 1024;
 
-// Derived from the catalog declarations rather than written out, so adding a
-// catalog cannot leave its search route unrouted.
 const CATALOG_SEARCH = Object.fromEntries(
   Object.entries(CATALOGS).map(([key, spec]) => [`/api/${spec.path}/search`, key]),
 );
 
-// One canonical hostname; every other host attached to this Worker (the
-// pre-migration index.kc-it.pl, the percall.dev apex) answers 308 to it. 308
 // rather than 301 because it preserves the method and body, so an in-flight
-// x402 POST survives the hop instead of being degraded to a GET.
 function canonicalRedirect(url) {
-  // Retire at the requested URL, including old aliases; never redirect a
-  // payment-bearing retry to a different product.
   if (RETIRED_API_PATHS.has(url.pathname)) return null;
   if (url.host === CANONICAL_HOST) {
     // Preserve the old private sweep URL; the scheduled job calls the Router directly.
@@ -77,16 +50,8 @@ function canonicalRedirect(url) {
     }
     return null;
   }
-  // The Router host answers for its notice and private sweep; every other
-  // path on it belongs to the canonical host and says so.
   if (isRouterOwned(url)) return null;
-  // The apex root is a page, not a redirect. Only the root: a request for any
-  // other path on the apex is asking for content that has one canonical home.
   if (isApexRoot(url)) return null;
-  // www belongs to the apex, not to the service. Sending www.percall.dev to the
-  // index would hand someone who typed the umbrella domain a different page than
-  // the umbrella domain serves. Its root goes to the apex; every other path goes
-  // straight to the canonical host, so neither case costs two hops.
   if (APEX_HOST && url.host === `www.${APEX_HOST}` && isRoot(url)) {
     return new Response(null, {
       status: 308,
@@ -108,14 +73,12 @@ const json = (body, status = 200, headers = {}) =>
     headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...headers },
   });
 
-// --- measurement -----------------------------------------------------------
 
 function record(env, request, url, clientType, status) {
   if (!env.ANALYTICS) return;
   const ua = request.headers.get('user-agent') ?? '';
   try {
     env.ANALYTICS.writeDataPoint({
-      // No IP address and no full request URL — only a bucketed path.
       blobs: [
         classifyPath(url.pathname, { apex: isApexRoot(url) }),
         clientType,
@@ -123,17 +86,6 @@ function record(env, request, url, clientType, status) {
         `${Math.floor(status / 100)}xx`,
         ua.slice(0, 200),
         request.cf?.asOrganization ?? 'unknown',
-        // Which of this Worker's hostnames was asked. A bounded set of five, and
-        // the only way to answer "is the umbrella getting traffic, and is anyone
-        // still arriving on the retired host" — a path bucket cannot, because
-        // every host serves the same paths. Rows written before 2026-08-02 have
-        // no value here and report as `unrecorded` rather than as a real host.
-        //
-        // `hostname`, not `host`: host carries the port, and Cloudflare answers
-        // on 8443/8080 as well as 443. Port scanners duly produced
-        // `router.percall.dev:8443` and `www.percall.dev:8080` as separate rows,
-        // which splits a host's real traffic across entries and invents hosts
-        // that do not exist. The port is not a dimension anyone asks about here.
         url.hostname,
       ],
       doubles: [1, status, request.cf?.asn ?? 0],
@@ -144,18 +96,9 @@ function record(env, request, url, clientType, status) {
   }
 }
 
-// --- asset layer -----------------------------------------------------------
 
 
-// --- paid route ------------------------------------------------------------
 
-// What this endpoint takes and returns, in the shape the CDP facilitator reads
-// off a settlement to build a Bazaar listing. `discoverable: true` is the opt
-// in — without it the endpoint settles payments perfectly well and is never
-// catalogued, which is exactly what happened here for four settlements.
-//
-// It doubles as machine-readable API documentation in every 402 challenge, so
-// an agent learns the request shape from the refusal rather than from prose.
 const AUDIT_SCHEMA = {
   input: {
     type: 'http',
@@ -203,7 +146,6 @@ async function handleAudit(request, env, cfgObj) {
   } catch (e) {
     return json({ ok: false, code: 'bad_json', error: `invalid JSON: ${e.message.slice(0, 200)}` }, 400);
   }
-  // Validate BEFORE charging — nobody should pay for a request we would reject.
   const parsed = parseAuditRequest(body);
   if (parsed.error) return json({ ok: false, code: 'invalid', errors: [parsed.error] }, 400);
 
@@ -225,11 +167,7 @@ async function handleAudit(request, env, cfgObj) {
   return attachSettlement(json(result, status), gate.settlement, gate.version);
 }
 
-// --- public payment terms --------------------------------------------------
 
-// Lets an agent read the price without provoking a 402. Everything here is
-// already published in the payment challenge, so nothing new is disclosed —
-// it just saves a wasted request, and gives a Bazaar crawler something to read.
 function handleX402Info(cfgObj) {
   const rail = resolveX402(cfgObj);
   if (!rail) {
@@ -243,9 +181,6 @@ function handleX402Info(cfgObj) {
   return json({
     ok: true,
     protocol: 'x402',
-    // Both versions are accepted. A v2 client sends PAYMENT-SIGNATURE and reads
-    // the PAYMENT-REQUIRED header; a v1 client sends X-PAYMENT and reads the
-    // 402 body, where the terms appear under v1's own field names.
     x402Versions: rail.network_v1 ? [2, 1] : [2],
     x402Version: 2,
     network: rail.network,
@@ -264,12 +199,7 @@ function handleX402Info(cfgObj) {
   }, 200, { 'cache-control': 'public, max-age=300' });
 }
 
-// --- private dashboard -----------------------------------------------------
 
-// The page shell is private too, not just the data behind it. An unauthorized
-// request gets the ordinary 404 rather than a 401, so the dashboard's existence
-// is not disclosed to anyone probing the site — robots.txt and a noindex meta
-// are advisory, this is not.
 async function handleDashboardPage(request, env, url) {
   const auth = authorizeDashboard(request, env);
   if (auth.state !== 'ok') {
@@ -284,13 +214,10 @@ async function handleDashboardPage(request, env, url) {
   const headers = new Headers(page.headers);
   headers.set('cache-control', 'no-store');
   headers.set('x-robots-tag', 'noindex, nofollow');
-  // Trade the one-time ?token= for a session cookie, so reloads work and the
-  // token stops travelling in URLs (and therefore in history and referrers).
   if (auth.viaQuery) headers.append('set-cookie', sessionCookie(env.DASHBOARD_TOKEN));
   return new Response(page.body, { status: page.status, headers });
 }
 
-// --- router ----------------------------------------------------------------
 
 export const __testing = { fetchAsset, decorate, canonicalRedirect, AUDIT_SCHEMA };
 
@@ -322,9 +249,6 @@ export default {
       } else if (url.pathname === '/api/audit') {
         response = await handleAudit(request, env, cfg);
       } else if (url.pathname === DIRECTORY_PATH) {
-        // Discovery for RFC 9421 verifiers. 404 rather than an empty key set when
-        // unkeyed: advertising a directory with no keys in it is worse than not
-        // advertising one.
         const directory = await keyDirectory(env);
         response = directory
           ? new Response(JSON.stringify(directory, null, 2) + '\n', {
@@ -341,8 +265,6 @@ export default {
         response = await handleSweep(request, env, {
           probe,
           cfg,
-          // Same bearer as the revenue dashboard, and the same 404-not-401
-          // posture: an unauthorized caller learns nothing about what exists.
           authorized: authorizeDashboard(request, env).state === 'ok',
         });
       } else if (url.pathname === '/api/score') {
@@ -354,9 +276,6 @@ export default {
       } else if (CATALOG_SEARCH[url.pathname]) {
         response = await handleCatalogSearch(CATALOG_SEARCH[url.pathname], url, env, BASE);
       } else if (url.pathname === '/mcp') {
-        // score_url goes back through the real /api/score handler rather than
-        // calling the auditor directly, so an MCP caller gets the same cache,
-        // the same validation and the same grade a browser would.
         const scoreUrl = async (target) => {
           const proxied = new Request(`${BASE}/api/score?url=${encodeURIComponent(target)}`, { headers: request.headers });
           return (await handleScore(proxied, env, cfg, resolveX402(cfg))).json();
@@ -376,15 +295,8 @@ export default {
       } else if (url.pathname === '/dashboard.html' || url.pathname === '/dashboard') {
         response = await handleDashboardPage(request, env, url);
       } else if (isRouterRoot(url)) {
-        // Same shared-asset trick as the apex: the Router needs no deploy of its
-        // own, and the page's canonical names the Router host, so the same asset
-        // being reachable at /router.html here is not a second copy.
         response = await serveStatic(env, new URL('/router.html', url.origin), request.headers);
       } else if (isApexRoot(url)) {
-        // Served from the shared asset store, so the apex needs no deploy of its
-        // own. The page declares its canonical as the apex, which is why the
-        // same asset being reachable at /apex.html on the canonical host is not
-        // a duplicate.
         response = await serveStatic(env, new URL('/apex.html', url.origin), request.headers);
       } else {
         response = await serveStatic(env, url, request.headers);
@@ -395,8 +307,6 @@ export default {
 
     ctx.waitUntil(Promise.resolve(record(env, request, url, clientType, response.status)));
 
-    // Last thing before the wire, so the digest covers exactly what ships.
-    // Never allowed to fail the response: an unsigned answer beats no answer.
     try {
       response = await signResponse(request, response, env);
     } catch (e) {

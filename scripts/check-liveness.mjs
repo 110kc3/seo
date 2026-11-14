@@ -1,9 +1,3 @@
-// Weekly registry hygiene: re-check every listing's URL. A listing is
-// delisted after 3 consecutive failed weekly checks (state in health.json,
-// committed for transparency; healthy listings are absent from it). Dated URL
-// observations in health-weeks.json prevent retries from adding weekly strikes.
-// Writes health-report.md (gitignored) when anything failed or was delisted,
-// and emits changed=/report= to $GITHUB_OUTPUT for the workflow.
 import { readFileSync, writeFileSync, readdirSync, existsSync, rmSync, appendFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -28,7 +22,6 @@ async function alive(url, base, fetchImpl, timeoutMs) {
       signal: ctl.signal,
       headers: { 'user-agent': `ai-product-index-health-check (+${base})` },
     });
-    // Only the status is needed; release streaming bodies and their connection.
     await resp.body?.cancel().catch(() => {});
     return resp.status < 400 ? null : `HTTP ${resp.status}`;
   } catch (e) {
@@ -48,13 +41,11 @@ export async function checkLiveness({ listings, previous = {}, previousWeeks = {
   const delisted = [];
   for (const listing of [...listings].sort((a, b) => a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0)) {
     const err = await alive(listing.url, base, fetchImpl, timeoutMs);
-    if (err === null) continue; // healthy -> strikes and dates reset by omission
+    if (err === null) continue;
     const last = previousWeeks[listing.slug];
     const count = previous[listing.slug];
     const known = last?.url === listing.url && Number.isInteger(count)
       && count > 0 && count < MAX_STRIKES;
-    // No dated observation (legacy state), a changed URL or a missed week
-    // cannot establish consecutive failures. Start a new streak conservatively.
     const strikes = known && last.week === week ? count
       : known && new Date(`${last.week}T00:00:00Z`).getTime() === priorWeek ? count + 1 : 1;
     if (strikes >= MAX_STRIKES) {

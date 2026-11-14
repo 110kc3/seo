@@ -1,38 +1,3 @@
-// x402 payment gate (HTTP transport), speaking BOTH protocol versions.
-//
-// Spec: coinbase/x402 specs/x402-specification-v2.md + specs/transports-v2/http.md
-// Headers (v2 dropped the non-standard X- prefix):
-//   PAYMENT-REQUIRED   server -> client   base64(PaymentRequired)
-//   PAYMENT-SIGNATURE  client -> server   base64(PaymentPayload)
-//   PAYMENT-RESPONSE   server -> client   base64(SettlementResponse)
-//
-// Why v1 is still served
-// ----------------------
-// v2 is the current spec, but the installed client base is not there yet. The
-// reference client (x402-fetch 1.2.0, npm latest as of 2026-07) validates the
-// 402 with a v1 Zod schema and *throws* rather than degrading: it requires
-// `network: "base-sepolia"` (a name, not a CAIP-2 id) and `maxAmountRequired`
-// (not `amount`), and it sends its payload in `X-PAYMENT`. A v2-only endpoint
-// is therefore unpayable by the very clients most likely to call it — verified
-// by driving that client against this Worker.
-//
-// So each version is answered where its own spec says to look:
-//   * the PAYMENT-REQUIRED *header* carries the v2 challenge (v2 clients read
-//     the header)
-//   * the response *body* carries the v1 challenge (v1 clients read the body)
-// They are not merged into one `accepts` array on purpose: a v1 client parses
-// the whole array with its own schema, so a single v2 entry in there makes it
-// throw on the entire response.
-//
-// A payment then arrives in whichever header the client speaks, and is verified
-// and settled against the matching requirements. The facilitator settles both —
-// x402.org/facilitator advertises v1 base-sepolia and v2 eip155:84532 alike.
-//
-// Trust model: the facilitator verifies signatures, balances and simulates the
-// transfer. It does NOT know what we charge, so this module — not the
-// facilitator — is what stops a client from paying 1 atomic unit to an address
-// of their choosing. Every field of the client's `accepted` block is compared
-// against our own requirements before anything is sent onward.
 
 import { resolveX402 } from '../scripts/x402-config.mjs';
 import { facilitatorHeaders } from './cdp-auth.js';
@@ -41,7 +6,6 @@ import { recordSettlement } from './revenue.js';
 const HDR_REQUIRED = 'PAYMENT-REQUIRED';
 const HDR_SIGNATURE = 'PAYMENT-SIGNATURE';
 const HDR_RESPONSE = 'PAYMENT-RESPONSE';
-// v1 used non-standard X- prefixes; kept for the installed client base.
 const HDR_V1_SIGNATURE = 'X-PAYMENT';
 const HDR_V1_RESPONSE = 'X-PAYMENT-RESPONSE';
 
@@ -65,22 +29,12 @@ function b64decode(value) {
 const sameAddress = (a, b) =>
   typeof a === 'string' && typeof b === 'string' && a.toLowerCase() === b.toLowerCase();
 
-// Atomic-unit amounts are decimal strings; compare numerically so "010000"
-// or " 10000" can never pass as a match for "10000".
 function sameAmount(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string') return false;
   if (!/^\d{1,78}$/.test(a) || !/^\d{1,78}$/.test(b)) return false;
   return BigInt(a) === BigInt(b);
 }
 
-/**
- * Builds the PaymentRequirements we are willing to accept. Returns null when
- * payment rails are unconfigured — callers must fail closed, never serve free.
- *
- * `resource.outputSchema` rides along under v2's `extensions.bazaar`, which is
- * where the CDP facilitator reads discovery metadata for v2 — see
- * paymentRequirementsV1 for the v1 half and why any of this is here.
- */
 export function paymentRequirements(cfg, amountAtomic, resource) {
   const rail = resolveX402(cfg);
   if (!rail || !amountAtomic) return null;
@@ -92,26 +46,10 @@ export function paymentRequirements(cfg, amountAtomic, resource) {
     payTo: rail.payTo,
     maxTimeoutSeconds: rail.max_timeout_seconds,
     extra: { name: rail.asset_name, version: rail.asset_version },
-    // Spread, not `key: undefined`: a caller that declares no schema gets back
-    // exactly the object it got before, with no key to explain.
     ...(resource?.outputSchema ? { extensions: { bazaar: { info: resource.outputSchema } } } : {}),
   };
 }
 
-/**
- * The same terms in the v1 shape: a network *name* instead of a CAIP-2 id,
- * `maxAmountRequired` instead of `amount`, and a flat `resource` URL string.
- *
- * Returns null when the profile declares no v1 network name, which switches v1
- * off for that rail rather than guessing a name the facilitator may not know.
- *
- * `outputSchema` is the v1 field the CDP facilitator turns into a Bazaar
- * listing. It is not decoration: the requirements object below is what gets
- * POSTed to /settle, and CDP catalogs the endpoint from that — an endpoint
- * that settles without one is simply never indexed, which is what kept this
- * one out of the Bazaar after its first four settlements. Of the 1,795 v1
- * resources in the live catalog, 1,698 carry `discoverable: true` in here.
- */
 export function paymentRequirementsV1(cfg, amountAtomic, resource) {
   const rail = resolveX402(cfg);
   if (!rail || !amountAtomic || !rail.network_v1) return null;
@@ -139,9 +77,6 @@ function paymentRequiredResponse(requirements, requirementsV1, resource, error, 
   if (settlement) {
     headers[version === X402_VERSION_V1 ? HDR_V1_RESPONSE : HDR_RESPONSE] = b64encode(settlement);
   }
-  // The body is the v1 challenge when v1 is available, because that is where a
-  // v1 client looks and it validates the body strictly. v2 clients read the
-  // header above, so nothing is lost by shaping the body for the older spec.
   const body = requirementsV1
     ? { ok: false, code: 'payment_required', error, x402Version: X402_VERSION_V1, accepts: [requirementsV1] }
     : { ok: false, code: 'payment_required', error, x402Version: X402_VERSION, accepts: [requirements] };
@@ -174,19 +109,10 @@ async function facilitator(url, path, body, authHeaders = {}) {
   }
 }
 
-/**
- * Gates a request behind an x402 payment, in either protocol version.
- *
- * @returns {Promise<{paid: true, settlement: object, version: number} | {paid: false, response: Response}>}
- *   On `paid`, the caller must echo `settlement` back in the settlement header
- *   for that `version` (see attachSettlement).
- */
 export async function requirePayment(request, env, cfg, { amountAtomic, resource }) {
   const requirements = paymentRequirements(cfg, amountAtomic, resource);
   const requirementsV1 = paymentRequirementsV1(cfg, amountAtomic, resource);
   if (!requirements) {
-    // Same fail-closed contract the [upgrade] issue flow uses, so agents get
-    // one recognisable code across both write paths.
     return {
       paid: false,
       response: fail(
@@ -199,8 +125,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
   const challenge = (error, settlement, version) =>
     paymentRequiredResponse(requirements, requirementsV1, resource, error, settlement, version);
 
-  // Whichever header the client speaks decides the version for the rest of the
-  // exchange. v2 wins if somehow both are present.
   const rawV2 = request.headers.get(HDR_SIGNATURE);
   const rawV1 = requirementsV1 ? request.headers.get(HDR_V1_SIGNATURE) : null;
   const version = rawV2 ? X402_VERSION : X402_VERSION_V1;
@@ -229,16 +153,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     };
   }
 
-  // --- the checks the facilitator cannot make for us ---
-  // The two versions assert different amounts of the deal in the payload, so
-  // each is checked for exactly what it actually claims — no more:
-  //
-  //   v2 restates the chosen terms under `accepted`, so all five fields are
-  //   compared against ours.
-  //   v1 carries only `scheme` and `network`; it names no asset, recipient or
-  //   amount. Those are pinned instead by the paymentRequirements *we* send to
-  //   the facilitator, by the token's own EIP-712 domain, and by the
-  //   authorization checks immediately below — never by the client's word.
   let mismatch;
   if (version === X402_VERSION) {
     const accepted = payload.accepted;
@@ -263,15 +177,10 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     };
   }
 
-  // The authorization is what actually moves funds — check it independently of
-  // the `accepted` block the client also controls.
   const auth = payload.payload?.authorization;
   if (typeof auth !== 'object' || auth === null) {
     return { paid: false, response: fail('bad_payment_payload', 'payment payload is missing payload.authorization') };
   }
-  // requirements (v2) is used for both versions here on purpose: payTo and the
-  // atomic amount are identical across the two shapes, and this is the one
-  // check that stands between a client and paying one atomic unit to itself.
   if (!sameAddress(auth.to, requirements.payTo) || !sameAmount(auth.value, requirements.amount)) {
     return {
       paid: false,
@@ -282,14 +191,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     return { paid: false, response: fail('bad_payment_payload', 'authorization.nonce must be a 32-byte hex string') };
   }
 
-  // --- replay protection ---
-  // An EIP-3009 authorization is reusable until it lands on chain, so reserve
-  // the nonce BEFORE settling. A concurrent replay hits the reservation and is
-  // rejected rather than racing us to a second settlement.
-  //
-  // Keyed on the CAIP-2 network, never on the version-specific label: v1 calls
-  // this chain "base-sepolia" and v2 calls it "eip155:84532", so keying on the
-  // label would let the same authorization be replayed once per version.
   const nonceKey = `x402:nonce:${requirements.network}:${auth.nonce.toLowerCase()}`;
   const seen = await env.PAYMENTS.get(nonceKey);
   if (seen) {
@@ -304,9 +205,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
   const rail = resolveX402(cfg);
   const url = rail.facilitator_url;
 
-  // Each JWT is bound to one method+host+path by its `uris` claim, so /verify
-  // and /settle are signed separately — a token for one is not valid for the
-  // other. Rails with auth: "none" get an empty header set from the same call.
   const verifyAuth = await facilitatorHeaders(rail, env, 'POST', `${url.replace(/\/+$/, '')}/verify`);
   if (!verifyAuth.ok) {
     await env.PAYMENTS.delete(nonceKey);
@@ -356,7 +254,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     };
   }
 
-  // Settled: hold the nonce well past the authorization's validity window.
   const at = new Date().toISOString();
   await env.PAYMENTS.put(nonceKey, JSON.stringify({
     transaction: settlement.transaction ?? '',
@@ -364,8 +261,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
     at,
   }), { expirationTtl: 60 * 60 * 24 * 30 });
 
-  // Revenue ledger. Deliberately awaited but internally non-throwing: money has
-  // already moved, so a bookkeeping failure must not fail the buyer's request.
   await recordSettlement(env, {
     ts: at,
     amount: requirements.amount,
@@ -381,11 +276,6 @@ export async function requirePayment(request, env, cfg, { amountAtomic, resource
   return { paid: true, settlement, version };
 }
 
-/**
- * Attaches the settlement receipt to a paid 200 response, in the header the
- * paying client is listening on: a v1 client reads X-PAYMENT-RESPONSE and would
- * never see a v2 PAYMENT-RESPONSE.
- */
 export function attachSettlement(response, settlement, version = X402_VERSION) {
   const headers = new Headers(response.headers);
   headers.set(version === X402_VERSION_V1 ? HDR_V1_RESPONSE : HDR_RESPONSE, b64encode(settlement));

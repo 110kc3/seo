@@ -1,32 +1,5 @@
-// Monitoring: tell me when an endpoint I depend on stops answering.
-//
-// The recurring product the per-call ones cannot be. NEXT.md §7 found the audit's
-// paid tier struggles because the free grade already answers the caller's
-// question — a one-shot answer is substitutable, a standing watch is not. And it
-// needs no new data-gathering: the Router already records `consecutive_failures`
-// per endpoint precisely so something could fire on it.
-//
-// --- three decisions worth stating -----------------------------------------
-//
-// 1. CREDITS, NOT SUBSCRIPTIONS. x402 has no recurring billing and inventing one
-//    would mean holding a mandate to charge later, which is custody by another
-//    name and the thing this project refused. So a watch is *prepaid*: one
-//    payment buys N sweeps, each sweep spends one, and at zero the watch stops
-//    and says so. Nothing is ever charged without the caller signing for it.
-//
-// 2. THE PAYER IS THE OWNER. A settlement already proves which address paid, so
-//    that address is the account id — no signup, no key to issue, no password to
-//    lose. Topping up the same URL from the same wallet adds credits rather than
-//    creating a second watch.
-//
-// 3. ALERTS ARE EDGES, NOT LEVELS. A webhook on every failing sweep is a mailing
-//    list nobody reads. It fires when the state *changes* — answering to failing,
-//    or failing to answering — which is the only moment the information is worth
-//    an interruption.
 
 const WATCH_PREFIX = 'watch:v1:';
-// Long enough to outlive credits bought at the weekly cadence, short enough that
-// an abandoned watch eventually stops costing a probe.
 const WATCH_TTL_S = 400 * 24 * 3600;
 export const MAX_SWEEPS = 52;
 const MIN_SWEEPS = 4;
@@ -38,47 +11,16 @@ const json = (body, status = 200, headers = {}) =>
     headers: { 'content-type': 'application/json; charset=utf-8', ...headers },
   });
 
-/**
- * Status codes that are a correct answer rather than an outage.
- *
- * 401/402/403 are what a paid or authenticated endpoint is *supposed* to say to
- * an unpaid, unauthenticated probe — treating them as failure would alert every
- * subscriber that their working paywall is broken. 405 is our own doing: the
- * probe sends GET, so a POST-only endpoint answers 405 while being healthy.
- */
 const EXPECTED_STATUS = new Set([401, 402, 403, 405]);
 
-/**
- * Is a watched endpoint healthy?
- *
- * Deliberately NOT `result.alive`. That field answers the Router's question —
- * did the host answer at all, where a 402 is the successful outcome — and
- * inheriting it here made this product unable to report the commonest outage
- * there is: **an endpoint returning 500 was reported as "answering"**, so a
- * subscriber whose API had been erroring for a week would never have been told.
- *
- * `scripts/probe-catalogs.mjs` has had the correct rule written down since the
- * catalogs shipped — "only transport failures and 5xx count against an
- * endpoint" — and this, the one product sold on knowing, was the place not
- * following it. 4xx is added on top because this is a *watch*: if the URL you
- * depend on starts 404ing, your integration is broken even though the server is
- * fine.
- */
 export function healthyForWatch(result) {
   if (!result.alive) return false;
   if (EXPECTED_STATUS.has(result.status)) return true;
   return result.status < 400;
 }
 
-/** One watch is one URL for one payer, so a top-up is idempotent by construction. */
 export const watchKey = (payer, url) => `${WATCH_PREFIX}${String(payer).toLowerCase()}:${url}`;
 
-/**
- * Validate before charging. The webhook is checked as strictly as the target:
- * we will be POSTing to it unattended, so it must be a public https URL for the
- * same reason the audit target must be — an alert aimed at 127.0.0.1 is a
- * request to use this Worker as an internal-network probe.
- */
 export function parseWatchRequest(body, urlError) {
   if (typeof body !== 'object' || body === null || Array.isArray(body)) {
     return { error: 'body must be a JSON object like {"url": "https://example.com/paid", "webhook": "https://you.example/hook", "sweeps": 12}' };
@@ -97,13 +39,6 @@ export function parseWatchRequest(body, urlError) {
   return { url: body.url, webhook: body.webhook, sweeps };
 }
 
-/**
- * POST /api/watch — buy N sweeps of one endpoint.
- *
- * `gate` is passed in rather than called here for the same reason /api/route
- * does it: the price depends on how many sweeps were asked for, so the amount
- * has to be computed from a validated body before the challenge is issued.
- */
 export async function handleWatch(request, env, cfg, { gate, urlError, base } = {}) {
   if (request.method !== 'POST') {
     return json({ ok: false, code: 'method_not_allowed', error: 'POST a JSON body like {"url": "…", "webhook": "…", "sweeps": 12}' }, 405, { allow: 'POST' });
@@ -122,8 +57,6 @@ export async function handleWatch(request, env, cfg, { gate, urlError, base } = 
   const paid = await gate(parsed.sweeps);
   if (!paid.ok) return paid.response;
 
-  // The payer address comes from the settlement, not from the request body —
-  // a self-declared owner is one a stranger can type.
   const payer = paid.payer;
   if (!payer) {
     return paid.attach(json({
@@ -141,9 +74,6 @@ export async function handleWatch(request, env, cfg, { gate, urlError, base } = 
     url: parsed.url,
     webhook: parsed.webhook,
     payer,
-    // A top-up adds to what is left rather than replacing it. Same wallet, same
-    // URL, so the caller's intent is unambiguous and losing their remainder to a
-    // second purchase would be theft by rounding.
     credits: (existing?.credits ?? 0) + parsed.sweeps,
     created: existing?.created ?? null,
     sweeps_run: existing?.sweeps_run ?? 0,
@@ -153,8 +83,6 @@ export async function handleWatch(request, env, cfg, { gate, urlError, base } = 
   try {
     await env?.PAYMENTS?.put(key, JSON.stringify(watch), { expirationTtl: WATCH_TTL_S });
   } catch (e) {
-    // Refusing to confirm a watch we could not store is the only honest answer:
-    // the payment settled, so say plainly that it did and that this needs a human.
     return paid.attach(json({
       ok: false,
       code: 'watch_not_stored',
@@ -177,19 +105,8 @@ export async function handleWatch(request, env, cfg, { gate, urlError, base } = 
   }));
 }
 
-/**
- * One sweep over every watch. Called by the weekly health cron, bearer-gated.
- *
- * Deliberately not a Cloudflare cron trigger: `wrangler deploy` applies triggers
- * as one phase, and a trigger it cannot apply takes the whole deployment down —
- * which has happened here once already (see wrangler.toml). The health workflow
- * runs weekly anyway, which is the cadence this product promises, so it costs
- * nothing to reuse and cannot break a deploy.
- */
 export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch, authorized } = {}) {
   if (!authorized) {
-    // 404, not 401 — the same posture as the revenue dashboard. An unauthorized
-    // caller learns nothing about what exists here.
     return json({ ok: false, code: 'not_found', error: 'not found' }, 404);
   }
   const listed = await env?.PAYMENTS?.list({ prefix: WATCH_PREFIX });
@@ -213,8 +130,6 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
     await env.PAYMENTS.put(name, JSON.stringify(updated), { expirationTtl: WATCH_TTL_S });
     results.swept++;
 
-    // First sweep establishes the baseline rather than alerting: a watch created
-    // on an endpoint that is already down should not fire "it changed".
     if (!changed && credits > 0) continue;
 
     const payload = {
@@ -223,8 +138,6 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
       changed,
       status: result.status,
       consecutive_failures: state === 'failing' ? 1 : 0,
-      // A subscriber has to tell "your server is erroring" from "your server is
-      // gone" — different fix, different urgency.
       reason: state === 'failing'
         ? (result.alive ? `HTTP ${result.status}` : `no response (${result.error ?? 'transport failure'})`)
         : null,
@@ -240,8 +153,6 @@ export async function handleSweep(request, env, { probe, cfg, fetchImpl = fetch,
       });
       if (resp.ok) results.alerted++; else results.failed_delivery++;
     } catch {
-      // A webhook that refuses delivery is the subscriber's problem, not ours,
-      // and must not stop the sweep for everyone else.
       results.failed_delivery++;
     }
   }

@@ -1,14 +1,6 @@
-// The header and content-negotiation layer — the two agent-readiness checks
-// that static hosting cannot satisfy at any price.
-//
-// Kept free of config imports so it is directly unit-testable under `node --test`.
 
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$/;
 
-/**
- * Builds the `Link:` header advertising the machine-readable twin of a path,
- * so an agent never has to guess a URL.
- */
 export function alternatesFor(base, pathname) {
   const links = [`<${base}/llms.txt>; rel="alternate"; type="text/markdown"; title="llms.txt"`];
   if (pathname === '/' || pathname === '/index.html') {
@@ -22,17 +14,11 @@ export function alternatesFor(base, pathname) {
   return links.join(', ');
 }
 
-/**
- * Maps an Accept header onto the asset that should be served instead.
- * @returns {string|null} replacement path, or null to serve the request as-is.
- */
 export function negotiate(pathname, accept) {
   const a = (accept ?? '').toLowerCase();
   const wantsJson = a.includes('application/json');
   const wantsMarkdown = a.includes('text/markdown') || a.includes('text/plain');
   if (!wantsJson && !wantsMarkdown) return null;
-  // An Accept header that also welcomes HTML is a browser being polite, not an
-  // agent asking for data.
   if (a.includes('text/html')) return null;
 
   if (pathname === '/' || pathname === '/index.html') {
@@ -43,18 +29,6 @@ export function negotiate(pathname, accept) {
   return null;
 }
 
-/**
- * The content type a *negotiated* alternate must be labelled with.
- *
- * The asset binding types by file extension, so the markdown twin goes out as
- * `text/plain` — honest about the file, wrong about the representation. A client
- * that asked for `text/markdown` and is answered `text/plain` cannot tell it got
- * the twin it asked for, and every agent-readiness audit scores that as a failed
- * negotiation. Only the negotiated response is relabelled: a direct GET of
- * /llms.txt is left exactly as the binding serves it.
- *
- * @returns {string|null} content type to set, or null to keep the binding's own.
- */
 export function alternateContentType(path) {
   return path.endsWith('.txt') ? 'text/markdown; charset=utf-8' : null;
 }

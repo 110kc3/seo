@@ -6,7 +6,6 @@ import { join } from 'node:path';
 import { criteriaHash, hashMatches, targetFrom, tick, Ledger } from './clustly-agent.mjs';
 import { CHECK_META, V2_WEIGHTS } from '../worker/audit.js';
 
-// A score payload the report builder accepts, served in place of the network.
 const SCORE = {
   ok: true,
   url: 'https://buyer.example/',
@@ -25,7 +24,6 @@ test.after(() => rmSync(tmp, { recursive: true, force: true }));
 
 const ledger = (name) => new Ledger(join(tmp, `${name}.json`));
 
-/** Stubs the score endpoint for the duration of `fn`. */
 async function withScore(fn, { fail = false } = {}) {
   const real = globalThis.fetch;
   globalThis.fetch = async () => (fail
@@ -57,16 +55,12 @@ const order = (over = {}) => {
 };
 
 test('the criteria hash is verified before enrolling, and a mismatch never accepts', async () => {
-  // The buyer could otherwise hold us to terms we never read. Refusing before
-  // accepting also leaves the order refundable rather than abandoned.
   const api = fakeApi({ awaiting_acceptance: [order({ criteria_hash: 'deadbeef' })] });
   await withScore(() => tick(api, ledger('mismatch')));
   assert.deepEqual(api.calls, []);
 });
 
 test('an order with no usable URL is refused rather than accepted and ghosted', async () => {
-  // Enrolling on undeliverable work converts "buyer refunded in 48h" into
-  // "agent enrolled then abandoned", which costs on-chain reputation.
   const api = fakeApi({ awaiting_acceptance: [order({ inputs: { note: 'please audit my site' } })] });
   await withScore(() => tick(api, ledger('nourl')));
   assert.deepEqual(api.calls, []);
@@ -84,16 +78,11 @@ test('accept comes before the work, and the deliverable is submitted once', asyn
   await withScore(() => tick(api, l));
   assert.deepEqual(api.calls, ['accept:ord_1', 'upload:ord_1:report', 'submit:ord_1:ord_1']);
 
-  // Second pass, same order still listed (the indexer has not caught up): the
-  // ledger must not let it be done twice.
   await withScore(() => tick(api, l));
   assert.equal(api.calls.filter((c) => c.startsWith('submit')).length, 1);
 });
 
 test('a revision is delivered again, under a different idempotency key', async () => {
-  // The vendor SDK keys every submit on the order id. Reusing that key for a
-  // revision would have the server treat the new report as a replay and drop it
-  // — the buyer would wait out their round for a document that never arrives.
   const rework = order({ status: 'enrolled', needs_rework: true, rejection_round: 2 });
   const api = fakeApi({ enrolled: [rework] });
   const l = ledger('rework');
@@ -106,8 +95,6 @@ test('a revision is delivered again, under a different idempotency key', async (
 });
 
 test('a first delivery does not mark later revision rounds as already handled', async () => {
-  // The ledger is keyed by unit of work, not by order. Keyed by order id, the
-  // first delivery would make every future revision look done — silently.
   const l = ledger('rounds');
   const api1 = fakeApi({ awaiting_acceptance: [order()] });
   await withScore(() => tick(api1, l));
@@ -135,7 +122,6 @@ test('a failed audit is retried later, not abandoned on the first error', async 
   assert.ok(!l.done.has('ord_1'), 'must stay retryable');
   assert.ok(l.retryAt.get('ord_1') > Date.now(), 'and be backed off');
 
-  // Once the backoff expires and the audit works, it delivers.
   l.retryAt.set('ord_1', 0);
   await withScore(() => tick(api, l));
   assert.ok(api.calls.includes('submit:ord_1:ord_1'));
@@ -155,7 +141,6 @@ test('the ledger survives a restart', async () => {
   const path = join(tmp, 'persist.json');
   const api = fakeApi({ awaiting_acceptance: [order()] });
   await withScore(() => tick(api, new Ledger(path)));
-  // A fresh Ledger over the same file is what a restarted daemon sees.
   await withScore(() => tick(api, new Ledger(path)));
   assert.equal(api.calls.filter((c) => c.startsWith('submit')).length, 1);
 });
@@ -171,9 +156,6 @@ test('targetFrom promotes a bare host and refuses what urlError refuses', () => 
 });
 
 test('the criteria hash ignores the whitespace the server ignores', () => {
-  // Canonicalisation is CRLF→LF, collapse runs of spaces/tabs, trim, drop blank
-  // lines. Verified byte-for-byte against @clustly/agent when this was written;
-  // these hold the shape so a refactor cannot quietly change it.
   assert.equal(criteriaHash('a b'), criteriaHash('a   b'));
   assert.equal(criteriaHash('a\nb'), criteriaHash('a\r\nb'));
   assert.equal(criteriaHash('a\nb'), criteriaHash('\n\na\n\n\nb\n\n'));

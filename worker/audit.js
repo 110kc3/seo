@@ -1,9 +1,3 @@
-// Agent-readability audit — the paid endpoint.
-//
-// This is the Track A deliverable (llms.txt + schema.org JSON-LD + audit,
-// previously done by hand) turned into something an agent can buy per call.
-// Its value does not depend on how many listings the registry holds, which is
-// why it — not the tier upgrade — is what sits behind the x402 gate.
 
 import { urlError } from '../scripts/validate.mjs';
 
@@ -11,8 +5,6 @@ const MAX_HTML_BYTES = 512 * 1024;
 const FETCH_TIMEOUT_MS = 10_000;
 const UA = 'ai-product-index-auditor (+https://index.kc-it.pl/llms.txt)';
 
-// Crawlers whose exclusion is the difference between "AI can read this" and
-// "AI is locked out". Mirrors the allowlist this site publishes for itself.
 const AI_CRAWLER_AGENTS = [
   'GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User',
   'Claude-SearchBot', 'anthropic-ai', 'PerplexityBot', 'Google-Extended', 'CCBot',
@@ -22,24 +14,13 @@ async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fe
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
-    // web-bot-auth: a site we audit can verify this fetch cryptographically
-    // instead of trusting a user-agent string anyone can copy.
     const signed = signHeaders ? await signHeaders('GET', url) : {};
     const resp = await fetchImpl(url, {
       redirect: 'follow',
       signal: ctl.signal,
       headers: { 'user-agent': UA, accept, ...signed },
     });
-    // `type` is needed to tell content negotiation from a site that ignores
-    // Accept and hands back the same HTML whatever you ask for.
     const type = resp.headers?.get?.('content-type') ?? null;
-    // `Response.url` is set by fetch and is the EMPTY STRING on any Response
-    // built in-Worker — which is every response a same-host self-audit gets,
-    // because the header layer rebuilds the response to attach its headers. It
-    // is not nullish, so `home.url ?? target` downstream keeps the '' and
-    // `new URL('')` throws "Invalid URL string.", with no stack and nothing
-    // naming the audit. Falling back to the URL we asked for is also just true:
-    // absent a redirect, that is where the body came from.
     const landed = resp.url || url;
     if (as === 'status') return { status: resp.status, ok: resp.ok, url: landed, type };
     const buf = await resp.arrayBuffer();
@@ -52,7 +33,6 @@ async function get(url, { as = 'text', maxBytes = MAX_HTML_BYTES, fetchImpl = fe
   }
 }
 
-// Streaming extraction of the head elements agents actually key off.
 async function readHead(html, baseUrl) {
   const out = {
     title: '', description: '', canonical: '', jsonLd: [], alternates: [],
@@ -106,8 +86,6 @@ async function readHead(html, baseUrl) {
   return out;
 }
 
-// robots.txt is line-oriented and group-scoped: a directive only applies to the
-// user-agents named in the block directly above it.
 function robotsBlocksAgent(robotsText, agent) {
   const lines = robotsText.split(/\r?\n/).map((l) => l.replace(/#.*$/, '').trim()).filter(Boolean);
   let groupAgents = [];
@@ -130,7 +108,6 @@ function robotsBlocksAgent(robotsText, agent) {
       applies = groupAgents.includes(target) || groupAgents.includes('*');
     }
     if (!applies) continue;
-    // A specific block for this agent overrides the wildcard block.
     const specific = groupAgents.includes(target);
     if (key === 'disallow' && value === '/') blocked = true;
     else if (key === 'allow' && (value === '/' || value === '') && specific) blocked = false;
@@ -138,7 +115,6 @@ function robotsBlocksAgent(robotsText, agent) {
   return blocked;
 }
 
-// llms.txt spec shape: an H1 title, then an optional blockquote summary.
 function llmsTxtShape(text) {
   const lines = text.split(/\r?\n/);
   const h1 = lines.findIndex((l) => /^#\s+\S/.test(l));
@@ -149,24 +125,10 @@ function llmsTxtShape(text) {
 const isSchemaOrgContext = (ctx) =>
   (typeof ctx === 'string' ? ctx : JSON.stringify(ctx ?? '')).includes('schema.org');
 
-// `@type` is a string for one type and an array for a node that is several at
-// once (`["Organization","LocalBusiness"]` is ordinary in local-business markup).
 const hasType = (n) =>
   typeof n['@type'] === 'string' ||
   (Array.isArray(n['@type']) && n['@type'].some((t) => typeof t === 'string' && t));
 
-/**
- * Flattens one parsed block into the typed nodes it actually asserts.
- *
- * The `@graph` container is the shape a page uses to declare several entities in
- * one block — it carries the `@context` itself and leaves `@type` to its members,
- * so matching on a top-level `@type` scores a correctly-marked-up page as having
- * no structured data at all. Yoast emits this for every page it touches and
- * schema.org's own multi-entity examples use it, so it is not an edge case.
- *
- * Members inherit the container's `@context`, which is where it is defined for
- * them; a member carrying its own `@context` keeps it.
- */
 function expandGraph(node) {
   if (!Array.isArray(node['@graph'])) return [node];
   const members = node['@graph']
@@ -174,8 +136,6 @@ function expandGraph(node) {
     .map((m) => (m['@context'] === undefined && node['@context'] !== undefined
       ? { ...m, '@context': node['@context'] }
       : m));
-  // Keep the container too when it is itself a typed node, so a
-  // `{"@type":"WebPage","@graph":[…]}` is not silently dropped.
   return hasType(node) ? [node, ...members] : members;
 }
 
@@ -198,52 +158,8 @@ export function parseJsonLd(blocks) {
 
 const check = (id, weight, pass, detail, fix) => ({ id, weight, pass: Boolean(pass), detail, ...(pass ? {} : { fix }) });
 
-/**
- * The 2026 signals, reported and deliberately NOT scored.
- *
- * The scored checklist is thirteen items and the standard has grown past it —
- * Cloudflare's agent-readiness score now reads Content Signals, an API catalog,
- * an Agent Skills index, an MCP server card and Web Bot Auth. Detecting those is
- * straightforward. *Scoring* them is not, and the reason is other people:
- * grades are stamped into `scores.json`, rendered as badges inside other
- * people's READMEs, and quoted in our own fleet numbers. Adding weighted checks
- * would move every one of those overnight — a site that changed nothing would
- * wake up a letter lower and be told it had got worse.
- *
- * So these arrive as `signals` beside `checks`: the audit reports what it found,
- * `scoreChecks` never sees them, and no existing grade moves by a point.
- * Promoting them into the score is a separate, deliberate decision that needs a
- * versioned check set and a fleet re-score first — see docs/agent-readiness-2026.md.
- *
- * Adoption of most of these is tiny today, so a site missing them is normal
- * rather than negligent. `detail` says so; none of this is phrased as a failure.
- */
 const signal = (id, label, present, detail, fix) => ({ id, label, present: Boolean(present), detail, ...(present ? {} : { fix }) });
 
-/**
- * Check sets. `v1` is the thirteen checks every published grade was produced by;
- * `v2` additionally scores the 2026 signals above.
- *
- * Versioning exists because a grade is not private. It is stamped into
- * `scores.json`, rendered as a badge inside other people's READMEs, and quoted
- * in our own fleet numbers — so "which checklist produced this letter" has to be
- * answerable after the fact, or a site that changed nothing looks like it got
- * worse. Every result carries `check_set`, and anything that stores a grade
- * stores it alongside.
- *
- * **Every v2 weight sits below the lowest v1 weight (5, `https`)**, and that is
- * deliberate rather than tidy: under 15% of the web publishes an MCP server card
- * or an API catalog, so missing one is normal rather than negligent, and it must
- * never cost more than missing `llms.txt`. The three at 3 are the ones with a
- * concrete consequence — Cloudflare scores Content Signals and markdown
- * negotiation, and a card on the pre-0.3 path is genuinely invisible to an A2A
- * 1.0 client. The rest are 2.
- *
- * What this costs a site that did everything right in 2025 and nothing since:
- * 105 of 122, so **100 → 86, A → B**. That drop is the point of promoting them
- * — the standard moved — but it is also why this needed a decision rather than a
- * commit, and why the fleet is re-scored before any badge renders it.
- */
 export const V2_WEIGHTS = {
   content_signals: 3,
   agent_card_current_path: 3,
@@ -254,11 +170,6 @@ export const V2_WEIGHTS = {
   web_bot_auth: 2,
 };
 
-/**
- * Label and remedy for each 2026 signal, alongside its weight in V2_WEIGHTS.
- * Same reason as CHECK_META: the checklist pages are generated from this, so
- * documentation and product cannot drift apart.
- */
 export const SIGNAL_META = {
   content_signals: { label: 'Content Signals declared in robots.txt', fix: 'Add a Content-Signal line to robots.txt (contentsignals.org) stating how your content may be used: search, ai-input, ai-train. Roughly 4% of sites declare it, so it is a differentiator rather than a baseline — and pick the values deliberately, because the common default (ai-train=no) suits a publisher protecting an archive and not everyone is one.' },
   agent_card_current_path: { label: 'A2A card at the 1.0 path', fix: 'A2A 1.0 reads /.well-known/agent-card.json; /.well-known/agent.json is the pre-0.3 path a 1.0 client never looks at. Serve the same document at both while the installed base catches up.' },
@@ -272,10 +183,8 @@ export const SIGNAL_META = {
 export const CHECK_SETS = ['v1', 'v2'];
 export const DEFAULT_CHECK_SET = 'v2';
 
-/** Normalises anything a caller passes to a known set, falling back to the default. */
 export const resolveCheckSet = (v) => (CHECK_SETS.includes(v) ? v : DEFAULT_CHECK_SET);
 
-/** Does robots.txt carry a Content-Signal declaration (contentsignals.org)? */
 export function contentSignalsIn(robotsBody) {
   if (typeof robotsBody !== 'string') return null;
   const line = robotsBody.split(/\r?\n/).find((l) => /^\s*content-signal\s*:/i.test(l));
@@ -283,17 +192,6 @@ export function contentSignalsIn(robotsBody) {
   return line.split(':').slice(1).join(':').trim();
 }
 
-/**
- * Weight and remedy for each scored check, in one table.
- *
- * Extracted from the call sites so the published checklist pages and the audit
- * cannot disagree. They are the same advice sold for $0.05 and the same advice
- * documented for free, which is deliberate: the paid tier sells the diagnosis
- * and the per-origin snippet, not secrecy about what good looks like.
- *
- * Weights live here too, so the thirteen 2025 weights are as greppable as the
- * seven 2026 ones in V2_WEIGHTS.
- */
 export const CHECK_META = {
   llms_txt: { weight: 15, fix: 'Publish /llms.txt: an H1 with the site name, a > blockquote summary, then linked sections of the pages agents should read.' },
   llms_txt_summary: { weight: 5, fix: 'Add a one-paragraph "> " blockquote directly under the H1 — it is what agents quote when describing you.' },
@@ -310,9 +208,6 @@ export const CHECK_META = {
   https: { weight: 5, fix: 'Serve over HTTPS; several crawlers will not follow an http:// origin at all.' },
 };
 
-// Human labels, so the free score can name what failed without shipping the
-// paid `detail`/`fix`/`snippet` fields. Keyed by check id; a missing id falls
-// back to the id itself rather than throwing.
 export const CHECK_LABELS = {
   llms_txt: 'llms.txt published',
   llms_txt_summary: 'llms.txt has a title and summary',
@@ -329,10 +224,6 @@ export const CHECK_LABELS = {
   https: 'served over HTTPS',
 };
 
-/**
- * A–F band for the score. The descriptive `grade` stays as it was; this is the
- * one-glance version the free teaser leads with.
- */
 export function letterGrade(score) {
   if (score >= 90) return 'A';
   if (score >= 80) return 'B';
@@ -342,9 +233,6 @@ export function letterGrade(score) {
   return 'F';
 }
 
-// The paid deliverable: paste-ready code for each failure, not just advice.
-// `{{ORIGIN}}` is replaced with the audited site's origin so the output is
-// specific to the caller's domain rather than a generic example.
 export const SNIPPETS = {
   llms_txt: `# /llms.txt  — publish at {{ORIGIN}}/llms.txt
 
@@ -457,7 +345,6 @@ Link: <{{ORIGIN}}/llms.txt>; rel="alternate"; type="text/markdown"`,
 }`,
 };
 
-/** Paste-ready fix for a failing check, specific to the audited origin. */
 export function snippetFor(id, origin) {
   const template = SNIPPETS[id];
   return template ? template.replaceAll('{{ORIGIN}}', origin.replace(/\/+$/, '')) : null;
@@ -486,12 +373,6 @@ export function scoreDescription(score) {
  * `auditUrl` itself needs HTMLRewriter and so cannot run under `node --test`.
  */
 export function scoreChecks(checks) {
-  // A weightless entry contributes nothing instead of poisoning the total.
-  // Without this, one item with no `weight` makes the sum NaN, NaN is falsy, and
-  // the function returns 0 — so a flawless site would be given zero coverage because something
-  // weightless got into the array. The 2026 signals
-  // are deliberately weightless and live in their own list, but the arithmetic
-  // should not depend on nobody ever mixing the two.
   const weightOf = (c) => (Number.isFinite(c.weight) ? c.weight : 0);
   const totalWeight = checks.reduce((sum, c) => sum + weightOf(c), 0);
   const earned = checks.reduce((sum, c) => sum + (c.pass ? weightOf(c) : 0), 0);
@@ -500,15 +381,6 @@ export function scoreChecks(checks) {
   return { score, grade };
 }
 
-/**
- * Runs the audit. Assumes `target` already passed urlError().
- *
- * `score` is normalised to a percentage of the total weight rather than assuming
- * the weights happen to add up to 100 — they summed to 105, so a fully agent-ready
- * site was reported as `score: 105` against `max_score: 100`. Deriving the
- * denominator keeps every weight as the relative importance it was chosen to be,
- * and makes adding or reweighting a check impossible to get wrong.
- */
 /**
  * @param {string} target        already through urlError()
  * @param {Function} [fetchImpl] fetcher for the target's own origin. Defaults to
@@ -519,27 +391,8 @@ export function scoreChecks(checks) {
  *   outright. No check reads a response header, so serving those sub-requests
  *   from the asset binding scores identically.
  */
-/**
- * Is this response actually the JSON document the path promised?
- *
- * Fetching a URL is not the check; the URL being what it claims is. A site with
- * a catch-all — no 404 page, every unmatched path answering 200 with the
- * homepage — used to pass every one of the 2026 signals on documents it did not
- * have. `kc-it.pl` scored A 95 that way, 11 of its points for files that do not
- * exist, and the same configuration is the default for SPAs and for Cloudflare
- * Pages without a 404.html. Grades inflated in the direction that flatters the
- * customer are the ones nobody reports.
- *
- * Every artifact here is a JSON document, so parsing is the whole test and no
- * allowlist or heuristic is needed. `soft404` is kept separate from plain
- * absence because they are different findings with different fixes: one site is
- * missing a file, the other is misreporting every URL it does not have.
- */
 function jsonDoc(res) {
   if (!res?.ok) return { ok: false, soft404: false };
-  // A body cut off at the ceiling cannot be parsed, so fall back to the declared
-  // type — still enough to tell a manifest from a page of HTML, and a real
-  // manifest large enough to truncate should not be failed for its size.
   if (res.truncated) {
     const isJson = /json/i.test(res.type ?? '');
     return { ok: isJson, soft404: !isJson };
@@ -553,7 +406,6 @@ function jsonDoc(res) {
   }
 }
 
-/** "absent" and "answered with a page" are different things to tell a reader. */
 const missing = (doc, path) => (doc.soft404
   ? `${path} answers 200 but is not JSON — a catch-all is serving a page there, not a document`
   : `no ${path}`);
@@ -571,29 +423,17 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     one(at('/llms-full.txt'), { maxBytes: 4096 }),
     one(at('/robots.txt'), { maxBytes: 64 * 1024 }),
     one(at('/sitemap.xml'), { maxBytes: 4096 }),
-    // Both A2A card paths. agent-card.json is where the 1.0 spec puts it;
-    // agent.json is the pre-0.3 path most published cards still use. A site
-    // passing on either is reachable by some real client, so both are fetched
-    // and the advice below names the current one.
     one(at('/.well-known/agent-card.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/agent.json'), { maxBytes: 32 * 1024 }),
     one(at('/agents.json'), { maxBytes: 32 * 1024 }),
-    // The 2026 surfaces. Reported as signals, never scored — see signal() above.
-    // Small ceilings: these are all manifests, and a site that answers a
-    // multi-megabyte body at one of these paths has not implemented the spec.
     one(at('/.well-known/api-catalog'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/mcp.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/mcp/server-card.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/agent-skills/index.json'), { maxBytes: 32 * 1024 }),
     one(at('/.well-known/http-message-signatures-directory'), { maxBytes: 32 * 1024 }),
-    // The same page asked for as markdown. Cheap for us, and the only way to
-    // tell a site that negotiates from one that ignores Accept — a status code
-    // proves nothing here, since ignoring the header also returns 200.
     one(target, { accept: 'text/markdown', maxBytes: 1024 }),
   ]);
 
-  // Validated forms of the JSON artifacts. `.ok` from get() means only that the
-  // server answered 200; these mean the answer was the document.
   const cardDoc = jsonDoc(agentCard);
   const legacyCardDoc = jsonDoc(wellKnown);
   const agentsJsonDoc = jsonDoc(agentsJson);
@@ -660,11 +500,6 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
         ? `${machineAlternates.length} machine-readable alternate(s): ${machineAlternates.map((a) => a.type || 'untyped').join(', ')}`
         : 'no rel=alternate link to a JSON or Markdown representation',
       'Add <link rel="alternate" type="application/json"> (and text/markdown) pointing at machine-readable versions of the page.'),
-    // Passing on the old path still counts — a card at agent.json is reachable
-    // by every client written before A2A 0.3, which is most of them. But the
-    // evidence says which path answered, and a site on the old one is told so,
-    // because "you pass" while a spec-compliant 1.0 client cannot find you is
-    // exactly the kind of advice that is worse than none.
     check('agent_card', CHECK_META.agent_card.weight, cardDoc.ok || legacyCardDoc.ok || agentsJsonDoc.ok,
       cardDoc.ok ? '/.well-known/agent-card.json is available'
         : (legacyCardDoc.ok ? '/.well-known/agent.json is available — the pre-0.3 path; A2A 1.0 clients look at /.well-known/agent-card.json'
@@ -712,11 +547,6 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
       SIGNAL_META.web_bot_auth.fix),
   ];
 
-  // In v2 the signals are scored, so they become ordinary checks carrying the
-  // weight the table above assigns them. They keep their own `label`, which is
-  // written for a reader who has never heard of the spec; CHECK_LABELS covers
-  // only the thirteen. A signal with no weight in the table would score zero, so
-  // the table is the single place a promotion happens.
   const promoted = set === 'v2'
     ? signals.map((s) => ({
       id: s.id,
@@ -738,9 +568,6 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
     audited_at: new Date().toISOString(),
     score,
     max_score: 100,
-    // Which checklist produced this letter. Stored beside every grade, because a
-    // badge outlives the run that made it and "86" means different things under
-    // the two sets.
     check_set: set,
     letter: letterGrade(score),
     grade,
@@ -751,7 +578,6 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
       ...c,
       label: c.label ?? CHECK_LABELS[c.id] ?? c.id,
       applicability: CHECK_CONTEXT[c.id] ?? 'Site information and access: assess this finding against your intended audience and publishing policy.',
-      // The paid half: paste-ready code for this specific origin, not advice.
       ...(c.pass ? {} : { snippet: snippetFor(c.id, origin) }),
     })),
     next_steps: failing.map((c) => ({
@@ -761,10 +587,6 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
       fix: c.fix,
       snippet: snippetFor(c.id, origin),
     })),
-    // The same seven surfaces, always reported here whether or not they counted.
-    // Under v1 this block is the only place they appear; under v2 they are also
-    // in `checks`, carrying weight. `scored` says which, so a client never has to
-    // infer it from the check count.
     signals: {
       $comment: set === 'v2'
         ? 'Emerging 2026 agent-readiness surfaces. Under check set v2 these are scored, at weights below every 2025 check — adoption is still tiny, so missing one is normal rather than negligent, and it costs less than missing llms.txt. They also appear in `checks`.'
@@ -777,18 +599,12 @@ export async function auditUrl(target, fetchImpl = fetch, signHeaders = null, ch
   };
 }
 
-/** Validates the request body and returns { url } or { error }. */
 export function parseAuditRequest(obj) {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
     return { error: 'body must be a JSON object like {"url": "https://example.com"}' };
   }
-  // Same boundary the registry uses for submitted listing URLs: http/https
-  // only, public hostnames only, no private or loopback literals.
   const err = urlError(obj.url, 'url');
   if (err) return { error: err };
-  // `checks` is optional and normalised rather than rejected: an unknown value
-  // gets the current default, because refusing to audit a paid request over a
-  // typo in an optional field would be charging for a 400.
   return { url: obj.url, checkSet: resolveCheckSet(obj.checks) };
 }
 

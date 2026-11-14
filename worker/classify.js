@@ -1,10 +1,4 @@
-// Classifies the caller of a request so the index can answer the question
-// GitHub Pages made unanswerable: has any agent ever actually used this?
-//
-// Deliberately coarse. A user-agent string is self-reported and trivially
-// spoofed, so these buckets are a traffic-shape signal, not an identity claim.
 
-// Crawlers that fetch pages to build training corpora or answer engines.
 const AI_CRAWLERS = [
   'gptbot', 'oai-searchbot', 'chatgpt-user',
   'claudebot', 'claude-user', 'claude-searchbot', 'anthropic-ai',
@@ -16,8 +10,6 @@ const AI_CRAWLERS = [
   'duckassistbot', 'mistralai-user', 'ai2bot', 'firecrawl',
 ];
 
-// Callers that act rather than crawl — the traffic class the article says
-// grew 7,851% YoY, and the one this index is actually built for.
 const AI_AGENTS = [
   'langchain', 'llamaindex', 'llama-index', 'openai-python', 'openai-node',
   'anthropic-sdk', 'anthropic-python', 'anthropic-ai-sdk', 'claude-code',
@@ -25,18 +17,14 @@ const AI_AGENTS = [
   'agentkit', 'x402', 'operator', 'computer-use', 'smithery', 'glama',
 ];
 
-// Our own tooling — separated so dogfooding never inflates the agent numbers.
 const OWN = ['ai-product-index-mcp', 'ai-product-index-registry'];
 
-// Conventional search/social crawlers. Not AI traffic, but not humans either.
 const CLASSIC_BOTS = [
   'googlebot', 'bingbot', 'slurp', 'duckduckbot', 'baiduspider', 'yandexbot',
   'facebookexternalhit', 'twitterbot', 'linkedinbot', 'slackbot',
   'discordbot', 'telegrambot', 'whatsapp', 'pingdom', 'uptimerobot',
 ];
 
-// Generic HTTP clients. Could be an agent, could be a shell script — the
-// honest label is "script", not "agent".
 const SCRIPTS = [
   'curl/', 'wget/', 'python-requests', 'httpx/', 'aiohttp', 'node-fetch',
   'undici', 'axios/', 'go-http-client', 'okhttp', 'java/', 'ruby', 'php/',
@@ -45,33 +33,18 @@ const SCRIPTS = [
 
 const hit = (ua, list) => list.some((needle) => ua.includes(needle));
 
-/**
- * @returns {'own'|'ai_agent'|'ai_crawler'|'classic_bot'|'browser'|'script'|'unknown'|'other'}
- */
 export function classifyUserAgent(userAgent) {
   const ua = (userAgent ?? '').toLowerCase();
   if (!ua) return 'unknown';
   if (hit(ua, OWN)) return 'own';
-  // Agents before crawlers: several agent stacks embed a vendor token that
-  // also appears in the crawler list (e.g. anthropic-ai inside an SDK UA).
   if (hit(ua, AI_AGENTS)) return 'ai_agent';
   if (hit(ua, AI_CRAWLERS)) return 'ai_crawler';
   if (hit(ua, CLASSIC_BOTS)) return 'classic_bot';
   if (hit(ua, SCRIPTS)) return 'script';
-  // Real browsers always carry a rendering-engine token alongside Mozilla/5.0.
   if (ua.startsWith('mozilla/') && /(chrome|safari|firefox|gecko|edg)\//.test(ua)) return 'browser';
   return 'other';
 }
 
-/**
- * Buckets a path into a small stable set so stats stay readable as listings grow.
- *
- * `apex` distinguishes the umbrella's portfolio page from the service's home
- * page. They share a pathname and nothing else: one asks "does anyone visit the
- * portfolio", the other "does anyone visit the index", and bucketing both as
- * `home` made the first question unanswerable — the umbrella could have had zero
- * visitors since launch and the figure would have looked identical.
- */
 export function classifyPath(pathname, { apex = false } = {}) {
   if (pathname === '/' || pathname === '/index.html') return apex ? 'apex_home' : 'home';
   if (pathname === '/llms.txt' || pathname === '/llms-full.txt') return 'llms_txt';
@@ -79,19 +52,8 @@ export function classifyPath(pathname, { apex = false } = {}) {
   if (pathname === '/sitemap.xml') return 'sitemap';
   if (pathname === '/openapi.yaml') return 'openapi';
   if (pathname === '/api/audit') return 'audit';
-  // Separate bucket from 'audit' on purpose: free-score vs paid-audit counts are
-  // the conversion rate of the funnel.
   if (pathname === '/api/score') return 'score_free';
-  // The router's two paid endpoints get their own buckets for the same reason
-  // `audit` has one: a paid endpoint's traffic is the only number that says
-  // whether the thing is being bought, and `/api/*` as one bucket buries it
-  // under the free registry reads that dominate it by an order of magnitude.
-  // Bought one at a time; counted separately from the whole-report `audit`,
-  // because "did unbundling work" is a question about the ratio between them.
   if (pathname === '/api/check') return 'check_single';
-  // The recurring product, counted apart from the per-call ones — whether
-  // anyone buys a standing watch is a different question from whether they
-  // buy one answer, and §7 says it is the more important of the two.
   if (pathname === '/api/watch') return 'watch';
   if (pathname === '/api/watch/sweep') return 'watch_sweep';
   if (pathname === '/api/liveness') return 'liveness';

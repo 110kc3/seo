@@ -81,7 +81,6 @@ test('rejects dangerous or private URLs', () => {
 });
 
 test('public IP-like domains are not false positives', () => {
-  // real-world domains that merely start with digits must pass
   for (const url of ['https://10.tv/x', 'https://127.net/x', 'https://0.example.com/']) {
     assert.equal(validate({ ...valid(), url }).ok, true, `url should pass: ${url}`);
   }
@@ -92,7 +91,6 @@ test('rejects oversize and control-character text', () => {
   assert.equal(validate({ ...valid(), name: 'a'.repeat(81) }).ok, false);
   assert.equal(validate({ ...valid(), name: 'bad\x00name' }).ok, false);
   assert.equal(validate({ ...valid(), name: 'two\nlines' }).ok, false);
-  // newlines are allowed in description, other control chars are not
   assert.equal(validate({ ...valid(), description: 'two\nlines' }).ok, true);
   assert.equal(validate({ ...valid(), description: 'bad\x07bell' }).ok, false);
 });
@@ -118,9 +116,6 @@ test('reconstruct sets server fields, drops junk, fixes key order', () => {
   assert.equal(out.created, '2026-07-09');
   assert.equal(out.github_user, 'realuser');
   assert.equal(out.tier, 'free');
-  // `origin` is server-set like `tier`: a submitted "curated" is dropped, not
-  // honoured. It gates the per-account cap, so trusting the payload here would
-  // make the cap opt-out.
   assert.equal(out.origin, 'self-registered');
   assert.equal({}.polluted, undefined);
 });

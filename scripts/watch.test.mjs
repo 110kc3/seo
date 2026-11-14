@@ -21,9 +21,6 @@ const okGate = (payer = PAYER) => async () => ({ ok: true, payer, attach: (r) =>
 const req = (body) => new Request(`${BASE}/api/watch`, { method: 'POST', body: JSON.stringify(body) });
 
 test('a webhook is validated as strictly as the target, and https only', () => {
-  // We POST to this unattended. An alert aimed at 127.0.0.1 is a request to use
-  // this Worker as an internal-network probe, and http would leak the URL being
-  // watched across the wire.
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'http://you.example/h' }, urlError).error, /^webhook: must be https/);
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://127.0.0.1/h' }, urlError).error, /^webhook:/);
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://localhost/h' }, urlError).error, /^webhook:/);
@@ -45,7 +42,6 @@ test('an invalid watch is refused before anything is charged', async () => {
 test('the payer from the settlement owns the watch — not a self-declared address', async () => {
   const env = { PAYMENTS: fakeKv() };
   const r = await handleWatch(
-    // A body claiming a different owner must be ignored entirely.
     req({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: 6, payer: '0xATTACKER', owner: '0xATTACKER' }),
     env, cfg, { base: BASE, urlError, gate: okGate() },
   );
@@ -57,8 +53,6 @@ test('the payer from the settlement owns the watch — not a self-declared addre
 });
 
 test('paying again for the same URL tops up rather than resetting', async () => {
-  // Same wallet, same URL: the intent is unambiguous, and losing the remainder
-  // to a second purchase would be theft by rounding.
   const env = { PAYMENTS: fakeKv() };
   const opts = { base: BASE, urlError, gate: okGate() };
   await handleWatch(req({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: 6 }), env, cfg, opts);
@@ -80,7 +74,6 @@ test('a settled payment whose watch cannot be stored says so, and does not claim
   assert.match(body.error, /nothing is being monitored/i);
 });
 
-// --- the sweep ---------------------------------------------------------------
 
 const seed = async (env, over = {}) => {
   const w = { url: 'https://a.example/x', webhook: 'https://you.example/h', payer: PAYER, credits: 3, sweeps_run: 0, last_state: null, last_swept: null, ...over };
@@ -94,8 +87,6 @@ test('the sweep is invisible without the bearer', async () => {
 });
 
 test('the first sweep sets a baseline instead of alerting', async () => {
-  // A watch created on an endpoint that is already down must not fire "it
-  // changed" — nothing changed, that is just how it was found.
   const env = { PAYMENTS: fakeKv() };
   await seed(env);
   let posted = 0;
@@ -127,7 +118,6 @@ test('the alert fires on the edge, in both directions', async () => {
   assert.equal(sent[0].body.state, 'failing');
   assert.equal(sent[0].body.changed, true);
 
-  // Recovery is an edge too — the subscriber needs to know it came back.
   await handleSweep(new Request(`${BASE}/api/watch/sweep`, { method: 'POST' }), env, {
     authorized: true, cfg,
     probe: async () => ({ alive: true, status: 402 }),
@@ -146,8 +136,6 @@ test('an exhausted watch stops costing probes, and the last alert says why', asy
     probe: async () => ({ alive: true, status: 402 }),
     fetchImpl: async (url, init) => { sent.push(JSON.parse(init.body)); return { ok: true }; },
   })).json();
-  // Credits hit zero: that fires even without a state change, because "this was
-  // your last one" is exactly the moment a subscriber needs to hear from us.
   assert.equal(first.swept, 1);
   assert.equal(sent.at(-1).exhausted, true);
   assert.equal(sent.at(-1).credits_left, 0);
@@ -184,25 +172,15 @@ test('the legacy watch parser enforces the original prepaid sweep cap', () => {
   assert.match(parseWatchRequest({ url: 'https://a.example/x', webhook: 'https://you.example/h', sweeps: MAX_SWEEPS + 1 }, urlError).error, /^sweeps:/);
 });
 
-// --- what counts as an outage -----------------------------------------------
 
 test('a 500 is an outage, not "answering" — the bug this product could least afford', async () => {
-  // `probe().alive` answers the Router's question: did the host answer at all,
-  // where a 402 is the successful outcome. The watch inherited it, so an
-  // endpoint erroring for a week reported as healthy the entire time — on the
-  // one product whose whole promise is telling you it stopped.
   const { healthyForWatch } = await import('../worker/watch.js');
   for (const status of [500, 502, 503, 504]) {
     assert.equal(healthyForWatch({ alive: true, status }), false, `HTTP ${status} must be an outage`);
   }
-  // 4xx too: if the URL you depend on starts 404ing, your integration is broken
-  // even though their server is fine.
   assert.equal(healthyForWatch({ alive: true, status: 404 }), false);
   assert.equal(healthyForWatch({ alive: true, status: 410 }), false);
 
-  // But the codes that are a *correct* answer must never alert. A paid endpoint
-  // answering 402 to an unpaid probe is working exactly as designed, and 405 is
-  // our own doing — the probe sends GET.
   for (const status of [200, 204, 301, 401, 402, 403, 405]) {
     assert.equal(healthyForWatch({ alive: true, status }), true, `HTTP ${status} must not alert`);
   }
@@ -210,8 +188,6 @@ test('a 500 is an outage, not "answering" — the bug this product could least a
 });
 
 test('the alert says whether the server errored or vanished', async () => {
-  // Different fix, different urgency: a subscriber must be able to tell "your
-  // server is returning 500" from "your host is gone".
   const env = { PAYMENTS: fakeKv() };
   await env.PAYMENTS.put(watchKey(PAYER, 'https://a.example/x'), JSON.stringify({
     url: 'https://a.example/x', webhook: 'https://you.example/h', payer: PAYER, credits: 3, last_state: 'answering',
@@ -231,6 +207,5 @@ test('the alert says whether the server errored or vanished', async () => {
     probe: async () => ({ alive: false, status: 0, error: 'timeout' }),
     fetchImpl: async (url, init) => { sent.push(JSON.parse(init.body)); return { ok: true }; },
   });
-  // Still failing, so no new edge — but when it does fire, the reason differs.
   assert.equal(sent.length, 1, 'failing -> failing is not an edge');
 });

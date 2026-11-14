@@ -1,19 +1,3 @@
-// Freezes the live traffic feed into a committed file, so the report page can
-// quote it without the build depending on the network.
-//
-// `/api/stats.json` is computed at request time from Analytics Engine. That is
-// right for an API and wrong for a page that wants to be cited: a citable number
-// has to be the same number tomorrow, and `build.mjs` must stay a pure function
-// of its inputs or every rebuild diffs. So the weekly cron takes a snapshot and
-// commits it, exactly as it already does for scores.json and health.json.
-//
-// Written as a series rather than a single reading. The interesting thing about
-// agent share is not its value, it is its slope — 3.2% at day 4, 7.19% at day 7,
-// 10.6% at day 8 is a finding; "10.6%" on its own is a statistic. Each run
-// appends one dated point and rewrites nothing, so the history is append-only
-// and a bad run can be dropped by hand without recomputing anything.
-//
-// Usage: node scripts/snapshot-traffic.mjs [--date YYYY-MM-DD]
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -37,15 +21,10 @@ if (!resp.ok) {
 }
 const live = await resp.json();
 if (!live.ok) {
-  // `stats_not_enabled` is the documented answer when the analytics credential
-  // is missing. Overwriting a good history with that would silently blank the
-  // report, so refuse instead.
   console.error(`stats endpoint reports ${live.code ?? 'not ok'}; leaving the snapshot untouched`);
   process.exit(1);
 }
 
-// The date comes from the reading itself, not from the clock, so re-running
-// against a cached response cannot invent a new day.
 const date = argDate ?? String(live.generated_at ?? '').slice(0, 10);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
   console.error(`could not determine a date for this reading (generated_at: ${live.generated_at})`);

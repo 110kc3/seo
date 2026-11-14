@@ -1,5 +1,3 @@
-// Shared by the generated browser script and the rendering/security tests.
-// Keep these functions self-contained: pages.mjs embeds their source directly.
 export function catalogResults(rows, columns, kind) {
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);

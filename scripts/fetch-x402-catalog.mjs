@@ -1,21 +1,3 @@
-// Builds the x402 endpoint catalog from the Coinbase CDP Bazaar.
-//
-//   node scripts/fetch-x402-catalog.mjs
-//
-// Why mirror a catalog someone else already publishes: because the published
-// one cannot be searched. The discovery API offers offset paging and nothing
-// else — no query, no filter, no aggregate — so answering "is there an x402
-// endpoint that does X, and what does it cost" means pulling all ~15k records
-// and doing the work yourself. Every agent that wants to spend money on this
-// rail hits that wall. This does the pull once, normalizes it, and serves the
-// result through the same search / NLWeb / MCP surfaces as the registry.
-//
-// It is explicitly a mirror, and says so in the artifact it writes: source,
-// fetch date and the upstream URL travel with the data. The value added is
-// normalization, search and aggregates — not ownership of the underlying facts.
-//
-// Output is sorted by URL so a weekly refresh produces a small diff rather than
-// rewriting 15k lines; that keeps this committable without bloating history.
 
 import { writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -26,9 +8,6 @@ const DISCOVERY = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/resou
 const PAGE = 1000;
 const MAX_PAGES = 60;
 
-// CAIP-2 ids are unreadable and the v1 records use bare names for the same
-// chains, so both are folded onto one label. Anything unrecognised keeps its
-// raw id rather than being guessed at.
 const CHAINS = {
   'eip155:8453': 'base',
   'eip155:84532': 'base-sepolia',
@@ -48,9 +27,6 @@ const CHAINS = {
   'solana-devnet': 'solana-devnet',
 };
 
-// Only assets whose decimals are known can be priced. Guessing 6 for an
-// unknown token would print a number that is wrong by orders of magnitude,
-// which is worse than printing nothing.
 const ASSETS = {
   '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913': { symbol: 'USDC', decimals: 6 },
   '0x036cbd53842c5426634e7929541ec2318f3dcf7e': { symbol: 'USDC', decimals: 6 },
@@ -75,7 +51,7 @@ function normalize(record) {
   try {
     host = new URL(record.resource).host;
   } catch {
-    return null; // a resource that is not a URL cannot be called, so it is not an endpoint
+    return null;
   }
 
   const atomic = accept.maxAmountRequired ?? accept.amount ?? null;
@@ -103,7 +79,6 @@ function normalize(record) {
   };
 }
 
-// --- fetch ------------------------------------------------------------------
 
 const raw = [];
 let reported = null;
@@ -117,8 +92,6 @@ for (let i = 0; i < MAX_PAGES; i += 1) {
 }
 process.stderr.write('\n');
 
-// The upstream can serve the same resource twice across pages if it is written
-// to while we page. Last write wins, keyed on the URL.
 const byUrl = new Map();
 let skipped = 0;
 for (const record of raw) {
@@ -129,9 +102,6 @@ for (const record of raw) {
 
 const endpoints = [...byUrl.values()].sort((a, b) => a.url.localeCompare(b.url));
 
-// --- aggregates -------------------------------------------------------------
-// These are the numbers nobody publishes about this ecosystem, and they are the
-// reason to keep the mirror rather than proxy the upstream per query.
 
 const tally = (values) => {
   const counts = new Map();
@@ -149,8 +119,6 @@ const stats = {
   fetched: new Date().toISOString().slice(0, 10),
   endpoints: endpoints.length,
   hosts: hosts.length,
-  // The single most useful fact about this ecosystem, and the one the raw
-  // catalog hides: it is far more concentrated than its endpoint count implies.
   concentration: {
     top_10_hosts_share: hosts.length
       ? Number((hosts.slice(0, 10).reduce((n, [, c]) => n + c, 0) / endpoints.length).toFixed(3))
@@ -183,12 +151,6 @@ writeFileSync(join(ROOT, 'api', 'x402', 'catalog.json'), `${JSON.stringify({
 
 writeFileSync(join(ROOT, 'api', 'x402', 'stats.json'), `${JSON.stringify(stats, null, 2)}\n`);
 
-// The search index the Worker actually loads. Positional rows rather than
-// objects: repeating eleven key names 14,661 times more than doubles the file,
-// and this one is parsed on a request path. Descriptions are capped shorter
-// here than in the catalog — this file has to answer a query, not archive the
-// record — and the fields kept are exactly what a result needs to be useful,
-// so a hit never requires a second fetch into the 8 MB catalog.
 const INDEX_FIELDS = ['url', 'host', 'description', 'price', 'chain', 'method', 'x402_version'];
 writeFileSync(join(ROOT, 'api', 'x402', 'index.json'), `${JSON.stringify({
   $comment: 'Compact search index over api/x402/catalog.json. rows are positional, keyed by `fields`.',

@@ -1,7 +1,3 @@
-// Security boundary for the AI Product Index registry.
-// Every listing that reaches disk or generated HTML goes through validate()
-// and reconstruct() from this file, and api/schema.json is generated from the
-// same constants — published docs cannot drift from enforcement.
 
 export const CATEGORIES = ['api', 'app', 'agent', 'mcp', 'other'];
 export const PRICING = ['free', 'freemium', 'paid'];
@@ -17,20 +13,6 @@ export const AGENT_FIELDS = [
 ];
 export const SERVER_FIELDS = ['created', 'github_user', 'tier', 'updated', 'origin'];
 
-/**
- * How a listing got here. Server-set, and the per-account cap counts only
- * `self-registered`.
- *
- * It has to be server-set rather than read off `submitted_by`, which records
- * the same thing in prose: `submitted_by` is *self-reported by the submitter*,
- * so a cap keyed on it would be lifted by typing "registry (curated)" into a
- * field nobody can validate. `origin` is written by the registry at acceptance
- * and ignored as input, exactly like `tier`.
- *
- * A listing with no `origin` counts toward the cap. That is the fail-closed
- * direction: an unrecognised entry should cost its account a slot rather than
- * be free.
- */
 export const ORIGINS = ['self-registered', 'curated', 'seed'];
 export const DEFAULT_ORIGIN = 'self-registered';
 export const TIERS = ['free', 'verified', 'featured'];
@@ -70,10 +52,6 @@ function textError(v, field, min, max, { allowNewlines = false } = {}) {
   return null;
 }
 
-// Validates an agent-submitted listing object. Server-set fields are accepted
-// (agents may echo the full schema) but their values are ignored — reconstruct()
-// always overwrites them. Returns { ok, errors: [all problems found] } so a
-// rejected agent can fix everything in one resubmission.
 export function validate(obj) {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
     return { ok: false, errors: ['payload must be a single JSON object'] };
@@ -128,9 +106,6 @@ export function validate(obj) {
   return errors.length ? { ok: false, errors } : { ok: true, errors: [] };
 }
 
-// Rebuilds the listing field-by-field from the allowlist — never writes the
-// submitted object through (kills __proto__ tricks, drops junk, fixes key
-// order for clean diffs). Server-set fields always come from the caller.
 export function reconstruct(obj, { created, github_user, tier = 'free', updated, origin = DEFAULT_ORIGIN }) {
   const out = {
     slug: obj.slug,
@@ -157,15 +132,12 @@ export function reconstruct(obj, { created, github_user, tier = 'free', updated,
   return out;
 }
 
-// Canonical form for duplicate detection: case-normalized host, no fragment,
-// no trailing slash.
 export function normalizeUrl(value) {
   const u = new URL(value);
   const path = u.pathname.replace(/\/+$/, '');
   return `${u.protocol}//${u.hostname.toLowerCase()}${u.port ? ':' + u.port : ''}${path}${u.search}`;
 }
 
-// Single escape helper for ALL text and attribute values in generated HTML.
 export function esc(s) {
   return String(s)
     .replaceAll('&', '&amp;')
@@ -175,8 +147,6 @@ export function esc(s) {
     .replaceAll("'", '&#39;');
 }
 
-// JSON-LD payloads: <-escape '<' so user text can't break out of the
-// <script> block with a literal </script>.
 export function jsonLd(obj) {
   return JSON.stringify(obj, null, 2).replace(/</g, '\\u003c');
 }

@@ -40,3 +40,9 @@ Read `ARCHITECTURE.md` and `NEXT.md` before changing implementation or product b
 - Before pushing, run the full suite and `git diff --check`. After a deployment,
   verify production and confirm that live `llms.txt` matches the committed
   artifact byte for byte.
+
+## Code style
+
+- Do not add comments to code. Make code self-explanatory through descriptive
+  names, small focused functions and clear control flow. Put rationale and usage
+  explanations in Markdown documentation.

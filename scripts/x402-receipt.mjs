@@ -1,21 +1,9 @@
-// Verifies an ALREADY-SETTLED x402 payment from its transaction hash.
-//
-// Why not the facilitator: /verify and /settle operate on a signed but
-// unsettled EIP-3009 authorization, carried in an HTTP header. The [upgrade]
-// flow's transport is a GitHub issue, which cannot do the 402 handshake — by
-// the time an agent opens the issue the payment is already on chain. So the
-// check here is an on-chain receipt lookup: did this transaction actually move
-// at least the tier price of the expected asset to our address?
-//
-// Zero dependencies: plain JSON-RPC over fetch, no web3 library.
 
-// keccak256("Transfer(address,address,uint256)")
 export const TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
 
 export const TX_RE = /^0x[0-9a-fA-F]{64}$/;
 const ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
 
-/** Left-pads a 20-byte address into the 32-byte form used in log topics. */
 export function topicAddress(address) {
   if (!ADDRESS_RE.test(address)) throw new Error(`not an address: ${address}`);
   return `0x${'0'.repeat(24)}${address.slice(2).toLowerCase()}`;
@@ -24,10 +12,6 @@ export function topicAddress(address) {
 const sameHex = (a, b) =>
   typeof a === 'string' && typeof b === 'string' && a.toLowerCase() === b.toLowerCase();
 
-/**
- * Finds an ERC-20 Transfer log paying `payTo` in `asset`.
- * @returns {{value: bigint, from: string}|null}
- */
 export function findTransfer(logs, { asset, payTo }) {
   const wantTo = topicAddress(payTo);
   for (const log of logs ?? []) {
@@ -70,9 +54,6 @@ async function rpc(url, method, params) {
   }
 }
 
-/**
- * @returns {Promise<{ok: true, payer: string|null, value: string} | {ok: false, code: string, error: string}>}
- */
 export async function verifyReceipt(rpcUrl, { transaction, asset, payTo, minAmount, minConfirmations = 2 }) {
   if (typeof transaction !== 'string' || !TX_RE.test(transaction)) {
     return { ok: false, code: 'invalid', error: 'receipt.transaction must be a 32-byte hex transaction hash' };

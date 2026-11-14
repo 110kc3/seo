@@ -1,16 +1,3 @@
-// Query surfaces: the endpoints an agent reaches for when it wants an *answer*
-// rather than a file.
-//
-// Everything else this site serves is a document you have to know the URL of.
-// These three take a question:
-//
-//   GET  /api/search?q=…   plain HTTP search over the registry
-//   POST /ask             NLWeb — natural language in, schema.org out
-//   POST /mcp             Model Context Protocol over streamable HTTP
-//
-// All three answer from the committed registry bundled into the Worker, so they
-// cost one CPU slice and no network — the same data `/api/index.json` serves,
-// never a second copy that can drift.
 
 import x402Stats from '../api/x402/stats.json' with { type: 'json' };
 import mcpStats from '../api/mcp/stats.json' with { type: 'json' };
@@ -30,23 +17,6 @@ const json = (body, status = 200, headers = {}) =>
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-/**
- * How well one term matches one field, as a multiplier on that field's weight.
- *
- *   1.0  the whole word is there          "camera" in "old cameras"? no — see below
- *   0.6  it appears inside another word   "api" in "rapid"
- *   0.5  a word shares its stem           "agents"/"agent", "readable"/"readability"
- *
- * The stem tier exists because English plurals and nominalisations broke real
- * queries: "how do I make my site readable to AI agents" missed the listing
- * called *Agent Readability Service* — `agents` is not `agent` and `readable`
- * is not `readability`, so an exact matcher scored it zero. Rather than ship a
- * stemmer, two words count as the same stem when they share a prefix at least
- * 60% as long as the shorter of them (minimum four characters). It is crude and
- * it will occasionally pair unrelated words, which is why it scores half: an
- * exact hit always outranks it, and the relevance floor drops it when nothing
- * better exists to compare against.
- */
 function strength(haystack, term) {
   if (!haystack || !term) return 0;
   if (new RegExp(`\\b${escapeRe(term)}\\b`).test(haystack)) return 1;
@@ -62,15 +32,6 @@ function strength(haystack, term) {
   return 0;
 }
 
-/**
- * Ranked substring search. Deliberately not a fuzzy matcher: with a registry
- * this small, a scorer that can rank an unrelated listing above an exact name
- * match is worse than one that returns nothing — an agent can widen its own
- * query, but it cannot tell that a confident wrong answer is wrong.
- *
- * Weights: name beats tag beats description, and a whole-word hit beats a
- * substring, so "api" does not rank "rapidfire" over "API Gateway".
- */
 export function searchListings(listings, { q = '', category = '', tag = '', limit = DEFAULT_LIMIT, minScoreRatio = 0 } = {}) {
   const needle = String(q).trim().toLowerCase().slice(0, MAX_QUERY);
   const terms = needle ? needle.split(/\s+/).filter(Boolean) : [];
@@ -97,16 +58,8 @@ export function searchListings(listings, { q = '', category = '', tag = '', limi
     scored.push({ listing: l, score });
   }
 
-  // Stable within a score band: slug order, so the same query answers the same
-  // way twice. An agent comparing two runs must not see phantom churn.
   scored.sort((a, b) => b.score - a.score || String(a.listing.slug).localeCompare(String(b.listing.slug)));
 
-  // A relevance floor, relative to the best hit rather than absolute — scores
-  // scale with how many words the query had, so any fixed threshold is wrong
-  // for some query length. /api/search does not use one (an explicit query
-  // wants every match, and the caller sets the limit), but a natural-language
-  // answer does: "polish property auctions" matching seven of eight listings
-  // because they all say "polish" is a worse answer than two right ones.
   const relevant = minScoreRatio > 0 && scored.length
     ? scored.filter((s) => s.score >= scored[0].score * minScoreRatio)
     : scored;
@@ -129,7 +82,6 @@ const publicFields = (l, base) => ({
   json: `${base}/listings/${l.slug}.json`,
 });
 
-/** GET /api/search?q=…&category=…&tag=…&limit=… */
 export function handleSearch(url, listings, base) {
   const params = url.searchParams;
   const q = params.get('q') ?? params.get('query') ?? '';
@@ -146,9 +98,6 @@ export function handleSearch(url, listings, base) {
     total,
     count: hits.length,
     results: hits.map(({ listing }) => publicFields(listing, base)),
-    // A zero-result answer that just says "0" teaches an agent nothing. Say
-    // what the corpus contains so the next query can be better, and how to
-    // add the thing it was looking for.
     ...(hits.length === 0 && {
       corpus: { listings: listings.length, categories: [...new Set(listings.map((l) => l.category))].sort() },
       register: `${base}/llms.txt`,
@@ -156,35 +105,14 @@ export function handleSearch(url, listings, base) {
   }, 200, { 'cache-control': 'public, max-age=300' });
 }
 
-// --- mirrored catalogs ------------------------------------------------------
-//
-// Two ecosystems are indexed exhaustively here because nobody indexes them in a
-// way you can query:
-//
-//   x402  ~14.7k paid HTTP endpoints, from the Coinbase CDP Bazaar
-//   mcp   ~2.2k remotely-callable MCP servers, from the official MCP registry
-//
-// Both upstreams publish cursor or offset paging and nothing else — no query,
-// no filter, no aggregate — so "is there one that does X" means pulling every
-// record yourself. Each is normalized into a compact positional index at build
-// time and answered here in one call.
-//
-// An index is loaded from our own static assets on first use and kept in module
-// scope for the life of the isolate: a few MB parsed once, then free. Loading is
-// lazy so the requests that never touch a catalog pay nothing for it.
 
 export const CATALOGS = {
   x402: {
     path: 'x402',
     source: 'Coinbase CDP x402 Bazaar',
     unit: 'endpoints',
-    // Filters are declared, not hand-coded per catalog: `eq` compares exactly,
-    // `includes` is a substring, `lte` is an upper bound that also rejects rows
-    // with no value — an unknown price is not a low one.
     filters: { chain: ['chain', 'eq'], method: ['method', 'eq'], host: ['host', 'includes'], max_price: ['price', 'lte'] },
     weights: { description: 6, url: 4, host: 2 },
-    // On a pay-per-call rail, price is the tiebreak an agent actually cares
-    // about, so equally relevant hits come back cheapest first.
     tiebreak: 'price',
   },
   mcp: {
@@ -208,11 +136,6 @@ function loadCatalog(env, base, key) {
       if (!resp.ok) throw new Error(`catalog unavailable (HTTP ${resp.status})`);
       const body = await resp.json();
 
-      // Liveness is optional and must stay optional: it is written by a weekly
-      // cron, so it is absent until the first run and stale between them.
-      // Search has to work without it — a missing health file means we know
-      // nothing about these endpoints, which is different from knowing they
-      // are fine, but it is never a reason to fail the query.
       let unreachable = new Set();
       let observations = new Map();
       let probed = null;
@@ -228,8 +151,6 @@ function loadCatalog(env, base, key) {
 
       return { ...body, at: Object.fromEntries(body.fields.map((f, i) => [f, i])), unreachable, observations, probed };
     })().catch((e) => {
-      // A failed load must not poison every later request: drop the cached
-      // promise so the next caller retries rather than replaying the error.
       catalogPromises.delete(key);
       throw e;
     });
@@ -238,9 +159,6 @@ function loadCatalog(env, base, key) {
   return catalogPromises.get(key);
 }
 
-/**
- * GET /api/{x402,mcp}/search?q=…&limit=… plus that catalog's declared filters.
- */
 export async function handleCatalogSearch(key, url, env, base) {
   const spec = CATALOGS[key];
   if (!spec) return json({ ok: false, code: 'unknown_catalog', error: `no catalog "${key}"` }, 404);
@@ -294,17 +212,11 @@ export async function handleCatalogSearch(key, url, env, base) {
     || (tie === null ? 0 : (a[1][tie] ?? Infinity) - (b[1][tie] ?? Infinity))
     || String(a[1][at.url]).localeCompare(String(b[1][at.url])));
 
-  // Flagged, never hidden. A probe failure is evidence, not proof — the sample
-  // is weekly and taken from one network path — so removing the entry would
-  // silently delete endpoints on the strength of one bad moment. Saying so and
-  // leaving it ranked lets the caller decide, which is the only honest option
-  // when the alternative is an empty result set.
   const view = ([, row]) => {
     const out = Object.fromEntries(catalog.fields.map((f, i) => [f, row[i]]));
     if (catalog.unreachable?.has(out.url)) out.unreachable = true;
     const observation = catalog.observations?.get(out.url);
     // The file retains failures, not per-endpoint successes. Its global sample
-    // date must never be presented as the last check of an individual result.
     out.health = observation ? {
       state: 'failed',
       last_checked: observation.last_checked ?? null,
@@ -330,11 +242,6 @@ export async function handleCatalogSearch(key, url, env, base) {
   }, 200, { 'cache-control': 'public, max-age=600' });
 }
 
-// --- NLWeb ------------------------------------------------------------------
-// nlweb.ai: POST /ask with {query: {text}}, answered with schema.org objects
-// under `results`. The protocol's whole premise is that a site already
-// publishes schema.org — this one does, on every listing page — so answering
-// is a projection of the registry, not a second content model.
 
 const NLWEB_VERSION = '0.55';
 
@@ -350,16 +257,9 @@ const asSchemaOrg = (l, base) => ({
   subjectOf: { '@type': 'WebPage', url: `${base}/l/${l.slug}.html` },
 });
 
-/** POST /ask — and GET /ask?query=… , because half of what calls this is curl. */
 export async function handleAsk(request, listings, base) {
   let text = '';
   let site = '';
-  // Summarizing is the default. It was not, back when the corpus was ten
-  // listings and reading all ten *was* the answer; a caller asking a question
-  // in English now gets a sentence first and the structured results after,
-  // rather than a ranked list it has to interpret itself. `mode=list` still
-  // turns it off. This only ever adds a field, so a client that ignores
-  // `summary` sees exactly what it saw before.
   let mode = 'summarize';
 
   if (request.method === 'POST') {
@@ -369,9 +269,6 @@ export async function handleAsk(request, listings, base) {
     } catch (e) {
       return json({ _meta: { response_type: 'failure', version: NLWEB_VERSION }, error: `invalid JSON: ${e.message.slice(0, 120)}` }, 400);
     }
-    // The spec nests the question under query.text; accept a bare string too,
-    // because every hand-written client gets this wrong on the first try and a
-    // 400 teaches it nothing it could not be told by answering.
     text = typeof body.query === 'string' ? body.query : (body.query?.text ?? body.text ?? '');
     site = body.query?.site ?? body.site ?? '';
     mode = body.prefer?.mode ?? mode;
@@ -386,14 +283,11 @@ export async function handleAsk(request, listings, base) {
     return json({
       _meta: { response_type: 'elicitation', version: NLWEB_VERSION },
       results: [],
-      // An elicitation is the protocol's way of asking a question back.
       elicitation: 'What are you looking for? This corpus is a directory of AI products — try "MCP server", "free API", or a category.',
       corpus: { listings: listings.length, categories: [...new Set(listings.map((l) => l.category))].sort() },
     }, 200);
   }
 
-  // `site` scopes the query to a corpus. We are one corpus; an unknown one is
-  // answered honestly rather than silently treated as ours.
   const host = new URL(base).host;
   if (site && site !== host && site !== base && site !== 'all') {
     return json({
@@ -403,15 +297,10 @@ export async function handleAsk(request, listings, base) {
     }, 400);
   }
 
-  // Natural language in, so strip the words that carry no signal in a corpus
-  // this small — otherwise "do you have any MCP servers?" scores on "any".
   const STOP = new Set(['a', 'an', 'the', 'is', 'are', 'do', 'does', 'you', 'have', 'any', 'for', 'me', 'i', 'want', 'need', 'looking', 'find', 'show', 'what', 'which', 'to', 'of', 'in', 'on', 'with', 'that', 'can', 'please', 'best', 'good', 'some', 'and', 'or']);
   const keywords = text.toLowerCase().replace(/[^\p{L}\p{N}\s-]/gu, ' ').split(/\s+/)
     .filter((w) => w.length > 1 && !STOP.has(w));
 
-  // 0.5: a hit has to be at least half as good as the best one to be offered
-  // as part of an answer. Tuned against the real corpus, where a one-word
-  // incidental match ("polish") scores 1–3 against a name-and-tag match's 15+.
   const { total, hits } = searchListings(listings, { q: keywords.join(' '), limit: 10, minScoreRatio: 0.5 });
 
   return json({
@@ -426,24 +315,12 @@ export async function handleAsk(request, listings, base) {
     ...(mode.includes('summarize') && {
       summary: hits.length
         ? `${total} of ${listings.length} indexed products match "${text}". Top result: ${hits[0].listing.name} — ${hits[0].listing.description}`
-        // "Nothing matches" is only true of the registry, which is the small
-        // half of what this site indexes. Saying it without naming the two
-        // catalogs would send an agent away from an answer we actually have.
         : `Nothing in the registry matches "${text}". The registry holds ${listings.length} self-registered AI products, and two larger catalogs are searchable separately: ${base}/api/x402/search for paid APIs an agent can call per request, and ${base}/api/mcp/search for remotely-callable MCP servers. Anything can be added to the registry autonomously via ${base}/llms.txt.`,
     }),
     ...(hits.length === 0 && { register: `${base}/llms.txt` }),
   }, 200, { 'cache-control': 'public, max-age=300' });
 }
 
-// --- MCP over streamable HTTP -----------------------------------------------
-// The same tools as mcp/server.mjs, reachable without installing anything: any
-// MCP client that takes a URL can add this site as a tool source. That is the
-// difference between being a directory an agent could find and one it can call.
-//
-// Only the JSON-RPC half of the streamable-HTTP transport is implemented —
-// POST in, one JSON response out. No SSE stream and no session resumption,
-// which the transport permits: a server with no server-initiated messages has
-// nothing to stream. `initialize` says so by declaring only `tools`.
 
 const MCP_PROTOCOL_VERSION = '2025-06-18';
 
@@ -556,16 +433,12 @@ async function callMcpTool(name, args, { listings, base, scoreUrl, catalogSearch
     if (typeof args.url !== 'string') {
       return { ...textContent({ ok: false, error: 'url is required' }), isError: true };
     }
-    // Reuses the live scorer rather than reimplementing it, so an MCP caller
-    // and a browser caller can never disagree about a grade.
     const scored = await scoreUrl(args.url);
     return scored.ok === false ? { ...textContent(scored), isError: true } : textContent(scored);
   }
 
   const CATALOG_TOOLS = { search_x402_endpoints: 'x402', search_mcp_servers: 'mcp' };
   if (CATALOG_TOOLS[name]) {
-    // Reuses the HTTP handler so the MCP tool and the URL cannot drift apart —
-    // the same failure mode `score_url` avoids by proxying /api/score.
     const key = CATALOG_TOOLS[name];
     const params = new URLSearchParams();
     for (const [k, v] of Object.entries(args)) if (v !== undefined && v !== null) params.set(k, String(v));
@@ -591,12 +464,8 @@ async function callMcpTool(name, args, { listings, base, scoreUrl, catalogSearch
   return null;
 }
 
-/** POST /mcp — JSON-RPC 2.0 over HTTP. */
 export async function handleMcp(request, { listings, base, scoreUrl, catalogSearch }) {
   if (request.method === 'GET') {
-    // The transport allows a GET that opens an SSE stream for server-initiated
-    // messages. We have none, so say that plainly instead of holding a socket
-    // open forever; 405 is the transport's prescribed answer.
     return json({
       jsonrpc: '2.0',
       error: { code: -32000, message: 'this server sends no unsolicited messages; POST JSON-RPC requests instead' },
@@ -613,8 +482,6 @@ export async function handleMcp(request, { listings, base, scoreUrl, catalogSear
     return json(rpcError(null, -32700, `parse error: ${e.message.slice(0, 120)}`), 400);
   }
 
-  // A batch is a JSON array. Answer each in order; a notification inside one
-  // contributes no reply, exactly as for a lone notification.
   if (Array.isArray(msg)) {
     const replies = [];
     for (const one of msg) {
@@ -625,7 +492,6 @@ export async function handleMcp(request, { listings, base, scoreUrl, catalogSear
   }
 
   const reply = await dispatch(msg, { listings, base, scoreUrl, catalogSearch });
-  // A notification (no id) gets no body — the transport says 202.
   return reply ? json(reply) : new Response(null, { status: 202 });
 }
 
@@ -636,8 +502,6 @@ async function dispatch(msg, ctx) {
 
   if (method === 'initialize') {
     return rpcResult(id, {
-      // Echo the client's version when we can speak it, which is the transport's
-      // negotiation rule; otherwise name ours and let the client decide.
       protocolVersion: typeof params.protocolVersion === 'string' ? params.protocolVersion : MCP_PROTOCOL_VERSION,
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: 'ai-product-index', title: 'AI Product Index', version: '1.1.0' },
@@ -656,21 +520,13 @@ async function dispatch(msg, ctx) {
       if (result === null) return rpcError(id, -32602, `unknown tool: ${name}`);
       return rpcResult(id, result);
     } catch (e) {
-      // A tool that throws is a tool result with isError, not a protocol error:
-      // the model is supposed to see the failure and be able to react to it.
       return rpcResult(id, { ...textContent({ ok: false, error: e.message?.slice(0, 300) ?? 'tool failed' }), isError: true });
     }
   }
 
-  // resources/prompts are not implemented, and saying so beats an empty list:
-  // an empty list reads as "this server has no resources", which invites a
-  // client to stop asking.
   return rpcError(id, -32601, `method not found: ${method}`);
 }
 
-// The catalog cache lives for the life of the isolate on purpose, which makes
-// it shared state a test cannot escape by constructing a new request. Tests get
-// an explicit reset rather than a re-import hack.
 const resetCatalog = () => catalogPromises.clear();
 
 export const __testing = { asSchemaOrg, publicFields, dispatch, resetCatalog, strength, MCP_PROTOCOL_VERSION, NLWEB_VERSION };

@@ -28,8 +28,6 @@ const call = (env, target, headers = {}) => handleScore(new Request(`${base}/api
 }), env, { base }, null, listings);
 const auth = { authorization: `Bearer ${token}`, 'x-registry-score': '1' };
 
-// This fixture intentionally has no metadata. HTML parsing itself is covered
-// on the Workers runtime; here the real audit exercises auth, cache and limits.
 test('110 uncached scheduled audits complete without spending the anonymous allowance', async (t) => {
   const original = globalThis.HTMLRewriter;
   globalThis.HTMLRewriter = class { on() { return this; } transform(r) { return r; } };
@@ -45,7 +43,6 @@ test('110 uncached scheduled audits complete without spending the anonymous allo
   assert.equal(result.scores['site-109'].checked, '2026-10-03');
   assert.equal([...store.keys()].filter(k => k.startsWith(score.RATE_PREFIX)).length, 0);
 
-  // Use fresh targets so cache hits cannot mask a public rate-limit regression.
   for (let i = 0; i < 60; i++) assert.equal((await call(env, `${base}/site/public-${i}`)).status, 200);
   assert.equal((await call(env, `${base}/site/public-61`)).status, 429);
   assert.equal((await call(env, `${base}/site/public-62`, { authorization: `Bearer ${token}` })).status, 429);

@@ -1,4 +1,3 @@
-// Tests for on-chain receipt verification used by the [upgrade] tier rail.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -31,12 +30,8 @@ test('findTransfer tolerates checksum differences in the asset address', () => {
 });
 
 test('findTransfer ignores transfers that are not ours', () => {
-  // Wrong token contract — a worthless token paying the right address must not
-  // buy an upgrade.
   assert.equal(findTransfer([transferLog({ address: OTHER })], { asset: ASSET, payTo: PAY_TO }), null);
-  // Right token, someone else's address.
   assert.equal(findTransfer([transferLog({ to: OTHER })], { asset: ASSET, payTo: PAY_TO }), null);
-  // Right token and address, but an Approval-style event rather than Transfer.
   assert.equal(
     findTransfer([transferLog({ topic: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925' })], { asset: ASSET, payTo: PAY_TO }),
     null,

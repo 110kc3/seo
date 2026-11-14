@@ -1,6 +1,3 @@
-// Manual tier flip for the repo owner (e.g. after an out-of-band card payment):
-//   node scripts/set-tier.mjs <slug> <free|verified|featured>
-// Edits the listing, stamps `updated`, and rebuilds. Commit + push afterwards.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

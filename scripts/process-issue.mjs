@@ -1,8 +1,3 @@
-// The autonomous transaction behind [register], [update] and [upgrade] issues:
-// parse, validate, authorize, dedup, liveness-check, write the listing file.
-// All untrusted input arrives via env vars (never shell-interpolated).
-// Writes result.md (gitignored) for the bot's issue comment and emits
-// slug=/verb= to $GITHUB_OUTPUT. Exit 1 = rejected (result.md has the reasons).
 import { readFileSync, writeFileSync, readdirSync, existsSync, appendFileSync } from 'node:fs';
 import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -61,8 +56,6 @@ async function checkLiveness(url) {
 if (!user) reject(['internal: missing ISSUE_USER'], 'internal');
 if (Buffer.byteLength(body, 'utf8') > 20 * 1024) reject(['issue body larger than 20 KB'], 'too_large');
 
-// Prefer a ```json fence (what the issue forms produce), fall back to any
-// fence, then to the whole body (raw REST API submissions may skip the fence).
 const fence = body.match(/```json\s*\n([\s\S]*?)```/i) ?? body.match(/```\s*\n([\s\S]*?)```/);
 const raw = (fence ? fence[1] : body).trim();
 if (!raw) reject(['no JSON found in issue body'], 'no_json');
@@ -87,20 +80,10 @@ function assertOwnership(existing) {
 }
 function safeTarget(slug) {
   const target = resolve(listingDir, `${slug}.json`);
-  // Unreachable given SLUG_RE — defense in depth against path escape.
   if (!target.startsWith(resolve(listingDir) + sep)) reject(['internal: path escape blocked'], 'internal');
   return target;
 }
 
-// ---------------------------------------------------------------- upgrade --
-// Body: {"slug": "...", "tier": "verified"|"featured", "rail": "x402"|"card", "receipt": {...}}
-// x402 receipts are verified on chain (see scripts/x402-receipt.mjs for why the
-// facilitator cannot serve this transport). Card payments have no automated
-// rail — they are reconciled by hand with scripts/set-tier.mjs.
-//
-// Spent transaction hashes are recorded in the committed ledger so one payment
-// cannot buy two upgrades. Same pattern as health.json: state that must survive
-// a workflow run lives in the repo.
 const LEDGER = join(ROOT, 'payments.json');
 
 function loadLedger() {
@@ -122,8 +105,6 @@ async function verifyPayment(rail, receipt, tier) {
     return { ok: false, code: 'invalid', error: 'rail must be "x402" or "card"' };
   }
 
-  // Same resolver the Worker uses, so the issue flow and the HTTP flow can
-  // never disagree about which chain and asset are being accepted.
   const x = resolveX402(cfg);
   if (!x || !x.rpc_url) {
     return { ok: false, code: 'payments_not_enabled', error: `the x402 rail is not fully configured yet; watch ${BASE}/llms.txt` };
@@ -170,8 +151,6 @@ if (MODE === 'upgrade') {
   existing.tier = obj.tier;
   existing.updated = today;
   writeFileSync(target, JSON.stringify(existing, null, 2) + '\n');
-  // Burn the receipt before the listing change is announced, so a retry of the
-  // same transaction cannot buy a second upgrade.
   const ledger = loadLedger();
   ledger[pay.tx] = { slug: existing.slug, tier: existing.tier, date: today, payer: pay.payer, value: pay.value };
   writeFileSync(LEDGER, JSON.stringify(ledger, null, 2) + '\n');
@@ -188,7 +167,6 @@ if (MODE === 'upgrade') {
   process.exit(0);
 }
 
-// ----------------------------------------------------- register / update --
 const res = validate(obj);
 if (!res.ok) reject(res.errors);
 
@@ -199,9 +177,6 @@ if (MODE === 'update') {
   if (!existsSync(target)) reject([`no such listing: ${obj.slug} — use [register] for new listings`], 'not_found');
   const existing = loadListing(obj.slug);
   assertOwnership(existing);
-  // created/github_user/tier/origin survive updates; only content fields change.
-  // origin especially: an [update] must not be able to launder a curated entry
-  // into a self-registered one, or the reverse.
   server = {
     created: existing.created,
     github_user: existing.github_user,
@@ -214,18 +189,6 @@ if (MODE === 'update') {
   server = { created: today, github_user: user, origin: 'self-registered' };
 }
 
-// URL uniqueness (excluding the listing being updated) + per-account cap.
-//
-// The cap counts self-registered listings only. It exists to stop one account
-// flooding the registry through this flow, and an entry the registry itself
-// wrote — a curated mirror, or an operator seed — was never a submission. Found
-// the direct way: after 30 curated entries were seeded under the operator's
-// account, the operator's own [register] was refused at "40 listings (max 10)",
-// which would have been every future self-registration too.
-//
-// `origin` is server-set and refused as input, so this cannot be gamed by
-// claiming to be curated. A listing predating the field has no origin and still
-// counts, which is the fail-closed direction.
 const wanted = normalizeUrl(obj.url);
 let mine = 0;
 for (const f of readdirSync(listingDir).filter((n) => n.endsWith('.json'))) {

@@ -1,25 +1,8 @@
-// Human-facing pages generated from data this site already collects.
-//
-// Why these exist: 46% of requests here are browsers and 10-12% are AI
-// crawlers, but until now the only thing a human could *do* was type a URL into
-// the score box — and only 3 of the first 123 free scores came from a browser.
-// Meanwhile the two catalogs, 24,741 endpoints with weekly liveness probing and
-// the most genuinely unique thing this site holds, existed only as JSON.
-//
-// Every page here is generated from committed data, never hand-written, for the
-// same reason the Agent Skills digests are: a page quoting 14,661 when the file
-// says 14,815 does not read as staleness, it reads as carelessness on a site
-// whose product is being accurate about other people's sites.
-//
-// Determinism: nothing here reads the clock. Every date shown comes from the
-// data file that supplied the number (`fetched`, `probed_at`, `checked`), so a
-// rebuild with unchanged inputs produces an unchanged byte stream.
 
 import { esc, jsonLd } from './validate.mjs';
 import { catalogBrowser, catalogResults } from './catalog-ui.mjs';
 import { CHECK_CONTEXT, SCORE_INTERPRETATION } from '../worker/audit.js';
 
-// --- shared shell -----------------------------------------------------------
 
 export const PAGE_CSS = `
   :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --accent:#0b6e4f; --card:#f5f5f4; --border:#e2e2e0; }
@@ -54,26 +37,10 @@ const num = (n) => Number(n).toLocaleString('en-US');
 const pct = (x, digits = 1) => `${(Number(x) * 100).toFixed(digits)}%`;
 const usd = (n) => (Number(n) < 0.01 ? `$${Number(n).toFixed(4)}` : `$${Number(n).toFixed(2)}`);
 
-/**
- * A meta description that ends somewhere a human would end one.
- *
- * This was a hard `.slice(0, 160)`, which cut `/apex.html` at a comma and
- * `/x402.html` in the middle of a word — on a site that sells
- * `title_and_description` as a graded check and ships a snippet telling other
- * people to keep theirs under 160. The cap is right; cutting mid-token is not.
- *
- * Prefer a sentence boundary, fall back to a word boundary, and never leave the
- * string hanging on punctuation that promised more text was coming. A sentence
- * is only accepted if it uses most of the budget — otherwise a description that
- * opens with a short sentence would publish only that opener and drop the part
- * that actually says what the page is.
- */
 export function metaDescription(text, max = 160) {
   const s = String(text).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   if (s.length <= max) return s;
 
-  // A full sentence needs no ellipsis, so it may use the whole budget; a
-  // truncation has to leave room for the one it does need.
   const sentence = s.slice(0, max).lastIndexOf('. ');
   if (sentence >= max * 0.7) return s.slice(0, sentence + 1);
 
@@ -82,20 +49,7 @@ export function metaDescription(text, max = 160) {
   return `${(cut > 0 ? budget.slice(0, cut) : budget).replace(/[\s,;:—–-]+$/, '')}…`;
 }
 
-/**
- * The standard page shell. `depth` is how many directories deep the page sits,
- * so relative links resolve from `/checks/foo.html` as well as from `/x402.html`.
- */
 export function page({ base, path, title, description, body, ld = null, depth = 0, crumb = null, footer = null, noindex = false }) {
-  // A page whose body is missing used to render the literal string "undefined"
-  // between a correct header and a correct footer, and ship: valid HTML, right
-  // title, right canonical, no content. That is exactly what happened to
-  // /router.html — a `const body` computed and then not passed — and it reached
-  // production because every check around it passed. The asset existed, it was
-  // in the sitemap, its meta description was fine, the tests asserted the URL
-  // answered 200. Nothing asserted the page said anything.
-  //
-  // Failing the build is the only place this is cheap to catch.
   if (typeof body !== 'string' || body.trim().length < 50) {
     throw new Error(`page(${base}${path}): body is missing or trivially short — a page shell must never render "undefined" as its content`);
   }
@@ -132,18 +86,7 @@ Website checks: <a href="${up}checks/">published checklist and remedies</a>.`}</
 const statCards = (cards) =>
   `<div class="cards">${cards.map((c) => `<div class="card"><div class="n">${esc(String(c.n))}</div><div class="k">${esc(c.k)}</div></div>`).join('')}</div>`;
 
-// --- (3) the report ---------------------------------------------------------
 
-/**
- * A dated, citable reading of the agent web from the three vantage points this
- * site happens to own: its own traffic, the machine-payable catalog, and the
- * remotely-callable MCP catalog.
- *
- * The editorial rule is that every number here is one we measured, with the
- * measurement's own date attached, and that the uncomfortable one leads. Zero
- * organic payments against a rising agent share is the only finding on this
- * page that anyone could not have guessed, so burying it would waste the page.
- */
 export function reportPage({ base, x402, mcp, x402Health, mcpHealth, traffic, scores }) {
   const series = traffic?.series ?? [];
   const latest = series.at(-1);
@@ -295,21 +238,7 @@ It is a reading, not a census.</p>
   });
 }
 
-// --- (1) and (2) the catalogs ----------------------------------------------
 
-/**
- * One page per catalog. Deliberately *one* page and not fourteen thousand.
- *
- * Generating a thin page per endpoint would read as doorway spam to every
- * search engine, on a site whose entire pitch is being well-made — and it would
- * republish other people's endpoints at a scale that makes the removal request
- * inevitable. So: aggregates, which are the part nobody else publishes anyway,
- * plus a search box wired to the JSON API that already exists. The browsing
- * happens client-side against a live endpoint rather than in generated files.
- *
- * The search degrades to a plain link to the API when JavaScript is off, which
- * is the honest fallback for a page whose data is 8 MB.
- */
 export function catalogPage({ base, kind, stats, health, title, lede, columns, searchPath, extraSections = '' }) {
   const total = stats.endpoints ?? stats.remote_endpoints;
   const topHosts = (stats.top_hosts ?? []).slice(0, 25);
@@ -396,8 +325,6 @@ no justification needed, and it is removed on the next build.</p>
     base,
     path: `/${kind === 'x402' ? 'x402' : 'mcp-servers'}.html`,
     title: `${title} — AI Product Index`,
-    // Unsliced on purpose — `page()` trims to a boundary, and pre-cutting here
-    // would hand it a string already broken mid-word.
     description: lede.replace(/<[^>]+>/g, ''),
     ld: {
       '@context': 'https://schema.org',
@@ -509,14 +436,7 @@ ${Object.entries(auth).sort((a, b) => b[1] - a[1]).map(([k, v], i) => {
   });
 }
 
-// --- (5) the leaderboard ----------------------------------------------------
 
-/**
- * Every graded listing, ranked. Three jobs at once: it gives the browser
- * traffic something to read, it is the reciprocal-link surface (each row links
- * to a listing page that carries the site's own badge), and every row below a B
- * is a Track A prospect with the evidence already attached.
- */
 export function leaderboardPage({ base, scores, listings }) {
   const bySlug = new Map(listings.map((l) => [l.slug, l]));
   const rows = Object.entries(scores)
@@ -594,13 +514,7 @@ grade rather than blanking it.</p>
   });
 }
 
-// --- (6) the checklist ------------------------------------------------------
 
-// Why each check is worth what it is worth. The audit ships the *remedy*
-// (CHECK_META.fix); this is the argument for caring, which is the half a
-// customer asks about before paying anyone to fix it. Kept here rather than in
-// audit.js because it is documentation, not product behaviour — nothing in the
-// scorer reads it.
 const WHY = {
   llms_txt: 'It is the first file an arriving agent fetches after robots.txt, and the only one whose entire purpose is to tell a model what you are. Absent, the agent has to infer your site from HTML written for humans.',
   llms_txt_summary: 'The blockquote is what gets quoted. When a model describes you in an answer, this paragraph is the raw material — leaving it out means the description is assembled from whatever the crawler happened to keep.',
@@ -624,15 +538,6 @@ const WHY = {
   web_bot_auth: 'It lets you tell a real signed agent from anything that copied its user-agent string, and it lets callers verify your responses. The infrastructure side of agent traffic rather than the content side.',
 };
 
-/**
- * One page per check, generated from CHECK_META / SIGNAL_META / SNIPPETS.
- *
- * Twenty pages is the one place on this site where per-item pages are the right
- * call rather than doorway spam: each is a distinct question a buyer actually
- * asks ("what is llms.txt and do I need one"), each carries a different remedy
- * and a different code snippet, and the content is argument rather than a
- * database row reformatted.
- */
 export function checkPages({ base, checkMeta, signalMeta, v2Weights, labels, snippets }) {
   const items = [
     ...Object.entries(checkMeta).map(([id, m]) => ({
@@ -769,18 +674,7 @@ looks wrong, it probably is; the repository is <a href="https://github.com/110kc
   return pages;
 }
 
-// --- (7) how the checkers differ -------------------------------------------
 
-/**
- * A comparison written from documented behaviour only.
- *
- * The rule for this page: every claim about somebody else is something their
- * own published checklist says, or something observed by actually being audited
- * by them — both of which happened. No inferred weaknesses, no invented
- * weightings, and their strengths are stated where they are real. A comparison
- * page that shades its rivals is worth less than none on a site selling
- * accuracy about other people's sites.
- */
 export function comparePage({ base, checkCount }) {
   const body = `
 <h1>How agent-readiness checkers differ</h1>
@@ -851,21 +745,7 @@ which is why the check set here is versioned in public.</p>
   });
 }
 
-// --- (4) the Router's own front door ----------------------------------------
 
-/**
- * The human page for the Router, served at the root of its own hostname.
- *
- * Two gaps closed by one page. The Router shipped agent-facing only — announced
- * in llms.txt, the OpenAPI document and the agents manifest — on a site where
- * 46% of requests are browsers and the only thing a browser could do about it
- * was read JSON. And a product on its own subdomain whose root redirects
- * elsewhere is a product that looks abandoned to anyone who types the domain.
- *
- * `routerBase` falls back to the service host while the custom domain is
- * unattached, so this page is correct in both states rather than advertising a
- * hostname that does not resolve yet.
- */
 export function routerPage({ canonicalBase, canonicalPath, serviceBase, apexBase }) {
   return page({
     base: canonicalBase,
@@ -889,22 +769,7 @@ scores and an optional full audit API. See <a href="${serviceBase}/openapi.yaml"
   });
 }
 
-// --- (5) the umbrella apex --------------------------------------------------
 
-/**
- * The portfolio page at the apex.
- *
- * `percall.dev` was bought as the umbrella for paid, machine-callable services
- * and then pointed straight at the first one, so the domain that is supposed to
- * name a portfolio answered a 308 and described nothing. This is the page that
- * was missing.
- *
- * It is deliberately not a second copy of the index. The apex answers "what is
- * this domain and what runs under it"; every service answers for itself on its
- * own subdomain. And it does not pretend to a portfolio that does not exist —
- * there is one service live, the page says one service is live, and the roadmap
- * is described as intent rather than as inventory.
- */
 export function apexPage({ apexBase, serviceBase, x402, mcp, listingCount }) {
   return page({
     base: apexBase,

@@ -1,18 +1,3 @@
-// Builds the remote-MCP-server catalog from the official MCP registry.
-//
-//   node scripts/fetch-mcp-catalog.mjs
-//
-// Same reasoning as the x402 catalog: the upstream is public and complete, and
-// offers cursor paging and nothing else. There is no way to ask it "is there an
-// MCP server that does X", which is the only question anyone actually has.
-//
-// The curation rule is deliberate and narrow: **active, latest, and remotely
-// callable**. A server distributed only as an npm package is a thing you
-// install; a server with a `remotes` URL is a thing an agent can use right now,
-// with no filesystem and no consent dialog. That subset is a third of the
-// registry and the whole of what matters to a running agent, so it is the
-// subset indexed here. Packages-only servers are counted in the stats and
-// excluded from the catalog, which the artifact states rather than implies.
 
 import { writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -21,7 +6,7 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REGISTRY = 'https://registry.modelcontextprotocol.io/v0/servers';
 const PAGE = 100;
-const MAX_PAGES = 1000; // a runaway guard, not a budget — see the exhaustion check below
+const MAX_PAGES = 1000;
 const OFFICIAL = 'io.modelcontextprotocol.registry/official';
 
 const clean = (s, max) => String(s ?? '').replace(/\s+/g, ' ').trim().slice(0, max);
@@ -35,7 +20,6 @@ async function page(cursor) {
   return resp.json();
 }
 
-// --- fetch ------------------------------------------------------------------
 
 const raw = [];
 let cursor = '';
@@ -48,15 +32,12 @@ for (let i = 0; i < MAX_PAGES; i += 1) {
 }
 process.stderr.write('\n');
 
-// Silently stopping at a page cap would publish a partial catalog that looks
-// complete, which is the one failure mode a mirror must not have.
 if (cursor) {
   console.error(`\nERROR: stopped at the ${MAX_PAGES}-page cap with more records available.`);
   console.error('The catalog would be incomplete. Raise MAX_PAGES and re-run.');
   process.exit(1);
 }
 
-// --- normalize --------------------------------------------------------------
 
 let notLatest = 0;
 let inactive = 0;
@@ -77,11 +58,8 @@ for (const item of raw) {
     try {
       host = new URL(remote.url).host;
     } catch {
-      continue; // a remote without a usable URL is not remotely callable
+      continue;
     }
-    // A server may publish several endpoints for the same service. Each is
-    // callable on its own, so each is a row, keyed by URL so re-publishes
-    // collapse rather than duplicate.
     byUrl.set(remote.url, {
       url: remote.url,
       host,
@@ -89,8 +67,6 @@ for (const item of raw) {
       title: clean(server.title ?? server.name ?? '', 120),
       description: clean(server.description ?? '', 400),
       transport: remote.type ?? null,
-      // Headers on a remote entry are how the registry expresses "you will need
-      // a credential". Recorded as a boolean, never the header names' values.
       auth: Array.isArray(remote.headers) && remote.headers.length ? 'required' : 'none',
       version: server.version ?? null,
       repository: server.repository?.url ?? null,
@@ -102,7 +78,6 @@ for (const item of raw) {
 
 const servers = [...byUrl.values()].sort((a, b) => a.url.localeCompare(b.url));
 
-// --- aggregates -------------------------------------------------------------
 
 const tally = (values) => {
   const counts = new Map();

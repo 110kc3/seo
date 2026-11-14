@@ -1,20 +1,3 @@
-// Tests for the autonomous registration path — the one place untrusted input
-// from a stranger on the internet turns into a committed file in this repo.
-//
-// It was the only script here with no coverage at all, which is backwards: it
-// is also the only one that enforces ownership, per-account caps and single-use
-// payment receipts. The gap survived because process-issue.mjs is a program,
-// not a module — it reads env vars at import time and calls process.exit, so it
-// cannot simply be imported and called.
-//
-// So it is tested the way the workflow actually invokes it: as a subprocess,
-// with the untrusted values in env vars, asserting on the exit code and
-// result.md. That is the real contract — register.yml branches on exit status
-// and posts result.md verbatim as the bot's reply — and testing it this way
-// needs no refactor of code that currently has nothing exercising it.
-//
-// Each case runs against a throwaway copy of the repo (scripts/, listings/,
-// site.config.json) so a test can never write a listing into the real one.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, cp, mkdir, writeFile, readFile } from 'node:fs/promises';
@@ -39,8 +22,6 @@ async function sandbox(listings = {}, ledger = null) {
   return dir;
 }
 
-// SKIP_LIVENESS keeps the suite offline; the liveness check has its own network
-// path and is exercised by check-liveness.mjs against the real registry.
 async function run(dir, env) {
   const outFile = join(dir, 'gh_output');
   await writeFile(outFile, '');
@@ -58,9 +39,6 @@ async function run(dir, env) {
   return { code, dir, result: await read('result.md'), output: await read('gh_output') };
 }
 
-// result.md embeds the machine-readable rejection in a ````json block — that
-// block is the registry's actual API for a failed submission, so parse it
-// rather than string-matching the prose around it.
 function rejection(md) {
   const m = md.match(/````json\s*\n([\s\S]*?)````/);
   assert.ok(m, `no json block in result.md:\n${md}`);
@@ -92,7 +70,6 @@ const issue = (payload, over = {}) => ({
   ...over,
 });
 
-// --- the happy paths --------------------------------------------------------
 
 test('register writes the listing, the reply and the workflow outputs', async () => {
   const dir = await sandbox();
@@ -101,7 +78,6 @@ test('register writes the listing, the reply and the workflow outputs', async ()
   assert.equal(r.code, 0, `expected acceptance, got:\n${r.result}`);
   const written = JSON.parse(await readFile(join(dir, 'listings', 'test-product.json'), 'utf8'));
   assert.equal(written.slug, 'test-product');
-  // Server-owned fields are stamped here, never taken from the submitter.
   assert.equal(written.github_user, 'submitter');
   assert.equal(written.tier, 'free');
   assert.match(written.created, /^\d{4}-\d{2}-\d{2}$/);
@@ -121,8 +97,6 @@ test('update keeps the fields the submitter does not own', async () => {
   assert.equal(r.code, 0, `expected acceptance, got:\n${r.result}`);
   const written = JSON.parse(await readFile(join(dir, 'listings', 'test-product.json'), 'utf8'));
   assert.match(written.description, /An updated description/);
-  // A paying customer must not be able to lose their tier — or grant it — by
-  // editing their own listing.
   assert.equal(written.tier, 'featured');
   assert.equal(written.created, '2026-01-01');
   assert.equal(written.github_user, 'original-owner');
@@ -133,12 +107,6 @@ test('a submitter cannot grant themselves a paid tier through register', async (
   const dir = await sandbox();
   const r = await run(dir, issue(listing({ tier: 'featured', github_user: 'somebody-else', created: '1999-01-01' })));
 
-  // The submission is accepted and the injected fields are dropped, rather than
-  // the whole payload being refused. That is the safe half of the tradeoff and
-  // the half worth pinning: the listing is rebuilt from a whitelist of agent
-  // fields, so an unknown or server-owned key cannot reach disk no matter what
-  // the schema does or does not say about it. Assert on the file, because that
-  // is where a privilege escalation would show up.
   assert.equal(r.code, 0, `expected acceptance, got:\n${r.result}`);
   const written = JSON.parse(await readFile(join(dir, 'listings', 'test-product.json'), 'utf8'));
   assert.equal(written.tier, 'free', 'submitter granted themselves a paid tier');
@@ -146,7 +114,6 @@ test('a submitter cannot grant themselves a paid tier through register', async (
   assert.notEqual(written.created, '1999-01-01', 'submitter forged the creation date');
 });
 
-// --- authorization ----------------------------------------------------------
 
 test('only the original submitter can update a listing', async () => {
   const dir = await sandbox({ 'test-product': stored() });
@@ -178,7 +145,6 @@ test('a missing issue author is an internal error, not an anonymous listing', as
   assert.equal(rejection(r.result).code, 'internal');
 });
 
-// --- deduplication and caps -------------------------------------------------
 
 test('a slug cannot be registered twice', async () => {
   const dir = await sandbox({ 'test-product': stored() });
@@ -224,11 +190,6 @@ test('an account cannot exceed the per-user listing cap', async () => {
 });
 
 test('curated and seed listings do not consume an account cap slot', async () => {
-  // Found by running the real workflow: after 30 curated entries were seeded
-  // under the operator's account, the operator's own [register] was refused at
-  // "40 listings (max 10)" — and so was every future one. The cap is meant to
-  // stop an account flooding the registry *through this flow*; an entry the
-  // registry itself wrote was never a submission.
   const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
   const existing = {};
   for (let i = 0; i < MAX_LISTINGS_PER_USER * 3; i += 1) {
@@ -248,9 +209,6 @@ test('curated and seed listings do not consume an account cap slot', async () =>
 });
 
 test('a submitter cannot claim to be curated to escape the cap', async () => {
-  // The reason `origin` is server-set rather than read off `submitted_by`.
-  // `submitted_by` is self-reported — if the cap trusted it, this listing would
-  // register and so would the next thousand.
   const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
   const existing = {};
   for (let i = 0; i < MAX_LISTINGS_PER_USER; i += 1) {
@@ -272,8 +230,6 @@ test('a submitter cannot claim to be curated to escape the cap', async () => {
 });
 
 test('a listing with no origin still counts toward the cap', async () => {
-  // Fail-closed for anything written before the field existed: an unrecognised
-  // entry costs its account a slot rather than being free.
   const { MAX_LISTINGS_PER_USER } = await import('./validate.mjs');
   const existing = {};
   for (let i = 0; i < MAX_LISTINGS_PER_USER; i += 1) {
@@ -299,7 +255,6 @@ test('an update cannot launder a curated listing into a self-registered one', as
   assert.equal(written.origin, 'curated', 'origin survived an update it should not have');
 });
 
-// --- payload handling -------------------------------------------------------
 
 test('a raw json body with no fence is accepted', async () => {
   const dir = await sandbox();
@@ -343,7 +298,6 @@ test('a slug that tries to escape the listings directory is refused', async () =
   const dir = await sandbox();
   const r = await run(dir, issue(listing({ slug: '../../../etc/passwd' })));
 
-  // SLUG_RE is the gate; safeTarget is the second line of defence behind it.
   assert.equal(r.code, 1);
   assert.equal(rejection(r.result).ok, false);
 });
@@ -353,7 +307,6 @@ test('backticks in a name cannot break out of the reply markdown', async () => {
   const r = await run(dir, issue(listing({ name: 'Ev`il ```json Product' })));
 
   if (r.code === 0) {
-    // Accepted: the name must not be able to close the fence the bot posts.
     const fences = r.result.match(/^````json$/gm) ?? [];
     assert.equal(fences.length, 1, `reply markdown has ${fences.length} json fences:\n${r.result}`);
   } else {
@@ -361,8 +314,6 @@ test('backticks in a name cannot break out of the reply markdown', async () => {
   }
 });
 
-// --- upgrades and the payment ledger ---------------------------------------
-// Every case below is refused before any RPC call, so the suite stays offline.
 
 test('an upgrade to an unknown tier is refused', async () => {
   const dir = await sandbox({ 'test-product': stored() });

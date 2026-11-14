@@ -1,9 +1,4 @@
-// Tests for the Cloudflare Worker layer: payment-term enforcement, content
-// negotiation, client classification and the audit's input boundary.
-//
 // These modules are deliberately free of Cloudflare-only globals at import
-// time, so they run under plain `node --test`. HTMLRewriter-dependent paths
-// (readHead/auditUrl) are exercised with `wrangler dev`, not here.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
@@ -24,12 +19,8 @@ import { handleBadge, badgeSvg, __testing as badge } from '../worker/badge.js';
 import { searchListings, handleSearch, handleAsk, handleMcp, handleCatalogSearch, mcpTools, __testing as discovery } from '../worker/discovery.js';
 import cfgFile from '../site.config.json' with { type: 'json' };
 
-// Derived from the shipped config, not hardcoded: these tests pin "artifacts
-// match the config", and pinning a literal hostname instead turned all of them
-// red on the percall.dev migration without catching anything real.
 const BASE = cfgFile.base.replace(/\/+$/, '');
 
-// --- client classification -------------------------------------------------
 
 test('classifyUserAgent separates AI crawlers from action-taking agents', () => {
   assert.equal(classifyUserAgent('Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)'), 'ai_crawler');
@@ -52,8 +43,6 @@ test('classifyUserAgent recognises real browsers but not bare Mozilla claims', (
 });
 
 test('an agent stack embedding a vendor token is counted as an agent, not a crawler', () => {
-  // "anthropic-ai" appears in both lists; the agent match must win so SDK
-  // traffic is not mistaken for training-corpus crawling.
   assert.equal(classifyUserAgent('anthropic-sdk-python/0.40 anthropic-ai'), 'ai_agent');
 });
 
@@ -66,13 +55,8 @@ test('classifyPath buckets paths into a stable set', () => {
   assert.equal(classifyPath('/api/audit'), 'audit');
   assert.equal(classifyPath('/api/score'), 'score_free');
   assert.equal(classifyPath('/dashboard'), 'dashboard');
-  // The paid router endpoints are counted separately from the free /api/* reads
-  // that outnumber them by an order of magnitude — same reason `audit` is.
   assert.equal(classifyPath('/api/liveness'), 'liveness');
   assert.equal(classifyPath('/api/route'), 'route');
-  // The umbrella's portfolio page and the service's home page share a pathname
-  // and nothing else. Bucketed together, "does anyone visit the umbrella" is
-  // unanswerable — it could have had zero visitors and read identically.
   assert.equal(classifyPath('/', { apex: true }), 'apex_home');
   assert.equal(classifyPath('/index.html', { apex: true }), 'apex_home');
   assert.equal(classifyPath('/report.html', { apex: true }), 'other',
@@ -84,7 +68,6 @@ test('classifyPath buckets paths into a stable set', () => {
   assert.equal(classifyPath('/nope'), 'other');
 });
 
-// --- content negotiation ---------------------------------------------------
 
 test('negotiate serves data representations to agents', () => {
   assert.equal(negotiate('/', 'application/json'), '/api/index.json');
@@ -94,8 +77,6 @@ test('negotiate serves data representations to agents', () => {
 });
 
 test('negotiate leaves browsers alone', () => {
-  // Chrome sends text/html,application/xhtml+xml,...,*/*;q=0.8 — the presence
-  // of text/html must veto the swap or every browser gets raw JSON.
   assert.equal(negotiate('/', 'text/html,application/xhtml+xml,application/json;q=0.9'), null);
   assert.equal(negotiate('/', '*/*'), null);
   assert.equal(negotiate('/', null), null);
@@ -108,32 +89,19 @@ test('negotiate refuses slugs that are not valid slugs', () => {
 });
 
 test('a negotiated markdown twin is labelled text/markdown, not text/plain', () => {
-  // The asset binding types by extension, so /llms-full.txt goes out as
-  // text/plain. Answering a request for text/markdown with text/plain is a
-  // failed negotiation as far as any agent (or auditor) can tell — it cost this
-  // site 9 points on agentswelcome.dev while the *body* was already correct.
   assert.equal(alternateContentType('/llms-full.txt'), 'text/markdown; charset=utf-8');
-  // JSON twins already carry the right type from the binding; leave them alone.
   assert.equal(alternateContentType('/api/index.json'), null);
   assert.equal(alternateContentType('/listings/my-product.json'), null);
 });
 
 test('audit targets on our own alias hosts are canonicalized before fetching', () => {
-  // A Worker cannot fetch its own hostnames, and both aliases 308 anyway. A
-  // paid audit of the pre-migration domain settled and then 502'd — this is
-  // the regression test for that five-cent lesson.
   assert.equal(score.canonicalTarget('https://percall.dev/x?y=1', cfgFile), `${BASE}/x?y=1`);
   assert.equal(score.canonicalTarget('https://index.kc-it.pl/', cfgFile), `${BASE}/`);
   assert.equal(score.canonicalTarget('https://example.com/', cfgFile), 'https://example.com/');
-  // The alias list must never contain the canonical host itself, or the
-  // rewrite would be a no-op loop hiding a misconfigured base.
   assert.ok(!(cfgFile.host_aliases ?? []).includes(new URL(cfgFile.base).host));
 });
 
 test('non-canonical hosts 308 to the canonical host, path and query intact', () => {
-  // 308, not 301: the paid endpoint is a POST, and a 301 lets clients degrade
-  // the replayed request to GET. The old hostname stays attached forever, so
-  // every URL published before the percall.dev migration keeps resolving.
   const moved = worker.canonicalRedirect(new URL('https://index.kc-it.pl/api/audit?x=1'));
   assert.equal(moved.status, 308);
   assert.equal(moved.headers.get('location'), `${BASE}/api/audit?x=1`);
@@ -147,16 +115,12 @@ test('decorate relabels only the negotiated response, and sends both agent heade
   const swapped = worker.decorate(asset(), url, '/llms-full.txt');
   assert.equal(swapped.headers.get('content-type'), 'text/markdown; charset=utf-8');
   assert.equal(swapped.headers.get('vary'), 'Accept');
-  // X-Agent-Protocol is what existing clients were told to read; X-Agent-Welcome
-  // is the name auditors look for. Removing either is a regression.
   assert.equal(swapped.headers.get('x-agent-protocol'), `${BASE}/llms.txt`);
   assert.equal(swapped.headers.get('x-agent-welcome'), `${BASE}/llms.txt`);
 
-  // No negotiation happened: the binding's own type stands.
   const plain = worker.decorate(asset(), url, null);
   assert.equal(plain.headers.get('content-type'), 'text/plain');
 
-  // A 404 for a missing twin must not be dressed up as markdown.
   const missing = worker.decorate(new Response('nope', { status: 404, headers: { 'content-type': 'text/html' } }), url, '/llms-full.txt');
   assert.equal(missing.headers.get('content-type'), 'text/html');
 });
@@ -174,7 +138,6 @@ test('alternatesFor advertises the machine-readable twin of each path', () => {
   assert.doesNotMatch(other, /listings\//);
 });
 
-// --- x402 payment terms ----------------------------------------------------
 
 const CFG = {
   base: BASE,
@@ -196,9 +159,6 @@ const CFG = {
           rpc_url: 'https://sepolia.base.org',
           min_confirmations: 2,
         },
-        // Deliberately blank here — this fixture exists to pin the fail-closed
-        // contract for an unverified asset address. The real site.config.json
-        // has its own invariants, asserted separately below.
         mainnet: {
           facilitator_url: 'https://x402.org/facilitator',
           auth: 'none',
@@ -226,8 +186,6 @@ test('paymentRequirements fails closed until a receiving address is set', () => 
 });
 
 test('a rail with an unverified asset address stays disabled', () => {
-  // The mainnet profile is intentionally incomplete. Selecting it must disable
-  // payments rather than quote a payment against an empty contract address.
   assert.equal(paymentRequirements(withRail('mainnet'), '10000'), null);
   assert.equal(resolveX402(withRail('mainnet')), null);
 });
@@ -262,10 +220,6 @@ test('paymentRequirements emits a spec-shaped exact-scheme requirement', () => {
 });
 
 test('a profile overrides the shared EIP-712 asset name', () => {
-  // extra.{name,version} is the EIP-712 domain the payer signs
-  // transferWithAuthorization against, and it must equal the token contract's
-  // own name() on that chain. USDC calls itself "USDC" on Base Sepolia and
-  // "USD Coin" on Base mainnet, so this cannot be one shared value.
   const cfg = withRail('cdp');
   cfg.payments.x402.profiles = {
     ...cfg.payments.x402.profiles,
@@ -274,25 +228,19 @@ test('a profile overrides the shared EIP-712 asset name', () => {
   assert.equal(resolveX402(cfg).asset_name, 'USD Coin');
   assert.equal(paymentRequirements(cfg, '10000').extra.name, 'USD Coin');
 
-  // A profile that says nothing still inherits the shared value.
   assert.equal(resolveX402(CFG).asset_name, 'USDC');
 });
 
-// Guards the shipped config, not the fixtures: these are the mistakes that
-// would only surface as "the facilitator rejects every payment" in production.
 test('the real site.config.json rails are internally consistent', async () => {
   const cfg = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
   const x402cfg = cfg.payments.x402;
 
   for (const [name, profile] of Object.entries(x402cfg.profiles)) {
-    if (!profile.asset) continue;   // an incomplete rail is disabled anyway
+    if (!profile.asset) continue;
     assert.match(profile.asset, /^0x[0-9a-fA-F]{40}$/, `${name}.asset is not an address`);
 
-    // Inheriting the EIP-712 name across chains is exactly the bug this guards.
     assert.ok(profile.asset_name, `${name} sets an asset but no explicit asset_name`);
 
-    // The public x402.org facilitator advertises testnet networks only, so a
-    // mainnet rail pointed at it fails at settlement — after the payer signed.
     if (profile.network === 'eip155:8453') {
       assert.ok(
         !/^https:\/\/x402\.org\//.test(profile.facilitator_url),
@@ -301,13 +249,10 @@ test('the real site.config.json rails are internally consistent', async () => {
     }
   }
 
-  // The rail that is switched on must actually resolve.
   assert.ok(resolveX402(cfg), `the active rail "${x402cfg.active}" does not resolve`);
 });
 
 test('amounts compare numerically, not as strings', () => {
-  // A client that pads or reformats the amount must still match; a client that
-  // shaves it must not.
   assert.ok(x402.sameAmount('10000', '010000'));
   assert.ok(x402.sameAmount('10000', '10000'));
   assert.ok(!x402.sameAmount('9999', '10000'));
@@ -328,8 +273,6 @@ test('payment headers round-trip through base64 JSON', () => {
   assert.deepEqual(x402.b64decode(x402.b64encode(payload)), payload);
 });
 
-// --- payment gate: every path below rejects before any facilitator call, so
-// these run fully offline. A network call escaping the gate would fail loudly.
 
 const NONCE = `0x${'ab'.repeat(32)}`;
 const RESOURCE = { url: `${BASE}/api/audit`, mimeType: 'application/json' };
@@ -390,8 +333,6 @@ test('the gate fails closed when no receiving address is configured', async () =
 });
 
 test('a client cannot choose its own price or recipient', async () => {
-  // The facilitator validates signatures, not our pricing — if these got
-  // through, one atomic unit to an attacker address would buy an audit.
   for (const overrides of [
     { accepted: { amount: '1' } },
     { accepted: { payTo: '0xdead000000000000000000000000000000000001' } },
@@ -406,8 +347,6 @@ test('a client cannot choose its own price or recipient', async () => {
 });
 
 test('the authorization is checked independently of the accepted block', async () => {
-  // A payload whose `accepted` block matches perfectly but whose actual
-  // authorization pays someone else, or less.
   const wrongRecipient = await gate(validPayload({ authorization: { to: '0xdead000000000000000000000000000000000001' } }));
   assert.equal(wrongRecipient.paid, false);
   assert.match(await wrongRecipient.response.text(), /authorization recipient or value/);
@@ -442,13 +381,7 @@ test('malformed payment payloads are 400, not 402', async () => {
   assert.equal(badNonce.response.status, 400);
 });
 
-// --- x402 v1 compatibility --------------------------------------------------
-//
-// The reference client (x402-fetch 1.2.0) validates the 402 body against a v1
-// schema and throws rather than degrading, so a v2-only endpoint is unpayable by
-// it. These tests pin the dual-version behaviour that makes it payable.
 
-// Same fixture, plus the v1 network name that switches v1 on.
 const CFG_V1 = {
   ...CFG,
   payments: {
@@ -494,18 +427,13 @@ test('the v1 challenge uses v1 field names and a network name, not a CAIP-2 id',
   const terms = paymentRequirementsV1(CFG_V1, '10000', RESOURCE);
   assert.equal(terms.network, 'base-sepolia');
   assert.equal(terms.maxAmountRequired, '10000');
-  assert.equal(terms.resource, RESOURCE.url);          // a flat URL string in v1
-  assert.equal(terms.amount, undefined);               // v2's name must not leak
+  assert.equal(terms.resource, RESOURCE.url);
+  assert.equal(terms.amount, undefined);
   assert.deepEqual(terms.extra, { name: 'USDC', version: '2' });
 
-  // No v1 network name configured → v1 is off rather than guessed at.
   assert.equal(paymentRequirementsV1(CFG, '10000', RESOURCE), null);
 });
 
-// The CDP facilitator builds a Bazaar listing out of whatever discovery
-// metadata rides along with the settlement, and nothing else. Dropping these
-// fields would not fail a payment — it would silently un-list the endpoint,
-// which is the sort of regression only an explicit test catches.
 test('discovery metadata rides along in both versions, and only when declared', () => {
   const described = { ...RESOURCE, outputSchema: { input: { type: 'http', method: 'POST', discoverable: true } } };
 
@@ -513,12 +441,9 @@ test('discovery metadata rides along in both versions, and only when declared', 
   assert.deepEqual(v1.outputSchema, described.outputSchema);
   assert.equal(v1.outputSchema.input.discoverable, true);
 
-  // v2 carries the same thing under the name CDP reads for v2.
   const v2 = paymentRequirements(CFG_V1, '10000', described);
   assert.deepEqual(v2.extensions, { bazaar: { info: described.outputSchema } });
 
-  // Undeclared means absent from the wire, not present-and-null: a caller that
-  // publishes no schema publishes exactly what it did before.
   assert.ok(!('outputSchema' in paymentRequirementsV1(CFG_V1, '10000', RESOURCE)));
   assert.ok(!('extensions' in paymentRequirements(CFG_V1, '10000', RESOURCE)));
 });
@@ -529,7 +454,6 @@ test('the audit endpoint declares itself discoverable, with its real request sha
   assert.equal(schema.input.discoverable, true, 'without this the endpoint is never catalogued');
   assert.equal(schema.input.method, 'POST');
   assert.equal(schema.input.bodyType, 'json');
-  // The documented request field must be the one parseAuditRequest actually reads.
   assert.equal(schema.input.body.url.required, true);
   assert.deepEqual(Object.keys(schema.input.body), ['url']);
   assert.equal(parseAuditRequest({ url: 'https://example.com' }).error, undefined);
@@ -539,15 +463,12 @@ test('one 402 answers both versions: v1 in the body, v2 in the header', async ()
   const res = await gateV1(undefined);
   assert.equal(res.response.status, 402);
 
-  // A v1 client reads the body, and parses the whole accepts array with its own
-  // schema — so it must contain v1 entries only.
   const body = await res.response.json();
   assert.equal(body.x402Version, 1);
   assert.equal(body.accepts.length, 1);
   assert.equal(body.accepts[0].network, 'base-sepolia');
   assert.equal(body.accepts[0].maxAmountRequired, '10000');
 
-  // A v2 client reads the header, which still speaks pure v2.
   const header = x402.b64decode(res.response.headers.get('PAYMENT-REQUIRED'));
   assert.equal(header.x402Version, 2);
   assert.equal(header.accepts[0].network, 'eip155:84532');
@@ -555,8 +476,6 @@ test('one 402 answers both versions: v1 in the body, v2 in the header', async ()
 });
 
 test('a v1 payer cannot redirect or shave the payment', async () => {
-  // v1 carries no asset/payTo/amount of its own, so the authorization is the
-  // only place a v1 client can lie about money. It is checked directly.
   const wrongRecipient = await gateV1(validPayloadV1({ authorization: { to: '0xdead000000000000000000000000000000000001' } }));
   assert.equal(wrongRecipient.paid, false);
   assert.match(await wrongRecipient.response.text(), /authorization recipient or value/);
@@ -572,9 +491,6 @@ test('a v1 payer cannot redirect or shave the payment', async () => {
 });
 
 test('replay protection spans both versions for the same chain', async () => {
-  // v1 calls this chain "base-sepolia" and v2 "eip155:84532". Keying the spent
-  // nonce on the version's own label would let one authorization be replayed
-  // once per version, so both must collide on the CAIP-2 key.
   const key = `x402:nonce:eip155:84532:${NONCE}`;
   const v1 = await gateV1(validPayloadV1(), { kv: stubKv({ [key]: 'spent' }) });
   assert.match(await v1.response.text(), /already been used/);
@@ -595,7 +511,6 @@ test('each version is answered in the header it listens on', () => {
 });
 
 test('a version-mismatched payload is refused rather than coerced', async () => {
-  // v2 content in the v1 header, and vice versa.
   const v2InV1Header = await gateV1({ ...validPayloadV1(), x402Version: 2 });
   assert.equal(v2InV1Header.response.status, 400);
   assert.equal((await v2InV1Header.response.json()).code, 'unsupported_version');
@@ -606,8 +521,6 @@ test('a version-mismatched payload is refused rather than coerced', async () => 
 });
 
 test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
-  // CFG has no network_v1, so a v1 payload must not be honoured by accident —
-  // it gets the challenge, not a free audit.
   const res = await gateV1(validPayloadV1(), { cfg: CFG });
   assert.equal(res.paid, false);
   assert.equal(res.response.status, 402);
@@ -615,15 +528,8 @@ test('X-PAYMENT is ignored on a rail that does not offer v1', async () => {
   assert.equal(body.x402Version, 2);
 });
 
-// --- what the deploy publishes ----------------------------------------------
 
 test('no source directory is published as a static asset by accident', async () => {
-  // The asset directory is the repo root and .assetsignore is a denylist, so
-  // *anything* added at the top level ships publicly unless someone remembers to
-  // exclude it. That has now bitten three times — DEPLOY.md/ARCHITECTURE.md, the
-  // .wrangler state directory, and clients/ — so the expectation is pinned here
-  // rather than left to memory. Adding a file at the repo root should fail this
-  // test until it is deliberately classified.
   const root = new URL('../', import.meta.url);
   const entries = (await readdir(root, { withFileTypes: true })).map((e) => e.name).sort();
   const ignored = new Set(
@@ -633,36 +539,17 @@ test('no source directory is published as a static asset by accident', async () 
       .map((l) => l.replace(/^\//, '')),
   );
 
-  // The IndexNow key file is named after the key, so the expected name is
-  // computed rather than listed. A rotated key therefore fails this test on the
-  // orphan the old one leaves behind, which is the only moment anyone would
-  // notice a stale proof-of-control file still being served.
   const cfg = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
 
-  // Everything here is site content on purpose.
   const published = new Set([
     ...(cfg.indexnow_key ? [`${cfg.indexnow_key}.txt`] : []),
     '404.html', 'api', 'assets', 'dashboard.html', 'health.json', 'health-weeks.json', 'index.html',
     'l', 'listings', 'llms-full.txt', 'llms.txt', 'openapi.yaml', 'robots.txt',
-    // Published for the same reason health.json is: the registry's own state
-    // about its listings should be inspectable by whoever it describes.
     'scores.json', 'sitemap.xml', '.well-known',
-    // Discovery surfaces. Static on purpose: a feed and a search description
-    // that need the Worker awake are worse than ones the CDN can serve cold.
     'feed.xml', 'feed.json', 'opensearch.xml',
-    // Human-facing pages, all generated by build.mjs from committed data —
-    // see scripts/pages.mjs. Browsers are ~46% of requests here and had
-    // nothing to read; these are what they read.
     'report.html', 'x402.html', 'mcp-servers.html', 'leaderboard.html',
     'compare.html', 'checks',
-    // The umbrella apex's portfolio page. Served from the shared asset store at
-    // the apex root, so the apex needs no deploy of its own; its canonical names
-    // the apex, so being reachable here too is not a duplicate.
     'apex.html',
-    // The Router's front door. Served at its own hostname's root once the
-    // custom domain is attached, and reachable here as /router.html either way
-    // — its canonical names whichever of those is current, so the asset being
-    // present on this host is not a second copy.
     'router.html',
   ]);
 
@@ -672,21 +559,12 @@ test('no source directory is published as a static asset by accident', async () 
 });
 
 test('the stdio server offers exactly the Worker tools plus register_product', async () => {
-  // These two servers answer the same clients, so a tool present on one and
-  // absent from the other means the answer depends on which one a client
-  // happened to reach. That is what had happened: the Worker grew to six tools
-  // while mcp/server.mjs still declared three, invisibly, for a whole release.
-  // The stdio server now imports these definitions rather than restating them,
-  // so this test is really asserting that nobody has reintroduced a second copy.
   const { TOOLS, HOSTED_TOOLS } = await import('../mcp/server.mjs');
   assert.deepEqual(HOSTED_TOOLS.map((t) => t.name), mcpTools(BASE).map((t) => t.name));
 
-  // register_product is the one deliberate difference, and only ever an
-  // addition: it needs a GitHub token, which the public Worker must not carry.
   const extra = TOOLS.map((t) => t.name).filter((n) => !mcpTools(BASE).some((t) => t.name === n));
   assert.deepEqual(extra, ['register_product']);
 
-  // Every tool a client can list must be one it can actually call.
   for (const t of TOOLS) {
     assert.equal(typeof t.description, 'string', `${t.name} has no description`);
     assert.equal(t.inputSchema?.type, 'object', `${t.name} has no object inputSchema`);
@@ -694,19 +572,11 @@ test('the stdio server offers exactly the Worker tools plus register_product', a
 });
 
 test('no .assetsignore pattern silently excludes a nested published file', async () => {
-  // The test above guards one direction — nothing ships by accident. This guards
-  // the other, which is the one that actually bit: an unanchored gitignore
-  // pattern matches at EVERY depth, so the `mcp` line written for the top-level
-  // `mcp/` directory also excluded `api/mcp/`. The catalog was committed, the
-  // build was current, the tests passed, the deploy said Success — and
-  // /api/mcp/search answered 503 in production because the files were never
-  // uploaded. Nothing in CI could see it, so the rule is pinned here instead.
   const root = new URL('../', import.meta.url);
   const unanchored = (await readFile(new URL('../.assetsignore', import.meta.url), 'utf8'))
     .split('\n').map((l) => l.trim())
     .filter((l) => l && !l.startsWith('#') && !l.startsWith('/'));
 
-  // Every directory and file name below the trees the site actually serves.
   const names = new Set();
   const walk = async (rel) => {
     for (const e of await readdir(new URL(rel, root), { withFileTypes: true })) {
@@ -716,22 +586,16 @@ test('no .assetsignore pattern silently excludes a nested published file', async
   };
   for (const dir of ['api/', 'assets/', 'l/', 'listings/', '.well-known/']) await walk(dir);
 
-  // node_modules is unanchored on purpose and must never appear in a served tree.
   const collisions = unanchored.filter((p) => names.has(p));
   assert.deepEqual(collisions, [],
     `these .assetsignore patterns also match published files nested under api/, l/, `
     + `listings/, assets/ or .well-known/ — anchor them with a leading slash: ${collisions.join(', ')}`);
 });
 
-// --- the well-known surfaces the build generates ------------------------------
 
 const wellKnown = (name) => readFile(new URL(`../.well-known/${name}`, import.meta.url), 'utf8');
 
 test('every published skill matches the digest the index claims for it', async () => {
-  // The index publishes a sha256 of each skill body, and a client is entitled to
-  // check it. A stale digest is worse than a missing index: it looks like
-  // tampering. This is exactly the failure a hand-maintained index would hit the
-  // first time someone edited a SKILL.md, which is why the build computes it.
   const { createHash } = await import('node:crypto');
   const index = JSON.parse(await wellKnown('agent-skills/index.json'));
 
@@ -747,29 +611,19 @@ test('every published skill matches the digest the index claims for it', async (
     const digest = `sha256:${createHash('sha256').update(body).digest('hex')}`;
     assert.equal(skill.digest, digest, `${skill.name}: index digest does not match the published file`);
 
-    // A skill promising something the site does not serve is the same failure
-    // as a manifest advertising a route the router lacks.
     assert.doesNotMatch(body, /\{\{/, `${skill.name} shipped with an unfilled placeholder`);
   }
 });
 
 test('the A2A card is served at both the 1.0 path and the pre-0.3 one', async () => {
-  // A2A 1.0 puts the card at /.well-known/agent-card.json and a compliant 1.0
-  // client will never look at /.well-known/agent.json — but most cards in the
-  // wild are still at the old path, so clients written against it are real too.
-  // Serving one and not the other means being invisible to one generation.
   const current = await wellKnown('agent-card.json');
   const legacy = await wellKnown('agent.json');
 
-  // Byte-identical because they come from one template. If these ever diverge,
-  // the two paths are describing different agents to different clients.
   assert.equal(current, legacy, 'the two agent card paths have drifted apart');
   assert.ok(JSON.parse(current).name, 'the agent card has no name');
 });
 
 test('the MCP server card is served at both paths the specs disagree on', async () => {
-  // SEP-2127 says /.well-known/mcp.json; Cloudflare's agent-readiness check
-  // reads /.well-known/mcp/server-card.json. Neither is wrong, so serve both.
   const sep = await wellKnown('mcp.json');
   const cloudflare = await wellKnown('mcp/server-card.json');
 
@@ -778,30 +632,18 @@ test('the MCP server card is served at both paths the specs disagree on', async 
 });
 
 test('agents.json advertises only interfaces this site actually serves', async () => {
-  // The PLURAL agents.json is a different spec from the A2A card at
-  // /.well-known/agent.json, and both are published. Auditors read this one for
-  // the site's machine-readable interfaces; three separate checks do nothing but
-  // look at what it advertises, so an advertisement that is not backed by a real
-  // endpoint is worse than a missing file.
   const raw = await wellKnown('agents.json');
   assert.doesNotMatch(raw, /\{\{/, 'an unfilled {{PLACEHOLDER}} survived the build');
   const manifest = JSON.parse(raw);
 
   assert.equal(manifest.interfaces.json_api, `${BASE}/api/index.json`);
   assert.equal(manifest.interfaces.webmcp, `${BASE}/`);
-  // The 1.0 path, not the pre-0.3 one. Both files are served, but what we
-  // *advertise* should be the location the current spec sends clients to.
   assert.equal(manifest.interfaces.agent_card, `${BASE}/.well-known/agent-card.json`);
-  // Honest only because worker/signing.js really does sign every response and
-  // really does publish keys at that path. If signing is ever removed, this
-  // advertisement must go with it.
   assert.equal(manifest.interfaces.web_bot_auth, `${BASE}${DIRECTORY_PATH}`);
   assert.equal(manifest.identity.signature_directory, `${BASE}${DIRECTORY_PATH}`);
   assert.equal(manifest.web_bot_auth.signature_directory, `${BASE}${DIRECTORY_PATH}`);
   assert.match(manifest.identity.contact, /^mailto:/);
 
-  // The in-page WebMCP tools named here are the ones templates/index.html
-  // registers on navigator.modelContext.
   const home = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   for (const tool of manifest.webmcp.tools) {
     assert.match(home, new RegExp(`name: '${tool.name}'`), `agents.json advertises a WebMCP tool the page does not register: ${tool.name}`);
@@ -815,14 +657,10 @@ test('security.txt is a valid, unexpired RFC 9116 file', async () => {
 
   const expires = raw.match(/^Expires: (.+)$/m);
   assert.ok(expires, 'RFC 9116 requires exactly one Expires field');
-  // Deliberate tripwire. The date is hardcoded because the build must stay a
-  // pure function of its inputs, which means nothing renews it — so the test
-  // fails *before* the site starts serving an expired security contact.
   assert.ok(new Date(expires[1]).getTime() > Date.now(),
     'security.txt has expired — bump Expires in templates/security.txt and rebuild');
 });
 
-// --- README badge -----------------------------------------------------------
 
 const LISTINGS = [
   { slug: 'my-product', name: 'My Product', tier: 'free' },
@@ -840,7 +678,6 @@ test('the badge reflects the listing tier', async () => {
   assert.match(featured, /featured/);
   assert.match(featured, new RegExp(badge.COLOURS.featured));
 
-  // Slugs are matched case-insensitively; a README should not break on caps.
   assert.match(await callBadge('?slug=MY-PRODUCT').text(), /indexed/);
 });
 
@@ -851,19 +688,14 @@ test('the score badge shows a stored grade, never an audit', async () => {
   assert.match(svg, new RegExp(badge.GRADE_COLOURS.B));
   assert.match(svg, /Agent Readability/, 'the score badge gets its own default label');
 
-  // A listing the weekly run has not reached yet must say so rather than imply
-  // an F, and must not be cached as long as a real grade.
   const unscored = await callBadge('?slug=paid-thing&show=score');
   assert.match(await unscored.text(), /not scored yet/);
   assert.match(unscored.headers.get('cache-control'), /max-age=900/);
 
-  // Without show=score it stays the tier badge.
   assert.match(await callBadge('?slug=my-product').text(), /indexed/);
 });
 
 test('a badge request never answers with a broken image', async () => {
-  // Every one of these arrives from an <img> in someone else's README, where a
-  // 4xx renders as a broken icon and reflects on them. Say it in the badge.
   for (const [qs, expected] of [
     ['', /pass \?slug=/],
     ['?slug=', /pass \?slug=/],
@@ -875,7 +707,6 @@ test('a badge request never answers with a broken image', async () => {
     assert.match(await resp.text(), expected);
   }
 
-  // A real listing caches for longer than a miss.
   const hit = await callBadge('?slug=my-product');
   assert.match(hit.headers.get('cache-control'), /max-age=3600/);
 });
@@ -886,13 +717,11 @@ test('badge text is escaped and cannot inject markup', async () => {
   assert.ok(!svg.includes('<script>'), 'raw markup must not survive');
   assert.match(svg, /&lt;script&gt;/);
 
-  // The label is caller-controlled via ?label=, so the same holds end to end.
   const viaQuery = await handleBadge(new URL(`${BASE}/badge.svg?slug=my-product&label=${encodeURIComponent(evil)}`), LISTINGS).text();
   assert.ok(!viaQuery.includes('<script>'));
 });
 
 test('badge geometry leaves room for its text', () => {
-  // Too-narrow pills clip glyphs; the estimate must never undershoot.
   for (const text of ['A', 'indexed', 'AI Agent Ready', 'WWWWWWWWWW', 'iiiiiiiiii']) {
     const svg = badgeSvg('AI Agent Ready', text, '#000');
     const width = Number(svg.match(/width="(\d+)"/)[1]);
@@ -901,9 +730,7 @@ test('badge geometry leaves room for its text', () => {
   }
 });
 
-// --- RFC 9421 response signing ----------------------------------------------
 
-// A real keypair, so signatures are verified rather than merely present.
 async function signingEnv() {
   const pair = await crypto.subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify']);
   const priv = await crypto.subtle.exportKey('jwk', pair.privateKey);
@@ -927,12 +754,9 @@ test('a signed response verifies against the published key', async () => {
   assert.ok(digest && input && sig, 'all three headers must be present');
   assert.match(digest, /^sha-256=:[A-Za-z0-9+/]+=*:$/);
 
-  // The digest must be over exactly the bytes that ship, or verification of the
-  // body is meaningless.
   const body = await signed.clone().arrayBuffer();
   assert.equal(digest, await contentDigest(new Uint8Array(body)));
 
-  // Rebuild the base the way a verifier would, from the headers alone.
   const params = input.replace(/^sig1=/, '');
   const base = signatureBase([
     ['"@status"', '200'],
@@ -948,7 +772,6 @@ test('a signed response verifies against the published key', async () => {
   );
   assert.ok(ok, 'the signature must verify over the reconstructed base');
 
-  // keyid must be the thumbprint a verifier computes from the directory entry.
   const directory = await keyDirectory(env);
   assert.equal(directory.keys[0].x, x);
   assert.match(input, new RegExp(`keyid="${directory.keys[0].kid.replace(/[+/]/g, '\\$&')}"`));
@@ -957,9 +780,6 @@ test('a signed response verifies against the published key', async () => {
 });
 
 test('a signature cannot be lifted onto another resource', async () => {
-  // @authority and @path are covered, so the same body signed for one path does
-  // not verify as the other — otherwise a cached signature would authenticate
-  // any endpoint.
   const { env, verifyKey } = await signingEnv();
   const signed = await signResponse(new Request(`${BASE}/api/index.json`), new Response('{}'), env);
   const digest = signed.headers.get('content-digest');
@@ -985,7 +805,6 @@ test('without a key, nothing is signed and the directory is absent', async () =>
   assert.equal(await keyDirectory({}), null);
   assert.equal(await signingKey({}), null);
 
-  // A malformed key must not produce a bogus signature either.
   assert.equal(await signingKey({ SIGNING_KEY: 'dG9vLXNob3J0' }), null);
   assert.equal((await signResponse(new Request(`${BASE}/`), new Response('hi'), { SIGNING_KEY: 'dG9vLXNob3J0' })).headers.get('signature'), null);
   assert.deepEqual(await botAuthHeaders({}, 'GET', 'https://example.com/'), {});
@@ -1021,11 +840,9 @@ test('the key directory is shaped the way verifiers expect', async () => {
   assert.ok(!('d' in key), 'the private half must never be published');
   assert.equal(DIRECTORY_PATH, '/.well-known/http-message-signatures-directory');
 
-  // The thumbprint must be over the canonical JWK, members in lexical order.
   assert.equal(key.kid, await sign.thumbprint(x));
 });
 
-// --- free score / paid fixes boundary ---------------------------------------
 
 const FULL_RESULT = {
   ok: true,
@@ -1047,7 +864,6 @@ const FULL_RESULT = {
 test('the free view withholds exactly what the paid audit sells', () => {
   const view = freeView(FULL_RESULT, { what: 'more' });
 
-  // Kept: the verdict, and the name of every check.
   assert.equal(view.letter, 'D');
   assert.equal(view.score, 62);
   assert.equal(view.tier, 'free');
@@ -1055,7 +871,6 @@ test('the free view withholds exactly what the paid audit sells', () => {
   assert.equal(view.checks[0].label, 'llms.txt published');
   assert.equal(view.checks[0].pass, false);
 
-  // Withheld: everything actionable.
   const serialised = JSON.stringify(view);
   for (const leaked of ['"detail":', '"fix":', '"snippet":', '"next_steps":', 'HTTP 404']) {
     assert.ok(!serialised.includes(leaked), `free tier leaked "${leaked}"`);
@@ -1083,7 +898,6 @@ test('letterGrade bands cover A to F with no gaps', () => {
   assert.equal(letterGrade(45), 'E');
   assert.equal(letterGrade(44), 'F');
   assert.equal(letterGrade(0), 'F');
-  // Every score maps to something.
   for (let n = 0; n <= 100; n += 1) assert.match(letterGrade(n), /^[A-F]$/);
 });
 
@@ -1097,15 +911,11 @@ test('every check has a label, and every fixable one a snippet for the right ori
   assert.ok(!snippet.includes('{{ORIGIN}}'), 'placeholder must be substituted');
   assert.ok(!snippet.includes('customer.example//'), 'trailing slash must not double up');
 
-  // https is a server-config fix with nothing to paste; that is allowed.
   assert.equal(snippetFor('https', 'https://x.example'), null);
   assert.equal(snippetFor('nonexistent_check', 'https://x.example'), null);
 });
 
 test('auditing our own hostname goes through ASSETS, not the network', () => {
-  // A Worker cannot fetch its own hostname: Cloudflare answers 522 on the custom
-  // domain and the workers.dev one alike, so auditing our own site — the
-  // showcase, and the first URL anyone tries — failed outright.
   const assets = { fetch() { return new Response('x'); } };
   const req = new Request('https://index.kc-it.pl/api/score?url=x');
 
@@ -1114,22 +924,14 @@ test('auditing our own hostname goes through ASSETS, not the network', () => {
   assert.equal(score.fetcherFor(req, { ASSETS: assets }, 'https://example.com/'), undefined,
     'a third-party host must use the real network');
 
-  // Matching on the request host, not a configured base, covers every hostname
-  // this deployment answers on.
   const wd = new Request('https://ai-product-index.110kc3.workers.dev/api/score?url=x');
   assert.ok(score.fetcherFor(wd, { ASSETS: assets }, 'https://ai-product-index.110kc3.workers.dev/x'));
   assert.equal(score.fetcherFor(wd, { ASSETS: assets }, 'https://index.kc-it.pl/'), undefined);
 
-  // No binding (bare Node tests) must degrade to the default fetcher.
   assert.equal(score.fetcherFor(req, {}, 'https://index.kc-it.pl/'), undefined);
 });
 
 test('a self-audit can see the routes the Worker generates, not just its files', async () => {
-  // The ASSETS binding serves committed files and nothing else, so a same-host
-  // audit was blind to every route generated at request time — and reported us
-  // as lacking web-bot-auth while the key directory answered 200 to everyone
-  // else. A self-audit understating its own site is the one direction of error
-  // nobody thinks to check, so it is pinned here.
   const { DIRECTORY_PATH } = await import('../worker/signing.js');
   const keyed = await signingEnv();
   const assets = { fetch() { return new Response('not found', { status: 404 }); } };
@@ -1141,28 +943,13 @@ test('a self-audit can see the routes the Worker generates, not just its files',
   assert.equal(directory.status, 200, 'the key directory 404d in a self-audit');
   assert.ok((await directory.json()).keys?.length, 'the directory served no keys');
 
-  // Everything else goes through the asset layer, so a missing file is still a
-  // 404 rather than being invented.
   assert.equal((await fetcher('https://index.percall.dev/llms.txt')).status, 404);
 
-  // An unkeyed deployment genuinely has no directory, and must say so rather
-  // than serving the literal string "null" with a 200 — which would report
-  // web-bot-auth as present on a site that cannot sign anything.
   const unkeyed = score.fetcherFor(req, { ASSETS: assets }, 'https://index.percall.dev/');
   assert.equal((await unkeyed(`https://index.percall.dev${DIRECTORY_PATH}`)).status, 404);
 });
 
 test('a response built in-Worker still reports where it came from', async () => {
-  // The bug that made every same-host audit a 500, and that survived two wrong
-  // fixes: `Response.url` is populated by fetch and is the EMPTY STRING on any
-  // Response constructed in-Worker. The header layer rebuilds the response to
-  // attach its headers, so every self-audit sub-response has url ''. Being ''
-  // rather than undefined, `home.url ?? target` downstream keeps it, and
-  // `new URL('')` throws "Invalid URL string." — no stack, nothing naming the
-  // audit, and a fully green suite, because Node's fetch does populate url.
-  //
-  // Pinned at `get()`, the one place the empty string can enter, so the fix
-  // holds for every consumer rather than for the two call sites that crashed.
   const { __testing: a } = await import('../worker/audit.js');
   const target = 'https://index.percall.dev/';
 
@@ -1173,7 +960,6 @@ test('a response built in-Worker still reports where it came from', async () => 
   assert.equal(r.url, target, 'an empty Response.url must fall back to the URL we asked for');
   assert.doesNotThrow(() => new URL(r.url), 'the reported url must be parseable');
 
-  // A real redirect still wins: this is a fallback, not an override.
   const redirected = new Response('x', { status: 200 });
   Object.defineProperty(redirected, 'url', { value: 'https://index.percall.dev/landed' });
   const r2 = await a.get(target, { fetchImpl: async () => redirected });
@@ -1181,17 +967,6 @@ test('a response built in-Worker still reports where it came from', async () => 
 });
 
 test('a self-audit sees content negotiation, not the committed bytes', async () => {
-  // The other half of the same blind spot, and the one that survived the first
-  // fix. `markdown_negotiation` is decided entirely by the header layer: the
-  // Accept branch picks a different body and `alternateContentType()` relabels
-  // it, because the asset store types .txt as text/plain. Neither runs in the
-  // ASSETS binding, so a self-audit saw raw HTML and reported the signal absent
-  // while `curl -H 'accept: text/markdown'` returned text/markdown to everyone
-  // else. Unscored that was cosmetic; under v2 it costs three points, and the
-  // only site the audit is wrong about is our own.
-  //
-  // Fixed by routing through the same serveStatic() the public branch uses, so
-  // this asserts against the real negotiation rules rather than a copy.
   const served = {};
   const assets = {
     fetch(req) {
@@ -1208,20 +983,14 @@ test('a self-audit sees content negotiation, not the committed bytes', async () 
   const fetcher = score.fetcherFor(req, { ASSETS: assets }, 'https://index.percall.dev/');
 
   const md = await fetcher('https://index.percall.dev/', { headers: { accept: 'text/markdown' } });
-  // `/` negotiates to /llms-full.txt — asserted against what negotiate() really
-  // does rather than what this test first assumed, which is the point of not
-  // reimplementing the rules here.
   assert.equal(served.last, '/llms-full.txt', 'Accept: text/markdown did not swap the body');
   assert.match(md.headers.get('content-type') ?? '', /markdown/,
     'the negotiated body went out labelled as the asset store typed it');
 
-  // A plain request is untouched: negotiation must not leak into the default.
   const html = await fetcher('https://index.percall.dev/');
   assert.equal(served.last, '/');
   assert.match(html.headers.get('content-type') ?? '', /html/);
 
-  // And the header layer ran at all, which is what makes the Link-based checks
-  // measurable in a self-audit too.
   assert.ok(html.headers.get('link'), 'no Link header — the header layer did not run');
   assert.ok(html.headers.get('x-agent-welcome'));
 });
@@ -1230,10 +999,10 @@ test('the free score refuses the same targets the paid one does', async () => {
   const cfg = { base: BASE, payments: CFG.payments };
   const call = (qs) => handleScore(new Request(`${BASE}/api/score${qs}`), {}, cfg, resolveX402(cfg));
 
-  assert.equal((await call('')).status, 400);                                  // no url
-  assert.equal((await call('?url=http://127.0.0.1/')).status, 400);            // loopback
-  assert.equal((await call('?url=http://169.254.169.254/')).status, 400);      // cloud metadata
-  assert.equal((await call('?url=file:///etc/passwd')).status, 400);           // wrong scheme
+  assert.equal((await call('')).status, 400);
+  assert.equal((await call('?url=http://127.0.0.1/')).status, 400);
+  assert.equal((await call('?url=http://169.254.169.254/')).status, 400);
+  assert.equal((await call('?url=file:///etc/passwd')).status, 400);
   assert.equal((await call('?url=not-a-url')).status, 400);
 
   const body = await (await call('')).json();
@@ -1243,11 +1012,10 @@ test('the free score refuses the same targets the paid one does', async () => {
 
 test('the upsell names a real price from the active rail', () => {
   const up = score.upsellFor(BASE, resolveX402(CFG));
-  assert.equal(up.price, '0.01 USDC');       // 10000 atomic at 6 decimals in the fixture
+  assert.equal(up.price, '0.01 USDC');
   assert.match(up.endpoint, /\/api\/audit$/);
   assert.match(up.terms, /\/api\/x402\/info$/);
 
-  // An unconfigured rail must not invent a price.
   assert.equal(score.upsellFor(BASE, null).price, null);
 });
 
@@ -1259,12 +1027,8 @@ test('the free score is rate limited per IP, and cache hits are not', async () =
     async delete(k) { store.delete(k); },
   };
   const cfg = { base: BASE, payments: CFG.payments };
-  // Pre-seed the per-IP counter at the limit and the cache for one URL.
   const hour = new Date().toISOString().slice(0, 13);
   store.set(`${score.RATE_PREFIX}9.9.9.9:${hour}`, String(score.RATE_LIMIT_PER_HOUR));
-  // The check set is part of the cache identity — the same URL has two different
-  // correct grades, and serving one to a caller who asked for the other would be
-  // wrong in a way nothing downstream could detect.
   store.set(`${score.CACHE_PREFIX}v2:https://cached.example/`, JSON.stringify({ ok: true, letter: 'B', tier: 'free' }));
 
   const call = (target, checks) => handleScore(
@@ -1272,35 +1036,24 @@ test('the free score is rate limited per IP, and cache hits are not', async () =
     { PAYMENTS: kv }, cfg, resolveX402(cfg),
   );
 
-  // A fresh URL from a spent IP is refused before any outbound fetch.
   const limited = await call('https://fresh.example/');
   assert.equal(limited.status, 429);
   const limitedBody = await limited.json();
   assert.equal(limitedBody.code, 'rate_limited');
   assert.ok(limitedBody.unlock, 'a refusal should still point at the paid endpoint');
 
-  // The cached URL still answers, because serving it costs us nothing.
   const cached = await call('https://cached.example/');
   assert.equal(cached.status, 200);
   const cachedBody = await cached.json();
   assert.equal(cachedBody.cached, true);
   assert.equal(cachedBody.letter, 'B');
 
-  // Same URL, other check set: must NOT be served the v2 entry. It falls through
-  // to a fresh audit, which this spent IP is rate limited out of — a 429 here is
-  // proof the cache did not answer, and is the cheapest way to observe it
-  // without a network call.
   const otherSet = await call('https://cached.example/', 'v1');
   assert.equal(otherSet.status, 429, 'a v1 request was served the cached v2 grade');
 });
 
-// --- asset redirect absorption ----------------------------------------------
 
 test('an ASSETS .html redirect is absorbed, not passed through', async () => {
-  // Workers Assets answers /foo.html with a 307 to /foo. Returning that verbatim
-  // made every published listing URL a redirect, and made the dashboard redirect
-  // to itself forever — it fetched /dashboard.html and handed back the 307 to
-  // /dashboard, which is the same request again.
   const seen = [];
   const env = {
     ASSETS: {
@@ -1323,7 +1076,6 @@ test('an ASSETS .html redirect is absorbed, not passed through', async () => {
 });
 
 test('absorbing a redirect follows exactly one hop', async () => {
-  // A binding that always redirects must not spin.
   let calls = 0;
   const env = {
     ASSETS: {
@@ -1344,18 +1096,12 @@ test('a non-redirect asset response is returned untouched', async () => {
   assert.equal(resp.status, 200);
   assert.equal(await resp.text(), 'ok');
 
-  // A redirect with no Location cannot be followed; pass it through.
   const noLoc = { ASSETS: { async fetch() { return new Response(null, { status: 307 }); } } };
   assert.equal((await worker.fetchAsset(noLoc, new URL(`${BASE}/x`), new Headers())).status, 307);
 });
 
-// --- audit scoring ----------------------------------------------------------
 
 test('a fully passing audit scores exactly 100, whatever the weights are', () => {
-  // The weights are relative importance, chosen by hand, and they summed to 105
-  // — so a fully agent-ready site was reported as `score: 105` out of a declared
-  // `max_score: 100`. Normalising means this holds no matter how they are
-  // reweighted or how many checks are added.
   const weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
   assert.equal(weights.reduce((a, b) => a + b), 105, 'fixture mirrors the shipped weights');
 
@@ -1365,28 +1111,19 @@ test('a fully passing audit scores exactly 100, whatever the weights are', () =>
   assert.equal(audit.scoreChecks(all(false)).score, 0);
   assert.equal(audit.scoreChecks(all(false)).grade, 'very low checklist coverage');
 
-  // Unequal weights still land inside the band they describe.
   const half = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: i % 2 === 0 }));
   const { score } = audit.scoreChecks(half);
   assert.ok(score > 0 && score < 100, `expected a partial score, got ${score}`);
 
-  // An empty set must not divide by zero.
   assert.equal(audit.scoreChecks([]).score, 0);
 });
 
 test('a raw signal is weightless, so promotion is always explicit', async () => {
-  // Under v1 the signals must not move a grade at all, and under v2 they move it
-  // only through the V2_WEIGHTS table. Keeping the `signal()` factory weightless
-  // is what makes that true: a signal cannot acquire weight by being added to
-  // the list, only by being named in the table, so "which checklist scores this"
-  // has exactly one answer and it is greppable.
   const { contentSignalsIn, __testing: a } = await import('../worker/audit.js');
   const weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
   const checks = weights.map((weight, i) => ({ id: `c${i}`, weight, pass: true }));
   const before = a.scoreChecks(checks).score;
 
-  // Signals carry no weight at all, so they cannot contribute to either side of
-  // the ratio even if someone passes them in by mistake.
   const signals = [
     a.signal('content_signals', 'x', false, 'absent', 'add it'),
     a.signal('api_catalog', 'y', true, 'present'),
@@ -1394,21 +1131,14 @@ test('a raw signal is weightless, so promotion is always explicit', async () => 
   assert.ok(signals.every((s) => s.weight === undefined), 'a signal grew a weight');
   assert.equal(a.scoreChecks([...checks, ...signals]).score, before);
 
-  // A present signal carries no fix; an absent one does. That asymmetry is what
-  // keeps the paid audit's advice list free of noise about things you have.
   assert.equal(signals[1].fix, undefined);
   assert.equal(signals[0].fix, 'add it');
   void contentSignalsIn;
 });
 
 test('no v2 weight may outrank a 2025 check', async () => {
-  // The rule that keeps the extended checklist honest. Under 15% of the web
-  // publishes an MCP server card or an API catalog, so missing one is normal
-  // rather than negligent — and it must never cost a site more than missing
-  // llms.txt. Encoded as an assertion because it is the kind of judgement that
-  // erodes silently the next time someone feels strongly about a new spec.
   const { __testing: a } = await import('../worker/audit.js');
-  const LOWEST_V1_WEIGHT = 5; // `https`
+  const LOWEST_V1_WEIGHT = 5;
   for (const [id, weight] of Object.entries(a.V2_WEIGHTS)) {
     assert.ok(weight > 0, `${id} would be promoted to a scored check worth nothing`);
     assert.ok(weight < LOWEST_V1_WEIGHT, `${id} at ${weight} outranks the cheapest 2025 check`);
@@ -1416,10 +1146,6 @@ test('no v2 weight may outrank a 2025 check', async () => {
 });
 
 test('v2 costs a 2025-perfect site exactly the weight it did not earn', async () => {
-  // The number this decision turns on, pinned so it cannot drift unnoticed: a
-  // site that passes all thirteen 2025 checks and publishes none of the seven
-  // 2026 surfaces scores 105/122 — an A that becomes a B. If a weight changes,
-  // this test is where the consequence shows up, in grades rather than points.
   const { __testing: a } = await import('../worker/audit.js');
   const v1Weights = [15, 5, 5, 5, 10, 8, 15, 7, 7, 5, 8, 10, 5];
   const v1Total = v1Weights.reduce((x, y) => x + y);
@@ -1435,15 +1161,11 @@ test('v2 costs a 2025-perfect site exactly the weight it did not earn', async ()
   const { score } = a.scoreChecks(perfect2025);
   assert.equal(score, 86);
 
-  // And everything passing is still exactly 100 under the extended set, so the
-  // denominator is genuinely derived rather than assumed.
   const perfect2026 = perfect2025.map((c) => ({ ...c, pass: true }));
   assert.equal(a.scoreChecks(perfect2026).score, 100);
 });
 
 test('an unknown or missing check set resolves to the default, never throws', async () => {
-  // Reached from a query string and from a *paid* request body, so a typo must
-  // not 400 after the money has settled.
   const { resolveCheckSet, DEFAULT_CHECK_SET, CHECK_SETS } = await import('../worker/audit.js');
   assert.equal(resolveCheckSet('v1'), 'v1');
   assert.equal(resolveCheckSet('v2'), 'v2');
@@ -1458,7 +1180,6 @@ test('the paid endpoint accepts an optional check set without loosening its URL 
   const { parseAuditRequest, DEFAULT_CHECK_SET } = await import('../worker/audit.js');
   assert.equal(parseAuditRequest({ url: 'https://example.com' }).checkSet, DEFAULT_CHECK_SET);
   assert.equal(parseAuditRequest({ url: 'https://example.com', checks: 'v1' }).checkSet, 'v1');
-  // A bad `checks` value is normalised; a bad URL is still refused.
   assert.equal(parseAuditRequest({ url: 'https://example.com', checks: 'nope' }).checkSet, DEFAULT_CHECK_SET);
   assert.ok(parseAuditRequest({ url: 'http://127.0.0.1/', checks: 'v1' }).error);
 });
@@ -1466,26 +1187,19 @@ test('the paid endpoint accepts an optional check set without loosening its URL 
 test('Content-Signal is read out of robots.txt, not merely detected', async () => {
   const { contentSignalsIn } = await import('../worker/audit.js');
 
-  // The declared values are the useful part — "has a Content-Signal line" says
-  // nothing about whether the site allows training.
   assert.equal(contentSignalsIn('User-agent: *\nContent-Signal: search=yes, ai-train=no\nAllow: /'),
     'search=yes, ai-train=no');
-  // Case and leading space are both legal in robots.txt.
   assert.equal(contentSignalsIn('  content-signal:search=yes'), 'search=yes');
 
   assert.equal(contentSignalsIn('User-agent: *\nAllow: /'), null);
   assert.equal(contentSignalsIn(null), null);
-  // A URL in a comment mentioning content-signal is not a declaration.
   assert.equal(contentSignalsIn('# see https://contentsignals.org/ for content-signal docs'), null);
 });
 
-// --- CDP facilitator authentication ----------------------------------------
 
 const decodeJwtPart = (part) =>
   JSON.parse(Buffer.from(part.replaceAll('-', '+').replaceAll('_', '/'), 'base64').toString('utf8'));
 
-// A CDP Ed25519 secret is base64 of seed(32) || publicKey(32). Generate a real
-// keypair so the signature path is genuinely exercised, not stubbed.
 async function ed25519Secret() {
   const { subtle } = globalThis.crypto;
   const pair = await subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify']);
@@ -1521,8 +1235,6 @@ test('CDP JWT carries the documented header and claims (EdDSA)', async () => {
   assert.equal(claims.nbf, 1_800_000_000);
   assert.ok(claims.exp > claims.nbf);
   assert.ok(claims.jti);
-  // The uris claim binds the token to one route — a /verify token must not be
-  // usable against /settle.
   assert.deepEqual(claims.uris, ['POST api.cdp.coinbase.com/platform/v2/x402/verify']);
 });
 
@@ -1560,8 +1272,6 @@ test('facilitatorHeaders sends nothing for an unauthenticated rail', async () =>
 });
 
 test('a CDP rail without credentials fails closed instead of firing unauthenticated', async () => {
-  // Otherwise Coinbase's 401 would surface to the agent as if its payment were
-  // bad, when the real fault is a missing deployment secret.
   const res = await facilitatorHeaders(resolveX402(withRail('cdp')), {}, 'POST', 'https://api.cdp.coinbase.com/platform/v2/x402/verify');
   assert.equal(res.ok, false);
   assert.equal(res.code, 'payments_not_enabled');
@@ -1576,11 +1286,8 @@ test('a CDP rail with credentials produces an Authorization header', async () =>
   assert.deepEqual(claims.uris, ['POST api.cdp.coinbase.com/platform/v2/x402/settle']);
 });
 
-// --- audit input boundary --------------------------------------------------
 
 test('parseAuditRequest rejects everything that is not a public http(s) URL', () => {
-  // Same boundary the registry uses for submitted listing URLs — an audit
-  // target is attacker-chosen, so this is the SSRF gate.
   for (const bad of [
     'http://127.0.0.1/', 'http://10.0.0.5/', 'http://192.168.1.1/', 'http://169.254.169.254/',
     'http://localhost/', 'http://box.local/', 'http://svc.internal/',
@@ -1603,7 +1310,6 @@ test('parseAuditRequest rejects non-object bodies', () => {
   }
 });
 
-// --- robots.txt interpretation ---------------------------------------------
 
 test('robotsBlocksAgent respects group scoping', () => {
   const robots = `
@@ -1613,7 +1319,6 @@ Disallow: /
 User-agent: GPTBot
 Allow: /
 `;
-  // The specific Allow block overrides the wildcard Disallow.
   assert.equal(audit.robotsBlocksAgent(robots, 'GPTBot'), false);
   assert.equal(audit.robotsBlocksAgent(robots, 'ClaudeBot'), true);
 });
@@ -1635,13 +1340,11 @@ test('robotsBlocksAgent ignores comments and a permissive default', () => {
   assert.equal(audit.robotsBlocksAgent('', 'GPTBot'), false);
 });
 
-// --- llms.txt + JSON-LD shape ----------------------------------------------
 
 test('llmsTxtShape requires an H1 and a following blockquote summary', () => {
   assert.deepEqual(audit.llmsTxtShape('# Title\n\n> Summary line\n'), { hasH1: true, hasSummary: true });
   assert.deepEqual(audit.llmsTxtShape('# Title\n\nno summary\n'), { hasH1: true, hasSummary: false });
   assert.deepEqual(audit.llmsTxtShape('just text\n'), { hasH1: false, hasSummary: false });
-  // A blockquote above the H1 is not the spec's summary slot.
   assert.equal(audit.llmsTxtShape('> stray\n\n# Title\n').hasSummary, false);
 });
 
@@ -1657,15 +1360,11 @@ test('parseJsonLd keeps only schema.org nodes and survives broken blocks', () =>
 });
 
 test('parseJsonLd counts @graph members, which carry the type instead of the container', () => {
-  // The shape Yoast emits and schema.org's multi-entity examples use: @context on
-  // the wrapper, @type only on the members. Matching a top-level @type scored this
-  // as "no structured data" on a fully marked-up page.
   const res = audit.parseJsonLd([
     '{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"X"},{"@type":"ItemList"}]}',
   ]);
   assert.equal(res.schemaOrg.length, 2);
   assert.deepEqual(res.schemaOrg.map((n) => n['@type']), ['WebSite', 'ItemList']);
-  // Members inherit the container's @context — that is where it is defined for them.
   assert.ok(res.schemaOrg.every((n) => n['@context'] === 'https://schema.org'));
 });
 
@@ -1692,7 +1391,6 @@ test('parseJsonLd still rejects untyped and non-schema.org nodes', () => {
   assert.equal(res.schemaOrg.length, 0);
 });
 
-// --- revenue ledger --------------------------------------------------------
 
 test('formatAmount converts atomic units without floating point', () => {
   assert.equal(revenue.formatAmount('50000', 6), '0.05');
@@ -1700,7 +1398,6 @@ test('formatAmount converts atomic units without floating point', () => {
   assert.equal(revenue.formatAmount('1000000', 6), '1');
   assert.equal(revenue.formatAmount('1500000', 6), '1.5');
   assert.equal(revenue.formatAmount('0', 6), '0');
-  // Beyond 2^53 — the exact reason this is string/BigInt work, not arithmetic.
   assert.equal(revenue.formatAmount('123456789012345678901', 6), '123456789012345.678901');
   assert.equal(revenue.formatAmount(undefined, 6), '0');
 });
@@ -1727,15 +1424,12 @@ test('summarise totals, buckets and de-duplicates payers', () => {
 
   assert.equal(out.total, '5.1');
   assert.equal(out.settlements, 3);
-  // Same payer twice on day one, a different one on day two.
   assert.equal(out.unique_payers, 2);
   assert.equal(out.by_day.length, 2);
   assert.deepEqual(out.by_day.map((d) => d.date), ['2026-07-20', '2026-07-21']);
   assert.equal(out.by_day[0].amount, '0.1');
   assert.equal(out.by_day[0].count, 2);
-  // Endpoints rank by value, not by name or insertion order.
   assert.equal(out.by_resource[0].resource, 'https://index.kc-it.pl/upgrade');
-  // Most recent first.
   assert.equal(out.recent[0].ts, '2026-07-21T09:00:00.000Z');
   assert.equal(out.last_payment_at, '2026-07-21T09:00:00.000Z');
 });
@@ -1777,7 +1471,6 @@ test('revenue feed rejects a missing or wrong bearer token', async () => {
 test('revenue feed returns the ledger for a valid token', async () => {
   const env = {
     DASHBOARD_TOKEN: 'sekret',
-    // Records live in KV *metadata*, so one list() call returns them all.
     PAYMENTS: { list: async () => ({ keys: [{ name: 'revenue:x', metadata: ledgerRow() }], list_complete: true }) },
   };
   const res = await handleRevenue(
@@ -1790,7 +1483,6 @@ test('revenue feed returns the ledger for a valid token', async () => {
   assert.equal(body.ok, true);
   assert.equal(body.total, '0.05');
   assert.equal(body.rail.name, 'testnet');
-  // Base Sepolia is not mainnet, so the dashboard must not call it live money.
   assert.equal(body.rail.live, false);
 });
 
@@ -1800,7 +1492,6 @@ test('the token may also arrive as a query parameter', async () => {
   assert.equal(res.status, 200);
 });
 
-// --- dashboard privacy -----------------------------------------------------
 
 const dashEnv = { DASHBOARD_TOKEN: 'sekret' };
 const dashReq = (init) => new Request(`${BASE}/dashboard.html`, init);
@@ -1819,7 +1510,6 @@ test('authorizeDashboard denies an anonymous request', () => {
 test('authorizeDashboard accepts cookie, bearer and query, and flags the query case', () => {
   assert.deepEqual(authorizeDashboard(dashReq({ headers: { cookie: 'aipi_dash=sekret' } }), dashEnv), { state: 'ok', viaQuery: false });
   assert.deepEqual(authorizeDashboard(dashReq({ headers: { authorization: 'Bearer sekret' } }), dashEnv), { state: 'ok', viaQuery: false });
-  // viaQuery drives the one-time cookie handoff that gets the token out of the URL.
   assert.deepEqual(authorizeDashboard(new Request(`${BASE}/dashboard.html?token=sekret`), dashEnv), { state: 'ok', viaQuery: true });
 });
 
@@ -1839,15 +1529,12 @@ test('token comparison is length-independent and exact', () => {
 
 test('sessionCookie is HttpOnly, Secure and SameSite=Strict', () => {
   const c = sessionCookie('sekret');
-  // HttpOnly keeps the token out of page JavaScript entirely; Strict stops it
-  // riding any cross-site request.
   assert.match(c, /^aipi_dash=sekret;/);
   assert.match(c, /HttpOnly/);
   assert.match(c, /Secure/);
   assert.match(c, /SameSite=Strict/);
 });
 
-// --- stats shaping ---------------------------------------------------------
 
 test('stats shaping computes the agent share the migration exists to measure', () => {
   const body = stats.shape([
@@ -1867,10 +1554,6 @@ test('stats shaping handles an empty dataset without dividing by zero', () => {
 });
 
 test('stats report which hostname was asked, and do not invent one for old rows', () => {
-  // Every host attached to this Worker serves the same paths, so a path bucket
-  // can never answer "is the umbrella getting traffic". `host` was added
-  // 2026-08-02; rows written before it carry no value and must not be
-  // attributed to a host they may never have been sent to.
   const body = stats.shape([
     { client_type: 'browser', path_bucket: 'apex_home', host: 'percall.dev', requests: '12' },
     { client_type: 'ai_agent', path_bucket: 'llms_txt', host: 'index.percall.dev', requests: '30' },
@@ -1888,12 +1571,6 @@ test('stats report which hostname was asked, and do not invent one for old rows'
   assert.equal(body.total_requests, 105);
 });
 
-// --- query surfaces: search, NLWeb /ask, remote MCP -------------------------
-//
-// These are the endpoints that answer a question rather than serve a file, so
-// what is pinned here is the *answer's* quality: that ranking cannot put an
-// unrelated listing above an exact name match, and that an empty answer still
-// tells the caller something it can act on.
 
 const CORPUS = [
   { slug: 'alpha-mcp', name: 'Alpha MCP Server', url: 'https://alpha.example', description: 'A search server.', category: 'mcp', pricing: 'free', tier: 'free', tags: ['search', 'mcp'] },
@@ -1906,8 +1583,6 @@ const rpc = (body) => new Request(`${BASE}/mcp`, { method: 'POST', headers: { 'c
 test('search ranks a name match above a description match', () => {
   const { hits } = searchListings(CORPUS, { q: 'alpha mcp' });
   assert.equal(hits[0].listing.slug, 'alpha-mcp');
-  // beta-api only mentions MCP in prose, so it must not outrank the server
-  // actually called that — the failure mode this weighting exists to prevent.
   assert.ok(hits[0].score > hits[1].score);
 });
 
@@ -1918,12 +1593,10 @@ test('search filters, limits, and orders stably within a score band', () => {
   const limited = searchListings(CORPUS, { q: '', limit: 2 });
   assert.equal(limited.total, 3, 'total counts every match, not just the page');
   assert.equal(limited.hits.length, 2);
-  // Same query twice must not reorder equal-scoring listings.
   assert.deepEqual(
     searchListings(CORPUS, { q: '' }).hits.map((h) => h.listing.slug),
     searchListings(CORPUS, { q: '' }).hits.map((h) => h.listing.slug),
   );
-  // A limit outside the allowed range is clamped rather than honoured.
   assert.equal(searchListings(CORPUS, { q: '', limit: 9999 }).hits.length, 3);
 });
 
@@ -1971,26 +1644,19 @@ test('/ask asks back when the question is empty, and refuses another corpus', as
 });
 
 test('/ask summarizes by default, and mode=list opts out', async () => {
-  // The default flipped once the corpus outgrew "read all of it yourself".
   const plain = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"}}' }), CORPUS, BASE)).json();
   assert.match(plain.summary, /Alpha MCP Server/);
   const get = await (await handleAsk(new Request(`${BASE}/ask?query=mcp`), CORPUS, BASE)).json();
   assert.match(get.summary, /Alpha MCP Server/);
 
-  // Still opt-out-able, both ways in.
   const listed = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"mcp"},"prefer":{"mode":"list"}}' }), CORPUS, BASE)).json();
   assert.equal(listed.summary, undefined);
   assert.equal((await (await handleAsk(new Request(`${BASE}/ask?query=mcp&mode=list`), CORPUS, BASE)).json()).summary, undefined);
 
-  // The results are the answer either way — opting out of prose must not
-  // change what matched.
   assert.deepEqual(listed.results, plain.results);
 });
 
 test('/ask points a miss at the catalogs instead of saying there is nothing', async () => {
-  // The registry is the small half of what this site indexes. A flat "nothing
-  // matches" would send an agent away from an answer that exists one endpoint
-  // over — which is the whole failure this directory is meant to fix.
   const miss = await (await handleAsk(new Request(`${BASE}/ask`, { method: 'POST', body: '{"query":{"text":"zzzznotathing"}}' }), CORPUS, BASE)).json();
   assert.equal(miss.results.length, 0);
   assert.match(miss.summary, /\/api\/x402\/search/);
@@ -2021,14 +1687,11 @@ test('MCP tools/call runs search, get and score', async () => {
   const get = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'get_product', arguments: { slug: 'gamma-agent' } } }), mcpCtx)).json();
   assert.equal(JSON.parse(get.result.content[0].text).name, 'Gamma');
 
-  // score_url goes through the same handler a browser hits, stubbed here.
   const scored = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 5, method: 'tools/call', params: { name: 'score_url', arguments: { url: 'https://example.com' } } }), mcpCtx)).json();
   assert.equal(JSON.parse(scored.result.content[0].text).letter, 'A');
 });
 
 test('a failing MCP tool is a tool result, not a protocol error', async () => {
-  // The model has to be able to see and react to the failure; a JSON-RPC error
-  // is swallowed by the client instead.
   const body = await (await handleMcp(rpc({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'get_product', arguments: { slug: 'nope' } } }), mcpCtx)).json();
   assert.equal(body.error, undefined);
   assert.equal(body.result.isError, true);
@@ -2041,7 +1704,6 @@ test('a failing MCP tool is a tool result, not a protocol error', async () => {
 });
 
 test('MCP handles notifications, batches, unknown methods and a stray GET', async () => {
-  // A notification has no id, so it gets no body — 202, not an empty object.
   const notif = await handleMcp(rpc({ jsonrpc: '2.0', method: 'notifications/initialized' }), mcpCtx);
   assert.equal(notif.status, 202);
   assert.equal(await notif.text(), '');
@@ -2067,8 +1729,6 @@ test('MCP handles notifications, batches, unknown methods and a stray GET', asyn
 });
 
 test('every query surface the manifests advertise is actually routed', async () => {
-  // The manifests are hand-written, so this is the check that stops them
-  // promising an endpoint the router does not have.
   const manifest = JSON.parse(await readFile(new URL('../.well-known/agents.json', import.meta.url), 'utf8'));
   const card = JSON.parse(await readFile(new URL('../.well-known/mcp.json', import.meta.url), 'utf8'));
   const routed = ['/api/search', '/ask', '/mcp', '/api/x402/search', '/api/mcp/search', '/api/audit'];
@@ -2084,8 +1744,6 @@ test('every query surface the manifests advertise is actually routed', async () 
 });
 
 test('a natural-language answer drops the incidental matches a search keeps', () => {
-  // Every listing in this corpus says "polish", so an unfiltered search finds
-  // all three. Only one is actually about property.
   const polish = [
     { slug: 'auctions', name: 'Property Auctions', description: 'Polish municipal property auctions.', category: 'app', pricing: 'free', tags: ['property', 'poland'] },
     { slug: 'quiz', name: 'Headline Quiz', description: 'A polish newspaper guessing game.', category: 'app', pricing: 'free', tags: ['poland'] },
@@ -2105,13 +1763,10 @@ test('term matching survives plurals and nominalisations, at a discount', () => 
     description: 'Done-for-you agent readability: llms.txt, schema.org JSON-LD.',
     category: 'other', pricing: 'paid', tags: ['audit', 'llms-txt'],
   }];
-  // The query that used to score this listing zero: agents != agent, and
-  // readable != readability.
   const hits = searchListings(service, { q: 'readable ai agents' }).hits;
   assert.equal(hits.length, 1);
   assert.ok(hits[0].score > 0);
 
-  // But an exact hit must still beat a stem hit, or the discount is pointless.
   const both = [
     { slug: 'exact', name: 'Agent Directory', description: 'x', category: 'api', pricing: 'free', tags: [] },
     { slug: 'stemmed', name: 'Agentic Toolkit', description: 'x', category: 'api', pricing: 'free', tags: [] },
@@ -2121,13 +1776,10 @@ test('term matching survives plurals and nominalisations, at a discount', () => 
 
 test('stem matching does not pair short unrelated words', () => {
   const corpus = [{ slug: 'api-gw', name: 'API Gateway', description: 'Routing.', category: 'api', pricing: 'free', tags: [] }];
-  // Four-character floor: "app" must not stem-match "API", and a query with no
-  // real relationship must still return nothing rather than a weak guess.
   assert.equal(searchListings(corpus, { q: 'sourdough' }).hits.length, 0);
   assert.equal(searchListings(corpus, { q: 'gatehouse' }).hits.length, 0);
 });
 
-// --- the x402 endpoint catalog ----------------------------------------------
 
 const X402_INDEX = {
   fetched: '2026-08-01',
@@ -2148,8 +1800,6 @@ const x402Get = async (qs) => (await handleCatalogSearch('x402', new URL(`${BASE
 test('x402 search ranks by relevance, then by price', async () => {
   const body = await x402Get('q=weather');
   assert.equal(body.ok, true);
-  // All three mention weather; among equally relevant hits the cheaper one wins,
-  // because on a pay-per-call rail that is the tiebreak that matters.
   assert.equal(body.results[0].url, 'https://b.example/weather');
   assert.equal(body.source, 'Coinbase CDP x402 Bazaar');
   assert.equal(body.catalog.endpoints, 4);
@@ -2161,7 +1811,6 @@ test('x402 search filters by chain, method and host', async () => {
   assert.deepEqual((await x402Get('host=b.example')).results.map((r) => r.host), ['b.example']);
 });
 
-// --- catalog liveness -------------------------------------------------------
 
 const withHealth = (health) => ({
   ASSETS: {
@@ -2182,14 +1831,11 @@ test('an endpoint confirmed unreachable is flagged, not removed', async () => {
     probed_at: '2026-08-01',
     unreachable: [
       { url: 'https://b.example/weather', reason: 'timeout', misses: 2, last_checked: '2026-07-25' },
-      // One miss is a bad moment, not a death — it must not reach the caller.
       { url: 'https://a.example/weather', reason: 'timeout', misses: 1 },
     ],
   });
   const body = await (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?q=weather`), env, BASE)).json();
 
-  // Still ranked first: flagging must not quietly reorder or drop results, or
-  // the caller loses the cheapest endpoint on one week's evidence.
   assert.equal(body.results[0].url, 'https://b.example/weather');
   assert.equal(body.results[0].unreachable, true);
   assert.deepEqual(body.results[0].health, { state: 'failed', reason: 'timeout', misses: 2, last_checked: '2026-07-25' });
@@ -2201,9 +1847,6 @@ test('an endpoint confirmed unreachable is flagged, not removed', async () => {
 });
 
 test('search works unchanged when liveness has never run', async () => {
-  // The health file is absent until the first cron run and stale between them.
-  // Not knowing is different from knowing everything is fine, and neither is a
-  // reason to fail a query.
   discovery.resetCatalog();
   const body = await (await handleCatalogSearch('x402', new URL(`${BASE}/api/x402/search?q=weather`), withHealth(null), BASE)).json();
 
@@ -2216,9 +1859,6 @@ test('search works unchanged when liveness has never run', async () => {
 });
 
 test('an unpriced x402 endpoint is excluded by a price filter, not treated as free', async () => {
-  // d.example is priced in an asset whose decimals are unknown, so its price is
-  // unknown — not zero. Sorting it first as "cheapest" would be a lie an agent
-  // would act on.
   const cheap = await x402Get('q=weather&max_price=0.005');
   assert.deepEqual(cheap.results.map((r) => r.host), ['b.example']);
   const all = await x402Get('q=weather');
@@ -2244,8 +1884,6 @@ test('x402 search survives a missing catalog without poisoning later requests', 
   assert.equal(first.status, 503);
   assert.equal((await first.json()).code, 'catalog_unavailable');
 
-  // The cached promise must have been cleared, or every later request replays
-  // the failure for the life of the isolate.
   const second = await handleCatalogSearch('x402', url, flaky, BASE);
   assert.equal(second.status, 200);
 });
@@ -2255,19 +1893,15 @@ test('the x402 catalog artifacts carry their provenance', async () => {
   const idx = JSON.parse(await readFile(new URL('../api/x402/index.json', import.meta.url), 'utf8'));
   const st = JSON.parse(await readFile(new URL('../api/x402/stats.json', import.meta.url), 'utf8'));
 
-  // This is republished third-party data. Whoever reads it must be able to see
-  // where it came from and when, without being told.
   assert.match(catalog.$comment, /mirror/i);
   assert.match(catalog.$comment, /removed/i, 'a mirror needs a stated way out of it');
   assert.equal(catalog.source_url, st.source_url);
   assert.match(catalog.fetched, /^\d{4}-\d{2}-\d{2}$/);
 
-  // The compact index must stay in step with the catalog it indexes.
   assert.equal(idx.count, catalog.count);
   assert.equal(idx.fetched, catalog.fetched);
   assert.equal(idx.rows.length, catalog.endpoints.length);
   assert.equal(idx.rows[0][0], catalog.endpoints[0].url);
-  // Sorted by URL, so a weekly refresh is a small diff rather than a rewrite.
   const urls = catalog.endpoints.map((e) => e.url);
   assert.deepEqual(urls, [...urls].sort((a, b) => a.localeCompare(b)));
 });
@@ -2292,13 +1926,9 @@ test('the MCP catalog is scoped honestly and searchable by auth', async () => {
   assert.equal(hits.source, 'Official MCP Registry (registry.modelcontextprotocol.io)');
   assert.equal(hits.catalog.servers, 3, 'each catalog names its own unit');
 
-  // "I want one I can call without going and finding a token first" is the
-  // most common real constraint, so it has to be a filter and not a re-read.
   assert.deepEqual((await get('q=github&auth=none')).results.map((r) => r.host), ['b.example']);
   assert.deepEqual((await get('transport=sse')).results.map((r) => r.host), ['c.example']);
 
-  // The committed artifact must state what it leaves out, or "10,080 servers"
-  // reads as "every server".
   const st = JSON.parse(await readFile(new URL('../api/mcp/stats.json', import.meta.url), 'utf8'));
   assert.equal(st.scope.rule, 'active + latest + remotely callable');
   assert.ok(st.scope.excluded_packages_only > 0);
@@ -2311,14 +1941,8 @@ test('an unknown catalog is refused rather than guessed at', async () => {
   assert.equal((await res.json()).code, 'unknown_catalog');
 });
 
-// --- generated pages ---------------------------------------------------------
 
 test('every scored check has a published page, and vice versa', async () => {
-  // The checklist pages are the public argument for the weights the product
-  // charges against. A check added to the scorer without a page leaves a grade
-  // nobody can look up; a page left behind for a removed check documents a
-  // remedy that no longer affects anyone's score. Both are the drift this
-  // generation exists to prevent, so both fail here.
   const { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS } = await import('../worker/audit.js');
   const files = (await readdir(new URL('../checks/', import.meta.url)))
     .filter((f) => f.endsWith('.html') && f !== 'index.html')
@@ -2327,8 +1951,6 @@ test('every scored check has a published page, and vice versa', async () => {
 
   assert.deepEqual(files, scored, 'checks/ and the scorer disagree about which checks exist');
 
-  // Every 2026 signal must carry a weight, or its page advertises a check worth
-  // nothing while claiming to be scored.
   for (const id of Object.keys(SIGNAL_META)) {
     assert.ok(V2_WEIGHTS[id] > 0, `${id} has a page and a label but no v2 weight`);
   }
@@ -2338,10 +1960,6 @@ test('every scored check has a published page, and vice versa', async () => {
 });
 
 test('the generated pages quote the data files rather than a copy of them', async () => {
-  // These pages exist to be citable, which only works if the number on the page
-  // is the number in the file. Hard-coding a figure that later moves is the
-  // exact failure the Agent Skills digests were generated to avoid, so a few
-  // load-bearing figures are checked against their sources.
   const read = async (p) => JSON.parse(await readFile(new URL(`../${p}`, import.meta.url), 'utf8'));
   const html = await readFile(new URL('../report.html', import.meta.url), 'utf8');
   const x402 = await read('api/x402/stats.json');
@@ -2352,13 +1970,10 @@ test('the generated pages quote the data files rather than a copy of them', asyn
   assert.ok(html.includes(fmt(mcp.remote_endpoints)), 'report does not quote the live MCP count');
   assert.ok(html.includes(x402.fetched), 'report does not date its catalog figures');
 
-  // And the pages must not silently render an empty data set as a page of zeros.
   assert.ok(!/>0<\/div>\s*<div class="k">endpoints/.test(html), 'report rendered a zeroed catalog');
 });
 
 test('generated pages are all in the sitemap', async () => {
-  // A page nobody links and no sitemap lists is a page that does not exist. The
-  // build derives both from one list; this asserts the derivation happened.
   const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8');
   for (const p of ['/report.html', '/x402.html', '/mcp-servers.html', '/leaderboard.html', '/compare.html', '/checks/']) {
     assert.ok(sitemap.includes(`<loc>${BASE}${p}</loc>`), `${p} is missing from the sitemap`);
@@ -2368,10 +1983,6 @@ test('generated pages are all in the sitemap', async () => {
 });
 
 test('the umbrella is reachable — sitemap entry plus a link from the pages agents read', async () => {
-  // The apex shipped with no sitemap entry and nothing anywhere linking to it:
-  // the only page whose job is to name the portfolio was the one page search
-  // engines had no route to. A canonical host that never links up is also the
-  // reason the one external link pointing at the apex had to be corrected away.
   const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
   const apex = `https://${REAL.apex_host}/`;
 
@@ -2384,17 +1995,10 @@ test('the umbrella is reachable — sitemap entry plus a link from the pages age
   const llms = await readFile(new URL('../llms.txt', import.meta.url), 'utf8');
   assert.ok(llms.includes(apex), 'llms.txt does not name the umbrella');
 
-  // And the link has to survive a config change rather than be a pasted string.
   assert.ok(!index.includes('{{APEX}}') && !llms.includes('{{APEX}}'), 'unfilled APEX placeholder');
 });
 
 test('no published surface claims a check count the scorer does not run', async () => {
-  // Ten surfaces said "13 checks" for a day after v2 became the default and
-  // started running 20 — the agent card, both manifests, the MCP card, the
-  // plugin manifest, the Agent Skill, the homepage. Every one of them is a
-  // document written *for agents*, telling them a number the audit had stopped
-  // using. The templates now interpolate {{CHECKS}} from the scorer; this
-  // asserts nobody has typed a literal back in.
   const { CHECK_META, V2_WEIGHTS } = await import('../worker/audit.js');
   const expected = Object.keys(CHECK_META).length + Object.keys(V2_WEIGHTS).length;
   const root = new URL('../', import.meta.url);
@@ -2409,18 +2013,14 @@ test('no published surface claims a check count the scorer does not run', async 
     try {
       text = await readFile(new URL(f, root), 'utf8');
     } catch {
-      continue; // not every surface exists in every build
+      continue;
     }
-    // Any "<n> checks" claim in a published document must be the real number.
     for (const [, n] of text.matchAll(/\b(\d+)\s+(?:weighted\s+|agent-readability\s+)?checks\b/g)) {
       assert.equal(Number(n), expected,
         `${f} claims ${n} checks; the default set runs ${expected}`);
     }
   }
 
-  // tools/list is generated at request time rather than from a file. It was
-  // therefore the one published agent surface the guard above did not read,
-  // and it kept saying 13 after every generated document moved to 20.
   for (const tool of mcpTools(BASE)) {
     for (const [, n] of tool.description.matchAll(/\b(\d+)\s+(?:weighted\s+|agent-readability\s+)?checks\b/g)) {
       assert.equal(Number(n), expected,
@@ -2430,15 +2030,6 @@ test('no published surface claims a check count the scorer does not run', async 
 });
 
 test('every generated page actually says something', async () => {
-  // /router.html shipped to production as a correct header, the literal string
-  // "undefined", and a correct footer — `const body` computed in routerPage()
-  // and never passed to page(). Everything around it passed: the asset existed,
-  // it was in the sitemap, its meta description was well-formed, the route
-  // answered 200. Nothing asserted the page had content.
-  //
-  // `page()` now throws on a missing body, so this is the second line of
-  // defence: it catches a body that is present but degenerate, and it covers
-  // the hand-written pages that never go through page() at all.
   const root = new URL('../', import.meta.url);
   const files = [
     ...(await readdir(root)).filter((f) => f.endsWith('.html')),
@@ -2451,22 +2042,12 @@ test('every generated page actually says something', async () => {
     assert.doesNotMatch(body, /^\s*undefined\s*$/m, `${f}: renders a bare "undefined" as content`);
     assert.ok(!body.includes('[object Object]'), `${f}: renders "[object Object]"`);
     assert.match(body, /<h1[^>]*>[^<]/, `${f}: has no h1`);
-    // The size floor is for content pages only. 404.html and the revenue
-    // dashboard are deliberately terse and both declare noindex, which is the
-    // same signal the description test keys off.
     if (/<meta name="robots" content="noindex/.test(html)) continue;
-    // Header + footer alone is roughly 700 bytes; anything near that has no
-    // middle. The real pages here are 5-30 KB.
     assert.ok(body.length > 1200, `${f}: body is ${body.length} bytes — too short to be a page`);
   }
 });
 
 test('no generated page publishes a meta description cut mid-thought', async () => {
-  // `.slice(0, 160)` cut /apex.html at a comma and /x402.html mid-word, on a
-  // site that grades other people on title_and_description and ships a snippet
-  // telling them to keep it under 160. The cap stays; the cut moved to a
-  // boundary. og:description is asserted equal because the two are one string
-  // in the shell and a divergence would mean someone had reintroduced a second.
   const root = new URL('../', import.meta.url);
   const files = [
     ...(await readdir(root)).filter((f) => f.endsWith('.html')),
@@ -2476,8 +2057,6 @@ test('no generated page publishes a meta description cut mid-thought', async () 
 
   for (const f of files) {
     const html = await readFile(new URL(`../${f}`, import.meta.url), 'utf8');
-    // A page that asks not to be indexed has no snippet to get wrong. 404.html
-    // and the revenue dashboard are both noindex on purpose.
     if (/<meta name="robots" content="noindex/.test(html)) continue;
     const meta = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
     assert.ok(meta, `${f} has no meta description`);
@@ -2490,12 +2069,6 @@ test('no generated page publishes a meta description cut mid-thought', async () 
 });
 
 test('the apex root serves the portfolio; every other apex path still redirects', async () => {
-  // The whole point of the canonical-host discipline is that content has one
-  // address. The apex is the single deliberate exception and it is exactly one
-  // path wide: a directory that records percall.dev/llms.txt as this site's
-  // llms.txt would be recording a URL that should have been a redirect.
-  // The Worker reads the real site.config.json at module load, so the routing
-  // assertions have to be made against that file rather than the test fixture.
   const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
   const apex = REAL.apex_host;
   const REAL_BASE = REAL.base.replace(/\/+$/, '');
@@ -2512,7 +2085,6 @@ test('the apex root serves the portfolio; every other apex path still redirects'
     assert.equal(r.headers.get('location'), `${REAL_BASE}${path}`);
   }
 
-  // A retired alias is not an apex: index.kc-it.pl redirects at the root too.
   const retired = REAL.host_aliases.find((h) => h !== apex);
   const rr = worker.canonicalRedirect(new URL(`https://${retired}/`));
   assert.ok(rr, `${retired} is retired and its root should still redirect`);
@@ -2520,25 +2092,15 @@ test('the apex root serves the portfolio; every other apex path still redirects'
 });
 
 test('the apex page names the apex as its canonical, not the service host', async () => {
-  // It is served from the shared asset store, so it is also reachable at
-  // /apex.html on the canonical host. Without a self-referential canonical that
-  // is duplicate content — on a site that audits other people for exactly this.
   const html = await readFile(new URL('../apex.html', import.meta.url), 'utf8');
   const apex = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8')).apex_host;
   assert.match(html, new RegExp(`<link rel="canonical" href="https://${apex}/">`),
     'the apex page does not declare the apex as its canonical');
   assert.match(html, new RegExp(`<meta property="og:url" content="https://${apex}/">`));
-  // And it must not claim to be the index.
   assert.ok(!html.includes('<h1>AI Product Index</h1>'), 'the apex is a portfolio page, not a copy of the index');
 });
 
 test('auditing the apex reads the apex page, not the index behind it', async () => {
-  // canonicalTarget exists because a Worker cannot fetch its own hostnames, so
-  // an alias has to be rewritten to the canonical host before the audit runs.
-  // That was exactly right while the apex was an alias. It became wrong when the
-  // apex root turned into its own page: mapping it to `/` would grade the index
-  // and publish the number under the apex's name — the same class of defect this
-  // endpoint is sold to detect, on our own domain.
   const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
   const canonicalHost = new URL(REAL.base).host;
   const apex = REAL.apex_host;
@@ -2546,29 +2108,15 @@ test('auditing the apex reads the apex page, not the index behind it', async () 
   assert.equal(score.canonicalTarget(`https://${apex}/`, REAL), `https://${canonicalHost}/apex.html`);
   assert.equal(score.canonicalTarget(`https://${apex}/index.html`, REAL), `https://${canonicalHost}/apex.html`);
 
-  // Any other apex path is ordinary content and maps straight across.
   assert.equal(score.canonicalTarget(`https://${apex}/llms.txt`, REAL), `https://${canonicalHost}/llms.txt`);
 
-  // A retired alias has no page of its own, so its root maps to the root.
   const retired = REAL.host_aliases.find((h) => h !== apex);
   assert.equal(score.canonicalTarget(`https://${retired}/`, REAL), `https://${canonicalHost}/`);
 
-  // And a stranger's URL is never rewritten.
   assert.equal(score.canonicalTarget('https://example.com/', REAL), 'https://example.com/');
 });
 
 test('www belongs to the umbrella, and is never fetched by the Worker itself', async () => {
-  // Two bugs attaching www would otherwise have introduced.
-  //
-  // First: sending www.percall.dev to the index hands whoever typed the umbrella
-  // domain a different page than the umbrella domain serves. Its root goes to
-  // the apex; deeper paths go straight to the canonical host, so neither costs
-  // two hops.
-  //
-  // Second and worse: www is now attached to this Worker, and a Worker cannot
-  // fetch its own hostnames — Cloudflare answers 522. Auditing www would have
-  // 502'd *after* taking the payment, which is the exact failure the alias list
-  // was created for. It only stays fixed if www is in that list.
   const REAL = JSON.parse(await readFile(new URL('../site.config.json', import.meta.url), 'utf8'));
   const apex = REAL.apex_host;
   const canonicalHost = new URL(REAL.base).host;
@@ -2588,12 +2136,8 @@ test('www belongs to the umbrella, and is never fetched by the Worker itself', a
   assert.equal(score.canonicalTarget(`https://${www}/llms.txt`, REAL), `https://${canonicalHost}/llms.txt`);
 });
 
-// --- free catalog health ---------------------------------------------------
 
 test('the avoid-lists separate what is confirmed from what is merely suspected', async () => {
-  // The sweep is a rotating sample, so an endpoint is re-probed about twice a
-  // year and two *consecutive* misses take roughly a year to accumulate. A
-  // single list would therefore be either empty or overclaiming.
   for (const f of ['api/x402/avoid.json', 'api/mcp/avoid.json']) {
     const j = JSON.parse(await readFile(new URL(`../${f}`, import.meta.url), 'utf8'));
     assert.equal(j.free, true);
@@ -2605,41 +2149,25 @@ test('the avoid-lists separate what is confirmed from what is merely suspected',
   }
 });
 
-// --- soft 404s: fetching a URL is not the check ------------------------------
 
 test('a page of HTML is not a JSON document, however cheerfully it answers 200', async () => {
-  // seo#10. Every one of the 2026 signal checks tested `resp.ok` alone, so a
-  // site with no 404 page — every unmatched path answering 200 with the
-  // homepage — passed all five on documents it did not have. kc-it.pl scored
-  // A 95 that way, 11 of its points for files that do not exist, and that
-  // configuration is the default for SPAs and for Cloudflare Pages without a
-  // 404.html. Grades inflated in the direction that flatters the customer are
-  // the ones nobody reports.
   const { __testing: audit } = await import('../worker/audit.js');
   const { jsonDoc, missing } = audit;
 
   const page = { ok: true, body: '<!doctype html><html><body>hello</body></html>', type: 'text/html' };
   assert.deepEqual(jsonDoc(page), { ok: false, soft404: true });
 
-  // A genuine document still passes.
   assert.equal(jsonDoc({ ok: true, body: '{"name":"Example"}', type: 'application/json' }).ok, true);
-  // RFC 9727 serves a linkset; content-type is not the test, parsing is.
   assert.equal(jsonDoc({ ok: true, body: '{"linkset":[]}', type: 'application/linkset+json' }).ok, true);
 
-  // A real 404 is absence, not a soft 404 — different finding, different fix.
   assert.deepEqual(jsonDoc({ ok: false, body: 'Not Found', type: 'text/plain' }), { ok: false, soft404: false });
 
-  // A bare JSON scalar is not a document either.
   assert.equal(jsonDoc({ ok: true, body: '"hello"', type: 'application/json' }).ok, false);
   assert.equal(jsonDoc({ ok: true, body: 'null', type: 'application/json' }).ok, false);
 
-  // Truncated at the ceiling: unparseable, so fall back to the declared type
-  // rather than failing a real manifest for being large.
   assert.equal(jsonDoc({ ok: true, body: '{"a":1', truncated: true, type: 'application/json' }).ok, true);
   assert.equal(jsonDoc({ ok: true, body: '<!doctype ht', truncated: true, type: 'text/html' }).ok, false);
 
-  // The advice has to name the cause: "no card" sends someone off to publish a
-  // file they already appear to have.
   assert.match(missing({ ok: false, soft404: true }, '/x'), /answers 200 but is not JSON/);
   assert.equal(missing({ ok: false, soft404: false }, '/x'), 'no /x');
 });

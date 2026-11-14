@@ -1,17 +1,3 @@
-// Revenue ledger — every settled payment, and the aggregates behind /dashboard.html.
-//
-// Storage is KV *metadata*, not KV values: a settlement record is written as the
-// metadata of an empty key, so a single `list()` returns every record in one
-// call. Reading N settlements therefore costs one operation rather than N gets,
-// and there is no read-modify-write on a shared array to lose writes to a race.
-//
-// Keys are `revenue:<ISO timestamp>:<short tx>`. KV lists lexicographically and
-// ISO-8601 sorts chronologically, so listing is already time-ordered.
-//
-// This is a business feed, so both it and the dashboard page are gated and
-// fail closed when no token is configured. The payTo address is public and its
-// inflows are visible on-chain regardless — the gate is about not exposing a
-// convenient aggregate, not about pretending the payments are secret.
 
 const PREFIX = 'revenue:';
 const RETENTION_SECONDS = 60 * 60 * 24 * 400;
@@ -24,16 +10,11 @@ const json = (body, status = 200, headers = {}) =>
     headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...headers },
   });
 
-/**
- * Records one settled payment. Never throws into the request path — a failed
- * ledger write must not turn a payment the buyer already made into an error.
- */
 export async function recordSettlement(env, record) {
   if (!env?.PAYMENTS) return;
   try {
     const ts = record.ts ?? new Date().toISOString();
     const key = `${PREFIX}${ts}:${String(record.transaction ?? '').slice(2, 12)}`;
-    // KV caps metadata at 1024 bytes; these fields are far inside that.
     await env.PAYMENTS.put(key, '', {
       metadata: {
         ts,
@@ -53,7 +34,6 @@ export async function recordSettlement(env, record) {
   }
 }
 
-/** Atomic units -> a decimal string, without floating point. */
 export function formatAmount(atomic, decimals) {
   const digits = String(atomic ?? '0').replace(/\D/g, '') || '0';
   if (!decimals) return digits;
@@ -63,7 +43,6 @@ export function formatAmount(atomic, decimals) {
   return frac ? `${whole}.${frac}` : whole;
 }
 
-/** Aggregates raw ledger records into the shape the dashboard renders. */
 export function summarise(records) {
   const sorted = [...records].sort((a, b) => (a.ts < b.ts ? 1 : -1));
   const decimals = sorted[0]?.decimals ?? 6;
@@ -128,7 +107,6 @@ export function summarise(records) {
 
 export const COOKIE = 'aipi_dash';
 
-/** Length-independent comparison, so a wrong token leaks nothing by timing. */
 function tokensMatch(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
   let diff = 0;
@@ -136,7 +114,6 @@ function tokensMatch(a, b) {
   return diff === 0;
 }
 
-/** Operations clients must explicitly use Bearer auth, never a cookie or URL. */
 export function authorizeOperationsBearer(request, env) {
   const token = (request.headers.get('authorization') ?? '').match(/^Bearer\s+(.+)$/i)?.[1];
   return Boolean(env?.DASHBOARD_TOKEN && token && tokensMatch(token, env.DASHBOARD_TOKEN));
@@ -151,15 +128,6 @@ function cookieValue(request, name) {
   return null;
 }
 
-/**
- * Authorizes any dashboard surface — the page and the feed alike.
- *
- * Three ways to present the token: an HttpOnly cookie (set on first use, so
- * reloads work and the token never reaches page JavaScript), `?token=` for that
- * first navigation, or a bearer header for programmatic callers.
- *
- * @returns {{state: 'disabled'} | {state: 'denied'} | {state: 'ok', viaQuery: boolean}}
- */
 export function authorizeDashboard(request, env) {
   const expected = env?.DASHBOARD_TOKEN;
   if (!expected) return { state: 'disabled' };
@@ -175,18 +143,10 @@ export function authorizeDashboard(request, env) {
   return { state: 'denied' };
 }
 
-/**
- * Cookie for the authenticated session. HttpOnly so page scripts cannot read
- * the token, SameSite=Strict so it never rides a cross-site request.
- */
 export function sessionCookie(token) {
   return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=43200`;
 }
 
-/**
- * GET /api/revenue.json — gated.
- * No token configured => 503, so an unconfigured deployment never leaks the feed.
- */
 export async function handleRevenue(request, env, rail) {
   const auth = authorizeDashboard(request, env);
   if (auth.state === 'disabled') {
