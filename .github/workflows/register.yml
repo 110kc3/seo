@@ -84,6 +84,27 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
 
+      - name: Verify publication on production
+        if: success()
+        id: verify_deploy
+        env:
+          SLUG: ${{ steps.process.outputs.slug }}
+        run: |
+          target="https://index.percall.dev/l/${SLUG}.html"
+          echo "Verifying $target returns HTTP 200..."
+          for i in $(seq 1 18); do
+            sleep 10
+            status=$(curl -s -o /dev/null -w "%{http_code}" "$target" || true)
+            if [ "$status" = "200" ]; then
+              echo "verified=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Attempt $i: HTTP $status (waiting for deployment)"
+          done
+          echo "verified=false" >> "$GITHUB_OUTPUT"
+          echo "::error::Publication verification timed out for $target"
+          exit 1
+
       - name: Reply (accepted)
         if: success()
         env:
@@ -94,8 +115,25 @@ jobs:
           gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
           gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label listing || true
 
+      - name: Reply (deployment unconfirmed)
+        if: failure() && steps.process.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SLUG: ${{ steps.process.outputs.slug }}
+        run: |
+          {
+            echo "## Listing accepted — deployment pending"
+            echo
+            echo "Your listing \`${SLUG}\` was accepted and committed to the repository, but publication verification timed out on https://index.percall.dev/l/${SLUG}.html."
+            echo
+            echo "This issue remains open until deployment succeeds."
+          } > /tmp/deploy-pending.md
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file /tmp/deploy-pending.md
+          gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label listing || true
+
       - name: Reply (rejected or failed)
-        if: failure()
+        if: failure() && steps.process.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}

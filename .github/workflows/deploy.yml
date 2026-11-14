@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: deploy
@@ -87,3 +88,35 @@ jobs:
           else
             echo "indexnow: no diff against the previous commit — nothing to announce"
           fi
+
+      - name: Open deployment-failure incident
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title='Deployment failure'
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,title --jq "map(select(.title == \"$title\")) | length")
+          if [ "$open" -eq 0 ]; then
+            {
+              echo "Cloudflare deployment failed for commit \`$GITHUB_SHA\` on branch \`$GITHUB_REF_NAME\`."
+              echo
+              echo "Workflow run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+              echo
+              echo "Check the run logs for test, build, or wrangler deployment errors."
+            } > /tmp/deploy-incident.md
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$title" --body-file /tmp/deploy-incident.md
+          fi
+
+      - name: Close recovered deployment incident
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,title --jq '.[] | select(.title == "Deployment failure") | .number' |
+          while read -r issue; do
+            [ -n "$issue" ] && gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
+              --comment "Deployment recovered in workflow run $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+          done

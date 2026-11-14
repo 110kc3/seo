@@ -2,42 +2,37 @@
 
 ## Current — 2026-11-14
 
-Last completed slice: reviewed and merged [PR #260](https://github.com/110kc3/seo/pull/260)
-as `c4999d9`. Its root-anchored `/.gitattributes` exclusion is identical to the
-fix already shipped in `9f4f3fa`; the merge preserves the contribution without
-changing the current tree. All 313 tests pass on Node 22.23.3, two builds leave
-generated artifacts unchanged, and `git diff --check` passes.
+Last completed slice: implemented asset size protection (25 MiB Cloudflare Workers limit)
+and deployment failure visibility. Static assets are now guarded in `scripts/validate.mjs`,
+`scripts/build.mjs`, and catalog fetch scripts (`fetch-x402-catalog.mjs`, `fetch-mcp-catalog.mjs`),
+backed by unit tests on synthetic over-limit assets. Deployment workflows (`deploy.yml`)
+now open an incident issue on failure streaks and resolve it on recovery. Registration
+(`register.yml`) verifies HTTP 200 on production before marking listings live and closing
+issues. Issue #217 was confirmed and closed as completed. PR #260 merge (`c4999d9`) and
+documentation push (`e517f0a`) runs were observed passing in GitHub Actions. All 316 tests pass
+on Node 22, two builds leave generated artifacts unchanged, and `git diff --check` passes.
 
 ### Accepted next work
 
-- [ ] Monitor weekly scheduled liveness and scoring refreshes (`health-weeks.json`).
+- [ ] Monitor weekly scheduled liveness and scoring refreshes on November 16 (`health-weeks.json`). 62 of 224 listings are currently ungraded and await scoring.
 
 ### Owner actions / blocked
 
 - Show HN: posting remains unconfirmed; refresh private draft in vault before posting.
 - Indexation: Google/Bing search console verification and sitemap submissions need owner's logged-in consoles.
-- User-value validation: participant recruitment and outreach per private September 27 plan.
+- User-value validation: participant recruitment and outreach per private September 27 plan. Retention evidence from November 14: 11 of 187 self-registered listings embed the badge, 11 link back to percall.dev, and 7 performed updates (across 6 distinct accounts).
 
 ### Pending verification
 
-- Merge `c4999d9` and this status update on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
+- Push of asset size guard, deploy visibility, and status update on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
   pending observation next session. Do not wait or poll after pushing.
-- The old `883fa86` deployment failed; it was not pending. The subsequent
-  `7fe29a0` [deployment succeeded](https://github.com/110kc3/seo/actions/runs/43578241835).
-  November 14 production checks verified all five listing pages from #210–#214,
-  the Earshot page/JSON/registry entry from #259, and byte-identical `llms.txt`.
 
 ### Reviewed reports — 2026-11-14
 
-- [#260](https://github.com/110kc3/seo/pull/260) merged after independent review;
-  removing its exclusion reproduces the existing asset-boundary test failure.
-  The PR and [#259](https://github.com/110kc3/seo/issues/259) have received
-  verification comments.
-- [#217](https://github.com/110kc3/seo/issues/217) remains open, with a recovery
-  explanation. The catalog shrank below Cloudflare's limit on November 9; the
-  separate Git-metadata validation failure was corrected on November 14.
-  Neither catalog-size protection nor publication-confirmation changes are
-  implemented or selected by this PR review. The commercial-evidence gate remains.
+- [#260](https://github.com/110kc3/seo/pull/260) merged and verified in production.
+- [#217](https://github.com/110kc3/seo/issues/217) closed as completed. Reporter confirmed
+  the 5 listings resolve. 25 MiB asset limit guard and deploy visibility/verification
+  are now implemented and tested.
 
 ### History / deferred
 

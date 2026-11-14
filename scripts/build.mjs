@@ -4,7 +4,7 @@ import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { validate, esc, jsonLd, normalizeUrl, schemaJson } from './validate.mjs';
+import { validate, esc, jsonLd, normalizeUrl, schemaJson, assertPublishedAssetSizes } from './validate.mjs';
 import { resolveX402 } from './x402-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -357,5 +357,7 @@ if (cfg.indexnow_key) {
 
 writeFileSync(join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${smUrls.join('\n')}\n</urlset>\n`);
+
+assertPublishedAssetSizes(ROOT);
 
 console.log(`built ${listings.length} listing(s) and ${pagePaths.length} page(s): api/, l/, .well-known/, index.html, 404.html, llms.txt, llms-full.txt, robots.txt, openapi.yaml, sitemap.xml, opensearch.xml, feed.xml, feed.json`);

@@ -1,6 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validate, reconstruct, esc, jsonLd, normalizeUrl, urlError, schemaJson } from './validate.mjs';
+import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import {
+  validate, reconstruct, esc, jsonLd, normalizeUrl, urlError, schemaJson,
+  checkAssetSize, assertPublishedAssetSizes, MAX_ASSET_BYTES,
+} from './validate.mjs';
 
 const valid = () => ({
   slug: 'test-product',
@@ -147,4 +153,37 @@ test('schemaJson matches the validator contract', () => {
   assert.deepEqual(s.required, ['slug', 'name', 'url', 'description', 'category', 'pricing']);
   assert.ok(s.properties.tier.readOnly);
   assert.equal(s.$id, 'https://example.com/base/api/schema.json');
+});
+
+test('checkAssetSize validates byte boundaries', () => {
+  assert.deepEqual(checkAssetSize(0), { ok: true });
+  assert.deepEqual(checkAssetSize(1024), { ok: true });
+  assert.deepEqual(checkAssetSize(MAX_ASSET_BYTES), { ok: true });
+  assert.equal(checkAssetSize(MAX_ASSET_BYTES + 1).ok, false);
+  assert.equal(checkAssetSize(-1).ok, false);
+  assert.equal(checkAssetSize('100').ok, false);
+  assert.equal(checkAssetSize(NaN).ok, false);
+});
+
+test('assertPublishedAssetSizes verifies current repository files', () => {
+  const root = new URL('../', import.meta.url).pathname;
+  assert.doesNotThrow(() => assertPublishedAssetSizes(root));
+});
+
+test('assertPublishedAssetSizes fails locally on synthetic over-limit asset', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'asset-test-'));
+  try {
+    writeFileSync(join(temp, '.assetsignore'), '/ignored\nnode_modules\n');
+    mkdirSync(join(temp, 'api'), { recursive: true });
+    mkdirSync(join(temp, 'ignored'), { recursive: true });
+    writeFileSync(join(temp, 'api', 'oversized.json'), Buffer.alloc(1024));
+    writeFileSync(join(temp, 'ignored', 'huge.bin'), Buffer.alloc(2048));
+    assert.throws(
+      () => assertPublishedAssetSizes(temp, 500),
+      /published static asset exceeds 500 bytes limit: api\/oversized\.json/,
+    );
+    assert.doesNotThrow(() => assertPublishedAssetSizes(temp, 2000));
+  } finally {
+    rmSync(temp, { recursive: true, force: true });
+  }
 });

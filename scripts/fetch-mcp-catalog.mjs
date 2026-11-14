@@ -2,6 +2,7 @@
 import { writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { MAX_ASSET_BYTES } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REGISTRY = 'https://registry.modelcontextprotocol.io/v0/servers';
@@ -106,14 +107,24 @@ const stats = {
 };
 
 mkdirSync(join(ROOT, 'api', 'mcp'), { recursive: true });
-writeFileSync(join(ROOT, 'api', 'mcp', 'catalog.json'), `${JSON.stringify({
+const mcpCatalogPayload = {
   $comment: 'Remotely-callable MCP servers, normalized from the official MCP registry so they can be searched. Scope is active + latest + has a remote URL; package-only servers are excluded and counted in stats.json. The facts belong to the server authors. Refreshed weekly; to have an entry corrected or removed, open an issue at https://github.com/110kc3/seo/issues.',
   source: stats.source,
   source_url: REGISTRY,
   fetched: stats.fetched,
   count: servers.length,
   servers,
-}, null, 1)}\n`);
+};
+
+let mcpCatalogJson = `${JSON.stringify(mcpCatalogPayload, null, 1)}\n`;
+if (Buffer.byteLength(mcpCatalogJson) > MAX_ASSET_BYTES) {
+  mcpCatalogJson = `${JSON.stringify(mcpCatalogPayload)}\n`;
+}
+if (Buffer.byteLength(mcpCatalogJson) > MAX_ASSET_BYTES) {
+  throw new Error(`mcp catalog exceeds ${MAX_ASSET_BYTES} bytes limit (${Buffer.byteLength(mcpCatalogJson)} bytes)`);
+}
+
+writeFileSync(join(ROOT, 'api', 'mcp', 'catalog.json'), mcpCatalogJson);
 
 writeFileSync(join(ROOT, 'api', 'mcp', 'stats.json'), `${JSON.stringify(stats, null, 2)}\n`);
 

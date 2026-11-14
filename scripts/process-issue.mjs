@@ -218,11 +218,11 @@ writeFileSync(join(ROOT, 'result.md'), [
   `- Listing JSON: ${json}`,
   `- Registry: ${BASE}/api/index.json`,
   '',
-  'The site redeploys within about a minute of this comment.',
+  'Verified live in the AI Product Index.',
   '',
   '````json',
   JSON.stringify({ ok: true, slug: listing.slug, html, json }, null, 2),
   '````',
 ].join('\n') + '\n');
-output({ slug: listing.slug, verb: MODE === 'update' ? 'Update' : 'Add' });
+output({ slug: listing.slug, verb: MODE === 'update' ? 'Update' : 'Add', url: html });
 console.log(`${MODE === 'update' ? 'updated' : 'accepted'}: ${listing.slug}`);

@@ -2,6 +2,7 @@
 import { writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { MAX_ASSET_BYTES } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DISCOVERY = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources';
@@ -140,14 +141,24 @@ const stats = {
 };
 
 mkdirSync(join(ROOT, 'api', 'x402'), { recursive: true });
-writeFileSync(join(ROOT, 'api', 'x402', 'catalog.json'), `${JSON.stringify({
+const catalogPayload = {
   $comment: 'A normalized mirror of the Coinbase CDP x402 Bazaar, republished so it can be searched. The facts belong to the endpoint operators; the normalization, search and aggregates are the contribution. Refreshed weekly; report a wrong or unwanted entry at https://github.com/110kc3/seo/issues and it will be removed.',
   source: stats.source,
   source_url: DISCOVERY,
   fetched: stats.fetched,
   count: endpoints.length,
   endpoints,
-}, null, 1)}\n`);
+};
+
+let catalogJson = `${JSON.stringify(catalogPayload, null, 1)}\n`;
+if (Buffer.byteLength(catalogJson) > MAX_ASSET_BYTES) {
+  catalogJson = `${JSON.stringify(catalogPayload)}\n`;
+}
+if (Buffer.byteLength(catalogJson) > MAX_ASSET_BYTES) {
+  throw new Error(`x402 catalog exceeds ${MAX_ASSET_BYTES} bytes limit (${Buffer.byteLength(catalogJson)} bytes)`);
+}
+
+writeFileSync(join(ROOT, 'api', 'x402', 'catalog.json'), catalogJson);
 
 writeFileSync(join(ROOT, 'api', 'x402', 'stats.json'), `${JSON.stringify(stats, null, 2)}\n`);
 
