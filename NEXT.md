@@ -1,8 +1,12 @@
 # NEXT — the one pending list
 
-## Current — 2026-11-04
+## Current — 2026-11-14
 
-Last completed slice: replaced AGENTS.md symlink with canonical regular file, mirrored CLAUDE.md, and added agent-instructions CI workflow (`883fa86`). Added listing code-by-ai (`78a6cea`); all 313 tests pass.
+Last completed slice: reviewed and merged [PR #260](https://github.com/110kc3/seo/pull/260)
+as `c4999d9`. Its root-anchored `/.gitattributes` exclusion is identical to the
+fix already shipped in `9f4f3fa`; the merge preserves the contribution without
+changing the current tree. All 313 tests pass on Node 22.23.3, two builds leave
+generated artifacts unchanged, and `git diff --check` passes.
 
 ### Accepted next work
 
@@ -16,7 +20,24 @@ Last completed slice: replaced AGENTS.md symlink with canonical regular file, mi
 
 ### Pending verification
 
-- Commit `883fa86` pushed to `origin/main`; [Actions runs](https://github.com/110kc3/seo/actions) pending observation next session.
+- Merge `c4999d9` and this status update on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
+  pending observation next session. Do not wait or poll after pushing.
+- The old `883fa86` deployment failed; it was not pending. The subsequent
+  `7fe29a0` [deployment succeeded](https://github.com/110kc3/seo/actions/runs/43578241835).
+  November 14 production checks verified all five listing pages from #210–#214,
+  the Earshot page/JSON/registry entry from #259, and byte-identical `llms.txt`.
+
+### Reviewed reports — 2026-11-14
+
+- [#260](https://github.com/110kc3/seo/pull/260) merged after independent review;
+  removing its exclusion reproduces the existing asset-boundary test failure.
+  The PR and [#259](https://github.com/110kc3/seo/issues/259) have received
+  verification comments.
+- [#217](https://github.com/110kc3/seo/issues/217) remains open, with a recovery
+  explanation. The catalog shrank below Cloudflare's limit on November 9; the
+  separate Git-metadata validation failure was corrected on November 14.
+  Neither catalog-size protection nor publication-confirmation changes are
+  implemented or selected by this PR review. The commercial-evidence gate remains.
 
 ### History / deferred
 
