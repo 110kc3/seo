@@ -15,6 +15,14 @@
     <description>Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global</description>
   </item>
   <item>
+    <title>Kunavo</title>
+    <link>https://index.percall.dev/l/kunavo.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/kunavo.html</guid>
+    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.</description>
+  </item>
+  <item>
     <title>链小知区块链</title>
     <link>https://index.percall.dev/l/lianxiaozhi.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/lianxiaozhi.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Browser-based video and audio localization for creators, educators, and teams. Transcribe and translate subtitles, generate AI dubbing, review results in an online editor, and export localized media, transcripts, or SRT/ASS subtitle files. Paid subscriptions and credit add-ons, with one-time starter credits. Company: Hefei Qiangshi Information Technology Co., Ltd.</description>
-  </item>
-  <item>
-    <title>AI Tiny Desk</title>
-    <link>https://index.percall.dev/l/ai-tiny-desk.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ai-tiny-desk.html</guid>
-    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.</description>
   </item>
 </channel>
 </rss>

@@ -1,0 +1,23 @@
+{
+  "slug": "kunavo",
+  "name": "Kunavo",
+  "url": "https://kunavo.com",
+  "description": "Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://kunavo.com/llms.txt"
+  },
+  "tags": [
+    "ai-gateway",
+    "llm",
+    "api",
+    "usage-tracking",
+    "developer-tools"
+  ],
+  "submitted_by": "cooldk, Kunavo operator; AI-assisted submission",
+  "created": "2026-11-14",
+  "github_user": "cooldk",
+  "tier": "free",
+  "origin": "self-registered"
+}

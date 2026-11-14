@@ -22,6 +22,22 @@
       "external_url": "https://kling.ai/app/mcp/guide"
     },
     {
+      "id": "https://index.percall.dev/l/kunavo.html",
+      "url": "https://index.percall.dev/l/kunavo.html",
+      "title": "Kunavo",
+      "content_text": "Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.",
+      "date_published": "2026-11-14T00:00:00Z",
+      "tags": [
+        "api",
+        "ai-gateway",
+        "llm",
+        "api",
+        "usage-tracking",
+        "developer-tools"
+      ],
+      "external_url": "https://kunavo.com"
+    },
+    {
       "id": "https://index.percall.dev/l/lianxiaozhi.html",
       "url": "https://index.percall.dev/l/lianxiaozhi.html",
       "title": "链小知区块链",
@@ -752,20 +768,6 @@
         "localization"
       ],
       "external_url": "https://voxsail.com/en/"
-    },
-    {
-      "id": "https://index.percall.dev/l/ai-tiny-desk.html",
-      "url": "https://index.percall.dev/l/ai-tiny-desk.html",
-      "title": "AI Tiny Desk",
-      "content_text": "Create a personal 19-second vertical desk-concert video from one adult photo, with a BGM version for social sharing. Personalized creation uses paid one-time credits from $9.99; examples are free to view. AI can alter likeness and movement.",
-      "date_published": "2026-10-29T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-video",
-        "photo-to-video",
-        "creative-tools"
-      ],
-      "external_url": "https://ai-tinydesk.com/"
     }
   ]
 }
