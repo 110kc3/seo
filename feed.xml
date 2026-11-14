@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>链小知区块链</title>
+    <link>https://index.percall.dev/l/lianxiaozhi.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/lianxiaozhi.html</guid>
+    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.</description>
+  </item>
+  <item>
     <title>PEARL AGENT (PEAGENT)</title>
     <link>https://index.percall.dev/l/peagent.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/peagent.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Turn a dog or cat photo into a 10-second vertical pet tribute video with marigold bridge, gate, ofrenda and rainbow bridge scenes.</description>
-  </item>
-  <item>
-    <title>Friday Invoice Chase Ranker</title>
-    <link>https://index.percall.dev/l/friday-invoice-chase-ranker.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/friday-invoice-chase-ranker.html</guid>
-    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Rank which unpaid freelance invoices to chase this Friday by amount × days overdue. Free browser tool for freelancers prioritizing chase order.</description>
   </item>
 </channel>
 </rss>

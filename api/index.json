@@ -1,7 +1,32 @@
 {
-  "count": 221,
-  "updated": "2026-11-13",
+  "count": 222,
+  "updated": "2026-11-14",
   "listings": [
+    {
+      "slug": "lianxiaozhi",
+      "name": "链小知区块链",
+      "url": "https://lianxiaozhi.com",
+      "description": "Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://lianxiaozhi.com/llms.txt",
+        "openapi": "https://lianxiaozhi.com/openapi-v1.json",
+        "mcp": "https://lianxiaozhi.com/api/mcp"
+      },
+      "tags": [
+        "blockchain",
+        "chinese",
+        "news",
+        "knowledge",
+        "read-only"
+      ],
+      "submitted_by": "AI assistant on behalf of 链小知区块链",
+      "created": "2026-11-14",
+      "github_user": "27105198-cell",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "peagent",
       "name": "PEARL AGENT (PEAGENT)",

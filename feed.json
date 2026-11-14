@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/lianxiaozhi.html",
+      "url": "https://index.percall.dev/l/lianxiaozhi.html",
+      "title": "链小知区块链",
+      "content_text": "Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.",
+      "date_published": "2026-11-14T00:00:00Z",
+      "tags": [
+        "mcp",
+        "blockchain",
+        "chinese",
+        "news",
+        "knowledge",
+        "read-only"
+      ],
+      "external_url": "https://lianxiaozhi.com"
+    },
+    {
       "id": "https://index.percall.dev/l/peagent.html",
       "url": "https://index.percall.dev/l/peagent.html",
       "title": "PEARL AGENT (PEAGENT)",
@@ -748,22 +764,6 @@
         "photo-to-video"
       ],
       "external_url": "https://dayofthedeadpet-ai.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
-      "url": "https://index.percall.dev/l/friday-invoice-chase-ranker.html",
-      "title": "Friday Invoice Chase Ranker",
-      "content_text": "Rank which unpaid freelance invoices to chase this Friday by amount × days overdue. Free browser tool for freelancers prioritizing chase order.",
-      "date_published": "2026-10-29T00:00:00Z",
-      "tags": [
-        "app",
-        "freelance",
-        "finance",
-        "invoices",
-        "productivity",
-        "billing"
-      ],
-      "external_url": "https://sirmem.github.io/friday-invoice-chase-tool/"
     }
   ]
 }

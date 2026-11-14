@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 221 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 222 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (221)
+## All listings (222)
+
+### 链小知区块链 (lianxiaozhi)
+- url: https://lianxiaozhi.com
+- category: mcp · pricing: free · tags: blockchain, chinese, news, knowledge, read-only
+- Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.
+- llms_txt: https://lianxiaozhi.com/llms.txt
+- openapi: https://lianxiaozhi.com/openapi-v1.json
+- mcp: https://lianxiaozhi.com/api/mcp
+- listing JSON: https://index.percall.dev/listings/lianxiaozhi.json
+- listing page: https://index.percall.dev/l/lianxiaozhi.html
 
 ### PEARL AGENT (PEAGENT) (peagent)
 - url: https://peagent.pages.dev
