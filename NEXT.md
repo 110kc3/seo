@@ -27,11 +27,17 @@ and HTTP 200 publication verification in `register.yml` before a registration is
 - Indexation: Google/Bing search console verification and sitemap submissions need owner's logged-in consoles.
 - User-value validation: participant recruitment and outreach per private September 27 plan. Retention evidence from November 14: 11 of 187 self-registered listings embed the badge, 11 link back to percall.dev, and 7 performed updates (across 6 distinct accounts).
 
+### Verified — 2026-11-15
+
+- `7f4efdc` [deployed successfully](https://github.com/110kc3/seo/actions/runs/43714390527).
+  Incident #265 closed automatically on recovery. The three delayed listing pages
+  return 200 and live `llms.txt` matches the committed artifact byte for byte.
+  Registration issues #266, #267 and #268 were closed as completed with the live URL.
+
 ### Pending verification
 
-- Deployment repair push on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain).
-  Confirm the deploy succeeded, incident #265 closed, the three delayed listing pages
-  return 200 and live `llms.txt` matches the committed artifact.
+- Status-only documentation push after `7f4efdc`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
+  pending observation next session.
 
 ### Reviewed reports — 2026-11-14
 
