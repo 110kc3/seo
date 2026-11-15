@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 227 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 228 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (227)
+## All listings (228)
 
 ### FreeAI Go (freeai-go)
 - url: https://www.freeaigo.com/
@@ -311,6 +311,15 @@ A response does not verify authentication, payment or tool behavior.
 - Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.
 - listing JSON: https://index.percall.dev/listings/freeai-go.json
 - listing page: https://index.percall.dev/l/freeai-go.html
+
+### Valmera (valmera)
+- url: https://valmera.io
+- category: agent · pricing: paid · tags: ai-video-editor, video-editing, captions, mp4, mcp
+- Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.
+- llms_txt: https://valmera.io/llms.txt
+- mcp: https://valmera.io/mcp/server
+- listing JSON: https://index.percall.dev/listings/valmera.json
+- listing page: https://index.percall.dev/l/valmera.html
 
 ### BeliefState (beliefstate)
 - url: https://beliefstate.ai/

@@ -1,5 +1,5 @@
 {
-  "count": 227,
+  "count": 228,
   "updated": "2026-11-15",
   "listings": [
     {
@@ -18,6 +18,30 @@
       "submitted_by": "Codex AI assistant on behalf of maker jimmysenior",
       "created": "2026-11-15",
       "github_user": "jimmysenior",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "valmera",
+      "name": "Valmera",
+      "url": "https://valmera.io",
+      "description": "Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.",
+      "category": "agent",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://valmera.io/llms.txt",
+        "mcp": "https://valmera.io/mcp/server"
+      },
+      "tags": [
+        "ai-video-editor",
+        "video-editing",
+        "captions",
+        "mp4",
+        "mcp"
+      ],
+      "submitted_by": "Codex on behalf of Valmera",
+      "created": "2026-11-15",
+      "github_user": "ABO3SKRALMASAOODI",
       "tier": "free",
       "origin": "self-registered"
     },

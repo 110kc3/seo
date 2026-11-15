@@ -21,6 +21,22 @@
       "external_url": "https://www.freeaigo.com/"
     },
     {
+      "id": "https://index.percall.dev/l/valmera.html",
+      "url": "https://index.percall.dev/l/valmera.html",
+      "title": "Valmera",
+      "content_text": "Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "tags": [
+        "agent",
+        "ai-video-editor",
+        "video-editing",
+        "captions",
+        "mp4",
+        "mcp"
+      ],
+      "external_url": "https://valmera.io"
+    },
+    {
       "id": "https://index.percall.dev/l/beliefstate.html",
       "url": "https://index.percall.dev/l/beliefstate.html",
       "title": "BeliefState",
@@ -751,21 +767,6 @@
         "developer"
       ],
       "external_url": "https://viewhtml.app"
-    },
-    {
-      "id": "https://index.percall.dev/l/tessamonials.html",
-      "url": "https://index.percall.dev/l/tessamonials.html",
-      "title": "Tessamonials",
-      "content_text": "AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Saved testimonials default to approved; participants can unapprove or withdraw. Publication is separate. Free: 15 lifetime voice or text interviews per Company, counted at three answers or over two minutes. Short visits and member tests excluded. Paid plans available. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2",
-      "date_published": "2026-10-31T00:00:00Z",
-      "tags": [
-        "app",
-        "mcp",
-        "customer-research",
-        "testimonials",
-        "feedback"
-      ],
-      "external_url": "https://tessamonials.com/"
     }
   ]
 }
