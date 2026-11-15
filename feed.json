@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/freeai-go.html",
+      "url": "https://index.percall.dev/l/freeai-go.html",
+      "title": "FreeAI Go",
+      "content_text": "Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "tags": [
+        "other",
+        "ai-directory",
+        "free-ai-tools",
+        "tool-comparison",
+        "productivity"
+      ],
+      "external_url": "https://www.freeaigo.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/beliefstate.html",
       "url": "https://index.percall.dev/l/beliefstate.html",
       "title": "BeliefState",
@@ -751,22 +766,6 @@
         "feedback"
       ],
       "external_url": "https://tessamonials.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/echoempire-machine-foundry.html",
-      "url": "https://index.percall.dev/l/echoempire-machine-foundry.html",
-      "title": "EchoEmpire Machine Foundry",
-      "content_text": "Machine-readable catalog of EchoEmpire's pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.",
-      "date_published": "2026-10-30T00:00:00Z",
-      "tags": [
-        "api",
-        "scraping",
-        "rag",
-        "youtube",
-        "pdf",
-        "apify"
-      ],
-      "external_url": "https://foundry.echoempire.org/"
     }
   ]
 }

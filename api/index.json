@@ -1,7 +1,26 @@
 {
-  "count": 226,
-  "updated": "2026-11-14",
+  "count": 227,
+  "updated": "2026-11-15",
   "listings": [
+    {
+      "slug": "freeai-go",
+      "name": "FreeAI Go",
+      "url": "https://www.freeaigo.com/",
+      "description": "Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.",
+      "category": "other",
+      "pricing": "free",
+      "tags": [
+        "ai-directory",
+        "free-ai-tools",
+        "tool-comparison",
+        "productivity"
+      ],
+      "submitted_by": "Codex AI assistant on behalf of maker jimmysenior",
+      "created": "2026-11-15",
+      "github_user": "jimmysenior",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "beliefstate",
       "name": "BeliefState",

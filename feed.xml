@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>FreeAI Go</title>
+    <link>https://index.percall.dev/l/freeai-go.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/freeai-go.html</guid>
+    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.</description>
+  </item>
+  <item>
     <title>BeliefState</title>
     <link>https://index.percall.dev/l/beliefstate.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/beliefstate.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>AI voice/text customer interviews with adaptive follow-ups, transcripts and feedback. Saved testimonials default to approved; participants can unapprove or withdraw. Publication is separate. Free: 15 lifetime voice or text interviews per Company, counted at three answers or over two minutes. Short visits and member tests excluded. Paid plans available. Docs: https://tessamonials.com/docs/mcp. Official icon: https://tessamonials.com/images/favicon-48.png?v=2</description>
-  </item>
-  <item>
-    <title>EchoEmpire Machine Foundry</title>
-    <link>https://index.percall.dev/l/echoempire-machine-foundry.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/echoempire-machine-foundry.html</guid>
-    <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Machine-readable catalog of EchoEmpire&#39;s pay-per-event Apify Actors for AI agents: YouTube transcripts and comments, contact details, LinkedIn and remote jobs, PDF/OCR/SEC/subtitle citation chunkers. Call via Apify REST or MCP; pay with an Apify token or Apify AGI prepaid token over x402/MPP. Catalog documents endpoints only; it does not execute or bill.</description>
   </item>
 </channel>
 </rss>
