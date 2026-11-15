@@ -2169,3 +2169,30 @@ test('a page of HTML is not a JSON document, however cheerfully it answers 200',
   assert.match(missing({ ok: false, soft404: true }, '/x'), /answers 200 but is not JSON/);
   assert.equal(missing({ ok: false, soft404: false }, '/x'), 'no /x');
 });
+
+async function workerModuleGraph() {
+  const pending = [new URL('../worker/index.js', import.meta.url)];
+  const modules = new Map();
+  while (pending.length > 0) {
+    const moduleUrl = pending.pop();
+    if (modules.has(moduleUrl.href)) continue;
+    const source = await readFile(moduleUrl, 'utf8');
+    const specifiers = [...source.matchAll(/^\s*(?:import|export)\b[^'"]*?from\s*['"]([^'"]+)['"]|^\s*import\s*['"]([^'"]+)['"]/gm)]
+      .map((match) => match[1] ?? match[2]);
+    modules.set(moduleUrl.href, specifiers);
+    for (const specifier of specifiers) {
+      if (specifier.startsWith('.') && /\.m?js$/.test(specifier)) pending.push(new URL(specifier, moduleUrl));
+    }
+  }
+  return modules;
+}
+
+test('nothing the Worker bundles imports a Node built-in or bare package', async () => {
+  const modules = await workerModuleGraph();
+  assert.ok(modules.size > 5, 'the Worker import graph was not walked');
+  const offenders = [...modules]
+    .flatMap(([href, specifiers]) => specifiers
+      .filter((specifier) => !specifier.startsWith('.'))
+      .map((specifier) => `${href.split('/').slice(-2).join('/')} imports ${specifier}`));
+  assert.deepEqual(offenders, [], 'workerd rejects the upload with "No such module" for these');
+});

@@ -1,20 +1,25 @@
 # NEXT — the one pending list
 
-## Current — 2026-11-14
+## Current — 2026-11-15
 
-Last completed slice: implemented asset size protection (25 MiB Cloudflare Workers limit)
-and deployment failure visibility. Static assets are now guarded in `scripts/validate.mjs`,
-`scripts/build.mjs`, and catalog fetch scripts (`fetch-x402-catalog.mjs`, `fetch-mcp-catalog.mjs`),
-backed by unit tests on synthetic over-limit assets. Deployment workflows (`deploy.yml`)
-now open an incident issue on failure streaks and resolve it on recovery. Registration
-(`register.yml`) verifies HTTP 200 on production before marking listings live and closing
-issues. Issue #217 was confirmed and closed as completed. PR #260 merge (`c4999d9`) and
-documentation push (`e517f0a`) runs were observed passing in GitHub Actions. All 316 tests pass
-on Node 22, two builds leave generated artifacts unchanged, and `git diff --check` passes.
+Last completed slice: repaired the production deployment. The November 14 asset
+size guard added `node:fs` imports to `scripts/validate.mjs`, which the Worker
+bundles through `worker/audit.js` and `worker/route.js`; Cloudflare rejected every
+upload with `No such module "node:fs"` (code 10021). Five consecutive deploy runs
+failed from `9e72a21` onward, so registrations #266, #267 and #268 were committed but
+never published. The filesystem guard now lives in `scripts/asset-sizes.mjs`, the
+validator is byte-identical to the last deployed version, and a test walks the
+Worker import graph and rejects any Node built-in. All 317 tests pass on Node 22,
+two builds leave generated artifacts unchanged, and `git diff --check` passes. The
+Node suite cannot detect workerd upload rejections, so the deploy run itself is the check.
+
+The November 14 slice remains in place: 25 MiB asset size protection in the build and
+catalog fetch scripts, incident issues on deployment failure with closure on recovery,
+and HTTP 200 publication verification in `register.yml` before a registration issue closes.
 
 ### Accepted next work
 
-- [ ] Monitor weekly scheduled liveness and scoring refreshes on November 16 (`health-weeks.json`). 62 of 224 listings are currently ungraded and await scoring.
+- [ ] Monitor weekly scheduled liveness and scoring refreshes on November 16 (`health-weeks.json`). 65 of 227 listings are currently ungraded and await scoring.
 
 ### Owner actions / blocked
 
@@ -24,8 +29,9 @@ on Node 22, two builds leave generated artifacts unchanged, and `git diff --chec
 
 ### Pending verification
 
-- Push of asset size guard, deploy visibility, and status update on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
-  pending observation next session. Do not wait or poll after pushing.
+- Deployment repair push on `main`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain).
+  Confirm the deploy succeeded, incident #265 closed, the three delayed listing pages
+  return 200 and live `llms.txt` matches the committed artifact.
 
 ### Reviewed reports — 2026-11-14
 

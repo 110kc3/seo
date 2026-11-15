@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
   validate, reconstruct, esc, jsonLd, normalizeUrl, urlError, schemaJson,
-  checkAssetSize, assertPublishedAssetSizes, MAX_ASSET_BYTES,
 } from './validate.mjs';
+import { checkAssetSize, assertPublishedAssetSizes, MAX_ASSET_BYTES } from './asset-sizes.mjs';
 
 const valid = () => ({
   slug: 'test-product',

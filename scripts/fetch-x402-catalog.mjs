@@ -2,7 +2,7 @@
 import { writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { MAX_ASSET_BYTES } from './validate.mjs';
+import { MAX_ASSET_BYTES } from './asset-sizes.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DISCOVERY = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources';

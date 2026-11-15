@@ -4,7 +4,8 @@ import { CHECK_META, SIGNAL_META, V2_WEIGHTS, CHECK_LABELS, SNIPPETS } from '../
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { validate, esc, jsonLd, normalizeUrl, schemaJson, assertPublishedAssetSizes } from './validate.mjs';
+import { validate, esc, jsonLd, normalizeUrl, schemaJson } from './validate.mjs';
+import { assertPublishedAssetSizes } from './asset-sizes.mjs';
 import { resolveX402 } from './x402-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');

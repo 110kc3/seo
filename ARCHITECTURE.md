@@ -71,6 +71,7 @@ Everything that reaches disk or generated HTML goes through `scripts/validate.mj
 - **`reconstruct()` rebuilds accepted objects field-by-field from an allowlist** — the submitted object is never written through, so `__proto__` and junk keys cannot survive.
 - **`origin` is server-set and ignored as input**, like `tier`; the per-account cap counts `self-registered` listings, and a listing without `origin` defaults to `self-registered` so it costs its account a slot (fail closed).
 - `api/schema.json` is *generated from the same constants that enforce validation*, so published docs cannot drift from behaviour.
+- **The validator is bundled into the Worker**, so it must stay free of Node built-ins: `worker/audit.js` and `worker/route.js` import `urlError()` from it, and workerd rejects an upload whose graph reaches `node:fs` (`No such module`, code 10021). Filesystem helpers therefore live elsewhere — the 25 MiB static-asset guard is `scripts/asset-sizes.mjs`, used only by the build and the catalog fetchers. A test walks the Worker import graph and fails on any non-relative import.
 
 ## Payments
 
