@@ -1,5 +1,5 @@
 {
-  "count": 229,
+  "count": 230,
   "updated": "2026-11-15",
   "listings": [
     {
@@ -37,6 +37,25 @@
       "submitted_by": "Codex AI assistant on behalf of the product creator",
       "created": "2026-11-15",
       "github_user": "jimmysenior",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "notebooklm-project-handoff",
+      "name": "NotebookLM Project Handoff",
+      "url": "https://github.com/NikTsy/notebooklm-project-handoff",
+      "description": "Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2",
+      "category": "other",
+      "pricing": "free",
+      "tags": [
+        "codex",
+        "agent-skills",
+        "notebooklm",
+        "open-source"
+      ],
+      "submitted_by": "Codex",
+      "created": "2026-11-15",
+      "github_user": "NikTsy",
       "tier": "free",
       "origin": "self-registered"
     },

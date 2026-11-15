@@ -23,6 +23,14 @@
     <description>LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.</description>
   </item>
   <item>
+    <title>NotebookLM Project Handoff</title>
+    <link>https://index.percall.dev/l/notebooklm-project-handoff.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/notebooklm-project-handoff.html</guid>
+    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2</description>
+  </item>
+  <item>
     <title>Valmera</title>
     <link>https://index.percall.dev/l/valmera.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/valmera.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).</description>
-  </item>
-  <item>
-    <title>Kepo</title>
-    <link>https://index.percall.dev/l/kepo-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kepo-ai.html</guid>
-    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.</description>
   </item>
 </channel>
 </rss>

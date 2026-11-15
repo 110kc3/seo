@@ -36,6 +36,21 @@
       "external_url": "https://www.lobbyclip.com/"
     },
     {
+      "id": "https://index.percall.dev/l/notebooklm-project-handoff.html",
+      "url": "https://index.percall.dev/l/notebooklm-project-handoff.html",
+      "title": "NotebookLM Project Handoff",
+      "content_text": "Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2",
+      "date_published": "2026-11-15T00:00:00Z",
+      "tags": [
+        "other",
+        "codex",
+        "agent-skills",
+        "notebooklm",
+        "open-source"
+      ],
+      "external_url": "https://github.com/NikTsy/notebooklm-project-handoff"
+    },
+    {
       "id": "https://index.percall.dev/l/valmera.html",
       "url": "https://index.percall.dev/l/valmera.html",
       "title": "Valmera",
@@ -754,20 +769,6 @@
         "spanish"
       ],
       "external_url": "https://fondoblanco.org"
-    },
-    {
-      "id": "https://index.percall.dev/l/kepo-ai.html",
-      "url": "https://index.percall.dev/l/kepo-ai.html",
-      "title": "Kepo",
-      "content_text": "Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.",
-      "date_published": "2026-10-31T00:00:00Z",
-      "tags": [
-        "app",
-        "macos",
-        "widgets",
-        "desktop"
-      ],
-      "external_url": "https://kepo.ai"
     }
   ]
 }

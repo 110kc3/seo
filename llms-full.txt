@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 229 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 230 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (229)
+## All listings (230)
 
 ### FreeAI Go (freeai-go)
 - url: https://www.freeaigo.com/
@@ -318,6 +318,13 @@ A response does not verify authentication, payment or tool behavior.
 - LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.
 - listing JSON: https://index.percall.dev/listings/lobbyclip.json
 - listing page: https://index.percall.dev/l/lobbyclip.html
+
+### NotebookLM Project Handoff (notebooklm-project-handoff)
+- url: https://github.com/NikTsy/notebooklm-project-handoff
+- category: other · pricing: free · tags: codex, agent-skills, notebooklm, open-source
+- Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2
+- listing JSON: https://index.percall.dev/listings/notebooklm-project-handoff.json
+- listing page: https://index.percall.dev/l/notebooklm-project-handoff.html
 
 ### Valmera (valmera)
 - url: https://valmera.io
