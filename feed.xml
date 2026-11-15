@@ -15,6 +15,14 @@
     <description>Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.</description>
   </item>
   <item>
+    <title>LobbyClip</title>
+    <link>https://index.percall.dev/l/lobbyclip.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/lobbyclip.html</guid>
+    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.</description>
+  </item>
+  <item>
     <title>Valmera</title>
     <link>https://index.percall.dev/l/valmera.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/valmera.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Mac desktop widgets for macOS: clocks, calendars, notes, RSS and system widgets on the desktop.</description>
-  </item>
-  <item>
-    <title>ViewHTML</title>
-    <link>https://index.percall.dev/l/viewhtml-app.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/viewhtml-app.html</guid>
-    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.</description>
   </item>
 </channel>
 </rss>

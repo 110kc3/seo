@@ -1,5 +1,5 @@
 {
-  "count": 228,
+  "count": 229,
   "updated": "2026-11-15",
   "listings": [
     {
@@ -16,6 +16,25 @@
         "productivity"
       ],
       "submitted_by": "Codex AI assistant on behalf of maker jimmysenior",
+      "created": "2026-11-15",
+      "github_user": "jimmysenior",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "lobbyclip",
+      "name": "LobbyClip",
+      "url": "https://www.lobbyclip.com/",
+      "description": "LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-video",
+        "dance",
+        "photo-to-video",
+        "content-creation"
+      ],
+      "submitted_by": "Codex AI assistant on behalf of the product creator",
       "created": "2026-11-15",
       "github_user": "jimmysenior",
       "tier": "free",

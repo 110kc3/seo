@@ -21,6 +21,21 @@
       "external_url": "https://www.freeaigo.com/"
     },
     {
+      "id": "https://index.percall.dev/l/lobbyclip.html",
+      "url": "https://index.percall.dev/l/lobbyclip.html",
+      "title": "LobbyClip",
+      "content_text": "LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.",
+      "date_published": "2026-11-15T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-video",
+        "dance",
+        "photo-to-video",
+        "content-creation"
+      ],
+      "external_url": "https://www.lobbyclip.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/valmera.html",
       "url": "https://index.percall.dev/l/valmera.html",
       "title": "Valmera",
@@ -753,20 +768,6 @@
         "desktop"
       ],
       "external_url": "https://kepo.ai"
-    },
-    {
-      "id": "https://index.percall.dev/l/viewhtml-app.html",
-      "url": "https://index.percall.dev/l/viewhtml-app.html",
-      "title": "ViewHTML",
-      "content_text": "Online HTML viewer and live HTML preview — paste markup and see it rendered instantly in the browser.",
-      "date_published": "2026-10-31T00:00:00Z",
-      "tags": [
-        "app",
-        "html",
-        "preview",
-        "developer"
-      ],
-      "external_url": "https://viewhtml.app"
     }
   ]
 }
