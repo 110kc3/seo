@@ -1,5 +1,5 @@
 {
-  "count": 231,
+  "count": 232,
   "updated": "2026-11-16",
   "listings": [
     {
@@ -39,6 +39,28 @@
       "submitted_by": "Tutuo, Inc.",
       "created": "2026-11-16",
       "github_user": "tutuo-ai",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "telo-blynkai",
+      "name": "Telo",
+      "url": "https://telo.ferryman.app/",
+      "description": "Telo is an AI health coach for iPhone and Apple Watch. It brings Apple Health sleep, workouts, heart rate variability and daily readiness together with a health log. Its optional Codex and Claude Desktop plugins let users ask about the health data they authorize.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://api.incubator.blynkai.app/v1/health/mcp"
+      },
+      "tags": [
+        "apple-health",
+        "health-log",
+        "ios",
+        "mcp"
+      ],
+      "submitted_by": "Codex on behalf of Telo",
+      "created": "2026-11-16",
+      "github_user": "weiweiwang",
       "tier": "free",
       "origin": "self-registered"
     },

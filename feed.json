@@ -38,6 +38,21 @@
       "external_url": "https://www.tutuo.ai/en/octuo/"
     },
     {
+      "id": "https://index.percall.dev/l/telo-blynkai.html",
+      "url": "https://index.percall.dev/l/telo-blynkai.html",
+      "title": "Telo",
+      "content_text": "Telo is an AI health coach for iPhone and Apple Watch. It brings Apple Health sleep, workouts, heart rate variability and daily readiness together with a health log. Its optional Codex and Claude Desktop plugins let users ask about the health data they authorize.",
+      "date_published": "2026-11-16T00:00:00Z",
+      "tags": [
+        "app",
+        "apple-health",
+        "health-log",
+        "ios",
+        "mcp"
+      ],
+      "external_url": "https://telo.ferryman.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/freeai-go.html",
       "url": "https://index.percall.dev/l/freeai-go.html",
       "title": "FreeAI Go",
@@ -756,22 +771,6 @@
         "apify"
       ],
       "external_url": "https://apify.com/johnvc/linkedin-profile-api"
-    },
-    {
-      "id": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
-      "url": "https://index.percall.dev/l/johnvc-youtube-transcripts.html",
-      "title": "YouTube Transcript & Subtitles API",
-      "content_text": "Returns YouTube transcripts, subtitles and captions as text, SRT or VTT, with video metadata. Works on single videos, lists of URLs or a whole channel, and runs from servers where YouTube blocks direct caption requests. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
-      "date_published": "2026-11-01T00:00:00Z",
-      "tags": [
-        "api",
-        "youtube",
-        "transcripts",
-        "captions",
-        "mcp",
-        "apify"
-      ],
-      "external_url": "https://apify.com/johnvc/youtubetranscripts"
     }
   ]
 }
