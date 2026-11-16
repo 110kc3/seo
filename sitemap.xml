@@ -4,10 +4,10 @@
   <url><loc>https://percall.dev/</loc></url>
   <url><loc>https://index.percall.dev/ask</loc></url>
   <url><loc>https://index.percall.dev/api/search</loc></url>
-  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-11-09</lastmod></url>
-  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://index.percall.dev/mcp-servers.html</loc><lastmod>2026-09-07</lastmod></url>
-  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://index.percall.dev/checks/llms_txt.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_txt_summary.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_full_txt.html</loc></url>
@@ -135,7 +135,6 @@
   <url><loc>https://index.percall.dev/l/codex-reset-radar.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://index.percall.dev/l/ddg-agent-services.html</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://index.percall.dev/l/linkflow-desktop.html</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://index.percall.dev/l/shellwire.html</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://index.percall.dev/l/bkk-staff.html</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://index.percall.dev/l/mangatranslate-ko.html</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://index.percall.dev/l/somora-kassio-studio.html</loc><lastmod>2026-10-14</lastmod></url>

@@ -198,6 +198,19 @@
       "llms_txt": 1642,
       "audit_hits": 21,
       "x402_info": 85
+    },
+    {
+      "date": "2026-11-16",
+      "window": "30d",
+      "total_requests": 120021,
+      "agent_share": 0.0276,
+      "ai_crawler": 3300,
+      "browser": 53224,
+      "script": 19400,
+      "free_scores": 1239,
+      "llms_txt": 1757,
+      "audit_hits": 20,
+      "x402_info": 96
     }
   ]
 }

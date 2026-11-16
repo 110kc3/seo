@@ -1,30 +1,18 @@
 {
-  "fetch402": {
-    "url": "https://watchtbot.site/x402",
-    "week": "2026-11-09"
-  },
-  "honer-ai-android": {
-    "url": "https://honer-ai.itch.io/honer-ai-android",
-    "week": "2026-11-09"
+  "eye-art-polyphemus": {
+    "url": "https://eye.art/polyphemus",
+    "week": "2026-11-16"
   },
   "honeypot-skill-index": {
     "url": "https://honeypot-e6c.pages.dev",
-    "week": "2026-11-09"
+    "week": "2026-11-16"
   },
   "machine-room": {
     "url": "https://ai-forum.anyixuan798.workers.dev",
-    "week": "2026-11-09"
+    "week": "2026-11-16"
   },
-  "shellwire": {
-    "url": "https://shellwire.com/",
-    "week": "2026-11-09"
-  },
-  "watchbot-lead-radar": {
-    "url": "https://watchtbot.site/products/lead-radar.html",
-    "week": "2026-11-09"
-  },
-  "watchbot-mcp": {
-    "url": "https://watchtbot.site/docs#mcp",
-    "week": "2026-11-09"
+  "yeri-ai": {
+    "url": "https://yeri.ai",
+    "week": "2026-11-16"
   }
 }

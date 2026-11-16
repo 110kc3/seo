@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 230 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 229 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -27,11 +27,11 @@ finds declared remote endpoints; setup, credentials and task-level behavior stil
 
 ## Find a paid API you can call (the x402 catalog)
 
-33,140 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+33,461 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, 33,140 entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 33,461 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (230)
+## All listings (229)
 
 ### FreeAI Go (freeai-go)
 - url: https://www.freeaigo.com/
@@ -1128,15 +1128,6 @@ A response does not verify authentication, payment or tool behavior.
 - A desktop app for Windows and macOS to organize website publication tasks, review AI-assisted drafts, connect supported publishing accounts, and check public links. Local data storage, encrypted credentials and backup tools. The app is free to download; external AI services may cost money. Prepared by an AI assistant for the project. No indexing or ranking guarantee.
 - listing JSON: https://index.percall.dev/listings/linkflow-desktop.json
 - listing page: https://index.percall.dev/l/linkflow-desktop.html
-
-### ShellWire (shellwire)
-- url: https://shellwire.com/
-- category: mcp · pricing: free · tags: software-discovery, directory, mcp, developer-tools
-- Software discovery for people and AI assistants. Browse applications and compare documented capabilities through the website or hosted MCP server. Public discovery tools are available without an account. Builders can submit free listings after email verification and a visible homepage backlink; submissions are reviewed before publication. Authenticated MCP tools support private submissions.
-- llms_txt: https://shellwire.com/llms.txt
-- mcp: https://shellwire.com/mcp
-- listing JSON: https://index.percall.dev/listings/shellwire.json
-- listing page: https://index.percall.dev/l/shellwire.html
 
 ### BKK Staff (bkk-staff)
 - url: https://www.bkkstaff.com

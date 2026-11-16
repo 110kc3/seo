@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-11-09",
-  "catalog_size": 33140,
+  "probed_at": "2026-11-16",
+  "catalog_size": 33461,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -11,17 +11,24 @@
   },
   "free": true,
   "counts": {
-    "confirmed": 1,
-    "suspected": 29,
-    "tracked": 30
+    "confirmed": 2,
+    "suspected": 32,
+    "tracked": 34
   },
   "endpoints": [
     {
       "url": "https://polynews.news/api/v1/feed",
       "reason": "timeout after 8000ms",
-      "misses": 2,
+      "misses": 3,
       "since": "2026-09-21",
-      "last_checked": "2026-10-19"
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://api.jpverify.com/mcp#jp_invoice_registration_verify#jp_invoice_registration_verify",
+      "reason": "timeout after 8000ms",
+      "misses": 2,
+      "since": "2026-11-09",
+      "last_checked": "2026-11-16"
     }
   ],
   "suspected": [
@@ -34,13 +41,6 @@
     },
     {
       "url": "https://defillama.use.x402atlas.com/fee-summary",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-08-10",
-      "last_checked": "2026-08-10"
-    },
-    {
-      "url": "https://instagram.use.x402atlas.com/profile/:username",
       "reason": "timeout after 8000ms",
       "misses": 1,
       "since": "2026-08-10",
@@ -152,13 +152,6 @@
       "last_checked": "2026-10-19"
     },
     {
-      "url": "https://quickly-techrepublic-modified-fate.trycloudflare.com/fx-rate/:pair",
-      "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-10-19",
-      "last_checked": "2026-10-19"
-    },
-    {
       "url": "https://sweetai.tiamatcrypto.com/api/v1/bazaar/organic-ranking",
       "reason": "timeout after 8000ms",
       "misses": 1,
@@ -173,42 +166,7 @@
       "last_checked": "2026-11-02"
     },
     {
-      "url": "https://api.jpverify.com/mcp#jp_invoice_registration_verify#jp_invoice_registration_verify",
-      "reason": "timeout after 8000ms",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://api.thaikit.dev/thai-time",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://base-facts.yankii.fr/v1/wallet",
-      "reason": "ENOTFOUND",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://saylorinnovations.com/api/bio/pdb/:pdb_id",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
       "url": "https://saylorinnovations.com/api/evm/ethereum/erc1155-balance/:address/:address2/1",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://saylorinnovations.com/api/rail/finland/station/:code",
       "reason": "HTTP 503",
       "misses": 1,
       "since": "2026-11-09",
@@ -222,11 +180,81 @@
       "last_checked": "2026-11-09"
     },
     {
-      "url": "https://soo-lichenologic-wan.ngrok-free.dev/generate-text",
+      "url": "https://address-formats.x402tookit.com/address-format",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://audio-calc.x402tookit.com/bit-depth",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://aviation-calc.x402tookit.com/pressure-altitude",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://deepcounterfeit.com/v1/x402/prebuy/:mint",
+      "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://opendata402.com/v1/ecb/policy-rates",
       "reason": "HTTP 502",
       "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://paper-print-calc.x402tookit.com/print-pixels",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://saylorinnovations.com/api/evm/bsc/block/:number",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://saylorinnovations.com/api/security/:solana_address",
+      "reason": "HTTP 503",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://web-probe.x402tookit.com/http-timing",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://world-bank.x402tookit.com/country-profile",
+      "reason": "HTTP 530",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
+    },
+    {
+      "url": "https://x402.omniaco.org/api/liq-aggregate",
+      "reason": "HTTP 502",
+      "misses": 1,
+      "since": "2026-11-16",
+      "last_checked": "2026-11-16"
     }
   ]
 }
