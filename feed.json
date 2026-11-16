@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/demonroute.html",
+      "url": "https://index.percall.dev/l/demonroute.html",
+      "title": "DemonRoute",
+      "content_text": "Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.",
+      "date_published": "2026-11-16T00:00:00Z",
+      "tags": [
+        "api",
+        "openai-compatible",
+        "open-weight",
+        "uncensored",
+        "prepaid",
+        "crypto"
+      ],
+      "external_url": "https://demonroute.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/octuo.html",
       "url": "https://index.percall.dev/l/octuo.html",
       "title": "Octuo",
@@ -756,21 +772,6 @@
         "apify"
       ],
       "external_url": "https://apify.com/johnvc/youtubetranscripts"
-    },
-    {
-      "id": "https://index.percall.dev/l/1zheai.html",
-      "url": "https://index.percall.dev/l/1zheai.html",
-      "title": "1ZheAI",
-      "content_text": "Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.",
-      "date_published": "2026-10-31T00:00:00Z",
-      "tags": [
-        "api",
-        "api-gateway",
-        "developer-tools",
-        "claude",
-        "openai-compatible"
-      ],
-      "external_url": "https://1zheai.com/"
     }
   ]
 }

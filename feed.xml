@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>DemonRoute</title>
+    <link>https://index.percall.dev/l/demonroute.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/demonroute.html</guid>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.</description>
+  </item>
+  <item>
     <title>Octuo</title>
     <link>https://index.percall.dev/l/octuo.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/octuo.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Returns YouTube transcripts, subtitles and captions as text, SRT or VTT, with video metadata. Works on single videos, lists of URLs or a whole channel, and runs from servers where YouTube blocks direct caption requests. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
-  </item>
-  <item>
-    <title>1ZheAI</title>
-    <link>https://index.percall.dev/l/1zheai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/1zheai.html</guid>
-    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.</description>
   </item>
 </channel>
 </rss>

@@ -1,0 +1,20 @@
+{
+  "slug": "demonroute",
+  "name": "DemonRoute",
+  "url": "https://demonroute.com/",
+  "description": "Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.",
+  "category": "api",
+  "pricing": "paid",
+  "tags": [
+    "openai-compatible",
+    "open-weight",
+    "uncensored",
+    "prepaid",
+    "crypto"
+  ],
+  "submitted_by": "DemonRoute Writer (affiliated), via authorized demonroute1 account; contact: demonroute@brainer.one",
+  "created": "2026-11-16",
+  "github_user": "demonroute1",
+  "tier": "free",
+  "origin": "self-registered"
+}
