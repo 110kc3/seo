@@ -1,0 +1,20 @@
+{
+  "slug": "octuo",
+  "name": "Octuo",
+  "url": "https://www.tutuo.ai/en/octuo/",
+  "description": "Octuo is the one place to run the agents you already use: a coordinator and unified entry point for heavy agent users. You state the goal; it prepares the work, hands each part to the right agent (Claude Code, Codex, MCP tools, browser and files), and follows up until it is done, with long jobs continuing after the chat closes. Work runs on your own Mac (macOS 15+, native); the iPhone companion (iOS 18+) shows progress and decisions on the go.",
+  "category": "agent",
+  "pricing": "paid",
+  "tags": [
+    "multi-agent",
+    "agent-orchestration",
+    "claude-code",
+    "macos",
+    "mcp"
+  ],
+  "submitted_by": "Tutuo, Inc.",
+  "created": "2026-11-16",
+  "github_user": "tutuo-ai",
+  "tier": "free",
+  "origin": "self-registered"
+}

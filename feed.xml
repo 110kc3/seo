@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Octuo</title>
+    <link>https://index.percall.dev/l/octuo.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/octuo.html</guid>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>Octuo is the one place to run the agents you already use: a coordinator and unified entry point for heavy agent users. You state the goal; it prepares the work, hands each part to the right agent (Claude Code, Codex, MCP tools, browser and files), and follows up until it is done, with long jobs continuing after the chat closes. Work runs on your own Mac (macOS 15+, native); the iPhone companion (iOS 18+) shows progress and decisions on the go.</description>
+  </item>
+  <item>
     <title>FreeAI Go</title>
     <link>https://index.percall.dev/l/freeai-go.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/freeai-go.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Independent paid AI API gateway for developers using Claude, GPT and image models through documented Anthropic-format and OpenAI-compatible endpoints. Requires an account, API key and funded balance. Model-specific pricing and usage records. Claude cache use is billed at the official rate; non-Claude-Code requests include an additional system prompt. Independent service, not an official model-provider partner.</description>
-  </item>
-  <item>
-    <title>Fondo Blanco</title>
-    <link>https://index.percall.dev/l/fondoblanco-org.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/fondoblanco-org.html</guid>
-    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Free Spanish tool to remove photo backgrounds and put a white background (quitar fondo / fondo blanco).</description>
   </item>
 </channel>
 </rss>
