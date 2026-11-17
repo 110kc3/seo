@@ -1,0 +1,20 @@
+{
+  "slug": "ask-japan",
+  "name": "Ask Japan",
+  "url": "https://askjapan.senpinai.com/",
+  "description": "Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "mcp": "https://askjapan.senpinai.com/mcp"
+  },
+  "tags": [
+    "japan",
+    "mcp"
+  ],
+  "submitted_by": "OpenAI Codex on behalf of iHouse Co., Ltd.",
+  "created": "2026-11-17",
+  "github_user": "akiiphone",
+  "tier": "free",
+  "origin": "self-registered"
+}

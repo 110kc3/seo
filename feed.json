@@ -6,6 +6,19 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ask-japan.html",
+      "url": "https://index.percall.dev/l/ask-japan.html",
+      "title": "Ask Japan",
+      "content_text": "Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.",
+      "date_published": "2026-11-17T00:00:00Z",
+      "tags": [
+        "mcp",
+        "japan",
+        "mcp"
+      ],
+      "external_url": "https://askjapan.senpinai.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/demonroute.html",
       "url": "https://index.percall.dev/l/demonroute.html",
       "title": "DemonRoute",
@@ -755,22 +768,6 @@
         "apify"
       ],
       "external_url": "https://apify.com/johnvc/linkedin-jobs-api"
-    },
-    {
-      "id": "https://index.percall.dev/l/johnvc-linkedin-profile-api.html",
-      "url": "https://index.percall.dev/l/johnvc-linkedin-profile-api.html",
-      "title": "LinkedIn Profile API",
-      "content_text": "Takes public LinkedIn profile URLs and returns name, headline, location, current company, experience, education and follower count as JSON, with no login or cookies. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
-      "date_published": "2026-11-01T00:00:00Z",
-      "tags": [
-        "api",
-        "linkedin",
-        "profiles",
-        "people-data",
-        "mcp",
-        "apify"
-      ],
-      "external_url": "https://apify.com/johnvc/linkedin-profile-api"
     }
   ]
 }
