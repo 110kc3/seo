@@ -2,9 +2,9 @@
   "slug": "humanpen",
   "name": "HumanPen",
   "url": "https://humanpen.net",
-  "description": "Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.",
+  "description": "Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.",
   "category": "app",
-  "pricing": "freemium",
+  "pricing": "paid",
   "machine_endpoints": {
     "llms_txt": "https://humanpen.net/llms.txt"
   },
@@ -19,5 +19,6 @@
   "created": "2026-10-21",
   "github_user": "LWJUOLPENNCJBS",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-11-17"
 }

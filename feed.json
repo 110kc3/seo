@@ -32,6 +32,22 @@
       "external_url": "https://hands.senpinai.com/"
     },
     {
+      "id": "https://index.percall.dev/l/humanpen.html",
+      "url": "https://index.percall.dev/l/humanpen.html",
+      "title": "HumanPen",
+      "content_text": "Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.",
+      "date_published": "2026-11-17T00:00:00Z",
+      "tags": [
+        "app",
+        "writing",
+        "education",
+        "humanizer",
+        "academic",
+        "docx"
+      ],
+      "external_url": "https://humanpen.net"
+    },
+    {
       "id": "https://index.percall.dev/l/demonroute.html",
       "url": "https://index.percall.dev/l/demonroute.html",
       "title": "DemonRoute",
@@ -749,22 +765,6 @@
         "apify"
       ],
       "external_url": "https://apify.com/johnvc/google-jobs-scraper"
-    },
-    {
-      "id": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
-      "url": "https://index.percall.dev/l/johnvc-google-maps-places-api.html",
-      "title": "Google Maps Places API",
-      "content_text": "Turns search terms like 'dentists in Austin, TX' into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
-      "date_published": "2026-11-01T00:00:00Z",
-      "tags": [
-        "api",
-        "maps",
-        "local-business",
-        "leads",
-        "mcp",
-        "apify"
-      ],
-      "external_url": "https://apify.com/johnvc/google-maps-places-api"
     }
   ]
 }

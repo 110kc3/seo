@@ -1010,8 +1010,8 @@ A response does not verify authentication, payment or tool behavior.
 
 ### HumanPen (humanpen)
 - url: https://humanpen.net
-- category: app · pricing: freemium · tags: writing, education, humanizer, academic, docx
-- Document-level AI humanizer for academic Word (DOCX) and PowerPoint (PPTX): rewrite AI text in-file, convert citations, condense and translate while preserving formatting.
+- category: app · pricing: paid · tags: writing, education, humanizer, academic, docx
+- Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.
 - llms_txt: https://humanpen.net/llms.txt
 - listing JSON: https://index.percall.dev/listings/humanpen.json
 - listing page: https://index.percall.dev/l/humanpen.html
