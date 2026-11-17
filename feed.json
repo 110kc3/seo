@@ -32,6 +32,22 @@
       "external_url": "https://hands.senpinai.com/"
     },
     {
+      "id": "https://index.percall.dev/l/orbheaven.html",
+      "url": "https://index.percall.dev/l/orbheaven.html",
+      "title": "OrbHeaven",
+      "content_text": "OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.",
+      "date_published": "2026-11-17T00:00:00Z",
+      "tags": [
+        "app",
+        "astrology",
+        "tarot",
+        "numerology",
+        "birth-chart",
+        "self-reflection"
+      ],
+      "external_url": "https://orbheaven.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=authority"
+    },
+    {
       "id": "https://index.percall.dev/l/humanpen.html",
       "url": "https://index.percall.dev/l/humanpen.html",
       "title": "HumanPen",
@@ -749,22 +765,6 @@
         "cdp"
       ],
       "external_url": "https://cloudbrowser.tv/"
-    },
-    {
-      "id": "https://index.percall.dev/l/johnvc-google-jobs-scraper.html",
-      "url": "https://index.percall.dev/l/johnvc-google-jobs-scraper.html",
-      "title": "Google Jobs API",
-      "content_text": "Searches Google for Jobs by query and location and returns each listing with title, company, location, posting age, salary when shown, description and every apply link (LinkedIn, Indeed, Glassdoor, company sites) as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.",
-      "date_published": "2026-11-01T00:00:00Z",
-      "tags": [
-        "api",
-        "jobs",
-        "google-jobs",
-        "recruiting",
-        "mcp",
-        "apify"
-      ],
-      "external_url": "https://apify.com/johnvc/google-jobs-scraper"
     }
   ]
 }

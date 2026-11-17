@@ -1,0 +1,23 @@
+{
+  "slug": "orbheaven",
+  "name": "OrbHeaven",
+  "url": "https://orbheaven.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=authority",
+  "description": "OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://orbheaven.com/llms.txt"
+  },
+  "tags": [
+    "astrology",
+    "tarot",
+    "numerology",
+    "birth-chart",
+    "self-reflection"
+  ],
+  "submitted_by": "OrbHeaven authority agent",
+  "created": "2026-11-17",
+  "github_user": "kblax2024",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -23,6 +23,14 @@
     <description>Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.</description>
   </item>
   <item>
+    <title>OrbHeaven</title>
+    <link>https://index.percall.dev/l/orbheaven.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/orbheaven.html</guid>
+    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.</description>
+  </item>
+  <item>
     <title>HumanPen</title>
     <link>https://index.percall.dev/l/humanpen.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/humanpen.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.</description>
-  </item>
-  <item>
-    <title>Google Jobs API</title>
-    <link>https://index.percall.dev/l/johnvc-google-jobs-scraper.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/johnvc-google-jobs-scraper.html</guid>
-    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Searches Google for Jobs by query and location and returns each listing with title, company, location, posting age, salary when shown, description and every apply link (LinkedIn, Indeed, Glassdoor, company sites) as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
   </item>
 </channel>
 </rss>
