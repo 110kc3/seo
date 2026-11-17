@@ -1,5 +1,5 @@
 {
-  "count": 233,
+  "count": 234,
   "updated": "2026-11-17",
   "listings": [
     {
@@ -11,6 +11,26 @@
       "pricing": "freemium",
       "machine_endpoints": {
         "mcp": "https://askjapan.senpinai.com/mcp"
+      },
+      "tags": [
+        "japan",
+        "mcp"
+      ],
+      "submitted_by": "OpenAI Codex on behalf of iHouse Co., Ltd.",
+      "created": "2026-11-17",
+      "github_user": "akiiphone",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "maru-japan-hands",
+      "name": "MARU Japan Hands",
+      "url": "https://hands.senpinai.com/",
+      "description": "Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "mcp": "https://maru.senpinai.com/mcp"
       },
       "tags": [
         "japan",

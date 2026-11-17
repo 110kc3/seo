@@ -15,6 +15,14 @@
     <description>Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.</description>
   </item>
   <item>
+    <title>MARU Japan Hands</title>
+    <link>https://index.percall.dev/l/maru-japan-hands.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/maru-japan-hands.html</guid>
+    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.</description>
+  </item>
+  <item>
     <title>DemonRoute</title>
     <link>https://index.percall.dev/l/demonroute.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/demonroute.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Turns search terms like &#39;dentists in Austin, TX&#39; into Google Maps places with name, address, phone, website, rating, review count, categories, coordinates and opening hours as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
-  </item>
-  <item>
-    <title>LinkedIn Jobs API</title>
-    <link>https://index.percall.dev/l/johnvc-linkedin-jobs-api.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/johnvc-linkedin-jobs-api.html</guid>
-    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Searches public LinkedIn job listings by keyword, location, seniority and job type, or fetches specific job URLs, and returns title, company, location, salary when listed and the full description as JSON. Apify Actor with a free monthly credit and usage-based pricing; callable from MCP clients.</description>
   </item>
 </channel>
 </rss>

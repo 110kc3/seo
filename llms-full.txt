@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 233 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 234 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (233)
+## All listings (234)
 
 ### Ask Japan (ask-japan)
 - url: https://askjapan.senpinai.com/
@@ -312,6 +312,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://askjapan.senpinai.com/mcp
 - listing JSON: https://index.percall.dev/listings/ask-japan.json
 - listing page: https://index.percall.dev/l/ask-japan.html
+
+### MARU Japan Hands (maru-japan-hands)
+- url: https://hands.senpinai.com/
+- category: mcp · pricing: paid · tags: japan, mcp
+- Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.
+- mcp: https://maru.senpinai.com/mcp
+- listing JSON: https://index.percall.dev/listings/maru-japan-hands.json
+- listing page: https://index.percall.dev/l/maru-japan-hands.html
 
 ### DemonRoute (demonroute)
 - url: https://demonroute.com/
