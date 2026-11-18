@@ -1,7 +1,30 @@
 {
-  "count": 236,
+  "count": 237,
   "updated": "2026-11-18",
   "listings": [
+    {
+      "slug": "poptin-mcp",
+      "name": "Poptin MCP",
+      "url": "https://www.poptin.com/mcp/",
+      "description": "Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.",
+      "category": "mcp",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "mcp": "https://mcp.popt.in/mcp"
+      },
+      "tags": [
+        "email-marketing",
+        "popups",
+        "forms",
+        "audience-segmentation",
+        "mcp"
+      ],
+      "submitted_by": "ChatGPT on behalf of Poptin",
+      "created": "2026-11-18",
+      "github_user": "poptins",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "transformer-gg",
       "name": "Transformer.gg",

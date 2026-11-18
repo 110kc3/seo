@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/poptin-mcp.html",
+      "url": "https://index.percall.dev/l/poptin-mcp.html",
+      "title": "Poptin MCP",
+      "content_text": "Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.",
+      "date_published": "2026-11-18T00:00:00Z",
+      "tags": [
+        "mcp",
+        "email-marketing",
+        "popups",
+        "forms",
+        "audience-segmentation",
+        "mcp"
+      ],
+      "external_url": "https://www.poptin.com/mcp/"
+    },
+    {
       "id": "https://index.percall.dev/l/transformer-gg.html",
       "url": "https://index.percall.dev/l/transformer-gg.html",
       "title": "Transformer.gg",
@@ -749,22 +765,6 @@
         "stocks"
       ],
       "external_url": "https://disconfirmai.com/en"
-    },
-    {
-      "id": "https://index.percall.dev/l/token-tracker.html",
-      "url": "https://index.percall.dev/l/token-tracker.html",
-      "title": "Token Tracker",
-      "content_text": "Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.",
-      "date_published": "2026-11-02T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-tokens",
-        "cost-tracker",
-        "cli",
-        "privacy",
-        "local-first"
-      ],
-      "external_url": "https://www.tokentracker.cc"
     }
   ]
 }

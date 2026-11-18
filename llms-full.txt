@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 236 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 237 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (236)
+## All listings (237)
+
+### Poptin MCP (poptin-mcp)
+- url: https://www.poptin.com/mcp/
+- category: mcp · pricing: freemium · tags: email-marketing, popups, forms, audience-segmentation, mcp
+- Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.
+- mcp: https://mcp.popt.in/mcp
+- listing JSON: https://index.percall.dev/listings/poptin-mcp.json
+- listing page: https://index.percall.dev/l/poptin-mcp.html
 
 ### Transformer.gg (transformer-gg)
 - url: https://transformer.gg/?utm_source=index.percall.dev&utm_medium=referral&utm_campaign=backlinks&utm_content=listing

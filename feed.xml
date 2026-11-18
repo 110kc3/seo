@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Poptin MCP</title>
+    <link>https://index.percall.dev/l/poptin-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/poptin-mcp.html</guid>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.</description>
+  </item>
+  <item>
     <title>Transformer.gg</title>
     <link>https://index.percall.dev/l/transformer-gg.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/transformer-gg.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.</description>
-  </item>
-  <item>
-    <title>Token Tracker</title>
-    <link>https://index.percall.dev/l/token-tracker.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/token-tracker.html</guid>
-    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Token Tracker is a local-first desktop and CLI dashboard for AI token usage and costs across Claude Code, Codex, Cursor, Gemini, Copilot and more. Privacy-first: token counts only, never prompts. Free and open source (MIT) with optional cloud sync.</description>
   </item>
 </channel>
 </rss>
