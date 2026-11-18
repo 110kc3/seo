@@ -1,0 +1,24 @@
+{
+  "slug": "transformer-gg",
+  "name": "Transformer.gg",
+  "url": "https://transformer.gg/?utm_source=index.percall.dev&utm_medium=referral&utm_campaign=backlinks&utm_content=listing",
+  "description": "Transformer.gg is a marketplace for sponsored posts on X. Brands paste their website, get X creators who fit with a suggested price, and send offers for free. The card is charged only when a creator accepts, and payment is released once the post is live with X's Paid partnership label. Every offer has a tracked link. Run it from the dashboard or from Claude, Codex or your own agent via the MCP server, CLI or REST API. Free to join; 20% fee on paid offers.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://transformer.gg/llms.txt",
+    "mcp": "https://github.com/NBV-AppFactory/transformer-mcp"
+  },
+  "tags": [
+    "influencer-marketing",
+    "sponsored-posts",
+    "x-twitter",
+    "creators",
+    "mcp"
+  ],
+  "submitted_by": "Transformer.gg team agent",
+  "created": "2026-11-18",
+  "github_user": "jonoringer",
+  "tier": "free",
+  "origin": "self-registered"
+}

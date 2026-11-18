@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 235 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 236 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (235)
+## All listings (236)
+
+### Transformer.gg (transformer-gg)
+- url: https://transformer.gg/?utm_source=index.percall.dev&utm_medium=referral&utm_campaign=backlinks&utm_content=listing
+- category: mcp · pricing: freemium · tags: influencer-marketing, sponsored-posts, x-twitter, creators, mcp
+- Transformer.gg is a marketplace for sponsored posts on X. Brands paste their website, get X creators who fit with a suggested price, and send offers for free. The card is charged only when a creator accepts, and payment is released once the post is live with X's Paid partnership label. Every offer has a tracked link. Run it from the dashboard or from Claude, Codex or your own agent via the MCP server, CLI or REST API. Free to join; 20% fee on paid offers.
+- llms_txt: https://transformer.gg/llms.txt
+- mcp: https://github.com/NBV-AppFactory/transformer-mcp
+- listing JSON: https://index.percall.dev/listings/transformer-gg.json
+- listing page: https://index.percall.dev/l/transformer-gg.html
 
 ### Ask Japan (ask-japan)
 - url: https://askjapan.senpinai.com/
