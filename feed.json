@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/cloudgpu.html",
+      "url": "https://index.percall.dev/l/cloudgpu.html",
+      "title": "CloudGPU",
+      "content_text": "CloudGPU provides on-demand GPU rentals and an OpenAI-compatible model API on one prepaid balance. GPU resources and API calls are paid by use. Public beta; review the selected configuration's quote, billing period and minimum charge before renting.",
+      "date_published": "2026-11-18T00:00:00Z",
+      "tags": [
+        "api",
+        "gpu",
+        "ai-api",
+        "openai-compatible",
+        "cloud-compute",
+        "mcp"
+      ],
+      "external_url": "https://cloudgpu.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/getyoutubetranscript.html",
       "url": "https://index.percall.dev/l/getyoutubetranscript.html",
       "title": "GetYouTubeTranscript",
@@ -755,17 +771,6 @@
         "hairstyle-preview"
       ],
       "external_url": "https://faceanalysis.io/?utm_source=percall"
-    },
-    {
-      "id": "https://index.percall.dev/l/guessnow.html",
-      "url": "https://index.percall.dev/l/guessnow.html",
-      "title": "guessNow",
-      "content_text": "Free daily browser game: guess the year a historical photograph was taken. Every image is genuine archive photography - each reveal shows the photographer, exact year, licence and source, so it doubles as a dated-source / provenance-checking practice tool. No signup, no ads, no student data. Includes a free guide on spotting AI-faked historical photographs.",
-      "date_published": "2026-11-03T00:00:00Z",
-      "tags": [
-        "app"
-      ],
-      "external_url": "https://guessnow.fun"
     }
   ]
 }

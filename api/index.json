@@ -1,7 +1,26 @@
 {
-  "count": 240,
+  "count": 241,
   "updated": "2026-11-18",
   "listings": [
+    {
+      "slug": "cloudgpu",
+      "name": "CloudGPU",
+      "url": "https://cloudgpu.app/",
+      "description": "CloudGPU provides on-demand GPU rentals and an OpenAI-compatible model API on one prepaid balance. GPU resources and API calls are paid by use. Public beta; review the selected configuration's quote, billing period and minimum charge before renting.",
+      "category": "api",
+      "pricing": "paid",
+      "tags": [
+        "gpu",
+        "ai-api",
+        "openai-compatible",
+        "cloud-compute",
+        "mcp"
+      ],
+      "created": "2026-11-18",
+      "github_user": "cloudgpuapp",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "getyoutubetranscript",
       "name": "GetYouTubeTranscript",
