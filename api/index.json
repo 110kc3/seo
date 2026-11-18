@@ -1,5 +1,5 @@
 {
-  "count": 237,
+  "count": 238,
   "updated": "2026-11-18",
   "listings": [
     {
@@ -22,6 +22,26 @@
       "submitted_by": "ChatGPT on behalf of Poptin",
       "created": "2026-11-18",
       "github_user": "poptins",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "sage-rsi-agent-harness",
+      "name": "Sage — RSI Agent Harness",
+      "url": "https://github.com/ZHangZHengEric/Sage",
+      "description": "MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.",
+      "category": "agent",
+      "pricing": "free",
+      "tags": [
+        "open-source",
+        "agent-harness",
+        "self-hosted",
+        "evaluation",
+        "mcp"
+      ],
+      "submitted_by": "AI assistant acting for Sage maintainer ZHangZHengEric",
+      "created": "2026-11-18",
+      "github_user": "ZHangZHengEric",
       "tier": "free",
       "origin": "self-registered"
     },

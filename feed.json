@@ -22,6 +22,22 @@
       "external_url": "https://www.poptin.com/mcp/"
     },
     {
+      "id": "https://index.percall.dev/l/sage-rsi-agent-harness.html",
+      "url": "https://index.percall.dev/l/sage-rsi-agent-harness.html",
+      "title": "Sage — RSI Agent Harness",
+      "content_text": "MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.",
+      "date_published": "2026-11-18T00:00:00Z",
+      "tags": [
+        "agent",
+        "open-source",
+        "agent-harness",
+        "self-hosted",
+        "evaluation",
+        "mcp"
+      ],
+      "external_url": "https://github.com/ZHangZHengEric/Sage"
+    },
+    {
       "id": "https://index.percall.dev/l/transformer-gg.html",
       "url": "https://index.percall.dev/l/transformer-gg.html",
       "title": "Transformer.gg",
@@ -750,21 +766,6 @@
         "text-to-song"
       ],
       "external_url": "https://music.rynn.me"
-    },
-    {
-      "id": "https://index.percall.dev/l/disconfirmai.html",
-      "url": "https://index.percall.dev/l/disconfirmai.html",
-      "title": "DisconfirmAI",
-      "content_text": "Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.",
-      "date_published": "2026-11-02T00:00:00Z",
-      "tags": [
-        "app",
-        "investing",
-        "research",
-        "finance",
-        "stocks"
-      ],
-      "external_url": "https://disconfirmai.com/en"
     }
   ]
 }

@@ -15,6 +15,14 @@
     <description>Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.</description>
   </item>
   <item>
+    <title>Sage — RSI Agent Harness</title>
+    <link>https://index.percall.dev/l/sage-rsi-agent-harness.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/sage-rsi-agent-harness.html</guid>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+    <category>agent</category>
+    <description>MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.</description>
+  </item>
+  <item>
     <title>Transformer.gg</title>
     <link>https://index.percall.dev/l/transformer-gg.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/transformer-gg.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.</description>
-  </item>
-  <item>
-    <title>DisconfirmAI</title>
-    <link>https://index.percall.dev/l/disconfirmai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/disconfirmai.html</guid>
-    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Investment research and reading tool for investors. Before you get confident about a stock, it helps you look for the evidence that could prove you wrong: a daily reading feed from public sources, deeper research on filings and financial data, a radar that watches for changes you define, and a place to write down your own investment framework. Submitted by the maker.</description>
   </item>
 </channel>
 </rss>
