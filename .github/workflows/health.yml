@@ -196,10 +196,11 @@ jobs:
             --title "Liveness report $(date -u +%Y-%m-%d)" \
             --body-file health-report.md
 
-      # A green workflow must not conceal retained/stale or missing scores.
+      # Failures that survive one retry fail the run unless the listing is also
+      # failing liveness; the job summary always lists every remaining failure.
       # This runs after publication so failures do not discard successful updates.
       - name: Report incomplete scoring
         if: always() && (steps.score.outcome == 'failure' || steps.commit.outputs.scoring_failed == 'true')
         run: |
-          echo "::error::Registry scoring was incomplete; see the score refresh job summary. Previous successful grades were retained with their original dates."
+          echo "::error::Registry scoring had failures not explained by liveness, or too many failures overall; see the score refresh job summary. Previous successful grades were retained with their original dates."
           exit 1

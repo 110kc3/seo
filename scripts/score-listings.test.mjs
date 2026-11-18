@@ -70,25 +70,97 @@ test('maintenance auth is bearer-only and applies before cache or alias rewritin
   assert.equal((await handleScore(alias, env, { base, host_aliases: ['alias.example'] }, null, listings)).status, 403);
 });
 
+const noWait = async () => {};
+const targetOf = (url) => new URL(url).searchParams.get('url');
+
 test('partial refresh retains old dates, reports missing grades and continues after errors', async () => {
   const previous = { 'site-000': { letter: 'B', score: 80, checked: '2026-09-21' } };
-  let count = 0;
-  const result = await refreshScores({ listings: listings.slice(0, 4), previous, base, token, now, fetchImpl: async () => {
-    count++;
-    if (count === 1) return new Response('rate limited', { status: 429 });
-    if (count === 2) return Response.json({ ...good, letter: 'wrong' });
-    if (count === 3) throw new Error(`network failure ${token}`);
-    return Response.json(good);
-  } });
+  const persistentFailures = {
+    [listings[0].url]: () => new Response('rate limited', { status: 429 }),
+    [listings[1].url]: () => Response.json({ ...good, letter: 'wrong' }),
+    [listings[2].url]: () => { throw new Error(`network failure ${token}`); },
+  };
+  const result = await refreshScores({ listings: listings.slice(0, 4), previous, base, token, now, sleep: noWait,
+    fetchImpl: async (url) => (persistentFailures[targetOf(url)] ?? (() => Response.json(good)))() });
   assert.equal(result.complete, false);
+  assert.equal(result.acceptable, false);
+  assert.equal(result.unexplained, 3);
   assert.equal(result.refreshed, 1);
   assert.equal(result.retained, 1);
   assert.equal(result.missing, 2);
   assert.deepEqual(result.scores['site-000'], previous['site-000']);
   assert.equal(result.scores['site-003'].checked, '2026-10-03');
-  assert.match(scoreSummary(result), /1\/4 refreshed; 1 previous grades retained; 2 without a grade/);
-  assert.match(scoreSummary(result), /INCOMPLETE/);
+  assert.match(scoreSummary(result), /1\/4 refreshed \(0 on retry\); 1 previous grades retained; 2 without a grade/);
+  assert.match(scoreSummary(result), /3 failure\(s\) not explained by liveness/);
   assert.doesNotMatch(scoreSummary(result), new RegExp(token));
+});
+
+test('transient failures are retried once after a pause and then count as refreshed', async () => {
+  const attempts = new Map();
+  const pauses = [];
+  const result = await refreshScores({ listings: listings.slice(0, 3), base, token, now, retryDelayMs: 1234,
+    sleep: async (ms) => { pauses.push(ms); },
+    fetchImpl: async (url) => {
+      const target = targetOf(url);
+      attempts.set(target, (attempts.get(target) ?? 0) + 1);
+      if (target === listings[1].url && attempts.get(target) === 1) {
+        return Response.json({ ok: false, code: 'audit_failed' }, { status: 502 });
+      }
+      return Response.json(good);
+    } });
+  assert.deepEqual(pauses, [1234]);
+  assert.equal(attempts.get(listings[1].url), 2);
+  assert.equal(attempts.get(listings[0].url), 1);
+  assert.equal(result.complete, true);
+  assert.equal(result.acceptable, true);
+  assert.equal(result.recovered, 1);
+  assert.equal(result.refreshed, 3);
+});
+
+test('no pause is taken when the first pass succeeds', async () => {
+  const result = await refreshScores({ listings: listings.slice(0, 2), base, token, now,
+    sleep: () => assert.fail('must not pause'), fetchImpl: async () => Response.json(good) });
+  assert.equal(result.complete, true);
+});
+
+test('failures of listings already failing liveness are reported but do not fail the run', async () => {
+  const down = listings[0];
+  const result = await refreshScores({ listings: listings.slice(0, 8), base, token, now, sleep: noWait,
+    health: { [down.slug]: 2 },
+    fetchImpl: async (url) => targetOf(url) === down.url
+      ? Response.json({ ok: false, code: 'audit_failed' }, { status: 502 })
+      : Response.json(good) });
+  assert.equal(result.complete, false);
+  assert.equal(result.explained, 1);
+  assert.equal(result.unexplained, 0);
+  assert.equal(result.acceptable, true);
+  const summary = scoreSummary(result);
+  assert.match(summary, /the run passes/);
+  assert.match(summary, /site-000: HTTP 502 audit_failed \(no previous grade; also failing liveness\)/);
+});
+
+test('one unexplained failure fails the run even when others are explained', async () => {
+  const result = await refreshScores({ listings: listings.slice(0, 8), base, token, now, sleep: noWait,
+    health: { [listings[0].slug]: 1 },
+    fetchImpl: async (url) => [listings[0].url, listings[1].url].includes(targetOf(url))
+      ? new Response('', { status: 503 })
+      : Response.json(good) });
+  assert.equal(result.explained, 1);
+  assert.equal(result.unexplained, 1);
+  assert.equal(result.acceptable, false);
+});
+
+test('explained failures beyond a quarter of the registry still fail the run', async () => {
+  const sample = listings.slice(0, 8);
+  const down = sample.slice(0, 3);
+  const result = await refreshScores({ listings: sample, base, token, now, sleep: noWait,
+    health: Object.fromEntries(down.map((l) => [l.slug, 1])),
+    fetchImpl: async (url) => down.some((l) => l.url === targetOf(url))
+      ? new Response('', { status: 502 })
+      : Response.json(good) });
+  assert.equal(result.unexplained, 0);
+  assert.equal(result.acceptable, false);
+  assert.match(scoreSummary(result), /more than 25% of listings failed/);
 });
 
 test('missing credentials and unsafe service URLs fail before making requests', async () => {
@@ -98,7 +170,7 @@ test('missing credentials and unsafe service URLs fail before making requests', 
   }
 });
 
-test('CLI publishes partial scores and summary but exits unsuccessfully', async (t) => {
+test('CLI publishes partial scores and exits unsuccessfully unless liveness explains every failure', async (t) => {
   const { mkdtemp, cp, writeFile, readFile, mkdir, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
@@ -117,14 +189,20 @@ test('CLI publishes partial scores and summary but exits unsuccessfully', async 
   const old = { letter: 'B', score: 80, checked: '2026-09-21' };
   await writeFile(join(root, 'scores.json'), JSON.stringify({ 'site-000': old }));
   await writeFile(join(root, 'fetch.mjs'), `globalThis.fetch = async (url) => new URL(url).searchParams.get('url').endsWith('/0') ? new Response('', {status: 502}) : Response.json(${JSON.stringify(good)});`);
-  const env = { ...process.env, DASHBOARD_TOKEN: token, GITHUB_OUTPUT: join(root, 'outputs'), GITHUB_STEP_SUMMARY: join(root, 'summary') };
+  const env = { ...process.env, DASHBOARD_TOKEN: token, SCORE_RETRY_DELAY_MS: '0', GITHUB_OUTPUT: join(root, 'outputs'), GITHUB_STEP_SUMMARY: join(root, 'summary') };
   const result = spawnSync(process.execPath, ['--import', join(root, 'fetch.mjs'), join(root, 'scripts/score-listings.mjs')], { env, encoding: 'utf8' });
   assert.equal(result.status, 1, result.stderr);
   const scores = JSON.parse(await readFile(join(root, 'scores.json'), 'utf8'));
   assert.deepEqual(scores['site-000'], old);
   assert.equal(scores['site-001']?.score, 100, result.stdout + result.stderr);
-  assert.match(await readFile(env.GITHUB_OUTPUT, 'utf8'), /complete=false/);
-  assert.match(await readFile(env.GITHUB_STEP_SUMMARY, 'utf8'), /1\/2 refreshed; 1 previous grades retained/);
+  assert.match(await readFile(env.GITHUB_OUTPUT, 'utf8'), /complete=false\nacceptable=false/);
+  assert.match(await readFile(env.GITHUB_STEP_SUMMARY, 'utf8'), /1\/2 refreshed \(0 on retry\); 1 previous grades retained/);
+  await writeFile(join(root, 'health.json'), JSON.stringify({ 'site-000': 1 }));
+  for (const listing of listings.slice(2, 5)) await writeFile(join(root, `listings/${listing.slug}.json`), JSON.stringify(listing));
+  const explained = spawnSync(process.execPath, ['--import', join(root, 'fetch.mjs'), join(root, 'scripts/score-listings.mjs')], { env, encoding: 'utf8' });
+  assert.equal(explained.status, 0, explained.stdout + explained.stderr);
+  assert.match(await readFile(env.GITHUB_OUTPUT, 'utf8'), /complete=false\nacceptable=true/);
+  assert.match(explained.stdout, /also failing liveness/);
   const before = await readFile(join(root, 'scores.json'), 'utf8');
   const missing = spawnSync(process.execPath, [join(root, 'scripts/score-listings.mjs')], { env: { ...env, DASHBOARD_TOKEN: '' }, encoding: 'utf8' });
   assert.equal(missing.status, 1);

@@ -1,31 +1,46 @@
 # NEXT — the one pending list
 
-## Current — 2026-11-15
+## Current — 2026-11-18
 
-Last completed slice: repaired the production deployment. The November 14 asset
-size guard added `node:fs` imports to `scripts/validate.mjs`, which the Worker
-bundles through `worker/audit.js` and `worker/route.js`; Cloudflare rejected every
-upload with `No such module "node:fs"` (code 10021). Five consecutive deploy runs
-failed from `9e72a21` onward, so registrations #266, #267 and #268 were committed but
-never published. The filesystem guard now lives in `scripts/asset-sizes.mjs`, the
-validator is byte-identical to the last deployed version, and a test walks the
-Worker import graph and rejects any Node built-in. All 317 tests pass on Node 22,
-two builds leave generated artifacts unchanged, and `git diff --check` passes. The
-Node suite cannot detect workerd upload rejections, so the deploy run itself is the check.
+Last completed slice: the weekly health run now fails only for scoring misses that
+mean something. It had been red every week since October because any one scoring
+miss failed it, so a red run carried no signal. On 16 November 10 of its 13 misses
+were transient HTTP 502/503 responses from `/api/score` for sites that pass liveness;
+the five sampled on 18 November all scored normally. The scorer now retries each
+failure once after a pause, treats a remaining failure as explained when the listing
+already has a liveness strike, and fails the run for any unexplained failure or when
+explained failures exceed a quarter of the registry. See `ARCHITECTURE.md`,
+"Scoring failures that fail the run".
 
-The November 14 slice remains in place: 25 MiB asset size protection in the build and
-catalog fetch scripts, incident issues on deployment failure with closure on recovery,
-and HTTP 200 publication verification in `register.yml` before a registration issue closes.
+The November 14–15 reliability work remains in place: 25 MiB asset size protection,
+deploy-failure incident issues with closure on recovery, HTTP 200 publication
+verification before a registration issue closes, and a test that keeps Node
+built-ins out of the Worker bundle.
 
 ### Accepted next work
 
-- [ ] Monitor weekly scheduled liveness and scoring refreshes on November 16 (`health-weeks.json`). 65 of 227 listings are currently ungraded and await scoring.
+- [ ] Read the November 23 scheduled health run once: record refreshed, retried,
+  explained and unexplained counts, and whether the run was green.
 
 ### Owner actions / blocked
 
 - Show HN: posting remains unconfirmed; refresh private draft in vault before posting.
 - Indexation: Google/Bing search console verification and sitemap submissions need owner's logged-in consoles.
 - User-value validation: participant recruitment and outreach per private September 27 plan. Retention evidence from November 14: 11 of 187 self-registered listings embed the badge, 11 link back to percall.dev, and 7 performed updates (across 6 distinct accounts).
+
+### Verified — 2026-11-18
+
+- `b9a856b` (status-only docs) [deployed successfully](https://github.com/110kc3/seo/actions/runs/43714458772).
+  Registrations #269–#287 since then published through the automated deploys; the
+  newest listing (`cloudgpu`) returns 200.
+- [16 November health run](https://github.com/110kc3/seo/actions/runs/43869876674): 216 of
+  229 refreshed, 10 grades retained, 3 without a grade. Results were committed and
+  deployed; the run then failed at "Report incomplete scoring", which this slice
+  addresses. On `844c634` 226 of 241 listings carry a grade; 13 of the 15 without one
+  registered after the run. Liveness report #272 delisted `shellwire` and lists four
+  listings failing; #250 (9 November) was closed as superseded.
+- llms-txt-hub [PR #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460) was
+  closed unmerged on 13 November. No upstream PR is open.
 
 ### Verified — 2026-11-15
 
@@ -36,7 +51,7 @@ and HTTP 200 publication verification in `register.yml` before a registration is
 
 ### Pending verification
 
-- Status-only documentation push after `7f4efdc`: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
+- This slice's push: [Actions runs](https://github.com/110kc3/seo/actions?query=branch%3Amain)
   pending observation next session.
 
 ### Reviewed reports — 2026-11-14
@@ -112,9 +127,9 @@ you can make. §2 is code and PRs, and needs nothing from you.**
   Older consulting/outreach/Stripe plans are historical, not a reopened offer.
   The existing commercial-evidence gate has not been satisfied or replaced.
 - **External status:** Awesome-llms-txt #114 merged; awesome-mcp-servers #11152
-  closed unmerged after remote entries moved to another repository. Only
-  llms-txt-hub #1460 remains open awaiting review (§3). A replacement submission
-  is unselected. Bazaar's last recorded absence remains an external wait; recheck
+  closed unmerged after remote entries moved to another repository; llms-txt-hub
+  #1460 closed unmerged on 13 November 2026. No upstream PR is open. A replacement
+  submission is unselected. Bazaar's last recorded absence remains an external wait; recheck
   only if upstream state changes.
 - **Repository/Codex:** weekly liveness rerun safety is implemented; this change's
   deployment and the next scheduled health run need observation. The October 3
@@ -717,7 +732,7 @@ rather than inferred. **265 tests.**
 |---|---|
 | **[awesome-mcp-servers #11152](https://github.com/punkpeye/awesome-mcp-servers/pull/11152)** | CLOSED unmerged on 8 September. Maintainers moved remote entries to `punkpeye/awesome-remote-mcp-servers`. No replacement submission selected or sent. |
 | **[Awesome-llms-txt #114](https://github.com/SecretiveShell/Awesome-llms-txt/pull/114)** | MERGED on 28 September. No pending review action. |
-| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | OPEN, BLOCKED pending required review (rechecked October 21). Await the maintainer; no new comment or review request sent. |
+| **[llms-txt-hub #1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460)** | CLOSED unmerged on 13 November 2026. No replacement submission is selected. |
 | **x402 Bazaar listing** | Last verified absent on 1 September; not rechecked this session. That check read **14,819 resources**; the 26 Aug committed snapshot contains **15,127 endpoints**. Nothing pays our address or lives on our host. Everything on our side is done: the rail is CDP, the 402 carries discovery metadata and a settlement carried it. Upstream `x402-foundation/x402#2112` is now closed and documents several indexing/re-indexing causes, so it does not identify ours. Check with `node scripts/bazaar-check.mjs`; do not spend more time on this unless the upstream state changes. |
 
 ---
@@ -843,7 +858,7 @@ Verified live 2026-08-02 unless noted.
 
 | channel | state |
 |---|---|
-| **llms-txt-hub** | ✅ **PR [#1459](https://github.com/thedaviddias/llms-txt-hub/pull/1459) merged 2026-08-02 at 09:31 UTC** — the first real inbound link this project received. Canonical URL correction [#1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460) is still waiting on review (§3). |
+| **llms-txt-hub** | ✅ **PR [#1459](https://github.com/thedaviddias/llms-txt-hub/pull/1459) merged 2026-08-02 at 09:31 UTC** — the first real inbound link this project received. Canonical URL correction [#1460](https://github.com/thedaviddias/llms-txt-hub/pull/1460) closed unmerged on 13 November 2026. |
 | **Glama repo listing** | ✅ **Live** — `glama.ai/mcp/servers/110kc3/seo` resolves, badge renders. Unblocks §2.1. |
 | **agentswelcome.dev** | ✅ Certified 100/100 "exemplary", all 18 checks. Entry `ae21017ab44f`, one of 3 sites in the directory. |
 | **awesome-mcp-servers** | ✅ Submitted (#11152) — now waiting, see §3. |

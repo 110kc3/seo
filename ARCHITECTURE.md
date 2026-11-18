@@ -193,8 +193,8 @@ do not authorize this mode. The operations bearer is never passed to audit targe
 
 The runner requires an HTTPS service URL and refuses redirects when carrying the
 bearer. It validates responses, reports refreshed/retained/missing counts and
-keeps a failed listing's previous score and original date. Incomplete runs exit
-nonzero. `health.yml` publishes successful updates before its final failure step;
+keeps a failed listing's previous score and original date. Runs with unexplained
+failures exit nonzero. `health.yml` publishes successful updates before its final failure step;
 its push-retry path authenticates and reports failures too. Newly committed URLs
 not yet deployed fail explicitly and can be scored after their deployment.
 
@@ -212,7 +212,24 @@ Undated legacy state starts a new streak rather than risking premature removal.
 Each probe releases its response body and clears its timeout on both success
 and failure. Obsolete local reports are removed when no listing is failing.
 Scoring remains independent: an inaccessible site receives no invented grade,
-retained grades keep their dates, and incomplete scoring still fails the job.
+and retained grades keep their dates.
+
+### Scoring failures that fail the run — 2026-11-18
+
+The weekly health run failed every week from October onward because any single
+scoring miss failed it. A red run had become normal, which helped a 19-day deploy
+outage go unnoticed. On 16 November, 10 of the 13 misses were transient HTTP 502/503
+responses from `/api/score` for sites that passed liveness and scored normally two
+days later.
+
+`scripts/score-listings.mjs` therefore retries every first-pass failure once after a
+30-second pause (`SCORE_RETRY_DELAY_MS` overrides it, for tests). A failure that
+remains is *explained* when `health.json` already records a liveness strike for that
+listing; the liveness step runs first. The run fails when any remaining failure is
+unexplained, or when explained failures exceed a quarter of all listings, which
+points to a problem on our side rather than on the targets. The job summary always
+lists every remaining failure with its HTTP status and the Worker's error `code`, and
+`GITHUB_OUTPUT` reports both `complete` and `acceptable`.
 
 ## Data stores
 
