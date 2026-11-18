@@ -54,6 +54,21 @@
       "external_url": "https://transformer.gg/?utm_source=index.percall.dev&utm_medium=referral&utm_campaign=backlinks&utm_content=listing"
     },
     {
+      "id": "https://index.percall.dev/l/youzi-public-ai-station.html",
+      "url": "https://index.percall.dev/l/youzi-public-ai-station.html",
+      "title": "Youzi Public AI Station (柚子的公益站)",
+      "content_text": "A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.",
+      "date_published": "2026-11-18T00:00:00Z",
+      "tags": [
+        "api",
+        "llm",
+        "api-gateway",
+        "chat-completions",
+        "responses"
+      ],
+      "external_url": "https://ai.bayunzi.shop/"
+    },
+    {
       "id": "https://index.percall.dev/l/ask-japan.html",
       "url": "https://index.percall.dev/l/ask-japan.html",
       "title": "Ask Japan",
@@ -750,22 +765,6 @@
         "governance"
       ],
       "external_url": "https://blog.aeneia.pl/"
-    },
-    {
-      "id": "https://index.percall.dev/l/cadence-music.html",
-      "url": "https://index.percall.dev/l/cadence-music.html",
-      "title": "Cadence Music",
-      "content_text": "Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.",
-      "date_published": "2026-11-02T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-music",
-        "song-generator",
-        "vocals",
-        "gifts",
-        "text-to-song"
-      ],
-      "external_url": "https://music.rynn.me"
     }
   ]
 }

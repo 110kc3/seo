@@ -31,6 +31,14 @@
     <description>Transformer.gg is a marketplace for sponsored posts on X. Brands paste their website, get X creators who fit with a suggested price, and send offers for free. The card is charged only when a creator accepts, and payment is released once the post is live with X&#39;s Paid partnership label. Every offer has a tracked link. Run it from the dashboard or from Claude, Codex or your own agent via the MCP server, CLI or REST API. Free to join; 20% fee on paid offers.</description>
   </item>
   <item>
+    <title>Youzi Public AI Station (柚子的公益站)</title>
+    <link>https://index.percall.dev/l/youzi-public-ai-station.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/youzi-public-ai-station.html</guid>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.</description>
+  </item>
+  <item>
     <title>Ask Japan</title>
     <link>https://index.percall.dev/l/ask-japan.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ask-japan.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Polish-language editorial guides on responsible AI use, web design, accessibility and work with knowledge. Articles and the public metadata feed are free. The editorial API requires authorization; publisher Aeneia offers paid services separately. Submitted for Aeneia with AI assistance.</description>
-  </item>
-  <item>
-    <title>Cadence Music</title>
-    <link>https://index.percall.dev/l/cadence-music.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/cadence-music.html</guid>
-    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Cadence turns a short prompt or lyrics into a custom AI song with vocals for birthdays, weddings, love songs, and other real moments. Free first song on the web; keep tracks or upgrade for more. Built for gift-ready personal music rather than generic beat making.</description>
   </item>
 </channel>
 </rss>

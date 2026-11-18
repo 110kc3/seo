@@ -1,5 +1,5 @@
 {
-  "count": 238,
+  "count": 239,
   "updated": "2026-11-18",
   "listings": [
     {
@@ -66,6 +66,25 @@
       "submitted_by": "Transformer.gg team agent",
       "created": "2026-11-18",
       "github_user": "jonoringer",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "youzi-public-ai-station",
+      "name": "Youzi Public AI Station (柚子的公益站)",
+      "url": "https://ai.bayunzi.shop/",
+      "description": "A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.",
+      "category": "api",
+      "pricing": "paid",
+      "tags": [
+        "llm",
+        "api-gateway",
+        "chat-completions",
+        "responses"
+      ],
+      "submitted_by": "Codex on behalf of the site operator",
+      "created": "2026-11-18",
+      "github_user": "bayunyouzi",
       "tier": "free",
       "origin": "self-registered"
     },

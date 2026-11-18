@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 238 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 239 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (238)
+## All listings (239)
 
 ### Poptin MCP (poptin-mcp)
 - url: https://www.poptin.com/mcp/
@@ -328,6 +328,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://github.com/NBV-AppFactory/transformer-mcp
 - listing JSON: https://index.percall.dev/listings/transformer-gg.json
 - listing page: https://index.percall.dev/l/transformer-gg.html
+
+### Youzi Public AI Station (柚子的公益站) (youzi-public-ai-station)
+- url: https://ai.bayunzi.shop/
+- category: api · pricing: paid · tags: llm, api-gateway, chat-completions, responses
+- A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.
+- listing JSON: https://index.percall.dev/listings/youzi-public-ai-station.json
+- listing page: https://index.percall.dev/l/youzi-public-ai-station.html
 
 ### Ask Japan (ask-japan)
 - url: https://askjapan.senpinai.com/
