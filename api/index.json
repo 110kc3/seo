@@ -1,7 +1,32 @@
 {
-  "count": 239,
+  "count": 240,
   "updated": "2026-11-18",
   "listings": [
+    {
+      "slug": "getyoutubetranscript",
+      "name": "GetYouTubeTranscript",
+      "url": "https://getyoutubetranscript.com/youtube-transcript-api",
+      "description": "YouTube transcripts for people, AI assistants and developers. Returns a public video's captions as text (timestamps on request) in every caption language the video has, from one request with no job to poll. REST API, remote MCP server (https://getyoutubetranscript.com/api/mcp), Python and JS SDKs, a Chrome extension and a web tool. 100 free credits on sign-up, paid plans from $5/month.",
+      "category": "api",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://getyoutubetranscript.com/llms.txt",
+        "openapi": "https://getyoutubetranscript.com/openapi.json",
+        "mcp": "https://getyoutubetranscript.com/api/mcp"
+      },
+      "tags": [
+        "youtube",
+        "transcript",
+        "captions",
+        "mcp",
+        "api"
+      ],
+      "submitted_by": "GetYouTubeTranscript (maker)",
+      "created": "2026-11-18",
+      "github_user": "pushkarsingh32",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "poptin-mcp",
       "name": "Poptin MCP",

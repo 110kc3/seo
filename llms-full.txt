@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 239 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 240 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (239)
+## All listings (240)
+
+### GetYouTubeTranscript (getyoutubetranscript)
+- url: https://getyoutubetranscript.com/youtube-transcript-api
+- category: api · pricing: freemium · tags: youtube, transcript, captions, mcp, api
+- YouTube transcripts for people, AI assistants and developers. Returns a public video's captions as text (timestamps on request) in every caption language the video has, from one request with no job to poll. REST API, remote MCP server (https://getyoutubetranscript.com/api/mcp), Python and JS SDKs, a Chrome extension and a web tool. 100 free credits on sign-up, paid plans from $5/month.
+- llms_txt: https://getyoutubetranscript.com/llms.txt
+- openapi: https://getyoutubetranscript.com/openapi.json
+- mcp: https://getyoutubetranscript.com/api/mcp
+- listing JSON: https://index.percall.dev/listings/getyoutubetranscript.json
+- listing page: https://index.percall.dev/l/getyoutubetranscript.html
 
 ### Poptin MCP (poptin-mcp)
 - url: https://www.poptin.com/mcp/
