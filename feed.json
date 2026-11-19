@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/autotasker.html",
+      "url": "https://index.percall.dev/l/autotasker.html",
+      "title": "AutoTasker",
+      "content_text": "x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.",
+      "date_published": "2026-11-19T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "social-data",
+        "ai-agents",
+        "mcp"
+      ],
+      "external_url": "https://autotasker.highkingflower.com"
+    },
+    {
       "id": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
       "url": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
       "title": "Gocdkey.nl Game Prices API",
@@ -754,22 +769,6 @@
         "codex"
       ],
       "external_url": "https://www.codebyai.net"
-    },
-    {
-      "id": "https://index.percall.dev/l/teable.html",
-      "url": "https://index.percall.dev/l/teable.html",
-      "title": "Teable",
-      "content_text": "Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.",
-      "date_published": "2026-11-04T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-spreadsheet",
-        "business-data",
-        "no-code",
-        "automation",
-        "productivity"
-      ],
-      "external_url": "https://teable.ai"
     }
   ]
 }

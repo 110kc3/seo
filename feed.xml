@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AutoTasker</title>
+    <link>https://index.percall.dev/l/autotasker.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/autotasker.html</guid>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.</description>
+  </item>
+  <item>
     <title>Gocdkey.nl Game Prices API</title>
     <link>https://index.percall.dev/l/gocdkey-game-prices-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/gocdkey-game-prices-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Unified API gateway for AI coding agents: one API key and one prepaid balance for Claude, GPT/Codex and Gemini models, usable from Claude Code, Codex CLI, Gemini CLI and other coding tools via an OpenAI-compatible base URL (https://www.codebyai.net/api/agent/v1). Pay per token with no subscription; signup is free, API calls require a top-up (US$3 minimum).</description>
-  </item>
-  <item>
-    <title>Teable</title>
-    <link>https://index.percall.dev/l/teable.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/teable.html</guid>
-    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.</description>
   </item>
 </channel>
 </rss>

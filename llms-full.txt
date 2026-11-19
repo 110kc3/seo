@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 242 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 243 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (242)
+## All listings (243)
+
+### AutoTasker (autotasker)
+- url: https://autotasker.highkingflower.com
+- category: api · pricing: freemium · tags: x402, social-data, ai-agents, mcp
+- x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.
+- llms_txt: https://autotasker.highkingflower.com/llms.txt
+- openapi: https://autotasker.highkingflower.com/openapi.json
+- mcp: https://autotasker.highkingflower.com/mcp
+- listing JSON: https://index.percall.dev/listings/autotasker.json
+- listing page: https://index.percall.dev/l/autotasker.html
 
 ### Gocdkey.nl Game Prices API (gocdkey-game-prices-api)
 - url: https://gocdkey.nl/data

@@ -1,0 +1,24 @@
+{
+  "slug": "autotasker",
+  "name": "AutoTasker",
+  "url": "https://autotasker.highkingflower.com",
+  "description": "x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.",
+  "category": "api",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://autotasker.highkingflower.com/llms.txt",
+    "openapi": "https://autotasker.highkingflower.com/openapi.json",
+    "mcp": "https://autotasker.highkingflower.com/mcp"
+  },
+  "tags": [
+    "x402",
+    "social-data",
+    "ai-agents",
+    "mcp"
+  ],
+  "submitted_by": "breezesamuel",
+  "created": "2026-11-19",
+  "github_user": "breezesamuel",
+  "tier": "free",
+  "origin": "self-registered"
+}
