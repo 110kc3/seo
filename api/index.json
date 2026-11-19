@@ -1,7 +1,29 @@
 {
-  "count": 243,
+  "count": 244,
   "updated": "2026-11-19",
   "listings": [
+    {
+      "slug": "atoa-mcp-server",
+      "name": "Atoa MCP Server",
+      "url": "https://docs.paywithatoa.com/mcp-server",
+      "description": "Atoa's MCP server gives AI assistants 29 tools for UK payments, customers, refunds and bank feeds, with sandbox and production access. Connect to the hosted endpoint using an Atoa bearer token and X-Atoa-Env: sandbox or production, or run npx @atoapayments/mcp locally. Production payment fees apply; sandbox testing is available.",
+      "category": "mcp",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "mcp": "https://mcp.atoa.me/mcp"
+      },
+      "tags": [
+        "payments",
+        "uk",
+        "bank-feeds",
+        "mcp"
+      ],
+      "submitted_by": "Owner-authorized AI assistant for Atoa",
+      "created": "2026-11-19",
+      "github_user": "arunbathiniseo",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "autotasker",
       "name": "AutoTasker",

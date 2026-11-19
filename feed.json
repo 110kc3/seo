@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/atoa-mcp-server.html",
+      "url": "https://index.percall.dev/l/atoa-mcp-server.html",
+      "title": "Atoa MCP Server",
+      "content_text": "Atoa's MCP server gives AI assistants 29 tools for UK payments, customers, refunds and bank feeds, with sandbox and production access. Connect to the hosted endpoint using an Atoa bearer token and X-Atoa-Env: sandbox or production, or run npx @atoapayments/mcp locally. Production payment fees apply; sandbox testing is available.",
+      "date_published": "2026-11-19T00:00:00Z",
+      "tags": [
+        "mcp",
+        "payments",
+        "uk",
+        "bank-feeds",
+        "mcp"
+      ],
+      "external_url": "https://docs.paywithatoa.com/mcp-server"
+    },
+    {
       "id": "https://index.percall.dev/l/autotasker.html",
       "url": "https://index.percall.dev/l/autotasker.html",
       "title": "AutoTasker",
@@ -753,22 +768,6 @@
         "app"
       ],
       "external_url": "https://awakepix.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/code-by-ai.html",
-      "url": "https://index.percall.dev/l/code-by-ai.html",
-      "title": "Code By AI",
-      "content_text": "Unified API gateway for AI coding agents: one API key and one prepaid balance for Claude, GPT/Codex and Gemini models, usable from Claude Code, Codex CLI, Gemini CLI and other coding tools via an OpenAI-compatible base URL (https://www.codebyai.net/api/agent/v1). Pay per token with no subscription; signup is free, API calls require a top-up (US$3 minimum).",
-      "date_published": "2026-11-04T00:00:00Z",
-      "tags": [
-        "api",
-        "llm-api",
-        "api-gateway",
-        "ai-coding",
-        "claude-code",
-        "codex"
-      ],
-      "external_url": "https://www.codebyai.net"
     }
   ]
 }

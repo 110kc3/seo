@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Atoa MCP Server</title>
+    <link>https://index.percall.dev/l/atoa-mcp-server.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/atoa-mcp-server.html</guid>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Atoa&#39;s MCP server gives AI assistants 29 tools for UK payments, customers, refunds and bank feeds, with sandbox and production access. Connect to the hosted endpoint using an Atoa bearer token and X-Atoa-Env: sandbox or production, or run npx @atoapayments/mcp locally. Production payment fees apply; sandbox testing is available.</description>
+  </item>
+  <item>
     <title>AutoTasker</title>
     <link>https://index.percall.dev/l/autotasker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/autotasker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.</description>
-  </item>
-  <item>
-    <title>Code By AI</title>
-    <link>https://index.percall.dev/l/code-by-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/code-by-ai.html</guid>
-    <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Unified API gateway for AI coding agents: one API key and one prepaid balance for Claude, GPT/Codex and Gemini models, usable from Claude Code, Codex CLI, Gemini CLI and other coding tools via an OpenAI-compatible base URL (https://www.codebyai.net/api/agent/v1). Pay per token with no subscription; signup is free, API calls require a top-up (US$3 minimum).</description>
   </item>
 </channel>
 </rss>
