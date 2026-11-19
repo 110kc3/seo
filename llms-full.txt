@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 244 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 245 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (244)
+## All listings (245)
+
+### Atoa Agent Pay (atoa-agent-pay)
+- url: https://docs.paywithatoa.com/agent-pay/overview
+- category: api · pricing: paid · tags: payments, agent-tools, sdk, uk
+- Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa's servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.
+- listing JSON: https://index.percall.dev/listings/atoa-agent-pay.json
+- listing page: https://index.percall.dev/l/atoa-agent-pay.html
 
 ### Atoa MCP Server (atoa-mcp-server)
 - url: https://docs.paywithatoa.com/mcp-server

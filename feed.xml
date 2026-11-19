@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Atoa Agent Pay</title>
+    <link>https://index.percall.dev/l/atoa-agent-pay.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/atoa-agent-pay.html</guid>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa&#39;s servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.</description>
+  </item>
+  <item>
     <title>Atoa MCP Server</title>
     <link>https://index.percall.dev/l/atoa-mcp-server.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/atoa-mcp-server.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.</description>
-  </item>
-  <item>
-    <title>AwakePix</title>
-    <link>https://index.percall.dev/l/awakepix.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/awakepix.html</guid>
-    <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.</description>
   </item>
 </channel>
 </rss>

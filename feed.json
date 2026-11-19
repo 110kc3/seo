@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/atoa-agent-pay.html",
+      "url": "https://index.percall.dev/l/atoa-agent-pay.html",
+      "title": "Atoa Agent Pay",
+      "content_text": "Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa's servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.",
+      "date_published": "2026-11-19T00:00:00Z",
+      "tags": [
+        "api",
+        "payments",
+        "agent-tools",
+        "sdk",
+        "uk"
+      ],
+      "external_url": "https://docs.paywithatoa.com/agent-pay/overview"
+    },
+    {
       "id": "https://index.percall.dev/l/atoa-mcp-server.html",
       "url": "https://index.percall.dev/l/atoa-mcp-server.html",
       "title": "Atoa MCP Server",
@@ -757,17 +772,6 @@
         "mcp"
       ],
       "external_url": "https://github.com/InkRoom-AI/inkroom-prompts"
-    },
-    {
-      "id": "https://index.percall.dev/l/awakepix.html",
-      "url": "https://index.percall.dev/l/awakepix.html",
-      "title": "AwakePix",
-      "content_text": "AwakePix is an all-in-one AI image and video generator. Turn photos into videos with Seedance, Kling, Wan and MiniMax, or create images with GPT Image 2 and Nano Banana. Get one free video, then pay as you go, no subscription.",
-      "date_published": "2026-11-05T00:00:00Z",
-      "tags": [
-        "app"
-      ],
-      "external_url": "https://awakepix.com/"
     }
   ]
 }

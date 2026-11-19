@@ -1,0 +1,19 @@
+{
+  "slug": "atoa-agent-pay",
+  "name": "Atoa Agent Pay",
+  "url": "https://docs.paywithatoa.com/agent-pay/overview",
+  "description": "Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa's servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.",
+  "category": "api",
+  "pricing": "paid",
+  "tags": [
+    "payments",
+    "agent-tools",
+    "sdk",
+    "uk"
+  ],
+  "submitted_by": "Owner-authorized AI assistant for Atoa",
+  "created": "2026-11-19",
+  "github_user": "arunbathiniseo",
+  "tier": "free",
+  "origin": "self-registered"
+}
