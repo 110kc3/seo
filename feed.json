@@ -51,6 +51,22 @@
       "external_url": "https://autotasker.highkingflower.com"
     },
     {
+      "id": "https://index.percall.dev/l/coverage-cat.html",
+      "url": "https://index.percall.dev/l/coverage-cat.html",
+      "title": "Coverage Cat",
+      "content_text": "Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.",
+      "date_published": "2026-11-19T00:00:00Z",
+      "tags": [
+        "mcp",
+        "insurance",
+        "umbrella-insurance",
+        "personal-finance",
+        "comparison-shopping",
+        "mcp"
+      ],
+      "external_url": "https://www.coveragecat.com/ai/shop-with-your-assistant"
+    },
+    {
       "id": "https://index.percall.dev/l/ddscore.html",
       "url": "https://index.percall.dev/l/ddscore.html",
       "title": "DDScore",
@@ -755,20 +771,6 @@
         "receipts"
       ],
       "external_url": "https://misty-flame-3nw3.here.now/"
-    },
-    {
-      "id": "https://index.percall.dev/l/inkroom-image-mcp.html",
-      "url": "https://index.percall.dev/l/inkroom-image-mcp.html",
-      "title": "InkRoom Image MCP",
-      "content_text": "Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.",
-      "date_published": "2026-11-05T00:00:00Z",
-      "tags": [
-        "mcp",
-        "image-generation",
-        "design",
-        "mcp"
-      ],
-      "external_url": "https://inkroom.ai/en/solutions/mcp-server"
     }
   ]
 }

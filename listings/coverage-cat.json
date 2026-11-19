@@ -1,0 +1,25 @@
+{
+  "slug": "coverage-cat",
+  "name": "Coverage Cat",
+  "url": "https://www.coveragecat.com/ai/shop-with-your-assistant",
+  "description": "Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://www.coveragecat.com/llms.txt",
+    "openapi": "https://www.coveragecat.com/api/consumer/openapi.yaml",
+    "mcp": "https://www.coveragecat.com/api/consumer/mcp"
+  },
+  "tags": [
+    "insurance",
+    "umbrella-insurance",
+    "personal-finance",
+    "comparison-shopping",
+    "mcp"
+  ],
+  "submitted_by": "Coverage Cat via its authorized Codex assistant",
+  "created": "2026-11-19",
+  "github_user": "gabriel4cc",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 246 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 247 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (246)
+## All listings (247)
 
 ### Atoa Agent Pay (atoa-agent-pay)
 - url: https://docs.paywithatoa.com/agent-pay/overview
@@ -329,6 +329,16 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://autotasker.highkingflower.com/mcp
 - listing JSON: https://index.percall.dev/listings/autotasker.json
 - listing page: https://index.percall.dev/l/autotasker.html
+
+### Coverage Cat (coverage-cat)
+- url: https://www.coveragecat.com/ai/shop-with-your-assistant
+- category: mcp · pricing: free · tags: insurance, umbrella-insurance, personal-finance, comparison-shopping, mcp
+- Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.
+- llms_txt: https://www.coveragecat.com/llms.txt
+- openapi: https://www.coveragecat.com/api/consumer/openapi.yaml
+- mcp: https://www.coveragecat.com/api/consumer/mcp
+- listing JSON: https://index.percall.dev/listings/coverage-cat.json
+- listing page: https://index.percall.dev/l/coverage-cat.html
 
 ### DDScore (ddscore)
 - url: https://www.ddscore.ai/
