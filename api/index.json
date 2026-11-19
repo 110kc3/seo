@@ -1,7 +1,29 @@
 {
-  "count": 241,
-  "updated": "2026-11-18",
+  "count": 242,
+  "updated": "2026-11-19",
   "listings": [
+    {
+      "slug": "gocdkey-game-prices-api",
+      "name": "Gocdkey.nl Game Prices API",
+      "url": "https://gocdkey.nl/data",
+      "description": "Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.",
+      "category": "api",
+      "pricing": "free",
+      "machine_endpoints": {
+        "openapi": "https://gist.githubusercontent.com/Hatseflatsh/27c1e45cf055930a74a8e1b7042ca081/raw/openapi.json"
+      },
+      "tags": [
+        "game-prices",
+        "public-api",
+        "netherlands",
+        "openapi"
+      ],
+      "submitted_by": "Codex for Gocdkey.nl (Hatseflatsh)",
+      "created": "2026-11-19",
+      "github_user": "Hatseflatsh",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "cloudgpu",
       "name": "CloudGPU",

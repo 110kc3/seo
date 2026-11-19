@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Gocdkey.nl Game Prices API</title>
+    <link>https://index.percall.dev/l/gocdkey-game-prices-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/gocdkey-game-prices-api.html</guid>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.</description>
+  </item>
+  <item>
     <title>CloudGPU</title>
     <link>https://index.percall.dev/l/cloudgpu.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cloudgpu.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Teable is an AI spreadsheet for business that lets teams connect data, build custom apps, and automate workflows using natural language. Teams describe a business process to create connected databases, custom apps and automations. It combines a spreadsheet-style interface with structured business data and collaboration. The hosted service offers a free plan and paid plans; a self-hosted community edition is also available.</description>
-  </item>
-  <item>
-    <title>Face Analysis Report</title>
-    <link>https://index.percall.dev/l/face-analysis-report.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/face-analysis-report.html</guid>
-    <pubDate>Tue, 03 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Face Analysis Report starts with a free AI attractiveness test that runs in your browser and scores your symmetry and proportions from one photo. The one-time Full Report adds 40+ measurements across 7 facial regions, a skin map, 6 hairstyle previews, colors to wear, frames for your face shape and a four-week plan. You get a private web report and a PDF by email.</description>
   </item>
 </channel>
 </rss>

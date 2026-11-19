@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 241 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 242 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,15 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (241)
+## All listings (242)
+
+### Gocdkey.nl Game Prices API (gocdkey-game-prices-api)
+- url: https://gocdkey.nl/data
+- category: api · pricing: free · tags: game-prices, public-api, netherlands, openapi
+- Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.
+- openapi: https://gist.githubusercontent.com/Hatseflatsh/27c1e45cf055930a74a8e1b7042ca081/raw/openapi.json
+- listing JSON: https://index.percall.dev/listings/gocdkey-game-prices-api.json
+- listing page: https://index.percall.dev/l/gocdkey-game-prices-api.html
 
 ### CloudGPU (cloudgpu)
 - url: https://cloudgpu.app/
