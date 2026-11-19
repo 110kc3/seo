@@ -1,5 +1,5 @@
 {
-  "count": 245,
+  "count": 246,
   "updated": "2026-11-19",
   "listings": [
     {
@@ -64,6 +64,18 @@
       "submitted_by": "breezesamuel",
       "created": "2026-11-19",
       "github_user": "breezesamuel",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "ddscore",
+      "name": "DDScore",
+      "url": "https://www.ddscore.ai/",
+      "description": "DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.",
+      "category": "app",
+      "pricing": "paid",
+      "created": "2026-11-19",
+      "github_user": "mheilimo",
       "tier": "free",
       "origin": "self-registered"
     },

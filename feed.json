@@ -51,6 +51,17 @@
       "external_url": "https://autotasker.highkingflower.com"
     },
     {
+      "id": "https://index.percall.dev/l/ddscore.html",
+      "url": "https://index.percall.dev/l/ddscore.html",
+      "title": "DDScore",
+      "content_text": "DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.",
+      "date_published": "2026-11-19T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://www.ddscore.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
       "url": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
       "title": "Gocdkey.nl Game Prices API",
@@ -758,20 +769,6 @@
         "mcp"
       ],
       "external_url": "https://inkroom.ai/en/solutions/mcp-server"
-    },
-    {
-      "id": "https://index.percall.dev/l/inkroom-prompts-mcp.html",
-      "url": "https://index.percall.dev/l/inkroom-prompts-mcp.html",
-      "title": "InkRoom Prompts MCP",
-      "content_text": "Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.",
-      "date_published": "2026-11-05T00:00:00Z",
-      "tags": [
-        "mcp",
-        "prompts",
-        "visual-workflow",
-        "mcp"
-      ],
-      "external_url": "https://github.com/InkRoom-AI/inkroom-prompts"
     }
   ]
 }

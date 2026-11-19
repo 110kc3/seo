@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 245 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 246 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (245)
+## All listings (246)
 
 ### Atoa Agent Pay (atoa-agent-pay)
 - url: https://docs.paywithatoa.com/agent-pay/overview
@@ -329,6 +329,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://autotasker.highkingflower.com/mcp
 - listing JSON: https://index.percall.dev/listings/autotasker.json
 - listing page: https://index.percall.dev/l/autotasker.html
+
+### DDScore (ddscore)
+- url: https://www.ddscore.ai/
+- category: app · pricing: paid
+- DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.
+- listing JSON: https://index.percall.dev/listings/ddscore.json
+- listing page: https://index.percall.dev/l/ddscore.html
 
 ### Gocdkey.nl Game Prices API (gocdkey-game-prices-api)
 - url: https://gocdkey.nl/data

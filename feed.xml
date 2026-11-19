@@ -31,6 +31,14 @@
     <description>x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.</description>
   </item>
   <item>
+    <title>DDScore</title>
+    <link>https://index.percall.dev/l/ddscore.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ddscore.html</guid>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.</description>
+  </item>
+  <item>
     <title>Gocdkey.nl Game Prices API</title>
     <link>https://index.percall.dev/l/gocdkey-game-prices-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/gocdkey-game-prices-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Hosted Streamable HTTP image MCP at https://mcp.inkroom.ai. Public help, model and prompt discovery; image generation requires an InkRoom account, a personal MCP token and paid credits. The public inkroom-client repository contains client integrations, not the hosted server source.</description>
-  </item>
-  <item>
-    <title>InkRoom Prompts MCP</title>
-    <link>https://index.percall.dev/l/inkroom-prompts-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/inkroom-prompts-mcp.html</guid>
-    <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Free MIT-licensed local Prompts MCP 1.0.4 for searching and refining visual prompts. Install from the public repository and run locally via STDIO or HTTP. It does not generate images and is separate from InkRoom’s hosted, paid Image MCP.</description>
   </item>
 </channel>
 </rss>
