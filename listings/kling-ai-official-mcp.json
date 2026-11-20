@@ -1,6 +1,6 @@
 {
   "slug": "kling-ai-official-mcp",
-  "name": "Kling AI Official MCP",
+  "name": "Kling AI Official MCP Plugin",
   "url": "https://kling.ai/app/mcp/guide",
   "description": "Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global",
   "category": "mcp",
@@ -19,5 +19,6 @@
   "created": "2026-11-14",
   "github_user": "Wlain",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-11-20"
 }

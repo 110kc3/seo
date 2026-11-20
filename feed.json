@@ -33,6 +33,22 @@
       "external_url": "https://www.sandbase.ai/"
     },
     {
+      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "title": "Kling AI Official MCP Plugin",
+      "content_text": "Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global",
+      "date_published": "2026-11-20T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-video",
+        "image-generation",
+        "mcp",
+        "creative-tools",
+        "oauth"
+      ],
+      "external_url": "https://kling.ai/app/mcp/guide"
+    },
+    {
       "id": "https://index.percall.dev/l/atoa-agent-pay.html",
       "url": "https://index.percall.dev/l/atoa-agent-pay.html",
       "title": "Atoa Agent Pay",
@@ -394,22 +410,6 @@
         "x402"
       ],
       "external_url": "https://beliefstate.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "title": "Kling AI Official MCP",
-      "content_text": "Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global",
-      "date_published": "2026-11-14T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-video",
-        "image-generation",
-        "mcp",
-        "creative-tools",
-        "oauth"
-      ],
-      "external_url": "https://kling.ai/app/mcp/guide"
     },
     {
       "id": "https://index.percall.dev/l/kunavo.html",

@@ -23,6 +23,14 @@
     <description>SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.</description>
   </item>
   <item>
+    <title>Kling AI Official MCP Plugin</title>
+    <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global</description>
+  </item>
+  <item>
     <title>Atoa Agent Pay</title>
     <link>https://index.percall.dev/l/atoa-agent-pay.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/atoa-agent-pay.html</guid>
@@ -213,14 +221,6 @@
     <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.</description>
-  </item>
-  <item>
-    <title>Kling AI Official MCP</title>
-    <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
-    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Official hosted Kling AI MCP for image and video creation through compatible agents. Global users connect via OAuth; generation consumes paid personal workspace credits. China uses https://klingai.com/mcp/plugin with separate accounts, credits and tasks. The public Claude plugin is client configuration, not the hosted backend source. Full plugin package: https://www.npmjs.com/package/@klingai/plugin-global</description>
   </item>
   <item>
     <title>Kunavo</title>
