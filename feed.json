@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/sandbase.html",
+      "url": "https://index.percall.dev/l/sandbase.html",
+      "title": "SandBase",
+      "content_text": "SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.",
+      "date_published": "2026-11-20T00:00:00Z",
+      "tags": [
+        "api"
+      ],
+      "external_url": "https://www.sandbase.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/atoa-agent-pay.html",
       "url": "https://index.percall.dev/l/atoa-agent-pay.html",
       "title": "Atoa Agent Pay",
@@ -755,22 +766,6 @@
         "claude-code"
       ],
       "external_url": "https://www.codeilab.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/dmt-receipts.html",
-      "url": "https://index.percall.dev/l/dmt-receipts.html",
-      "title": "DMT Receipts",
-      "content_text": "Stamp and verify Bitcoin-anchored OpenTimestamps memory receipts for AI agents (dmt-memory/v1). Local MCP stamp_memory / verify_receipt plus a static verifier UI.",
-      "date_published": "2026-11-05T00:00:00Z",
-      "tags": [
-        "mcp",
-        "mcp",
-        "opentimestamps",
-        "bitcoin",
-        "memory",
-        "receipts"
-      ],
-      "external_url": "https://misty-flame-3nw3.here.now/"
     }
   ]
 }

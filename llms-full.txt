@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 247 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 248 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (247)
+## All listings (248)
+
+### SandBase (sandbase)
+- url: https://www.sandbase.ai/
+- category: api · pricing: freemium
+- SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.
+- listing JSON: https://index.percall.dev/listings/sandbase.json
+- listing page: https://index.percall.dev/l/sandbase.html
 
 ### Atoa Agent Pay (atoa-agent-pay)
 - url: https://docs.paywithatoa.com/agent-pay/overview

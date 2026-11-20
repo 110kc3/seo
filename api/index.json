@@ -1,7 +1,19 @@
 {
-  "count": 247,
-  "updated": "2026-11-19",
+  "count": 248,
+  "updated": "2026-11-20",
   "listings": [
+    {
+      "slug": "sandbase",
+      "name": "SandBase",
+      "url": "https://www.sandbase.ai/",
+      "description": "SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.",
+      "category": "api",
+      "pricing": "freemium",
+      "created": "2026-11-20",
+      "github_user": "liyangbing",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "atoa-agent-pay",
       "name": "Atoa Agent Pay",
