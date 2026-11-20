@@ -23,6 +23,14 @@
     <description>SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.</description>
   </item>
   <item>
+    <title>Taste Stack</title>
+    <link>https://index.percall.dev/l/taste-stack.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/taste-stack.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.</description>
+  </item>
+  <item>
     <title>Kling AI Global MCP Plugin</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.</description>
-  </item>
-  <item>
-    <title>Sandbox0</title>
-    <link>https://index.percall.dev/l/sandbox0.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/sandbox0.html</guid>
-    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Managed cloud runtime for long-running AI agents. Sandbox0 provides isolated cloud computers with persistent writable filesystems across successful checkpoints, plus lifecycle and file APIs, SDKs, and the s0 CLI. Default pause and resume preserve files and start fresh processes.</description>
   </item>
 </channel>
 </rss>

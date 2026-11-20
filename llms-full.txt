@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 249 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 250 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (249)
+## All listings (250)
 
 ### Map Animation Studio (map-animation-studio)
 - url: https://map-animation.com/
@@ -318,6 +318,13 @@ A response does not verify authentication, payment or tool behavior.
 - SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.
 - listing JSON: https://index.percall.dev/listings/sandbase.json
 - listing page: https://index.percall.dev/l/sandbase.html
+
+### Taste Stack (taste-stack)
+- url: https://tastestack.dev/
+- category: other · pricing: freemium · tags: agent-skills, frontend-design, motion-design, creative-direction
+- Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.
+- listing JSON: https://index.percall.dev/listings/taste-stack.json
+- listing page: https://index.percall.dev/l/taste-stack.html
 
 ### Atoa Agent Pay (atoa-agent-pay)
 - url: https://docs.paywithatoa.com/agent-pay/overview

@@ -1,5 +1,5 @@
 {
-  "count": 249,
+  "count": 250,
   "updated": "2026-11-20",
   "listings": [
     {
@@ -31,6 +31,25 @@
       "pricing": "freemium",
       "created": "2026-11-20",
       "github_user": "liyangbing",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "taste-stack",
+      "name": "Taste Stack",
+      "url": "https://tastestack.dev/",
+      "description": "Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.",
+      "category": "other",
+      "pricing": "freemium",
+      "tags": [
+        "agent-skills",
+        "frontend-design",
+        "motion-design",
+        "creative-direction"
+      ],
+      "submitted_by": "Taste Stack team (AI-assisted)",
+      "created": "2026-11-20",
+      "github_user": "WYSIATI",
       "tier": "free",
       "origin": "self-registered"
     },
