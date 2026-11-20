@@ -1,7 +1,27 @@
 {
-  "count": 248,
+  "count": 249,
   "updated": "2026-11-20",
   "listings": [
+    {
+      "slug": "map-animation-studio",
+      "name": "Map Animation Studio",
+      "url": "https://map-animation.com/",
+      "description": "Browser-based map video editor with AI-assisted generation and visual route, scene and camera timeline editing. Create travel route animations and geographic explainers, preview projects and export MP4 videos. Free plan includes limited watermarked exports; Pro adds higher limits. Submitted on behalf of the maker with AI assistance.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "maps",
+        "video",
+        "animation",
+        "travel",
+        "education"
+      ],
+      "submitted_by": "Codex on behalf of Map Animation Studio",
+      "created": "2026-11-20",
+      "github_user": "YaokunLee",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "sandbase",
       "name": "SandBase",

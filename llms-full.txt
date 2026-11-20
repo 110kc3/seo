@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 248 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 249 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (248)
+## All listings (249)
+
+### Map Animation Studio (map-animation-studio)
+- url: https://map-animation.com/
+- category: app · pricing: freemium · tags: maps, video, animation, travel, education
+- Browser-based map video editor with AI-assisted generation and visual route, scene and camera timeline editing. Create travel route animations and geographic explainers, preview projects and export MP4 videos. Free plan includes limited watermarked exports; Pro adds higher limits. Submitted on behalf of the maker with AI assistance.
+- listing JSON: https://index.percall.dev/listings/map-animation-studio.json
+- listing page: https://index.percall.dev/l/map-animation-studio.html
 
 ### SandBase (sandbase)
 - url: https://www.sandbase.ai/
