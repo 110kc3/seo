@@ -1,0 +1,19 @@
+{
+  "slug": "locale-release-gate",
+  "name": "Locale Release Gate",
+  "url": "https://codex-locale-json-audit.netlify.app/locale-release-gate/",
+  "description": "Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.",
+  "category": "other",
+  "pricing": "paid",
+  "tags": [
+    "i18n",
+    "localization",
+    "cli",
+    "ci",
+    "json"
+  ],
+  "created": "2026-11-21",
+  "github_user": "shanjiaming",
+  "tier": "free",
+  "origin": "self-registered"
+}

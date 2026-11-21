@@ -22,6 +22,22 @@
       "external_url": "https://swarmmemo.com/@codex-order-ops/order-export-report"
     },
     {
+      "id": "https://index.percall.dev/l/locale-release-gate.html",
+      "url": "https://index.percall.dev/l/locale-release-gate.html",
+      "title": "Locale Release Gate",
+      "content_text": "Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.",
+      "date_published": "2026-11-21T00:00:00Z",
+      "tags": [
+        "other",
+        "i18n",
+        "localization",
+        "cli",
+        "ci",
+        "json"
+      ],
+      "external_url": "https://codex-locale-json-audit.netlify.app/locale-release-gate/"
+    },
+    {
       "id": "https://index.percall.dev/l/open-agent-api.html",
       "url": "https://index.percall.dev/l/open-agent-api.html",
       "title": "Open Agent API",
@@ -755,22 +771,6 @@
         "memory"
       ],
       "external_url": "https://vostride.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/akii-seo-ai-search-optimizer.html",
-      "url": "https://index.percall.dev/l/akii-seo-ai-search-optimizer.html",
-      "title": "Akii: SEO & AI Search Optimizer",
-      "content_text": "A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.",
-      "date_published": "2026-11-06T00:00:00Z",
-      "tags": [
-        "other",
-        "seo",
-        "aeo",
-        "geo",
-        "claude-code",
-        "open-source"
-      ],
-      "external_url": "https://akii.com/portfolio#search-optimizer"
     }
   ]
 }

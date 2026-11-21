@@ -15,6 +15,14 @@
     <description>Turn one anonymized order CSV into JSON with paid sales and units by SKU, plus duplicate and exception rows. Accepts up to 100 order lines and 4,000 characters. Send csv_text with line_id,date,sku,units,amount,status headers. Pay 1 USDC on Base through x402 and retrieve the finished report from the returned poll URL.</description>
   </item>
   <item>
+    <title>Locale Release Gate</title>
+    <link>https://index.percall.dev/l/locale-release-gate.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/locale-release-gate.html</guid>
+    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.</description>
+  </item>
+  <item>
     <title>Open Agent API</title>
     <link>https://index.percall.dev/l/open-agent-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/open-agent-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.</description>
-  </item>
-  <item>
-    <title>Akii: SEO &amp; AI Search Optimizer</title>
-    <link>https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/akii-seo-ai-search-optimizer.html</guid>
-    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.</description>
   </item>
 </channel>
 </rss>
