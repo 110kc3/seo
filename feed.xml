@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Order export sales reconciliation</title>
+    <link>https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html</guid>
+    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Turn one anonymized order CSV into JSON with paid sales and units by SKU, plus duplicate and exception rows. Accepts up to 100 order lines and 4,000 characters. Send csv_text with line_id,date,sku,units,amount,status headers. Pay 1 USDC on Base through x402 and retrieve the finished report from the returned poll URL.</description>
+  </item>
+  <item>
     <title>Open Agent API</title>
     <link>https://index.percall.dev/l/open-agent-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/open-agent-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>A free Claude Code plugin that audits sites, checks links and plans content. Use 12 skills, five agents and three commands to compare rivals, group keywords and add JSON-LD. The MIT plugin runs locally in Claude Code on macOS or Linux. No Akii account or fee is required. Claude Code and optional data tools have separate costs.</description>
-  </item>
-  <item>
-    <title>AzYun</title>
-    <link>https://index.percall.dev/l/azyun.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/azyun.html</guid>
-    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.</description>
   </item>
 </channel>
 </rss>
