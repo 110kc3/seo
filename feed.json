@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/open-agent-api.html",
+      "url": "https://index.percall.dev/l/open-agent-api.html",
+      "title": "Open Agent API",
+      "content_text": "Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API",
+      "date_published": "2026-11-21T00:00:00Z",
+      "tags": [
+        "api",
+        "open-source",
+        "self-hosted",
+        "coding-agents",
+        "developer-tools",
+        "acp"
+      ],
+      "external_url": "https://openagentapi.pages.dev/en/"
+    },
+    {
       "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "title": "Kling AI Official MCP, Plugins & CLI",
@@ -750,22 +766,6 @@
         "api"
       ],
       "external_url": "https://www.azyun.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/revenue-scout.html",
-      "url": "https://index.percall.dev/l/revenue-scout.html",
-      "title": "Revenue Scout",
-      "content_text": "Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.",
-      "date_published": "2026-11-06T00:00:00Z",
-      "tags": [
-        "app",
-        "sales",
-        "social-listening",
-        "lead-discovery",
-        "reply-drafts",
-        "public-conversations"
-      ],
-      "external_url": "https://revenuescout.ai/"
     }
   ]
 }

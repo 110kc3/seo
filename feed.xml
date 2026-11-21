@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Open Agent API</title>
+    <link>https://index.percall.dev/l/open-agent-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/open-agent-api.html</guid>
+    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API</description>
+  </item>
+  <item>
     <title>Kling AI Official MCP, Plugins &amp; CLI</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>AzYun provides a unified API gateway for a vast range of AI models — one standard API protocol to access OpenAI, Claude, Gemini and other models, with high-concurrency load balancing, transparent pay-as-you-go billing and team collaboration.</description>
-  </item>
-  <item>
-    <title>Revenue Scout</title>
-    <link>https://index.percall.dev/l/revenue-scout.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/revenue-scout.html</guid>
-    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Find public conversations where people need what your business sells, across seven social platforms. See why a conversation matches and review a reply draft before posting it yourself. Gmail sends need separate approval. The Free plan has 2,000 one-time welcome credits and needs no card. Paid plans start at $49 per month. Optional top-ups cost $15 per 1,000 credits.</description>
   </item>
 </channel>
 </rss>

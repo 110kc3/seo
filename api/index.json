@@ -1,7 +1,26 @@
 {
-  "count": 250,
+  "count": 251,
   "updated": "2026-11-21",
   "listings": [
+    {
+      "slug": "open-agent-api",
+      "name": "Open Agent API",
+      "url": "https://openagentapi.pages.dev/en/",
+      "description": "Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API",
+      "category": "api",
+      "pricing": "free",
+      "tags": [
+        "open-source",
+        "self-hosted",
+        "coding-agents",
+        "developer-tools",
+        "acp"
+      ],
+      "created": "2026-11-21",
+      "github_user": "jiangxingfan1-coder",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "map-animation-studio",
       "name": "Map Animation Studio",
