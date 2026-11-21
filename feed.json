@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "title": "Kling AI Official MCP, Plugins & CLI",
+      "content_text": "Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.",
+      "date_published": "2026-11-21T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-video",
+        "image-generation",
+        "mcp",
+        "claude-plugin",
+        "cli"
+      ],
+      "external_url": "https://kling.ai/app/mcp/guide"
+    },
+    {
       "id": "https://index.percall.dev/l/map-animation-studio.html",
       "url": "https://index.percall.dev/l/map-animation-studio.html",
       "title": "Map Animation Studio",
@@ -46,22 +62,6 @@
         "creative-direction"
       ],
       "external_url": "https://tastestack.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "title": "Kling AI Global MCP Plugin",
-      "content_text": "Official Kling AI Global MCP Plugin for image and video creation. Connects via OAuth to https://kling.ai/mcp/plugin; generation uses Global account credits. The @klingai/plugin-global npm bundle includes the plugin, CLI, and Skill: https://www.npmjs.com/package/@klingai/plugin-global. Standalone CLI: https://www.npmjs.com/package/@klingai/cli-global. China is separate: https://klingai.com/mcp/plugin, @klingai/plugin-cn, and @klingai/cli-cn.",
-      "date_published": "2026-11-20T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-video",
-        "image-generation",
-        "mcp",
-        "creative-tools",
-        "oauth"
-      ],
-      "external_url": "https://kling.ai/app/mcp/guide"
     },
     {
       "id": "https://index.percall.dev/l/atoa-agent-pay.html",

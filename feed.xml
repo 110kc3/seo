@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Kling AI Official MCP, Plugins &amp; CLI</title>
+    <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
+    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.</description>
+  </item>
+  <item>
     <title>Map Animation Studio</title>
     <link>https://index.percall.dev/l/map-animation-studio.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/map-animation-studio.html</guid>
@@ -29,14 +37,6 @@
     <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.</description>
-  </item>
-  <item>
-    <title>Kling AI Global MCP Plugin</title>
-    <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Official Kling AI Global MCP Plugin for image and video creation. Connects via OAuth to https://kling.ai/mcp/plugin; generation uses Global account credits. The @klingai/plugin-global npm bundle includes the plugin, CLI, and Skill: https://www.npmjs.com/package/@klingai/plugin-global. Standalone CLI: https://www.npmjs.com/package/@klingai/cli-global. China is separate: https://klingai.com/mcp/plugin, @klingai/plugin-cn, and @klingai/cli-cn.</description>
   </item>
   <item>
     <title>Atoa Agent Pay</title>

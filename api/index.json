@@ -1,6 +1,6 @@
 {
   "count": 250,
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "listings": [
     {
       "slug": "map-animation-studio",
@@ -538,9 +538,9 @@
     },
     {
       "slug": "kling-ai-official-mcp",
-      "name": "Kling AI Global MCP Plugin",
+      "name": "Kling AI Official MCP, Plugins & CLI",
       "url": "https://kling.ai/app/mcp/guide",
-      "description": "Official Kling AI Global MCP Plugin for image and video creation. Connects via OAuth to https://kling.ai/mcp/plugin; generation uses Global account credits. The @klingai/plugin-global npm bundle includes the plugin, CLI, and Skill: https://www.npmjs.com/package/@klingai/plugin-global. Standalone CLI: https://www.npmjs.com/package/@klingai/cli-global. China is separate: https://klingai.com/mcp/plugin, @klingai/plugin-cn, and @klingai/cli-cn.",
+      "description": "Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.",
       "category": "mcp",
       "pricing": "paid",
       "machine_endpoints": {
@@ -550,15 +550,15 @@
         "ai-video",
         "image-generation",
         "mcp",
-        "creative-tools",
-        "oauth"
+        "claude-plugin",
+        "cli"
       ],
       "submitted_by": "Wlain, assisting Kling AI promotion",
       "created": "2026-11-14",
       "github_user": "Wlain",
       "tier": "free",
       "origin": "self-registered",
-      "updated": "2026-11-20"
+      "updated": "2026-11-21"
     },
     {
       "slug": "kunavo",
