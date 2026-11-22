@@ -1,7 +1,27 @@
 {
-  "count": 253,
+  "count": 254,
   "updated": "2026-11-22",
   "listings": [
+    {
+      "slug": "estockes",
+      "name": "eStockes",
+      "url": "https://estockes.com/?utm_source=ai_product_index&utm_medium=directory&utm_campaign=stock_rule_comparison",
+      "description": "eStockes combines stock screening, charts and AI-generated research commentary for people researching U.S. stocks and ETFs. The free no-account Reality Check runs a predefined daily rule and compares it with holding the same symbol across the same dates, showing the modeled costs and execution assumptions. Submitted by the eStockes team for readers to try and give feedback.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "finance",
+        "stock-research",
+        "stock-screener",
+        "stock-charts",
+        "backtesting"
+      ],
+      "submitted_by": "eStockes team",
+      "created": "2026-11-22",
+      "github_user": "ElonSabag",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "codex-order-ops-sales-reconciliation",
       "name": "Order export sales reconciliation",

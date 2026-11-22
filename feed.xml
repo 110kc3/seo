@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>eStockes</title>
+    <link>https://index.percall.dev/l/estockes.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/estockes.html</guid>
+    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>eStockes combines stock screening, charts and AI-generated research commentary for people researching U.S. stocks and ETFs. The free no-account Reality Check runs a predefined daily rule and compares it with holding the same symbol across the same dates, showing the modeled costs and execution assumptions. Submitted by the eStockes team for readers to try and give feedback.</description>
+  </item>
+  <item>
     <title>Kling AI Official MCP, Plugins &amp; CLI</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.</description>
-  </item>
-  <item>
-    <title>agent-qa</title>
-    <link>https://index.percall.dev/l/agent-qa.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agent-qa.html</guid>
-    <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.</description>
   </item>
 </channel>
 </rss>

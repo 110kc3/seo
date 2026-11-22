@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/estockes.html",
+      "url": "https://index.percall.dev/l/estockes.html",
+      "title": "eStockes",
+      "content_text": "eStockes combines stock screening, charts and AI-generated research commentary for people researching U.S. stocks and ETFs. The free no-account Reality Check runs a predefined daily rule and compares it with holding the same symbol across the same dates, showing the modeled costs and execution assumptions. Submitted by the eStockes team for readers to try and give feedback.",
+      "date_published": "2026-11-22T00:00:00Z",
+      "tags": [
+        "app",
+        "finance",
+        "stock-research",
+        "stock-screener",
+        "stock-charts",
+        "backtesting"
+      ],
+      "external_url": "https://estockes.com/?utm_source=ai_product_index&utm_medium=directory&utm_campaign=stock_rule_comparison"
+    },
+    {
       "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "title": "Kling AI Official MCP, Plugins & CLI",
@@ -755,22 +771,6 @@
         "macos"
       ],
       "external_url": "https://meetini.net/"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-qa.html",
-      "url": "https://index.percall.dev/l/agent-qa.html",
-      "title": "agent-qa",
-      "content_text": "agent-qa by vostride turns plain-English journeys into repeatable web, Android and iOS tests. Its memidex memory engine retains validated app knowledge, while self-improvement checks learned lessons before reuse. CLI, local dashboard and local MCP tools provide screenshots and step evidence. Free for FSL-permitted use; model inference and execution infrastructure costs are separate.",
-      "date_published": "2026-11-06T00:00:00Z",
-      "tags": [
-        "agent",
-        "testing",
-        "mcp",
-        "web",
-        "mobile",
-        "memory"
-      ],
-      "external_url": "https://vostride.com"
     }
   ]
 }
