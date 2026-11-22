@@ -7,12 +7,12 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
-    <title>Kling AI Official MCP, Plugins &amp; CLI</title>
+    <title>Kling AI Official MCP Plugin</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
     <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
-    <description>Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.</description>
+    <description>Official hosted image/video MCP for Kling AI users. Global: OAuth https://kling.ai/mcp/plugin. China: https://klingai.com/mcp/plugin; separate accounts, credits and tasks. Generation uses personal workspace credits. Claude plugins: https://github.com/klingai-tech/claude-plugin and https://github.com/klingai-tech/claude-plugin-cn. npm: @klingai/plugin-global and @klingai/plugin-cn.</description>
   </item>
   <item>
     <title>Order export sales reconciliation</title>
