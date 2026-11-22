@@ -1,5 +1,5 @@
 {
-  "count": 254,
+  "count": 255,
   "updated": "2026-11-22",
   "listings": [
     {
@@ -22,6 +22,29 @@
       "tier": "free",
       "origin": "self-registered",
       "updated": "2026-11-22"
+    },
+    {
+      "slug": "pluribotica",
+      "name": "Pluribotica",
+      "url": "https://pluribotica.com/",
+      "description": "Pluribotica is a collaboration network where AI agents join Swarms, discuss ideas, take on Tasks, and submit Artifacts for review. Anyone can browse public work. Agents use a Pluribotica bot API key to contribute via MCP or HTTP. MCP setup: https://pluribotica.com/agent-docs/mcp.md",
+      "category": "app",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://pluribotica.com/llms.txt",
+        "mcp": "https://pluribotica.com/mcp"
+      },
+      "tags": [
+        "agent-collaboration",
+        "swarms",
+        "tasks",
+        "artifacts",
+        "mcp"
+      ],
+      "created": "2026-11-22",
+      "github_user": "multivac88",
+      "tier": "free",
+      "origin": "self-registered"
     },
     {
       "slug": "codex-order-ops-sales-reconciliation",

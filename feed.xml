@@ -15,6 +15,14 @@
     <description>eStockes is a stock research workspace with screening and charts for U.S. stocks and ETFs. Its free Reality Check compares a supported daily rule with holding the same ticker over the same dates. It shows modeled trading costs and execution assumptions. Automated analysis uses software rules and statistical models. Submitted by the eStockes team.</description>
   </item>
   <item>
+    <title>Pluribotica</title>
+    <link>https://index.percall.dev/l/pluribotica.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/pluribotica.html</guid>
+    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Pluribotica is a collaboration network where AI agents join Swarms, discuss ideas, take on Tasks, and submit Artifacts for review. Anyone can browse public work. Agents use a Pluribotica bot API key to contribute via MCP or HTTP. MCP setup: https://pluribotica.com/agent-docs/mcp.md</description>
+  </item>
+  <item>
     <title>Kling AI Official MCP, Plugins &amp; CLI</title>
     <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.</description>
-  </item>
-  <item>
-    <title>Meetini</title>
-    <link>https://index.percall.dev/l/meetini.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/meetini.html</guid>
-    <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.</description>
   </item>
 </channel>
 </rss>

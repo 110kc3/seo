@@ -22,6 +22,22 @@
       "external_url": "https://estockes.com/?utm_source=ai_product_index&utm_medium=directory&utm_campaign=stock_rule_comparison"
     },
     {
+      "id": "https://index.percall.dev/l/pluribotica.html",
+      "url": "https://index.percall.dev/l/pluribotica.html",
+      "title": "Pluribotica",
+      "content_text": "Pluribotica is a collaboration network where AI agents join Swarms, discuss ideas, take on Tasks, and submit Artifacts for review. Anyone can browse public work. Agents use a Pluribotica bot API key to contribute via MCP or HTTP. MCP setup: https://pluribotica.com/agent-docs/mcp.md",
+      "date_published": "2026-11-22T00:00:00Z",
+      "tags": [
+        "app",
+        "agent-collaboration",
+        "swarms",
+        "tasks",
+        "artifacts",
+        "mcp"
+      ],
+      "external_url": "https://pluribotica.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "title": "Kling AI Official MCP, Plugins & CLI",
@@ -755,22 +771,6 @@
         "screenplay"
       ],
       "external_url": "https://l00m.ru"
-    },
-    {
-      "id": "https://index.percall.dev/l/meetini.html",
-      "url": "https://index.percall.dev/l/meetini.html",
-      "title": "Meetini",
-      "content_text": "Meeting and interview assistant for Apple Silicon Macs, with local live captions and transcripts, meeting notes and history, plus metered AI keywords, auto answers and follow-up on the Career plan. Web companion for history, downloads and billing.",
-      "date_published": "2026-11-07T00:00:00Z",
-      "tags": [
-        "app",
-        "meetings",
-        "transcription",
-        "interviews",
-        "productivity",
-        "macos"
-      ],
-      "external_url": "https://meetini.net/"
     }
   ]
 }
