@@ -534,7 +534,7 @@ A response does not verify authentication, payment or tool behavior.
 
 ### Kling AI Official MCP, Plugins & CLI (kling-ai-official-mcp)
 - url: https://kling.ai/app/mcp/guide
-- category: mcp · pricing: paid · tags: ai-video, image-generation, mcp, claude-plugin, cli
+- category: mcp · pricing: freemium · tags: ai-video, image-generation, mcp, claude-plugin, cli
 - Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.
 - mcp: https://kling.ai/mcp/plugin
 - listing JSON: https://index.percall.dev/listings/kling-ai-official-mcp.json

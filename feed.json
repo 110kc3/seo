@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
+      "title": "Kling AI Official MCP, Plugins & CLI",
+      "content_text": "Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.",
+      "date_published": "2026-11-22T00:00:00Z",
+      "tags": [
+        "mcp",
+        "ai-video",
+        "image-generation",
+        "mcp",
+        "claude-plugin",
+        "cli"
+      ],
+      "external_url": "https://kling.ai/app/mcp/guide"
+    },
+    {
       "id": "https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html",
       "url": "https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html",
       "title": "Order export sales reconciliation",
@@ -52,22 +68,6 @@
         "acp"
       ],
       "external_url": "https://openagentapi.pages.dev/en/"
-    },
-    {
-      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "title": "Kling AI Official MCP, Plugins & CLI",
-      "content_text": "Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.",
-      "date_published": "2026-11-21T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-video",
-        "image-generation",
-        "mcp",
-        "claude-plugin",
-        "cli"
-      ],
-      "external_url": "https://kling.ai/app/mcp/guide"
     },
     {
       "id": "https://index.percall.dev/l/map-animation-studio.html",

@@ -4,7 +4,7 @@
   "url": "https://kling.ai/app/mcp/guide",
   "description": "Image/video MCP for agents. Global: OAuth https://kling.ai/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin; npm https://npmjs.com/package/@klingai/plugin-global and https://npmjs.com/package/@klingai/cli-global. China: OAuth https://klingai.com/mcp/plugin; Claude https://github.com/klingai-tech/claude-plugin-cn; npm https://npmjs.com/package/@klingai/plugin-cn and https://npmjs.com/package/@klingai/cli-cn. Separate regional accounts, credits and tasks; generation uses credits.",
   "category": "mcp",
-  "pricing": "paid",
+  "pricing": "freemium",
   "machine_endpoints": {
     "mcp": "https://kling.ai/mcp/plugin"
   },
@@ -20,5 +20,5 @@
   "github_user": "Wlain",
   "tier": "free",
   "origin": "self-registered",
-  "updated": "2026-11-21"
+  "updated": "2026-11-22"
 }
