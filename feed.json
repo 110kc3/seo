@@ -8,16 +8,16 @@
     {
       "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
       "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "title": "Kling AI Official MCP Plugin",
-      "content_text": "Official hosted image/video MCP for Kling AI users. Global: OAuth https://kling.ai/mcp/plugin. China: https://klingai.com/mcp/plugin; separate accounts, credits and tasks. Generation uses personal workspace credits. Claude plugins: https://github.com/klingai-tech/claude-plugin and https://github.com/klingai-tech/claude-plugin-cn. npm: @klingai/plugin-global and @klingai/plugin-cn.",
+      "title": "Kling AI Official MCP, Plugins & CLI",
+      "content_text": "Official image/video MCP and agent integrations. Global: OAuth https://kling.ai/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin; npm plugin @klingai/plugin-global and CLI @klingai/cli-global; skills: npx skills add klingai-tech/skills. China: OAuth https://klingai.com/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin-cn; npm plugin @klingai/plugin-cn and CLI @klingai/cli-cn. Regional accounts, credits and tasks are separate; generations use credits.",
       "date_published": "2026-11-22T00:00:00Z",
       "tags": [
         "mcp",
         "ai-video",
         "image-generation",
         "mcp",
-        "creative-tools",
-        "oauth"
+        "agent-plugin",
+        "cli"
       ],
       "external_url": "https://kling.ai/app/mcp/guide"
     },

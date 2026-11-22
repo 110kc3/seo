@@ -532,10 +532,10 @@ A response does not verify authentication, payment or tool behavior.
 - listing JSON: https://index.percall.dev/listings/beliefstate.json
 - listing page: https://index.percall.dev/l/beliefstate.html
 
-### Kling AI Official MCP Plugin (kling-ai-official-mcp)
+### Kling AI Official MCP, Plugins & CLI (kling-ai-official-mcp)
 - url: https://kling.ai/app/mcp/guide
-- category: mcp · pricing: paid · tags: ai-video, image-generation, mcp, creative-tools, oauth
-- Official hosted image/video MCP for Kling AI users. Global: OAuth https://kling.ai/mcp/plugin. China: https://klingai.com/mcp/plugin; separate accounts, credits and tasks. Generation uses personal workspace credits. Claude plugins: https://github.com/klingai-tech/claude-plugin and https://github.com/klingai-tech/claude-plugin-cn. npm: @klingai/plugin-global and @klingai/plugin-cn.
+- category: mcp · pricing: freemium · tags: ai-video, image-generation, mcp, agent-plugin, cli
+- Official image/video MCP and agent integrations. Global: OAuth https://kling.ai/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin; npm plugin @klingai/plugin-global and CLI @klingai/cli-global; skills: npx skills add klingai-tech/skills. China: OAuth https://klingai.com/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin-cn; npm plugin @klingai/plugin-cn and CLI @klingai/cli-cn. Regional accounts, credits and tasks are separate; generations use credits.
 - mcp: https://kling.ai/mcp/plugin
 - listing JSON: https://index.percall.dev/listings/kling-ai-official-mcp.json
 - listing page: https://index.percall.dev/l/kling-ai-official-mcp.html
