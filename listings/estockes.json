@@ -2,7 +2,7 @@
   "slug": "estockes",
   "name": "eStockes",
   "url": "https://estockes.com/?utm_source=ai_product_index&utm_medium=directory&utm_campaign=stock_rule_comparison",
-  "description": "eStockes combines stock screening, charts and AI-generated research commentary for people researching U.S. stocks and ETFs. The free no-account Reality Check runs a predefined daily rule and compares it with holding the same symbol across the same dates, showing the modeled costs and execution assumptions. Submitted by the eStockes team for readers to try and give feedback.",
+  "description": "eStockes is a stock research workspace with screening and charts for U.S. stocks and ETFs. Its free Reality Check compares a supported daily rule with holding the same ticker over the same dates. It shows modeled trading costs and execution assumptions. Automated analysis uses software rules and statistical models. Submitted by the eStockes team.",
   "category": "app",
   "pricing": "freemium",
   "tags": [
@@ -16,5 +16,6 @@
   "created": "2026-11-22",
   "github_user": "ElonSabag",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-11-22"
 }
