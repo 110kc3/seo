@@ -37,6 +37,22 @@
       "external_url": "https://flowmusicai.pro/"
     },
     {
+      "id": "https://index.percall.dev/l/linger.html",
+      "url": "https://index.percall.dev/l/linger.html",
+      "title": "Linger",
+      "content_text": "Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.",
+      "date_published": "2026-11-23T00:00:00Z",
+      "tags": [
+        "app",
+        "macos",
+        "design",
+        "visual-references",
+        "local-first",
+        "mcp"
+      ],
+      "external_url": "https://withlinger.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/nateandowl.html",
       "url": "https://index.percall.dev/l/nateandowl.html",
       "title": "Nate & Owl",
@@ -755,22 +771,6 @@
         "revision"
       ],
       "external_url": "https://paperhumanizer.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/ormas-outcomes.html",
-      "url": "https://index.percall.dev/l/ormas-outcomes.html",
-      "title": "Ormas Outcomes",
-      "content_text": "Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task",
-      "date_published": "2026-11-08T00:00:00Z",
-      "tags": [
-        "mcp",
-        "coding",
-        "github",
-        "mcp",
-        "developer-tools",
-        "code-review"
-      ],
-      "external_url": "https://ormas.ai/"
     }
   ]
 }

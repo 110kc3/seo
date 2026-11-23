@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 257 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 258 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (257)
+## All listings (258)
 
 ### API Acre (api-acre)
 - url: https://apiacre.com
@@ -321,6 +321,14 @@ A response does not verify authentication, payment or tool behavior.
 - Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.
 - listing JSON: https://index.percall.dev/listings/flow-music-ai.json
 - listing page: https://index.percall.dev/l/flow-music-ai.html
+
+### Linger (linger)
+- url: https://withlinger.com/
+- category: app · pricing: paid · tags: macos, design, visual-references, local-first, mcp
+- Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.
+- llms_txt: https://withlinger.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/linger.json
+- listing page: https://index.percall.dev/l/linger.html
 
 ### Nate & Owl (nateandowl)
 - url: https://nateandowl.com

@@ -23,6 +23,14 @@
     <description>Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.</description>
   </item>
   <item>
+    <title>Linger</title>
+    <link>https://index.percall.dev/l/linger.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/linger.html</guid>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.</description>
+  </item>
+  <item>
     <title>Nate &amp; Owl</title>
     <link>https://index.percall.dev/l/nateandowl.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/nateandowl.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Academic English revision for students and researchers. Compare suggested wording with the original and check citations, numbers, terms and claims before use. Generation requires sign-in and available credits. Submitted by the PaperHumanizer team.</description>
-  </item>
-  <item>
-    <title>Ormas Outcomes</title>
-    <link>https://index.percall.dev/l/ormas-outcomes.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ormas-outcomes.html</guid>
-    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task</description>
   </item>
 </channel>
 </rss>

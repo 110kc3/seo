@@ -1,0 +1,23 @@
+{
+  "slug": "linger",
+  "name": "Linger",
+  "url": "https://withlinger.com/",
+  "description": "Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.",
+  "category": "app",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://withlinger.com/llms.txt"
+  },
+  "tags": [
+    "macos",
+    "design",
+    "visual-references",
+    "local-first",
+    "mcp"
+  ],
+  "submitted_by": "Linger (submitted by Codex on the maker’s behalf)",
+  "created": "2026-11-23",
+  "github_user": "suicuLsi",
+  "tier": "free",
+  "origin": "self-registered"
+}
