@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 257 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 258 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,17 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (257)
+## All listings (258)
+
+### API Acre (api-acre)
+- url: https://apiacre.com
+- category: api · pricing: paid · tags: x402, mcp, usdc, document-processing, structured-data
+- Account-free, pay-per-call APIs and MCP tools for document and table extraction, CSV cleanup, website audits, SEC company evidence, and weather. Browse the free catalog and buyer guides at https://apiacre.com/buyers. Pay per request with x402 USDC on Base or use Solana on supported routes.
+- llms_txt: https://apiacre.com/llms.txt
+- openapi: https://apiacre.com/openapi.json
+- mcp: https://apiacre.com/mcp
+- listing JSON: https://index.percall.dev/listings/api-acre.json
+- listing page: https://index.percall.dev/l/api-acre.html
 
 ### Flow Music AI (flow-music-ai)
 - url: https://flowmusicai.pro/

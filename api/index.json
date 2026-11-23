@@ -1,7 +1,31 @@
 {
-  "count": 257,
+  "count": 258,
   "updated": "2026-11-23",
   "listings": [
+    {
+      "slug": "api-acre",
+      "name": "API Acre",
+      "url": "https://apiacre.com",
+      "description": "Account-free, pay-per-call APIs and MCP tools for document and table extraction, CSV cleanup, website audits, SEC company evidence, and weather. Browse the free catalog and buyer guides at https://apiacre.com/buyers. Pay per request with x402 USDC on Base or use Solana on supported routes.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://apiacre.com/llms.txt",
+        "openapi": "https://apiacre.com/openapi.json",
+        "mcp": "https://apiacre.com/mcp"
+      },
+      "tags": [
+        "x402",
+        "mcp",
+        "usdc",
+        "document-processing",
+        "structured-data"
+      ],
+      "created": "2026-11-23",
+      "github_user": "APIAcre",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "flow-music-ai",
       "name": "Flow Music AI",

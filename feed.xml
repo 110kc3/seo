@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>API Acre</title>
+    <link>https://index.percall.dev/l/api-acre.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/api-acre.html</guid>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Account-free, pay-per-call APIs and MCP tools for document and table extraction, CSV cleanup, website audits, SEC company evidence, and weather. Browse the free catalog and buyer guides at https://apiacre.com/buyers. Pay per request with x402 USDC on Base or use Solana on supported routes.</description>
+  </item>
+  <item>
     <title>Flow Music AI</title>
     <link>https://index.percall.dev/l/flow-music-ai.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/flow-music-ai.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.</description>
-  </item>
-  <item>
-    <title>Datacircle</title>
-    <link>https://index.percall.dev/l/datacircle.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/datacircle.html</guid>
-    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Find the best GTM APIs. We benchmark all the GTM APIs and we put the results on our website. Our API is free and open, with no key: list every API, see who is best for each and search every plan, at api.datacircle.dev/v1.</description>
   </item>
 </channel>
 </rss>
