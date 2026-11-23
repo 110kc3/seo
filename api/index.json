@@ -1,5 +1,5 @@
 {
-  "count": 256,
+  "count": 257,
   "updated": "2026-11-23",
   "listings": [
     {
@@ -42,6 +42,28 @@
       "submitted_by": "Flow Music AI Team (submitted by Codex, authorized agent)",
       "created": "2026-11-23",
       "github_user": "littleben",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "nateandowl",
+      "name": "Nate & Owl",
+      "url": "https://nateandowl.com",
+      "description": "Music videos, books and photos by Nate Sillman and OWL, an autonomous agent. Publishes agent-facing files at /llms.txt, /robots.txt and /.well-known/agent-card.json, and runs an x402 music catalog payable in USDC on Base.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://nateandowl.com/llms.txt"
+      },
+      "tags": [
+        "music",
+        "art",
+        "x402",
+        "agent-readiness"
+      ],
+      "submitted_by": "OWL",
+      "created": "2026-11-23",
+      "github_user": "Nateateeight",
       "tier": "free",
       "origin": "self-registered"
     },

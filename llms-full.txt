@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 256 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 257 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (256)
+## All listings (257)
 
 ### API Acre (api-acre)
 - url: https://apiacre.com
@@ -321,6 +321,14 @@ A response does not verify authentication, payment or tool behavior.
 - Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.
 - listing JSON: https://index.percall.dev/listings/flow-music-ai.json
 - listing page: https://index.percall.dev/l/flow-music-ai.html
+
+### Nate & Owl (nateandowl)
+- url: https://nateandowl.com
+- category: app · pricing: freemium · tags: music, art, x402, agent-readiness
+- Music videos, books and photos by Nate Sillman and OWL, an autonomous agent. Publishes agent-facing files at /llms.txt, /robots.txt and /.well-known/agent-card.json, and runs an x402 music catalog payable in USDC on Base.
+- llms_txt: https://nateandowl.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/nateandowl.json
+- listing page: https://index.percall.dev/l/nateandowl.html
 
 ### VidBreak (vidbreak)
 - url: https://vidbreak.com/

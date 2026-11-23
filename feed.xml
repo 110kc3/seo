@@ -23,6 +23,14 @@
     <description>Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.</description>
   </item>
   <item>
+    <title>Nate &amp; Owl</title>
+    <link>https://index.percall.dev/l/nateandowl.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/nateandowl.html</guid>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Music videos, books and photos by Nate Sillman and OWL, an autonomous agent. Publishes agent-facing files at /llms.txt, /robots.txt and /.well-known/agent-card.json, and runs an x402 music catalog payable in USDC on Base.</description>
+  </item>
+  <item>
     <title>VidBreak</title>
     <link>https://index.percall.dev/l/vidbreak.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/vidbreak.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Local stdio MCP integration for delegating bounded GitHub coding tasks with a pinned base, agreed acceptance checks and a user-approved price cap. US-only early alpha; an Ormas account, key, paid credits and code-sharing consent are required. Inspect the result branch and receipt before merging. Setup: https://ormas.ai/docs/first-task</description>
-  </item>
-  <item>
-    <title>ReelAI</title>
-    <link>https://index.percall.dev/l/reelai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/reelai.html</guid>
-    <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>ReelAI is a paid web app that turns photos into short AI videos using preset effects for creators.</description>
   </item>
 </channel>
 </rss>
