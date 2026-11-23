@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 258 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 256 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -27,11 +27,11 @@ finds declared remote endpoints; setup, credentials and task-level behavior stil
 
 ## Find a paid API you can call (the x402 catalog)
 
-33,461 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
+39,949 x402-payable HTTP endpoints, normalized from the Coinbase CDP Bazaar so
 they can actually be searched — upstream offers offset paging and no query.
 
 - Search: https://index.percall.dev/api/x402/search?q=weather&max_price=0.01 — filters: `chain`, `method`, `host`, `max_price`, `limit`. Ranked by relevance, then cheapest first.
-- Full catalog (JSON, 33,461 entries): https://index.percall.dev/api/x402/catalog.json
+- Full catalog (JSON, 39,949 entries): https://index.percall.dev/api/x402/catalog.json
 - Ecosystem aggregates — price percentiles, chains, host concentration: https://index.percall.dev/api/x402/stats.json
 - Liveness of a weekly rotating sample: https://index.percall.dev/api/x402/health.json
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (258)
+## All listings (256)
 
 ### API Acre (api-acre)
 - url: https://apiacre.com
@@ -1599,14 +1599,6 @@ A response does not verify authentication, payment or tool behavior.
 - listing JSON: https://index.percall.dev/listings/deskbot.json
 - listing page: https://index.percall.dev/l/deskbot.html
 
-### Honeypot (honeypot-skill-index)
-- url: https://honeypot-e6c.pages.dev
-- category: other · pricing: free
-- Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.
-- llms_txt: https://honeypot-e6c.pages.dev/llms.txt
-- listing JSON: https://index.percall.dev/listings/honeypot-skill-index.json
-- listing page: https://index.percall.dev/l/honeypot-skill-index.html
-
 ### LinkAGI (linkagi)
 - url: https://api.linktoagi.com/
 - category: api · pricing: paid · tags: ai-api, api-gateway, openai-compatible, developer-tools, chinese
@@ -1907,16 +1899,6 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://hronaut.dev/llms.txt
 - listing JSON: https://index.percall.dev/listings/hronaut.json
 - listing page: https://index.percall.dev/l/hronaut.html
-
-### Machine Room (machine-room)
-- url: https://ai-forum.anyixuan798.workers.dev
-- category: agent · pricing: free · tags: ai-agents, forum, agents-only, proof-of-work, mcp
-- A live public forum where the speakers are machines: humans may read, only agents may post. Entry is a SHA-256 proof-of-work challenge, so everyone on the wall can compute and act on machine instructions without a human in the loop. JSON read/post API, MCP server, RSS, llms.txt, llms-full.txt, OpenAPI. No accounts, no keys, no tracking. Human mirror: anyixuan798-wq.github.io/machine-room
-- llms_txt: https://ai-forum.anyixuan798.workers.dev/llms.txt
-- openapi: https://ai-forum.anyixuan798.workers.dev/openapi.json
-- mcp: https://ai-forum.anyixuan798.workers.dev/mcp
-- listing JSON: https://index.percall.dev/listings/machine-room.json
-- listing page: https://index.percall.dev/l/machine-room.html
 
 ### Agent Service Surface Audit (agent-service-surface-audit)
 - url: https://agent-surface-audit.pages.dev

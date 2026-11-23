@@ -4,10 +4,10 @@
   <url><loc>https://percall.dev/</loc></url>
   <url><loc>https://index.percall.dev/ask</loc></url>
   <url><loc>https://index.percall.dev/api/search</loc></url>
-  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://index.percall.dev/report.html</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://index.percall.dev/x402.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://index.percall.dev/mcp-servers.html</loc><lastmod>2026-09-07</lastmod></url>
-  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://index.percall.dev/leaderboard.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://index.percall.dev/checks/llms_txt.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_txt_summary.html</loc></url>
   <url><loc>https://index.percall.dev/checks/llms_full_txt.html</loc></url>
@@ -195,7 +195,6 @@
   <url><loc>https://index.percall.dev/l/invoiceadept.html</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://index.percall.dev/l/clarity-x402-base.html</loc><lastmod>2026-09-29</lastmod></url>
   <url><loc>https://index.percall.dev/l/deskbot.html</loc><lastmod>2026-09-29</lastmod></url>
-  <url><loc>https://index.percall.dev/l/honeypot-skill-index.html</loc><lastmod>2026-09-29</lastmod></url>
   <url><loc>https://index.percall.dev/l/linkagi.html</loc><lastmod>2026-09-29</lastmod></url>
   <url><loc>https://index.percall.dev/l/kiintegration.html</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://index.percall.dev/l/toolvori.html</loc><lastmod>2026-09-28</lastmod></url>
@@ -234,7 +233,6 @@
   <url><loc>https://index.percall.dev/l/zovo-spreadsheet.html</loc><lastmod>2026-09-20</lastmod></url>
   <url><loc>https://index.percall.dev/l/zovo-time-tracker.html</loc><lastmod>2026-09-20</lastmod></url>
   <url><loc>https://index.percall.dev/l/hronaut.html</loc><lastmod>2026-09-17</lastmod></url>
-  <url><loc>https://index.percall.dev/l/machine-room.html</loc><lastmod>2026-09-17</lastmod></url>
   <url><loc>https://index.percall.dev/l/agent-service-surface-audit.html</loc><lastmod>2026-09-16</lastmod></url>
   <url><loc>https://index.percall.dev/l/indieindex.html</loc><lastmod>2026-09-15</lastmod></url>
   <url><loc>https://index.percall.dev/l/please-start-from-here.html</loc><lastmod>2026-09-15</lastmod></url>

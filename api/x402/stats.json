@@ -1,22 +1,23 @@
 {
   "source": "Coinbase CDP x402 Bazaar",
   "source_url": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/resources",
-  "fetched": "2026-11-16",
-  "endpoints": 33461,
-  "hosts": 3226,
+  "fetched": "2026-11-23",
+  "endpoints": 39949,
+  "hosts": 3288,
   "concentration": {
-    "top_10_hosts_share": 0.189,
+    "top_10_hosts_share": 0.179,
     "note": "A handful of operators publish thousands of endpoints each, so the endpoint count overstates the number of distinct services."
   },
   "by_chain": {
-    "base": 32338,
-    "solana": 803,
-    "base-sepolia": 189,
+    "base": 38862,
+    "solana": 786,
+    "base-sepolia": 148,
     "xrpl:0": 53,
     "arbitrum": 37,
-    "eip155:4663": 16,
-    "eip155:5042": 6,
-    "eip155:42220": 5,
+    "eip155:4663": 32,
+    "kadena:mainnet01": 6,
+    "eip155:42220": 6,
+    "eip155:5042": 5,
     "eip155:8217": 4,
     "x-layer": 4,
     "polygon": 3,
@@ -25,19 +26,19 @@
     "eip155:143": 1
   },
   "by_version": {
-    "1": 184,
-    "2": 33277
+    "1": 163,
+    "2": 39786
   },
   "by_method": {
-    "POST": 16563,
-    "GET": 16355,
+    "POST": 22864,
+    "GET": 16584,
     "PUT": 5,
     "DELETE": 1
   },
   "price_usd": {
-    "priced": 33367,
-    "unpriced": 94,
-    "min": 0.001,
+    "priced": 39833,
+    "unpriced": 116,
+    "min": 0.000167,
     "p50": 0.005,
     "p90": 0.05,
     "max": 1000
@@ -45,7 +46,7 @@
   "top_hosts": [
     {
       "host": "detect.halowerk.com",
-      "endpoints": 1972
+      "endpoints": 1983
     },
     {
       "host": "southpow.media",
@@ -53,95 +54,95 @@
     },
     {
       "host": "agent-data-tools.revmesh2074.workers.dev",
-      "endpoints": 727
+      "endpoints": 776
     },
     {
       "host": "agent402.tools",
-      "endpoints": 627
+      "endpoints": 637
     },
     {
       "host": "tanod.dev",
       "endpoints": 596
     },
     {
-      "host": "api.x402node.dev",
-      "endpoints": 315
+      "host": "tasksai-agent-commerce-live-10437713249.us-central1.run.app",
+      "endpoints": 535
     },
     {
-      "host": "x402.orthogonal.com",
-      "endpoints": 310
+      "host": "research.halowerk.com",
+      "endpoints": 479
+    },
+    {
+      "host": "daten.halowerk.com",
+      "endpoints": 387
+    },
+    {
+      "host": "text.halowerk.com",
+      "endpoints": 378
     },
     {
       "host": "twin.unykorn.org",
-      "endpoints": 274
+      "endpoints": 374
     },
     {
-      "host": "api.realtimeapi.ai",
-      "endpoints": 255
+      "host": "paket.halowerk.com",
+      "endpoints": 339
+    },
+    {
+      "host": "medien.halowerk.com",
+      "endpoints": 319
+    },
+    {
+      "host": "x402.orthogonal.com",
+      "endpoints": 308
+    },
+    {
+      "host": "buero.halowerk.com",
+      "endpoints": 299
+    },
+    {
+      "host": "format.halowerk.com",
+      "endpoints": 296
+    },
+    {
+      "host": "handel.halowerk.com",
+      "endpoints": 287
+    },
+    {
+      "host": "api.x402node.dev",
+      "endpoints": 271
+    },
+    {
+      "host": "ort.halowerk.com",
+      "endpoints": 271
+    },
+    {
+      "host": "kette.halowerk.com",
+      "endpoints": 268
     },
     {
       "host": "api.vextorium.com",
-      "endpoints": 240
+      "endpoints": 234
     },
     {
-      "host": "aipaygen.com",
-      "endpoints": 222
+      "host": "finanz.halowerk.com",
+      "endpoints": 223
+    },
+    {
+      "host": "apexfaucet.xyz",
+      "endpoints": 219
+    },
+    {
+      "host": "api.xynaptic.io",
+      "endpoints": 219
     },
     {
       "host": "api.myceliasignal.com",
       "endpoints": 216
     },
     {
-      "host": "buero.halowerk.com",
-      "endpoints": 216
-    },
-    {
-      "host": "bot-bazaar.fly.dev",
-      "endpoints": 198
-    },
-    {
-      "host": "x402-factory.com",
-      "endpoints": 189
-    },
-    {
-      "host": "apexfaucet.xyz",
-      "endpoints": 188
-    },
-    {
-      "host": "api.aiskills402.com",
-      "endpoints": 179
-    },
-    {
-      "host": "api.chainmarket-api.workers.dev",
-      "endpoints": 174
-    },
-    {
-      "host": "agentshield.live",
-      "endpoints": 169
-    },
-    {
-      "host": "seo.halowerk.com",
-      "endpoints": 168
-    },
-    {
-      "host": "x402.freeq.one",
-      "endpoints": 166
-    },
-    {
-      "host": "blockrun.ai",
-      "endpoints": 162
-    },
-    {
-      "host": "search.gedx402.com",
-      "endpoints": 159
-    },
-    {
-      "host": "x402.forgemesh.io",
-      "endpoints": 151
-    },
-    {
-      "host": "webtechnik.halowerk.com",
-      "endpoints": 148
+      "host": "api.realtimeapi.ai",
+      "endpoints": 212
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "$comment": "Endpoints that failed a liveness probe. Evidence, not proof: the probe is a rotating weekly sample taken from one network path, so an entry may be firewalling us specifically or may have been down for an hour. Nothing is removed from the catalog on the strength of it — search still returns these, flagged. Operators: to be corrected or removed, open an issue on the repo; no justification needed.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-11-16",
-  "catalog_size": 33461,
+  "probed_at": "2026-11-23",
+  "catalog_size": 39949,
   "confidence": {
     "confirmed": "failed at least two consecutive probes",
     "suspected": "failed its most recent probe, once",
@@ -12,8 +12,8 @@
   "free": true,
   "counts": {
     "confirmed": 2,
-    "suspected": 32,
-    "tracked": 34
+    "suspected": 27,
+    "tracked": 29
   },
   "endpoints": [
     {
@@ -173,34 +173,6 @@
       "last_checked": "2026-11-09"
     },
     {
-      "url": "https://signal-api.shicoars.workers.dev/p/regime-hot",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://address-formats.x402tookit.com/address-format",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://audio-calc.x402tookit.com/bit-depth",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://aviation-calc.x402tookit.com/pressure-altitude",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
       "url": "https://deepcounterfeit.com/v1/x402/prebuy/:mint",
       "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
       "misses": 1,
@@ -215,13 +187,6 @@
       "last_checked": "2026-11-16"
     },
     {
-      "url": "https://paper-print-calc.x402tookit.com/print-pixels",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
       "url": "https://saylorinnovations.com/api/evm/bsc/block/:number",
       "reason": "HTTP 503",
       "misses": 1,
@@ -229,32 +194,32 @@
       "last_checked": "2026-11-16"
     },
     {
-      "url": "https://saylorinnovations.com/api/security/:solana_address",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://web-probe.x402tookit.com/http-timing",
+      "url": "https://api.cortexcloud.org/v1/webhooks/whale-alerts",
       "reason": "HTTP 530",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     },
     {
-      "url": "https://world-bank.x402tookit.com/country-profile",
-      "reason": "HTTP 530",
+      "url": "https://api.liquidagent.ai/v1/gas",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     },
     {
-      "url": "https://x402.omniaco.org/api/liq-aggregate",
-      "reason": "HTTP 502",
+      "url": "https://mintintel.35-171-220-195.sslip.io/v1/base/receipt/:hash",
+      "reason": "timeout after 8000ms",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.ryanseslow.com/wp-json/rsmad/v1/x402/v2/park",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     }
   ]
 }

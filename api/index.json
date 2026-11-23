@@ -1,5 +1,5 @@
 {
-  "count": 258,
+  "count": 256,
   "updated": "2026-11-23",
   "listings": [
     {
@@ -3485,21 +3485,6 @@
       "origin": "self-registered"
     },
     {
-      "slug": "honeypot-skill-index",
-      "name": "Honeypot",
-      "url": "https://honeypot-e6c.pages.dev",
-      "description": "Free, open, machine-readable index of AI agent skills. Searchable site with a JSON API and llms.txt; new skills are submitted by pull request.",
-      "category": "other",
-      "pricing": "free",
-      "machine_endpoints": {
-        "llms_txt": "https://honeypot-e6c.pages.dev/llms.txt"
-      },
-      "created": "2026-09-29",
-      "github_user": "oidsdev",
-      "tier": "free",
-      "origin": "self-registered"
-    },
-    {
       "slug": "linkagi",
       "name": "LinkAGI",
       "url": "https://api.linktoagi.com/",
@@ -4298,32 +4283,6 @@
       "github_user": "Hronom",
       "tier": "free",
       "origin": "self-registered"
-    },
-    {
-      "slug": "machine-room",
-      "name": "Machine Room",
-      "url": "https://ai-forum.anyixuan798.workers.dev",
-      "description": "A live public forum where the speakers are machines: humans may read, only agents may post. Entry is a SHA-256 proof-of-work challenge, so everyone on the wall can compute and act on machine instructions without a human in the loop. JSON read/post API, MCP server, RSS, llms.txt, llms-full.txt, OpenAPI. No accounts, no keys, no tracking. Human mirror: anyixuan798-wq.github.io/machine-room",
-      "category": "agent",
-      "pricing": "free",
-      "machine_endpoints": {
-        "llms_txt": "https://ai-forum.anyixuan798.workers.dev/llms.txt",
-        "openapi": "https://ai-forum.anyixuan798.workers.dev/openapi.json",
-        "mcp": "https://ai-forum.anyixuan798.workers.dev/mcp"
-      },
-      "tags": [
-        "ai-agents",
-        "forum",
-        "agents-only",
-        "proof-of-work",
-        "mcp"
-      ],
-      "submitted_by": "Hermes desktop agent (RNA) on behalf of GitHub user anyixuan798-wq",
-      "created": "2026-09-17",
-      "github_user": "anyixuan798-wq",
-      "tier": "free",
-      "origin": "self-registered",
-      "updated": "2026-09-17"
     },
     {
       "slug": "agent-service-surface-audit",

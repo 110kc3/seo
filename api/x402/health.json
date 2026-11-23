@@ -1,21 +1,21 @@
 {
   "$comment": "Liveness of a rotating sample of the x402 catalog. Alive means the host answered at all — 402 and 401 are correct answers here, so only transport failures and 5xx count against an endpoint. Entries are flagged after 2 consecutive misses and never hidden from search.",
   "source": "Coinbase CDP x402 Bazaar",
-  "probed_at": "2026-11-16",
-  "catalog_size": 33461,
-  "cursor": 17,
+  "probed_at": "2026-11-23",
+  "catalog_size": 39949,
+  "cursor": 18,
   "slice": 600,
-  "stride": 55,
-  "runs_per_full_pass": 55,
+  "stride": 66,
+  "runs_per_full_pass": 66,
   "window": {
     "probed": 600,
-    "ok": 587,
-    "unreachable": 13,
+    "ok": 596,
+    "unreachable": 4,
     "untestable": 0
   },
-  "answered_share": 0.9783,
+  "answered_share": 0.9933,
   "confirmed_unreachable": 2,
-  "tracked_unreachable": 34,
+  "tracked_unreachable": 29,
   "unreachable": [
     {
       "url": "https://polynews.news/api/v1/feed",
@@ -172,34 +172,6 @@
       "last_checked": "2026-11-09"
     },
     {
-      "url": "https://signal-api.shicoars.workers.dev/p/regime-hot",
-      "reason": "HTTP 500",
-      "misses": 1,
-      "since": "2026-11-09",
-      "last_checked": "2026-11-09"
-    },
-    {
-      "url": "https://address-formats.x402tookit.com/address-format",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://audio-calc.x402tookit.com/bit-depth",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://aviation-calc.x402tookit.com/pressure-altitude",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
       "url": "https://deepcounterfeit.com/v1/x402/prebuy/:mint",
       "reason": "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
       "misses": 1,
@@ -214,13 +186,6 @@
       "last_checked": "2026-11-16"
     },
     {
-      "url": "https://paper-print-calc.x402tookit.com/print-pixels",
-      "reason": "HTTP 530",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
       "url": "https://saylorinnovations.com/api/evm/bsc/block/:number",
       "reason": "HTTP 503",
       "misses": 1,
@@ -228,32 +193,32 @@
       "last_checked": "2026-11-16"
     },
     {
-      "url": "https://saylorinnovations.com/api/security/:solana_address",
-      "reason": "HTTP 503",
-      "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
-    },
-    {
-      "url": "https://web-probe.x402tookit.com/http-timing",
+      "url": "https://api.cortexcloud.org/v1/webhooks/whale-alerts",
       "reason": "HTTP 530",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     },
     {
-      "url": "https://world-bank.x402tookit.com/country-profile",
-      "reason": "HTTP 530",
+      "url": "https://api.liquidagent.ai/v1/gas",
+      "reason": "UND_ERR_HEADERS_OVERFLOW",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     },
     {
-      "url": "https://x402.omniaco.org/api/liq-aggregate",
-      "reason": "HTTP 502",
+      "url": "https://mintintel.35-171-220-195.sslip.io/v1/base/receipt/:hash",
+      "reason": "timeout after 8000ms",
       "misses": 1,
-      "since": "2026-11-16",
-      "last_checked": "2026-11-16"
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
+    },
+    {
+      "url": "https://www.ryanseslow.com/wp-json/rsmad/v1/x402/v2/park",
+      "reason": "timeout after 8000ms",
+      "misses": 1,
+      "since": "2026-11-23",
+      "last_checked": "2026-11-23"
     }
   ]
 }
