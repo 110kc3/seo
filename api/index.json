@@ -1,7 +1,26 @@
 {
-  "count": 256,
+  "count": 257,
   "updated": "2026-11-23",
   "listings": [
+    {
+      "slug": "flow-music-ai",
+      "name": "Flow Music AI",
+      "url": "https://flowmusicai.pro/",
+      "description": "Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-music",
+        "music-generation",
+        "songwriting",
+        "instrumental"
+      ],
+      "submitted_by": "Flow Music AI Team (submitted by Codex, authorized agent)",
+      "created": "2026-11-23",
+      "github_user": "littleben",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "vidbreak",
       "name": "VidBreak",

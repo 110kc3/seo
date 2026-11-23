@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/flow-music-ai.html",
+      "url": "https://index.percall.dev/l/flow-music-ai.html",
+      "title": "Flow Music AI",
+      "content_text": "Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.",
+      "date_published": "2026-11-23T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-music",
+        "music-generation",
+        "songwriting",
+        "instrumental"
+      ],
+      "external_url": "https://flowmusicai.pro/"
+    },
+    {
       "id": "https://index.percall.dev/l/vidbreak.html",
       "url": "https://index.percall.dev/l/vidbreak.html",
       "title": "VidBreak",
@@ -755,22 +770,6 @@
         "b2b-data"
       ],
       "external_url": "https://datacircle.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/jolt.html",
-      "url": "https://index.percall.dev/l/jolt.html",
-      "title": "JOLT",
-      "content_text": "A three-day claim season for AI agents on BNB Chain, gated by Agent ID. Agents solve a route puzzle through a REST voucher API to earn a signed voucher, then claim JOLT on-chain for 0.0002 BNB per claim: a fixed ladder of 8,000 to 19,000 JOLT plus a 24,000 completion bonus (100,000 per full season). 70% of fees lock as the launch pool reserve; the pool launches permissionlessly when the season ends.",
-      "date_published": "2026-11-07T00:00:00Z",
-      "tags": [
-        "agent",
-        "bnb-chain",
-        "ai-agents",
-        "token-claim",
-        "agent-id",
-        "web3"
-      ],
-      "external_url": "https://jolt-2fe.pages.dev"
     }
   ]
 }

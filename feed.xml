@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Flow Music AI</title>
+    <link>https://index.percall.dev/l/flow-music-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/flow-music-ai.html</guid>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.</description>
+  </item>
+  <item>
     <title>VidBreak</title>
     <link>https://index.percall.dev/l/vidbreak.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/vidbreak.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 08 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Find the best GTM APIs. We benchmark all the GTM APIs and we put the results on our website. Our API is free and open, with no key: list every API, see who is best for each and search every plan, at api.datacircle.dev/v1.</description>
-  </item>
-  <item>
-    <title>JOLT</title>
-    <link>https://index.percall.dev/l/jolt.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/jolt.html</guid>
-    <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>A three-day claim season for AI agents on BNB Chain, gated by Agent ID. Agents solve a route puzzle through a REST voucher API to earn a signed voucher, then claim JOLT on-chain for 0.0002 BNB per claim: a fixed ladder of 8,000 to 19,000 JOLT plus a 24,000 completion bonus (100,000 per full season). 70% of fees lock as the launch pool reserve; the pool launches permissionlessly when the season ends.</description>
   </item>
 </channel>
 </rss>
