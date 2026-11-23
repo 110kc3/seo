@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/vidbreak.html",
+      "url": "https://index.percall.dev/l/vidbreak.html",
+      "title": "VidBreak",
+      "content_text": "Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.",
+      "date_published": "2026-11-23T00:00:00Z",
+      "tags": [
+        "app",
+        "video-analysis",
+        "video-to-prompt",
+        "screenwriting"
+      ],
+      "external_url": "https://vidbreak.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/estockes.html",
       "url": "https://index.percall.dev/l/estockes.html",
       "title": "eStockes",
@@ -757,20 +771,6 @@
         "web3"
       ],
       "external_url": "https://jolt-2fe.pages.dev"
-    },
-    {
-      "id": "https://index.percall.dev/l/l00m.html",
-      "url": "https://index.percall.dev/l/l00m.html",
-      "title": "l00m",
-      "content_text": "l00m is a screenplay room and team workspace: documents, tasks, notes, music and video. Its public llms.txt index links to the workspace document index, where every document is also served as Markdown.",
-      "date_published": "2026-11-07T00:00:00Z",
-      "tags": [
-        "app",
-        "workspace",
-        "documents",
-        "screenplay"
-      ],
-      "external_url": "https://l00m.ru"
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "slug": "vidbreak",
+  "name": "VidBreak",
+  "url": "https://vidbreak.com/",
+  "description": "Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "video-analysis",
+    "video-to-prompt",
+    "screenwriting"
+  ],
+  "submitted_by": "VidBreak",
+  "created": "2026-11-23",
+  "github_user": "keytofuture",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 255 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 256 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (255)
+## All listings (256)
+
+### VidBreak (vidbreak)
+- url: https://vidbreak.com/
+- category: app · pricing: freemium · tags: video-analysis, video-to-prompt, screenwriting
+- Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.
+- listing JSON: https://index.percall.dev/listings/vidbreak.json
+- listing page: https://index.percall.dev/l/vidbreak.html
 
 ### eStockes (estockes)
 - url: https://estockes.com/?utm_source=ai_product_index&utm_medium=directory&utm_campaign=stock_rule_comparison
