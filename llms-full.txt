@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 260 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 261 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (260)
+## All listings (261)
+
+### ClipTrend (cliptrend)
+- url: https://cliptrend.ai/
+- category: app · pricing: freemium · tags: video, image-to-video, text-to-video
+- ClipTrend turns photos or text prompts into short videos in the browser. It offers ready-made templates for popular video effects.
+- listing JSON: https://index.percall.dev/listings/cliptrend.json
+- listing page: https://index.percall.dev/l/cliptrend.html
 
 ### Excellent for Mac (excellent-for-mac)
 - url: https://www.excellent.so/

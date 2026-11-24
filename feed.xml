@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>ClipTrend</title>
+    <link>https://index.percall.dev/l/cliptrend.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cliptrend.html</guid>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>ClipTrend turns photos or text prompts into short videos in the browser. It offers ready-made templates for popular video effects.</description>
+  </item>
+  <item>
     <title>Excellent for Mac</title>
     <link>https://index.percall.dev/l/excellent-for-mac.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/excellent-for-mac.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by RAYDA TECH in Chengdu.</description>
-  </item>
-  <item>
-    <title>Agent Garrett</title>
-    <link>https://index.percall.dev/l/agent-garrett.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agent-garrett.html</guid>
-    <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Hosted personal cybersecurity agent that keeps working after logout. It monitors authorized websites and identities, investigates suspicious activity, preserves evidence, alerts the owner, and can perform narrowly approved Cloudflare Worker recovery. Dashboard, MCP, and backend API access are authenticated.</description>
   </item>
 </channel>
 </rss>

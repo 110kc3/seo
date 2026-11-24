@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/cliptrend.html",
+      "url": "https://index.percall.dev/l/cliptrend.html",
+      "title": "ClipTrend",
+      "content_text": "ClipTrend turns photos or text prompts into short videos in the browser. It offers ready-made templates for popular video effects.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "app",
+        "video",
+        "image-to-video",
+        "text-to-video"
+      ],
+      "external_url": "https://cliptrend.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/excellent-for-mac.html",
       "url": "https://index.percall.dev/l/excellent-for-mac.html",
       "title": "Excellent for Mac",
@@ -750,22 +764,6 @@
         "automation"
       ],
       "external_url": "https://rayda-tech.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/agent-garrett.html",
-      "url": "https://index.percall.dev/l/agent-garrett.html",
-      "title": "Agent Garrett",
-      "content_text": "Hosted personal cybersecurity agent that keeps working after logout. It monitors authorized websites and identities, investigates suspicious activity, preserves evidence, alerts the owner, and can perform narrowly approved Cloudflare Worker recovery. Dashboard, MCP, and backend API access are authenticated.",
-      "date_published": "2026-11-09T00:00:00Z",
-      "tags": [
-        "agent",
-        "cybersecurity",
-        "monitoring",
-        "incident-response",
-        "identity-protection",
-        "evidence"
-      ],
-      "external_url": "https://agent.garrettstimpson.ca/"
     }
   ]
 }

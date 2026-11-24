@@ -1,7 +1,24 @@
 {
-  "count": 260,
+  "count": 261,
   "updated": "2026-11-24",
   "listings": [
+    {
+      "slug": "cliptrend",
+      "name": "ClipTrend",
+      "url": "https://cliptrend.ai/",
+      "description": "ClipTrend turns photos or text prompts into short videos in the browser. It offers ready-made templates for popular video effects.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "video",
+        "image-to-video",
+        "text-to-video"
+      ],
+      "created": "2026-11-24",
+      "github_user": "seantins9",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "excellent-for-mac",
       "name": "Excellent for Mac",
