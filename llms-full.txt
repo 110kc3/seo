@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 259 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 260 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (259)
+## All listings (260)
+
+### Excellent for Mac (excellent-for-mac)
+- url: https://www.excellent.so/
+- category: app · pricing: freemium · tags: macos, developer-tools, ai-agents, monitoring
+- Excellent for Mac helps developers review activity and findings from Claude Code, Codex and other supported coding agents. Free manual scans read existing logs on the Mac without an account. Optional Pro adds background scans, alerts and checks for selected actions in supported agents.
+- listing JSON: https://index.percall.dev/listings/excellent-for-mac.json
+- listing page: https://index.percall.dev/l/excellent-for-mac.html
 
 ### Message.com MCP Server (message-com-mcp)
 - url: https://www.message.com/developers/integrations/mcp

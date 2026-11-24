@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/excellent-for-mac.html",
+      "url": "https://index.percall.dev/l/excellent-for-mac.html",
+      "title": "Excellent for Mac",
+      "content_text": "Excellent for Mac helps developers review activity and findings from Claude Code, Codex and other supported coding agents. Free manual scans read existing logs on the Mac without an account. Optional Pro adds background scans, alerts and checks for selected actions in supported agents.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "app",
+        "macos",
+        "developer-tools",
+        "ai-agents",
+        "monitoring"
+      ],
+      "external_url": "https://www.excellent.so/"
+    },
+    {
       "id": "https://index.percall.dev/l/message-com-mcp.html",
       "url": "https://index.percall.dev/l/message-com-mcp.html",
       "title": "Message.com MCP Server",
@@ -751,22 +766,6 @@
         "evidence"
       ],
       "external_url": "https://agent.garrettstimpson.ca/"
-    },
-    {
-      "id": "https://index.percall.dev/l/agentseo.html",
-      "url": "https://index.percall.dev/l/agentseo.html",
-      "title": "AgentSEO",
-      "content_text": "AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.",
-      "date_published": "2026-11-09T00:00:00Z",
-      "tags": [
-        "api",
-        "seo-api",
-        "aeo",
-        "serp",
-        "keyword-research",
-        "mcp"
-      ],
-      "external_url": "https://www.agentseo.dev/"
     }
   ]
 }

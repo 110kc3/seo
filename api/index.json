@@ -1,7 +1,25 @@
 {
-  "count": 259,
+  "count": 260,
   "updated": "2026-11-24",
   "listings": [
+    {
+      "slug": "excellent-for-mac",
+      "name": "Excellent for Mac",
+      "url": "https://www.excellent.so/",
+      "description": "Excellent for Mac helps developers review activity and findings from Claude Code, Codex and other supported coding agents. Free manual scans read existing logs on the Mac without an account. Optional Pro adds background scans, alerts and checks for selected actions in supported agents.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "macos",
+        "developer-tools",
+        "ai-agents",
+        "monitoring"
+      ],
+      "created": "2026-11-24",
+      "github_user": "excellent-so",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "message-com-mcp",
       "name": "Message.com MCP Server",

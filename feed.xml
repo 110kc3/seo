@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Excellent for Mac</title>
+    <link>https://index.percall.dev/l/excellent-for-mac.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/excellent-for-mac.html</guid>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Excellent for Mac helps developers review activity and findings from Claude Code, Codex and other supported coding agents. Free manual scans read existing logs on the Mac without an account. Optional Pro adds background scans, alerts and checks for selected actions in supported agents.</description>
+  </item>
+  <item>
     <title>Message.com MCP Server</title>
     <link>https://index.percall.dev/l/message-com-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/message-com-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Hosted personal cybersecurity agent that keeps working after logout. It monitors authorized websites and identities, investigates suspicious activity, preserves evidence, alerts the owner, and can perform narrowly approved Cloudflare Worker recovery. Dashboard, MCP, and backend API access are authenticated.</description>
-  </item>
-  <item>
-    <title>AgentSEO</title>
-    <link>https://index.percall.dev/l/agentseo.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/agentseo.html</guid>
-    <pubDate>Mon, 09 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>AgentSEO is a paid SEO API and hosted MCP server for AI agents and developer workflows. Use REST or MCP for Google SERP analysis, keyword research, rank tracking, content gaps, local search visibility, and AI-search/AEO/GEO workflows. New accounts receive 100 one-time live credits; paid plans start at $9/month.</description>
   </item>
 </channel>
 </rss>
