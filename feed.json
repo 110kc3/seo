@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/message-com-mcp.html",
+      "url": "https://index.percall.dev/l/message-com-mcp.html",
+      "title": "Message.com MCP Server",
+      "content_text": "Connect an AI client to an authorized Message.com workspace to work with customer chats and tickets. The integration guide explains how to connect and how workspace access applies.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "mcp"
+      ],
+      "external_url": "https://www.message.com/developers/integrations/mcp"
+    },
+    {
       "id": "https://index.percall.dev/l/api-acre.html",
       "url": "https://index.percall.dev/l/api-acre.html",
       "title": "API Acre",
@@ -756,21 +767,6 @@
         "mcp"
       ],
       "external_url": "https://www.agentseo.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/paperhumanizer.html",
-      "url": "https://index.percall.dev/l/paperhumanizer.html",
-      "title": "PaperHumanizer",
-      "content_text": "Academic English revision for students and researchers. Compare suggested wording with the original and check citations, numbers, terms and claims before use. Generation requires sign-in and available credits. Submitted by the PaperHumanizer team.",
-      "date_published": "2026-11-09T00:00:00Z",
-      "tags": [
-        "app",
-        "academic-writing",
-        "research",
-        "english",
-        "revision"
-      ],
-      "external_url": "https://paperhumanizer.com"
     }
   ]
 }

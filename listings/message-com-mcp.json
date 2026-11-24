@@ -1,0 +1,12 @@
+{
+  "slug": "message-com-mcp",
+  "name": "Message.com MCP Server",
+  "url": "https://www.message.com/developers/integrations/mcp",
+  "description": "Connect an AI client to an authorized Message.com workspace to work with customer chats and tickets. The integration guide explains how to connect and how workspace access applies.",
+  "category": "mcp",
+  "pricing": "paid",
+  "created": "2026-11-24",
+  "github_user": "stfng",
+  "tier": "free",
+  "origin": "self-registered"
+}
