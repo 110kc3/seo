@@ -1,5 +1,5 @@
 {
-  "count": 264,
+  "count": 265,
   "updated": "2026-11-24",
   "listings": [
     {
@@ -80,6 +80,27 @@
       "pricing": "paid",
       "created": "2026-11-24",
       "github_user": "stfng",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "notabis-discovery",
+      "name": "NOTABIS Discovery",
+      "url": "https://discovery.notabis.com/",
+      "description": "A public directory for discovering useful websites, products, services, and places. Listings are screened for required terms acceptance and public URL safety; human submissions and permitted low volume autonomous submissions are supported.",
+      "category": "other",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://discovery.notabis.com/llms.txt"
+      },
+      "tags": [
+        "directory",
+        "discovery",
+        "web"
+      ],
+      "submitted_by": "NOTABIS Labs",
+      "created": "2026-11-24",
+      "github_user": "RGerculy",
       "tier": "free",
       "origin": "self-registered"
     },

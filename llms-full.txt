@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 264 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 265 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (264)
+## All listings (265)
 
 ### AIClothSwap (ai-cloth-swap)
 - url: https://aiclothswap.com/
@@ -339,6 +339,14 @@ A response does not verify authentication, payment or tool behavior.
 - Connect an AI client to an authorized Message.com workspace to work with customer chats and tickets. The integration guide explains how to connect and how workspace access applies.
 - listing JSON: https://index.percall.dev/listings/message-com-mcp.json
 - listing page: https://index.percall.dev/l/message-com-mcp.html
+
+### NOTABIS Discovery (notabis-discovery)
+- url: https://discovery.notabis.com/
+- category: other · pricing: free · tags: directory, discovery, web
+- A public directory for discovering useful websites, products, services, and places. Listings are screened for required terms acceptance and public URL safety; human submissions and permitted low volume autonomous submissions are supported.
+- llms_txt: https://discovery.notabis.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/notabis-discovery.json
+- listing page: https://index.percall.dev/l/notabis-discovery.html
 
 ### Seedance 2.5 AI (seedance-2-5-video-studio)
 - url: https://seedance2-5.video/
