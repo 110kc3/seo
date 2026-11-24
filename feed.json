@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/ai-cloth-swap.html",
+      "url": "https://index.percall.dev/l/ai-cloth-swap.html",
+      "title": "AIClothSwap",
+      "content_text": "Preview different outfits and clothing colors on your own photo using a browser-based clothes swap and virtual try-on tool.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "app",
+        "virtual-try-on",
+        "fashion",
+        "photo-editing"
+      ],
+      "external_url": "https://aiclothswap.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/cliptrend.html",
       "url": "https://index.percall.dev/l/cliptrend.html",
       "title": "ClipTrend",
@@ -746,22 +760,6 @@
         "rest-api"
       ],
       "external_url": "https://publora.com/?utm_source=percall&utm_medium=referral&utm_campaign=ai-directories"
-    },
-    {
-      "id": "https://index.percall.dev/l/aichi-food.html",
-      "url": "https://index.percall.dev/l/aichi-food.html",
-      "title": "HANK Studio - 46 Commercial WorkBuddy Agents",
-      "content_text": "Production AI agent portfolio and engineering workshop by HANK in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.",
-      "date_published": "2026-11-11T00:00:00Z",
-      "tags": [
-        "agent",
-        "agents",
-        "ai",
-        "mcp",
-        "rag",
-        "devtools"
-      ],
-      "external_url": "https://aichi.food"
     }
   ]
 }

@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>AIClothSwap</title>
+    <link>https://index.percall.dev/l/ai-cloth-swap.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/ai-cloth-swap.html</guid>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Preview different outfits and clothing colors on your own photo using a browser-based clothes swap and virtual try-on tool.</description>
+  </item>
+  <item>
     <title>ClipTrend</title>
     <link>https://index.percall.dev/l/cliptrend.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/cliptrend.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user&#39;s own Publora account. Free Starter plan; paid plans per account.</description>
-  </item>
-  <item>
-    <title>HANK Studio - 46 Commercial WorkBuddy Agents</title>
-    <link>https://index.percall.dev/l/aichi-food.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/aichi-food.html</guid>
-    <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Production AI agent portfolio and engineering workshop by HANK in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.</description>
   </item>
 </channel>
 </rss>

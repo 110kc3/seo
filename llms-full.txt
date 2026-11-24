@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 262 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 263 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (262)
+## All listings (263)
+
+### AIClothSwap (ai-cloth-swap)
+- url: https://aiclothswap.com/
+- category: app · pricing: freemium · tags: virtual-try-on, fashion, photo-editing
+- Preview different outfits and clothing colors on your own photo using a browser-based clothes swap and virtual try-on tool.
+- listing JSON: https://index.percall.dev/listings/ai-cloth-swap.json
+- listing page: https://index.percall.dev/l/ai-cloth-swap.html
 
 ### ClipTrend (cliptrend)
 - url: https://cliptrend.ai/

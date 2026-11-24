@@ -1,7 +1,24 @@
 {
-  "count": 262,
+  "count": 263,
   "updated": "2026-11-24",
   "listings": [
+    {
+      "slug": "ai-cloth-swap",
+      "name": "AIClothSwap",
+      "url": "https://aiclothswap.com/",
+      "description": "Preview different outfits and clothing colors on your own photo using a browser-based clothes swap and virtual try-on tool.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "virtual-try-on",
+        "fashion",
+        "photo-editing"
+      ],
+      "created": "2026-11-24",
+      "github_user": "seantins9",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "cliptrend",
       "name": "ClipTrend",
