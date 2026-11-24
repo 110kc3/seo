@@ -31,6 +31,14 @@
     <description>Connect an AI client to an authorized Message.com workspace to work with customer chats and tickets. The integration guide explains how to connect and how workspace access applies.</description>
   </item>
   <item>
+    <title>Seedance 2.5 AI</title>
+    <link>https://index.percall.dev/l/seedance-2-5-video-studio.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/seedance-2-5-video-studio.html</guid>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.</description>
+  </item>
+  <item>
     <title>API Acre</title>
     <link>https://index.percall.dev/l/api-acre.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/api-acre.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Production AI agent portfolio and engineering workshop by HANK in Chengdu, featuring 46 official reviewed commercial Tencent WorkBuddy agents (26 experts + 20 skills), 4 live AI web tools, and 17 open-source repos.</description>
-  </item>
-  <item>
-    <title>RAYDA TECH - Enterprise AI Agent Studio</title>
-    <link>https://index.percall.dev/l/rayda-tech.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/rayda-tech.html</guid>
-    <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by RAYDA TECH in Chengdu.</description>
   </item>
 </channel>
 </rss>

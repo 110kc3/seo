@@ -1,5 +1,5 @@
 {
-  "count": 261,
+  "count": 262,
   "updated": "2026-11-24",
   "listings": [
     {
@@ -46,6 +46,23 @@
       "pricing": "paid",
       "created": "2026-11-24",
       "github_user": "stfng",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "seedance-2-5-video-studio",
+      "name": "Seedance 2.5 AI",
+      "url": "https://seedance2-5.video/",
+      "description": "Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "video",
+        "text-to-video",
+        "image-to-video"
+      ],
+      "created": "2026-11-24",
+      "github_user": "seantins9",
       "tier": "free",
       "origin": "self-registered"
     },

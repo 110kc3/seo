@@ -46,6 +46,20 @@
       "external_url": "https://www.message.com/developers/integrations/mcp"
     },
     {
+      "id": "https://index.percall.dev/l/seedance-2-5-video-studio.html",
+      "url": "https://index.percall.dev/l/seedance-2-5-video-studio.html",
+      "title": "Seedance 2.5 AI",
+      "content_text": "Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "app",
+        "video",
+        "text-to-video",
+        "image-to-video"
+      ],
+      "external_url": "https://seedance2-5.video/"
+    },
+    {
       "id": "https://index.percall.dev/l/api-acre.html",
       "url": "https://index.percall.dev/l/api-acre.html",
       "title": "API Acre",
@@ -748,22 +762,6 @@
         "devtools"
       ],
       "external_url": "https://aichi.food"
-    },
-    {
-      "id": "https://index.percall.dev/l/rayda-tech.html",
-      "url": "https://index.percall.dev/l/rayda-tech.html",
-      "title": "RAYDA TECH - Enterprise AI Agent Studio",
-      "content_text": "Enterprise AI agent deployment, RAG knowledge systems, multi-agent workflow orchestration, team AI enablement workshops, and 46 commercial WorkBuddy solutions by RAYDA TECH in Chengdu.",
-      "date_published": "2026-11-11T00:00:00Z",
-      "tags": [
-        "agent",
-        "enterprise-ai",
-        "agents",
-        "rag",
-        "mcp",
-        "automation"
-      ],
-      "external_url": "https://rayda-tech.com"
     }
   ]
 }
