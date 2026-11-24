@@ -1,0 +1,17 @@
+{
+  "slug": "flux-3-image-editor",
+  "name": "FLUX 3 Image Editor",
+  "url": "https://flux-3image.com/flux-3-image-editor",
+  "description": "Edit a photo in the browser with a text instruction. Change colors, objects, or backgrounds using the FLUX 3 Image model.",
+  "category": "app",
+  "pricing": "paid",
+  "tags": [
+    "image-editing",
+    "photo-editing",
+    "flux"
+  ],
+  "created": "2026-11-24",
+  "github_user": "seantins9",
+  "tier": "free",
+  "origin": "self-registered"
+}

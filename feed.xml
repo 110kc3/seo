@@ -31,6 +31,14 @@
     <description>Excellent for Mac helps developers review activity and findings from Claude Code, Codex and other supported coding agents. Free manual scans read existing logs on the Mac without an account. Optional Pro adds background scans, alerts and checks for selected actions in supported agents.</description>
   </item>
   <item>
+    <title>FLUX 3 Image Editor</title>
+    <link>https://index.percall.dev/l/flux-3-image-editor.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/flux-3-image-editor.html</guid>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Edit a photo in the browser with a text instruction. Change colors, objects, or backgrounds using the FLUX 3 Image model.</description>
+  </item>
+  <item>
     <title>Message.com MCP Server</title>
     <link>https://index.percall.dev/l/message-com-mcp.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/message-com-mcp.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Paid iPhone app for on-device text, speech, photo and text-based document translation, local history and bilingual PDF export. US$4.99 once. iOS 17+. No account or subscription. Speech depends on local language resources. Scanned PDFs are unsupported. Bundled-model use excludes the EU, UK and South Korea, including travel. Unavailable in mainland China&#39;s App Store. The site has an actual edited build-19 simulator demo and its exported PDF.</description>
-  </item>
-  <item>
-    <title>Publora – Social Media Scheduler</title>
-    <link>https://index.percall.dev/l/publora.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/publora.html</guid>
-    <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user&#39;s own Publora account. Free Starter plan; paid plans per account.</description>
   </item>
 </channel>
 </rss>

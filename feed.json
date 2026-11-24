@@ -49,6 +49,20 @@
       "external_url": "https://www.excellent.so/"
     },
     {
+      "id": "https://index.percall.dev/l/flux-3-image-editor.html",
+      "url": "https://index.percall.dev/l/flux-3-image-editor.html",
+      "title": "FLUX 3 Image Editor",
+      "content_text": "Edit a photo in the browser with a text instruction. Change colors, objects, or backgrounds using the FLUX 3 Image model.",
+      "date_published": "2026-11-24T00:00:00Z",
+      "tags": [
+        "app",
+        "image-editing",
+        "photo-editing",
+        "flux"
+      ],
+      "external_url": "https://flux-3image.com/flux-3-image-editor"
+    },
+    {
       "id": "https://index.percall.dev/l/message-com-mcp.html",
       "url": "https://index.percall.dev/l/message-com-mcp.html",
       "title": "Message.com MCP Server",
@@ -744,22 +758,6 @@
         "on-device-ai"
       ],
       "external_url": "https://earshot.chuchu1226.chatgpt.site/"
-    },
-    {
-      "id": "https://index.percall.dev/l/publora.html",
-      "url": "https://index.percall.dev/l/publora.html",
-      "title": "Publora – Social Media Scheduler",
-      "content_text": "Social media scheduler with a REST API and a hosted MCP server. Schedule and publish posts to LinkedIn, X, Instagram, Threads, TikTok, YouTube, Facebook, Bluesky, Mastodon and Telegram. Agents can create drafts, schedule or publish posts, upload images and videos, and check post status. The MCP server uses OAuth with each user's own Publora account. Free Starter plan; paid plans per account.",
-      "date_published": "2026-11-11T00:00:00Z",
-      "tags": [
-        "mcp",
-        "social-media",
-        "scheduling",
-        "publishing",
-        "mcp",
-        "rest-api"
-      ],
-      "external_url": "https://publora.com/?utm_source=percall&utm_medium=referral&utm_campaign=ai-directories"
     }
   ]
 }
