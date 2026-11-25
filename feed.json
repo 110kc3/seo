@@ -33,6 +33,22 @@
       "external_url": "https://math.hjinlabs.com/"
     },
     {
+      "id": "https://index.percall.dev/l/neuraliquid-signals.html",
+      "url": "https://index.percall.dev/l/neuraliquid-signals.html",
+      "title": "NeuraLiquid Signals by FutureCast",
+      "content_text": "Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 1.65 USDC per eligible direct pass purchase after the payment is finalized.",
+      "date_published": "2026-11-25T00:00:00Z",
+      "tags": [
+        "api",
+        "crypto-signals",
+        "watchlist",
+        "market-data",
+        "x402",
+        "base"
+      ],
+      "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
+    },
+    {
       "id": "https://index.percall.dev/l/sandboxer.html",
       "url": "https://index.percall.dev/l/sandboxer.html",
       "title": "Sandboxer",
@@ -736,22 +752,6 @@
         "developer-tools"
       ],
       "external_url": "https://kunavo.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/leadli-me.html",
-      "url": "https://index.percall.dev/l/leadli-me.html",
-      "title": "leadli.me",
-      "content_text": "leadli.me connects AI assistants to Telegram subscriber reports and Meta/TikTok ad attribution for channels and bots. Review traffic sources, confirmed joins, bot starts and unsubscribes. Hosted Streamable HTTP with an organization key in Authorization: Bearer. Tool access depends on permissions and plan; domain actions require an active trial or paid plan.",
-      "date_published": "2026-11-14T00:00:00Z",
-      "tags": [
-        "mcp",
-        "telegram",
-        "ad-attribution",
-        "analytics",
-        "marketing",
-        "mcp"
-      ],
-      "external_url": "https://leadli.me/en/guides/mcp-server"
     }
   ]
 }

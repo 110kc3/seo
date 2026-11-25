@@ -23,6 +23,14 @@
     <description>ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.</description>
   </item>
   <item>
+    <title>NeuraLiquid Signals by FutureCast</title>
+    <link>https://index.percall.dev/l/neuraliquid-signals.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/neuraliquid-signals.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 1.65 USDC per eligible direct pass purchase after the payment is finalized.</description>
+  </item>
+  <item>
     <title>Sandboxer</title>
     <link>https://index.percall.dev/l/sandboxer.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/sandboxer.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.</description>
-  </item>
-  <item>
-    <title>leadli.me</title>
-    <link>https://index.percall.dev/l/leadli-me.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/leadli-me.html</guid>
-    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>leadli.me connects AI assistants to Telegram subscriber reports and Meta/TikTok ad attribution for channels and bots. Review traffic sources, confirmed joins, bot starts and unsubscribes. Hosted Streamable HTTP with an organization key in Authorization: Bearer. Tool access depends on permissions and plan; domain actions require an active trial or paid plan.</description>
   </item>
 </channel>
 </rss>

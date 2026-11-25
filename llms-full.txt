@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 268 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 269 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (268)
+## All listings (269)
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/
@@ -320,6 +320,15 @@ A response does not verify authentication, payment or tool behavior.
 - ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.
 - listing JSON: https://index.percall.dev/listings/modumath.json
 - listing page: https://index.percall.dev/l/modumath.html
+
+### NeuraLiquid Signals by FutureCast (neuraliquid-signals)
+- url: https://futurecast.ml85.xyz/quickstart?utm_source=product-index
+- category: api · pricing: paid · tags: crypto-signals, watchlist, market-data, x402, base
+- Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 1.65 USDC per eligible direct pass purchase after the payment is finalized.
+- llms_txt: https://futurecast.ml85.xyz/llms.txt
+- openapi: https://futurecast.ml85.xyz/openapi.json
+- listing JSON: https://index.percall.dev/listings/neuraliquid-signals.json
+- listing page: https://index.percall.dev/l/neuraliquid-signals.html
 
 ### Sandboxer (sandboxer)
 - url: https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks
