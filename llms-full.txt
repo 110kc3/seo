@@ -324,7 +324,7 @@ A response does not verify authentication, payment or tool behavior.
 ### NeuraLiquid Signals by FutureCast (neuraliquid-signals)
 - url: https://futurecast.ml85.xyz/quickstart?utm_source=product-index
 - category: api · pricing: paid · tags: crypto-signals, watchlist, market-data, x402, base
-- Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 1.65 USDC per eligible direct pass purchase after the payment is finalized.
+- Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 34% on eligible new direct purchases after the payment is finalized. At 5 USDC, that pays 1.70 USDC.
 - llms_txt: https://futurecast.ml85.xyz/llms.txt
 - openapi: https://futurecast.ml85.xyz/openapi.json
 - listing JSON: https://index.percall.dev/listings/neuraliquid-signals.json
