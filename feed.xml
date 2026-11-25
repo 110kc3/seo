@@ -31,6 +31,14 @@
     <description>Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 34% on eligible new direct purchases after the payment is finalized. At 5 USDC, that pays 1.70 USDC.</description>
   </item>
   <item>
+    <title>Qianliu API (千流 API)</title>
+    <link>https://index.percall.dev/l/qianliu-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/qianliu-api.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Qianliu API is a metered model gateway. Developers can browse group prices before funding an account. The OpenAPI quickstart lists models available to a group key and shows how to send a paid Chat Completions request. Video teams can look up separate Seedance 2.5 and MiniMax H3 rates in the model catalog.</description>
+  </item>
+  <item>
     <title>Sandboxer</title>
     <link>https://index.percall.dev/l/sandboxer.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/sandboxer.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.</description>
-  </item>
-  <item>
-    <title>Kunavo</title>
-    <link>https://index.percall.dev/l/kunavo.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kunavo.html</guid>
-    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.</description>
   </item>
 </channel>
 </rss>

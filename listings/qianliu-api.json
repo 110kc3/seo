@@ -1,0 +1,24 @@
+{
+  "slug": "qianliu-api",
+  "name": "Qianliu API (千流 API)",
+  "url": "https://www.plusapi.cn/",
+  "description": "Qianliu API is a metered model gateway. Developers can browse group prices before funding an account. The OpenAPI quickstart lists models available to a group key and shows how to send a paid Chat Completions request. Video teams can look up separate Seedance 2.5 and MiniMax H3 rates in the model catalog.",
+  "category": "api",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://cvlgthwl97.apifox.cn/llms.txt",
+    "openapi": "https://qianliu-api-tools.deed.page/qianliu-openapi.json"
+  },
+  "tags": [
+    "llm-api",
+    "chat-completions",
+    "video-generation",
+    "seedance",
+    "minimax-h3"
+  ],
+  "submitted_by": "Qianliu API operations with AI assistance",
+  "created": "2026-11-25",
+  "github_user": "xiaodilj-dev",
+  "tier": "free",
+  "origin": "self-registered"
+}

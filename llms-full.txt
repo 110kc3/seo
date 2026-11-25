@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 269 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 270 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (269)
+## All listings (270)
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/
@@ -329,6 +329,15 @@ A response does not verify authentication, payment or tool behavior.
 - openapi: https://futurecast.ml85.xyz/openapi.json
 - listing JSON: https://index.percall.dev/listings/neuraliquid-signals.json
 - listing page: https://index.percall.dev/l/neuraliquid-signals.html
+
+### Qianliu API (千流 API) (qianliu-api)
+- url: https://www.plusapi.cn/
+- category: api · pricing: paid · tags: llm-api, chat-completions, video-generation, seedance, minimax-h3
+- Qianliu API is a metered model gateway. Developers can browse group prices before funding an account. The OpenAPI quickstart lists models available to a group key and shows how to send a paid Chat Completions request. Video teams can look up separate Seedance 2.5 and MiniMax H3 rates in the model catalog.
+- llms_txt: https://cvlgthwl97.apifox.cn/llms.txt
+- openapi: https://qianliu-api-tools.deed.page/qianliu-openapi.json
+- listing JSON: https://index.percall.dev/listings/qianliu-api.json
+- listing page: https://index.percall.dev/l/qianliu-api.html
 
 ### Sandboxer (sandboxer)
 - url: https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks

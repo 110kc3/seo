@@ -49,6 +49,22 @@
       "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
     },
     {
+      "id": "https://index.percall.dev/l/qianliu-api.html",
+      "url": "https://index.percall.dev/l/qianliu-api.html",
+      "title": "Qianliu API (千流 API)",
+      "content_text": "Qianliu API is a metered model gateway. Developers can browse group prices before funding an account. The OpenAPI quickstart lists models available to a group key and shows how to send a paid Chat Completions request. Video teams can look up separate Seedance 2.5 and MiniMax H3 rates in the model catalog.",
+      "date_published": "2026-11-25T00:00:00Z",
+      "tags": [
+        "api",
+        "llm-api",
+        "chat-completions",
+        "video-generation",
+        "seedance",
+        "minimax-h3"
+      ],
+      "external_url": "https://www.plusapi.cn/"
+    },
+    {
       "id": "https://index.percall.dev/l/sandboxer.html",
       "url": "https://index.percall.dev/l/sandboxer.html",
       "title": "Sandboxer",
@@ -736,22 +752,6 @@
         "x402"
       ],
       "external_url": "https://beliefstate.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/kunavo.html",
-      "url": "https://index.percall.dev/l/kunavo.html",
-      "title": "Kunavo",
-      "content_text": "Hosted prepaid AI API gateway with OpenAI-compatible chat completions, Anthropic-compatible Messages, streaming, and per-key usage reporting. API calls require a Kunavo account, an API key and sufficient balance. Public documentation and machine-readable pricing are available.",
-      "date_published": "2026-11-14T00:00:00Z",
-      "tags": [
-        "api",
-        "ai-gateway",
-        "llm",
-        "api",
-        "usage-tracking",
-        "developer-tools"
-      ],
-      "external_url": "https://kunavo.com"
     }
   ]
 }
