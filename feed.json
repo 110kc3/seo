@@ -22,6 +22,17 @@
       "external_url": "https://fastscribe.org/"
     },
     {
+      "id": "https://index.percall.dev/l/modumath.html",
+      "url": "https://index.percall.dev/l/modumath.html",
+      "title": "ModuMath",
+      "content_text": "ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.",
+      "date_published": "2026-11-25T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://math.hjinlabs.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/sandboxer.html",
       "url": "https://index.percall.dev/l/sandboxer.html",
       "title": "Sandboxer",
@@ -741,22 +752,6 @@
         "mcp"
       ],
       "external_url": "https://leadli.me/en/guides/mcp-server"
-    },
-    {
-      "id": "https://index.percall.dev/l/lianxiaozhi.html",
-      "url": "https://index.percall.dev/l/lianxiaozhi.html",
-      "title": "链小知区块链",
-      "content_text": "Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.",
-      "date_published": "2026-11-14T00:00:00Z",
-      "tags": [
-        "mcp",
-        "blockchain",
-        "chinese",
-        "news",
-        "knowledge",
-        "read-only"
-      ],
-      "external_url": "https://lianxiaozhi.com"
     }
   ]
 }

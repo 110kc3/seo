@@ -1,0 +1,12 @@
+{
+  "slug": "modumath",
+  "name": "ModuMath",
+  "url": "https://math.hjinlabs.com/",
+  "description": "ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.",
+  "category": "app",
+  "pricing": "free",
+  "created": "2026-11-25",
+  "github_user": "lmo0317",
+  "tier": "free",
+  "origin": "self-registered"
+}

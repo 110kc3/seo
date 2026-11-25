@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 267 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 268 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (267)
+## All listings (268)
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/
@@ -313,6 +313,13 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://fastscribe.org/help/mcp-server
 - listing JSON: https://index.percall.dev/listings/fastscribe.json
 - listing page: https://index.percall.dev/l/fastscribe.html
+
+### ModuMath (modumath)
+- url: https://math.hjinlabs.com/
+- category: app · pricing: free
+- ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.
+- listing JSON: https://index.percall.dev/listings/modumath.json
+- listing page: https://index.percall.dev/l/modumath.html
 
 ### Sandboxer (sandboxer)
 - url: https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks

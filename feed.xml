@@ -15,6 +15,14 @@
     <description>Upload an audio or video recording or paste a supported public video link to get an editable, timestamped transcript with speaker labels. Export a Word document or SRT captions. Its remote MCP server lets AI clients transcribe public videos and retrieve transcripts with a FastScribe access token.</description>
   </item>
   <item>
+    <title>ModuMath</title>
+    <link>https://index.percall.dev/l/modumath.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/modumath.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>ModuMath helps middle and high school students work through a math problem they type or photograph. Students open the explanation at the step where they got stuck, then try a similar problem with new numbers before revealing its answer. The pilot provides a limited number of free credits at signup. The interface supports Korean, English and Simplified Chinese.</description>
+  </item>
+  <item>
     <title>Sandboxer</title>
     <link>https://index.percall.dev/l/sandboxer.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/sandboxer.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>leadli.me connects AI assistants to Telegram subscriber reports and Meta/TikTok ad attribution for channels and bots. Review traffic sources, confirmed joins, bot starts and unsubscribes. Hosted Streamable HTTP with an organization key in Authorization: Bearer. Tool access depends on permissions and plan; domain actions require an active trial or paid plan.</description>
-  </item>
-  <item>
-    <title>链小知区块链</title>
-    <link>https://index.percall.dev/l/lianxiaozhi.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/lianxiaozhi.html</guid>
-    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.</description>
   </item>
 </channel>
 </rss>
