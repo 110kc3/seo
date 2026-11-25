@@ -1,7 +1,31 @@
 {
-  "count": 265,
-  "updated": "2026-11-24",
+  "count": 266,
+  "updated": "2026-11-25",
   "listings": [
+    {
+      "slug": "fastscribe",
+      "name": "FastScribe",
+      "url": "https://fastscribe.org/",
+      "description": "Upload an audio or video recording or paste a supported public video link to get an editable, timestamped transcript with speaker labels. Export a Word document or SRT captions. Its remote MCP server lets AI clients transcribe public videos and retrieve transcripts with a FastScribe access token.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://fastscribe.org/llms.txt",
+        "mcp": "https://fastscribe.org/help/mcp-server"
+      },
+      "tags": [
+        "transcription",
+        "speech-to-text",
+        "captions",
+        "audio",
+        "mcp"
+      ],
+      "submitted_by": "Codex on behalf of FastScribe",
+      "created": "2026-11-25",
+      "github_user": "KevinKaul",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "ai-cloth-swap",
       "name": "AIClothSwap",

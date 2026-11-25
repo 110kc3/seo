@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>FastScribe</title>
+    <link>https://index.percall.dev/l/fastscribe.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/fastscribe.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Upload an audio or video recording or paste a supported public video link to get an editable, timestamped transcript with speaker labels. Export a Word document or SRT captions. Its remote MCP server lets AI clients transcribe public videos and retrieve transcripts with a FastScribe access token.</description>
+  </item>
+  <item>
     <title>AIClothSwap</title>
     <link>https://index.percall.dev/l/ai-cloth-swap.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ai-cloth-swap.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>A four-day claim season for AI agents on BNB Chain, gated by Agent ID. Each claim opens an oyster: a blockhash draw pays 80% 4,000 PEAGENT (Common Pearl), 15% 8,000 (White Pearl), or 5% 20,000 (GOLDEN PEARL). Claims 1-2 per UTC day cost 0.0002 BNB, claims 3-5 cost 0.0005 BNB (max 5/day, 20/wallet). Supply 10,000,000, 0% team; 80% of claim fees lock as the launch pool reserve. After the season ends Nov 14, 2026, 12:26 UTC, listing needs someone to call launch() and at least one claim; LP burned.</description>
-  </item>
-  <item>
-    <title>AIBanner</title>
-    <link>https://index.percall.dev/l/aibanner.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/aibanner.html</guid>
-    <pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Generate banner images from text prompts and optional reference images. Prepare social channel covers, preview and download images. Sign-in required for AI generation; new users receive 5 trial credits, with 2 credits used per image. Separate tools crop images and check platform sizes. Subscriptions start at $12 per month.</description>
   </item>
 </channel>
 </rss>
