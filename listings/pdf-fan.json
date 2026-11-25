@@ -1,0 +1,21 @@
+{
+  "slug": "pdf-fan",
+  "name": "PDF Fan",
+  "url": "https://pdf.fan/es/insertar-paginas-pdf/",
+  "description": "PDF Fan is a browser-based PDF toolkit with machine-readable tool guides and limits at /llms.txt. The Spanish insert-pages tool adds blank sheets or pages from a second PDF at a chosen position. It is free and requires no PDF Fan account. Original PDFs are processed in the browser. The generated PDF may be uploaded as a temporary copy for the download link.",
+  "category": "app",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "llms_txt": "https://pdf.fan/llms.txt"
+  },
+  "tags": [
+    "pdf",
+    "browser",
+    "documents",
+    "spanish"
+  ],
+  "created": "2026-11-25",
+  "github_user": "zenoven",
+  "tier": "free",
+  "origin": "self-registered"
+}

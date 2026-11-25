@@ -49,6 +49,21 @@
       "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
     },
     {
+      "id": "https://index.percall.dev/l/pdf-fan.html",
+      "url": "https://index.percall.dev/l/pdf-fan.html",
+      "title": "PDF Fan",
+      "content_text": "PDF Fan is a browser-based PDF toolkit with machine-readable tool guides and limits at /llms.txt. The Spanish insert-pages tool adds blank sheets or pages from a second PDF at a chosen position. It is free and requires no PDF Fan account. Original PDFs are processed in the browser. The generated PDF may be uploaded as a temporary copy for the download link.",
+      "date_published": "2026-11-25T00:00:00Z",
+      "tags": [
+        "app",
+        "pdf",
+        "browser",
+        "documents",
+        "spanish"
+      ],
+      "external_url": "https://pdf.fan/es/insertar-paginas-pdf/"
+    },
+    {
       "id": "https://index.percall.dev/l/qianliu-api.html",
       "url": "https://index.percall.dev/l/qianliu-api.html",
       "title": "Qianliu API (千流 API)",
@@ -737,21 +752,6 @@
         "mcp"
       ],
       "external_url": "https://valmera.io"
-    },
-    {
-      "id": "https://index.percall.dev/l/beliefstate.html",
-      "url": "https://index.percall.dev/l/beliefstate.html",
-      "title": "BeliefState",
-      "content_text": "Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.",
-      "date_published": "2026-11-14T00:00:00Z",
-      "tags": [
-        "mcp",
-        "investor-research",
-        "finance",
-        "stocks",
-        "x402"
-      ],
-      "external_url": "https://beliefstate.ai/"
     }
   ]
 }

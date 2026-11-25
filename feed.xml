@@ -31,6 +31,14 @@
     <description>Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 34% on eligible new direct purchases after the payment is finalized. At 5 USDC, that pays 1.70 USDC.</description>
   </item>
   <item>
+    <title>PDF Fan</title>
+    <link>https://index.percall.dev/l/pdf-fan.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/pdf-fan.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>PDF Fan is a browser-based PDF toolkit with machine-readable tool guides and limits at /llms.txt. The Spanish insert-pages tool adds blank sheets or pages from a second PDF at a chosen position. It is free and requires no PDF Fan account. Original PDFs are processed in the browser. The generated PDF may be uploaded as a temporary copy for the download link.</description>
+  </item>
+  <item>
     <title>Qianliu API (千流 API)</title>
     <link>https://index.percall.dev/l/qianliu-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/qianliu-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.</description>
-  </item>
-  <item>
-    <title>BeliefState</title>
-    <link>https://index.percall.dev/l/beliefstate.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/beliefstate.html</guid>
-    <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Investor research for AI assistants through MCP and a REST API. BeliefState provides dated, source-linked investment theses, catalysts, risks and observed revisions. Anyone can check company coverage without an account; detailed research requires paid access.</description>
   </item>
 </channel>
 </rss>

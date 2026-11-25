@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 270 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 271 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (270)
+## All listings (271)
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/
@@ -329,6 +329,14 @@ A response does not verify authentication, payment or tool behavior.
 - openapi: https://futurecast.ml85.xyz/openapi.json
 - listing JSON: https://index.percall.dev/listings/neuraliquid-signals.json
 - listing page: https://index.percall.dev/l/neuraliquid-signals.html
+
+### PDF Fan (pdf-fan)
+- url: https://pdf.fan/es/insertar-paginas-pdf/
+- category: app · pricing: freemium · tags: pdf, browser, documents, spanish
+- PDF Fan is a browser-based PDF toolkit with machine-readable tool guides and limits at /llms.txt. The Spanish insert-pages tool adds blank sheets or pages from a second PDF at a chosen position. It is free and requires no PDF Fan account. Original PDFs are processed in the browser. The generated PDF may be uploaded as a temporary copy for the download link.
+- llms_txt: https://pdf.fan/llms.txt
+- listing JSON: https://index.percall.dev/listings/pdf-fan.json
+- listing page: https://index.percall.dev/l/pdf-fan.html
 
 ### Qianliu API (千流 API) (qianliu-api)
 - url: https://www.plusapi.cn/
