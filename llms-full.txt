@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 266 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 267 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (266)
+## All listings (267)
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/
@@ -313,6 +313,15 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://fastscribe.org/help/mcp-server
 - listing JSON: https://index.percall.dev/listings/fastscribe.json
 - listing page: https://index.percall.dev/l/fastscribe.html
+
+### Sandboxer (sandboxer)
+- url: https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks
+- category: mcp · pricing: paid · tags: sandboxes, ai-agents, microvm, mcp, developer-tools
+- Sandboxer gives AI agents and developers cloud sandboxes that are full Ubuntu 24.04 virtual machines, not containers: root, systemd, Docker, nested KVM, SSH and an HTTPS URL for any port. Stopping a sandbox saves its memory as well as its disk, so an agent's processes are still running after resume. Claude Code, Codex, OpenCode and other coding agents are preinstalled. Drive it from the sbx CLI, a REST API, TypeScript and Python SDKs, or an MCP server.
+- llms_txt: https://sandboxer.com/llms.txt
+- mcp: https://sandboxer.com/mcp
+- listing JSON: https://index.percall.dev/listings/sandboxer.json
+- listing page: https://index.percall.dev/l/sandboxer.html
 
 ### AIClothSwap (ai-cloth-swap)
 - url: https://aiclothswap.com/

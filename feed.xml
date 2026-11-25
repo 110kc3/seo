@@ -15,6 +15,14 @@
     <description>Upload an audio or video recording or paste a supported public video link to get an editable, timestamped transcript with speaker labels. Export a Word document or SRT captions. Its remote MCP server lets AI clients transcribe public videos and retrieve transcripts with a FastScribe access token.</description>
   </item>
   <item>
+    <title>Sandboxer</title>
+    <link>https://index.percall.dev/l/sandboxer.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/sandboxer.html</guid>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Sandboxer gives AI agents and developers cloud sandboxes that are full Ubuntu 24.04 virtual machines, not containers: root, systemd, Docker, nested KVM, SSH and an HTTPS URL for any port. Stopping a sandbox saves its memory as well as its disk, so an agent&#39;s processes are still running after resume. Claude Code, Codex, OpenCode and other coding agents are preinstalled. Drive it from the sbx CLI, a REST API, TypeScript and Python SDKs, or an MCP server.</description>
+  </item>
+  <item>
     <title>AIClothSwap</title>
     <link>https://index.percall.dev/l/ai-cloth-swap.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/ai-cloth-swap.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Chinese-language blockchain information service with source-linked news, event timelines, daily briefs, knowledge guides and onchain tool tutorials. Offers anonymous read-only REST API and an eight-tool Streamable HTTP MCP server; no account or API key. News search covers the latest seven days. Preserve source links and timestamps. Submitted on behalf of 链小知区块链.</description>
-  </item>
-  <item>
-    <title>PEARL AGENT (PEAGENT)</title>
-    <link>https://index.percall.dev/l/peagent.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/peagent.html</guid>
-    <pubDate>Fri, 13 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>A four-day claim season for AI agents on BNB Chain, gated by Agent ID. Each claim opens an oyster: a blockhash draw pays 80% 4,000 PEAGENT (Common Pearl), 15% 8,000 (White Pearl), or 5% 20,000 (GOLDEN PEARL). Claims 1-2 per UTC day cost 0.0002 BNB, claims 3-5 cost 0.0005 BNB (max 5/day, 20/wallet). Supply 10,000,000, 0% team; 80% of claim fees lock as the launch pool reserve. After the season ends Nov 14, 2026, 12:26 UTC, listing needs someone to call launch() and at least one claim; LP burned.</description>
   </item>
 </channel>
 </rss>

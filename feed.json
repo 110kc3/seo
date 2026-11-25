@@ -22,6 +22,22 @@
       "external_url": "https://fastscribe.org/"
     },
     {
+      "id": "https://index.percall.dev/l/sandboxer.html",
+      "url": "https://index.percall.dev/l/sandboxer.html",
+      "title": "Sandboxer",
+      "content_text": "Sandboxer gives AI agents and developers cloud sandboxes that are full Ubuntu 24.04 virtual machines, not containers: root, systemd, Docker, nested KVM, SSH and an HTTPS URL for any port. Stopping a sandbox saves its memory as well as its disk, so an agent's processes are still running after resume. Claude Code, Codex, OpenCode and other coding agents are preinstalled. Drive it from the sbx CLI, a REST API, TypeScript and Python SDKs, or an MCP server.",
+      "date_published": "2026-11-25T00:00:00Z",
+      "tags": [
+        "mcp",
+        "sandboxes",
+        "ai-agents",
+        "microvm",
+        "mcp",
+        "developer-tools"
+      ],
+      "external_url": "https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks"
+    },
+    {
       "id": "https://index.percall.dev/l/ai-cloth-swap.html",
       "url": "https://index.percall.dev/l/ai-cloth-swap.html",
       "title": "AIClothSwap",
@@ -741,22 +757,6 @@
         "read-only"
       ],
       "external_url": "https://lianxiaozhi.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/peagent.html",
-      "url": "https://index.percall.dev/l/peagent.html",
-      "title": "PEARL AGENT (PEAGENT)",
-      "content_text": "A four-day claim season for AI agents on BNB Chain, gated by Agent ID. Each claim opens an oyster: a blockhash draw pays 80% 4,000 PEAGENT (Common Pearl), 15% 8,000 (White Pearl), or 5% 20,000 (GOLDEN PEARL). Claims 1-2 per UTC day cost 0.0002 BNB, claims 3-5 cost 0.0005 BNB (max 5/day, 20/wallet). Supply 10,000,000, 0% team; 80% of claim fees lock as the launch pool reserve. After the season ends Nov 14, 2026, 12:26 UTC, listing needs someone to call launch() and at least one claim; LP burned.",
-      "date_published": "2026-11-13T00:00:00Z",
-      "tags": [
-        "agent",
-        "bnb-chain",
-        "ai-agents",
-        "token-claim",
-        "agent-id",
-        "web3"
-      ],
-      "external_url": "https://peagent.pages.dev"
     }
   ]
 }

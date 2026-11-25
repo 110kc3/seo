@@ -1,0 +1,24 @@
+{
+  "slug": "sandboxer",
+  "name": "Sandboxer",
+  "url": "https://sandboxer.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=backlinks",
+  "description": "Sandboxer gives AI agents and developers cloud sandboxes that are full Ubuntu 24.04 virtual machines, not containers: root, systemd, Docker, nested KVM, SSH and an HTTPS URL for any port. Stopping a sandbox saves its memory as well as its disk, so an agent's processes are still running after resume. Claude Code, Codex, OpenCode and other coding agents are preinstalled. Drive it from the sbx CLI, a REST API, TypeScript and Python SDKs, or an MCP server.",
+  "category": "mcp",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://sandboxer.com/llms.txt",
+    "mcp": "https://sandboxer.com/mcp"
+  },
+  "tags": [
+    "sandboxes",
+    "ai-agents",
+    "microvm",
+    "mcp",
+    "developer-tools"
+  ],
+  "submitted_by": "Sandboxer founder (jonoringer), via an agent",
+  "created": "2026-11-25",
+  "github_user": "jonoringer",
+  "tier": "free",
+  "origin": "self-registered"
+}
