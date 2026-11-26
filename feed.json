@@ -37,6 +37,22 @@
       "external_url": "https://heightpair.com/"
     },
     {
+      "id": "https://index.percall.dev/l/imgai.html",
+      "url": "https://index.percall.dev/l/imgai.html",
+      "title": "ImgAI",
+      "content_text": "Browser-based AI image and video generator. Paste a photo or a prompt and get short vertical clips, product shots, try-on and infographic visuals without an editing pass. Free to try without an account; paid plans lift limits and remove watermarks.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "app",
+        "ai-video",
+        "image-generation",
+        "photo-editing",
+        "social-video",
+        "try-on"
+      ],
+      "external_url": "https://imgai.ai"
+    },
+    {
       "id": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
       "url": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
       "title": "Pangolinfo Amazon Scraper API",
@@ -733,22 +749,6 @@
         "docx"
       ],
       "external_url": "https://humanpen.net"
-    },
-    {
-      "id": "https://index.percall.dev/l/demonroute.html",
-      "url": "https://index.percall.dev/l/demonroute.html",
-      "title": "DemonRoute",
-      "content_text": "Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.",
-      "date_published": "2026-11-16T00:00:00Z",
-      "tags": [
-        "api",
-        "openai-compatible",
-        "open-weight",
-        "uncensored",
-        "prepaid",
-        "crypto"
-      ],
-      "external_url": "https://demonroute.com/"
     }
   ]
 }

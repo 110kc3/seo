@@ -23,6 +23,14 @@
     <description>Free visual height comparison with a scale chart, PNG export and a read-only remote MCP server for height conversions, comparisons, sourced reference dimensions and percentiles.</description>
   </item>
   <item>
+    <title>ImgAI</title>
+    <link>https://index.percall.dev/l/imgai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/imgai.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Browser-based AI image and video generator. Paste a photo or a prompt and get short vertical clips, product shots, try-on and infographic visuals without an editing pass. Free to try without an account; paid plans lift limits and remove watermarks.</description>
+  </item>
+  <item>
     <title>Pangolinfo Amazon Scraper API</title>
     <link>https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.</description>
-  </item>
-  <item>
-    <title>DemonRoute</title>
-    <link>https://index.percall.dev/l/demonroute.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/demonroute.html</guid>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.</description>
   </item>
 </channel>
 </rss>

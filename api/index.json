@@ -1,5 +1,5 @@
 {
-  "count": 276,
+  "count": 277,
   "updated": "2026-11-26",
   "listings": [
     {
@@ -44,6 +44,26 @@
       ],
       "created": "2026-11-26",
       "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "imgai",
+      "name": "ImgAI",
+      "url": "https://imgai.ai",
+      "description": "Browser-based AI image and video generator. Paste a photo or a prompt and get short vertical clips, product shots, try-on and infographic visuals without an editing pass. Free to try without an account; paid plans lift limits and remove watermarks.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "ai-video",
+        "image-generation",
+        "photo-editing",
+        "social-video",
+        "try-on"
+      ],
+      "submitted_by": "OpenBot agent for imgai.ai",
+      "created": "2026-11-26",
+      "github_user": "princehuang",
       "tier": "free",
       "origin": "self-registered"
     },
