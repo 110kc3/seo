@@ -37,6 +37,22 @@
       "external_url": "https://thesmartoken.com/"
     },
     {
+      "id": "https://index.percall.dev/l/neuraliquid-signals.html",
+      "url": "https://index.percall.dev/l/neuraliquid-signals.html",
+      "title": "NeuraLiquid Signals by FutureCast",
+      "content_text": "NeuraLiquid delivers revisioned crypto watchlist events from a paper-trading engine. Track new observations, directional conflicts and expiry with events-v2 and a cursor. Inspect a historical example for free. With an authorized wallet and budget, the MCP client can buy or resume a 24-hour x402 pass for 5 USDC on Base. Eligible direct referrals earn 34% (1.70 USDC) after payment finality.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "api",
+        "crypto-signals",
+        "watchlist",
+        "mcp",
+        "x402",
+        "base"
+      ],
+      "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
+    },
+    {
       "id": "https://index.percall.dev/l/fastscribe.html",
       "url": "https://index.percall.dev/l/fastscribe.html",
       "title": "FastScribe",
@@ -62,22 +78,6 @@
         "app"
       ],
       "external_url": "https://math.hjinlabs.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/neuraliquid-signals.html",
-      "url": "https://index.percall.dev/l/neuraliquid-signals.html",
-      "title": "NeuraLiquid Signals by FutureCast",
-      "content_text": "Crypto research signals for watchlists and alert bots. Each dryrun observation contains the asset symbol, long or short direction and UTC detection time. One 5 USDC payment on Base via x402 unlocks 24 hours of repeated reads. The feed can be empty. Registered referral partners earn 34% on eligible new direct purchases after the payment is finalized. At 5 USDC, that pays 1.70 USDC.",
-      "date_published": "2026-11-25T00:00:00Z",
-      "tags": [
-        "api",
-        "crypto-signals",
-        "watchlist",
-        "market-data",
-        "x402",
-        "base"
-      ],
-      "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
     },
     {
       "id": "https://index.percall.dev/l/pdf-fan.html",
