@@ -140,7 +140,7 @@
       "slug": "neuraliquid-signals",
       "name": "NeuraLiquid Signals by FutureCast",
       "url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index",
-      "description": "NeuraLiquid delivers revisioned crypto watchlist events from a paper-trading engine. Track new observations, directional conflicts and expiry with events-v2 and a cursor. Inspect a historical example for free. With an authorized wallet and budget, the MCP client can buy or resume a 24-hour x402 pass for 5 USDC on Base. Eligible direct referrals earn 34% (1.70 USDC) after payment finality.",
+      "description": "Track crypto watchlist events from a paper-trading engine with events-v2 and a cursor for revisions, conflicts and expiry. Preview a historical example free. With wallet and budget approval, MCP can buy or resume a 24h live pass for 5 USDC on Base via x402. From Nov 26, 2026 22:00 UTC until Dec 26, 2026 22:00 UTC, sign your wallet to get a lasting referral link without buying a pass. Earn 34% on eligible direct sales (1.70 USDC per day pass) after payment finality.",
       "category": "api",
       "pricing": "paid",
       "machine_endpoints": {
