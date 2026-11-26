@@ -1,0 +1,23 @@
+{
+  "slug": "biggervs-measurements",
+  "name": "Bigger vs Measurements (MCP)",
+  "url": "https://biggervs.com/",
+  "description": "Free read-only MCP for real-world size data. Search objects, retrieve measurement definitions and cited sources, and compare size ratios. Distinguishes documented fixed dimensions from representative examples. Also offers a no-login daily browser size-comparison game.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://biggervs.com/llms.txt",
+    "mcp": "https://biggervs.com/mcp"
+  },
+  "tags": [
+    "measurements",
+    "size-comparison",
+    "education",
+    "data",
+    "mcp"
+  ],
+  "created": "2026-11-26",
+  "github_user": "iyuyoung",
+  "tier": "free",
+  "origin": "self-registered"
+}

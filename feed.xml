@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Bigger vs Measurements (MCP)</title>
+    <link>https://index.percall.dev/l/biggervs-measurements.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/biggervs-measurements.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Free read-only MCP for real-world size data. Search objects, retrieve measurement definitions and cited sources, and compare size ratios. Distinguishes documented fixed dimensions from representative examples. Also offers a no-login daily browser size-comparison game.</description>
+  </item>
+  <item>
     <title>HeightPair</title>
     <link>https://index.percall.dev/l/heightpair.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/heightpair.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Prepaid API gateway for open-weight and uncensored models. OpenAI-compatible base: https://api.demonroute.com/v1. Catalog/rates: https://demonroute.com/models. Pricing: https://demonroute.com/pricing. Privacy: https://demonroute.com/privacy. Anonymous signup: https://demonroute.com/login?door=anonymous (username/password, crypto-only, no recovery; lost credentials mean lost balance). A confirmed deposit is required, including for complimentary models.</description>
-  </item>
-  <item>
-    <title>Octuo</title>
-    <link>https://index.percall.dev/l/octuo.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/octuo.html</guid>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Octuo is the one place to run the agents you already use: a coordinator and unified entry point for heavy agent users. You state the goal; it prepares the work, hands each part to the right agent (Claude Code, Codex, MCP tools, browser and files), and follows up until it is done, with long jobs continuing after the chat closes. Work runs on your own Mac (macOS 15+, native); the iPhone companion (iOS 18+) shows progress and decisions on the go.</description>
   </item>
 </channel>
 </rss>

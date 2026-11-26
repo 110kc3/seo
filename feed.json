@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/biggervs-measurements.html",
+      "url": "https://index.percall.dev/l/biggervs-measurements.html",
+      "title": "Bigger vs Measurements (MCP)",
+      "content_text": "Free read-only MCP for real-world size data. Search objects, retrieve measurement definitions and cited sources, and compare size ratios. Distinguishes documented fixed dimensions from representative examples. Also offers a no-login daily browser size-comparison game.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "mcp",
+        "measurements",
+        "size-comparison",
+        "education",
+        "data",
+        "mcp"
+      ],
+      "external_url": "https://biggervs.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/heightpair.html",
       "url": "https://index.percall.dev/l/heightpair.html",
       "title": "HeightPair",
@@ -733,22 +749,6 @@
         "crypto"
       ],
       "external_url": "https://demonroute.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/octuo.html",
-      "url": "https://index.percall.dev/l/octuo.html",
-      "title": "Octuo",
-      "content_text": "Octuo is the one place to run the agents you already use: a coordinator and unified entry point for heavy agent users. You state the goal; it prepares the work, hands each part to the right agent (Claude Code, Codex, MCP tools, browser and files), and follows up until it is done, with long jobs continuing after the chat closes. Work runs on your own Mac (macOS 15+, native); the iPhone companion (iOS 18+) shows progress and decisions on the go.",
-      "date_published": "2026-11-16T00:00:00Z",
-      "tags": [
-        "agent",
-        "multi-agent",
-        "agent-orchestration",
-        "claude-code",
-        "macos",
-        "mcp"
-      ],
-      "external_url": "https://www.tutuo.ai/en/octuo/"
     }
   ]
 }
