@@ -1791,8 +1791,8 @@
     {
       "slug": "cloudbrowser",
       "name": "Cloudbrowser",
-      "url": "https://cloudbrowser.tv/",
-      "description": "Persistent, isolated Chrome cloud browsers for AI agents, with saved profiles, CDP access and permission-controlled live view. Pause and resume Chrome or fork a paused profile. Invitation-only private preview; REST API available, Go CLI planned. Free: 1 browser-hour/month, 1 concurrent browser. Paid plans from $20/month. Resume restarts Chrome; website sessions may expire.",
+      "url": "https://cloudbrowser.tv/virtual-browser",
+      "description": "Open a remote Chrome desktop in your current browser and return to its saved profile after a pause. Saved profiles require a verified email. Operate the running browser through Live View or attach a CDP client. A REST API and Go CLI manage browser lifecycles. The Free plan includes one browser-hour per UTC month and one running browser. Websites can still expire their own sessions.",
       "category": "app",
       "pricing": "freemium",
       "machine_endpoints": {
@@ -1809,7 +1809,8 @@
       "created": "2026-11-01",
       "github_user": "laotoutou",
       "tier": "free",
-      "origin": "self-registered"
+      "origin": "self-registered",
+      "updated": "2026-11-26"
     },
     {
       "slug": "johnvc-google-jobs-scraper",

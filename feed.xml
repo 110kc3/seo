@@ -39,6 +39,14 @@
     <description>NeuraLiquid delivers revisioned crypto watchlist events from a paper-trading engine. Track new observations, directional conflicts and expiry with events-v2 and a cursor. Inspect a historical example for free. With an authorized wallet and budget, the MCP client can buy or resume a 24-hour x402 pass for 5 USDC on Base. Eligible direct referrals earn 34% (1.70 USDC) after payment finality.</description>
   </item>
   <item>
+    <title>Cloudbrowser</title>
+    <link>https://index.percall.dev/l/cloudbrowser.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/cloudbrowser.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Open a remote Chrome desktop in your current browser and return to its saved profile after a pause. Saved profiles require a verified email. Operate the running browser through Live View or attach a CDP client. A REST API and Go CLI manage browser lifecycles. The Free plan includes one browser-hour per UTC month and one running browser. Websites can still expire their own sessions.</description>
+  </item>
+  <item>
     <title>FastScribe</title>
     <link>https://index.percall.dev/l/fastscribe.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fastscribe.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Telo is an AI health coach for iPhone and Apple Watch. It brings Apple Health sleep, workouts, heart rate variability and daily readiness together with a health log. Its optional Codex and Claude Desktop plugins let users ask about the health data they authorize.</description>
-  </item>
-  <item>
-    <title>FreeAI Go</title>
-    <link>https://index.percall.dev/l/freeai-go.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/freeai-go.html</guid>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.</description>
   </item>
 </channel>
 </rss>

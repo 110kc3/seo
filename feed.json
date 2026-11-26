@@ -68,6 +68,22 @@
       "external_url": "https://futurecast.ml85.xyz/quickstart?utm_source=product-index"
     },
     {
+      "id": "https://index.percall.dev/l/cloudbrowser.html",
+      "url": "https://index.percall.dev/l/cloudbrowser.html",
+      "title": "Cloudbrowser",
+      "content_text": "Open a remote Chrome desktop in your current browser and return to its saved profile after a pause. Saved profiles require a verified email. Operate the running browser through Live View or attach a CDP client. A REST API and Go CLI manage browser lifecycles. The Free plan includes one browser-hour per UTC month and one running browser. Websites can still expire their own sessions.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "app",
+        "cloud-browser",
+        "chrome",
+        "browser-automation",
+        "ai-agents",
+        "cdp"
+      ],
+      "external_url": "https://cloudbrowser.tv/virtual-browser"
+    },
+    {
       "id": "https://index.percall.dev/l/fastscribe.html",
       "url": "https://index.percall.dev/l/fastscribe.html",
       "title": "FastScribe",
@@ -737,21 +753,6 @@
         "mcp"
       ],
       "external_url": "https://telo.ferryman.app/"
-    },
-    {
-      "id": "https://index.percall.dev/l/freeai-go.html",
-      "url": "https://index.percall.dev/l/freeai-go.html",
-      "title": "FreeAI Go",
-      "content_text": "Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.",
-      "date_published": "2026-11-15T00:00:00Z",
-      "tags": [
-        "other",
-        "ai-directory",
-        "free-ai-tools",
-        "tool-comparison",
-        "productivity"
-      ],
-      "external_url": "https://www.freeaigo.com/"
     }
   ]
 }
