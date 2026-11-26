@@ -1,7 +1,26 @@
 {
-  "count": 271,
-  "updated": "2026-11-25",
+  "count": 272,
+  "updated": "2026-11-26",
   "listings": [
+    {
+      "slug": "pangolinfo-amazon-scraper-api",
+      "name": "Pangolinfo Amazon Scraper API",
+      "url": "https://www.pangolinfo.com/amazon-scraper-api/",
+      "description": "An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.",
+      "category": "api",
+      "pricing": "freemium",
+      "tags": [
+        "amazon",
+        "ecommerce",
+        "product-data",
+        "marketplace",
+        "api"
+      ],
+      "created": "2026-11-26",
+      "github_user": "Pangolin-spg",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "fastscribe",
       "name": "FastScribe",

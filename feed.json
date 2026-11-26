@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
+      "url": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
+      "title": "Pangolinfo Amazon Scraper API",
+      "content_text": "An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "api",
+        "amazon",
+        "ecommerce",
+        "product-data",
+        "marketplace",
+        "api"
+      ],
+      "external_url": "https://www.pangolinfo.com/amazon-scraper-api/"
+    },
+    {
       "id": "https://index.percall.dev/l/fastscribe.html",
       "url": "https://index.percall.dev/l/fastscribe.html",
       "title": "FastScribe",
@@ -736,22 +752,6 @@
         "open-source"
       ],
       "external_url": "https://github.com/NikTsy/notebooklm-project-handoff"
-    },
-    {
-      "id": "https://index.percall.dev/l/valmera.html",
-      "url": "https://index.percall.dev/l/valmera.html",
-      "title": "Valmera",
-      "content_text": "Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.",
-      "date_published": "2026-11-15T00:00:00Z",
-      "tags": [
-        "agent",
-        "ai-video-editor",
-        "video-editing",
-        "captions",
-        "mp4",
-        "mcp"
-      ],
-      "external_url": "https://valmera.io"
     }
   ]
 }

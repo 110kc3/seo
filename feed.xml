@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Pangolinfo Amazon Scraper API</title>
+    <link>https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.</description>
+  </item>
+  <item>
     <title>FastScribe</title>
     <link>https://index.percall.dev/l/fastscribe.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fastscribe.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2</description>
-  </item>
-  <item>
-    <title>Valmera</title>
-    <link>https://index.percall.dev/l/valmera.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/valmera.html</guid>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>Valmera is an AI video editing agent for footage you already shot. Upload a recording and describe the cut. Review a preview, ask for changes, and export an MP4. Creators can trim interviews, caption talking-head clips, and shorten product demos in Valmera Studio. Compatible assistants can edit the same project through the hosted MCP server with OAuth.</description>
   </item>
 </channel>
 </rss>
