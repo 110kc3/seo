@@ -37,6 +37,17 @@
       "external_url": "https://www.pangolinfo.com/amazon-scraper-api/"
     },
     {
+      "id": "https://index.percall.dev/l/poster-sh.html",
+      "url": "https://index.percall.dev/l/poster-sh.html",
+      "title": "Poster",
+      "content_text": "AI poster generator and editor. Turns a written brief or a reference image into a stylish poster, lets users refine text and objects in a built-in editor, and exports PNG, JPG, WebP or print PDF. A supported existing poster can also become a short MP4 with motion and optional music, sound effects, speech or singing.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://poster.sh/"
+    },
+    {
       "id": "https://index.percall.dev/l/smartoken.html",
       "url": "https://index.percall.dev/l/smartoken.html",
       "title": "SmarToken",
@@ -738,21 +749,6 @@
         "mcp"
       ],
       "external_url": "https://www.tutuo.ai/en/octuo/"
-    },
-    {
-      "id": "https://index.percall.dev/l/telo-blynkai.html",
-      "url": "https://index.percall.dev/l/telo-blynkai.html",
-      "title": "Telo",
-      "content_text": "Telo is an AI health coach for iPhone and Apple Watch. It brings Apple Health sleep, workouts, heart rate variability and daily readiness together with a health log. Its optional Codex and Claude Desktop plugins let users ask about the health data they authorize.",
-      "date_published": "2026-11-16T00:00:00Z",
-      "tags": [
-        "app",
-        "apple-health",
-        "health-log",
-        "ios",
-        "mcp"
-      ],
-      "external_url": "https://telo.ferryman.app/"
     }
   ]
 }

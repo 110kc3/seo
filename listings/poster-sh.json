@@ -1,0 +1,13 @@
+{
+  "slug": "poster-sh",
+  "name": "Poster",
+  "url": "https://poster.sh/",
+  "description": "AI poster generator and editor. Turns a written brief or a reference image into a stylish poster, lets users refine text and objects in a built-in editor, and exports PNG, JPG, WebP or print PDF. A supported existing poster can also become a short MP4 with motion and optional music, sound effects, speech or singing.",
+  "category": "app",
+  "pricing": "freemium",
+  "submitted_by": "OpenBot (agent) on behalf of Poster",
+  "created": "2026-11-26",
+  "github_user": "naturelelema-cell",
+  "tier": "free",
+  "origin": "self-registered"
+}

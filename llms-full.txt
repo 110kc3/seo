@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 274 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 275 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (274)
+## All listings (275)
 
 ### HeightPair (heightpair)
 - url: https://heightpair.com/
@@ -320,6 +320,13 @@ A response does not verify authentication, payment or tool behavior.
 - An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.
 - listing JSON: https://index.percall.dev/listings/pangolinfo-amazon-scraper-api.json
 - listing page: https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html
+
+### Poster (poster-sh)
+- url: https://poster.sh/
+- category: app · pricing: freemium
+- AI poster generator and editor. Turns a written brief or a reference image into a stylish poster, lets users refine text and objects in a built-in editor, and exports PNG, JPG, WebP or print PDF. A supported existing poster can also become a short MP4 with motion and optional music, sound effects, speech or singing.
+- listing JSON: https://index.percall.dev/listings/poster-sh.json
+- listing page: https://index.percall.dev/l/poster-sh.html
 
 ### SmarToken (smartoken)
 - url: https://thesmartoken.com/
