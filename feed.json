@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/heightpair.html",
+      "url": "https://index.percall.dev/l/heightpair.html",
+      "title": "HeightPair",
+      "content_text": "Free visual height comparison with a scale chart, PNG export and a read-only remote MCP server for height conversions, comparisons, sourced reference dimensions and percentiles.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "mcp",
+        "height",
+        "comparison",
+        "education",
+        "mcp"
+      ],
+      "external_url": "https://heightpair.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
       "url": "https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html",
       "title": "Pangolinfo Amazon Scraper API",
@@ -737,21 +752,6 @@
         "productivity"
       ],
       "external_url": "https://www.freeaigo.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/lobbyclip.html",
-      "url": "https://index.percall.dev/l/lobbyclip.html",
-      "title": "LobbyClip",
-      "content_text": "LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.",
-      "date_published": "2026-11-15T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-video",
-        "dance",
-        "photo-to-video",
-        "content-creation"
-      ],
-      "external_url": "https://www.lobbyclip.com/"
     }
   ]
 }

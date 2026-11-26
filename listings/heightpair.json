@@ -1,0 +1,22 @@
+{
+  "slug": "heightpair",
+  "name": "HeightPair",
+  "url": "https://heightpair.com/",
+  "description": "Free visual height comparison with a scale chart, PNG export and a read-only remote MCP server for height conversions, comparisons, sourced reference dimensions and percentiles.",
+  "category": "mcp",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://heightpair.com/llms.txt",
+    "mcp": "https://heightpair.com/mcp"
+  },
+  "tags": [
+    "height",
+    "comparison",
+    "education",
+    "mcp"
+  ],
+  "created": "2026-11-26",
+  "github_user": "iyuyoung",
+  "tier": "free",
+  "origin": "self-registered"
+}

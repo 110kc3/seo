@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>HeightPair</title>
+    <link>https://index.percall.dev/l/heightpair.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/heightpair.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Free visual height comparison with a scale chart, PNG export and a read-only remote MCP server for height conversions, comparisons, sourced reference dimensions and percentiles.</description>
+  </item>
+  <item>
     <title>Pangolinfo Amazon Scraper API</title>
     <link>https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Free directory for discovering and comparing AI tools for chat, images, writing, voice, video and APIs. Browse curated collections, check provider free-access limits, save a shortlist and open official sites. FreeAI Go does not host AI models or generate content; listed providers set their own prices and quotas. Available in English and Chinese.</description>
-  </item>
-  <item>
-    <title>LobbyClip</title>
-    <link>https://index.percall.dev/l/lobbyclip.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/lobbyclip.html</guid>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.</description>
   </item>
 </channel>
 </rss>
