@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 272 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 273 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (272)
+## All listings (273)
 
 ### Pangolinfo Amazon Scraper API (pangolinfo-amazon-scraper-api)
 - url: https://www.pangolinfo.com/amazon-scraper-api/
@@ -311,6 +311,14 @@ A response does not verify authentication, payment or tool behavior.
 - An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.
 - listing JSON: https://index.percall.dev/listings/pangolinfo-amazon-scraper-api.json
 - listing page: https://index.percall.dev/l/pangolinfo-amazon-scraper-api.html
+
+### SmarToken (smartoken)
+- url: https://thesmartoken.com/
+- category: api · pricing: paid · tags: ai, api, developer-tools, llm
+- Developers integrating several model providers often manage separate APIs and billing. SmarToken is an independent OpenAI-compatible gateway for supported Chinese text models, with a prepaid USD wallet, per-key budgets and usage logs. Eligible accounts may receive a one-time $1 trial if approved; it expires 30 days after grant. Conversations and responses are retained until deleted and may be accessed by authorized administrators.
+- llms_txt: https://thesmartoken.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/smartoken.json
+- listing page: https://index.percall.dev/l/smartoken.html
 
 ### FastScribe (fastscribe)
 - url: https://fastscribe.org/

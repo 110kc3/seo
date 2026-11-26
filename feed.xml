@@ -15,6 +15,14 @@
     <description>An Amazon data extraction API returning structured JSON for product details, keyword search, categories, seller storefronts, Best Sellers, and New Releases across 13 marketplaces. The free tier includes 60 credits per month with no card; higher usage uses paid plans. Requests require a bearer API key.</description>
   </item>
   <item>
+    <title>SmarToken</title>
+    <link>https://index.percall.dev/l/smartoken.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/smartoken.html</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Developers integrating several model providers often manage separate APIs and billing. SmarToken is an independent OpenAI-compatible gateway for supported Chinese text models, with a prepaid USD wallet, per-key budgets and usage logs. Eligible accounts may receive a one-time $1 trial if approved; it expires 30 days after grant. Conversations and responses are retained until deleted and may be accessed by authorized administrators.</description>
+  </item>
+  <item>
     <title>FastScribe</title>
     <link>https://index.percall.dev/l/fastscribe.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fastscribe.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>LobbyClip turns two portrait photos into a short AI duo video with synchronized dance motion. Creators choose a style and export an MP4 in square, portrait or landscape format. Paid one-time credit packs start at $1.49.</description>
-  </item>
-  <item>
-    <title>NotebookLM Project Handoff</title>
-    <link>https://index.percall.dev/l/notebooklm-project-handoff.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/notebooklm-project-handoff.html</guid>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2</description>
   </item>
 </channel>
 </rss>

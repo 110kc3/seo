@@ -1,5 +1,5 @@
 {
-  "count": 272,
+  "count": 273,
   "updated": "2026-11-26",
   "listings": [
     {
@@ -18,6 +18,27 @@
       ],
       "created": "2026-11-26",
       "github_user": "Pangolin-spg",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "smartoken",
+      "name": "SmarToken",
+      "url": "https://thesmartoken.com/",
+      "description": "Developers integrating several model providers often manage separate APIs and billing. SmarToken is an independent OpenAI-compatible gateway for supported Chinese text models, with a prepaid USD wallet, per-key budgets and usage logs. Eligible accounts may receive a one-time $1 trial if approved; it expires 30 days after grant. Conversations and responses are retained until deleted and may be accessed by authorized administrators.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "llms_txt": "https://thesmartoken.com/llms.txt"
+      },
+      "tags": [
+        "ai",
+        "api",
+        "developer-tools",
+        "llm"
+      ],
+      "created": "2026-11-26",
+      "github_user": "LiuXiyun",
       "tier": "free",
       "origin": "self-registered"
     },

@@ -22,6 +22,21 @@
       "external_url": "https://www.pangolinfo.com/amazon-scraper-api/"
     },
     {
+      "id": "https://index.percall.dev/l/smartoken.html",
+      "url": "https://index.percall.dev/l/smartoken.html",
+      "title": "SmarToken",
+      "content_text": "Developers integrating several model providers often manage separate APIs and billing. SmarToken is an independent OpenAI-compatible gateway for supported Chinese text models, with a prepaid USD wallet, per-key budgets and usage logs. Eligible accounts may receive a one-time $1 trial if approved; it expires 30 days after grant. Conversations and responses are retained until deleted and may be accessed by authorized administrators.",
+      "date_published": "2026-11-26T00:00:00Z",
+      "tags": [
+        "api",
+        "ai",
+        "api",
+        "developer-tools",
+        "llm"
+      ],
+      "external_url": "https://thesmartoken.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/fastscribe.html",
       "url": "https://index.percall.dev/l/fastscribe.html",
       "title": "FastScribe",
@@ -737,21 +752,6 @@
         "content-creation"
       ],
       "external_url": "https://www.lobbyclip.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/notebooklm-project-handoff.html",
-      "url": "https://index.percall.dev/l/notebooklm-project-handoff.html",
-      "title": "NotebookLM Project Handoff",
-      "content_text": "Hand off project decisions and next steps to a fresh Codex chat. Keep decisions and next steps in PROJECT_CONTEXT.md and use NotebookLM for facts still missing after a local check. The walkthrough includes a demo you can run without a Google account. Read it here: https://github.com/NikTsy/notebooklm-project-handoff/discussions/2",
-      "date_published": "2026-11-15T00:00:00Z",
-      "tags": [
-        "other",
-        "codex",
-        "agent-skills",
-        "notebooklm",
-        "open-source"
-      ],
-      "external_url": "https://github.com/NikTsy/notebooklm-project-handoff"
     }
   ]
 }
