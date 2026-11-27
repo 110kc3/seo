@@ -63,6 +63,14 @@
     <description>Left Unsaid is a social web app for posting anonymously or under a nickname, browsing nearby conversations, and joining groups around shared interests. Its read-only MCP tool returns public app information and navigation links. Submitted on behalf of founder David Bykerk.</description>
   </item>
   <item>
+    <title>LinguaDrop</title>
+    <link>https://index.percall.dev/l/linguadrop.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/linguadrop.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>LinguaDrop adapts real news stories to your language level and shows the translation alongside each story. Save words as you read, then practice them with spaced-repetition flashcards and quizzes. Try a five-minute reading challenge to see how a lesson works. The public news library is free, and the subscription app has a 30-day trial.</description>
+  </item>
+  <item>
     <title>OpenAny</title>
     <link>https://index.percall.dev/l/openany.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/openany.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>CloudGPU provides on-demand GPU rentals and an OpenAI-compatible model API on one prepaid balance. GPU resources and API calls are paid by use. Public beta; review the selected configuration&#39;s quote, billing period and minimum charge before renting.</description>
-  </item>
-  <item>
-    <title>GetYouTubeTranscript</title>
-    <link>https://index.percall.dev/l/getyoutubetranscript.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/getyoutubetranscript.html</guid>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>YouTube transcripts for people, AI assistants and developers. Returns a public video&#39;s captions as text (timestamps on request) in every caption language the video has, from one request with no job to poll. REST API, remote MCP server (https://getyoutubetranscript.com/api/mcp), Python and JS SDKs, a Chrome extension and a web tool. 100 free credits on sign-up, paid plans from $5/month.</description>
   </item>
 </channel>
 </rss>

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 285 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 286 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (285)
+## All listings (286)
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/
@@ -361,6 +361,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://leftunsaid.app/mcp
 - listing JSON: https://index.percall.dev/listings/left-unsaid.json
 - listing page: https://index.percall.dev/l/left-unsaid.html
+
+### LinguaDrop (linguadrop)
+- url: https://linguadrop.com/en
+- category: app · pricing: paid · tags: language-learning, news, education, flashcards
+- LinguaDrop adapts real news stories to your language level and shows the translation alongside each story. Save words as you read, then practice them with spaced-repetition flashcards and quizzes. Try a five-minute reading challenge to see how a lesson works. The public news library is free, and the subscription app has a 30-day trial.
+- llms_txt: https://linguadrop.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/linguadrop.json
+- listing page: https://index.percall.dev/l/linguadrop.html
 
 ### OpenAny (openany)
 - url: https://openany.si

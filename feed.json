@@ -113,6 +113,21 @@
       "external_url": "https://leftunsaid.app/"
     },
     {
+      "id": "https://index.percall.dev/l/linguadrop.html",
+      "url": "https://index.percall.dev/l/linguadrop.html",
+      "title": "LinguaDrop",
+      "content_text": "LinguaDrop adapts real news stories to your language level and shows the translation alongside each story. Save words as you read, then practice them with spaced-repetition flashcards and quizzes. Try a five-minute reading challenge to see how a lesson works. The public news library is free, and the subscription app has a 30-day trial.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "language-learning",
+        "news",
+        "education",
+        "flashcards"
+      ],
+      "external_url": "https://linguadrop.com/en"
+    },
+    {
       "id": "https://index.percall.dev/l/openany.html",
       "url": "https://index.percall.dev/l/openany.html",
       "title": "OpenAny",
@@ -735,22 +750,6 @@
         "mcp"
       ],
       "external_url": "https://cloudgpu.app/"
-    },
-    {
-      "id": "https://index.percall.dev/l/getyoutubetranscript.html",
-      "url": "https://index.percall.dev/l/getyoutubetranscript.html",
-      "title": "GetYouTubeTranscript",
-      "content_text": "YouTube transcripts for people, AI assistants and developers. Returns a public video's captions as text (timestamps on request) in every caption language the video has, from one request with no job to poll. REST API, remote MCP server (https://getyoutubetranscript.com/api/mcp), Python and JS SDKs, a Chrome extension and a web tool. 100 free credits on sign-up, paid plans from $5/month.",
-      "date_published": "2026-11-18T00:00:00Z",
-      "tags": [
-        "api",
-        "youtube",
-        "transcript",
-        "captions",
-        "mcp",
-        "api"
-      ],
-      "external_url": "https://getyoutubetranscript.com/youtube-transcript-api"
     }
   ]
 }

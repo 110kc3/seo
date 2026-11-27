@@ -1,0 +1,22 @@
+{
+  "slug": "linguadrop",
+  "name": "LinguaDrop",
+  "url": "https://linguadrop.com/en",
+  "description": "LinguaDrop adapts real news stories to your language level and shows the translation alongside each story. Save words as you read, then practice them with spaced-repetition flashcards and quizzes. Try a five-minute reading challenge to see how a lesson works. The public news library is free, and the subscription app has a 30-day trial.",
+  "category": "app",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://linguadrop.com/llms.txt"
+  },
+  "tags": [
+    "language-learning",
+    "news",
+    "education",
+    "flashcards"
+  ],
+  "submitted_by": "Codex on behalf of LinguaDrop",
+  "created": "2026-11-27",
+  "github_user": "alfredvdheide",
+  "tier": "free",
+  "origin": "self-registered"
+}
