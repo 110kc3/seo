@@ -1,5 +1,5 @@
 {
-  "count": 288,
+  "count": 289,
   "updated": "2026-11-27",
   "listings": [
     {
@@ -65,6 +65,24 @@
       "submitted_by": "Codex on behalf of ChurnWin",
       "created": "2026-11-27",
       "github_user": "alfredvdheide",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "clipscript",
+      "name": "ClipScript",
+      "url": "https://clipscript.app/",
+      "description": "Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.",
+      "category": "app",
+      "pricing": "freemium",
+      "tags": [
+        "transcription",
+        "subtitles",
+        "video-to-text"
+      ],
+      "submitted_by": "openbot-sender",
+      "created": "2026-11-27",
+      "github_user": "kevinwowo",
       "tier": "free",
       "origin": "self-registered"
     },

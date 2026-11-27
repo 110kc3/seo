@@ -51,6 +51,20 @@
       "external_url": "https://churnwin.com/"
     },
     {
+      "id": "https://index.percall.dev/l/clipscript.html",
+      "url": "https://index.percall.dev/l/clipscript.html",
+      "title": "ClipScript",
+      "content_text": "Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "transcription",
+        "subtitles",
+        "video-to-text"
+      ],
+      "external_url": "https://clipscript.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/fairvalid.html",
       "url": "https://index.percall.dev/l/fairvalid.html",
       "title": "FairValid",
@@ -739,17 +753,6 @@
         "mcp"
       ],
       "external_url": "https://www.coveragecat.com/ai/shop-with-your-assistant"
-    },
-    {
-      "id": "https://index.percall.dev/l/ddscore.html",
-      "url": "https://index.percall.dev/l/ddscore.html",
-      "title": "DDScore",
-      "content_text": "DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "app"
-      ],
-      "external_url": "https://www.ddscore.ai/"
     }
   ]
 }

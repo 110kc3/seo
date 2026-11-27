@@ -31,6 +31,14 @@
     <description>ChurnWin helps subscription teams find which Stripe failed payments and cancellation patterns put the most recurring revenue at risk. It groups customer feedback and ranks what to investigate next by monthly recurring revenue. Try the free recovery audit with your own figures before connecting Stripe. The subscription app has a 14-day trial.</description>
   </item>
   <item>
+    <title>ClipScript</title>
+    <link>https://index.percall.dev/l/clipscript.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/clipscript.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.</description>
+  </item>
+  <item>
     <title>FairValid</title>
     <link>https://index.percall.dev/l/fairvalid.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fairvalid.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.</description>
-  </item>
-  <item>
-    <title>DDScore</title>
-    <link>https://index.percall.dev/l/ddscore.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ddscore.html</guid>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.</description>
   </item>
 </channel>
 </rss>

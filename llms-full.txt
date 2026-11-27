@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 288 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 289 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (288)
+## All listings (289)
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/
@@ -328,6 +328,13 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://churnwin.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/churnwin.json
 - listing page: https://index.percall.dev/l/churnwin.html
+
+### ClipScript (clipscript)
+- url: https://clipscript.app/
+- category: app · pricing: freemium · tags: transcription, subtitles, video-to-text
+- Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.
+- listing JSON: https://index.percall.dev/listings/clipscript.json
+- listing page: https://index.percall.dev/l/clipscript.html
 
 ### FairValid (fairvalid)
 - url: https://fairvalid.com
