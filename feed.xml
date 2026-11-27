@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>3D Printed Car Part</title>
+    <link>https://index.percall.dev/l/3dprintedcarpart.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/3dprintedcarpart.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>3D Printed Car Part is a library and marketplace for printable automotive parts. Browse by vehicle, check fitment details and request a part you can’t find. Designers can share free files or sell original models.</description>
+  </item>
+  <item>
     <title>BigPlanner Partners – Calculadora para gestão de edifícios</title>
     <link>https://index.percall.dev/l/bigplanner-facilities-workload-pt.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/bigplanner-facilities-workload-pt.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.</description>
-  </item>
-  <item>
-    <title>Sage — RSI Agent Harness</title>
-    <link>https://index.percall.dev/l/sage-rsi-agent-harness.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/sage-rsi-agent-harness.html</guid>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-    <category>agent</category>
-    <description>MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.</description>
   </item>
 </channel>
 </rss>

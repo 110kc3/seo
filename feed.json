@@ -6,6 +6,21 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/3dprintedcarpart.html",
+      "url": "https://index.percall.dev/l/3dprintedcarpart.html",
+      "title": "3D Printed Car Part",
+      "content_text": "3D Printed Car Part is a library and marketplace for printable automotive parts. Browse by vehicle, check fitment details and request a part you can’t find. Designers can share free files or sell original models.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "3d-printing",
+        "automotive",
+        "stl-files",
+        "marketplace"
+      ],
+      "external_url": "https://3dprintedcarpart.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/bigplanner-facilities-workload-pt.html",
       "url": "https://index.percall.dev/l/bigplanner-facilities-workload-pt.html",
       "title": "BigPlanner Partners – Calculadora para gestão de edifícios",
@@ -737,22 +752,6 @@
         "mcp"
       ],
       "external_url": "https://www.poptin.com/mcp/"
-    },
-    {
-      "id": "https://index.percall.dev/l/sage-rsi-agent-harness.html",
-      "url": "https://index.percall.dev/l/sage-rsi-agent-harness.html",
-      "title": "Sage — RSI Agent Harness",
-      "content_text": "MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.",
-      "date_published": "2026-11-18T00:00:00Z",
-      "tags": [
-        "agent",
-        "open-source",
-        "agent-harness",
-        "self-hosted",
-        "evaluation",
-        "mcp"
-      ],
-      "external_url": "https://github.com/ZHangZHengEric/Sage"
     }
   ]
 }

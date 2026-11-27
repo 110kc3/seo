@@ -1,7 +1,29 @@
 {
-  "count": 283,
+  "count": 284,
   "updated": "2026-11-27",
   "listings": [
+    {
+      "slug": "3dprintedcarpart",
+      "name": "3D Printed Car Part",
+      "url": "https://3dprintedcarpart.com/",
+      "description": "3D Printed Car Part is a library and marketplace for printable automotive parts. Browse by vehicle, check fitment details and request a part you can’t find. Designers can share free files or sell original models.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://3dprintedcarpart.com/llms.txt"
+      },
+      "tags": [
+        "3d-printing",
+        "automotive",
+        "stl-files",
+        "marketplace"
+      ],
+      "submitted_by": "Codex on behalf of 3D Printed Car Part",
+      "created": "2026-11-27",
+      "github_user": "alfredvdheide",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "bigplanner-facilities-workload-pt",
       "name": "BigPlanner Partners – Calculadora para gestão de edifícios",
