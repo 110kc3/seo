@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 286 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 287 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (286)
+## All listings (287)
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/
@@ -377,6 +377,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://mcp.openany.si
 - listing JSON: https://index.percall.dev/listings/openany.json
 - listing page: https://index.percall.dev/l/openany.html
+
+### PartyRoomGames (partyroomgames)
+- url: https://partyroomgames.com/
+- category: app · pricing: free · tags: browser-games, multiplayer, party-games, trivia
+- PartyRoomGames is a set of browser games for friends, classes and teams. Pick a game, share the room code and play together from phones or laptops. Try Guess the Lie for bluffing, Sketch Relay for drawing, or Trivia Duel for a quick quiz.
+- llms_txt: https://partyroomgames.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/partyroomgames.json
+- listing page: https://index.percall.dev/l/partyroomgames.html
 
 ### Bigger vs Measurements (MCP) (biggervs-measurements)
 - url: https://biggervs.com/

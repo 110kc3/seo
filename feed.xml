@@ -79,6 +79,14 @@
     <description>The B2A (business to agent) marketplace. One MCP endpoint, https://mcp.openany.si, for 4,400+ APIs (social, SEO, crypto, company, finance, legal) and 168+ AI models (GPT, Claude, Gemini, DeepSeek, Qwen, Midjourney, Veo, Kling). Browse and check prices free; pay per call.</description>
   </item>
   <item>
+    <title>PartyRoomGames</title>
+    <link>https://index.percall.dev/l/partyroomgames.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/partyroomgames.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>PartyRoomGames is a set of browser games for friends, classes and teams. Pick a game, share the room code and play together from phones or laptops. Try Guess the Lie for bluffing, Sketch Relay for drawing, or Trivia Duel for a quick quiz.</description>
+  </item>
+  <item>
     <title>Bigger vs Measurements (MCP)</title>
     <link>https://index.percall.dev/l/biggervs-measurements.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/biggervs-measurements.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.</description>
-  </item>
-  <item>
-    <title>CloudGPU</title>
-    <link>https://index.percall.dev/l/cloudgpu.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/cloudgpu.html</guid>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>CloudGPU provides on-demand GPU rentals and an OpenAI-compatible model API on one prepaid balance. GPU resources and API calls are paid by use. Public beta; review the selected configuration&#39;s quote, billing period and minimum charge before renting.</description>
   </item>
 </channel>
 </rss>

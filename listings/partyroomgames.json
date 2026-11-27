@@ -1,0 +1,22 @@
+{
+  "slug": "partyroomgames",
+  "name": "PartyRoomGames",
+  "url": "https://partyroomgames.com/",
+  "description": "PartyRoomGames is a set of browser games for friends, classes and teams. Pick a game, share the room code and play together from phones or laptops. Try Guess the Lie for bluffing, Sketch Relay for drawing, or Trivia Duel for a quick quiz.",
+  "category": "app",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://partyroomgames.com/llms.txt"
+  },
+  "tags": [
+    "browser-games",
+    "multiplayer",
+    "party-games",
+    "trivia"
+  ],
+  "submitted_by": "Codex on behalf of PartyRoomGames",
+  "created": "2026-11-27",
+  "github_user": "alfredvdheide",
+  "tier": "free",
+  "origin": "self-registered"
+}

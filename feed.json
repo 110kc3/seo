@@ -144,6 +144,21 @@
       "external_url": "https://openany.si"
     },
     {
+      "id": "https://index.percall.dev/l/partyroomgames.html",
+      "url": "https://index.percall.dev/l/partyroomgames.html",
+      "title": "PartyRoomGames",
+      "content_text": "PartyRoomGames is a set of browser games for friends, classes and teams. Pick a game, share the room code and play together from phones or laptops. Try Guess the Lie for bluffing, Sketch Relay for drawing, or Trivia Duel for a quick quiz.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "browser-games",
+        "multiplayer",
+        "party-games",
+        "trivia"
+      ],
+      "external_url": "https://partyroomgames.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/biggervs-measurements.html",
       "url": "https://index.percall.dev/l/biggervs-measurements.html",
       "title": "Bigger vs Measurements (MCP)",
@@ -734,22 +749,6 @@
         "openapi"
       ],
       "external_url": "https://gocdkey.nl/data"
-    },
-    {
-      "id": "https://index.percall.dev/l/cloudgpu.html",
-      "url": "https://index.percall.dev/l/cloudgpu.html",
-      "title": "CloudGPU",
-      "content_text": "CloudGPU provides on-demand GPU rentals and an OpenAI-compatible model API on one prepaid balance. GPU resources and API calls are paid by use. Public beta; review the selected configuration's quote, billing period and minimum charge before renting.",
-      "date_published": "2026-11-18T00:00:00Z",
-      "tags": [
-        "api",
-        "gpu",
-        "ai-api",
-        "openai-compatible",
-        "cloud-compute",
-        "mcp"
-      ],
-      "external_url": "https://cloudgpu.app/"
     }
   ]
 }
