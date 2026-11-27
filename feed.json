@@ -6,6 +6,20 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/left-unsaid.html",
+      "url": "https://index.percall.dev/l/left-unsaid.html",
+      "title": "Left Unsaid",
+      "content_text": "Left Unsaid is a social web app for posting anonymously or under a nickname, browsing nearby conversations, and joining groups around shared interests. Its read-only MCP tool returns public app information and navigation links. Submitted on behalf of founder David Bykerk.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "mcp",
+        "social",
+        "community",
+        "read-only"
+      ],
+      "external_url": "https://leftunsaid.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/biggervs-measurements.html",
       "url": "https://index.percall.dev/l/biggervs-measurements.html",
       "title": "Bigger vs Measurements (MCP)",
@@ -733,22 +747,6 @@
         "self-reflection"
       ],
       "external_url": "https://orbheaven.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=authority"
-    },
-    {
-      "id": "https://index.percall.dev/l/humanpen.html",
-      "url": "https://index.percall.dev/l/humanpen.html",
-      "title": "HumanPen",
-      "content_text": "Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.",
-      "date_published": "2026-11-17T00:00:00Z",
-      "tags": [
-        "app",
-        "writing",
-        "education",
-        "humanizer",
-        "academic",
-        "docx"
-      ],
-      "external_url": "https://humanpen.net"
     }
   ]
 }

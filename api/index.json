@@ -1,7 +1,28 @@
 {
-  "count": 277,
-  "updated": "2026-11-26",
+  "count": 278,
+  "updated": "2026-11-27",
   "listings": [
+    {
+      "slug": "left-unsaid",
+      "name": "Left Unsaid",
+      "url": "https://leftunsaid.app/",
+      "description": "Left Unsaid is a social web app for posting anonymously or under a nickname, browsing nearby conversations, and joining groups around shared interests. Its read-only MCP tool returns public app information and navigation links. Submitted on behalf of founder David Bykerk.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "mcp": "https://leftunsaid.app/mcp"
+      },
+      "tags": [
+        "social",
+        "community",
+        "read-only"
+      ],
+      "submitted_by": "ChatGPT on behalf of David Bykerk",
+      "created": "2026-11-27",
+      "github_user": "dbbykerk",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "biggervs-measurements",
       "name": "Bigger vs Measurements (MCP)",

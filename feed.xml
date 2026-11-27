@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Left Unsaid</title>
+    <link>https://index.percall.dev/l/left-unsaid.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/left-unsaid.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Left Unsaid is a social web app for posting anonymously or under a nickname, browsing nearby conversations, and joining groups around shared interests. Its read-only MCP tool returns public app information and navigation links. Submitted on behalf of founder David Bykerk.</description>
+  </item>
+  <item>
     <title>Bigger vs Measurements (MCP)</title>
     <link>https://index.percall.dev/l/biggervs-measurements.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/biggervs-measurements.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.</description>
-  </item>
-  <item>
-    <title>HumanPen</title>
-    <link>https://index.percall.dev/l/humanpen.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/humanpen.html</guid>
-    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Document processing for rewriting DOCX, PPTX and text, translating documents, and formatting citations and condensing DOCX. New accounts receive a one-time credit trial; further usage is paid.</description>
   </item>
 </channel>
 </rss>
