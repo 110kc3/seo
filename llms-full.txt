@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 278 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 279 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,16 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (278)
+## All listings (279)
+
+### FairValid (fairvalid)
+- url: https://fairvalid.com
+- category: mcp · pricing: freemium · tags: email-verification, lead-generation, mcp, api, data-quality
+- Email verification and FairMatch work-email search through a web workspace, server API and official hosted MCP connector. Verify one email or a CSV list and keep original rows and columns. Includes 300 shared free credits per month; optional paid credits. Live work requires a FairValid account, authorization and available credits. Hosted service is proprietary; public integration and workflow skills are MIT licensed.
+- openapi: https://fairvalid.com/help/api/openapi.json
+- mcp: https://mcp.fairvalid.com/mcp
+- listing JSON: https://index.percall.dev/listings/fairvalid.json
+- listing page: https://index.percall.dev/l/fairvalid.html
 
 ### Left Unsaid (left-unsaid)
 - url: https://leftunsaid.app/

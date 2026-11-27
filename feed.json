@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/fairvalid.html",
+      "url": "https://index.percall.dev/l/fairvalid.html",
+      "title": "FairValid",
+      "content_text": "Email verification and FairMatch work-email search through a web workspace, server API and official hosted MCP connector. Verify one email or a CSV list and keep original rows and columns. Includes 300 shared free credits per month; optional paid credits. Live work requires a FairValid account, authorization and available credits. Hosted service is proprietary; public integration and workflow skills are MIT licensed.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "mcp",
+        "email-verification",
+        "lead-generation",
+        "mcp",
+        "api",
+        "data-quality"
+      ],
+      "external_url": "https://fairvalid.com"
+    },
+    {
       "id": "https://index.percall.dev/l/left-unsaid.html",
       "url": "https://index.percall.dev/l/left-unsaid.html",
       "title": "Left Unsaid",
@@ -731,22 +747,6 @@
         "mcp"
       ],
       "external_url": "https://hands.senpinai.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/orbheaven.html",
-      "url": "https://index.percall.dev/l/orbheaven.html",
-      "title": "OrbHeaven",
-      "content_text": "OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.",
-      "date_published": "2026-11-17T00:00:00Z",
-      "tags": [
-        "app",
-        "astrology",
-        "tarot",
-        "numerology",
-        "birth-chart",
-        "self-reflection"
-      ],
-      "external_url": "https://orbheaven.com/?utm_source=index.percall.dev&utm_medium=directory&utm_campaign=authority"
     }
   ]
 }

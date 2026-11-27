@@ -1,0 +1,24 @@
+{
+  "slug": "fairvalid",
+  "name": "FairValid",
+  "url": "https://fairvalid.com",
+  "description": "Email verification and FairMatch work-email search through a web workspace, server API and official hosted MCP connector. Verify one email or a CSV list and keep original rows and columns. Includes 300 shared free credits per month; optional paid credits. Live work requires a FairValid account, authorization and available credits. Hosted service is proprietary; public integration and workflow skills are MIT licensed.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "openapi": "https://fairvalid.com/help/api/openapi.json",
+    "mcp": "https://mcp.fairvalid.com/mcp"
+  },
+  "tags": [
+    "email-verification",
+    "lead-generation",
+    "mcp",
+    "api",
+    "data-quality"
+  ],
+  "submitted_by": "Codex AI assistant for FairValid maker MD Jannatul Nayeem (@themaildog)",
+  "created": "2026-11-27",
+  "github_user": "djmoonlitse-gif",
+  "tier": "free",
+  "origin": "self-registered"
+}

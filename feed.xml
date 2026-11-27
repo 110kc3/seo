@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>FairValid</title>
+    <link>https://index.percall.dev/l/fairvalid.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/fairvalid.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>Email verification and FairMatch work-email search through a web workspace, server API and official hosted MCP connector. Verify one email or a CSV list and keep original rows and columns. Includes 300 shared free credits per month; optional paid credits. Live work requires a FairValid account, authorization and available credits. Hosted service is proprietary; public integration and workflow skills are MIT licensed.</description>
+  </item>
+  <item>
     <title>Left Unsaid</title>
     <link>https://index.percall.dev/l/left-unsaid.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/left-unsaid.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.</description>
-  </item>
-  <item>
-    <title>OrbHeaven</title>
-    <link>https://index.percall.dev/l/orbheaven.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/orbheaven.html</guid>
-    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>OrbHeaven is an astrology, tarot and numerology web app. Vesper, its AI advisor, answers questions grounded in your birth chart, the sky right now and what you have told it before. The chart itself is not AI: positions are calculated from a published ephemeris, with the engine, house system, orbs and exact universal time shown. Free plan; Plus is $12 a month or $99 a year.</description>
   </item>
 </channel>
 </rss>
