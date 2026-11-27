@@ -23,6 +23,14 @@
     <description>Left Unsaid is a social web app for posting anonymously or under a nickname, browsing nearby conversations, and joining groups around shared interests. Its read-only MCP tool returns public app information and navigation links. Submitted on behalf of founder David Bykerk.</description>
   </item>
   <item>
+    <title>OpenAny</title>
+    <link>https://index.percall.dev/l/openany.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/openany.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>The B2A (business to agent) marketplace. One MCP endpoint, https://mcp.openany.si, for 4,400+ APIs (social, SEO, crypto, company, finance, legal) and 168+ AI models (GPT, Claude, Gemini, DeepSeek, Qwen, Midjourney, Veo, Kling). Browse and check prices free; pay per call.</description>
+  </item>
+  <item>
     <title>Bigger vs Measurements (MCP)</title>
     <link>https://index.percall.dev/l/biggervs-measurements.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/biggervs-measurements.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.</description>
-  </item>
-  <item>
-    <title>MARU Japan Hands</title>
-    <link>https://index.percall.dev/l/maru-japan-hands.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/maru-japan-hands.html</guid>
-    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.</description>
   </item>
 </channel>
 </rss>

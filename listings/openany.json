@@ -1,0 +1,23 @@
+{
+  "slug": "openany",
+  "name": "OpenAny",
+  "url": "https://openany.si",
+  "description": "The B2A (business to agent) marketplace. One MCP endpoint, https://mcp.openany.si, for 4,400+ APIs (social, SEO, crypto, company, finance, legal) and 168+ AI models (GPT, Claude, Gemini, DeepSeek, Qwen, Midjourney, Veo, Kling). Browse and check prices free; pay per call.",
+  "category": "mcp",
+  "pricing": "freemium",
+  "machine_endpoints": {
+    "mcp": "https://mcp.openany.si"
+  },
+  "tags": [
+    "mcp",
+    "api-marketplace",
+    "agents",
+    "ai-models",
+    "b2a"
+  ],
+  "submitted_by": "Pistis Wang, OpenAny",
+  "created": "2026-11-27",
+  "github_user": "ComunionIO",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -36,6 +36,22 @@
       "external_url": "https://leftunsaid.app/"
     },
     {
+      "id": "https://index.percall.dev/l/openany.html",
+      "url": "https://index.percall.dev/l/openany.html",
+      "title": "OpenAny",
+      "content_text": "The B2A (business to agent) marketplace. One MCP endpoint, https://mcp.openany.si, for 4,400+ APIs (social, SEO, crypto, company, finance, legal) and 168+ AI models (GPT, Claude, Gemini, DeepSeek, Qwen, Midjourney, Veo, Kling). Browse and check prices free; pay per call.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "api-marketplace",
+        "agents",
+        "ai-models",
+        "b2a"
+      ],
+      "external_url": "https://openany.si"
+    },
+    {
       "id": "https://index.percall.dev/l/biggervs-measurements.html",
       "url": "https://index.percall.dev/l/biggervs-measurements.html",
       "title": "Bigger vs Measurements (MCP)",
@@ -734,19 +750,6 @@
         "mcp"
       ],
       "external_url": "https://askjapan.senpinai.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/maru-japan-hands.html",
-      "url": "https://index.percall.dev/l/maru-japan-hands.html",
-      "title": "MARU Japan Hands",
-      "content_text": "Japanese phone calls, reservations, shopping and on-site checks by people in Japan. Human services use the existing fixed price list. Wallet requests require owner confirmation.",
-      "date_published": "2026-11-17T00:00:00Z",
-      "tags": [
-        "mcp",
-        "japan",
-        "mcp"
-      ],
-      "external_url": "https://hands.senpinai.com/"
     }
   ]
 }

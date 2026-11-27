@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 279 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 280 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (279)
+## All listings (280)
 
 ### FairValid (fairvalid)
 - url: https://fairvalid.com
@@ -321,6 +321,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://leftunsaid.app/mcp
 - listing JSON: https://index.percall.dev/listings/left-unsaid.json
 - listing page: https://index.percall.dev/l/left-unsaid.html
+
+### OpenAny (openany)
+- url: https://openany.si
+- category: mcp · pricing: freemium · tags: mcp, api-marketplace, agents, ai-models, b2a
+- The B2A (business to agent) marketplace. One MCP endpoint, https://mcp.openany.si, for 4,400+ APIs (social, SEO, crypto, company, finance, legal) and 168+ AI models (GPT, Claude, Gemini, DeepSeek, Qwen, Midjourney, Veo, Kling). Browse and check prices free; pay per call.
+- mcp: https://mcp.openany.si
+- listing JSON: https://index.percall.dev/listings/openany.json
+- listing page: https://index.percall.dev/l/openany.html
 
 ### Bigger vs Measurements (MCP) (biggervs-measurements)
 - url: https://biggervs.com/
