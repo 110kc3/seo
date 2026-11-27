@@ -22,6 +22,22 @@
       "external_url": "https://fairvalid.com"
     },
     {
+      "id": "https://index.percall.dev/l/govisit-mcp.html",
+      "url": "https://index.percall.dev/l/govisit-mcp.html",
+      "title": "GoVisit Tools",
+      "content_text": "A free hosted MCP server for travel discovery. Search destinations and places, and read published place, destination, collection, category, and developer documentation through 22 read-only tools. Connect over Streamable HTTP without a GoVisit API key.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "mcp",
+        "mcp",
+        "travel",
+        "maps",
+        "search",
+        "govisit"
+      ],
+      "external_url": "https://govisit.ai/en/docs/developers/mcp/overview"
+    },
+    {
       "id": "https://index.percall.dev/l/left-unsaid.html",
       "url": "https://index.percall.dev/l/left-unsaid.html",
       "title": "Left Unsaid",
@@ -737,19 +753,6 @@
         "responses"
       ],
       "external_url": "https://ai.bayunzi.shop/"
-    },
-    {
-      "id": "https://index.percall.dev/l/ask-japan.html",
-      "url": "https://index.percall.dev/l/ask-japan.html",
-      "title": "Ask Japan",
-      "content_text": "Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.",
-      "date_published": "2026-11-17T00:00:00Z",
-      "tags": [
-        "mcp",
-        "japan",
-        "mcp"
-      ],
-      "external_url": "https://askjapan.senpinai.com/"
     }
   ]
 }

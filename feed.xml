@@ -15,6 +15,14 @@
     <description>Email verification and FairMatch work-email search through a web workspace, server API and official hosted MCP connector. Verify one email or a CSV list and keep original rows and columns. Includes 300 shared free credits per month; optional paid credits. Live work requires a FairValid account, authorization and available credits. Hosted service is proprietary; public integration and workflow skills are MIT licensed.</description>
   </item>
   <item>
+    <title>GoVisit Tools</title>
+    <link>https://index.percall.dev/l/govisit-mcp.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/govisit-mcp.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>mcp</category>
+    <description>A free hosted MCP server for travel discovery. Search destinations and places, and read published place, destination, collection, category, and developer documentation through 22 read-only tools. Connect over Streamable HTTP without a GoVisit API key.</description>
+  </item>
+  <item>
     <title>Left Unsaid</title>
     <link>https://index.percall.dev/l/left-unsaid.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/left-unsaid.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.</description>
-  </item>
-  <item>
-    <title>Ask Japan</title>
-    <link>https://index.percall.dev/l/ask-japan.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/ask-japan.html</guid>
-    <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Japanese company, invoice and postcode data, plus human services in Japan. Free-source data is free; paid-source data follows authorized market pricing plus a small service fee. Human services are priced separately.</description>
   </item>
 </channel>
 </rss>

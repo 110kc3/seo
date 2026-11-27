@@ -1,5 +1,5 @@
 {
-  "count": 280,
+  "count": 281,
   "updated": "2026-11-27",
   "listings": [
     {
@@ -23,6 +23,28 @@
       "submitted_by": "Codex AI assistant for FairValid maker MD Jannatul Nayeem (@themaildog)",
       "created": "2026-11-27",
       "github_user": "djmoonlitse-gif",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "govisit-mcp",
+      "name": "GoVisit Tools",
+      "url": "https://govisit.ai/en/docs/developers/mcp/overview",
+      "description": "A free hosted MCP server for travel discovery. Search destinations and places, and read published place, destination, collection, category, and developer documentation through 22 read-only tools. Connect over Streamable HTTP without a GoVisit API key.",
+      "category": "mcp",
+      "pricing": "free",
+      "machine_endpoints": {
+        "mcp": "https://govisit.ai/mcp"
+      },
+      "tags": [
+        "mcp",
+        "travel",
+        "maps",
+        "search",
+        "govisit"
+      ],
+      "created": "2026-11-27",
+      "github_user": "janpopovic",
       "tier": "free",
       "origin": "self-registered"
     },
