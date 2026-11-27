@@ -87,6 +87,14 @@
     <description>PartyRoomGames is a set of browser games for friends, classes and teams. Pick a game, share the room code and play together from phones or laptops. Try Guess the Lie for bluffing, Sketch Relay for drawing, or Trivia Duel for a quick quiz.</description>
   </item>
   <item>
+    <title>Skill Tree Training</title>
+    <link>https://index.percall.dev/l/skill-tree-training.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/skill-tree-training.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Skill Tree Training is a free, ad-free workout tracker built around a progression tree. Log reps, holds and weight for calisthenics, kettlebell and Pilates training, or track distance and time for runs. Guided workouts take you through one set at a time, and the skill tree shows what to work toward next.</description>
+  </item>
+  <item>
     <title>Bigger vs Measurements (MCP)</title>
     <link>https://index.percall.dev/l/biggervs-measurements.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/biggervs-measurements.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>DDScore helps investors and founders run a first-pass due diligence review of private companies. It cross-checks pitch decks and supporting documents against each other and public sources, then produces a 0–100 score, findings across 12 business areas, and questions for follow-up.</description>
-  </item>
-  <item>
-    <title>Gocdkey.nl Game Prices API</title>
-    <link>https://index.percall.dev/l/gocdkey-game-prices-api.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/gocdkey-game-prices-api.html</guid>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.</description>
   </item>
 </channel>
 </rss>

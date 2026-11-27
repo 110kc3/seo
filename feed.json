@@ -159,6 +159,22 @@
       "external_url": "https://partyroomgames.com/"
     },
     {
+      "id": "https://index.percall.dev/l/skill-tree-training.html",
+      "url": "https://index.percall.dev/l/skill-tree-training.html",
+      "title": "Skill Tree Training",
+      "content_text": "Skill Tree Training is a free, ad-free workout tracker built around a progression tree. Log reps, holds and weight for calisthenics, kettlebell and Pilates training, or track distance and time for runs. Guided workouts take you through one set at a time, and the skill tree shows what to work toward next.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "fitness",
+        "workout-tracking",
+        "calisthenics",
+        "pilates",
+        "running"
+      ],
+      "external_url": "https://skilltreetraining.io/"
+    },
+    {
       "id": "https://index.percall.dev/l/biggervs-measurements.html",
       "url": "https://index.percall.dev/l/biggervs-measurements.html",
       "title": "Bigger vs Measurements (MCP)",
@@ -734,21 +750,6 @@
         "app"
       ],
       "external_url": "https://www.ddscore.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
-      "url": "https://index.percall.dev/l/gocdkey-game-prices-api.html",
-      "title": "Gocdkey.nl Game Prices API",
-      "content_text": "Free read-only JSON API for Dutch PC and console game offers and recent discounts in euros. No account or API key. The OpenAPI definition describes game lookup and recent-deal endpoints. Rate limit: 60 requests per minute per address. Reuse requires attribution.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "api",
-        "game-prices",
-        "public-api",
-        "netherlands",
-        "openapi"
-      ],
-      "external_url": "https://gocdkey.nl/data"
     }
   ]
 }

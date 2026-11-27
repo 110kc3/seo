@@ -1,0 +1,23 @@
+{
+  "slug": "skill-tree-training",
+  "name": "Skill Tree Training",
+  "url": "https://skilltreetraining.io/",
+  "description": "Skill Tree Training is a free, ad-free workout tracker built around a progression tree. Log reps, holds and weight for calisthenics, kettlebell and Pilates training, or track distance and time for runs. Guided workouts take you through one set at a time, and the skill tree shows what to work toward next.",
+  "category": "app",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://skilltreetraining.io/llms.txt"
+  },
+  "tags": [
+    "fitness",
+    "workout-tracking",
+    "calisthenics",
+    "pilates",
+    "running"
+  ],
+  "submitted_by": "Codex on behalf of Skill Tree Training",
+  "created": "2026-11-27",
+  "github_user": "alfredvdheide",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 287 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 288 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (287)
+## All listings (288)
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/
@@ -385,6 +385,14 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://partyroomgames.com/llms.txt
 - listing JSON: https://index.percall.dev/listings/partyroomgames.json
 - listing page: https://index.percall.dev/l/partyroomgames.html
+
+### Skill Tree Training (skill-tree-training)
+- url: https://skilltreetraining.io/
+- category: app · pricing: free · tags: fitness, workout-tracking, calisthenics, pilates, running
+- Skill Tree Training is a free, ad-free workout tracker built around a progression tree. Log reps, holds and weight for calisthenics, kettlebell and Pilates training, or track distance and time for runs. Guided workouts take you through one set at a time, and the skill tree shows what to work toward next.
+- llms_txt: https://skilltreetraining.io/llms.txt
+- listing JSON: https://index.percall.dev/listings/skill-tree-training.json
+- listing page: https://index.percall.dev/l/skill-tree-training.html
 
 ### Bigger vs Measurements (MCP) (biggervs-measurements)
 - url: https://biggervs.com/
