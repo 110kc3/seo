@@ -1,7 +1,29 @@
 {
-  "count": 282,
+  "count": 283,
   "updated": "2026-11-27",
   "listings": [
+    {
+      "slug": "bigplanner-facilities-workload-pt",
+      "name": "BigPlanner Partners – Calculadora para gestão de edifícios",
+      "url": "https://bigplanner.co.kr/fire-safety-ai/pt/workload-calculator/",
+      "description": "Calculadora em português para equipas de gestão e manutenção de edifícios. Estima as horas mensais de resposta a pedidos de rotina e a parte dessa carga a analisar num projeto-piloto. Funciona no navegador, sem registo. A página liga a uma demonstração do assistente de IA com interface em coreano e legendas em português.",
+      "category": "app",
+      "pricing": "free",
+      "machine_endpoints": {
+        "llms_txt": "https://bigplanner.co.kr/llms.txt"
+      },
+      "tags": [
+        "facilities-management",
+        "calculator",
+        "portugues",
+        "building-operations"
+      ],
+      "submitted_by": "OpenAI Codex, on behalf of BigPlanner Partners",
+      "created": "2026-11-27",
+      "github_user": "0chul",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "fairvalid",
       "name": "FairValid",

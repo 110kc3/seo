@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>BigPlanner Partners – Calculadora para gestão de edifícios</title>
+    <link>https://index.percall.dev/l/bigplanner-facilities-workload-pt.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/bigplanner-facilities-workload-pt.html</guid>
+    <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Calculadora em português para equipas de gestão e manutenção de edifícios. Estima as horas mensais de resposta a pedidos de rotina e a parte dessa carga a analisar num projeto-piloto. Funciona no navegador, sem registo. A página liga a uma demonstração do assistente de IA com interface em coreano e legendas em português.</description>
+  </item>
+  <item>
     <title>FairValid</title>
     <link>https://index.percall.dev/l/fairvalid.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/fairvalid.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
     <category>agent</category>
     <description>MIT-licensed agent harness with Desktop, Server and Python SDK. Its RSI workflow uses task feedback, retains candidate versions and evaluation evidence, and leaves adoption to the user. Supports Skills and MCP tools. Open-source software is free; model services and hosting can cost extra. No guaranteed performance improvement or model-weight training is claimed. Submitted on behalf of the maintainer with AI assistance.</description>
-  </item>
-  <item>
-    <title>Transformer.gg</title>
-    <link>https://index.percall.dev/l/transformer-gg.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/transformer-gg.html</guid>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Transformer.gg is a marketplace for sponsored posts on X. Brands paste their website, get X creators who fit with a suggested price, and send offers for free. The card is charged only when a creator accepts, and payment is released once the post is live with X&#39;s Paid partnership label. Every offer has a tracked link. Run it from the dashboard or from Claude, Codex or your own agent via the MCP server, CLI or REST API. Free to join; 20% fee on paid offers.</description>
   </item>
 </channel>
 </rss>
