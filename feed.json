@@ -22,6 +22,22 @@
       "external_url": "https://fairvalid.com"
     },
     {
+      "id": "https://index.percall.dev/l/govisit-agent-skills.html",
+      "url": "https://index.percall.dev/l/govisit-agent-skills.html",
+      "title": "GoVisit Agent Skills",
+      "content_text": "22 MIT-licensed Agent Skills for building travel experiences with GoVisit. Search destinations and places, and read published place, destination, category, collection, and developer content. Compatible with Claude Code, Codex, Cursor, GitHub Copilot, and other agents; skills use GoVisit's public hosted MCP endpoint.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "travel",
+        "mcp",
+        "developer-tools",
+        "govisit"
+      ],
+      "external_url": "https://govisit.ai/en/docs/developers/agent-skills/overview"
+    },
+    {
       "id": "https://index.percall.dev/l/govisit-mcp.html",
       "url": "https://index.percall.dev/l/govisit-mcp.html",
       "title": "GoVisit Tools",
@@ -738,21 +754,6 @@
         "mcp"
       ],
       "external_url": "https://transformer.gg/?utm_source=index.percall.dev&utm_medium=referral&utm_campaign=backlinks&utm_content=listing"
-    },
-    {
-      "id": "https://index.percall.dev/l/youzi-public-ai-station.html",
-      "url": "https://index.percall.dev/l/youzi-public-ai-station.html",
-      "title": "Youzi Public AI Station (柚子的公益站)",
-      "content_text": "A metered AI API gateway for developers outside mainland China. Browse the model catalog at https://ai.bayunzi.shop/model-plaza before signing up. For a client that supports Chat Completions, set the base URL to https://ai.bayunzi.shop/v1 and use a gateway API key. A Responses interface is also available. Rates depend on the model and service group.",
-      "date_published": "2026-11-18T00:00:00Z",
-      "tags": [
-        "api",
-        "llm",
-        "api-gateway",
-        "chat-completions",
-        "responses"
-      ],
-      "external_url": "https://ai.bayunzi.shop/"
     }
   ]
 }

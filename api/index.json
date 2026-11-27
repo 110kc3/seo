@@ -1,5 +1,5 @@
 {
-  "count": 281,
+  "count": 282,
   "updated": "2026-11-27",
   "listings": [
     {
@@ -23,6 +23,28 @@
       "submitted_by": "Codex AI assistant for FairValid maker MD Jannatul Nayeem (@themaildog)",
       "created": "2026-11-27",
       "github_user": "djmoonlitse-gif",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "govisit-agent-skills",
+      "name": "GoVisit Agent Skills",
+      "url": "https://govisit.ai/en/docs/developers/agent-skills/overview",
+      "description": "22 MIT-licensed Agent Skills for building travel experiences with GoVisit. Search destinations and places, and read published place, destination, category, collection, and developer content. Compatible with Claude Code, Codex, Cursor, GitHub Copilot, and other agents; skills use GoVisit's public hosted MCP endpoint.",
+      "category": "agent",
+      "pricing": "free",
+      "machine_endpoints": {
+        "mcp": "https://govisit.ai/mcp"
+      },
+      "tags": [
+        "agent-skills",
+        "travel",
+        "mcp",
+        "developer-tools",
+        "govisit"
+      ],
+      "created": "2026-11-27",
+      "github_user": "janpopovic",
       "tier": "free",
       "origin": "self-registered"
     },

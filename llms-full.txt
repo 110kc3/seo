@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 281 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 282 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (281)
+## All listings (282)
 
 ### FairValid (fairvalid)
 - url: https://fairvalid.com
@@ -313,6 +313,14 @@ A response does not verify authentication, payment or tool behavior.
 - mcp: https://mcp.fairvalid.com/mcp
 - listing JSON: https://index.percall.dev/listings/fairvalid.json
 - listing page: https://index.percall.dev/l/fairvalid.html
+
+### GoVisit Agent Skills (govisit-agent-skills)
+- url: https://govisit.ai/en/docs/developers/agent-skills/overview
+- category: agent · pricing: free · tags: agent-skills, travel, mcp, developer-tools, govisit
+- 22 MIT-licensed Agent Skills for building travel experiences with GoVisit. Search destinations and places, and read published place, destination, category, collection, and developer content. Compatible with Claude Code, Codex, Cursor, GitHub Copilot, and other agents; skills use GoVisit's public hosted MCP endpoint.
+- mcp: https://govisit.ai/mcp
+- listing JSON: https://index.percall.dev/listings/govisit-agent-skills.json
+- listing page: https://index.percall.dev/l/govisit-agent-skills.html
 
 ### GoVisit Tools (govisit-mcp)
 - url: https://govisit.ai/en/docs/developers/mcp/overview
