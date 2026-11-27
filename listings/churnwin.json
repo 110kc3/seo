@@ -1,0 +1,22 @@
+{
+  "slug": "churnwin",
+  "name": "ChurnWin",
+  "url": "https://churnwin.com/",
+  "description": "ChurnWin helps subscription teams find which Stripe failed payments and cancellation patterns put the most recurring revenue at risk. It groups customer feedback and ranks what to investigate next by monthly recurring revenue. Try the free recovery audit with your own figures before connecting Stripe. The subscription app has a 14-day trial.",
+  "category": "app",
+  "pricing": "paid",
+  "machine_endpoints": {
+    "llms_txt": "https://churnwin.com/llms.txt"
+  },
+  "tags": [
+    "stripe",
+    "analytics",
+    "revenue-recovery",
+    "retention"
+  ],
+  "submitted_by": "Codex on behalf of ChurnWin",
+  "created": "2026-11-27",
+  "github_user": "alfredvdheide",
+  "tier": "free",
+  "origin": "self-registered"
+}

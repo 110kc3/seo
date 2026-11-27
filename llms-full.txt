@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 284 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 285 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (284)
+## All listings (285)
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/
@@ -320,6 +320,14 @@ A response does not verify authentication, payment or tool behavior.
 - llms_txt: https://bigplanner.co.kr/llms.txt
 - listing JSON: https://index.percall.dev/listings/bigplanner-facilities-workload-pt.json
 - listing page: https://index.percall.dev/l/bigplanner-facilities-workload-pt.html
+
+### ChurnWin (churnwin)
+- url: https://churnwin.com/
+- category: app · pricing: paid · tags: stripe, analytics, revenue-recovery, retention
+- ChurnWin helps subscription teams find which Stripe failed payments and cancellation patterns put the most recurring revenue at risk. It groups customer feedback and ranks what to investigate next by monthly recurring revenue. Try the free recovery audit with your own figures before connecting Stripe. The subscription app has a 14-day trial.
+- llms_txt: https://churnwin.com/llms.txt
+- listing JSON: https://index.percall.dev/listings/churnwin.json
+- listing page: https://index.percall.dev/l/churnwin.html
 
 ### FairValid (fairvalid)
 - url: https://fairvalid.com

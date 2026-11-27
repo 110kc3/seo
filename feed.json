@@ -36,6 +36,21 @@
       "external_url": "https://bigplanner.co.kr/fire-safety-ai/pt/workload-calculator/"
     },
     {
+      "id": "https://index.percall.dev/l/churnwin.html",
+      "url": "https://index.percall.dev/l/churnwin.html",
+      "title": "ChurnWin",
+      "content_text": "ChurnWin helps subscription teams find which Stripe failed payments and cancellation patterns put the most recurring revenue at risk. It groups customer feedback and ranks what to investigate next by monthly recurring revenue. Try the free recovery audit with your own figures before connecting Stripe. The subscription app has a 14-day trial.",
+      "date_published": "2026-11-27T00:00:00Z",
+      "tags": [
+        "app",
+        "stripe",
+        "analytics",
+        "revenue-recovery",
+        "retention"
+      ],
+      "external_url": "https://churnwin.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/fairvalid.html",
       "url": "https://index.percall.dev/l/fairvalid.html",
       "title": "FairValid",
@@ -736,22 +751,6 @@
         "api"
       ],
       "external_url": "https://getyoutubetranscript.com/youtube-transcript-api"
-    },
-    {
-      "id": "https://index.percall.dev/l/poptin-mcp.html",
-      "url": "https://index.percall.dev/l/poptin-mcp.html",
-      "title": "Poptin MCP",
-      "content_text": "Official hosted Poptin MCP server for AI agents. Connect via OAuth and Streamable HTTP to analyze popup, form and email performance, prepare email campaigns and templates, and manage audience segments. Uses your authorized Poptin account; feature and plan limits apply. Sending and scheduling require explicit confirmation. Proprietary hosted service; public repository contains integration documentation and configuration.",
-      "date_published": "2026-11-18T00:00:00Z",
-      "tags": [
-        "mcp",
-        "email-marketing",
-        "popups",
-        "forms",
-        "audience-segmentation",
-        "mcp"
-      ],
-      "external_url": "https://www.poptin.com/mcp/"
     }
   ]
 }
