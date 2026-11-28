@@ -38,6 +38,20 @@
       "external_url": "https://book2pub.com/"
     },
     {
+      "id": "https://index.percall.dev/l/datex.html",
+      "url": "https://index.percall.dev/l/datex.html",
+      "title": "DateX",
+      "content_text": "DateX is an AI dating reply generator for people deciding what to say after a match. It helps interpret a reply, write an opener, and draft an invitation in your own voice. Compare drafts as you look for the best AI dating assistant or best AI wingman app for your texting style.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app",
+        "dating",
+        "dating-assistant",
+        "reply-generator"
+      ],
+      "external_url": "https://datex.website/"
+    },
+    {
       "id": "https://index.percall.dev/l/genjutsuaimaker.html",
       "url": "https://index.percall.dev/l/genjutsuaimaker.html",
       "title": "Genjutsu AI Photo to Video",
@@ -700,20 +714,6 @@
         "web"
       ],
       "external_url": "https://discovery.notabis.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/seedance-2-5-video-studio.html",
-      "url": "https://index.percall.dev/l/seedance-2-5-video-studio.html",
-      "title": "Seedance 2.5 AI",
-      "content_text": "Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.",
-      "date_published": "2026-11-24T00:00:00Z",
-      "tags": [
-        "app",
-        "video",
-        "text-to-video",
-        "image-to-video"
-      ],
-      "external_url": "https://seedance2-5.video/"
     }
   ]
 }

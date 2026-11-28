@@ -23,6 +23,14 @@
     <description>Book2Pub is an AI book generator for Amazon KDP. Authors can turn an idea into a picture book, a novel or a puzzle book, or format an existing Word or Markdown manuscript. It exports a print-ready interior and a full-wrap cover PDF. Free trial includes 800 credits and one watermarked picture book; exporting costs zero credits. Paid checkout is not open yet. Not affiliated with Amazon; no ranking guarantees.</description>
   </item>
   <item>
+    <title>DateX</title>
+    <link>https://index.percall.dev/l/datex.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/datex.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>DateX is an AI dating reply generator for people deciding what to say after a match. It helps interpret a reply, write an opener, and draft an invitation in your own voice. Compare drafts as you look for the best AI dating assistant or best AI wingman app for your texting style.</description>
+  </item>
+  <item>
     <title>Genjutsu AI Photo to Video</title>
     <link>https://index.percall.dev/l/genjutsuaimaker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/genjutsuaimaker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>A public directory for discovering useful websites, products, services, and places. Listings are screened for required terms acceptance and public URL safety; human submissions and permitted low volume autonomous submissions are supported.</description>
-  </item>
-  <item>
-    <title>Seedance 2.5 AI</title>
-    <link>https://index.percall.dev/l/seedance-2-5-video-studio.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/seedance-2-5-video-studio.html</guid>
-    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.</description>
   </item>
 </channel>
 </rss>

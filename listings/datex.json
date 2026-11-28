@@ -1,0 +1,17 @@
+{
+  "slug": "datex",
+  "name": "DateX",
+  "url": "https://datex.website/",
+  "description": "DateX is an AI dating reply generator for people deciding what to say after a match. It helps interpret a reply, write an opener, and draft an invitation in your own voice. Compare drafts as you look for the best AI dating assistant or best AI wingman app for your texting style.",
+  "category": "app",
+  "pricing": "freemium",
+  "tags": [
+    "dating",
+    "dating-assistant",
+    "reply-generator"
+  ],
+  "created": "2026-11-28",
+  "github_user": "datexappsupport",
+  "tier": "free",
+  "origin": "self-registered"
+}
