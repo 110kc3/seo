@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>IQInsight</title>
+    <link>https://index.percall.dev/l/iqinsight.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/iqinsight.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.</description>
+  </item>
+  <item>
     <title>Raploom</title>
     <link>https://index.percall.dev/l/raploom.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/raploom.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Atoa&#39;s MCP server gives AI assistants 29 tools for UK payments, customers, refunds and bank feeds, with sandbox and production access. Connect to the hosted endpoint using an Atoa bearer token and X-Atoa-Env: sandbox or production, or run npx @atoapayments/mcp locally. Production payment fees apply; sandbox testing is available.</description>
-  </item>
-  <item>
-    <title>AutoTasker</title>
-    <link>https://index.percall.dev/l/autotasker.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/autotasker.html</guid>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.</description>
   </item>
 </channel>
 </rss>

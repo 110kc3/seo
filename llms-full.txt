@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 290 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 291 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,14 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (290)
+## All listings (291)
+
+### IQInsight (iqinsight)
+- url: https://iqinsight.io/
+- category: app · pricing: freemium
+- Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.
+- listing JSON: https://index.percall.dev/listings/iqinsight.json
+- listing page: https://index.percall.dev/l/iqinsight.html
 
 ### Raploom (raploom)
 - url: https://raploom.com/

@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/iqinsight.html",
+      "url": "https://index.percall.dev/l/iqinsight.html",
+      "title": "IQInsight",
+      "content_text": "Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://iqinsight.io/"
+    },
+    {
       "id": "https://index.percall.dev/l/raploom.html",
       "url": "https://index.percall.dev/l/raploom.html",
       "title": "Raploom",
@@ -733,21 +744,6 @@
         "mcp"
       ],
       "external_url": "https://docs.paywithatoa.com/mcp-server"
-    },
-    {
-      "id": "https://index.percall.dev/l/autotasker.html",
-      "url": "https://index.percall.dev/l/autotasker.html",
-      "title": "AutoTasker",
-      "content_text": "x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "api",
-        "x402",
-        "social-data",
-        "ai-agents",
-        "mcp"
-      ],
-      "external_url": "https://autotasker.highkingflower.com"
     }
   ]
 }

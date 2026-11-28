@@ -1,7 +1,20 @@
 {
-  "count": 290,
+  "count": 291,
   "updated": "2026-11-28",
   "listings": [
+    {
+      "slug": "iqinsight",
+      "name": "IQInsight",
+      "url": "https://iqinsight.io/",
+      "description": "Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.",
+      "category": "app",
+      "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "raploom",
       "name": "Raploom",
