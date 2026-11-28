@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 295 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 296 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (295)
+## All listings (296)
 
 ### IQInsight (iqinsight)
 - url: https://iqinsight.io/
@@ -339,6 +339,13 @@ A response does not verify authentication, payment or tool behavior.
 - Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.
 - listing JSON: https://index.percall.dev/listings/raploom.json
 - listing page: https://index.percall.dev/l/raploom.html
+
+### Wall Paint Calculator (wall-paint-calculator)
+- url: https://www.wallpaintcalculator.com/
+- category: app · pricing: free
+- Wall Paint Calculator helps users estimate paint quantity and project costs. Enter room measurements, openings, coverage and coat assumptions, then compare paint needs and container options. Multi-room planning supports a broader home painting project. Results are estimates that depend on the measurements and product coverage supplied. Free calculator
+- listing JSON: https://index.percall.dev/listings/wall-paint-calculator.json
+- listing page: https://index.percall.dev/l/wall-paint-calculator.html
 
 ### WordSearchClub (wordsearchclub)
 - url: https://wordsearchclub.com/

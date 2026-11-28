@@ -1,5 +1,5 @@
 {
-  "count": 295,
+  "count": 296,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -61,6 +61,19 @@
       "description": "Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.",
       "category": "app",
       "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "wall-paint-calculator",
+      "name": "Wall Paint Calculator",
+      "url": "https://www.wallpaintcalculator.com/",
+      "description": "Wall Paint Calculator helps users estimate paint quantity and project costs. Enter room measurements, openings, coverage and coat assumptions, then compare paint needs and container options. Multi-room planning supports a broader home painting project. Results are estimates that depend on the measurements and product coverage supplied. Free calculator",
+      "category": "app",
+      "pricing": "free",
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",

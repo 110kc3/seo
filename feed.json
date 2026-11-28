@@ -61,6 +61,17 @@
       "external_url": "https://raploom.com/"
     },
     {
+      "id": "https://index.percall.dev/l/wall-paint-calculator.html",
+      "url": "https://index.percall.dev/l/wall-paint-calculator.html",
+      "title": "Wall Paint Calculator",
+      "content_text": "Wall Paint Calculator helps users estimate paint quantity and project costs. Enter room measurements, openings, coverage and coat assumptions, then compare paint needs and container options. Multi-room planning supports a broader home painting project. Results are estimates that depend on the measurements and product coverage supplied. Free calculator",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://www.wallpaintcalculator.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/wordsearchclub.html",
       "url": "https://index.percall.dev/l/wordsearchclub.html",
       "title": "WordSearchClub",
@@ -716,22 +727,6 @@
         "acp"
       ],
       "external_url": "https://openagentapi.pages.dev/en/"
-    },
-    {
-      "id": "https://index.percall.dev/l/map-animation-studio.html",
-      "url": "https://index.percall.dev/l/map-animation-studio.html",
-      "title": "Map Animation Studio",
-      "content_text": "Browser-based map video editor with AI-assisted generation and visual route, scene and camera timeline editing. Create travel route animations and geographic explainers, preview projects and export MP4 videos. Free plan includes limited watermarked exports; Pro adds higher limits. Submitted on behalf of the maker with AI assistance.",
-      "date_published": "2026-11-20T00:00:00Z",
-      "tags": [
-        "app",
-        "maps",
-        "video",
-        "animation",
-        "travel",
-        "education"
-      ],
-      "external_url": "https://map-animation.com/"
     }
   ]
 }

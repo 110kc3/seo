@@ -47,6 +47,14 @@
     <description>Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.</description>
   </item>
   <item>
+    <title>Wall Paint Calculator</title>
+    <link>https://index.percall.dev/l/wall-paint-calculator.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/wall-paint-calculator.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Wall Paint Calculator helps users estimate paint quantity and project costs. Enter room measurements, openings, coverage and coat assumptions, then compare paint needs and container options. Multi-room planning supports a broader home painting project. Results are estimates that depend on the measurements and product coverage supplied. Free calculator</description>
+  </item>
+  <item>
     <title>WordSearchClub</title>
     <link>https://index.percall.dev/l/wordsearchclub.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/wordsearchclub.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API</description>
-  </item>
-  <item>
-    <title>Map Animation Studio</title>
-    <link>https://index.percall.dev/l/map-animation-studio.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/map-animation-studio.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Browser-based map video editor with AI-assisted generation and visual route, scene and camera timeline editing. Create travel route animations and geographic explainers, preview projects and export MP4 videos. Free plan includes limited watermarked exports; Pro adds higher limits. Submitted on behalf of the maker with AI assistance.</description>
   </item>
 </channel>
 </rss>
