@@ -1,5 +1,5 @@
 {
-  "count": 296,
+  "count": 297,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -61,6 +61,19 @@
       "description": "Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.",
       "category": "app",
       "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "usechrono",
+      "name": "useChrono",
+      "url": "https://www.usechrono.com/",
+      "description": "useChrono helps remote teams and people working across countries compare time zones and plan meetings. Select locations and a date to view local times and overlapping work hours. Time-zone and daylight-saving context helps users find practical meeting windows. Free planning tool",
+      "category": "app",
+      "pricing": "free",
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",

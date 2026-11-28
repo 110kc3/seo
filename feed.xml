@@ -47,6 +47,14 @@
     <description>Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.</description>
   </item>
   <item>
+    <title>useChrono</title>
+    <link>https://index.percall.dev/l/usechrono.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/usechrono.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>useChrono helps remote teams and people working across countries compare time zones and plan meetings. Select locations and a date to view local times and overlapping work hours. Time-zone and daylight-saving context helps users find practical meeting windows. Free planning tool</description>
+  </item>
+  <item>
     <title>Wall Paint Calculator</title>
     <link>https://index.percall.dev/l/wall-paint-calculator.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/wall-paint-calculator.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.</description>
-  </item>
-  <item>
-    <title>Open Agent API</title>
-    <link>https://index.percall.dev/l/open-agent-api.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/open-agent-api.html</guid>
-    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API</description>
   </item>
 </channel>
 </rss>

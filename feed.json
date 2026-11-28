@@ -61,6 +61,17 @@
       "external_url": "https://raploom.com/"
     },
     {
+      "id": "https://index.percall.dev/l/usechrono.html",
+      "url": "https://index.percall.dev/l/usechrono.html",
+      "title": "useChrono",
+      "content_text": "useChrono helps remote teams and people working across countries compare time zones and plan meetings. Select locations and a date to view local times and overlapping work hours. Time-zone and daylight-saving context helps users find practical meeting windows. Free planning tool",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://www.usechrono.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/wall-paint-calculator.html",
       "url": "https://index.percall.dev/l/wall-paint-calculator.html",
       "title": "Wall Paint Calculator",
@@ -711,22 +722,6 @@
         "json"
       ],
       "external_url": "https://codex-locale-json-audit.netlify.app/locale-release-gate/"
-    },
-    {
-      "id": "https://index.percall.dev/l/open-agent-api.html",
-      "url": "https://index.percall.dev/l/open-agent-api.html",
-      "title": "Open Agent API",
-      "content_text": "Apache-2.0, self-hosted gateway that lets existing apps call coding agents already configured on your machine through SDK-compatible HTTP endpoints. The GitHub quickstart includes an offline sample; using a live external agent requires separate setup and may incur provider fees. Source: https://github.com/jiangxingfan1-coder/Open-Agent-API",
-      "date_published": "2026-11-21T00:00:00Z",
-      "tags": [
-        "api",
-        "open-source",
-        "self-hosted",
-        "coding-agents",
-        "developer-tools",
-        "acp"
-      ],
-      "external_url": "https://openagentapi.pages.dev/en/"
     }
   ]
 }
