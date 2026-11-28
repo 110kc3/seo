@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Raploom</title>
+    <link>https://index.percall.dev/l/raploom.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/raploom.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.</description>
+  </item>
+  <item>
     <title>3D Printed Car Part</title>
     <link>https://index.percall.dev/l/3dprintedcarpart.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/3dprintedcarpart.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>x402 machine-payable API for Chinese social-media trending data (Weibo, Zhihu, Douban, Bilibili, Tieba), with an MCP server and A2A agent card. Paid per call in USDC on Base.</description>
-  </item>
-  <item>
-    <title>Coverage Cat</title>
-    <link>https://index.percall.dev/l/coverage-cat.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/coverage-cat.html</guid>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.</description>
   </item>
 </channel>
 </rss>

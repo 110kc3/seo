@@ -6,6 +6,17 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/raploom.html",
+      "url": "https://index.percall.dev/l/raploom.html",
+      "title": "Raploom",
+      "content_text": "Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://raploom.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/3dprintedcarpart.html",
       "url": "https://index.percall.dev/l/3dprintedcarpart.html",
       "title": "3D Printed Car Part",
@@ -737,22 +748,6 @@
         "mcp"
       ],
       "external_url": "https://autotasker.highkingflower.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/coverage-cat.html",
-      "url": "https://index.percall.dev/l/coverage-cat.html",
-      "title": "Coverage Cat",
-      "content_text": "Estimate personal umbrella insurance costs and compare standalone policies with an AI assistant. Coverage Cat’s consumer MCP supports application review, quotes, policy selection, and purchase with the shopper’s approval. MCP access is free. Insurance premiums depend on the policy.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "mcp",
-        "insurance",
-        "umbrella-insurance",
-        "personal-finance",
-        "comparison-shopping",
-        "mcp"
-      ],
-      "external_url": "https://www.coveragecat.com/ai/shop-with-your-assistant"
     }
   ]
 }

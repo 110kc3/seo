@@ -1,7 +1,20 @@
 {
-  "count": 289,
-  "updated": "2026-11-27",
+  "count": 290,
+  "updated": "2026-11-28",
   "listings": [
+    {
+      "slug": "raploom",
+      "name": "Raploom",
+      "url": "https://raploom.com/",
+      "description": "Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.",
+      "category": "app",
+      "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "3dprintedcarpart",
       "name": "3D Printed Car Part",
