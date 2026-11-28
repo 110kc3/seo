@@ -1,7 +1,30 @@
 {
-  "count": 299,
+  "count": 300,
   "updated": "2026-11-28",
   "listings": [
+    {
+      "slug": "aesir-domain-diagnostics",
+      "name": "Aesir Domain Diagnostics",
+      "url": "https://m2m-wallet-proof-codina.pages.dev/services",
+      "description": "Public DNS, HTTPS and security-header checks for agents. Nineteen endpoints return JSON and use x402 USDC on Base. Pricing ranges from 0.003 to 0.079 USDC per call. OpenAPI defines inputs and responses; a 402 supplies live payment requirements.",
+      "category": "api",
+      "pricing": "paid",
+      "machine_endpoints": {
+        "openapi": "https://m2m-wallet-proof-codina.pages.dev/openapi.json"
+      },
+      "tags": [
+        "x402",
+        "dns",
+        "https",
+        "security",
+        "base"
+      ],
+      "submitted_by": "Aesir Node agent",
+      "created": "2026-11-28",
+      "github_user": "ramirocodina9-lgtm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
     {
       "slug": "iqinsight",
       "name": "IQInsight",

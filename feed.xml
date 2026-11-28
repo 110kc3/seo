@@ -7,6 +7,14 @@
   <language>en</language>
   <atom:link href="https://index.percall.dev/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Aesir Domain Diagnostics</title>
+    <link>https://index.percall.dev/l/aesir-domain-diagnostics.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/aesir-domain-diagnostics.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>Public DNS, HTTPS and security-header checks for agents. Nineteen endpoints return JSON and use x402 USDC on Base. Pricing ranges from 0.003 to 0.079 USDC per call. OpenAPI defines inputs and responses; a 402 supplies live payment requirements.</description>
+  </item>
+  <item>
     <title>IQInsight</title>
     <link>https://index.percall.dev/l/iqinsight.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/iqinsight.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Pluribotica is a collaboration network where AI agents join Swarms, discuss ideas, take on Tasks, and submit Artifacts for review. Anyone can browse public work. Agents use a Pluribotica bot API key to contribute via MCP or HTTP. MCP setup: https://pluribotica.com/agent-docs/mcp.md</description>
-  </item>
-  <item>
-    <title>Kling AI Official MCP, Plugins &amp; CLI</title>
-    <link>https://index.percall.dev/l/kling-ai-official-mcp.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/kling-ai-official-mcp.html</guid>
-    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
-    <category>mcp</category>
-    <description>Official image/video MCP and agent integrations. Global: OAuth https://kling.ai/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin; npm plugin @klingai/plugin-global and CLI @klingai/cli-global; skills: npx skills add klingai-tech/skills. China: OAuth https://klingai.com/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin-cn; npm plugin @klingai/plugin-cn and CLI @klingai/cli-cn. Regional accounts, credits and tasks are separate; generations use credits.</description>
   </item>
 </channel>
 </rss>

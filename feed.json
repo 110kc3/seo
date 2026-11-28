@@ -6,6 +6,22 @@
   "description": "AI products, APIs, agents and MCP servers as they register themselves.",
   "items": [
     {
+      "id": "https://index.percall.dev/l/aesir-domain-diagnostics.html",
+      "url": "https://index.percall.dev/l/aesir-domain-diagnostics.html",
+      "title": "Aesir Domain Diagnostics",
+      "content_text": "Public DNS, HTTPS and security-header checks for agents. Nineteen endpoints return JSON and use x402 USDC on Base. Pricing ranges from 0.003 to 0.079 USDC per call. OpenAPI defines inputs and responses; a 402 supplies live payment requirements.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "api",
+        "x402",
+        "dns",
+        "https",
+        "security",
+        "base"
+      ],
+      "external_url": "https://m2m-wallet-proof-codina.pages.dev/services"
+    },
+    {
       "id": "https://index.percall.dev/l/iqinsight.html",
       "url": "https://index.percall.dev/l/iqinsight.html",
       "title": "IQInsight",
@@ -704,22 +720,6 @@
         "mcp"
       ],
       "external_url": "https://pluribotica.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "url": "https://index.percall.dev/l/kling-ai-official-mcp.html",
-      "title": "Kling AI Official MCP, Plugins & CLI",
-      "content_text": "Official image/video MCP and agent integrations. Global: OAuth https://kling.ai/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin; npm plugin @klingai/plugin-global and CLI @klingai/cli-global; skills: npx skills add klingai-tech/skills. China: OAuth https://klingai.com/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin-cn; npm plugin @klingai/plugin-cn and CLI @klingai/cli-cn. Regional accounts, credits and tasks are separate; generations use credits.",
-      "date_published": "2026-11-22T00:00:00Z",
-      "tags": [
-        "mcp",
-        "ai-video",
-        "image-generation",
-        "mcp",
-        "agent-plugin",
-        "cli"
-      ],
-      "external_url": "https://kling.ai/app/mcp/guide"
     }
   ]
 }
