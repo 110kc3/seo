@@ -79,6 +79,14 @@
     <description>WordSearchClub offers word search puzzles for playing online and printing. Browse themed collections, hard challenges, large-print puzzles and a daily puzzle. Printable puzzle and answer resources support classroom activities, family time and quiet breaks. Free puzzles</description>
   </item>
   <item>
+    <title>Zaptural</title>
+    <link>https://index.percall.dev/l/zaptural.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/zaptural.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Online reference and product catalog for power inverters used in cars, RVs and off-grid battery systems. Browse inverter models, compare specifications and use the planning guide to check battery voltage, outlet type and appliance loads. The catalog and guides are free to access; equipment is sold separately.</description>
+  </item>
+  <item>
     <title>ClipScript</title>
     <link>https://index.percall.dev/l/clipscript.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/clipscript.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
     <category>mcp</category>
     <description>Official image/video MCP and agent integrations. Global: OAuth https://kling.ai/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin; npm plugin @klingai/plugin-global and CLI @klingai/cli-global; skills: npx skills add klingai-tech/skills. China: OAuth https://klingai.com/mcp/plugin; Claude plugin https://github.com/klingai-tech/claude-plugin-cn; npm plugin @klingai/plugin-cn and CLI @klingai/cli-cn. Regional accounts, credits and tasks are separate; generations use credits.</description>
-  </item>
-  <item>
-    <title>Order export sales reconciliation</title>
-    <link>https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html</guid>
-    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Turn one anonymized order CSV into JSON with paid sales and units by SKU, plus duplicate and exception rows. Accepts up to 100 order lines and 4,000 characters. Send csv_text with line_id,date,sku,units,amount,status headers. Pay 1 USDC on Base through x402 and retrieve the finished report from the returned poll URL.</description>
   </item>
 </channel>
 </rss>

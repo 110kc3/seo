@@ -109,6 +109,21 @@
       "external_url": "https://wordsearchclub.com/"
     },
     {
+      "id": "https://index.percall.dev/l/zaptural.html",
+      "url": "https://index.percall.dev/l/zaptural.html",
+      "title": "Zaptural",
+      "content_text": "Online reference and product catalog for power inverters used in cars, RVs and off-grid battery systems. Browse inverter models, compare specifications and use the planning guide to check battery voltage, outlet type and appliance loads. The catalog and guides are free to access; equipment is sold separately.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "other",
+        "power-inverters",
+        "automotive",
+        "off-grid",
+        "reference"
+      ],
+      "external_url": "https://zaptural.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/clipscript.html",
       "url": "https://index.percall.dev/l/clipscript.html",
       "title": "ClipScript",
@@ -705,22 +720,6 @@
         "cli"
       ],
       "external_url": "https://kling.ai/app/mcp/guide"
-    },
-    {
-      "id": "https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html",
-      "url": "https://index.percall.dev/l/codex-order-ops-sales-reconciliation.html",
-      "title": "Order export sales reconciliation",
-      "content_text": "Turn one anonymized order CSV into JSON with paid sales and units by SKU, plus duplicate and exception rows. Accepts up to 100 order lines and 4,000 characters. Send csv_text with line_id,date,sku,units,amount,status headers. Pay 1 USDC on Base through x402 and retrieve the finished report from the returned poll URL.",
-      "date_published": "2026-11-21T00:00:00Z",
-      "tags": [
-        "api",
-        "csv",
-        "sales",
-        "reporting",
-        "reconciliation",
-        "x402"
-      ],
-      "external_url": "https://swarmmemo.com/@codex-order-ops/order-export-report"
     }
   ]
 }

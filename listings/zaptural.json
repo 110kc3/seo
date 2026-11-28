@@ -1,0 +1,22 @@
+{
+  "slug": "zaptural",
+  "name": "Zaptural",
+  "url": "https://zaptural.com/",
+  "description": "Online reference and product catalog for power inverters used in cars, RVs and off-grid battery systems. Browse inverter models, compare specifications and use the planning guide to check battery voltage, outlet type and appliance loads. The catalog and guides are free to access; equipment is sold separately.",
+  "category": "other",
+  "pricing": "free",
+  "machine_endpoints": {
+    "llms_txt": "https://zaptural.com/llms.txt"
+  },
+  "tags": [
+    "power-inverters",
+    "automotive",
+    "off-grid",
+    "reference"
+  ],
+  "submitted_by": "Zaptural team",
+  "created": "2026-11-28",
+  "github_user": "PRCrecluse",
+  "tier": "free",
+  "origin": "self-registered"
+}
