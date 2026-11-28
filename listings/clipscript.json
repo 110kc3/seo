@@ -2,7 +2,7 @@
   "slug": "clipscript",
   "name": "ClipScript",
   "url": "https://clipscript.app/",
-  "description": "Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.",
+  "description": "Web tool that turns public short-video links from TikTok, Reels, Shorts and YouTube into timestamped transcripts and downloadable SRT or VTT subtitles. Free to try without an account; the free allowance is 30 minutes a day, and paid credit packs cover longer runs.",
   "category": "app",
   "pricing": "freemium",
   "tags": [
@@ -14,5 +14,6 @@
   "created": "2026-11-27",
   "github_user": "kevinwowo",
   "tier": "free",
-  "origin": "self-registered"
+  "origin": "self-registered",
+  "updated": "2026-11-28"
 }

@@ -388,7 +388,7 @@ A response does not verify authentication, payment or tool behavior.
 ### ClipScript (clipscript)
 - url: https://clipscript.app/
 - category: app · pricing: freemium · tags: transcription, subtitles, video-to-text
-- Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.
+- Web tool that turns public short-video links from TikTok, Reels, Shorts and YouTube into timestamped transcripts and downloadable SRT or VTT subtitles. Free to try without an account; the free allowance is 30 minutes a day, and paid credit packs cover longer runs.
 - listing JSON: https://index.percall.dev/listings/clipscript.json
 - listing page: https://index.percall.dev/l/clipscript.html
 

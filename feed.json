@@ -94,6 +94,20 @@
       "external_url": "https://wordsearchclub.com/"
     },
     {
+      "id": "https://index.percall.dev/l/clipscript.html",
+      "url": "https://index.percall.dev/l/clipscript.html",
+      "title": "ClipScript",
+      "content_text": "Web tool that turns public short-video links from TikTok, Reels, Shorts and YouTube into timestamped transcripts and downloadable SRT or VTT subtitles. Free to try without an account; the free allowance is 30 minutes a day, and paid credit packs cover longer runs.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app",
+        "transcription",
+        "subtitles",
+        "video-to-text"
+      ],
+      "external_url": "https://clipscript.app/"
+    },
+    {
       "id": "https://index.percall.dev/l/3dprintedcarpart.html",
       "url": "https://index.percall.dev/l/3dprintedcarpart.html",
       "title": "3D Printed Car Part",
@@ -137,20 +151,6 @@
         "retention"
       ],
       "external_url": "https://churnwin.com/"
-    },
-    {
-      "id": "https://index.percall.dev/l/clipscript.html",
-      "url": "https://index.percall.dev/l/clipscript.html",
-      "title": "ClipScript",
-      "content_text": "Web tool that turns short-video links from TikTok, Reels, Shorts and YouTube into text transcripts and downloadable subtitles. The free tier needs no account and covers 3 runs a day of up to 3 minutes each; paid credit packs raise the limits.",
-      "date_published": "2026-11-27T00:00:00Z",
-      "tags": [
-        "app",
-        "transcription",
-        "subtitles",
-        "video-to-text"
-      ],
-      "external_url": "https://clipscript.app/"
     },
     {
       "id": "https://index.percall.dev/l/fairvalid.html",
