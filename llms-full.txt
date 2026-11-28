@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 303 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 304 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (303)
+## All listings (304)
 
 ### Aesir Domain Diagnostics (aesir-domain-diagnostics)
 - url: https://m2m-wallet-proof-codina.pages.dev/services
@@ -376,6 +376,16 @@ A response does not verify authentication, payment or tool behavior.
 - Turn a topic, lyrics, or optional character photo into a 5–15-second AI rap video with vocals and a beat. Paid credit packs and subscriptions; See the public pricing page.
 - listing JSON: https://index.percall.dev/listings/rapvideolab.json
 - listing page: https://index.percall.dev/l/rapvideolab.html
+
+### TatSeek (tatseek)
+- url: https://tatseek.com/for-ai-agents/
+- category: api · pricing: free · tags: tattoo-art, visual-culture, mcp, openapi, catalogue
+- TatSeek offers free, read-only access to credited tattoo work, artists, studios and cultural guides. Search by motif, style or location and cite the original record. Access via a no-key JSON API, a remote MCP server, or agent-readable HTML. Cloudflare Is Your Site Agent-Ready? scored tatseek.com 100/100 (Level 5): https://isitagentready.com/tatseek.com
+- llms_txt: https://tatseek.com/llms.txt
+- openapi: https://tatseek.com/api/v1/openapi
+- mcp: https://tatseek.com/mcp
+- listing JSON: https://index.percall.dev/listings/tatseek.json
+- listing page: https://index.percall.dev/l/tatseek.html
 
 ### useChrono (usechrono)
 - url: https://www.usechrono.com/

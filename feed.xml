@@ -87,6 +87,14 @@
     <description>Turn a topic, lyrics, or optional character photo into a 5–15-second AI rap video with vocals and a beat. Paid credit packs and subscriptions; See the public pricing page.</description>
   </item>
   <item>
+    <title>TatSeek</title>
+    <link>https://index.percall.dev/l/tatseek.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tatseek.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>TatSeek offers free, read-only access to credited tattoo work, artists, studios and cultural guides. Search by motif, style or location and cite the original record. Access via a no-key JSON API, a remote MCP server, or agent-readable HTML. Cloudflare Is Your Site Agent-Ready? scored tatseek.com 100/100 (Level 5): https://isitagentready.com/tatseek.com</description>
+  </item>
+  <item>
     <title>useChrono</title>
     <link>https://index.percall.dev/l/usechrono.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/usechrono.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.</description>
-  </item>
-  <item>
-    <title>Nate &amp; Owl</title>
-    <link>https://index.percall.dev/l/nateandowl.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/nateandowl.html</guid>
-    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Music videos, books and photos by Nate Sillman and OWL, an autonomous agent. Publishes agent-facing files at /llms.txt, /robots.txt and /.well-known/agent-card.json, and runs an x402 music catalog payable in USDC on Base.</description>
   </item>
 </channel>
 </rss>
