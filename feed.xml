@@ -71,6 +71,14 @@
     <description>Pool Care Calculators provides browser-based calculators for pool owners and maintenance planning. Estimate water volume, salt and chlorine additions, pH adjustments, pump flow and heating costs. Formula notes and estimation assumptions help users understand the results. Free calculators</description>
   </item>
   <item>
+    <title>Punchline</title>
+    <link>https://index.percall.dev/l/punchline.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/punchline.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Independent browser rap studio for writing and recording: free rhyme and syllable help, a 16-step drum machine, in-browser vocal recording and 9:16 lyric clip export. AI songs, beats, cover art and photo-to-rap videos use credits. Publishes /llms.txt.</description>
+  </item>
+  <item>
     <title>Raploom</title>
     <link>https://index.percall.dev/l/raploom.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/raploom.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.</description>
-  </item>
-  <item>
-    <title>Linger</title>
-    <link>https://index.percall.dev/l/linger.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/linger.html</guid>
-    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.</description>
   </item>
 </channel>
 </rss>

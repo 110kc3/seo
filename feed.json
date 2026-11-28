@@ -111,6 +111,22 @@
       "external_url": "https://poolcarecalculators.com/"
     },
     {
+      "id": "https://index.percall.dev/l/punchline.html",
+      "url": "https://index.percall.dev/l/punchline.html",
+      "title": "Punchline",
+      "content_text": "Independent browser rap studio for writing and recording: free rhyme and syllable help, a 16-step drum machine, in-browser vocal recording and 9:16 lyric clip export. AI songs, beats, cover art and photo-to-rap videos use credits. Publishes /llms.txt.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app",
+        "music",
+        "rap",
+        "lyrics",
+        "recording",
+        "audio"
+      ],
+      "external_url": "https://punchline.fm"
+    },
+    {
       "id": "https://index.percall.dev/l/raploom.html",
       "url": "https://index.percall.dev/l/raploom.html",
       "title": "Raploom",
@@ -703,22 +719,6 @@
         "instrumental"
       ],
       "external_url": "https://flowmusicai.pro/"
-    },
-    {
-      "id": "https://index.percall.dev/l/linger.html",
-      "url": "https://index.percall.dev/l/linger.html",
-      "title": "Linger",
-      "content_text": "Linger is a local-first image organizer for designers on Apple Silicon Macs. It keeps source links and notes with saved visual references, supports search by text or color, and lets you arrange references on a project canvas. Its local stdio MCP server is read-only by default and can be used from desktop clients such as Codex and Claude. macOS 14 or later, seven-day trial, then a one-time purchase.",
-      "date_published": "2026-11-23T00:00:00Z",
-      "tags": [
-        "app",
-        "macos",
-        "design",
-        "visual-references",
-        "local-first",
-        "mcp"
-      ],
-      "external_url": "https://withlinger.com/"
     }
   ]
 }

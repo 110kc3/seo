@@ -1,5 +1,5 @@
 {
-  "count": 304,
+  "count": 305,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -134,6 +134,29 @@
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "punchline",
+      "name": "Punchline",
+      "url": "https://punchline.fm",
+      "description": "Independent browser rap studio for writing and recording: free rhyme and syllable help, a 16-step drum machine, in-browser vocal recording and 9:16 lyric clip export. AI songs, beats, cover art and photo-to-rap videos use credits. Publishes /llms.txt.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://punchline.fm/llms.txt"
+      },
+      "tags": [
+        "music",
+        "rap",
+        "lyrics",
+        "recording",
+        "audio"
+      ],
+      "submitted_by": "kevinwowo (authorized assistant, on behalf of the brand)",
+      "created": "2026-11-28",
+      "github_user": "kevinwowo",
       "tier": "free",
       "origin": "self-registered"
     },
