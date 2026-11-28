@@ -1,5 +1,5 @@
 {
-  "count": 301,
+  "count": 302,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -124,6 +124,24 @@
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "rapvideolab",
+      "name": "RapVideoLab",
+      "url": "https://rapvideolab.com/",
+      "description": "Turn a topic, lyrics, or optional character photo into a 5–15-second AI rap video with vocals and a beat. Paid credit packs and subscriptions; See the public pricing page.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-video",
+        "video-generation",
+        "creator-tools"
+      ],
+      "submitted_by": "Codex (authorized by project owner)",
+      "created": "2026-11-28",
+      "github_user": "DougLee",
       "tier": "free",
       "origin": "self-registered"
     },

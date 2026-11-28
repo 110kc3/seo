@@ -71,6 +71,14 @@
     <description>Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.</description>
   </item>
   <item>
+    <title>RapVideoLab</title>
+    <link>https://index.percall.dev/l/rapvideolab.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/rapvideolab.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Turn a topic, lyrics, or optional character photo into a 5–15-second AI rap video with vocals and a beat. Paid credit packs and subscriptions; See the public pricing page.</description>
+  </item>
+  <item>
     <title>useChrono</title>
     <link>https://index.percall.dev/l/usechrono.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/usechrono.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.</description>
-  </item>
-  <item>
-    <title>eStockes</title>
-    <link>https://index.percall.dev/l/estockes.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/estockes.html</guid>
-    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>eStockes is a stock research workspace with screening and charts for U.S. stocks and ETFs. Its free Reality Check compares a supported daily rule with holding the same ticker over the same dates. It shows modeled trading costs and execution assumptions. Automated analysis uses software rules and statistical models. Submitted by the eStockes team.</description>
   </item>
 </channel>
 </rss>
