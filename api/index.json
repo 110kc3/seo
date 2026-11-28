@@ -1,5 +1,5 @@
 {
-  "count": 294,
+  "count": 295,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -20,6 +20,19 @@
       "name": "JotOak",
       "url": "https://jotoak.com/",
       "description": "JotOak provides printable word searches, crosswords and mazes for classrooms, families and quiet breaks. Users can browse ready-made activities or make a word search from their own English vocabulary. The generator offers puzzle and answer previews and exports a matching PDF in US Letter or A4. Custom word lists are processed locally in the browser. Free printable resources",
+      "category": "app",
+      "pricing": "free",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "nameidea",
+      "name": "Nameidea",
+      "url": "https://nameideahub.com/",
+      "description": "Nameidea helps writers and families explore real English surnames and family-name ideas. Browse names by spelling length or initial, sample candidates, try a first name and surname in a fictional scene, and save a browser-local shortlist. It provides naming inspiration rather than domain-name generation or claims about ancestry. Free naming inspiration",
       "category": "app",
       "pricing": "free",
       "submitted_by": "Codex",
