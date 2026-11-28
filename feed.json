@@ -22,6 +22,22 @@
       "external_url": "https://m2m-wallet-proof-codina.pages.dev/services"
     },
     {
+      "id": "https://index.percall.dev/l/book2pub.html",
+      "url": "https://index.percall.dev/l/book2pub.html",
+      "title": "Book2Pub",
+      "content_text": "Book2Pub is an AI book generator for Amazon KDP. Authors can turn an idea into a picture book, a novel or a puzzle book, or format an existing Word or Markdown manuscript. It exports a print-ready interior and a full-wrap cover PDF. Free trial includes 800 credits and one watermarked picture book; exporting costs zero credits. Paid checkout is not open yet. Not affiliated with Amazon; no ranking guarantees.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app",
+        "book-generator",
+        "kdp",
+        "self-publishing",
+        "writing",
+        "formatting"
+      ],
+      "external_url": "https://book2pub.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/genjutsuaimaker.html",
       "url": "https://index.percall.dev/l/genjutsuaimaker.html",
       "title": "Genjutsu AI Photo to Video",
@@ -702,20 +718,6 @@
         "agent-readiness"
       ],
       "external_url": "https://nateandowl.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/vidbreak.html",
-      "url": "https://index.percall.dev/l/vidbreak.html",
-      "title": "VidBreak",
-      "content_text": "Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.",
-      "date_published": "2026-11-23T00:00:00Z",
-      "tags": [
-        "app",
-        "video-analysis",
-        "video-to-prompt",
-        "screenwriting"
-      ],
-      "external_url": "https://vidbreak.com/"
     }
   ]
 }

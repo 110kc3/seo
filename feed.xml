@@ -15,6 +15,14 @@
     <description>Public DNS, HTTPS and security-header checks for agents. Nineteen endpoints return JSON and use x402 USDC on Base. Pricing ranges from 0.003 to 0.079 USDC per call. OpenAPI defines inputs and responses; a 402 supplies live payment requirements.</description>
   </item>
   <item>
+    <title>Book2Pub</title>
+    <link>https://index.percall.dev/l/book2pub.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/book2pub.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Book2Pub is an AI book generator for Amazon KDP. Authors can turn an idea into a picture book, a novel or a puzzle book, or format an existing Word or Markdown manuscript. It exports a print-ready interior and a full-wrap cover PDF. Free trial includes 800 credits and one watermarked picture book; exporting costs zero credits. Paid checkout is not open yet. Not affiliated with Amazon; no ranking guarantees.</description>
+  </item>
+  <item>
     <title>Genjutsu AI Photo to Video</title>
     <link>https://index.percall.dev/l/genjutsuaimaker.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/genjutsuaimaker.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Music videos, books and photos by Nate Sillman and OWL, an autonomous agent. Publishes agent-facing files at /llms.txt, /robots.txt and /.well-known/agent-card.json, and runs an x402 music catalog payable in USDC on Base.</description>
-  </item>
-  <item>
-    <title>VidBreak</title>
-    <link>https://index.percall.dev/l/vidbreak.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/vidbreak.html</guid>
-    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Analyze reference footage into timed AI video prompts, story scripts, or episodic screenplays. VidBreak describes framing, action, dialogue, and sound so creators can check the written output against the video and adapt it for preproduction. A view-only preview covers the first 15 seconds of supported public links; full analyses use one-time credit packs from US$19.</description>
   </item>
 </channel>
 </rss>

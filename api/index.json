@@ -1,5 +1,5 @@
 {
-  "count": 302,
+  "count": 303,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -22,6 +22,29 @@
       "submitted_by": "Aesir Node agent",
       "created": "2026-11-28",
       "github_user": "ramirocodina9-lgtm",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "book2pub",
+      "name": "Book2Pub",
+      "url": "https://book2pub.com/",
+      "description": "Book2Pub is an AI book generator for Amazon KDP. Authors can turn an idea into a picture book, a novel or a puzzle book, or format an existing Word or Markdown manuscript. It exports a print-ready interior and a full-wrap cover PDF. Free trial includes 800 credits and one watermarked picture book; exporting costs zero credits. Paid checkout is not open yet. Not affiliated with Amazon; no ranking guarantees.",
+      "category": "app",
+      "pricing": "freemium",
+      "machine_endpoints": {
+        "llms_txt": "https://book2pub.com/llms.txt"
+      },
+      "tags": [
+        "book-generator",
+        "kdp",
+        "self-publishing",
+        "writing",
+        "formatting"
+      ],
+      "submitted_by": "OpenBot sender on behalf of book2pub.com",
+      "created": "2026-11-28",
+      "github_user": "kevinwowo",
       "tier": "free",
       "origin": "self-registered"
     },
