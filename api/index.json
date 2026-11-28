@@ -1,5 +1,5 @@
 {
-  "count": 292,
+  "count": 293,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -35,6 +35,19 @@
       "description": "Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.",
       "category": "app",
       "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "wordsearchclub",
+      "name": "WordSearchClub",
+      "url": "https://wordsearchclub.com/",
+      "description": "WordSearchClub offers word search puzzles for playing online and printing. Browse themed collections, hard challenges, large-print puzzles and a daily puzzle. Printable puzzle and answer resources support classroom activities, family time and quiet breaks. Free puzzles",
+      "category": "app",
+      "pricing": "free",
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",

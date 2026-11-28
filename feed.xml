@@ -31,6 +31,14 @@
     <description>Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.</description>
   </item>
   <item>
+    <title>WordSearchClub</title>
+    <link>https://index.percall.dev/l/wordsearchclub.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/wordsearchclub.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>WordSearchClub offers word search puzzles for playing online and printing. Browse themed collections, hard challenges, large-print puzzles and a daily puzzle. Printable puzzle and answer resources support classroom activities, family time and quiet breaks. Free puzzles</description>
+  </item>
+  <item>
     <title>3D Printed Car Part</title>
     <link>https://index.percall.dev/l/3dprintedcarpart.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/3dprintedcarpart.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
     <category>other</category>
     <description>Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.</description>
-  </item>
-  <item>
-    <title>Atoa Agent Pay</title>
-    <link>https://index.percall.dev/l/atoa-agent-pay.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/atoa-agent-pay.html</guid>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa&#39;s servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.</description>
   </item>
 </channel>
 </rss>

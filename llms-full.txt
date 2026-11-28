@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 292 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 293 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (292)
+## All listings (293)
 
 ### IQInsight (iqinsight)
 - url: https://iqinsight.io/
@@ -325,6 +325,13 @@ A response does not verify authentication, payment or tool behavior.
 - Create a 12-second rap video starring you, a friend, a pet or an original character. Generate and edit lyrics before choosing a paid video. Freemium: free lyrics and a 4-second preview; full 12-second videos USD6.99 one-time. USD15.99 photo pass covers three videos using the same people and photos; no subscription.
 - listing JSON: https://index.percall.dev/listings/raploom.json
 - listing page: https://index.percall.dev/l/raploom.html
+
+### WordSearchClub (wordsearchclub)
+- url: https://wordsearchclub.com/
+- category: app · pricing: free
+- WordSearchClub offers word search puzzles for playing online and printing. Browse themed collections, hard challenges, large-print puzzles and a daily puzzle. Printable puzzle and answer resources support classroom activities, family time and quiet breaks. Free puzzles
+- listing JSON: https://index.percall.dev/listings/wordsearchclub.json
+- listing page: https://index.percall.dev/l/wordsearchclub.html
 
 ### 3D Printed Car Part (3dprintedcarpart)
 - url: https://3dprintedcarpart.com/

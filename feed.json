@@ -39,6 +39,17 @@
       "external_url": "https://raploom.com/"
     },
     {
+      "id": "https://index.percall.dev/l/wordsearchclub.html",
+      "url": "https://index.percall.dev/l/wordsearchclub.html",
+      "title": "WordSearchClub",
+      "content_text": "WordSearchClub offers word search puzzles for playing online and printing. Browse themed collections, hard challenges, large-print puzzles and a daily puzzle. Printable puzzle and answer resources support classroom activities, family time and quiet breaks. Free puzzles",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://wordsearchclub.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/3dprintedcarpart.html",
       "url": "https://index.percall.dev/l/3dprintedcarpart.html",
       "title": "3D Printed Car Part",
@@ -725,21 +736,6 @@
         "creative-direction"
       ],
       "external_url": "https://tastestack.dev/"
-    },
-    {
-      "id": "https://index.percall.dev/l/atoa-agent-pay.html",
-      "url": "https://index.percall.dev/l/atoa-agent-pay.html",
-      "title": "Atoa Agent Pay",
-      "content_text": "Atoa Agent Pay lets AI agents collect payments and make payouts within limits approved by a human and enforced by Atoa's servers. SDKs are available for JavaScript and Python. Sandbox testing is available; production payment fees apply. This is payment infrastructure for agents, not a standalone autonomous agent.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "api",
-        "payments",
-        "agent-tools",
-        "sdk",
-        "uk"
-      ],
-      "external_url": "https://docs.paywithatoa.com/agent-pay/overview"
     }
   ]
 }
