@@ -127,6 +127,14 @@
     <description>Web tool that turns public short-video links from TikTok, Reels, Shorts and YouTube into timestamped transcripts and downloadable SRT or VTT subtitles. Free to try without an account; the free allowance is 30 minutes a day, and paid credit packs cover longer runs.</description>
   </item>
   <item>
+    <title>NeuraLiquid Signals by FutureCast</title>
+    <link>https://index.percall.dev/l/neuraliquid-signals.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/neuraliquid-signals.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>api</category>
+    <description>A BTC/ETH watchlist agent can buy one directional snapshot for 0.05 USDC on Base via x402 or MCP. Get token, long/short and UTC observation time from a paper-trading engine. Check availability free. An empty window returns no payment offer. Reuse the receipt for the same result for 24h. Continuous events with revisions and expiry cost 5 USDC per 24h pass. Eligible direct referrals earn 34% after finality (0.017 USDC per snapshot). Wallet-only enrollment is open until Dec 26, 2026 22:00 UTC.</description>
+  </item>
+  <item>
     <title>3D Printed Car Part</title>
     <link>https://index.percall.dev/l/3dprintedcarpart.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/3dprintedcarpart.html</guid>
@@ -261,14 +269,6 @@
     <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Developers integrating several model providers often manage separate APIs and billing. SmarToken is an independent OpenAI-compatible gateway for supported Chinese text models, with a prepaid USD wallet, per-key budgets and usage logs. Eligible accounts may receive a one-time $1 trial if approved; it expires 30 days after grant. Conversations and responses are retained until deleted and may be accessed by authorized administrators.</description>
-  </item>
-  <item>
-    <title>NeuraLiquid Signals by FutureCast</title>
-    <link>https://index.percall.dev/l/neuraliquid-signals.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/neuraliquid-signals.html</guid>
-    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Track crypto watchlist events from a paper-trading engine with events-v2 and a cursor for revisions, conflicts and expiry. Preview a historical example free. With wallet and budget approval, MCP can buy or resume a 24h live pass for 5 USDC on Base via x402. From Nov 26, 2026 22:00 UTC until Dec 26, 2026 22:00 UTC, sign your wallet to get a lasting referral link without buying a pass. Earn 34% on eligible direct sales (1.70 USDC per day pass) after payment finality.</description>
   </item>
   <item>
     <title>Cloudbrowser</title>
