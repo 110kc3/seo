@@ -1,5 +1,5 @@
 {
-  "count": 305,
+  "count": 306,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -212,6 +212,18 @@
       ],
       "created": "2026-11-28",
       "github_user": "ymltv",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "toolso-ai",
+      "name": "Toolso.AI",
+      "url": "https://toolso.ai/",
+      "description": "Toolso.AI is a curated directory for discovering AI tools. Browse by task or category, compare options, and open official product websites. Tool profiles describe features, use cases, and pricing where available.",
+      "category": "other",
+      "pricing": "free",
+      "created": "2026-11-28",
+      "github_user": "coolchange-ai",
       "tier": "free",
       "origin": "self-registered"
     },

@@ -103,6 +103,14 @@
     <description>TatSeek offers free, read-only access to credited tattoo work, artists, studios and cultural guides. Search by motif, style or location and cite the original record. Access via a no-key JSON API, a remote MCP server, or agent-readable HTML. Cloudflare Is Your Site Agent-Ready? scored tatseek.com 100/100 (Level 5): https://isitagentready.com/tatseek.com</description>
   </item>
   <item>
+    <title>Toolso.AI</title>
+    <link>https://index.percall.dev/l/toolso-ai.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/toolso-ai.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>other</category>
+    <description>Toolso.AI is a curated directory for discovering AI tools. Browse by task or category, compare options, and open official product websites. Tool profiles describe features, use cases, and pricing where available.</description>
+  </item>
+  <item>
     <title>useChrono</title>
     <link>https://index.percall.dev/l/usechrono.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/usechrono.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Account-free, pay-per-call APIs and MCP tools for document and table extraction, CSV cleanup, website audits, SEC company evidence, and weather. Browse the free catalog and buyer guides at https://apiacre.com/buyers. Pay per request with x402 USDC on Base or use Solana on supported routes.</description>
-  </item>
-  <item>
-    <title>Flow Music AI</title>
-    <link>https://index.percall.dev/l/flow-music-ai.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/flow-music-ai.html</guid>
-    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.</description>
   </item>
 </channel>
 </rss>

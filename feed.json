@@ -168,6 +168,17 @@
       "external_url": "https://tatseek.com/for-ai-agents/"
     },
     {
+      "id": "https://index.percall.dev/l/toolso-ai.html",
+      "url": "https://index.percall.dev/l/toolso-ai.html",
+      "title": "Toolso.AI",
+      "content_text": "Toolso.AI is a curated directory for discovering AI tools. Browse by task or category, compare options, and open official product websites. Tool profiles describe features, use cases, and pricing where available.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "other"
+      ],
+      "external_url": "https://toolso.ai/"
+    },
+    {
       "id": "https://index.percall.dev/l/usechrono.html",
       "url": "https://index.percall.dev/l/usechrono.html",
       "title": "useChrono",
@@ -704,21 +715,6 @@
         "structured-data"
       ],
       "external_url": "https://apiacre.com"
-    },
-    {
-      "id": "https://index.percall.dev/l/flow-music-ai.html",
-      "url": "https://index.percall.dev/l/flow-music-ai.html",
-      "title": "Flow Music AI",
-      "content_text": "Flow Music AI turns text prompts or original lyrics into vocal songs and instrumentals. Choose musical styles, preview tracks, and download MP3 audio. Optional AI lyrics assistance and WAV conversion use credits. Music generation requires sign-in.",
-      "date_published": "2026-11-23T00:00:00Z",
-      "tags": [
-        "app",
-        "ai-music",
-        "music-generation",
-        "songwriting",
-        "instrumental"
-      ],
-      "external_url": "https://flowmusicai.pro/"
     }
   ]
 }
