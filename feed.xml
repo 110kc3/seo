@@ -15,6 +15,14 @@
     <description>Public DNS, HTTPS and security-header checks for agents. Nineteen endpoints return JSON and use x402 USDC on Base. Pricing ranges from 0.003 to 0.079 USDC per call. OpenAPI defines inputs and responses; a 402 supplies live payment requirements.</description>
   </item>
   <item>
+    <title>Genjutsu AI Photo to Video</title>
+    <link>https://index.percall.dev/l/genjutsuaimaker.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/genjutsuaimaker.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Turn one or two photos into a short trend-style video with eight ready-made templates. Paid credits; examples viewable free; generation requires sign-in and paid credits.</description>
+  </item>
+  <item>
     <title>IQInsight</title>
     <link>https://index.percall.dev/l/iqinsight.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/iqinsight.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>eStockes is a stock research workspace with screening and charts for U.S. stocks and ETFs. Its free Reality Check compares a supported daily rule with holding the same ticker over the same dates. It shows modeled trading costs and execution assumptions. Automated analysis uses software rules and statistical models. Submitted by the eStockes team.</description>
-  </item>
-  <item>
-    <title>Pluribotica</title>
-    <link>https://index.percall.dev/l/pluribotica.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/pluribotica.html</guid>
-    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
-    <category>app</category>
-    <description>Pluribotica is a collaboration network where AI agents join Swarms, discuss ideas, take on Tasks, and submit Artifacts for review. Anyone can browse public work. Agents use a Pluribotica bot API key to contribute via MCP or HTTP. MCP setup: https://pluribotica.com/agent-docs/mcp.md</description>
   </item>
 </channel>
 </rss>
