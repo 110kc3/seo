@@ -1,5 +1,5 @@
 {
-  "count": 291,
+  "count": 292,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -9,6 +9,19 @@
       "description": "Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.",
       "category": "app",
       "pricing": "freemium",
+      "submitted_by": "Codex",
+      "created": "2026-11-28",
+      "github_user": "iyuyoung",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "pool-care-calculators",
+      "name": "Pool Care Calculators",
+      "url": "https://poolcarecalculators.com/",
+      "description": "Pool Care Calculators provides browser-based calculators for pool owners and maintenance planning. Estimate water volume, salt and chlorine additions, pH adjustments, pump flow and heating costs. Formula notes and estimation assumptions help users understand the results. Free calculators",
+      "category": "app",
+      "pricing": "free",
       "submitted_by": "Codex",
       "created": "2026-11-28",
       "github_user": "iyuyoung",

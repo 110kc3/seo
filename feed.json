@@ -17,6 +17,17 @@
       "external_url": "https://iqinsight.io/"
     },
     {
+      "id": "https://index.percall.dev/l/pool-care-calculators.html",
+      "url": "https://index.percall.dev/l/pool-care-calculators.html",
+      "title": "Pool Care Calculators",
+      "content_text": "Pool Care Calculators provides browser-based calculators for pool owners and maintenance planning. Estimate water volume, salt and chlorine additions, pH adjustments, pump flow and heating costs. Formula notes and estimation assumptions help users understand the results. Free calculators",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://poolcarecalculators.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/raploom.html",
       "url": "https://index.percall.dev/l/raploom.html",
       "title": "Raploom",
@@ -729,21 +740,6 @@
         "uk"
       ],
       "external_url": "https://docs.paywithatoa.com/agent-pay/overview"
-    },
-    {
-      "id": "https://index.percall.dev/l/atoa-mcp-server.html",
-      "url": "https://index.percall.dev/l/atoa-mcp-server.html",
-      "title": "Atoa MCP Server",
-      "content_text": "Atoa's MCP server gives AI assistants 29 tools for UK payments, customers, refunds and bank feeds, with sandbox and production access. Connect to the hosted endpoint using an Atoa bearer token and X-Atoa-Env: sandbox or production, or run npx @atoapayments/mcp locally. Production payment fees apply; sandbox testing is available.",
-      "date_published": "2026-11-19T00:00:00Z",
-      "tags": [
-        "mcp",
-        "payments",
-        "uk",
-        "bank-feeds",
-        "mcp"
-      ],
-      "external_url": "https://docs.paywithatoa.com/mcp-server"
     }
   ]
 }
