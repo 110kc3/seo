@@ -1,5 +1,5 @@
 {
-  "count": 306,
+  "count": 307,
   "updated": "2026-11-28",
   "listings": [
     {
@@ -224,6 +224,24 @@
       "pricing": "free",
       "created": "2026-11-28",
       "github_user": "coolchange-ai",
+      "tier": "free",
+      "origin": "self-registered"
+    },
+    {
+      "slug": "tunedgift",
+      "name": "TunedGift",
+      "url": "https://tunedgift.com/",
+      "description": "Turn a personal memory into a custom song gift with an AI music model. Rewrite lyrics with notes about what matters, listen to the opening preview for free, then make a one-time purchase to unlock the full song to download or share in a digital gift card.",
+      "category": "app",
+      "pricing": "paid",
+      "tags": [
+        "ai-music",
+        "custom-song",
+        "song-gift",
+        "audio"
+      ],
+      "created": "2026-11-28",
+      "github_user": "ccforai58",
       "tier": "free",
       "origin": "self-registered"
     },

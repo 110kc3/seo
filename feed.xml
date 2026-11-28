@@ -111,6 +111,14 @@
     <description>Toolso.AI is a curated directory for discovering AI tools. Browse by task or category, compare options, and open official product websites. Tool profiles describe features, use cases, and pricing where available.</description>
   </item>
   <item>
+    <title>TunedGift</title>
+    <link>https://index.percall.dev/l/tunedgift.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/tunedgift.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>Turn a personal memory into a custom song gift with an AI music model. Rewrite lyrics with notes about what matters, listen to the opening preview for free, then make a one-time purchase to unlock the full song to download or share in a digital gift card.</description>
+  </item>
+  <item>
     <title>useChrono</title>
     <link>https://index.percall.dev/l/usechrono.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/usechrono.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
     <category>app</category>
     <description>Independent browser studio for generating videos from text prompts or image references with Seedance 2.5.</description>
-  </item>
-  <item>
-    <title>API Acre</title>
-    <link>https://index.percall.dev/l/api-acre.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/api-acre.html</guid>
-    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
-    <category>api</category>
-    <description>Account-free, pay-per-call APIs and MCP tools for document and table extraction, CSV cleanup, website audits, SEC company evidence, and weather. Browse the free catalog and buyer guides at https://apiacre.com/buyers. Pay per request with x402 USDC on Base or use Solana on supported routes.</description>
   </item>
 </channel>
 </rss>

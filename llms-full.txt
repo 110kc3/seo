@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 306 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 307 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (306)
+## All listings (307)
 
 ### Aesir Domain Diagnostics (aesir-domain-diagnostics)
 - url: https://m2m-wallet-proof-codina.pages.dev/services
@@ -401,6 +401,13 @@ A response does not verify authentication, payment or tool behavior.
 - Toolso.AI is a curated directory for discovering AI tools. Browse by task or category, compare options, and open official product websites. Tool profiles describe features, use cases, and pricing where available.
 - listing JSON: https://index.percall.dev/listings/toolso-ai.json
 - listing page: https://index.percall.dev/l/toolso-ai.html
+
+### TunedGift (tunedgift)
+- url: https://tunedgift.com/
+- category: app · pricing: paid · tags: ai-music, custom-song, song-gift, audio
+- Turn a personal memory into a custom song gift with an AI music model. Rewrite lyrics with notes about what matters, listen to the opening preview for free, then make a one-time purchase to unlock the full song to download or share in a digital gift card.
+- listing JSON: https://index.percall.dev/listings/tunedgift.json
+- listing page: https://index.percall.dev/l/tunedgift.html
 
 ### useChrono (usechrono)
 - url: https://www.usechrono.com/
