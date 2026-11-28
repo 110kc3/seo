@@ -17,6 +17,17 @@
       "external_url": "https://iqinsight.io/"
     },
     {
+      "id": "https://index.percall.dev/l/jotoak.html",
+      "url": "https://index.percall.dev/l/jotoak.html",
+      "title": "JotOak",
+      "content_text": "JotOak provides printable word searches, crosswords and mazes for classrooms, families and quiet breaks. Users can browse ready-made activities or make a word search from their own English vocabulary. The generator offers puzzle and answer previews and exports a matching PDF in US Letter or A4. Custom word lists are processed locally in the browser. Free printable resources",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app"
+      ],
+      "external_url": "https://jotoak.com/"
+    },
+    {
       "id": "https://index.percall.dev/l/pool-care-calculators.html",
       "url": "https://index.percall.dev/l/pool-care-calculators.html",
       "title": "Pool Care Calculators",
@@ -721,21 +732,6 @@
         "api"
       ],
       "external_url": "https://www.sandbase.ai/"
-    },
-    {
-      "id": "https://index.percall.dev/l/taste-stack.html",
-      "url": "https://index.percall.dev/l/taste-stack.html",
-      "title": "Taste Stack",
-      "content_text": "Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.",
-      "date_published": "2026-11-20T00:00:00Z",
-      "tags": [
-        "other",
-        "agent-skills",
-        "frontend-design",
-        "motion-design",
-        "creative-direction"
-      ],
-      "external_url": "https://tastestack.dev/"
     }
   ]
 }

@@ -15,6 +15,14 @@
     <description>Take a free 40-question reasoning test with no signup. View an estimated score and explore an optional one-time paid report. Freemium: free test, estimated score, theoretical percentile and four-area breakdown; optional USD 6.99 one-time report; no subscription.</description>
   </item>
   <item>
+    <title>JotOak</title>
+    <link>https://index.percall.dev/l/jotoak.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/jotoak.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>JotOak provides printable word searches, crosswords and mazes for classrooms, families and quiet breaks. Users can browse ready-made activities or make a word search from their own English vocabulary. The generator offers puzzle and answer previews and exports a matching PDF in US Letter or A4. Custom word lists are processed locally in the browser. Free printable resources</description>
+  </item>
+  <item>
     <title>Pool Care Calculators</title>
     <link>https://index.percall.dev/l/pool-care-calculators.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/pool-care-calculators.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>SandBase gives developers one API key for AI model inference, data APIs and E2B-compatible code sandboxes, accessible through API, CLI and MCP.</description>
-  </item>
-  <item>
-    <title>Taste Stack</title>
-    <link>https://index.percall.dev/l/taste-stack.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/taste-stack.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Taste Stack offers installable creative-direction skills for Claude Code, Codex and Cursor. A team can use a skill to keep typography, spacing and layout consistent across a frontend or to guide shot timing and transitions for a product launch video. Four starter skills are free with an account. Other skills are available individually or by subscription. Submitted on behalf of the Taste Stack team with AI assistance.</description>
   </item>
 </channel>
 </rss>
