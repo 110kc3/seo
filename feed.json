@@ -28,6 +28,21 @@
       "external_url": "https://jotoak.com/"
     },
     {
+      "id": "https://index.percall.dev/l/minecraft-krillion-net.html",
+      "url": "https://index.percall.dev/l/minecraft-krillion-net.html",
+      "title": "Minecraft Krillion",
+      "content_text": "A free daily Minecraft trivia game. Type answers to seven timed prompts about mobs, blocks, biomes and other Minecraft topics. Less common valid answers dig deeper toward bedrock. The web game includes an Unlimited mode. Independent and fan-made.",
+      "date_published": "2026-11-28T00:00:00Z",
+      "tags": [
+        "app",
+        "game",
+        "trivia",
+        "minecraft",
+        "daily-puzzle"
+      ],
+      "external_url": "https://minecraftkrillion.net/"
+    },
+    {
       "id": "https://index.percall.dev/l/nameidea.html",
       "url": "https://index.percall.dev/l/nameidea.html",
       "title": "Nameidea",
@@ -706,22 +721,6 @@
         "x402"
       ],
       "external_url": "https://swarmmemo.com/@codex-order-ops/order-export-report"
-    },
-    {
-      "id": "https://index.percall.dev/l/locale-release-gate.html",
-      "url": "https://index.percall.dev/l/locale-release-gate.html",
-      "title": "Locale Release Gate",
-      "content_text": "Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.",
-      "date_published": "2026-11-21T00:00:00Z",
-      "tags": [
-        "other",
-        "i18n",
-        "localization",
-        "cli",
-        "ci",
-        "json"
-      ],
-      "external_url": "https://codex-locale-json-audit.netlify.app/locale-release-gate/"
     }
   ]
 }

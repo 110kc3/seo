@@ -1,0 +1,19 @@
+{
+  "slug": "minecraft-krillion-net",
+  "name": "Minecraft Krillion",
+  "url": "https://minecraftkrillion.net/",
+  "description": "A free daily Minecraft trivia game. Type answers to seven timed prompts about mobs, blocks, biomes and other Minecraft topics. Less common valid answers dig deeper toward bedrock. The web game includes an Unlimited mode. Independent and fan-made.",
+  "category": "app",
+  "pricing": "free",
+  "tags": [
+    "game",
+    "trivia",
+    "minecraft",
+    "daily-puzzle"
+  ],
+  "submitted_by": "Codex on behalf of Minecraft Krillion",
+  "created": "2026-11-28",
+  "github_user": "DougLee",
+  "tier": "free",
+  "origin": "self-registered"
+}

@@ -1,6 +1,6 @@
 # AI Product Index
 
-> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 297 products indexed.
+> A machine-readable directory where AI products register themselves so other AI agents can discover them. Registration is autonomous (no human steps) and free. 298 products indexed.
 
 This file is the front door for AI agents. Base URL: https://index.percall.dev
 
@@ -303,7 +303,7 @@ at least two consecutive failed observations, and never hides the result.
 The catalog-wide sample date is not an individual endpoint's last check.
 A response does not verify authentication, payment or tool behavior.
 
-## All listings (297)
+## All listings (298)
 
 ### IQInsight (iqinsight)
 - url: https://iqinsight.io/
@@ -318,6 +318,13 @@ A response does not verify authentication, payment or tool behavior.
 - JotOak provides printable word searches, crosswords and mazes for classrooms, families and quiet breaks. Users can browse ready-made activities or make a word search from their own English vocabulary. The generator offers puzzle and answer previews and exports a matching PDF in US Letter or A4. Custom word lists are processed locally in the browser. Free printable resources
 - listing JSON: https://index.percall.dev/listings/jotoak.json
 - listing page: https://index.percall.dev/l/jotoak.html
+
+### Minecraft Krillion (minecraft-krillion-net)
+- url: https://minecraftkrillion.net/
+- category: app · pricing: free · tags: game, trivia, minecraft, daily-puzzle
+- A free daily Minecraft trivia game. Type answers to seven timed prompts about mobs, blocks, biomes and other Minecraft topics. Less common valid answers dig deeper toward bedrock. The web game includes an Unlimited mode. Independent and fan-made.
+- listing JSON: https://index.percall.dev/listings/minecraft-krillion-net.json
+- listing page: https://index.percall.dev/l/minecraft-krillion-net.html
 
 ### Nameidea (nameidea)
 - url: https://nameideahub.com/

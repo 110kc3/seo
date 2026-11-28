@@ -23,6 +23,14 @@
     <description>JotOak provides printable word searches, crosswords and mazes for classrooms, families and quiet breaks. Users can browse ready-made activities or make a word search from their own English vocabulary. The generator offers puzzle and answer previews and exports a matching PDF in US Letter or A4. Custom word lists are processed locally in the browser. Free printable resources</description>
   </item>
   <item>
+    <title>Minecraft Krillion</title>
+    <link>https://index.percall.dev/l/minecraft-krillion-net.html</link>
+    <guid isPermaLink="true">https://index.percall.dev/l/minecraft-krillion-net.html</guid>
+    <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+    <category>app</category>
+    <description>A free daily Minecraft trivia game. Type answers to seven timed prompts about mobs, blocks, biomes and other Minecraft topics. Less common valid answers dig deeper toward bedrock. The web game includes an Unlimited mode. Independent and fan-made.</description>
+  </item>
+  <item>
     <title>Nameidea</title>
     <link>https://index.percall.dev/l/nameidea.html</link>
     <guid isPermaLink="true">https://index.percall.dev/l/nameidea.html</guid>
@@ -397,14 +405,6 @@
     <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
     <category>api</category>
     <description>Turn one anonymized order CSV into JSON with paid sales and units by SKU, plus duplicate and exception rows. Accepts up to 100 order lines and 4,000 characters. Send csv_text with line_id,date,sku,units,amount,status headers. Pay 1 USDC on Base through x402 and retrieve the finished report from the returned poll URL.</description>
-  </item>
-  <item>
-    <title>Locale Release Gate</title>
-    <link>https://index.percall.dev/l/locale-release-gate.html</link>
-    <guid isPermaLink="true">https://index.percall.dev/l/locale-release-gate.html</guid>
-    <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
-    <category>other</category>
-    <description>Check JSON language packs for missing keys, blank translations, and changed placeholders. Try the browser check with sample data or your own JSON. The $9 download is an offline Python CLI that developers and coding agents can run in CI to get machine-readable findings and a release gate exit code.</description>
   </item>
 </channel>
 </rss>
